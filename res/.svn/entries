@@ -1,0 +1,67 @@
+10
+
+dir
+7
+http://replicaisland.googlecode.com/svn/trunk/res
+http://replicaisland.googlecode.com/svn
+
+
+
+2011-01-16T07:13:43.135277Z
+7
+sm0a9f4@gmail.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1dde52a2-2b62-11df-8484-2f92f965d510
+
+values-en
+dir
+
+values
+dir
+
+xml
+dir
+
+values-wheel
+dir
+
+drawable
+dir
+
+anim
+dir
+
+values-dpad
+dir
+
+values-ja
+dir
+
+drawable-ja
+dir
+
+raw
+dir
+
+layout
+dir
+
+drawable-normal-mdpi
+dir
+
+values-nonav
+dir
+
