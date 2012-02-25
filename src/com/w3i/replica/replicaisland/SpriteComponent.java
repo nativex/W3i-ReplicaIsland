@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 /**
  * Provides an interface for controlling a sprite with animations.  Manages a list of animations

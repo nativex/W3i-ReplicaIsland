@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 /**
  * Main game loop.  Updates the time system and passes the result down to the rest of the game

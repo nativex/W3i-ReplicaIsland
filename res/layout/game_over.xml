@@ -16,7 +16,7 @@
 		<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
 				<TextView android:text="@string/game_results_pearls_collected" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textColor="#000000" android:textStyle="bold" android:typeface="serif" android:textSize="20sp"/>
 				<view 
-					class = "com.replica.replicaisland.GameOverActivity$IncrementingTextView"
+					class = "com.w3i.replica.replicaisland.GameOverActivity$IncrementingTextView"
 					android:id ="@+id/pearl_percent" 
 					android:text="100%" 
 					android:layout_height="wrap_content" 
@@ -29,7 +29,7 @@
 		<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
 			<TextView android:text="@string/game_results_robots_destroyed" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textSize="20sp" android:textColor="#000000" android:textStyle="bold" android:typeface="serif"/>
 			<view 				
-				class = "com.replica.replicaisland.GameOverActivity$IncrementingTextView"
+				class = "com.w3i.replica.replicaisland.GameOverActivity$IncrementingTextView"
 				android:id ="@+id/enemy_percent" 
 				android:layout_height="wrap_content" 
 				android:layout_width="fill_parent" 
@@ -40,7 +40,7 @@
 		<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
 			<TextView android:text="@string/game_results_total_play_time" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textSize="20sp" android:textColor="#000000" android:textStyle="bold" android:typeface="serif"/>
 			<view 
-				class = "com.replica.replicaisland.GameOverActivity$IncrementingTextView"
+				class = "com.w3i.replica.replicaisland.GameOverActivity$IncrementingTextView"
 				android:id ="@+id/total_play_time" 
 				android:layout_height="wrap_content" 
 				android:layout_width="fill_parent" 

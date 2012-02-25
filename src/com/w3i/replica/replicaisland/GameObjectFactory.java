@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 import java.util.Comparator;
 
-import com.replica.replicaisland.AnimationComponent.PlayerAnimations;
-import com.replica.replicaisland.CollisionParameters.HitType;
-import com.replica.replicaisland.EnemyAnimationComponent.EnemyAnimations;
-import com.replica.replicaisland.GameObject.ActionType;
-import com.replica.replicaisland.GameObject.Team;
-import com.replica.replicaisland.GenericAnimationComponent.Animation;
+import com.w3i.replica.replicaisland.AnimationComponent.PlayerAnimations;
+import com.w3i.replica.replicaisland.CollisionParameters.HitType;
+import com.w3i.replica.replicaisland.EnemyAnimationComponent.EnemyAnimations;
+import com.w3i.replica.replicaisland.GameObject.ActionType;
+import com.w3i.replica.replicaisland.GameObject.Team;
+import com.w3i.replica.replicaisland.GenericAnimationComponent.Animation;
 
 /** A class for generating game objects at runtime.
  * This should really be replaced with something that is data-driven, but it is hard to do data

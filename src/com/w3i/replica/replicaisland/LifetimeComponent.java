@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
-import com.replica.replicaisland.SoundSystem.Sound;
+import com.w3i.replica.replicaisland.SoundSystem.Sound;
 
 /** 
  * This component allows objects to die and be deleted when their life is reduced to zero or they

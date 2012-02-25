@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 /**
  * Simple 2D vector class.  Handles basic vector math for 2D vectors.

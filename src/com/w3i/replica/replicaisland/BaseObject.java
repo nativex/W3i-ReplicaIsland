@@ -15,7 +15,7 @@
  */
 
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 /**
  * The core object from which most other objects are derived.  Anything that will be managed by

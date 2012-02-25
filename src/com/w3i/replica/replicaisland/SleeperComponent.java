@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
-import com.replica.replicaisland.GameObject.ActionType;
+import com.w3i.replica.replicaisland.GameObject.ActionType;
 
 /**
  * A component that implements the "pop-out" AI behavior.  Pop-out characters alternate between 

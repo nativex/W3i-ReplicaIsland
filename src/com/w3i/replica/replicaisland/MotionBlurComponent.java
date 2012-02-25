@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 public class MotionBlurComponent extends GameComponent {
 	private static final int STEP_COUNT = 4;

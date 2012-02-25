@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 /**
  * A general-purpose animation selection system for animating enemy characters.  Most enemy

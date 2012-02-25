@@ -15,7 +15,7 @@
  */
 
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 public class LevelBuilder extends BaseObject {
     private final static int THEME_GRASS = 0;

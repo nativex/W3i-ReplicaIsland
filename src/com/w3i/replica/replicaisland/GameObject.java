@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
-import com.replica.replicaisland.CollisionParameters.HitType;
+import com.w3i.replica.replicaisland.CollisionParameters.HitType;
 
 /**
  * GameObject defines any object that resides in the game world (character, background, special

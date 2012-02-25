@@ -15,7 +15,7 @@
  */
 
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 import java.util.ArrayList;
 

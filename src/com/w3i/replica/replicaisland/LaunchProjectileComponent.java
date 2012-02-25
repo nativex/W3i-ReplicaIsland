@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
-import com.replica.replicaisland.GameObject.ActionType;
+import com.w3i.replica.replicaisland.GameObject.ActionType;
 
 /**
  * A component that allows an object to spawn other objects and apply velocity to them at 

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 import android.os.Vibrator;
 import android.content.Context;

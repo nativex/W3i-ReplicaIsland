@@ -15,7 +15,7 @@
  */
 
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 public final class DebugSystem extends BaseObject {
 	public static final int COLOR_RED = 0;

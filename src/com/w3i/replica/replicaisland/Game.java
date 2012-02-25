@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 import android.content.Context;
 import android.os.Build;
@@ -217,6 +217,8 @@ public class Game extends AllocationGuard {
             
             hud.setDigitDrawables(digits, xDrawable);
             hud.setCollectableDrawables(
+            		new DrawableBitmap(
+                            longTermTextureLibrary.allocateTexture(R.drawable.ui_pearl), 0, 0),
                     new DrawableBitmap(
                             longTermTextureLibrary.allocateTexture(R.drawable.ui_pearl), 0, 0), 
                     new DrawableBitmap(

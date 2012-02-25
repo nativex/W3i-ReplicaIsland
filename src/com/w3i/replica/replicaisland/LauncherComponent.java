@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
-import com.replica.replicaisland.GameObject.ActionType;
-import com.replica.replicaisland.SoundSystem.Sound;
+import com.w3i.replica.replicaisland.GameObject.ActionType;
+import com.w3i.replica.replicaisland.SoundSystem.Sound;
 
 public class LauncherComponent extends GameComponent {
     private final static float DEFAULT_LAUNCH_DELAY = 2.0f;

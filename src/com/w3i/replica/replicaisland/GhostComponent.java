@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
-import com.replica.replicaisland.SoundSystem.Sound;
+import com.w3i.replica.replicaisland.SoundSystem.Sound;
 
 public class GhostComponent extends GameComponent {
     private float mMovementSpeed;

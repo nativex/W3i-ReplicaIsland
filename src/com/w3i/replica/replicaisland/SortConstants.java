@@ -14,7 +14,7 @@
  * limitations under the License.
  */
  
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 public class SortConstants {
 	public static final int BACKGROUND_START = -100;

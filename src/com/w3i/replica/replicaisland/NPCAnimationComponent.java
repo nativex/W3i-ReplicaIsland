@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
-import com.replica.replicaisland.ChannelSystem.Channel;
-import com.replica.replicaisland.GameObject.ActionType;
+import com.w3i.replica.replicaisland.ChannelSystem.Channel;
+import com.w3i.replica.replicaisland.GameObject.ActionType;
 
 public class NPCAnimationComponent extends GameComponent {
 

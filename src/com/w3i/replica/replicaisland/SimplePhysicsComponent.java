@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 /** A light-weight physics implementation for use with non-complex characters (enemies, etc). */
 public class SimplePhysicsComponent extends GameComponent {

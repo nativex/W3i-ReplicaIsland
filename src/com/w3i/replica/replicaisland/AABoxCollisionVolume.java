@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 /**
  * An Axis-Aligned rectangular collision volume.  This code treats other volumes as if they are

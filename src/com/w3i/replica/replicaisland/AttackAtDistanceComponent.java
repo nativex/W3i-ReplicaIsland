@@ -15,7 +15,7 @@
  */
 
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 public class AttackAtDistanceComponent extends GameComponent {
     private static final int DEFAULT_ATTACK_DISTANCE = 100;

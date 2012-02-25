@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 
-import com.replica.replicaisland.CollisionParameters.HitType;
-import com.replica.replicaisland.GameObject.ActionType;
-import com.replica.replicaisland.SoundSystem.Sound;
+import com.w3i.replica.replicaisland.CollisionParameters.HitType;
+import com.w3i.replica.replicaisland.GameObject.ActionType;
+import com.w3i.replica.replicaisland.SoundSystem.Sound;
 
 /**
  * Player Animation game object component.  Responsible for selecting an animation to describe the 

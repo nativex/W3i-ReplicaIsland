@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 /** 
  * CollisionParamaters defines global parameters related to dynamic (object vs object) collisions.

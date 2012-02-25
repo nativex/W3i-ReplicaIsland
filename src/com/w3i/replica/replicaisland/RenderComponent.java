@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 /** 
  * Implements rendering of a drawable object for a game object.  If a drawable is set on this

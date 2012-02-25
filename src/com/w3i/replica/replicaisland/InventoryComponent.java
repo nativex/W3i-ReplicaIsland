@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 public class InventoryComponent extends GameComponent {
     private UpdateRecord mInventory;
@@ -61,6 +61,7 @@ public class InventoryComponent extends GameComponent {
         public int rubyCount;
         public int coinCount;
         public int diaryCount;
+        public int lifetimeCoinCount;
         
         public UpdateRecord() {
             super();
@@ -70,12 +71,15 @@ public class InventoryComponent extends GameComponent {
             rubyCount = 0;
             coinCount = 0;
             diaryCount = 0;
+            //DEREK: Initialize from game storage??
+            //lifetimeCoinCount = 0;
         }
         
         public void add(UpdateRecord other) {
             rubyCount += other.rubyCount;
             coinCount += other.coinCount;
             diaryCount += other.diaryCount;
+            lifetimeCoinCount += other.lifetimeCoinCount;
         }
     }
 }

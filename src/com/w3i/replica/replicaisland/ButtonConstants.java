@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 public final class ButtonConstants {
     public static final int FLY_BUTTON_REGION_X = 0;

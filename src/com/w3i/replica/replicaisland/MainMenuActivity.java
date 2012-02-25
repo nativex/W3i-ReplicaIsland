@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 
 import java.lang.reflect.InvocationTargetException;
@@ -23,6 +23,7 @@ import java.lang.reflect.Method;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,12 +32,15 @@ import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import com.w3i.advertiser.W3iConnect;
+import com.w3i.advertiser.W3iAdvertiser;
 
-public class MainMenuActivity extends Activity {
+public class MainMenuActivity extends Activity implements W3iAdvertiser {
     private boolean mPaused;
     private View mStartButton;
     private View mOptionsButton;
@@ -166,10 +170,26 @@ public class MainMenuActivity extends Activity {
         
         //MediaPlayer mp = MediaPlayer.create(this, R.raw.bwv_115);
         //mp.start();
+        Log.d("com.w3i.replica.replicaisland", "start");
+        Log.d("com.w3i.replica.replicaisland", "deviceid: " + ((android.telephony.TelephonyManager)this.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId());
+        Log.d("com.w3i.replica.replicaisland", "androidid: " + android.provider.Settings.Secure.getString(
+                getContentResolver(),
+                        android.provider.Settings.Secure.ANDROID_ID));
+        Log.d("com.w3i.replica.replicaisland", "serialnumber: " + android.os.Build.SERIAL);
+        Log.d("com.w3i.replica.replicaisland", "mac address: " + ((android.net.wifi.WifiManager)this.getApplicationContext().getSystemService(Context.WIFI_SERVICE)).getConnectionInfo().getMacAddress());
       
-        
+        /*Initialization of W3iConnect class*/
+        new W3iConnect(this, true, this).appWasRun(11103);  
+        Log.d("com.w3i.replica.replicaisland", "end");
     }
     
+    public void onActionComplete(Boolean success) {
+         
+    if( success == true ) {
+    			Log.d("com.w3i.replica.replicaisland", "awr success");
+          }
+         
+    }
     
     @Override
     protected void onPause() {

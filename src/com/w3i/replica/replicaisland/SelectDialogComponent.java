@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
-import com.replica.replicaisland.CollisionParameters.HitType;
+import com.w3i.replica.replicaisland.CollisionParameters.HitType;
 
 
 public class SelectDialogComponent extends GameComponent {

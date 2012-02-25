@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 public class FadeDrawableComponent extends GameComponent {
 	public static final int LOOP_TYPE_NONE = 0;

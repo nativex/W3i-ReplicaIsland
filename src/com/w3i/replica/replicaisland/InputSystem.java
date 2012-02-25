@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 /** 
  * Manages input from a roller wheel and touch screen.  Reduces frequent UI messages to

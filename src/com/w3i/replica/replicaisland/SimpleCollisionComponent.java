@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 // Simple collision detection component for objects not requiring complex collision (projectiles, etc)
 public class SimpleCollisionComponent extends GameComponent {

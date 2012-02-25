@@ -15,7 +15,7 @@
  */
  
  
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 import android.content.Context;
 import android.view.Gravity;

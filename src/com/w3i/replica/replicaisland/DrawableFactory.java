@@ -15,7 +15,7 @@
  */
 
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 /** 
  * This class manages drawable objects that have short lifetimes (one or two frames).  It provides

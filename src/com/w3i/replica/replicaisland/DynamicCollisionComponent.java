@@ -15,7 +15,7 @@
  */
 
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 /**
  * A component to include dynamic collision volumes (such as those produced every frame from

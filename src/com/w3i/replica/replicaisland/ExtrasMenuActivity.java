@@ -1,4 +1,4 @@
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

@@ -5,7 +5,7 @@
     >
     
     <view xmlns:android="http://schemas.android.com/apk/res/android" 
-		class = "com.replica.replicaisland.GLSurfaceView"
+		class = "com.w3i.replica.replicaisland.GLSurfaceView"
 		android:id="@+id/glsurfaceview"
 	    android:layout_width="fill_parent" 
 	    android:layout_height="fill_parent"

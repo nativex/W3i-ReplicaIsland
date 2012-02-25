@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
-import com.replica.replicaisland.GameObject.ActionType;
+import com.w3i.replica.replicaisland.GameObject.ActionType;
 
 public class TheSourceComponent extends GameComponent {
 	public final static float SHAKE_TIME = 0.6f;

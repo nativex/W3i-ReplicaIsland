@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 import java.util.Comparator;
 
-import com.replica.replicaisland.CollisionParameters.HitType;
+import com.w3i.replica.replicaisland.CollisionParameters.HitType;
 
 /**
  * A system for calculating collisions between moving game objects.  This system accepts collision

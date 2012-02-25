@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 /**
  * A very simple manager for orthographic in-game UI elements.
@@ -79,14 +79,19 @@ public class HudSystem extends BaseObject {
     
     private DrawableBitmap mRubyDrawable;
     private DrawableBitmap mCoinDrawable;
+    private DrawableBitmap mLifetimeCoinDrawable;
     
     private int mCoinCount;
     private int mRubyCount;
+    private int mLifetimeCoinCount;
     private Vector2 mCoinLocation;
+    private Vector2 mLifetimeCoinLocation;
     private Vector2 mRubyLocation;
     private int[] mCoinDigits;
+    private int[] mLifetimeCoinDigits;
     private int[] mRubyDigits;
     private boolean mCoinDigitsChanged;
+    private boolean mLifetimeCoinDigitsChanged;
     private boolean mRubyDigitsChanged;
     
     private int mFPS;
@@ -104,6 +109,7 @@ public class HudSystem extends BaseObject {
         mFlyButtonLocation = new Vector2();
         mStompButtonLocation = new Vector2();
         mCoinLocation = new Vector2();
+        mLifetimeCoinLocation = new Vector2();
         mRubyLocation = new Vector2();
         mFPSLocation = new Vector2();
         mDigitDrawables = new DrawableBitmap[10];
@@ -133,6 +139,13 @@ public class HudSystem extends BaseObject {
         mStompButtonDepressedDrawable = null;
         mStompButtonLocation.set(STOMP_BUTTON_X, STOMP_BUTTON_Y);
         mStompButtonPressed = false;
+        
+        //DEREK: Fix this so that it brings up a persisted state of lifetime coins.
+        mLifetimeCoinCount = 0;
+        mLifetimeCoinDigits[0] = 0;
+        mLifetimeCoinDigits[1] = -1;
+        mLifetimeCoinDigitsChanged = true;
+        
         mCoinCount = 0;
         mRubyCount = 0;
         mCoinDigits[0] = 0;
@@ -195,8 +208,9 @@ public class HudSystem extends BaseObject {
         }
     }
     
-    public void setCollectableDrawables(DrawableBitmap coin, DrawableBitmap ruby) {
+    public void setCollectableDrawables(DrawableBitmap coin, DrawableBitmap coin2, DrawableBitmap ruby) {
         mCoinDrawable = coin;
+        mLifetimeCoinDrawable = coin2;
         mRubyDrawable = ruby;
     }
     
@@ -223,10 +237,12 @@ public class HudSystem extends BaseObject {
     
     public void updateInventory(InventoryComponent.UpdateRecord newInventory) {
     	mCoinDigitsChanged = (mCoinCount != newInventory.coinCount);
+    	mLifetimeCoinDigitsChanged = (mLifetimeCoinCount != newInventory.lifetimeCoinCount);
     	mRubyDigitsChanged = (mRubyCount != newInventory.rubyCount);
 
         mCoinCount = newInventory.coinCount;
         mRubyCount = newInventory.rubyCount;
+        mLifetimeCoinCount = newInventory.lifetimeCoinCount;
     }
     
     public void setFPS(int fps) {
@@ -398,6 +414,26 @@ public class HudSystem extends BaseObject {
 	            mCoinLocation.x += offset;
 	            drawNumber(mCoinLocation, mCoinDigits, true);
 	            mCoinLocation.x -= offset;
+	        }
+	        
+	        if (mLifetimeCoinDrawable != null) {
+	            if (mLifetimeCoinDrawable.getWidth() == 0) {
+	                // first time init
+	                Texture tex = mLifetimeCoinDrawable.getTexture();
+	                mLifetimeCoinDrawable.resize(tex.width, tex.height);
+	                mLifetimeCoinLocation.x = (params.gameWidth / 2.0f) - tex.width / 2.0f;
+	                mLifetimeCoinLocation.y = params.gameHeight - tex.height - COLLECTABLE_EDGE_PADDING;
+	            }
+	            
+	            render.scheduleForDraw(mLifetimeCoinDrawable, mLifetimeCoinLocation, SortConstants.HUD, false);
+	            if (mLifetimeCoinDigitsChanged) {
+	            	intToDigitArray(mLifetimeCoinCount, mLifetimeCoinDigits);
+	            	mLifetimeCoinDigitsChanged = false;
+	            }
+	            final float offset = mLifetimeCoinDrawable.getWidth() * 0.75f;
+	            mLifetimeCoinLocation.x += offset;
+	            drawNumber(mLifetimeCoinLocation, mLifetimeCoinDigits, true);
+	            mLifetimeCoinLocation.x -= offset;
 	        }
 	        
 	        if (mRubyDrawable != null) {

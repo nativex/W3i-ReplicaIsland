@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 public class PreferenceConstants {
 	public static final String PREFERENCE_LEVEL_ROW = "levelRow";

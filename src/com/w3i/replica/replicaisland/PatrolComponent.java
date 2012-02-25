@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
-import com.replica.replicaisland.GameObject.ActionType;
-import com.replica.replicaisland.HotSpotSystem.HotSpotType;
+import com.w3i.replica.replicaisland.GameObject.ActionType;
+import com.w3i.replica.replicaisland.HotSpotSystem.HotSpotType;
 
 /**
  * This component implements the "patrolling" behavior for AI characters.  Patrolling characters

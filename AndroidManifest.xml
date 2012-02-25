@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.replica.replicaisland" 
-    android:versionName="1.4" 
+    package="com.w3i.replica.replicaisland"
     android:versionCode="14"
-    >
+    android:versionName="1.4" >
     
     <application android:icon="@drawable/icon"
     			 android:label="@string/app_name"
-    			 android:debuggable="false"
+    			 android:debuggable="true"
     			 android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
     	<activity android:name=".MainMenuActivity"
                   android:label="@string/app_name" 
@@ -54,12 +53,15 @@
 	              android:screenOrientation="landscape" 
 	              android:configChanges="keyboardHidden|orientation" />
 	              
-		<activity android:name="GameOverActivity"
+		<activity android:name=".GameOverActivity"
 				  android:screenOrientation="landscape" 
 	   			  android:configChanges="keyboardHidden|orientation"/>
 	   			     
 	</application>
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission xmlns:android="http://schemas.android.com/apk/res/android" 
                      android:name="android.permission.INTERNET"/>
 	<uses-sdk android:minSdkVersion="3" android:targetSdkVersion="8"/>

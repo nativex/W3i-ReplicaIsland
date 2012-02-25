@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 public class FixedAnimationComponent extends GameComponent {
     private int mAnimationIndex;

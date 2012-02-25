@@ -14,7 +14,7 @@
  * limitations under the License.
  */
  
- package com.replica.replicaisland;
+ package com.w3i.replica.replicaisland;
 
 public class EventRecorder extends BaseObject {
 	public final static int COUNTER_ROBOTS_DESTROYED = 0;

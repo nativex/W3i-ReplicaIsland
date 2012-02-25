@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.replica.replicaisland;
+package com.w3i.replica.replicaisland;
 
 import android.content.Context;
 import android.os.Build;
@@ -23,7 +23,7 @@ import android.os.SystemClock;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-import com.replica.replicaisland.RenderSystem.RenderElement;
+import com.w3i.replica.replicaisland.RenderSystem.RenderElement;
 
 /**
  * GameRenderer the top-level rendering interface for the game engine.  It is called by
