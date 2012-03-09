@@ -19,6 +19,7 @@ package com.w3i.replica.replicaisland;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -27,6 +28,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.os.Build;
@@ -37,8 +39,14 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.w3i.advertiser.W3iConnect;
 import com.w3i.advertiser.W3iAdvertiser;
+import com.w3i.offerwall.ApplicationInputs;
+import com.w3i.offerwall.W3iCurrencyListener;
+import com.w3i.offerwall.W3iPublisher;
+import com.w3i.offerwall.business.Balance;
 
 public class MainMenuActivity extends Activity implements W3iAdvertiser {
     private boolean mPaused;
@@ -46,6 +54,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
     private View mOptionsButton;
     private View mExtrasButton;
     private View mBackground;
+    private TextView mTotalCoins;
     private View mTicker;
     private Animation mButtonFlickerAnimation;
     private Animation mFadeOutAnimation;
@@ -118,6 +127,22 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
         }
     };
     
+    private W3iCurrencyListener w3iCurrencyRedemptionCallback = new W3iCurrencyListener() {
+		public void onRedeem(List<Balance> balances) {
+			Log.d("com.w3i.replica.replicaisland", "currency redemption success");
+			if(balances != null && balances.size() > 0)
+			{
+				SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
+				int coinBalance = prefs.getInt(PreferenceConstants.PREFERENCE_PEARLS_TOTAL, 0);
+				coinBalance += Integer.parseInt(balances.get(0).getAmount());
+				mTotalCoins.setText("Total Coins: " + coinBalance);
+				Editor edit = prefs.edit();
+				edit.putInt(PreferenceConstants.PREFERENCE_PEARLS_TOTAL, coinBalance);
+				edit.commit();
+			}
+		}
+};
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,6 +152,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
         mStartButton = findViewById(R.id.startButton);
         mOptionsButton = findViewById(R.id.optionButton);
         mBackground = findViewById(R.id.mainMenuBackground);
+        mTotalCoins = (TextView)findViewById(R.id.totalCoins);
         
         if (mOptionsButton != null) {
             mOptionsButton.setOnClickListener(sOptionButtonListener);
@@ -143,6 +169,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
         SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
         final int row = prefs.getInt(PreferenceConstants.PREFERENCE_LEVEL_ROW, 0);
         final int index = prefs.getInt(PreferenceConstants.PREFERENCE_LEVEL_INDEX, 0);
+        final int coinBalance = prefs.getInt(PreferenceConstants.PREFERENCE_PEARLS_TOTAL, 0);
         int levelTreeResource = R.xml.level_tree;
         if (row != 0 || index != 0) {
             final int linear = prefs.getInt(PreferenceConstants.PREFERENCE_LINEAR_MODE, 0);
@@ -163,6 +190,8 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
         	mTicker.setSelected(true);
         }
         
+        mTotalCoins.setText("Total Coins: " + coinBalance);
+        
         mJustCreated = true;
         
         // Keep the volume control type consistent across all activities.
@@ -170,18 +199,31 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
         
         //MediaPlayer mp = MediaPlayer.create(this, R.raw.bwv_115);
         //mp.start();
-        Log.d("com.w3i.replica.replicaisland", "start");
+      
+        doW3iInitialization();
+    }
+
+	/**
+	 * 
+	 */
+	private void doW3iInitialization() {
+		Log.d("com.w3i.replica.replicaisland", "start");
         Log.d("com.w3i.replica.replicaisland", "deviceid: " + ((android.telephony.TelephonyManager)this.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId());
         Log.d("com.w3i.replica.replicaisland", "androidid: " + android.provider.Settings.Secure.getString(
                 getContentResolver(),
                         android.provider.Settings.Secure.ANDROID_ID));
         Log.d("com.w3i.replica.replicaisland", "serialnumber: " + android.os.Build.SERIAL);
         Log.d("com.w3i.replica.replicaisland", "mac address: " + ((android.net.wifi.WifiManager)this.getApplicationContext().getSystemService(Context.WIFI_SERVICE)).getConnectionInfo().getMacAddress());
-      
-        /*Initialization of W3iConnect class*/
+		/*Initialization of W3iConnect class*/
         new W3iConnect(this, true, this).appWasRun(11103);  
-        Log.d("com.w3i.replica.replicaisland", "end");
-    }
+        
+        ApplicationInputs inputs = new ApplicationInputs();
+    	inputs.setAppId(11103);  //Application ID provided by W3i
+    	inputs.setApplicationName("W3i's Replica Island");  //Sets the display name for your app
+    	inputs.setPackageName("com.w3i.replica.replicaisland"); //The package name for your app
+    	new W3iPublisher(getApplicationContext(), inputs).redeemCurrency(this, w3iCurrencyRedemptionCallback);
+    	Log.d("com.w3i.replica.replicaisland", "end");
+	}
     
     public void onActionComplete(Boolean success) {
          
@@ -201,13 +243,14 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
     protected void onResume() {
         super.onResume();
         mPaused = false;
+        SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
         
         mButtonFlickerAnimation.setAnimationListener(null);
         
         if (mStartButton != null) {
             
             // Change "start" to "continue" if there's a saved game.
-            SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
+            prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
             final int row = prefs.getInt(PreferenceConstants.PREFERENCE_LEVEL_ROW, 0);
             final int index = prefs.getInt(PreferenceConstants.PREFERENCE_LEVEL_INDEX, 0);
             if (row != 0 || index != 0) {
@@ -346,7 +389,11 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
         	mExtrasButton.clearAnimation();
         }
         
-        
+        final int coinBalance = prefs.getInt(PreferenceConstants.PREFERENCE_PEARLS_TOTAL, 0);
+        if(mTotalCoins != null)
+        {
+        	mTotalCoins.setText("Total Coins: " + coinBalance);
+        }
     }
     
     @Override

@@ -15,6 +15,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import com.w3i.offerwall.W3iPublisher;
+import com.w3i.offerwall.ApplicationInputs;
 
 public class ExtrasMenuActivity extends Activity {
 	private View mLinearModeButton;
@@ -23,6 +25,7 @@ public class ExtrasMenuActivity extends Activity {
     private View mBackground;
     private View mLevelSelectLocked;
     private View mLinearModeLocked;
+    private View mOfferwallButton;
     private Animation mButtonFlickerAnimation;
     private Animation mFadeOutAnimation;
     private Animation mAlternateFadeOutAnimation;
@@ -86,6 +89,19 @@ public class ExtrasMenuActivity extends Activity {
         }
     };
     
+    private View.OnClickListener sOfferwallButtonListener = new View.OnClickListener() {
+        public void onClick(View v) {
+        	// Open the Offerwall
+        	ApplicationInputs inputs = new ApplicationInputs();
+        	inputs.setAppId(11103);  //Application ID provided by W3i
+        	inputs.setApplicationName("W3i's Replica Island");  //Sets the display name for your app
+        	inputs.setPackageName("com.w3i.replica.replicaisland"); //The package name for your app
+        	W3iPublisher w3iInstance = new W3iPublisher(getApplicationContext(), inputs);
+        	//Launches the offer wall
+        	w3iInstance.showOfferWall();
+        }
+    };
+    
 	 @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +115,7 @@ public class ExtrasMenuActivity extends Activity {
         mControlsButton = findViewById(R.id.controlsButton);
         mLinearModeLocked = findViewById(R.id.linearModeLocked);
         mLevelSelectLocked = findViewById(R.id.levelSelectLocked);
+        mOfferwallButton = findViewById(R.id.openOfferWallButton);
         
         mBackground = findViewById(R.id.mainMenuBackground);
         
@@ -121,6 +138,7 @@ public class ExtrasMenuActivity extends Activity {
         	mLevelSelectLocked.startAnimation(mLockedAnimation);
         }
         mControlsButton.setOnClickListener(sControlsButtonListener);
+        mOfferwallButton.setOnClickListener(sOfferwallButtonListener);
         
         
               

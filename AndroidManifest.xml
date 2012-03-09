@@ -56,6 +56,18 @@
 		<activity android:name=".GameOverActivity"
 				  android:screenOrientation="landscape" 
 	   			  android:configChanges="keyboardHidden|orientation"/>
+		
+		<activity
+            android:name="com.w3i.offerwall.ui.OfferwallActivity"
+            android:theme="@android:style/Theme.Translucent" />
+		
+        <activity
+            android:name="com.w3i.offerwall.ui.RewardHistoryActivity"
+            android:theme="@android:style/Theme.Translucent" />
+        
+        <activity
+            android:name="com.w3i.offerwall.ui.OfferDescriptionActivity"
+            android:theme="@android:style/Theme.Translucent" />
 	   			     
 	</application>
     <uses-permission android:name="android.permission.VIBRATE"/>

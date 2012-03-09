@@ -114,6 +114,7 @@ public class HudSystem extends BaseObject {
         mFPSLocation = new Vector2();
         mDigitDrawables = new DrawableBitmap[10];
         mCoinDigits = new int[MAX_DIGITS];
+        mLifetimeCoinDigits = new int[MAX_DIGITS];
         mRubyDigits = new int[MAX_DIGITS];
         mFPSDigits = new int[MAX_DIGITS];
         mMovementSliderBaseLocation = new Vector2();
@@ -416,25 +417,27 @@ public class HudSystem extends BaseObject {
 	            mCoinLocation.x -= offset;
 	        }
 	        
-	        if (mLifetimeCoinDrawable != null) {
-	            if (mLifetimeCoinDrawable.getWidth() == 0) {
-	                // first time init
-	                Texture tex = mLifetimeCoinDrawable.getTexture();
-	                mLifetimeCoinDrawable.resize(tex.width, tex.height);
-	                mLifetimeCoinLocation.x = (params.gameWidth / 2.0f) - tex.width / 2.0f;
-	                mLifetimeCoinLocation.y = params.gameHeight - tex.height - COLLECTABLE_EDGE_PADDING;
-	            }
-	            
-	            render.scheduleForDraw(mLifetimeCoinDrawable, mLifetimeCoinLocation, SortConstants.HUD, false);
-	            if (mLifetimeCoinDigitsChanged) {
-	            	intToDigitArray(mLifetimeCoinCount, mLifetimeCoinDigits);
-	            	mLifetimeCoinDigitsChanged = false;
-	            }
-	            final float offset = mLifetimeCoinDrawable.getWidth() * 0.75f;
-	            mLifetimeCoinLocation.x += offset;
-	            drawNumber(mLifetimeCoinLocation, mLifetimeCoinDigits, true);
-	            mLifetimeCoinLocation.x -= offset;
-	        }
+	        //TODO: Derek - bring this back when needed and fix.
+	        
+//	        if (mLifetimeCoinDrawable != null) {
+//	            if (mLifetimeCoinDrawable.getWidth() == 0) {
+//	                // first time init
+//	                Texture tex = mLifetimeCoinDrawable.getTexture();
+//	                mLifetimeCoinDrawable.resize(tex.width, tex.height);
+//	                mLifetimeCoinLocation.x = (params.gameWidth / 2.0f) - tex.width / 2.0f;
+//	                mLifetimeCoinLocation.y = params.gameHeight - tex.height - COLLECTABLE_EDGE_PADDING;
+//	            }
+//	            
+//	            render.scheduleForDraw(mLifetimeCoinDrawable, mLifetimeCoinLocation, SortConstants.HUD, false);
+//	            if (mLifetimeCoinDigitsChanged) {
+//	            	intToDigitArray(mLifetimeCoinCount, mLifetimeCoinDigits);
+//	            	mLifetimeCoinDigitsChanged = false;
+//	            }
+//	            final float offset = mLifetimeCoinDrawable.getWidth() * 0.75f;
+//	            mLifetimeCoinLocation.x += offset;
+//	            drawNumber(mLifetimeCoinLocation, mLifetimeCoinDigits, true);
+//	            mLifetimeCoinLocation.x -= offset;
+//	        }
 	        
 	        if (mRubyDrawable != null) {
 	            if (mRubyDrawable.getWidth() == 0) {
