@@ -15,7 +15,7 @@
  */
 
 
-package com.w3i.replica.replicaisland;
+package com.w3i.replica.replicaisland.activities;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -33,6 +33,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
+import com.w3i.replica.replicaisland.*;
 
 public class AnimationPlayerActivity extends Activity {
 	public static final int KYLE_DEATH = 0;

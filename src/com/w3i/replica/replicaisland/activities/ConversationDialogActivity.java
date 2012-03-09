@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.w3i.replica.replicaisland;
+package com.w3i.replica.replicaisland.activities;
 
 import java.util.ArrayList;
 
@@ -36,6 +36,7 @@ import android.widget.TextView;
 
 import com.w3i.replica.replicaisland.ConversationUtils.Conversation;
 import com.w3i.replica.replicaisland.ConversationUtils.ConversationPage;
+import com.w3i.replica.replicaisland.*;
 
 public class ConversationDialogActivity extends Activity {
 

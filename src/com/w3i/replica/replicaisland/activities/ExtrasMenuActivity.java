@@ -1,4 +1,4 @@
-package com.w3i.replica.replicaisland;
+package com.w3i.replica.replicaisland.activities;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -15,8 +15,11 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+
 import com.w3i.offerwall.W3iPublisher;
 import com.w3i.offerwall.ApplicationInputs;
+
+import com.w3i.replica.replicaisland.*;
 
 public class ExtrasMenuActivity extends Activity {
 	private View mLinearModeButton;

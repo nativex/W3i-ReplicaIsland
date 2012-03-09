@@ -14,9 +14,11 @@
  * limitations under the License.
  */
  
- package com.w3i.replica.replicaisland;
+ package com.w3i.replica.replicaisland.activities;
 
 import java.lang.reflect.InvocationTargetException;
+
+import com.w3i.replica.replicaisland.*;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -28,6 +30,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.w3i.replica.replicaisland.*;
 
 public class DiaryActivity extends Activity {
 
@@ -68,7 +72,7 @@ public class DiaryActivity extends Activity {
         AnimationDrawable anim = (AnimationDrawable) okArrow.getBackground();
         anim.start();
         
-        BaseObject.sSystemRegistry.customToastSystem.toast(getString(R.string.diary_found), Toast.LENGTH_SHORT);
+        BaseObject.getSystemRegistry().customToastSystem.toast(getString(R.string.diary_found), Toast.LENGTH_SHORT);
        
     }
     

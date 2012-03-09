@@ -38,6 +38,10 @@ public abstract class BaseObject extends AllocationGuard {
         // Base class does nothing.
     }
     
+    public static ObjectRegistry getSystemRegistry()
+    {
+    	return sSystemRegistry;
+    }
     
     public abstract void reset();
 

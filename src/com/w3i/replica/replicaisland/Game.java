@@ -16,6 +16,8 @@
 
 package com.w3i.replica.replicaisland;
 
+import com.w3i.replica.replicaisland.activities.AndouKun;
+
 import android.content.Context;
 import android.os.Build;
 import android.view.KeyEvent;

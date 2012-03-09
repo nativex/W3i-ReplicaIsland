@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.w3i.replica.replicaisland;
+package com.w3i.replica.replicaisland.activities;
 
 
 import java.lang.reflect.InvocationTargetException;
@@ -47,6 +47,8 @@ import com.w3i.offerwall.ApplicationInputs;
 import com.w3i.offerwall.W3iCurrencyListener;
 import com.w3i.offerwall.W3iPublisher;
 import com.w3i.offerwall.business.Balance;
+
+import com.w3i.replica.replicaisland.*;
 
 public class MainMenuActivity extends Activity implements W3iAdvertiser {
     private boolean mPaused;

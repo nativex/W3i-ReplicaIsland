@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.w3i.replica.replicaisland;
+package com.w3i.replica.replicaisland.activities;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -28,6 +28,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.w3i.replica.replicaisland.*;
 
 public class GameOverActivity extends Activity {
 	private float mPearlPercent = 100.0f;

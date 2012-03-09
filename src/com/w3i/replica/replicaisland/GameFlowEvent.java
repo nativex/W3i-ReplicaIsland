@@ -16,6 +16,8 @@
  
  package com.w3i.replica.replicaisland;
 
+import com.w3i.replica.replicaisland.activities.AndouKun;
+
 import android.content.Context;
 
 public class GameFlowEvent implements Runnable {

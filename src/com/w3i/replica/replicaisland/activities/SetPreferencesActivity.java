@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.w3i.replica.replicaisland;
+package com.w3i.replica.replicaisland.activities;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -23,6 +23,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.widget.Toast;
 
+import com.w3i.replica.replicaisland.*;
 
 public class SetPreferencesActivity extends PreferenceActivity implements 
 		YesNoDialogPreference.YesNoDialogListener {

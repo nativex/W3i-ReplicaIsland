@@ -8,7 +8,7 @@
     			 android:label="@string/app_name"
     			 android:debuggable="true"
     			 android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
-    	<activity android:name=".MainMenuActivity"
+    	<activity android:name=".activities.MainMenuActivity"
                   android:label="@string/app_name" 
                   android:screenOrientation="landscape" 
                   android:configChanges="keyboardHidden|orientation" >
@@ -18,42 +18,42 @@
             </intent-filter>
         </activity>
         
-        <activity android:name="AndouKun" android:label="@string/app_name" 
+        <activity android:name=".activities.AndouKun" android:label="@string/app_name" 
    				  android:screenOrientation="landscape" 
      			  android:configChanges="keyboardHidden|orientation" 
      			  android:launchMode="singleTask"/>
             
-        <activity android:name="LevelSelectActivity"
+        <activity android:name=".activities.LevelSelectActivity"
 	              android:screenOrientation="landscape" 
 	              android:configChanges="keyboardHidden|orientation" />
                   
 	    <activity android:theme="@style/Theme.ConversationDialog"
 	              android:screenOrientation="landscape" 
                   android:configChanges="keyboardHidden|orientation" 
-	    		  android:name="ConversationDialogActivity"/>
+	    		  android:name=".activities.ConversationDialogActivity"/>
 	    
-	    <activity android:name="DiaryActivity"
+	    <activity android:name=".activities.DiaryActivity"
 				  android:screenOrientation="landscape" 
 	   			  android:configChanges="keyboardHidden|orientation"/>
 		     					
 		     					
-		<activity android:name="SetPreferencesActivity"
+		<activity android:name=".activities.SetPreferencesActivity"
 				  android:screenOrientation="landscape" 
      			  android:configChanges="keyboardHidden|orientation" />
 		     					
-    	<activity android:name="AnimationPlayerActivity"
+    	<activity android:name=".activities.AnimationPlayerActivity"
              	  android:screenOrientation="landscape" 
                	  android:configChanges="keyboardHidden|orientation" />
              
-        <activity android:name="ExtrasMenuActivity"
+        <activity android:name=".activities.ExtrasMenuActivity"
 	              android:screenOrientation="landscape" 
 	              android:configChanges="keyboardHidden|orientation" />
 	              
-		<activity android:name="DifficultyMenuActivity"
+		<activity android:name=".activities.DifficultyMenuActivity"
 	              android:screenOrientation="landscape" 
 	              android:configChanges="keyboardHidden|orientation" />
 	              
-		<activity android:name=".GameOverActivity"
+		<activity android:name=".activities.GameOverActivity"
 				  android:screenOrientation="landscape" 
 	   			  android:configChanges="keyboardHidden|orientation"/>
 		
