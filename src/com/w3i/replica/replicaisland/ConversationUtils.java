@@ -23,7 +23,6 @@ import org.xmlpull.v1.XmlPullParser;
 
 import android.content.Context;
 import android.content.res.XmlResourceParser;
-import android.text.TextUtils;
 
 public final class ConversationUtils {
 	private static final int MAX_CHARACTERS_PER_PAGE = 250;

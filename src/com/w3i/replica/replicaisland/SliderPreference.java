@@ -16,14 +16,14 @@
 
 package com.w3i.replica.replicaisland;
 
-import android.util.AttributeSet;
-import android.view.View;
-import android.widget.SeekBar;
-import android.widget.TextView;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.preference.Preference;
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
 
 public class SliderPreference extends Preference implements OnSeekBarChangeListener {
 	private final static int MAX_SLIDER_VALUE = 100;

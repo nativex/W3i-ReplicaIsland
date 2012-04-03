@@ -16,10 +16,10 @@
 
 package com.w3i.replica.replicaisland;
 
-import android.content.res.AssetManager;
-
 import java.io.IOException;
 import java.io.InputStream;
+
+import android.content.res.AssetManager;
 
 /**
  * Manages information about the current level, including setup, deserialization, and tear-down.

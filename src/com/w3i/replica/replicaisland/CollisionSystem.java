@@ -16,10 +16,10 @@
 
 package com.w3i.replica.replicaisland;
 
-import android.content.res.AssetManager;
-
 import java.io.IOException;
 import java.io.InputStream;
+
+import android.content.res.AssetManager;
 
 /**
  * Collision detection system.  Provides a ray-based interface for finding surfaces in the collision

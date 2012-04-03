@@ -18,8 +18,6 @@
 
 import java.lang.reflect.InvocationTargetException;
 
-import com.w3i.replica.replicaisland.*;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
@@ -31,7 +29,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.w3i.replica.replicaisland.*;
+import com.w3i.replica.replicaisland.BaseObject;
+import com.w3i.replica.replicaisland.DebugLog;
+import com.w3i.replica.replicaisland.R;
+import com.w3i.replica.replicaisland.UIConstants;
 
 public class DiaryActivity extends Activity {
 

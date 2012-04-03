@@ -15,8 +15,8 @@
  */
 package com.w3i.replica.replicaisland;
 
-import android.os.Vibrator;
 import android.content.Context;
+import android.os.Vibrator;
 
 /** A system for accessing the Android vibrator.  Note that this system requires the app's 
  * AndroidManifest.xml to contain permissions for the Vibrator service.

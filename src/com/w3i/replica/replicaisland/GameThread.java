@@ -17,7 +17,6 @@
 package com.w3i.replica.replicaisland;
 
 import android.os.SystemClock;
-import android.view.KeyEvent;
 
 
 /** 

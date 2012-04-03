@@ -29,7 +29,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.w3i.replica.replicaisland.*;
+import com.w3i.replica.replicaisland.DebugLog;
+import com.w3i.replica.replicaisland.PreferenceConstants;
+import com.w3i.replica.replicaisland.R;
+import com.w3i.replica.replicaisland.UIConstants;
 
 public class GameOverActivity extends Activity {
 	private float mPearlPercent = 100.0f;

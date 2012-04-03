@@ -17,7 +17,6 @@
 package com.w3i.replica.replicaisland.activities;
 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -42,7 +41,15 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import com.w3i.replica.replicaisland.*;
+import com.w3i.replica.replicaisland.DebugLog;
+import com.w3i.replica.replicaisland.EventReporter;
+import com.w3i.replica.replicaisland.GLSurfaceView;
+import com.w3i.replica.replicaisland.Game;
+import com.w3i.replica.replicaisland.GameFlowEvent;
+import com.w3i.replica.replicaisland.LevelTree;
+import com.w3i.replica.replicaisland.PreferenceConstants;
+import com.w3i.replica.replicaisland.R;
+import com.w3i.replica.replicaisland.UIConstants;
 
 /**
  * Core activity for the game.  Sets up a surface view for OpenGL, bootstraps

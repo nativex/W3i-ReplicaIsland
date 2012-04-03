@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal" android:gravity="center" android:clickable="true" android:id="@+id/coinLayout" android:background="@drawable/coins_frame">
+
+    <ImageView
+        android:id="@+id/coinImage"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/coin" />
+
+    <TextView
+        android:id="@+id/coinQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Coins: 0"
+        android:textAppearance="?android:attr/textAppearanceLarge" android:textColor="#ff222222" android:layout_marginLeft="5dp" android:textSize="18dp"/>
+
+</LinearLayout>

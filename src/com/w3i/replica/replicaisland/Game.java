@@ -16,14 +16,14 @@
 
 package com.w3i.replica.replicaisland;
 
-import com.w3i.replica.replicaisland.activities.AndouKun;
-
 import android.content.Context;
 import android.os.Build;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.widget.Toast;
+
+import com.w3i.replica.replicaisland.activities.AndouKun;
 
 /**
  * High-level setup object for the AndouKun game engine.

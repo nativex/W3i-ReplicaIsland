@@ -16,6 +16,11 @@
 
 package com.w3i.replica.replicaisland.activities;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -33,12 +38,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-
-import com.w3i.replica.replicaisland.*;
+import com.w3i.replica.replicaisland.DebugLog;
+import com.w3i.replica.replicaisland.LevelTree;
+import com.w3i.replica.replicaisland.R;
+import com.w3i.replica.replicaisland.UIConstants;
 
 public class LevelSelectActivity extends ListActivity {
     private final static int UNLOCK_ALL_LEVELS_ID = 0;

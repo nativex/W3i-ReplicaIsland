@@ -23,7 +23,10 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.widget.Toast;
 
-import com.w3i.replica.replicaisland.*;
+import com.w3i.replica.replicaisland.KeyboardConfigDialogPreference;
+import com.w3i.replica.replicaisland.PreferenceConstants;
+import com.w3i.replica.replicaisland.R;
+import com.w3i.replica.replicaisland.YesNoDialogPreference;
 
 public class SetPreferencesActivity extends PreferenceActivity implements 
 		YesNoDialogPreference.YesNoDialogListener {

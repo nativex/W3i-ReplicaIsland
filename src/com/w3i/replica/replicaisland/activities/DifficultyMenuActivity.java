@@ -1,7 +1,6 @@
 package com.w3i.replica.replicaisland.activities;
 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,7 +11,9 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
-import com.w3i.replica.replicaisland.*;
+import com.w3i.replica.replicaisland.DebugLog;
+import com.w3i.replica.replicaisland.R;
+import com.w3i.replica.replicaisland.UIConstants;
 
 public class DifficultyMenuActivity extends Activity {
 	private View mBabyButton;

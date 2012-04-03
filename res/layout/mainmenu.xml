@@ -29,22 +29,6 @@
 	     	android:orientation="vertical"
 	     	android:gravity="bottom"
 	     	android:id="@+id/mainSectionMenu">
-	     	
-	    <TextView 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content" 
-			android:background="#99000000" 
-			android:textColor= "#FFFFFF" 
-			android:textColorHighlight="#FFFFFF"
-			android:text=" Total Coins: 0"
-			android:lines="1" 
-			android:textSize="14sp" 
-			android:fadingEdge="horizontal" 
-			android:fadingEdgeLength="5dp" 
-			android:focusable="false" 
-			android:id="@+id/totalCoins"
-			android:padding="5sp"
-			android:singleLine="true" android:layout_gravity="center_horizontal"/>
 	    
 	    <ImageView 
 	        android:id="@+id/startButton"
@@ -92,6 +76,7 @@
 			android:focusable="false" 
 			android:id="@+id/ticker"
 			android:singleLine="true" android:layout_gravity="bottom|left"/>
+
 	</LinearLayout>
 
 	<ImageView
@@ -101,6 +86,12 @@
        	android:layout_width="wrap_content" 
        	android:paddingLeft="280dp"
        	android:paddingTop="160dp"
-       	android:visibility="invisible"/>
+       	android:visibility="invisible" android:layout_gravity="left"/>
+
+	<include
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_margin="5dp"
+	    layout="@layout/coin_layout" android:layout_gravity="right"/>
 	
 </FrameLayout> 

@@ -33,7 +33,9 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
-import com.w3i.replica.replicaisland.*;
+import com.w3i.replica.replicaisland.DebugLog;
+import com.w3i.replica.replicaisland.R;
+import com.w3i.replica.replicaisland.UIConstants;
 
 public class AnimationPlayerActivity extends Activity {
 	public static final int KYLE_DEATH = 0;

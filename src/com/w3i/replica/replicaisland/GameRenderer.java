@@ -16,12 +16,12 @@
 
 package com.w3i.replica.replicaisland;
 
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
+
 import android.content.Context;
 import android.os.Build;
 import android.os.SystemClock;
-
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.opengles.GL10;
 
 import com.w3i.replica.replicaisland.RenderSystem.RenderElement;
 
