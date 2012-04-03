@@ -1,0 +1,1198 @@
+android.annotation.SuppressLint
+android.annotation.TargetApi
+com.egoclean.android.widget.flinger.MotionEventUtils:
+    public static final int ACTION_MASK
+    public static final int ACTION_POINTER_UP
+    public static final int ACTION_POINTER_INDEX_MASK
+    public static final int ACTION_POINTER_INDEX_SHIFT
+    24:24:public MotionEventUtils()
+com.egoclean.android.widget.flinger.MotionEventUtils$WrappedStaticMotionEvent:
+    78:78:private MotionEventUtils$WrappedStaticMotionEvent()
+com.egoclean.android.widget.flinger.ReflectionUtils:
+    21:21:public ReflectionUtils()
+com.egoclean.android.widget.flinger.ViewFlinger:
+    private static final java.lang.String TAG
+    private static final int INVALID_SCREEN
+    private static final int SNAP_VELOCITY
+    private static final int MIN_LENGTH_FOR_FLING
+    private static final int TOUCH_STATE_REST
+    private static final int TOUCH_STATE_SCROLLING
+    private static final int INVALID_POINTER
+    858:858:boolean allowLongPress()
+    900:904:public void setOnScrollListener(com.egoclean.android.widget.flinger.ViewFlinger$OnScrollListener,boolean)
+    910:911:public void setCurrentScreen(int)
+    920:921:public void setCurrentScreenNow(int)
+    924:925:public void setCurrentScreenNow(int,boolean)
+    932:944:public void scrollLeft()
+    951:963:public void scrollRight()
+    969:970:public void setIgnoreChildFocusRequests(boolean)
+    973:974:public void markViewSelected(android.view.View)
+    997:1031:public void setSeparator(int)
+    1066:1068:public void addViewToFront(android.view.View)
+    1071:1073:public void removeViewFromFront()
+    1076:1077:public void addViewToBack(android.view.View)
+    1080:1081:public void removeViewFromBack()
+com.google.gson.Cache:
+    public abstract java.lang.Object removeElement(java.lang.Object)
+com.google.gson.CamelCaseSeparatorNamingPolicy
+com.google.gson.CircularReferenceException:
+    private static final long serialVersionUID
+com.google.gson.CompositionFieldNamingPolicy
+com.google.gson.DefaultConstructorAllocator:
+    42:42:final boolean isInCache(java.lang.Class)
+com.google.gson.DefaultTypeAdapters:
+    61:1034:DefaultTypeAdapters()
+    251:251:static com.google.gson.ParameterizedTypeHandlerMap getDefaultSerializers()
+com.google.gson.DefaultTypeAdapters$DefaultDateTypeAdapter:
+    318:319:DefaultTypeAdapters$DefaultDateTypeAdapter(java.lang.String)
+    322:323:DefaultTypeAdapters$DefaultDateTypeAdapter(int)
+    326:328:public DefaultTypeAdapters$DefaultDateTypeAdapter(int,int)
+com.google.gson.DefaultTypeAdapters$GregorianCalendarTypeAdapter:
+    private static final java.lang.String YEAR
+    private static final java.lang.String MONTH
+    private static final java.lang.String DAY_OF_MONTH
+    private static final java.lang.String HOUR_OF_DAY
+    private static final java.lang.String MINUTE
+    private static final java.lang.String SECOND
+com.google.gson.DelegatingJsonElementVisitor
+com.google.gson.ExposeAnnotationDeserializationExclusionStrategy
+com.google.gson.ExposeAnnotationSerializationExclusionStrategy
+com.google.gson.FieldAttributes:
+    private static final java.lang.String MAX_CACHE_PROPERTY_NAME
+    89:89:public java.lang.Class getDeclaringClass()
+    221:221:java.lang.reflect.Field getFieldObject()
+com.google.gson.FieldNamingPolicy
+com.google.gson.FieldNamingStrategy
+com.google.gson.FieldNamingStrategy2Adapter
+com.google.gson.Gson:
+    static final boolean DEFAULT_JSON_NON_EXECUTABLE
+    private static final java.lang.String JSON_NON_EXECUTABLE_PREFIX
+    194:197:public com.google.gson.JsonElement toJsonTree(java.lang.Object)
+    279:284:public void toJson(java.lang.Object,java.lang.Appendable)
+    303:305:public void toJson(java.lang.Object,java.lang.reflect.Type,java.lang.Appendable)
+    313:314:public void toJson(java.lang.Object,java.lang.reflect.Type,com.google.gson.stream.JsonWriter)
+    440:443:public java.lang.Object fromJson(java.io.Reader,java.lang.Class)
+    521:522:public java.lang.Object fromJson(com.google.gson.JsonElement,java.lang.Class)
+com.google.gson.GsonBuilder
+com.google.gson.InnerClassExclusionStrategy
+com.google.gson.JsonArray:
+    63:64:public void addAll(com.google.gson.JsonArray)
+    70:71:void reverse()
+com.google.gson.JsonElement:
+    129:132:public com.google.gson.JsonNull getAsJsonNull()
+com.google.gson.JsonElementVisitor
+com.google.gson.JsonIOException:
+    private static final long serialVersionUID
+    34:35:public JsonIOException(java.lang.String,java.lang.Throwable)
+com.google.gson.JsonObject:
+    71:71:public com.google.gson.JsonElement remove(java.lang.String)
+    82:83:public void addProperty(java.lang.String,java.lang.String)
+    104:105:public void addProperty(java.lang.String,java.lang.Boolean)
+    115:116:public void addProperty(java.lang.String,java.lang.Character)
+    145:145:public boolean has(java.lang.String)
+    169:169:public com.google.gson.JsonPrimitive getAsJsonPrimitive(java.lang.String)
+    179:179:public com.google.gson.JsonArray getAsJsonArray(java.lang.String)
+    189:189:public com.google.gson.JsonObject getAsJsonObject(java.lang.String)
+com.google.gson.JsonParseException:
+    static final long serialVersionUID
+com.google.gson.JsonParser
+com.google.gson.JsonSerializationContext:
+    public abstract com.google.gson.JsonElement serialize(java.lang.Object)
+com.google.gson.JsonSerializationContextDefault:
+    46:49:public com.google.gson.JsonElement serialize(java.lang.Object)
+com.google.gson.JsonStreamParser
+com.google.gson.JsonSyntaxException:
+    private static final long serialVersionUID
+    30:31:public JsonSyntaxException(java.lang.String)
+com.google.gson.JsonTreeNavigator
+com.google.gson.LowerCamelCaseSeparatorNamingPolicy
+com.google.gson.LowerCaseNamingPolicy
+com.google.gson.LruCache:
+    private static final long serialVersionUID
+    50:50:public synchronized java.lang.Object removeElement(java.lang.Object)
+com.google.gson.MapAsArrayTypeAdapter
+com.google.gson.MemoryRefStack:
+    55:55:public boolean isEmpty()
+    65:65:public com.google.gson.ObjectTypePair peek()
+com.google.gson.ModifyFirstLetterNamingPolicy
+com.google.gson.ModifyFirstLetterNamingPolicy$LetterModifier
+com.google.gson.ObjectTypePair:
+    142:142:public boolean isPreserveType()
+com.google.gson.Primitives:
+    34:34:private Primitives()
+    82:82:public static boolean isWrapperType(java.lang.Class)
+com.google.gson.Streams:
+    30:153:Streams()
+com.google.gson.UpperCamelCaseSeparatorNamingPolicy
+com.google.gson.UpperCaseNamingPolicy
+com.google.gson.VersionConstants
+com.google.gson.VersionExclusionStrategy
+com.google.gson.annotations.Expose
+com.google.gson.annotations.Since
+com.google.gson.annotations.Until
+com.google.gson.internal.$Gson$Preconditions:
+    32:32:public $Gson$Preconditions()
+com.google.gson.internal.$Gson$Types:
+    44:44:private $Gson$Types()
+com.google.gson.internal.$Gson$Types$GenericArrayTypeImpl:
+    private static final long serialVersionUID
+com.google.gson.internal.$Gson$Types$ParameterizedTypeImpl:
+    private static final long serialVersionUID
+com.google.gson.internal.$Gson$Types$WildcardTypeImpl:
+    private static final long serialVersionUID
+com.google.gson.reflect.TypeToken
+com.google.gson.stream.JsonReader:
+    526:542:public double nextDouble()
+    556:577:public long nextLong()
+    591:612:public int nextInt()
+    633:647:public void skipValue()
+com.google.gson.stream.JsonWriter:
+    362:367:public com.google.gson.stream.JsonWriter value(double)
+    376:378:public com.google.gson.stream.JsonWriter value(long)
+    408:409:public void flush()
+com.google.gson.stream.MalformedJsonException:
+    private static final long serialVersionUID
+    33:37:public MalformedJsonException(java.lang.String,java.lang.Throwable)
+    39:43:public MalformedJsonException(java.lang.Throwable)
+com.test.SleepAsyncTask
+com.test.TestFactory
+com.test.TestRewardsTextViews$RewardsLayout:
+    private static final int ID_REWARD
+    private static final int ID_FREE_PAID
+com.test.VideoURLsTest$URLNamePair:
+    private static final java.lang.String host
+com.w3i.advertiser.ActionTakenRequestData:
+    18:18:public com.w3i.common.UDIDs getUdids()
+    29:29:public int getActionId()
+    37:37:public java.lang.String getIsHacked()
+com.w3i.advertiser.AdvertiserConstants
+com.w3i.advertiser.AdvertiserSharedData:
+    5:5:public AdvertiserSharedData()
+    39:39:protected static java.lang.String getRequest()
+    43:43:protected static java.lang.String getResponse()
+com.w3i.advertiser.AppWasRunRequestData:
+    21:21:public int getAppId()
+    29:29:public boolean isFirstRun()
+    37:37:public java.lang.String getIsHacked()
+    45:45:public com.w3i.common.UDIDs getUdids()
+com.w3i.advertiser.AppWasRunV2RequestData:
+    private java.lang.String clientIp
+    37:37:public com.w3i.common.UDIDs getUdids()
+    48:48:public java.lang.Integer getAppId()
+    56:56:public java.lang.String getClientIp()
+    60:61:public void setClientIp(java.lang.String)
+    64:64:public java.lang.Boolean getIsHacked()
+    72:72:public java.lang.Boolean getIsFirstRun()
+com.w3i.advertiser.AppWasRunV2RequestData$AndroidMarketInputs:
+    97:97:public java.lang.String getSource()
+    106:106:public java.lang.String getMedium()
+    115:115:public java.lang.String getTerm()
+    124:124:public java.lang.String getContent()
+    133:133:public java.lang.String getCampaign()
+com.w3i.advertiser.AppWasRunV2ResponseData:
+    private java.lang.Long deviceId
+    private java.lang.String mediaBuyURL
+    13:13:public java.lang.Long getDeviceId()
+    17:18:public void setDeviceId(java.lang.Long)
+    21:21:public java.lang.String getMediaBuyURL()
+    25:26:public void setMediaBuyURL(java.lang.String)
+com.w3i.advertiser.Device:
+    80:80:public java.lang.String getMacWlan()
+    84:85:public void setMacWlan(java.lang.String)
+com.w3i.advertiser.DeviceManager:
+    72:73:protected com.w3i.advertiser.Device getDeviceInstance(com.w3i.advertiser.Device)
+com.w3i.advertiser.NetworkConnectionManager:
+    163:165:public void release()
+com.w3i.advertiser.ReferralReceiver:
+    private static final java.lang.String PREFS_FILE_NAME
+com.w3i.advertiser.SerialNumberFactory:
+    14:14:SerialNumberFactory()
+com.w3i.advertiser.SharedPreferenceManager:
+    private static final java.lang.String sharedPrefsIdentifier
+com.w3i.advertiser.Version
+com.w3i.advertiser.W3iConnect:
+    85:86:public W3iConnect(android.app.Activity,boolean)
+    120:121:public com.w3i.advertiser.W3iConnect setW3iAdvertiser(com.w3i.advertiser.W3iAdvertiser)
+com.w3i.common.IAsyncTaskManager
+com.w3i.common.Log:
+    27:27:public Log()
+    93:96:public static void w(java.lang.String)
+    121:124:public static void v(java.lang.String)
+com.w3i.common.Request:
+    57:62:public Request(java.lang.String,java.lang.String,java.lang.String,com.w3i.common.Request$HTTP_ACTION)
+    190:190:public void preExecute()
+    194:194:public void postExecute()
+com.w3i.common.StringConstants
+com.w3i.common.UDIDs:
+    private static final long serialVersionUID
+com.w3i.common.UDIDs$UDID:
+    34:34:public java.lang.String getType()
+    38:39:public void setType(java.lang.String)
+    42:42:public java.lang.String getValue()
+    46:47:public void setValue(java.lang.String)
+com.w3i.offerwall.Constants
+com.w3i.offerwall.DialogInputs:
+    16:17:public void setCurrencyName(java.lang.String)
+    24:25:public void setIcon(android.graphics.drawable.Drawable)
+    32:33:public void setCurrencyAmount(int)
+com.w3i.offerwall.Version:
+    private static final java.lang.String VERSION
+    3:3:public Version()
+com.w3i.offerwall.W3iPublisher:
+    81:81:public com.w3i.offerwall.ui.ThemeManager getThemeManager()
+com.w3i.offerwall.business.AppWasRunV2ResponseData
+com.w3i.offerwall.business.Balance:
+    20:21:public void setId(java.lang.String)
+    28:29:public void setDisplayName(java.lang.String)
+    36:37:public void setExternalCurrencyId(java.lang.String)
+    40:40:public java.lang.String getExternalCurrencyId()
+    44:45:public void setAmount(java.lang.String)
+com.w3i.offerwall.business.CTAOffer:
+    private java.lang.String largeIconUrl
+    private java.lang.Double purchasePrice
+    35:36:public void setSmallIconDrawable(android.graphics.drawable.Drawable)
+    71:71:public java.lang.String getLargeIconUrl()
+    75:76:public void setLargeIconUrl(java.lang.String)
+    79:79:public java.lang.Double getPurchasePrice()
+    83:84:public void setPurchasePrice(java.lang.Double)
+com.w3i.offerwall.business.CTAOfferClickRequestData:
+    17:17:public java.lang.Long getOfferId()
+    25:25:public java.lang.Long getParentOfferId()
+    33:33:public com.w3i.offerwall.business.Session getSession()
+com.w3i.offerwall.business.CTAOfferClickResponseData:
+    private java.util.ArrayList violations
+    private java.util.ArrayList messages
+    private java.util.ArrayList log
+    22:22:public java.util.ArrayList getViolations()
+    26:27:public void setViolations(java.util.ArrayList)
+    30:30:public java.util.ArrayList getMessages()
+    34:35:public void setMessages(java.util.ArrayList)
+    38:38:public java.util.ArrayList getLog()
+    42:43:public void setLog(java.util.ArrayList)
+    50:51:public void setRedirectUrl(java.lang.String)
+com.w3i.offerwall.business.CreateSessionRequestData:
+    44:44:public com.w3i.common.UDIDs getUdids()
+    55:55:public long getAppId()
+    63:63:public java.lang.String getDeviceGenerationInfo()
+    71:71:public boolean isHacked()
+    79:79:public boolean isOnCellular()
+    87:87:public boolean isUsingSDK()
+    95:95:public java.lang.String getOsVersion()
+    103:103:public java.lang.String getPublisherUserId()
+    111:111:public java.lang.String getPublisherSDKVersion()
+    119:119:public java.lang.String getPreviousSessionEndTime()
+    127:127:public long getPreviousSessionId()
+com.w3i.offerwall.business.DeviceHistoryResponseData:
+    private java.util.ArrayList earnings
+    45:45:public java.util.ArrayList getViolations()
+    49:50:public void setViolations(java.util.ArrayList)
+    53:53:public java.util.ArrayList getMessages()
+    57:58:public void setMessages(java.util.ArrayList)
+    65:66:public void setTotalOfferCount(int)
+    69:69:public java.util.ArrayList getEarnings()
+    73:74:public void setEarnings(java.util.ArrayList)
+    81:82:public void setOfferHistories(java.util.ArrayList)
+com.w3i.offerwall.business.EndSessionRequestData:
+    12:12:public java.lang.Long getSessionID()
+com.w3i.offerwall.business.EndSessionResponseData
+com.w3i.offerwall.business.FeaturedOffer
+com.w3i.offerwall.business.GetCTAOffersRequestData:
+    14:14:public com.w3i.offerwall.business.Session getSession()
+    22:22:public java.lang.Long getOfferId()
+com.w3i.offerwall.business.GetCTAOffersResponseData:
+    private java.util.ArrayList violations
+    private java.util.ArrayList messages
+    private java.util.ArrayList log
+    22:22:public java.util.ArrayList getLog()
+    26:27:public void setLog(java.util.ArrayList)
+    30:30:public java.util.ArrayList getViolations()
+    34:35:public void setViolations(java.util.ArrayList)
+    38:38:public java.util.ArrayList getMessages()
+    42:43:public void setMessages(java.util.ArrayList)
+    50:51:public void setOffers(java.util.ArrayList)
+com.w3i.offerwall.business.GetDeviceBalanceRequestData:
+    18:18:public com.w3i.offerwall.business.Session getSession()
+    26:26:public java.lang.String getBalanceDateTime()
+    34:34:public java.lang.String getPreviousBalanceDateTime()
+com.w3i.offerwall.business.GetDeviceBalanceResponseData:
+    48:49:public void setViolations(java.util.ArrayList)
+    56:57:public void setMessages(java.util.ArrayList)
+    60:61:public void setBalanceDateTime(java.lang.String)
+    68:69:public void setBalances(java.util.ArrayList)
+com.w3i.offerwall.business.GetFeaturedOfferRequestData:
+    12:12:public com.w3i.offerwall.business.Session getSession()
+com.w3i.offerwall.business.GetFeaturedOfferResponseData:
+    89:90:public void setViolations(java.util.ArrayList)
+    97:98:public void setMessages(java.util.ArrayList)
+    105:106:public void setMessageBoxTitle(java.lang.String)
+    113:114:public void setMessageBoxDescription(java.lang.String)
+    121:122:public void setOfferFull(com.w3i.offerwall.business.OfferFull)
+com.w3i.offerwall.business.GetHistoryRequestData:
+    24:24:public com.w3i.offerwall.business.Session getSession()
+    32:32:public java.lang.Integer getOfferIndexStart()
+    40:40:public java.lang.Integer getOfferIndexStop()
+    48:48:public java.lang.Integer getSortColumn()
+    56:56:public java.lang.Integer getSortDirection()
+com.w3i.offerwall.business.GetOfferHistoryResponseData:
+    private java.lang.String id
+    private java.lang.String status
+    private java.lang.String shortDescription
+    private java.lang.String smallIconURL
+    private java.lang.String purchasePrice
+    49:49:public java.lang.String getId()
+    53:54:public void setId(java.lang.String)
+    61:62:public void setDisplayName(java.lang.String)
+    65:65:public java.lang.String getStatus()
+    69:70:public void setStatus(java.lang.String)
+    77:78:public void setDisplayStatus(java.lang.String)
+    85:86:public void setClickDate(java.lang.String)
+    89:89:public java.lang.String getShortDescription()
+    93:94:public void setShortDescription(java.lang.String)
+    97:97:public java.lang.String getsmallIconURL()
+    101:102:public void setsmallIconURL(java.lang.String)
+    105:105:public java.lang.String getpurchasePrice()
+    109:110:public void setpurchasePrice(java.lang.String)
+    117:118:public void setDevicePayoutCurrency(com.w3i.offerwall.business.PublisherCurrency)
+com.w3i.offerwall.business.GetQualifiedOffersRequestData:
+    19:19:public com.w3i.offerwall.business.Session getSession()
+com.w3i.offerwall.business.GetQualifiedOffersResponseData:
+    47:48:public void setViolations(java.util.ArrayList)
+    55:56:public void setMessages(java.util.ArrayList)
+    63:64:public void setTotalOfferCount(java.lang.String)
+    71:72:public void setOffers(java.util.ArrayList)
+com.w3i.offerwall.business.LogItem
+com.w3i.offerwall.business.Message:
+    17:18:public void setReferenceName(java.lang.String)
+    25:26:public void setDisplayName(java.lang.String)
+    33:34:public void setDisplayText(java.lang.String)
+com.w3i.offerwall.business.OfferBasic:
+    private java.lang.String publisherPayoutAmount
+    68:68:public int getSelectedCurrencyIndex()
+    96:96:public boolean isFeatured()
+    116:117:public void setPurchasePrice(java.lang.String)
+    120:120:public java.lang.String getPublisherPayoutAmount()
+    124:125:public void setPublisherPayoutAmount(java.lang.String)
+    148:149:public void setPublisherCurrencies(java.util.ArrayList)
+com.w3i.offerwall.business.OfferFull:
+    private java.lang.String largeIconUrl
+    11:11:public java.lang.String getLargeIconUrl()
+    15:16:public void setLargeIconUrl(java.lang.String)
+com.w3i.offerwall.business.PublisherCurrency:
+    private java.lang.String currencyId
+    45:46:public void setId(java.lang.String)
+    49:49:public java.lang.String getCurrencyId()
+    53:54:public void setCurrencyId(java.lang.String)
+    69:70:public void setAmount(java.lang.String)
+    77:78:public void setIsDefault(boolean)
+com.w3i.offerwall.business.RedeemDeviceBalanceRequestData:
+    15:15:public com.w3i.offerwall.business.Session getSession()
+    23:23:public java.lang.String getBalanceDateTime()
+com.w3i.offerwall.business.RedeemDeviceBalanceResponseData:
+    26:27:public void setViolations(java.util.ArrayList)
+    30:31:public void setReceiptId(java.lang.String)
+    38:39:public void setMessages(java.util.ArrayList)
+com.w3i.offerwall.business.SaveOfferClickRequestData:
+    18:18:public com.w3i.offerwall.business.Session getSession()
+    26:26:public java.lang.Long getOfferId()
+    34:34:public java.lang.String getPublisherCurrencyId()
+com.w3i.offerwall.business.SaveOfferClickResponseData:
+    57:58:public void setViolations(java.util.ArrayList)
+    65:66:public void setMessages(java.util.ArrayList)
+    69:69:public java.lang.String getFullConversionMessage()
+    73:74:public void setFullConversionMessage(java.lang.String)
+    77:77:public java.lang.String getShortConversionMessage()
+    81:82:public void setShortConversionMessage(java.lang.String)
+    89:90:public void setRedirectURL(java.lang.String)
+com.w3i.offerwall.business.SessionResponseData:
+    private java.lang.String deviceId
+    44:44:public java.util.ArrayList getViolations()
+    48:49:public void setViolations(java.util.ArrayList)
+    52:52:public java.util.ArrayList getMessages()
+    56:57:public void setMessages(java.util.ArrayList)
+    60:60:public java.lang.String getDeviceId()
+    64:65:public void setDeviceId(java.lang.String)
+    68:72:public void setSessionId(long)
+com.w3i.offerwall.business.Violation:
+    21:22:public void setEntity(java.lang.String)
+    29:30:public void setMessage(java.lang.String)
+    33:33:public java.lang.String getType()
+    37:38:public void setType(java.lang.String)
+com.w3i.offerwall.communication.HttpRedirectResolver:
+    public static final java.lang.String USER_AGENT_HEADER
+    public static final java.lang.String LOCATION_HEADER
+    public static final java.lang.String RTSP_PROTOCOL
+    public static final int RTSP_PORT
+    private static final java.lang.String TAG
+    39:40:public HttpRedirectResolver(com.w3i.common.OnTaskCompletedListener)
+com.w3i.offerwall.communication.ServerRequestManager:
+    private static final long endSessionDelay
+    private static final int MSG_END_SESSION
+    287:288:public void actionTaken(java.lang.String,android.content.Context)
+    458:459:public void executePendingRequests()
+com.w3i.offerwall.communication.requests.AppWasRunV2Request
+com.w3i.offerwall.communication.requests.EndSessionRequest:
+    44:45:public void preExecute()
+com.w3i.offerwall.communication.requests.GetDeviceBalanceRequest:
+    private com.w3i.offerwall.W3iListener currencyListener
+    private android.content.Context context
+    50:51:public void setCurencyListener(com.w3i.offerwall.W3iListener)
+    54:54:public com.w3i.offerwall.W3iListener getCurrencyListener()
+    58:59:public void setContext(android.content.Context)
+    62:62:public android.content.Context getContext()
+    66:67:public void setShowMessages(boolean)
+    70:70:public boolean getShowMessages()
+com.w3i.offerwall.communication.responses.AppWasRunV2Response
+com.w3i.offerwall.communication.responses.GetImageResponse$FlushedInputStream
+com.w3i.offerwall.custom.views.CustomVideoViewLayout:
+    247:250:public void pause()
+    253:256:public void setOnPreparedListener(android.media.MediaPlayer$OnPreparedListener)
+    260:261:public void stopPlayback()
+    294:294:public int getDuration()
+com.w3i.offerwall.custom.views.LinearProgressBar:
+    141:146:public void setProgress(float)
+    160:166:public void setBufferProgress(float)
+    176:178:public void setBufferDrawable(android.graphics.drawable.Drawable)
+    182:185:public void setProgressDrawable(android.graphics.drawable.Drawable)
+    189:191:public void setEmptyDrawable(android.graphics.drawable.Drawable)
+    197:197:public void setTickDrawable(android.graphics.drawable.Drawable)
+    201:201:public int getCurrentPosition()
+    206:206:public int getBufferedPosition()
+    216:216:public int getMax()
+com.w3i.offerwall.dialogs.CustomAlertDialog$ReadyListener
+com.w3i.offerwall.dialogs.CustomDialog
+com.w3i.offerwall.dialogs.CustomDialog$1
+com.w3i.offerwall.dialogs.CustomDialogLayout
+com.w3i.offerwall.dialogs.CustomDialogLayout$Body
+com.w3i.offerwall.dialogs.CustomDialogLayout$ButtonsBar
+com.w3i.offerwall.dialogs.CustomDialogLayout$StatusBar
+com.w3i.offerwall.dialogs.ListDialog
+com.w3i.offerwall.dialogs.ListDialog$CustomAdapter
+com.w3i.offerwall.dialogs.ListDialog$CustomAdapterItem
+com.w3i.offerwall.dialogs.ListDialog$ListRow
+com.w3i.offerwall.dialogs.MessageDialog
+com.w3i.offerwall.dialogs.MessageDialog$1
+com.w3i.offerwall.dialogs.custom.BaseDialog:
+    36:44:public BaseDialog(android.content.Context,int)
+    77:84:public void setDialogMaxWidth(int)
+    88:95:public void setDialogMinWidth(int)
+    99:106:public void setDialogMinHeight(int)
+    110:117:public void setDialogMaxHeight(int)
+com.w3i.offerwall.dialogs.custom.CTADialogBody:
+    public static final int ID_VIEW_FLIPPER
+    public static final int ID_AWARD
+    public static final int ID_SCROLLER
+    public static final int ID_AWARD_LAYOUT
+    public static final int ID_AWARD_PROGRESS
+    public static final int SIZE_OFFER_PROGRESS
+    public static final int SIZE_AWARD_PROGRESS
+    179:184:public void setSelected(int)
+    191:192:public void showProgress(boolean)
+com.w3i.offerwall.dialogs.custom.CTADialogTitle:
+    public static final int CLOSE_BUTTON_SIZE
+    public static final int ID_TITLE
+    public static final int ID_DESCRIPTION
+    public static final int ID_CLOSE
+    125:140:public void release()
+com.w3i.offerwall.dialogs.custom.CTADialogTitle$RewardTitle:
+    246:249:public CTADialogTitle$RewardTitle(com.w3i.offerwall.dialogs.custom.CTADialogTitle,android.content.Context,android.util.AttributeSet)
+    304:305:public void release()
+com.w3i.offerwall.dialogs.custom.CTADialogTitle$ThanksTitle:
+    205:208:public CTADialogTitle$ThanksTitle(com.w3i.offerwall.dialogs.custom.CTADialogTitle,android.content.Context,android.util.AttributeSet)
+    231:232:public void release()
+com.w3i.offerwall.dialogs.custom.CTADialogTitle$Title:
+    151:154:public CTADialogTitle$Title(com.w3i.offerwall.dialogs.custom.CTADialogTitle,android.content.Context,android.util.AttributeSet)
+    185:193:public void release()
+com.w3i.offerwall.dialogs.custom.CustomAlertDialog
+com.w3i.offerwall.dialogs.custom.CustomAlertDialog$1
+com.w3i.offerwall.dialogs.custom.DialogButtonsLayout
+com.w3i.offerwall.dialogs.custom.DialogScrollContainer
+com.w3i.offerwall.dialogs.custom.DialogTitleLayout
+com.w3i.offerwall.dialogs.custom.FadingTextSwitcher
+com.w3i.offerwall.dialogs.custom.FeaturedDialogBody:
+    91:94:public void setOnOfferClickListener(android.view.View$OnClickListener)
+    103:106:public void setOfferName(java.lang.String)
+    109:119:public void release()
+com.w3i.offerwall.dialogs.custom.FeaturedDialogTitle:
+    public static final int ID_CLOSE
+    public static final int ID_TITLE
+    protected static final int DEFAULT_TITLE_TEXT_SIZE
+    protected static final int DEFAULT_TITLE_TEXT_COLOR
+    protected static final int DEFAULT_CLOSE_BUTTON_SIZE
+com.w3i.offerwall.dialogs.custom.FeaturedOfferDialog:
+    20:22:public FeaturedOfferDialog(android.content.Context,int)
+    60:63:public void setOnOfferClickListener(android.view.View$OnClickListener)
+    72:75:public void setOfferName(java.lang.String)
+com.w3i.offerwall.dialogs.custom.HorizontalViewFlipper
+com.w3i.offerwall.dialogs.custom.HorizontalViewFlipper$1
+com.w3i.offerwall.dialogs.custom.HorizontalViewFlipper$AnimationHelper
+com.w3i.offerwall.dialogs.custom.MessageDialog
+com.w3i.offerwall.dialogs.custom.MessageDialogBody
+com.w3i.offerwall.dialogs.custom.OfferLayout:
+    public static final int ID_OFFER
+    public static final int ID_TITLE
+    public static final int ID_DESCRIPTION
+    public static final int ID_ICON
+    public static final int ICON_SIZE
+    public static final int OFFER_MIN_HEIGHT
+    143:143:public com.w3i.offerwall.business.OfferBasic getBasicOffer()
+    171:175:public void release()
+com.w3i.offerwall.dialogs.custom.ViewFlingerScroller:
+    92:93:public void addItem(android.graphics.drawable.Drawable)
+    96:97:public void addItem(java.lang.String)
+    116:123:public void addItems(int)
+com.w3i.offerwall.interfaces.IActivityManager
+com.w3i.offerwall.interfaces.ICustomImageView
+com.w3i.offerwall.interfaces.ICustomProgressBar
+com.w3i.offerwall.interfaces.ICustomVideoView
+com.w3i.offerwall.interfaces.IImageCacheManager
+com.w3i.offerwall.interfaces.IImageDownloader
+com.w3i.offerwall.interfaces.IServerRequestManager
+com.w3i.offerwall.listeners.OnDialogButtonClick:
+    public static final int BUTTON_NEGATIVE
+    public static final int BUTTON_POSITIVE
+    public static final int BUTTON_NEUTRAL
+com.w3i.offerwall.listeners.OnDownloadComplete
+com.w3i.offerwall.listeners.OnFlipListener
+com.w3i.offerwall.listeners.OnVideoStartedListener
+com.w3i.offerwall.manager.CurrencyRedemptionManager:
+    49:52:public boolean hasStoredDeviceBalance()
+    57:58:public void clearStoredDeviceBalance()
+com.w3i.offerwall.manager.DensityManager:
+    32:32:public DensityManager()
+com.w3i.offerwall.manager.DialogManager:
+    36:37:public void release()
+com.w3i.offerwall.manager.HistoryDownloadParams:
+    6:7:public HistoryDownloadParams(int,int)
+com.w3i.offerwall.manager.HistoryManager:
+    28:28:public int count()
+com.w3i.offerwall.manager.ImageCacheManager:
+    private static final int PURGE_PERIOD
+    private static final int MSG_PURGE
+com.w3i.offerwall.manager.ImageDownloadManager:
+    49:50:public void downloadBitmapToImageView(android.widget.ImageView,java.lang.String)
+com.w3i.offerwall.manager.ImageService:
+    87:100:public android.graphics.Movie getMovie(android.content.Context,java.lang.String)
+com.w3i.offerwall.manager.ItemManager:
+    39:39:public int getMaxItemsAvailable()
+    47:47:public int getOriginalMax()
+    55:55:public int getBatchSize()
+    82:83:public void setOffers(java.util.List)
+    103:103:public boolean isEmpty()
+com.w3i.offerwall.manager.JsonParserFactory:
+    37:37:public JsonParserFactory()
+    41:46:public static com.w3i.offerwall.business.EndSessionResponseData getEndSessionResponse(java.lang.String)
+com.w3i.offerwall.manager.ManagementService:
+    56:56:public com.w3i.offerwall.manager.DialogManager getDialogManager()
+    60:61:public void setDialogManager(com.w3i.offerwall.manager.DialogManager)
+    72:72:public com.w3i.offerwall.communication.ServerRequestManager getServerRequestManager()
+    76:77:public void setServerRequestManager(com.w3i.offerwall.communication.ServerRequestManager)
+com.w3i.offerwall.manager.OfferDownloadParams:
+    9:16:public OfferDownloadParams(int,int,com.w3i.offerwall.enums.SortOrder)
+com.w3i.offerwall.manager.OfferManager:
+    public static final java.lang.String SELECTED_OFFER_INDEX
+    40:40:public java.lang.String getIconUrl(int)
+    44:44:public java.util.List getOfferCurrencies()
+    48:51:public int getNumberOfCurrencies()
+    55:58:public boolean hasCurrencies()
+com.w3i.offerwall.manager.PublisherJsonRequestManager:
+    131:131:public java.lang.String getRedeemCurrencyRequest()
+    135:135:public java.lang.String getRedeemCurrencyRequest(long)
+com.w3i.offerwall.manager.SelectedCurrencyManager:
+    51:57:public com.w3i.offerwall.business.PublisherCurrency getDefaultCurrency()
+    74:74:public com.w3i.offerwall.business.PublisherCurrency getCurrencyAt(int)
+com.w3i.offerwall.manager.SessionManager:
+    public static final long NO_PREVIOUS_SESSION_ID
+    11:12:private SessionManager()
+    38:38:public static com.w3i.offerwall.business.SessionResponseData getSessionResponse()
+    54:55:public static void clearSession()
+com.w3i.offerwall.manager.SharedPreferenceManager:
+    private static final java.lang.String sharedPrefsIdentifier
+    private static final java.lang.String AVAILABLE_BALANCE_RESPONSE
+    private static final java.lang.String PREVIOUS_SESSION_END_TIME
+    private static final java.lang.String PREVIOUS_SESSION_ID
+    private static final java.lang.String SELECTED_CURRENCY_NAME
+    23:24:public void storePreviousSessionId(long)
+    31:32:public void storeAvailableBalanceResponse(java.lang.String)
+    40:41:public void storePreviousSessionEndTime(java.lang.String)
+    60:61:public void clearStoredDeviceBalance()
+    64:64:public java.lang.String getSelectedCurrencyName()
+    68:69:public void storeSelectedCurrencyName(java.lang.String)
+    72:73:public void clearSelectedCurrencyName()
+    76:79:public boolean hasSelectedCurrencyName()
+com.w3i.offerwall.ui.DeviceScreenSize:
+    17:17:public int getWidthPixels()
+    21:21:public int getHeightPixels()
+    25:25:public float getWidthInches()
+    29:29:public float getHeightInches()
+    75:76:public int getHeightInPixels(float)
+    80:81:public int getWidthInPixels(float)
+    89:89:public int setDensity(int)
+com.w3i.offerwall.ui.HistoryLayout:
+    168:171:public void setOnLoadMore(android.view.View$OnClickListener)
+com.w3i.offerwall.ui.HistoryTable:
+    public static final int ID_MAIN_LAYOUT
+    public static final int ID_SCROLL_VIEW
+    public static final int ID_TITLE
+    public static final int ID_HEADER
+    public static final int ID_TABLE
+    private static final int ID_HEADER_TEXT
+    private static final int ID_HEADER_SEPARATOR
+    private static final int ID_LOADMORE_BUTTON
+    private static final int MARGIN_ROW_RIGHT
+    private static final int MARGIN_ROW_LEFT
+com.w3i.offerwall.ui.MyProgressDialog
+com.w3i.offerwall.ui.OfferDescriptionLayout:
+    private static final int ID_OFFER_DESCRIPTION
+    private static final int ID_DESCRIPTION_ICON
+    private static final int ID_DESCRIPTION_TITLE
+    private static final int ID_DESCRIPTION_SHORT
+    private static final int ID_FULL_MESSAGE
+    private static final int ID_SEPARATOR
+    private static final int ID_PROCEED
+    private static final int ID_TOPBAR
+    private static final int ID_BOTTOMBAR
+    private static final int ID_DESCRIPTION_LAYOUT
+    199:202:public void setIcon(java.lang.String)
+com.w3i.offerwall.ui.OfferwallBottomBar:
+    public static final int ID_POWERED_BY
+    public static final int ID_W3i_MOBILE_SOLUTIONS
+    public static final int ID_PRIVACY
+    public static final int ID_QUESTION_MARK
+com.w3i.offerwall.ui.OfferwallLayout:
+    public static final int ID_TOPBAR
+    public static final int ID_OFFER_LIST
+    public static final int ID_BOTTOM_BAR
+    public static final int ID_SORTING_BAR
+    120:123:public com.w3i.offerwall.enums.SortOrder getSortingOrder()
+    225:228:public void setRewardsListener(android.view.View$OnClickListener)
+    237:240:public void setHistorySelected()
+com.w3i.offerwall.ui.OfferwallOfferList:
+    113:119:public void removeLoadMore()
+com.w3i.offerwall.ui.OfferwallRow:
+    public static final int ID_OFFER_AWARDED
+    public static final int ID_OFFER_COST
+    public static final int ID_OFFER_TITLE
+    public static final int ID_OFFER_DESCRIPTION
+    public static final int ID_DESCRIPTION_LAYOUT
+    public static final int ID_OFFER_ICON
+    public static final int ID_REWARD_BOX
+    public static final java.lang.String PRICE_PAID
+    104:104:public android.widget.ImageView getmParsedimage()
+    145:146:public void setAppIconImageView(android.graphics.drawable.Drawable)
+com.w3i.offerwall.ui.OfferwallTopBar:
+    155:158:public void setTitle(java.lang.String)
+    176:182:public void viewButton()
+com.w3i.offerwall.ui.SortingBar:
+    private static final int SORT_BY_TYPE_SPINNER_ID
+com.w3i.offerwall.ui.ThemeManager:
+    public static final int TITLE_COLOR
+    public static final int OFFER_NAME_COLOR
+    public static final int SHORT_DESCRIPTION_COLOR
+    public static final int SPINNER_TEXT_COLOR
+    public static final int HISTORY_ROW_TEXT_COLOR
+    public static final int HISTORY_COLUMN_HEADER_COLOR
+    public static final int ACTIVE_BUTTON_TEXT_COLOR
+    public static final int INACTIVE_BUTTON_TEXT_COLOR
+    public static final int BACKGROUND_COLOR
+    112:112:protected java.lang.String getBackgroundPortraitImage()
+    116:116:protected java.lang.String getBackgroundLandscapeImage()
+    120:120:protected java.lang.String getOfferBackgroundImage()
+    136:136:protected java.lang.String getTopBarPortraitLowResolution()
+    140:140:protected java.lang.String getTopBarPortraitHighResolution()
+    144:144:protected java.lang.String getTopBarLandscapeLowResolution()
+com.w3i.offerwall.util.SessionLifecycleHandler
+com.w3i.offerwall.util.Unbinder:
+    10:10:public Unbinder()
+    42:44:public static void unbindReferences(android.app.Activity,int)
+com.w3i.offerwall.util.Utilities
+com.w3i.replica.replicaisland.AABoxCollisionVolume:
+    110:125:public void growBy(com.w3i.replica.replicaisland.CollisionVolume)
+com.w3i.replica.replicaisland.AdultsDifficultyConstants:
+    private static final float FUEL_AIR_REFILL_SPEED
+    private static final float FUEL_GROUND_REFILL_SPEED
+    public static final int MAX_PLAYER_LIFE
+    private static final int COINS_PER_POWERUP
+    public static final float GLOW_DURATION
+    private static final int DDA_STAGE_1_ATTEMPTS
+    private static final int DDA_STAGE_2_ATTEMPTS
+    private static final int DDA_STAGE_1_LIFE_BOOST
+    private static final int DDA_STAGE_2_LIFE_BOOST
+    private static final float DDA_STAGE_1_FUEL_AIR_REFILL_SPEED
+    private static final float DDA_STAGE_2_FUEL_AIR_REFILL_SPEED
+com.w3i.replica.replicaisland.AnimationComponent:
+    private static final float MIN_ROCKET_TIME
+    private static final float FLICKER_INTERVAL
+    private static final float FLICKER_DURATION
+    private static final float LAND_THUMP_DELAY
+com.w3i.replica.replicaisland.AttackAtDistanceComponent:
+    private static final int DEFAULT_ATTACK_DISTANCE
+com.w3i.replica.replicaisland.BabyDifficultyConstants:
+    private static final float FUEL_AIR_REFILL_SPEED
+    private static final float FUEL_GROUND_REFILL_SPEED
+    public static final int MAX_PLAYER_LIFE
+    private static final int COINS_PER_POWERUP
+    public static final float GLOW_DURATION
+    private static final int DDA_STAGE_1_ATTEMPTS
+    private static final int DDA_STAGE_2_ATTEMPTS
+    private static final int DDA_STAGE_1_LIFE_BOOST
+    private static final int DDA_STAGE_2_LIFE_BOOST
+    private static final float DDA_STAGE_1_FUEL_AIR_REFILL_SPEED
+    private static final float DDA_STAGE_2_FUEL_AIR_REFILL_SPEED
+com.w3i.replica.replicaisland.BackgroundCollisionComponent:
+    57:78:public BackgroundCollisionComponent(int,int,int,int)
+com.w3i.replica.replicaisland.BackgroundCollisionComponent$HitPointDistanceComparator
+com.w3i.replica.replicaisland.BufferLibrary:
+    private static final int GRID_LIST_SIZE
+com.w3i.replica.replicaisland.BuildConfig
+com.w3i.replica.replicaisland.ButtonAnimationComponent$Animation
+com.w3i.replica.replicaisland.ButtonConstants
+com.w3i.replica.replicaisland.CameraSystem:
+    private static final float X_FOLLOW_DISTANCE
+    private static final float Y_UP_FOLLOW_DISTANCE
+    private static final float Y_DOWN_FOLLOW_DISTANCE
+    private static final float MAX_INTERPOLATE_TO_TARGET_DISTANCE
+    private static final float INTERPOLATE_TO_TARGET_TIME
+com.w3i.replica.replicaisland.ChangeComponentsComponent:
+    private static final int MAX_COMPONENT_SWAPS
+com.w3i.replica.replicaisland.ChannelSystem:
+    private static final int CHANNEL_COUNT
+com.w3i.replica.replicaisland.CollisionParameters
+com.w3i.replica.replicaisland.CollisionParameters$HitType
+com.w3i.replica.replicaisland.CollisionSystem:
+    private static final int MAX_TEMPORARY_SEGMENTS
+    155:231:public boolean testBox(float,float,float,float,com.w3i.replica.replicaisland.Vector2,com.w3i.replica.replicaisland.FixedSizeArray,com.w3i.replica.replicaisland.GameObject,boolean)
+    479:518:protected static boolean testBoxAgainstList(com.w3i.replica.replicaisland.FixedSizeArray,float,float,float,float,com.w3i.replica.replicaisland.Vector2,com.w3i.replica.replicaisland.GameObject,com.w3i.replica.replicaisland.Vector2,com.w3i.replica.replicaisland.FixedSizeArray)
+com.w3i.replica.replicaisland.CollisionSystem$LineSegment:
+    732:800:public boolean calculateIntersectionBox(float,float,float,float,com.w3i.replica.replicaisland.Vector2)
+com.w3i.replica.replicaisland.CollisionSystem$LineSegmentPool:
+    809:811:public CollisionSystem$LineSegmentPool(com.w3i.replica.replicaisland.CollisionSystem)
+com.w3i.replica.replicaisland.ConversationUtils:
+    private static final int MAX_CHARACTERS_PER_PAGE
+    27:27:public ConversationUtils()
+com.w3i.replica.replicaisland.DebugLog:
+    24:26:private DebugLog()
+    41:45:public static int v(java.lang.String,java.lang.String,java.lang.Throwable)
+    57:61:public static int d(java.lang.String,java.lang.String,java.lang.Throwable)
+    73:77:public static int i(java.lang.String,java.lang.String,java.lang.Throwable)
+    89:93:public static int w(java.lang.String,java.lang.String,java.lang.Throwable)
+    97:101:public static int w(java.lang.String,java.lang.Throwable)
+    113:117:public static int e(java.lang.String,java.lang.String,java.lang.Throwable)
+com.w3i.replica.replicaisland.DebugSystem:
+    public static final int COLOR_RED
+    public static final int COLOR_BLUE
+    public static final int COLOR_OUTLINE
+    public static final int SHAPE_BOX
+    public static final int SHAPE_CIRCLE
+    37:49:public DebugSystem(com.w3i.replica.replicaisland.TextureLibrary)
+com.w3i.replica.replicaisland.DoorAnimationComponent:
+    protected static final int STATE_CLOSED
+    protected static final int STATE_OPEN
+    protected static final int STATE_CLOSING
+    protected static final int STATE_OPENING
+    protected static final float DEFAULT_STAY_OPEN_TIME
+    192:193:public void setStayOpenTime(float)
+com.w3i.replica.replicaisland.DoorAnimationComponent$Animation
+com.w3i.replica.replicaisland.DrawableFactory:
+    private static final int BITMAP_POOL_SIZE
+com.w3i.replica.replicaisland.DrawableObject:
+    36:37:public void setPriority(float)
+com.w3i.replica.replicaisland.EventRecorder:
+    public static final int COUNTER_ROBOTS_DESTROYED
+    public static final int COUNTER_PEARLS_COLLECTED
+    public static final int COUNTER_PEARLS_TOTAL
+com.w3i.replica.replicaisland.EventReporter:
+    public static final int EVENT_DEATH
+    public static final int EVENT_BEAT_LEVEL
+    public static final int EVENT_BEAT_GAME
+com.w3i.replica.replicaisland.FadeDrawableComponent:
+    public static final int LOOP_TYPE_NONE
+    public static final int LOOP_TYPE_LOOP
+    public static final int LOOP_TYPE_PING_PONG
+    public static final int FADE_LINEAR
+    public static final int FADE_EASE
+com.w3i.replica.replicaisland.FixedAnimationComponent:
+    44:45:public void setAnimation(int)
+com.w3i.replica.replicaisland.FixedSizeArray:
+    private static final int LINEAR_SEARCH_CUTOFF
+    275:276:public void setSorter(com.w3i.replica.replicaisland.Sorter)
+com.w3i.replica.replicaisland.GLErrorLogger
+com.w3i.replica.replicaisland.GLErrorLogger$ErrorLoggingGL
+com.w3i.replica.replicaisland.GLSurfaceView:
+    private static final boolean LOG_THREADS
+    private static final boolean LOG_SURFACE
+    private static final boolean LOG_RENDERER
+    private static final boolean DRAW_TWICE_AFTER_SIZE_CHANGED
+    public static final int RENDERMODE_WHEN_DIRTY
+    public static final int RENDERMODE_CONTINUOUSLY
+    public static final int DEBUG_CHECK_GL_ERROR
+    public static final int DEBUG_LOG_GL_CALLS
+    194:196:public GLSurfaceView(android.content.Context)
+    230:231:public void setGLWrapper(com.w3i.replica.replicaisland.GLSurfaceView$GLWrapper)
+    243:244:public void setDebugFlags(int)
+    251:251:public int getDebugFlags()
+    306:308:public void setEGLContextFactory(com.w3i.replica.replicaisland.GLSurfaceView$EGLContextFactory)
+    320:322:public void setEGLWindowSurfaceFactory(com.w3i.replica.replicaisland.GLSurfaceView$EGLWindowSurfaceFactory)
+    373:375:public void setEGLConfigChooser(int,int,int,int,int,int)
+    404:406:public void setEGLContextClientVersion(int)
+    425:426:public void setRenderMode(int)
+    436:436:public int getRenderMode()
+    447:448:public void requestRender()
+    523:524:public void queueEvent(java.lang.Runnable)
+com.w3i.replica.replicaisland.GLSurfaceView$GLThread:
+    1319:1326:public void setRenderMode(int)
+    1329:1329:public int getRenderMode()
+    1335:1339:public void requestRender()
+    1500:1507:public void queueEvent(java.lang.Runnable)
+com.w3i.replica.replicaisland.GLSurfaceView$GLThreadManager:
+    private int mGLContextCount
+    private static final int kGLES_20
+com.w3i.replica.replicaisland.GameComponentPool:
+    23:26:public GameComponentPool(java.lang.Class)
+com.w3i.replica.replicaisland.GameFlowEvent:
+    public static final int EVENT_INVALID
+    public static final int EVENT_RESTART_LEVEL
+    public static final int EVENT_END_GAME
+    public static final int EVENT_GO_TO_NEXT_LEVEL
+    public static final int EVENT_SHOW_DIARY
+    public static final int EVENT_SHOW_DIALOG_CHARACTER1
+    public static final int EVENT_SHOW_DIALOG_CHARACTER2
+    public static final int EVENT_SHOW_ANIMATION
+com.w3i.replica.replicaisland.GameObject:
+    private static final float COLLISION_SURFACE_DECAY_TIME
+    private static final int DEFAULT_LIFE
+    217:217:public final float getLastTouchedCeilingTime()
+    225:225:public final float getLastTouchedLeftWallTime()
+    233:233:public final float getLastTouchedRightWallTime()
+com.w3i.replica.replicaisland.GameObjectCollisionSystem:
+    private static final int MAX_COLLIDING_OBJECTS
+    private static final int COLLISION_RECORD_POOL_SIZE
+    273:275:public void setDebugPrefs(boolean,boolean)
+com.w3i.replica.replicaisland.GameObjectFactory:
+    private static final int MAX_GAME_OBJECTS
+    private static final java.lang.String sRedButtonChannel
+    private static final java.lang.String sBlueButtonChannel
+    private static final java.lang.String sGreenButtonChannel
+    private static final java.lang.String sSurprisedNPCChannel
+com.w3i.replica.replicaisland.GameObjectFactory$GameObjectPool:
+    6750:6752:public GameObjectFactory$GameObjectPool(com.w3i.replica.replicaisland.GameObjectFactory)
+com.w3i.replica.replicaisland.GameObjectFactory$GameObjectType:
+    162:162:public int index()
+com.w3i.replica.replicaisland.GameObjectManager:
+    private static final int MAX_GAME_OBJECTS
+com.w3i.replica.replicaisland.GameRenderer:
+    private static final int PROFILE_REPORT_DELAY
+com.w3i.replica.replicaisland.GameThread:
+    private static final float PROFILE_REPORT_DELAY
+com.w3i.replica.replicaisland.GenericAnimationComponent$Animation
+com.w3i.replica.replicaisland.GravityComponent:
+    52:54:public void setGravityMultiplier(float)
+com.w3i.replica.replicaisland.Grid:
+    private static final int FLOAT_SIZE
+    private static final int FIXED_SIZE
+    private static final int CHAR_SIZE
+    255:282:public void draw(javax.microedition.khronos.opengles.GL10,boolean)
+    289:289:public boolean usingHardwareBuffers()
+com.w3i.replica.replicaisland.HitReactionComponent:
+    private static final float ATTACK_PAUSE_DELAY
+    private static final float DEFAULT_BOUNCE_MAGNITUDE
+    private static final float EVENT_SEND_DELAY
+    270:271:public void setPauseOnAttackTime(float)
+    278:279:public void setBounceMagnitude(float)
+    331:333:public final void setDealHitSound(int,com.w3i.replica.replicaisland.SoundSystem$Sound)
+com.w3i.replica.replicaisland.HotSpotSystem:
+    143:149:public final float getTileCenterWorldPositionX(int)
+com.w3i.replica.replicaisland.HotSpotSystem$HotSpotType
+com.w3i.replica.replicaisland.HudSystem:
+    private static final int FUEL_BAR_EDGE_PADDING
+    private static final float FUEL_DECREASE_BAR_SPEED
+    private static final float FUEL_INCREASE_BAR_SPEED
+    private static final float FLY_BUTTON_X
+    private static final float FLY_BUTTON_Y
+    private static final float STOMP_BUTTON_X
+    private static final float STOMP_BUTTON_Y
+    private static final float STOMP_BUTTON_SCALE
+    private static final int COLLECTABLE_EDGE_PADDING
+    private static final int MAX_DIGITS
+    private static final float MOVEMENT_SLIDER_BASE_X
+    private static final float MOVEMENT_SLIDER_BASE_Y
+    private static final float MOVEMENT_SLIDER_BUTTON_X
+    private static final float MOVEMENT_SLIDER_BUTTON_Y
+    private static final float FLY_BUTTON_WIDTH
+    private static final float STOMP_BUTTON_WIDTH
+    private static final float MOVEMENT_SLIDER_WIDTH
+    232:233:public void clearFade()
+    255:256:public void setShowFPS(boolean)
+com.w3i.replica.replicaisland.InputButton:
+    48:48:public final float getPressedDuration(float)
+com.w3i.replica.replicaisland.InputGameInterface:
+    private static final float ORIENTATION_DEAD_ZONE_MIN
+    private static final float ORIENTATION_DEAD_ZONE_MAX
+    private static final float ORIENTATION_DEAD_ZONE_SCALE
+    private static final float ROLL_TIMEOUT
+    private static final float ROLL_RESET_DELAY
+    private static final float ROLL_FILTER
+    private static final float ROLL_DECAY
+    private static final float KEY_FILTER
+    private static final float SLIDER_FILTER
+com.w3i.replica.replicaisland.InputTouchScreen:
+    42:46:public boolean getTriggered(int,float)
+    50:54:public boolean getPressed(int)
+    58:61:public final void setVector(int,com.w3i.replica.replicaisland.Vector2)
+    64:68:public final float getX(int)
+    72:76:public final float getY(int)
+    80:84:public final float getLastPressedTime(int)
+com.w3i.replica.replicaisland.InputXY:
+    30:33:public InputXY(com.w3i.replica.replicaisland.InputButton,com.w3i.replica.replicaisland.InputButton)
+    54:56:public final void setVector(com.w3i.replica.replicaisland.Vector2)
+com.w3i.replica.replicaisland.KeyboardConfigDialogPreference:
+    88:89:public KeyboardConfigDialogPreference(android.content.Context)
+com.w3i.replica.replicaisland.KidsDifficultyConstants:
+    private static final float FUEL_AIR_REFILL_SPEED
+    private static final float FUEL_GROUND_REFILL_SPEED
+    public static final int MAX_PLAYER_LIFE
+    private static final int COINS_PER_POWERUP
+    public static final float GLOW_DURATION
+    private static final int DDA_STAGE_1_ATTEMPTS
+    private static final int DDA_STAGE_2_ATTEMPTS
+    private static final int DDA_STAGE_1_LIFE_BOOST
+    private static final int DDA_STAGE_2_LIFE_BOOST
+    private static final float DDA_STAGE_1_FUEL_AIR_REFILL_SPEED
+    private static final float DDA_STAGE_2_FUEL_AIR_REFILL_SPEED
+com.w3i.replica.replicaisland.LauncherComponent:
+    private static final float DEFAULT_LAUNCH_DELAY
+    private static final float DEFAULT_LAUNCH_MAGNITUDE
+    private static final float DEFAULT_POST_LAUNCH_DELAY
+com.w3i.replica.replicaisland.Lerp:
+    19:19:public Lerp()
+com.w3i.replica.replicaisland.LevelBuilder:
+    private static final int THEME_GRASS
+    private static final int THEME_ISLAND
+    private static final int THEME_SEWER
+    private static final int THEME_UNDERGROUND
+    private static final int THEME_LAB
+    private static final int THEME_LIGHTING
+    private static final int THEME_TUTORIAL
+    private static final int BACKGROUND_SUNSET
+    private static final int BACKGROUND_ISLAND
+    private static final int BACKGROUND_SEWER
+    private static final int BACKGROUND_UNDERGROUND
+    private static final int BACKGROUND_FOREST
+    private static final int BACKGROUND_ISLAND2
+    private static final int BACKGROUND_LAB
+com.w3i.replica.replicaisland.LevelSystem:
+    71:73:public void sendRestartEvent()
+    76:78:public void sendNextLevelEvent()
+com.w3i.replica.replicaisland.LevelTree:
+    26:26:public LevelTree()
+com.w3i.replica.replicaisland.MotionBlurComponent:
+    private static final int STEP_COUNT
+    private static final float STEP_DELAY
+    private static final float OPACITY_STEP
+com.w3i.replica.replicaisland.NPCAnimationComponent:
+    public static final int IDLE
+    public static final int WALK
+    public static final int RUN_START
+    public static final int RUN
+    public static final int SHOOT
+    public static final int JUMP_START
+    public static final int JUMP_AIR
+    public static final int TAKE_HIT
+    public static final int SURPRISED
+    public static final int DEATH
+    protected static final float RUN_SPEED_THRESHOLD
+    protected static final float JUMP_SPEED_THRESHOLD
+    protected static final float FALL_SPEED_THRESHOLD
+    protected static final float FALL_TIME_THRESHOLD
+com.w3i.replica.replicaisland.NPCComponent:
+    private static final float UP_IMPULSE
+    private static final float DOWN_IMPULSE
+    private static final float HORIZONTAL_IMPULSE
+    private static final float SLOW_HORIZONTAL_IMPULSE
+    private static final float ACCELERATION
+    private static final float HIT_IMPULSE
+    private static final float HIT_ACCELERATION
+    private static final float DEATH_FADE_DELAY
+    private static final float PAUSE_TIME_SHORT
+    private static final float PAUSE_TIME_MEDIUM
+    private static final float PAUSE_TIME_LONG
+    private static final float PAUSE_TIME_ATTACK
+    private static final float PAUSE_TIME_HIT_REACT
+    private static final int COMMAND_QUEUE_SIZE
+com.w3i.replica.replicaisland.ObjectManager:
+    protected static final int DEFAULT_ARRAY_SIZE
+com.w3i.replica.replicaisland.ObjectPool:
+    private static final int DEFAULT_SIZE
+com.w3i.replica.replicaisland.OrbitalMagnetComponent:
+    private static final float DEFAULT_STRENGTH
+com.w3i.replica.replicaisland.PhysicsComponent:
+    private static final float DEFAULT_MASS
+    private static final float DEFAULT_BOUNCINESS
+    private static final float DEFAULT_INERTIA
+    private static final float DEFAULT_STATIC_FRICTION_COEFFECIENT
+    private static final float DEFAULT_DYNAMIC_FRICTION_COEFFECIENT
+    172:223:protected void resolveCollision(com.w3i.replica.replicaisland.Vector2,com.w3i.replica.replicaisland.Vector2,com.w3i.replica.replicaisland.Vector2,float,com.w3i.replica.replicaisland.Vector2,com.w3i.replica.replicaisland.Vector2,float,com.w3i.replica.replicaisland.Vector2)
+com.w3i.replica.replicaisland.PlayerComponent:
+    private static final float GROUND_IMPULSE_SPEED
+    private static final float AIR_HORIZONTAL_IMPULSE_SPEED
+    private static final float AIR_VERTICAL_IMPULSE_SPEED
+    private static final float AIR_VERTICAL_IMPULSE_SPEED_FROM_GROUND
+    private static final float AIR_DRAG_SPEED
+    private static final float MAX_GROUND_HORIZONTAL_SPEED
+    private static final float MAX_AIR_HORIZONTAL_SPEED
+    private static final float MAX_UPWARD_SPEED
+    private static final float VERTICAL_IMPULSE_TOLERANCE
+    private static final float FUEL_AMOUNT
+    private static final float JUMP_TO_JETS_DELAY
+    private static final float STOMP_VELOCITY
+    private static final float STOMP_DELAY_TIME
+    private static final float STOMP_AIR_HANG_TIME
+    private static final float STOMP_SHAKE_MAGNITUDE
+    private static final float STOMP_VIBRATE_TIME
+    private static final float HIT_REACT_TIME
+    private static final float GHOST_REACTIVATION_DELAY
+    private static final float GHOST_CHARGE_TIME
+    private static final int MAX_GEMS_PER_LEVEL
+    private static final float NO_GEMS_GHOST_TIME
+    private static final float ONE_GEM_GHOST_TIME
+    private static final float TWO_GEMS_GHOST_TIME
+    535:535:public final boolean getGhostActive()
+com.w3i.replica.replicaisland.PopOutComponent:
+    private static final int DEFAULT_APPEAR_DISTANCE
+    private static final int DEFAULT_HIDE_DISTANCE
+    private static final int DEFAULT_ATTACK_DISTANCE
+    private static final int STATE_HIDDEN
+    private static final int STATE_VISIBLE
+    private static final int STATE_ATTACKING
+com.w3i.replica.replicaisland.PreferenceConstants
+com.w3i.replica.replicaisland.QuickSorter
+com.w3i.replica.replicaisland.R:
+    10:10:public R()
+com.w3i.replica.replicaisland.R$anim
+com.w3i.replica.replicaisland.R$array
+com.w3i.replica.replicaisland.R$attr
+com.w3i.replica.replicaisland.R$color
+com.w3i.replica.replicaisland.R$drawable
+com.w3i.replica.replicaisland.R$id
+com.w3i.replica.replicaisland.R$layout
+com.w3i.replica.replicaisland.R$raw
+com.w3i.replica.replicaisland.R$string
+com.w3i.replica.replicaisland.R$style
+com.w3i.replica.replicaisland.R$styleable:
+    public static final int KeyConfigPreference_attackKey
+    public static final int KeyConfigPreference_jumpKey
+    public static final int KeyConfigPreference_leftKey
+    public static final int KeyConfigPreference_rightKey
+    public static final int SliderPreference_maxText
+    public static final int SliderPreference_minText
+    1106:1106:public R$styleable()
+com.w3i.replica.replicaisland.R$xml
+com.w3i.replica.replicaisland.RenderSystem:
+    private static final int TEXTURE_SORT_BUCKET_SIZE
+    private static final int DRAW_QUEUE_COUNT
+    private static final int MAX_RENDER_OBJECTS_PER_FRAME
+    private static final int MAX_RENDER_OBJECTS
+com.w3i.replica.replicaisland.ScrollableBitmap:
+    46:47:public void setScrollOriginX(float)
+    54:55:public void setScrollOriginY(float)
+com.w3i.replica.replicaisland.ShellSorter
+com.w3i.replica.replicaisland.SimplePhysicsComponent:
+    private static final float DEFAULT_BOUNCINESS
+com.w3i.replica.replicaisland.SleeperComponent:
+    private static final int STATE_SLEEPING
+    private static final int STATE_WAKING
+    private static final int STATE_ATTACKING
+    private static final int STATE_SLAM
+    private static final float DEFAULT_WAKE_UP_DURATION
+com.w3i.replica.replicaisland.SliderPreference:
+    private static final int MAX_SLIDER_VALUE
+    private static final int INITIAL_VALUE
+    38:41:public SliderPreference(android.content.Context)
+com.w3i.replica.replicaisland.SolidSurfaceComponent:
+    32:42:public SolidSurfaceComponent(int)
+com.w3i.replica.replicaisland.SortConstants
+com.w3i.replica.replicaisland.SoundSystem:
+    private static final int MAX_STREAMS
+    private static final int MAX_SOUNDS
+    public static final int PRIORITY_LOW
+    public static final int PRIORITY_NORMAL
+    public static final int PRIORITY_HIGH
+    public static final int PRIORITY_MUSIC
+com.w3i.replica.replicaisland.SpriteAnimation:
+    private static final int LINEAR_SEARCH_CUTOFF
+com.w3i.replica.replicaisland.SpriteComponent:
+    39:46:public SpriteComponent(int,int)
+    170:170:public final float getWidth()
+    174:174:public final float getHeight()
+com.w3i.replica.replicaisland.TextureLibrary:
+    static final int DEFAULT_SIZE
+    83:85:public com.w3i.replica.replicaisland.Texture loadTexture(android.content.Context,javax.microedition.khronos.opengles.GL10,int)
+    211:211:public boolean isTextureLoaded(int)
+com.w3i.replica.replicaisland.TheSourceComponent:
+    public static final float SHAKE_TIME
+    private static final float DIE_TIME
+    private static final float EXPLOSION_TIME
+    private static final float SHAKE_MAGNITUDE
+    private static final float SHAKE_SCALE
+    private static final float CAMERA_HIT_SHAKE_MAGNITUDE
+    private static final float SINK_SPEED
+com.w3i.replica.replicaisland.TiledVertexGrid:
+    private static final float GL_MAGIC_OFFSET
+com.w3i.replica.replicaisland.TiledWorld:
+    37:51:public TiledWorld(int,int)
+com.w3i.replica.replicaisland.TimeSystem:
+    private static final float EASE_DURATION
+    109:109:public float getRealTimeFrameDelta()
+com.w3i.replica.replicaisland.UIConstants:
+    24:24:public UIConstants()
+com.w3i.replica.replicaisland.Utils:
+    private static final float EPSILON
+    20:20:public Utils()
+com.w3i.replica.replicaisland.YesNoDialogPreference:
+    42:43:public YesNoDialogPreference(android.content.Context)
+com.w3i.replica.replicaisland.activities.AndouKun:
+    private static final int ACTIVITY_CHANGE_LEVELS
+    private static final int ACTIVITY_CONVERSATION
+    private static final int ACTIVITY_DIARY
+    private static final int ACTIVITY_ANIMATION_PLAYER
+    private static final int CHANGE_LEVEL_ID
+    private static final int TEST_ANIMATION_ID
+    private static final int TEST_DIARY_ID
+    private static final int METHOD_TRACING_ID
+    private static final int ROLL_TO_FACE_BUTTON_DELAY
+    public static final int QUIT_GAME_DIALOG
+    public static final int VERSION
+com.w3i.replica.replicaisland.activities.AnimationPlayerActivity:
+    public static final int KYLE_DEATH
+    public static final int WANDA_ENDING
+    public static final int KABOCHA_ENDING
+    public static final int ROKUDOU_ENDING
+com.w3i.replica.replicaisland.activities.ConversationDialogActivity:
+    private static final float TEXT_CHARACTER_DELAY
+    private static final int TEXT_CHARACTER_DELAY_MS
+com.w3i.replica.replicaisland.activities.ConversationDialogActivity$TypewriterTextView:
+    229:230:public ConversationDialogActivity$TypewriterTextView(android.content.Context)
+com.w3i.replica.replicaisland.activities.ExtrasMenuActivity:
+    public static final int NEW_GAME_DIALOG
+    public static final int EXTRAS_LOCKED_DIALOG
+    private static final int START_LINEAR_MODE
+    private static final int START_LEVEL_SELECT
+com.w3i.replica.replicaisland.activities.GameOverActivity$IncrementingTextView:
+    private static final int INCREMENT_DELAY_MS
+    private static final int MODE_NONE
+    private static final int MODE_PERCENT
+    private static final int MODE_TIME
+    61:62:public GameOverActivity$IncrementingTextView(android.content.Context)
+com.w3i.replica.replicaisland.activities.LevelSelectActivity:
+    private static final int UNLOCK_ALL_LEVELS_ID
+    private static final int UNLOCK_NEXT_LEVEL_ID
+com.w3i.replica.replicaisland.activities.LevelSelectActivity$DisableItemArrayAdapter:
+    private static final int TYPE_ENABLED
+    private static final int TYPE_DISABLED
+    private static final int TYPE_COMPLETED
+    private static final int TYPE_COUNT
+com.w3i.replica.replicaisland.activities.MainMenuActivity:
+    private static final int WHATS_NEW_DIALOG
+    private static final int TILT_TO_SCREEN_CONTROLS_DIALOG
+    private static final int CONTROL_SETUP_DIALOG
+org.OpenUDID.OpenUDID_manager
+org.OpenUDID.OpenUDID_manager$ValueComparator
