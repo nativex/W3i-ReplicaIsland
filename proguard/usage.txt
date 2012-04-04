@@ -162,40 +162,40 @@ com.test.TestRewardsTextViews$RewardsLayout:
 com.test.VideoURLsTest$URLNamePair:
     private static final java.lang.String host
 com.w3i.advertiser.ActionTakenRequestData:
-    18:18:public com.w3i.common.UDIDs getUdids()
-    29:29:public int getActionId()
-    37:37:public java.lang.String getIsHacked()
+    19:19:public com.w3i.common.UDIDs getUdids()
+    30:30:public int getActionId()
+    38:38:public java.lang.String getIsHacked()
 com.w3i.advertiser.AdvertiserConstants
 com.w3i.advertiser.AdvertiserSharedData:
     5:5:public AdvertiserSharedData()
     39:39:protected static java.lang.String getRequest()
     43:43:protected static java.lang.String getResponse()
 com.w3i.advertiser.AppWasRunRequestData:
-    21:21:public int getAppId()
-    29:29:public boolean isFirstRun()
-    37:37:public java.lang.String getIsHacked()
-    45:45:public com.w3i.common.UDIDs getUdids()
+    22:22:public int getAppId()
+    30:30:public boolean isFirstRun()
+    38:38:public java.lang.String getIsHacked()
+    46:46:public com.w3i.common.UDIDs getUdids()
 com.w3i.advertiser.AppWasRunV2RequestData:
     private java.lang.String clientIp
-    37:37:public com.w3i.common.UDIDs getUdids()
-    48:48:public java.lang.Integer getAppId()
-    56:56:public java.lang.String getClientIp()
-    60:61:public void setClientIp(java.lang.String)
-    64:64:public java.lang.Boolean getIsHacked()
-    72:72:public java.lang.Boolean getIsFirstRun()
+    38:38:public com.w3i.common.UDIDs getUdids()
+    49:49:public java.lang.Integer getAppId()
+    57:57:public java.lang.String getClientIp()
+    61:62:public void setClientIp(java.lang.String)
+    65:65:public java.lang.Boolean getIsHacked()
+    73:73:public java.lang.Boolean getIsFirstRun()
 com.w3i.advertiser.AppWasRunV2RequestData$AndroidMarketInputs:
-    97:97:public java.lang.String getSource()
-    106:106:public java.lang.String getMedium()
-    115:115:public java.lang.String getTerm()
-    124:124:public java.lang.String getContent()
-    133:133:public java.lang.String getCampaign()
+    98:98:public java.lang.String getSource()
+    107:107:public java.lang.String getMedium()
+    116:116:public java.lang.String getTerm()
+    125:125:public java.lang.String getContent()
+    134:134:public java.lang.String getCampaign()
 com.w3i.advertiser.AppWasRunV2ResponseData:
     private java.lang.Long deviceId
     private java.lang.String mediaBuyURL
-    13:13:public java.lang.Long getDeviceId()
-    17:18:public void setDeviceId(java.lang.Long)
-    21:21:public java.lang.String getMediaBuyURL()
-    25:26:public void setMediaBuyURL(java.lang.String)
+    14:14:public java.lang.Long getDeviceId()
+    18:19:public void setDeviceId(java.lang.Long)
+    22:22:public java.lang.String getMediaBuyURL()
+    26:27:public void setMediaBuyURL(java.lang.String)
 com.w3i.advertiser.Device:
     80:80:public java.lang.String getMacWlan()
     84:85:public void setMacWlan(java.lang.String)
@@ -214,6 +214,31 @@ com.w3i.advertiser.W3iConnect:
     85:86:public W3iConnect(android.app.Activity,boolean)
     120:121:public com.w3i.advertiser.W3iConnect setW3iAdvertiser(com.w3i.advertiser.W3iAdvertiser)
 com.w3i.common.IAsyncTaskManager
+com.w3i.common.JsonRequestConstants
+com.w3i.common.JsonRequestConstants$ActionTaken
+com.w3i.common.JsonRequestConstants$AndroidMarketInputs
+com.w3i.common.JsonRequestConstants$AppWasRun
+com.w3i.common.JsonRequestConstants$AppWasRunV2
+com.w3i.common.JsonRequestConstants$Balance
+com.w3i.common.JsonRequestConstants$CTAOffer
+com.w3i.common.JsonRequestConstants$CTAOfferClick
+com.w3i.common.JsonRequestConstants$CreateSession
+com.w3i.common.JsonRequestConstants$EndSession
+com.w3i.common.JsonRequestConstants$GetCTAOffers
+com.w3i.common.JsonRequestConstants$GetDeviceBalance
+com.w3i.common.JsonRequestConstants$GetFeaturedOffer
+com.w3i.common.JsonRequestConstants$GetHistory
+com.w3i.common.JsonRequestConstants$GetQualifiedOffers
+com.w3i.common.JsonRequestConstants$Log
+com.w3i.common.JsonRequestConstants$Message
+com.w3i.common.JsonRequestConstants$Offer
+com.w3i.common.JsonRequestConstants$PublisherCurrency
+com.w3i.common.JsonRequestConstants$RedeemBalance
+com.w3i.common.JsonRequestConstants$SaveOfferClick
+com.w3i.common.JsonRequestConstants$Session
+com.w3i.common.JsonRequestConstants$UDIDs
+com.w3i.common.JsonRequestConstants$URLS
+com.w3i.common.JsonRequestConstants$Violation
 com.w3i.common.Log:
     27:27:public Log()
     93:96:public static void w(java.lang.String)
@@ -226,10 +251,10 @@ com.w3i.common.StringConstants
 com.w3i.common.UDIDs:
     private static final long serialVersionUID
 com.w3i.common.UDIDs$UDID:
-    34:34:public java.lang.String getType()
-    38:39:public void setType(java.lang.String)
-    42:42:public java.lang.String getValue()
-    46:47:public void setValue(java.lang.String)
+    33:33:public java.lang.String getType()
+    37:38:public void setType(java.lang.String)
+    41:41:public java.lang.String getValue()
+    45:46:public void setValue(java.lang.String)
 com.w3i.offerwall.Constants
 com.w3i.offerwall.DialogInputs:
     16:17:public void setCurrencyName(java.lang.String)
@@ -242,11 +267,11 @@ com.w3i.offerwall.W3iPublisher:
     81:81:public com.w3i.offerwall.ui.ThemeManager getThemeManager()
 com.w3i.offerwall.business.AppWasRunV2ResponseData
 com.w3i.offerwall.business.Balance:
-    20:21:public void setId(java.lang.String)
-    28:29:public void setDisplayName(java.lang.String)
-    36:37:public void setExternalCurrencyId(java.lang.String)
-    40:40:public java.lang.String getExternalCurrencyId()
-    44:45:public void setAmount(java.lang.String)
+    21:22:public void setId(java.lang.String)
+    29:30:public void setDisplayName(java.lang.String)
+    37:38:public void setExternalCurrencyId(java.lang.String)
+    41:41:public java.lang.String getExternalCurrencyId()
+    45:46:public void setAmount(java.lang.String)
 com.w3i.offerwall.business.CTAOffer:
     private java.lang.String largeIconUrl
     private java.lang.Double purchasePrice
@@ -271,31 +296,30 @@ com.w3i.offerwall.business.CTAOfferClickResponseData:
     42:43:public void setLog(java.util.ArrayList)
     50:51:public void setRedirectUrl(java.lang.String)
 com.w3i.offerwall.business.CreateSessionRequestData:
-    44:44:public com.w3i.common.UDIDs getUdids()
-    55:55:public long getAppId()
-    63:63:public java.lang.String getDeviceGenerationInfo()
-    71:71:public boolean isHacked()
-    79:79:public boolean isOnCellular()
-    87:87:public boolean isUsingSDK()
-    95:95:public java.lang.String getOsVersion()
-    103:103:public java.lang.String getPublisherUserId()
-    111:111:public java.lang.String getPublisherSDKVersion()
-    119:119:public java.lang.String getPreviousSessionEndTime()
-    127:127:public long getPreviousSessionId()
+    43:43:public com.w3i.common.UDIDs getUdids()
+    54:54:public long getAppId()
+    62:62:public java.lang.String getDeviceGenerationInfo()
+    70:70:public boolean isHacked()
+    78:78:public boolean isOnCellular()
+    86:86:public boolean isUsingSDK()
+    94:94:public java.lang.String getOsVersion()
+    102:102:public java.lang.String getPublisherUserId()
+    110:110:public java.lang.String getPublisherSDKVersion()
+    118:118:public java.lang.String getPreviousSessionEndTime()
+    126:126:public long getPreviousSessionId()
 com.w3i.offerwall.business.DeviceHistoryResponseData:
     private java.util.ArrayList earnings
-    45:45:public java.util.ArrayList getViolations()
-    49:50:public void setViolations(java.util.ArrayList)
-    53:53:public java.util.ArrayList getMessages()
-    57:58:public void setMessages(java.util.ArrayList)
-    65:66:public void setTotalOfferCount(int)
-    69:69:public java.util.ArrayList getEarnings()
-    73:74:public void setEarnings(java.util.ArrayList)
-    81:82:public void setOfferHistories(java.util.ArrayList)
+    48:48:public java.util.ArrayList getViolations()
+    52:53:public void setViolations(java.util.ArrayList)
+    56:56:public java.util.ArrayList getMessages()
+    60:61:public void setMessages(java.util.ArrayList)
+    68:69:public void setTotalOfferCount(int)
+    72:72:public java.util.ArrayList getEarnings()
+    76:77:public void setEarnings(java.util.ArrayList)
+    84:85:public void setOfferHistories(java.util.ArrayList)
 com.w3i.offerwall.business.EndSessionRequestData:
     12:12:public java.lang.Long getSessionID()
 com.w3i.offerwall.business.EndSessionResponseData
-com.w3i.offerwall.business.FeaturedOffer
 com.w3i.offerwall.business.GetCTAOffersRequestData:
     14:14:public com.w3i.offerwall.business.Session getSession()
     22:22:public java.lang.Long getOfferId()
@@ -315,18 +339,18 @@ com.w3i.offerwall.business.GetDeviceBalanceRequestData:
     26:26:public java.lang.String getBalanceDateTime()
     34:34:public java.lang.String getPreviousBalanceDateTime()
 com.w3i.offerwall.business.GetDeviceBalanceResponseData:
-    48:49:public void setViolations(java.util.ArrayList)
-    56:57:public void setMessages(java.util.ArrayList)
-    60:61:public void setBalanceDateTime(java.lang.String)
-    68:69:public void setBalances(java.util.ArrayList)
+    49:50:public void setViolations(java.util.ArrayList)
+    57:58:public void setMessages(java.util.ArrayList)
+    61:62:public void setBalanceDateTime(java.lang.String)
+    69:70:public void setBalances(java.util.ArrayList)
 com.w3i.offerwall.business.GetFeaturedOfferRequestData:
     12:12:public com.w3i.offerwall.business.Session getSession()
 com.w3i.offerwall.business.GetFeaturedOfferResponseData:
-    89:90:public void setViolations(java.util.ArrayList)
-    97:98:public void setMessages(java.util.ArrayList)
-    105:106:public void setMessageBoxTitle(java.lang.String)
-    113:114:public void setMessageBoxDescription(java.lang.String)
-    121:122:public void setOfferFull(com.w3i.offerwall.business.OfferFull)
+    90:91:public void setViolations(java.util.ArrayList)
+    98:99:public void setMessages(java.util.ArrayList)
+    106:107:public void setMessageBoxTitle(java.lang.String)
+    114:115:public void setMessageBoxDescription(java.lang.String)
+    122:123:public void setOfferFull(com.w3i.offerwall.business.OfferFull)
 com.w3i.offerwall.business.GetHistoryRequestData:
     24:24:public com.w3i.offerwall.business.Session getSession()
     32:32:public java.lang.Integer getOfferIndexStart()
@@ -356,53 +380,53 @@ com.w3i.offerwall.business.GetOfferHistoryResponseData:
 com.w3i.offerwall.business.GetQualifiedOffersRequestData:
     19:19:public com.w3i.offerwall.business.Session getSession()
 com.w3i.offerwall.business.GetQualifiedOffersResponseData:
-    47:48:public void setViolations(java.util.ArrayList)
-    55:56:public void setMessages(java.util.ArrayList)
-    63:64:public void setTotalOfferCount(java.lang.String)
-    71:72:public void setOffers(java.util.ArrayList)
+    49:50:public void setViolations(java.util.ArrayList)
+    57:58:public void setMessages(java.util.ArrayList)
+    65:66:public void setTotalOfferCount(java.lang.String)
+    73:74:public void setOffers(java.util.ArrayList)
 com.w3i.offerwall.business.LogItem
 com.w3i.offerwall.business.Message:
-    17:18:public void setReferenceName(java.lang.String)
-    25:26:public void setDisplayName(java.lang.String)
-    33:34:public void setDisplayText(java.lang.String)
+    18:19:public void setReferenceName(java.lang.String)
+    26:27:public void setDisplayName(java.lang.String)
+    34:35:public void setDisplayText(java.lang.String)
 com.w3i.offerwall.business.OfferBasic:
     private java.lang.String publisherPayoutAmount
-    68:68:public int getSelectedCurrencyIndex()
-    96:96:public boolean isFeatured()
-    116:117:public void setPurchasePrice(java.lang.String)
-    120:120:public java.lang.String getPublisherPayoutAmount()
-    124:125:public void setPublisherPayoutAmount(java.lang.String)
-    148:149:public void setPublisherCurrencies(java.util.ArrayList)
+    69:69:public int getSelectedCurrencyIndex()
+    97:97:public boolean isFeatured()
+    117:118:public void setPurchasePrice(java.lang.String)
+    121:121:public java.lang.String getPublisherPayoutAmount()
+    125:126:public void setPublisherPayoutAmount(java.lang.String)
+    149:150:public void setPublisherCurrencies(java.util.ArrayList)
 com.w3i.offerwall.business.OfferFull:
     private java.lang.String largeIconUrl
-    11:11:public java.lang.String getLargeIconUrl()
-    15:16:public void setLargeIconUrl(java.lang.String)
+    12:12:public java.lang.String getLargeIconUrl()
+    16:17:public void setLargeIconUrl(java.lang.String)
 com.w3i.offerwall.business.PublisherCurrency:
     private java.lang.String currencyId
-    45:46:public void setId(java.lang.String)
-    49:49:public java.lang.String getCurrencyId()
-    53:54:public void setCurrencyId(java.lang.String)
-    69:70:public void setAmount(java.lang.String)
-    77:78:public void setIsDefault(boolean)
+    46:47:public void setId(java.lang.String)
+    50:50:public java.lang.String getCurrencyId()
+    54:55:public void setCurrencyId(java.lang.String)
+    70:71:public void setAmount(java.lang.String)
+    78:79:public void setIsDefault(boolean)
 com.w3i.offerwall.business.RedeemDeviceBalanceRequestData:
     15:15:public com.w3i.offerwall.business.Session getSession()
     23:23:public java.lang.String getBalanceDateTime()
 com.w3i.offerwall.business.RedeemDeviceBalanceResponseData:
-    26:27:public void setViolations(java.util.ArrayList)
-    30:31:public void setReceiptId(java.lang.String)
-    38:39:public void setMessages(java.util.ArrayList)
+    27:28:public void setViolations(java.util.ArrayList)
+    31:32:public void setReceiptId(java.lang.String)
+    39:40:public void setMessages(java.util.ArrayList)
 com.w3i.offerwall.business.SaveOfferClickRequestData:
     18:18:public com.w3i.offerwall.business.Session getSession()
     26:26:public java.lang.Long getOfferId()
     34:34:public java.lang.String getPublisherCurrencyId()
 com.w3i.offerwall.business.SaveOfferClickResponseData:
-    57:58:public void setViolations(java.util.ArrayList)
-    65:66:public void setMessages(java.util.ArrayList)
-    69:69:public java.lang.String getFullConversionMessage()
-    73:74:public void setFullConversionMessage(java.lang.String)
-    77:77:public java.lang.String getShortConversionMessage()
-    81:82:public void setShortConversionMessage(java.lang.String)
-    89:90:public void setRedirectURL(java.lang.String)
+    58:59:public void setViolations(java.util.ArrayList)
+    66:67:public void setMessages(java.util.ArrayList)
+    70:70:public java.lang.String getFullConversionMessage()
+    74:75:public void setFullConversionMessage(java.lang.String)
+    78:78:public java.lang.String getShortConversionMessage()
+    82:83:public void setShortConversionMessage(java.lang.String)
+    90:91:public void setRedirectURL(java.lang.String)
 com.w3i.offerwall.business.SessionResponseData:
     private java.lang.String deviceId
     44:44:public java.util.ArrayList getViolations()
