@@ -4,13 +4,18 @@
     android:versionCode="14"
     android:versionName="1.4" >
 
+    <service android:name="org.OpenUDID.OpenUDID_service" >
+        <intent-filter>
+            <action android:name="org.OpenUDID.GETUDID" />
+        </intent-filter>
+    </service>
+
     <application
         android:debuggable="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
-      	
-          <activity
+        <activity
             android:name=".activities.MainMenuActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
@@ -21,8 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        <activity 
+        <activity
             android:name=".activities.AndouKun"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
@@ -63,10 +67,10 @@
             android:screenOrientation="landscape" />
         <activity
             android:name="com.w3i.offerwall.ui.OfferwallActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
         <activity
             android:name="com.w3i.offerwall.ui.HistoryActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
         <activity
             android:name="com.w3i.offerwall.ui.OfferDescriptionActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
@@ -89,7 +93,7 @@
 
     <!--
     Actually, this game works fine on small screens, but the only one out 
-	right now has no 3D acceleration, so it's slow and unplayable.
+	right now has no 3D acceleration, so it's slow and unplayable.
     -->
     <supports-screens
         android:anyDensity="true"
