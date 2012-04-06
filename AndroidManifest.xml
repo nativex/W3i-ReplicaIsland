@@ -4,12 +4,6 @@
     android:versionCode="14"
     android:versionName="1.4" >
 
-    <service android:name="org.OpenUDID.OpenUDID_service" >
-        <intent-filter>
-            <action android:name="org.OpenUDID.GETUDID" />
-        </intent-filter>
-    </service>
-
     <application
         android:debuggable="true"
         android:icon="@drawable/icon"
@@ -77,6 +71,13 @@
         <activity
             android:name="com.w3i.offerwall.ui.ComplexVideoOfferActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        
+    <service android:name="org.OpenUDID.OpenUDID_service" >
+        <intent-filter>
+            <action android:name="org.OpenUDID.GETUDID" />
+        </intent-filter>
+    </service>
+
     </application>
 
     <uses-permission android:name="android.permission.VIBRATE" />
