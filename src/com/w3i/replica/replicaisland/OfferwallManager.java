@@ -28,13 +28,16 @@ public class OfferwallManager {
 	}
 
 	private static OfferwallManager getInstance() {
-		if (instance != null) {
+		if (instance == null) {
 			throw new IllegalStateException("OfferwallManager not initialized. Call OfferwallManager.initialize(Activity) before calling any other method");
 		}
 		return instance;
 	}
 
 	public static void initialize(Activity activity, W3iAdvertiser listener) {
+		if (instance != null) {
+			throw new IllegalStateException("OfferwallManager already initialized.");
+		}
 		instance = new OfferwallManager(activity, listener);
 	}
 
@@ -48,6 +51,10 @@ public class OfferwallManager {
 			appWasRunExecuted = true;
 		}
 
+	}
+
+	public static void setAdvertiserListener(W3iAdvertiser listener) {
+		getInstance().advertiser.setW3iAdvertiser(listener);
 	}
 
 	public static void actionTaken(int actionId) {

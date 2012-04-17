@@ -2,9 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="assets"/>
-	<classpathentry excluding="com/test/" kind="src" path="PublisherSDK"/>
+	<classpathentry excluding="com/test/AdvertiserActionsActivity.java|com/test/AdvertiserTestActivity.java|com/test/ChooserActivity.java|com/test/HistoryTableActivity.java|com/test/LinearProgressBarActivity.java|com/test/SleepAsyncTask.java|com/test/TestActivity.java|com/test/TestDialogs.java|com/test/TestFactory.java|com/test/TestRewardsTextViews.java|com/test/VideoURLsTest.java|com/test/VideoViewActivity.java|com/test/WebViewActivity.java" kind="src" path="PublisherSDK"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="src" path="src-PublisherSDK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="lib" path="lib/gson-1.7.1.jar"/>
