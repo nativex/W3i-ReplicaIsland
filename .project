@@ -30,4 +30,16 @@
 		<nature>com.android.ide.eclipse.adt.AndroidNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>PublisherSDK</name>
+			<type>2</type>
+			<location>C:/Projects/W3i/Android/Repositories/AFPP Offerwall/src</location>
+		</link>
+		<link>
+			<name>assets</name>
+			<type>2</type>
+			<location>C:/Projects/W3i/Android/Repositories/AFPP Offerwall/assets</location>
+		</link>
+	</linkedResources>
 </projectDescription>

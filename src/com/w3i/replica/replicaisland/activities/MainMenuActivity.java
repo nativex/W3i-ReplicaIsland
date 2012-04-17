@@ -39,14 +39,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.w3i.advertiser.W3iAdvertiser;
-import com.w3i.advertiser.W3iConnect;
-import com.w3i.offerwall.ApplicationInputs;
 import com.w3i.offerwall.W3iCurrencyListener;
-import com.w3i.offerwall.W3iPublisher;
 import com.w3i.offerwall.business.Balance;
 import com.w3i.replica.replicaisland.DebugLog;
 import com.w3i.replica.replicaisland.LevelTree;
 import com.w3i.replica.replicaisland.MultiTouchFilter;
+import com.w3i.replica.replicaisland.OfferwallManager;
 import com.w3i.replica.replicaisland.PreferenceConstants;
 import com.w3i.replica.replicaisland.R;
 import com.w3i.replica.replicaisland.SingleTouchFilter;
@@ -67,7 +65,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	private Animation mFadeInAnimation;
 	private boolean mJustCreated;
 	private String mSelectedControlsString;
-	private ApplicationInputs inputs;
 
 	private final static int WHATS_NEW_DIALOG = 0;
 	private final static int TILT_TO_SCREEN_CONTROLS_DIALOG = 1;
@@ -93,8 +90,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 
 		@Override
 		public void onClick(View v) {
-			W3iPublisher w3iPublisher = new W3iPublisher(v.getContext(), inputs);
-			w3iPublisher.showOfferWall();
+			OfferwallManager.showOfferwall();
 		}
 	};
 
@@ -167,7 +163,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		mBackground = findViewById(R.id.mainMenuBackground);
 		mTotalCoins = (TextView) findViewById(R.id.coinQuantity);
 		findViewById(R.id.coinLayout).setOnClickListener(sCoinsClicked);
-		
+
 		if (mOptionsButton != null) {
 			mOptionsButton.setOnClickListener(sOptionButtonListener);
 		}
@@ -227,16 +223,11 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		// Log.d("com.w3i.replica.replicaisland", "serialnumber: " + android.os.Build.SERIAL);
 		Log.d("com.w3i.replica.replicaisland", "mac address: " + ((android.net.wifi.WifiManager) this.getApplicationContext().getSystemService(Context.WIFI_SERVICE)).getConnectionInfo().getMacAddress());
 		/* Initialization of W3iConnect class */
-		new W3iConnect(this, true, this).appWasRun(11103);
-
-		inputs = new ApplicationInputs();
-		inputs.setAppId(11103); // Application ID provided by W3i
-		inputs.setApplicationName("W3i's Replica Island"); // Sets the display name for your app
-		inputs.setPackageName("com.w3i.replica.replicaisland"); // The package name for your app
-		W3iPublisher publisher = new W3iPublisher(getApplicationContext(), inputs);
-		publisher.enableLogging(true);
-		publisher.createSession();
-		publisher.showFeaturedOffer(this);
+		OfferwallManager.initialize(this, this);
+		OfferwallManager.enableLogging(true);
+		OfferwallManager.setCurrencyRedemptionListener(w3iCurrencyRedemptionCallback);
+		OfferwallManager.createSession();
+		OfferwallManager.showFeaturedOffer(this);
 
 		Log.d("com.w3i.replica.replicaisland", "end");
 	}
@@ -246,7 +237,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		if (success == true) {
 			Log.d("com.w3i.replica.replicaisland", "awr success");
 		}
-
 	}
 
 	@Override
@@ -260,7 +250,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		super.onResume();
 		mPaused = false;
 		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
-		new W3iPublisher(this, inputs).redeemCurrency(this, w3iCurrencyRedemptionCallback);
+		OfferwallManager.redeemCurrency(this);
 
 		mButtonFlickerAnimation.setAnimationListener(null);
 
