@@ -213,6 +213,12 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		doW3iInitialization();
 	}
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		OfferwallManager.release();
+	}
+
 	/**
 	 * 
 	 */
