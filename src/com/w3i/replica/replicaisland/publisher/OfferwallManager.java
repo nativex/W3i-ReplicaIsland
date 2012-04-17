@@ -1,9 +1,10 @@
-package com.w3i.replica.replicaisland;
+package com.w3i.replica.replicaisland.publisher;
 
 import android.app.Activity;
 
 import com.w3i.advertiser.W3iAdvertiser;
 import com.w3i.advertiser.W3iConnect;
+import com.w3i.common.Log;
 import com.w3i.offerwall.ApplicationInputs;
 import com.w3i.offerwall.DialogInputs;
 import com.w3i.offerwall.W3iClickListener;
@@ -17,10 +18,11 @@ public class OfferwallManager {
 	private W3iListener currencyListener = null;
 	private static boolean appWasRunExecuted = false;
 	private static boolean actionTakenExecuted = false;
+	private static final int appId = 11103;
 
 	private OfferwallManager(Activity activity, W3iAdvertiser listener) {
 		ApplicationInputs inputs = new ApplicationInputs();
-		inputs.setAppId(11103); // Application ID provided by W3i
+		inputs.setAppId(appId); // Application ID provided by W3i
 		inputs.setApplicationName("W3i's Replica Island"); // Sets the display name for your app
 		inputs.setPackageName("com.w3i.replica.replicaisland"); // The package name for your app
 		publisher = new W3iPublisher(activity, inputs);
@@ -34,9 +36,10 @@ public class OfferwallManager {
 		return instance;
 	}
 
-	public static void initialize(Activity activity, W3iAdvertiser listener) {
+	public static synchronized void initialize(Activity activity, W3iAdvertiser listener) {
 		if (instance != null) {
-			throw new IllegalStateException("OfferwallManager already initialized.");
+			Log.d("OfferwallManager already initialized.");
+			return;
 		}
 		instance = new OfferwallManager(activity, listener);
 	}
@@ -45,10 +48,12 @@ public class OfferwallManager {
 		initialize(activity, null);
 	}
 
-	public static void appWasRun(int appId) {
+	public static void appWasRun() {
 		if (appWasRunExecuted == false) {
 			getInstance().advertiser.appWasRun(appId);
 			appWasRunExecuted = true;
+		} else {
+			Log.d("OfferwallManager: AppWasRun already executed.");
 		}
 
 	}
@@ -61,6 +66,8 @@ public class OfferwallManager {
 		if (actionTakenExecuted == false) {
 			getInstance().advertiser.actionTaken(actionId);
 			actionTakenExecuted = true;
+		} else {
+			Log.d("OfferwallManager: ActionTaken already executed.");
 		}
 	}
 

@@ -44,12 +44,12 @@ import com.w3i.offerwall.business.Balance;
 import com.w3i.replica.replicaisland.DebugLog;
 import com.w3i.replica.replicaisland.LevelTree;
 import com.w3i.replica.replicaisland.MultiTouchFilter;
-import com.w3i.replica.replicaisland.OfferwallManager;
 import com.w3i.replica.replicaisland.PreferenceConstants;
 import com.w3i.replica.replicaisland.R;
 import com.w3i.replica.replicaisland.SingleTouchFilter;
 import com.w3i.replica.replicaisland.TouchFilter;
 import com.w3i.replica.replicaisland.UIConstants;
+import com.w3i.replica.replicaisland.publisher.OfferwallManager;
 
 public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	private boolean mPaused;
@@ -231,6 +231,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		/* Initialization of W3iConnect class */
 		OfferwallManager.initialize(this, this);
 		OfferwallManager.enableLogging(true);
+		OfferwallManager.appWasRun();
 		OfferwallManager.setCurrencyRedemptionListener(w3iCurrencyRedemptionCallback);
 		OfferwallManager.createSession();
 		OfferwallManager.showFeaturedOffer(this);
