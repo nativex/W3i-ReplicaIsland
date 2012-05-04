@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="top" android:padding="5dip">
+
+    <ImageView
+        android:id="@+id/itemIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="5dip"
+        android:maxHeight="128dip"
+        android:maxWidth="128dip"
+        android:minHeight="96dip"
+        android:minWidth="96dip"
+        android:src="@drawable/black" android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/itemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dip"
+        android:layout_toRightOf="@+id/itemIcon"
+        android:text="@string/store_item_name"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/itemDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/itemName"
+        android:layout_margin="5dip"
+        android:layout_toRightOf="@+id/itemIcon"
+        android:text="@string/store_item_description"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/itemPrice"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/itemDescription"
+        android:layout_toRightOf="@+id/itemIcon"
+        android:text="Price"
+        android:textAppearance="?android:attr/textAppearanceSmall" android:layout_margin="5dip" android:gravity="right"/>
+
+</RelativeLayout>

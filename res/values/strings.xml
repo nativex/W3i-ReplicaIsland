@@ -415,4 +415,12 @@ If I am honest with myself, there is another reason the adventurers had to die. 
 
 <string name="get_free_coins">Get Free Coins</string>
 
+<string name="store_title">Replica Island Store</string>
+
+<string name="store_item_name">Item name</string>
+
+<string name="store_item_description">Item description</string>
+
+<string name="store_item_price_label">Price: </string>
+
 </resources>
