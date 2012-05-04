@@ -1,12 +1,10 @@
 package com.w3i.replica.replicaisland.store;
 
-import android.graphics.drawable.Drawable;
-
 public class Item<T> {
 	private T powerupValue;
 	private String name;
 	private String description;
-	private Drawable icon;
+	private int icon;
 	private long price;
 
 	public long getPrice() {
@@ -41,11 +39,11 @@ public class Item<T> {
 		this.description = description;
 	}
 
-	public Drawable getIcon() {
+	public int getIcon() {
 		return icon;
 	}
 
-	public void setIcon(Drawable icon) {
+	public void setIcon(int icon) {
 		this.icon = icon;
 	}
 

@@ -23,7 +23,7 @@ public class StoreActivity extends Activity {
 			if (itemTag instanceof Item<?>) {
 				Item<?> item = (Item<?>) itemTag;
 				Toast.makeText(StoreActivity.this, item.getName() + " clicked",
-						Toast.LENGTH_SHORT);
+						Toast.LENGTH_SHORT).show();
 			}
 		}
 	};
@@ -51,5 +51,10 @@ public class StoreActivity extends Activity {
 	private void addItemsToStoreManager() {
 		storeManager.addListItem(new LiveUpgradeItem(LIFE_UPGRADE_LEVEL.SMALL),
 				onItemClick);
+		storeManager.addListItem(
+				new LiveUpgradeItem(LIFE_UPGRADE_LEVEL.MEDIUM), onItemClick);
+		storeManager.addListItem(new LiveUpgradeItem(
+				LIFE_UPGRADE_LEVEL.ULTIMATE), onItemClick);
+
 	}
 }

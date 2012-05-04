@@ -1,5 +1,7 @@
 package com.w3i.replica.replicaisland.store;
 
+import com.w3i.replica.replicaisland.R;
+
 public class LiveUpgradeItem extends Item<Integer> {
 
 	public enum LIFE_UPGRADE_LEVEL {
@@ -9,6 +11,7 @@ public class LiveUpgradeItem extends Item<Integer> {
 		private String name;
 		private int lives;
 		private long price;
+		private int icon;
 
 		public String getName() {
 			return name;
@@ -22,10 +25,15 @@ public class LiveUpgradeItem extends Item<Integer> {
 			return price;
 		}
 
+		public int getIcon() {
+			return icon;
+		}
+
 		private LIFE_UPGRADE_LEVEL(String name, int lives, long price) {
 			this.name = name;
 			this.lives = lives;
 			this.price = price;
+			this.icon = R.drawable.live_upgrade_icon;
 		}
 	}
 
@@ -34,5 +42,6 @@ public class LiveUpgradeItem extends Item<Integer> {
 		setName(upgradeLevel.getName() + " Live Upgrade");
 		setDescription("Adds " + upgradeLevel.getLives() + " points of live.");
 		setPrice(upgradeLevel.getPrice());
+		setIcon(upgradeLevel.getIcon());
 	}
 }

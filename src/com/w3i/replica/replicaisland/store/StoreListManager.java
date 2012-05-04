@@ -61,7 +61,7 @@ public class StoreListManager {
 			String priceLabel = itemsList.getContext().getResources()
 					.getString(R.string.store_item_price_label);
 
-			iconView.setBackgroundDrawable(item.getIcon());
+			iconView.setBackgroundResource(item.getIcon());
 			nameView.setText(item.getName());
 			descView.setText(item.getDescription());
 			priceView.setText(priceLabel + item.getPrice());

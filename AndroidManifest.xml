@@ -83,6 +83,7 @@
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
         </receiver>
+        <activity android:name=".store.StoreActivity"></activity>
     </application>
 
     <uses-permission android:name="android.permission.VIBRATE" />
