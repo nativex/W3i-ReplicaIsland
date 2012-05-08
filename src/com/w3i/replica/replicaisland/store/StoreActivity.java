@@ -7,10 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.w3i.replica.replicaisland.R;
-import com.w3i.replica.replicaisland.store.LiveUpgradeItem.LIFE_UPGRADE_LEVEL;
 
 public class StoreActivity extends Activity {
 	private StoreListManager storeManager;
@@ -19,12 +17,6 @@ public class StoreActivity extends Activity {
 
 		@Override
 		public void onClick(View itemLayout) {
-			Object itemTag = itemLayout.getTag();
-			if (itemTag instanceof Item<?>) {
-				Item<?> item = (Item<?>) itemTag;
-				Toast.makeText(StoreActivity.this, item.getName() + " clicked",
-						Toast.LENGTH_SHORT).show();
-			}
 		}
 	};
 
@@ -49,12 +41,6 @@ public class StoreActivity extends Activity {
 	}
 
 	private void addItemsToStoreManager() {
-		storeManager.addListItem(new LiveUpgradeItem(LIFE_UPGRADE_LEVEL.SMALL),
-				onItemClick);
-		storeManager.addListItem(
-				new LiveUpgradeItem(LIFE_UPGRADE_LEVEL.MEDIUM), onItemClick);
-		storeManager.addListItem(new LiveUpgradeItem(
-				LIFE_UPGRADE_LEVEL.ULTIMATE), onItemClick);
 
 	}
 }

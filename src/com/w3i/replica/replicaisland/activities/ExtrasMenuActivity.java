@@ -16,10 +16,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
+import com.w3i.gamesplatformsdk.ui.StoreUI;
 import com.w3i.replica.replicaisland.DebugLog;
 import com.w3i.replica.replicaisland.PreferenceConstants;
 import com.w3i.replica.replicaisland.R;
 import com.w3i.replica.replicaisland.UIConstants;
+import com.w3i.replica.replicaisland.store.GamesPlatformManager;
 import com.w3i.replica.replicaisland.store.StoreActivity;
 
 public class ExtrasMenuActivity extends Activity {
@@ -46,7 +48,14 @@ public class ExtrasMenuActivity extends Activity {
 
 		@Override
 		public void onClick(View arg0) {
-			Intent intent = new Intent(arg0.getContext(), StoreActivity.class);
+			Intent intent = new Intent(arg0.getContext(), StoreUI.class);
+			intent.putExtra(StoreUI.PUB_EXTRA_KEY,
+					GamesPlatformManager.PUBLISHER_ID);
+			intent.putExtra(StoreUI.APP_EXTRA_KEY, GamesPlatformManager.APP_ID);
+			intent.putExtra(StoreUI.REST_EXTRA_KEY,
+					GamesPlatformManager.REST_URL);
+			intent.putExtra(StoreUI.STORE_EXTRA_KEY,
+					GamesPlatformManager.STORE_ID);
 			arg0.getContext().startActivity(intent);
 		}
 	};

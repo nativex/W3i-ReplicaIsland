@@ -11,24 +11,24 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_margin="5dip"
+        android:gravity="center_horizontal"
         android:text="@string/store_title"
-        android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="center_horizontal"/>
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ScrollView
         android:id="@+id/itemListScroller"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/storeTitle" android:layout_marginBottom="25dip">
+        android:layout_below="@+id/storeTitle"
+        android:layout_marginBottom="25dip" >
 
         <LinearLayout
+            android:id="@+id/itemsList"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical" android:id="@+id/itemsList">
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
         </LinearLayout>
-
     </ScrollView>
-
-z
 
 </RelativeLayout>

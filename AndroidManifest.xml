@@ -83,7 +83,8 @@
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
         </receiver>
-        <activity android:name=".store.StoreActivity"></activity>
+        <activity android:name=".store.StoreActivity" android:screenOrientation="landscape"></activity>
+        <activity android:name="com.w3i.gamesplatformsdk.ui.StoreUI"></activity>
     </application>
 
     <uses-permission android:name="android.permission.VIBRATE" />
