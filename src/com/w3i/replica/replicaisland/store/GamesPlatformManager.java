@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.content.Context;
 
+import com.w3i.common.Log;
 import com.w3i.gamesplatformsdk.GamesPLatformListenerAdapter;
 import com.w3i.gamesplatformsdk.GamesPlatformSDK;
 import com.w3i.gamesplatformsdk.rest.entities.Category;
@@ -77,6 +78,10 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 
 	public static List<Currency> getCurrencies() {
 		checkInstance();
+		if (instance.currencies == null) {
+			Log.e("GamesPlatformManager: Currencies is null");
+			return null;
+		}
 		return instance.currencies;
 	}
 

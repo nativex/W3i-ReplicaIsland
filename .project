@@ -30,4 +30,11 @@
 		<nature>com.android.ide.eclipse.adt.AndroidNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>assets</name>
+			<type>2</type>
+			<location>C:/Anton/Projects/Eclipse/Repositories/AFPP Offerwall/assets</location>
+		</link>
+	</linkedResources>
 </projectDescription>

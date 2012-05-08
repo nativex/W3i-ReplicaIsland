@@ -48,14 +48,15 @@ public class ExtrasMenuActivity extends Activity {
 
 		@Override
 		public void onClick(View arg0) {
-			Intent intent = new Intent(arg0.getContext(), StoreUI.class);
-			intent.putExtra(StoreUI.PUB_EXTRA_KEY,
-					GamesPlatformManager.PUBLISHER_ID);
-			intent.putExtra(StoreUI.APP_EXTRA_KEY, GamesPlatformManager.APP_ID);
-			intent.putExtra(StoreUI.REST_EXTRA_KEY,
-					GamesPlatformManager.REST_URL);
-			intent.putExtra(StoreUI.STORE_EXTRA_KEY,
-					GamesPlatformManager.STORE_ID);
+			Intent intent = new Intent(arg0.getContext(), StoreActivity.class);
+			// intent.putExtra(StoreUI.PUB_EXTRA_KEY,
+			// GamesPlatformManager.PUBLISHER_ID);
+			// intent.putExtra(StoreUI.APP_EXTRA_KEY,
+			// GamesPlatformManager.APP_ID);
+			// intent.putExtra(StoreUI.REST_EXTRA_KEY,
+			// GamesPlatformManager.REST_URL);
+			// intent.putExtra(StoreUI.STORE_EXTRA_KEY,
+			// GamesPlatformManager.STORE_ID);
 			arg0.getContext().startActivity(intent);
 		}
 	};

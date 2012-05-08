@@ -1,34 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.egoclean.android.widget.flinger.ViewFlinger xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:gravity="top" >
+    android:layout_height="fill_parent" >
 
-    <TextView
-        android:id="@+id/storeTitle"
+    <include
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="5dip"
-        android:gravity="center_horizontal"
-        android:text="@string/store_title"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_height="fill_parent"
+        layout="@layout/store_ui" />
 
-    <ScrollView
-        android:id="@+id/itemListScroller"
+    <include
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/storeTitle"
-        android:layout_marginBottom="25dip" >
+        android:layout_height="fill_parent"
+        layout="@layout/history_ui" />
 
-        <LinearLayout
-            android:id="@+id/itemsList"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-        </LinearLayout>
-    </ScrollView>
-
-</RelativeLayout>
+</com.egoclean.android.widget.flinger.ViewFlinger> <!-- com.egoclean.android.widget.flinger.ViewFlinger /> -->
