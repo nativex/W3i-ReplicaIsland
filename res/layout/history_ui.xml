@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
         android:gravity="center"
-        android:text="Purchased Items"
+        android:text="@string/store_history_title"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <GridView
@@ -23,13 +23,12 @@
         android:numColumns="3" >
     </GridView>
 
-    <TextView
-        android:id="@+id/storeScrollStore"
+    <com.w3i.replica.replicaisland.store.VerticalTextView
+        android:id="@+id/storeScrollHistory"
         style="@style/StoreScrollerStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:text="Store" />
+        android:layout_centerVertical="true" />
 
 </RelativeLayout>

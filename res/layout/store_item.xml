@@ -34,17 +34,16 @@
         android:text="@string/store_item_description"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <TextView
+    <com.w3i.offerwall.custom.views.AdvancedTextView
         android:id="@+id/itemPrice"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/itemDescription"
         android:layout_marginBottom="5dip"
         android:layout_marginLeft="5dip"
         android:layout_marginRight="5dip"
-        android:layout_toRightOf="@+id/itemIcon"
-        android:gravity="right"
-        android:text="Price"
+        android:text="@string/store_item_price_label"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

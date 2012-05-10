@@ -14,7 +14,8 @@ public class HistoryListAdapter extends BaseAdapter {
 		this.items = new ArrayList<ImageView>();
 	}
 
-	public void add(ImageView v) {
+	public void add(
+			ImageView v) {
 		items.add(v);
 		notifyDataSetChanged();
 	}
@@ -25,17 +26,22 @@ public class HistoryListAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public Object getItem(int arg0) {
+	public Object getItem(
+			int arg0) {
 		return items.get(arg0);
 	}
 
 	@Override
-	public long getItemId(int arg0) {
+	public long getItemId(
+			int arg0) {
 		return arg0;
 	}
 
 	@Override
-	public View getView(int arg0, View arg1, ViewGroup arg2) {
+	public View getView(
+			int arg0,
+			View arg1,
+			ViewGroup arg2) {
 		return items.get(arg0);
 	}
 

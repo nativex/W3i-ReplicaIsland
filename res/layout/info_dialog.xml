@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="5dip" >
+
+    <RelativeLayout
+        android:id="@+id/infoDialogItemLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/infoDialogSeparator" >
+
+        <com.w3i.offerwall.custom.views.CustomImageView
+            android:id="@+id/infoDialogIcon"
+            android:layout_width="80dip"
+            android:layout_height="80dip"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="5dip" />
+
+        <TextView
+            android:id="@+id/infoDialogDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:layout_toRightOf="@+id/infoDialogIcon" >
+        </TextView>
+    </RelativeLayout>
+
+    <com.w3i.offerwall.custom.views.ScrollingTextView
+        android:id="@+id/infoDialogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/infoDialogCloseButton"
+        android:textSize="20dip"
+        android:typeface="sans" />
+
+    <ImageView
+        android:id="@+id/infoDialogSeparator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/infoDialogItemLayout"
+        android:layout_below="@+id/infoDialogTitle"
+        android:layout_marginBottom="5dip"
+        android:layout_marginTop="5dip"
+        android:src="@android:drawable/divider_horizontal_dim_dark" />
+
+    <ImageView
+        android:id="@+id/infoDialogCloseButton"
+        android:layout_width="40dip"
+        android:layout_height="40dip"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/infoDialogItemLayout"
+        android:paddingBottom="18dip"
+        android:paddingLeft="18dip"
+        android:src="@drawable/info_dialog_close" />
+
+    <Button
+        android:id="@+id/infoDialogButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/infoDialogItemLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dip"
+        android:background="@drawable/info_dialog_button"
+        android:minWidth="150dip"
+        android:textColor="@android:color/white" />
+
+</RelativeLayout>

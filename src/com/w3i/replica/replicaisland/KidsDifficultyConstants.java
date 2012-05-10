@@ -16,15 +16,17 @@
 
 package com.w3i.replica.replicaisland;
 
+import com.w3i.replica.replicaisland.store.PowerupManager;
+
 public class KidsDifficultyConstants extends DifficultyConstants {
 
 	private static final float FUEL_AIR_REFILL_SPEED = 0.15f;
-    private static final float FUEL_GROUND_REFILL_SPEED = 2.0f;
+	private static final float FUEL_GROUND_REFILL_SPEED = 2.0f;
 	public static final int MAX_PLAYER_LIFE = 3;
 	private static final int COINS_PER_POWERUP = 20;
-	      
+
 	public static final float GLOW_DURATION = 15.0f;
-	    
+
 	// DDA boosts
 	private static final int DDA_STAGE_1_ATTEMPTS = 3;
 	private static final int DDA_STAGE_2_ATTEMPTS = 8;
@@ -32,7 +34,7 @@ public class KidsDifficultyConstants extends DifficultyConstants {
 	private static final int DDA_STAGE_2_LIFE_BOOST = 2;
 	private static final float DDA_STAGE_1_FUEL_AIR_REFILL_SPEED = 0.22f;
 	private static final float DDA_STAGE_2_FUEL_AIR_REFILL_SPEED = 0.30f;
-	
+
 	@Override
 	public float getFuelAirRefillSpeed() {
 		return FUEL_AIR_REFILL_SPEED;
@@ -45,7 +47,7 @@ public class KidsDifficultyConstants extends DifficultyConstants {
 
 	@Override
 	public int getMaxPlayerLife() {
-		return MAX_PLAYER_LIFE;
+		return MAX_PLAYER_LIFE + PowerupManager.getLifeUpgrade();
 	}
 
 	@Override

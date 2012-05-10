@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
         android:gravity="center"
-        android:text="Store"
+        android:text="@string/store_title"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ScrollView
@@ -17,21 +17,22 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/storeTitle"
-        android:layout_toLeftOf="@+id/storeScrollHistory" android:layout_margin="5dip">
+        android:layout_margin="5dip"
+        android:layout_toLeftOf="@+id/storeScrollStore" >
 
         <LinearLayout
             android:id="@+id/storeItemsList"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
     </ScrollView>
 
-    <TextView
-        android:id="@+id/storeScrollHistory"
+    <com.w3i.replica.replicaisland.store.VerticalTextView
+        android:id="@+id/storeScrollStore"
         style="@style/StoreScrollerStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:text="Purchased Items" />
+        android:layout_centerVertical="true" />
 
 </RelativeLayout>

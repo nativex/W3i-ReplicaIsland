@@ -16,15 +16,18 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
-import com.w3i.gamesplatformsdk.ui.StoreUI;
 import com.w3i.replica.replicaisland.DebugLog;
 import com.w3i.replica.replicaisland.PreferenceConstants;
 import com.w3i.replica.replicaisland.R;
 import com.w3i.replica.replicaisland.UIConstants;
 import com.w3i.replica.replicaisland.store.GamesPlatformManager;
+import com.w3i.replica.replicaisland.store.ReplicaInfoDialog;
 import com.w3i.replica.replicaisland.store.StoreActivity;
 
 public class ExtrasMenuActivity extends Activity {
+	private static final String DIALOG_STORE_NOT_READY_TITLE = "Warning";
+	private static final String DIALOG_STORE_NOT_READY_MESSAGE = "The store is not ready or is unavailable.\nPlease try again later.";
+	private static final String DIALOG_STORE_NOT_READY_BUTON = "Ok";
 	private View mLinearModeButton;
 	private View mLevelSelectButton;
 	private View mControlsButton;
@@ -43,20 +46,17 @@ public class ExtrasMenuActivity extends Activity {
 
 	private static final int START_LINEAR_MODE = 0;
 	private static final int START_LEVEL_SELECT = 1;
+	private static final int EXTRAS_STORE_NOT_READY_DIALOG = 1001;
 
 	private View.OnClickListener sStoreButtonListener = new View.OnClickListener() {
 
 		@Override
 		public void onClick(View arg0) {
+			if (!GamesPlatformManager.isInitialized()) {
+				showDialog(EXTRAS_STORE_NOT_READY_DIALOG);
+				return;
+			}
 			Intent intent = new Intent(arg0.getContext(), StoreActivity.class);
-			// intent.putExtra(StoreUI.PUB_EXTRA_KEY,
-			// GamesPlatformManager.PUBLISHER_ID);
-			// intent.putExtra(StoreUI.APP_EXTRA_KEY,
-			// GamesPlatformManager.APP_ID);
-			// intent.putExtra(StoreUI.REST_EXTRA_KEY,
-			// GamesPlatformManager.REST_URL);
-			// intent.putExtra(StoreUI.STORE_EXTRA_KEY,
-			// GamesPlatformManager.STORE_ID);
 			arg0.getContext().startActivity(intent);
 		}
 	};
@@ -210,6 +210,13 @@ public class ExtrasMenuActivity extends Activity {
 					.setTitle(R.string.extras_locked_dialog_title)
 					.setPositiveButton(R.string.extras_locked_dialog_ok, null)
 					.setMessage(R.string.extras_locked_dialog_message).create();
+		} else if (id == EXTRAS_STORE_NOT_READY_DIALOG) {
+			ReplicaInfoDialog infoDialog = new ReplicaInfoDialog(this);
+			infoDialog.setTitle(DIALOG_STORE_NOT_READY_TITLE);
+			infoDialog.setDescripton(DIALOG_STORE_NOT_READY_MESSAGE);
+			infoDialog.setIcon(android.R.drawable.ic_dialog_alert);
+			infoDialog.setButtonText(DIALOG_STORE_NOT_READY_BUTON);
+			dialog = infoDialog;
 		}
 		return dialog;
 	}
