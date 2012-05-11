@@ -17,6 +17,7 @@ public class FundsManager {
 	private int crystals;
 	private SharedPreferences preferences;
 	private static FundsManager instance = null;
+	private int pearlsPerKill = 5;
 
 	private FundsManager(Context context) {
 		preferences = context.getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, Context.MODE_PRIVATE);
@@ -26,8 +27,8 @@ public class FundsManager {
 
 	private void loadFunds() {
 		try {
-			pearls = preferences.getInt(PreferenceConstants.PREFERENCE_PEARLS_TOTAL, 0);
-			crystals = preferences.getInt(PreferenceConstants.PREFERENCE_CRYSTALS_TOTAL, 0);
+			pearls = preferences.getInt(PreferenceConstants.PREFERENCE_FUNDS_PEARLS, 0);
+			crystals = preferences.getInt(PreferenceConstants.PREFERENCE_FUNDS_CRYSTALS, 0);
 		} catch (Exception e) {
 			Log.e("FundsManager: Unable to read SharedPreferences", e);
 		}
@@ -52,8 +53,8 @@ public class FundsManager {
 	private void writeFunds() {
 		try {
 			SharedPreferences.Editor editor = preferences.edit();
-			editor.putInt(PreferenceConstants.PREFERENCE_CRYSTALS_TOTAL, crystals);
-			editor.putInt(PreferenceConstants.PREFERENCE_PEARLS_TOTAL, pearls);
+			editor.putInt(PreferenceConstants.PREFERENCE_FUNDS_CRYSTALS, crystals);
+			editor.putInt(PreferenceConstants.PREFERENCE_FUNDS_PEARLS, pearls);
 			editor.commit();
 		} catch (Exception e) {
 			Log.e("FundsManager: Unable to write to SharedPreferences", e);
@@ -122,5 +123,16 @@ public class FundsManager {
 		checkInstance();
 		instance.preferences = null;
 		instance = null;
+	}
+
+	public static int getPearlsPerKill() {
+		checkInstance();
+		return instance.pearlsPerKill;
+	}
+
+	public static void setPearlsPerKill(
+			int pearlsPerKill) {
+		checkInstance();
+		instance.pearlsPerKill = pearlsPerKill;
 	}
 }

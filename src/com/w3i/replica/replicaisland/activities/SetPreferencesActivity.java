@@ -28,40 +28,41 @@ import com.w3i.replica.replicaisland.PreferenceConstants;
 import com.w3i.replica.replicaisland.R;
 import com.w3i.replica.replicaisland.YesNoDialogPreference;
 
-public class SetPreferencesActivity extends PreferenceActivity implements 
-		YesNoDialogPreference.YesNoDialogListener {
+public class SetPreferencesActivity extends PreferenceActivity implements YesNoDialogPreference.YesNoDialogListener {
 	@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        
-        getPreferenceManager().setSharedPreferencesMode(MODE_PRIVATE);
-        getPreferenceManager().setSharedPreferencesName(PreferenceConstants.PREFERENCE_NAME);
-        
-        // Load the preferences from an XML resource
-        addPreferencesFromResource(R.xml.preferences);
-        
-        Preference eraseGameButton = getPreferenceManager().findPreference("erasegame");
-        if (eraseGameButton != null) {
-        	YesNoDialogPreference yesNo = (YesNoDialogPreference)eraseGameButton;
-        	yesNo.setListener(this);
-        }
-        
-        Preference configureKeyboardPref = getPreferenceManager().findPreference("keyconfig");
-        if (configureKeyboardPref != null) {
-        	KeyboardConfigDialogPreference config = (KeyboardConfigDialogPreference)configureKeyboardPref;
-        	config.setPrefs(getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE));
-        	config.setContext(this);
-        }
-        
-        if (getIntent().getBooleanExtra("controlConfig", false)) {
-        	PreferenceScreen controlConfig = (PreferenceScreen)getPreferenceManager().findPreference("controlConfigScreen");
-        	if (controlConfig != null) {
-        		setPreferenceScreen(controlConfig);
-        	}
-        }
-    }
+	protected void onCreate(
+			Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-	public void onDialogClosed(boolean positiveResult) {
+		getPreferenceManager().setSharedPreferencesMode(MODE_PRIVATE);
+		getPreferenceManager().setSharedPreferencesName(PreferenceConstants.PREFERENCE_NAME);
+
+		// Load the preferences from an XML resource
+		addPreferencesFromResource(R.xml.preferences);
+
+		Preference eraseGameButton = getPreferenceManager().findPreference("erasegame");
+		if (eraseGameButton != null) {
+			YesNoDialogPreference yesNo = (YesNoDialogPreference) eraseGameButton;
+			yesNo.setListener(this);
+		}
+
+		Preference configureKeyboardPref = getPreferenceManager().findPreference("keyconfig");
+		if (configureKeyboardPref != null) {
+			KeyboardConfigDialogPreference config = (KeyboardConfigDialogPreference) configureKeyboardPref;
+			config.setPrefs(getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE));
+			config.setContext(this);
+		}
+
+		if (getIntent().getBooleanExtra("controlConfig", false)) {
+			PreferenceScreen controlConfig = (PreferenceScreen) getPreferenceManager().findPreference("controlConfigScreen");
+			if (controlConfig != null) {
+				setPreferenceScreen(controlConfig);
+			}
+		}
+	}
+
+	public void onDialogClosed(
+			boolean positiveResult) {
 		if (positiveResult) {
 			SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
 			SharedPreferences.Editor editor = prefs.edit();
@@ -76,8 +77,7 @@ public class SetPreferencesActivity extends PreferenceActivity implements
 			editor.remove(PreferenceConstants.PREFERENCE_DIFFICULTY);
 
 			editor.commit();
-			Toast.makeText(this, R.string.saved_game_erased_notification,
-                    Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, R.string.saved_game_erased_notification, Toast.LENGTH_SHORT).show();
 		}
 	}
 }

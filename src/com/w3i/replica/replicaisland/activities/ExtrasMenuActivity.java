@@ -51,7 +51,8 @@ public class ExtrasMenuActivity extends Activity {
 	private View.OnClickListener sStoreButtonListener = new View.OnClickListener() {
 
 		@Override
-		public void onClick(View arg0) {
+		public void onClick(
+				View arg0) {
 			if (!GamesPlatformManager.isInitialized()) {
 				showDialog(EXTRAS_STORE_NOT_READY_DIALOG);
 				return;
@@ -62,13 +63,11 @@ public class ExtrasMenuActivity extends Activity {
 	};
 
 	private View.OnClickListener sLinearModeButtonListener = new View.OnClickListener() {
-		public void onClick(View v) {
-			SharedPreferences prefs = getSharedPreferences(
-					PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
-			final int row = prefs.getInt(
-					PreferenceConstants.PREFERENCE_LEVEL_ROW, 0);
-			final int index = prefs.getInt(
-					PreferenceConstants.PREFERENCE_LEVEL_INDEX, 0);
+		public void onClick(
+				View v) {
+			SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
+			final int row = prefs.getInt(PreferenceConstants.PREFERENCE_LEVEL_ROW, 0);
+			final int index = prefs.getInt(PreferenceConstants.PREFERENCE_LEVEL_INDEX, 0);
 			if (row != 0 || index != 0) {
 				mPendingGameStart = START_LINEAR_MODE;
 				showDialog(NEW_GAME_DIALOG);
@@ -79,13 +78,11 @@ public class ExtrasMenuActivity extends Activity {
 	};
 
 	private View.OnClickListener sLevelSelectButtonListener = new View.OnClickListener() {
-		public void onClick(View v) {
-			SharedPreferences prefs = getSharedPreferences(
-					PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
-			final int row = prefs.getInt(
-					PreferenceConstants.PREFERENCE_LEVEL_ROW, 0);
-			final int index = prefs.getInt(
-					PreferenceConstants.PREFERENCE_LEVEL_INDEX, 0);
+		public void onClick(
+				View v) {
+			SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
+			final int row = prefs.getInt(PreferenceConstants.PREFERENCE_LEVEL_ROW, 0);
+			final int index = prefs.getInt(PreferenceConstants.PREFERENCE_LEVEL_INDEX, 0);
 			if (row != 0 || index != 0) {
 				mPendingGameStart = START_LEVEL_SELECT;
 				showDialog(NEW_GAME_DIALOG);
@@ -96,21 +93,21 @@ public class ExtrasMenuActivity extends Activity {
 	};
 
 	private View.OnClickListener sLockedSelectButtonListener = new View.OnClickListener() {
-		public void onClick(View v) {
+		public void onClick(
+				View v) {
 			showDialog(EXTRAS_LOCKED_DIALOG);
 		}
 	};
 
 	private View.OnClickListener sControlsButtonListener = new View.OnClickListener() {
-		public void onClick(View v) {
+		public void onClick(
+				View v) {
 
-			Intent i = new Intent(getBaseContext(),
-					SetPreferencesActivity.class);
+			Intent i = new Intent(getBaseContext(), SetPreferencesActivity.class);
 			i.putExtra("controlConfig", true);
 
 			v.startAnimation(mButtonFlickerAnimation);
-			mFadeOutAnimation
-					.setAnimationListener(new StartActivityAfterAnimation(i));
+			mFadeOutAnimation.setAnimationListener(new StartActivityAfterAnimation(i));
 			mBackground.startAnimation(mFadeOutAnimation);
 			mLinearModeButton.startAnimation(mAlternateFadeOutAnimation);
 			mLevelSelectButton.startAnimation(mAlternateFadeOutAnimation);
@@ -118,14 +115,13 @@ public class ExtrasMenuActivity extends Activity {
 	};
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(
+			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.extras_menu);
 
-		SharedPreferences prefs = getSharedPreferences(
-				PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
-		final boolean extrasUnlocked = prefs.getBoolean(
-				PreferenceConstants.PREFERENCE_EXTRAS_UNLOCKED, false);
+		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
+		final boolean extrasUnlocked = prefs.getBoolean(PreferenceConstants.PREFERENCE_EXTRAS_UNLOCKED, false);
 
 		mLinearModeButton = findViewById(R.id.linearModeButton);
 		mLevelSelectButton = findViewById(R.id.levelSelectButton);
@@ -138,11 +134,9 @@ public class ExtrasMenuActivity extends Activity {
 
 		mBackground = findViewById(R.id.mainMenuBackground);
 
-		mButtonFlickerAnimation = AnimationUtils.loadAnimation(this,
-				R.anim.button_flicker);
+		mButtonFlickerAnimation = AnimationUtils.loadAnimation(this, R.anim.button_flicker);
 		mFadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
-		mAlternateFadeOutAnimation = AnimationUtils.loadAnimation(this,
-				R.anim.fade_out);
+		mAlternateFadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 
 		if (extrasUnlocked) {
 			mLinearModeButton.setOnClickListener(sLinearModeButtonListener);
@@ -150,8 +144,7 @@ public class ExtrasMenuActivity extends Activity {
 			mLinearModeLocked.setVisibility(View.GONE);
 			mLevelSelectLocked.setVisibility(View.GONE);
 		} else {
-			mLockedAnimation = AnimationUtils.loadAnimation(this,
-					R.anim.fade_in_out);
+			mLockedAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in_out);
 
 			mLinearModeButton.setOnClickListener(sLockedSelectButtonListener);
 			mLevelSelectButton.setOnClickListener(sLockedSelectButtonListener);
@@ -165,22 +158,20 @@ public class ExtrasMenuActivity extends Activity {
 	}
 
 	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	public boolean onKeyDown(
+			int keyCode,
+			KeyEvent event) {
 		boolean result = true;
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			finish();
 
 			if (UIConstants.mOverridePendingTransition != null) {
 				try {
-					UIConstants.mOverridePendingTransition.invoke(
-							ExtrasMenuActivity.this, R.anim.activity_fade_in,
-							R.anim.activity_fade_out);
+					UIConstants.mOverridePendingTransition.invoke(ExtrasMenuActivity.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
 				} catch (InvocationTargetException ite) {
-					DebugLog.d("Activity Transition",
-							"Invocation Target Exception");
+					DebugLog.d("Activity Transition", "Invocation Target Exception");
 				} catch (IllegalAccessException ie) {
-					DebugLog.d("Activity Transition",
-							"Illegal Access Exception");
+					DebugLog.d("Activity Transition", "Illegal Access Exception");
 				}
 			}
 		} else {
@@ -190,26 +181,20 @@ public class ExtrasMenuActivity extends Activity {
 	}
 
 	@Override
-	protected Dialog onCreateDialog(int id) {
+	protected Dialog onCreateDialog(
+			int id) {
 		Dialog dialog = null;
 		if (id == NEW_GAME_DIALOG) {
 
-			dialog = new AlertDialog.Builder(this)
-					.setTitle(R.string.new_game_dialog_title)
-					.setPositiveButton(R.string.new_game_dialog_ok,
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int whichButton) {
-									startGame(mPendingGameStart);
-								}
-							})
-					.setNegativeButton(R.string.new_game_dialog_cancel, null)
-					.setMessage(R.string.new_game_dialog_message).create();
+			dialog = new AlertDialog.Builder(this).setTitle(R.string.new_game_dialog_title).setPositiveButton(R.string.new_game_dialog_ok, new DialogInterface.OnClickListener() {
+				public void onClick(
+						DialogInterface dialog,
+						int whichButton) {
+					startGame(mPendingGameStart);
+				}
+			}).setNegativeButton(R.string.new_game_dialog_cancel, null).setMessage(R.string.new_game_dialog_message).create();
 		} else if (id == EXTRAS_LOCKED_DIALOG) {
-			dialog = new AlertDialog.Builder(this)
-					.setTitle(R.string.extras_locked_dialog_title)
-					.setPositiveButton(R.string.extras_locked_dialog_ok, null)
-					.setMessage(R.string.extras_locked_dialog_message).create();
+			dialog = new AlertDialog.Builder(this).setTitle(R.string.extras_locked_dialog_title).setPositiveButton(R.string.extras_locked_dialog_ok, null).setMessage(R.string.extras_locked_dialog_message).create();
 		} else if (id == EXTRAS_STORE_NOT_READY_DIALOG) {
 			ReplicaInfoDialog infoDialog = new ReplicaInfoDialog(this);
 			infoDialog.setTitle(DIALOG_STORE_NOT_READY_TITLE);
@@ -221,37 +206,34 @@ public class ExtrasMenuActivity extends Activity {
 		return dialog;
 	}
 
-	protected void startGame(int type) {
+	protected void startGame(
+			int type) {
 		if (type == START_LINEAR_MODE) {
-			Intent i = new Intent(getBaseContext(),
-					DifficultyMenuActivity.class);
+			Intent i = new Intent(getBaseContext(), DifficultyMenuActivity.class);
 			i.putExtra("linearMode", true);
 			i.putExtra("newGame", true);
 			mLinearModeButton.startAnimation(mButtonFlickerAnimation);
-			mButtonFlickerAnimation
-					.setAnimationListener(new StartActivityAfterAnimation(i));
+			mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(i));
 
 		} else if (type == START_LEVEL_SELECT) {
-			Intent i = new Intent(getBaseContext(),
-					DifficultyMenuActivity.class);
+			Intent i = new Intent(getBaseContext(), DifficultyMenuActivity.class);
 			i.putExtra("startAtLevelSelect", true);
 			i.putExtra("newGame", true);
 			mLevelSelectButton.startAnimation(mButtonFlickerAnimation);
-			mButtonFlickerAnimation
-					.setAnimationListener(new StartActivityAfterAnimation(i));
+			mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(i));
 
 		}
 	}
 
-	protected class StartActivityAfterAnimation implements
-			Animation.AnimationListener {
+	protected class StartActivityAfterAnimation implements Animation.AnimationListener {
 		private Intent mIntent;
 
 		StartActivityAfterAnimation(Intent intent) {
 			mIntent = intent;
 		}
 
-		public void onAnimationEnd(Animation animation) {
+		public void onAnimationEnd(
+				Animation animation) {
 			mLinearModeButton.setVisibility(View.INVISIBLE);
 			mLinearModeButton.clearAnimation();
 			mLevelSelectButton.setVisibility(View.INVISIBLE);
@@ -262,25 +244,23 @@ public class ExtrasMenuActivity extends Activity {
 			finish();
 			if (UIConstants.mOverridePendingTransition != null) {
 				try {
-					UIConstants.mOverridePendingTransition.invoke(
-							ExtrasMenuActivity.this, R.anim.activity_fade_in,
-							R.anim.activity_fade_out);
+					UIConstants.mOverridePendingTransition.invoke(ExtrasMenuActivity.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
 				} catch (InvocationTargetException ite) {
-					DebugLog.d("Activity Transition",
-							"Invocation Target Exception");
+					DebugLog.d("Activity Transition", "Invocation Target Exception");
 				} catch (IllegalAccessException ie) {
-					DebugLog.d("Activity Transition",
-							"Illegal Access Exception");
+					DebugLog.d("Activity Transition", "Illegal Access Exception");
 				}
 			}
 		}
 
-		public void onAnimationRepeat(Animation animation) {
+		public void onAnimationRepeat(
+				Animation animation) {
 			// TODO Auto-generated method stub
 
 		}
 
-		public void onAnimationStart(Animation animation) {
+		public void onAnimationStart(
+				Animation animation) {
 			// TODO Auto-generated method stub
 
 		}

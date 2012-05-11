@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
- package com.w3i.replica.replicaisland.activities;
+
+package com.w3i.replica.replicaisland.activities;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -37,47 +37,46 @@ import com.w3i.replica.replicaisland.UIConstants;
 public class DiaryActivity extends Activity {
 
 	private OnClickListener mKillDiaryListener = new OnClickListener() {
-		public void onClick(View arg0) {
-			finish();		
+		public void onClick(
+				View arg0) {
+			finish();
 			if (UIConstants.mOverridePendingTransition != null) {
- 		       try {
- 		    	  UIConstants.mOverridePendingTransition.invoke(DiaryActivity.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
- 		       } catch (InvocationTargetException ite) {
- 		           DebugLog.d("Activity Transition", "Invocation Target Exception");
- 		       } catch (IllegalAccessException ie) {
- 		    	   DebugLog.d("Activity Transition", "Illegal Access Exception");
- 		       }
+				try {
+					UIConstants.mOverridePendingTransition.invoke(DiaryActivity.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
+				} catch (InvocationTargetException ite) {
+					DebugLog.d("Activity Transition", "Invocation Target Exception");
+				} catch (IllegalAccessException ie) {
+					DebugLog.d("Activity Transition", "Illegal Access Exception");
+				}
 			}
 		}
-    };
-    	
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.diary);
-        
-        TextView text = (TextView)findViewById(R.id.diarytext);
-        
-        ImageView image = (ImageView)findViewById(R.id.diarybackground);
-        image.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade));
-        final Intent callingIntent = getIntent();
-        final int textResource = callingIntent.getIntExtra("text", -1);
-        
-        if (textResource != -1) {
-            text.setText(textResource);
-        }
-        
-        ImageView okArrow = (ImageView)findViewById(R.id.ok);
-        okArrow.setOnClickListener(mKillDiaryListener);
-        okArrow.setBackgroundResource(R.anim.ui_button);
-        AnimationDrawable anim = (AnimationDrawable) okArrow.getBackground();
-        anim.start();
-        
-        BaseObject.getSystemRegistry().customToastSystem.toast(getString(R.string.diary_found), Toast.LENGTH_SHORT);
-       
-    }
-    
-    
-    
+	};
+
+	@Override
+	public void onCreate(
+			Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.diary);
+
+		TextView text = (TextView) findViewById(R.id.diarytext);
+
+		ImageView image = (ImageView) findViewById(R.id.diarybackground);
+		image.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade));
+		final Intent callingIntent = getIntent();
+		final int textResource = callingIntent.getIntExtra("text", -1);
+
+		if (textResource != -1) {
+			text.setText(textResource);
+		}
+
+		ImageView okArrow = (ImageView) findViewById(R.id.ok);
+		okArrow.setOnClickListener(mKillDiaryListener);
+		okArrow.setBackgroundResource(R.anim.ui_button);
+		AnimationDrawable anim = (AnimationDrawable) okArrow.getBackground();
+		anim.start();
+
+		BaseObject.getSystemRegistry().customToastSystem.toast(getString(R.string.diary_found), Toast.LENGTH_SHORT);
+
+	}
 
 }

@@ -156,7 +156,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 					try {
 						if (b.getDisplayName().equals(FundsManager.PEARLS)) {
 							FundsManager.addPearls(Integer.parseInt(b.getAmount()));
-							mTotalCoins.setText(FundsManager.PEARLS + ": " + FundsManager.getPearls());
 						} else if (b.getDisplayName().equals(FundsManager.CRYSTALS)) {
 							FundsManager.addCrystals(Integer.parseInt(b.getAmount()));
 						}
@@ -164,6 +163,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 						com.w3i.common.Log.e("MainMenuActivity: Unable to read balances", e);
 					}
 				}
+				mTotalCoins.setText(FundsManager.PEARLS + ": " + FundsManager.getPearls() + "\n" + FundsManager.CRYSTALS + ": " + FundsManager.getCrystals());
 			}
 		}
 	};
@@ -225,8 +225,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		// mp.start();
 		doW3iInitialization();
 
-		mTotalCoins.setText(FundsManager.PEARLS + ": " + FundsManager.getPearls());
-
+		mTotalCoins.setText(FundsManager.PEARLS + ": " + FundsManager.getPearls() + "\n" + FundsManager.CRYSTALS + ": " + FundsManager.getCrystals());
 	}
 
 	@Override
@@ -439,7 +438,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		}
 
 		if (mTotalCoins != null) {
-			mTotalCoins.setText(FundsManager.PEARLS + ": " + FundsManager.getPearls());
+			mTotalCoins.setText(FundsManager.PEARLS + ": " + FundsManager.getPearls() + "\n" + FundsManager.CRYSTALS + ": " + FundsManager.getCrystals());
 		}
 	}
 

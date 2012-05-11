@@ -34,15 +34,15 @@ public class TheSourceComponent extends GameComponent {
 	private int mGameEvent;
 	private int mGameEventIndex;
 	private boolean mDead;
-	
+
 	private static ChannelSystem.ChannelBooleanValue sChannelValue = new ChannelSystem.ChannelBooleanValue();
-	
+
 	public TheSourceComponent() {
 		super();
-        reset();
-        setPhase(ComponentPhases.THINK.ordinal());
+		reset();
+		setPhase(ComponentPhases.THINK.ordinal());
 	}
-	
+
 	@Override
 	public void reset() {
 		mTimer = 0.0f;
@@ -56,8 +56,10 @@ public class TheSourceComponent extends GameComponent {
 	}
 
 	@Override
-	public void update(float timeDelta, BaseObject parent) {
-		GameObject parentObject = (GameObject)parent;
+	public void update(
+			float timeDelta,
+			BaseObject parent) {
+		GameObject parentObject = (GameObject) parent;
 		GameObject.ActionType currentAction = parentObject.getCurrentAction();
 
 		CameraSystem camera = sSystemRegistry.cameraSystem;
@@ -67,7 +69,7 @@ public class TheSourceComponent extends GameComponent {
 				mTimer = SHAKE_TIME;
 				camera.shake(SHAKE_TIME, CAMERA_HIT_SHAKE_MAGNITUDE);
 				mShakeStartPosition = parentObject.getPosition().x;
-				parentObject.setCurrentAction(ActionType.IDLE); 
+				parentObject.setCurrentAction(ActionType.IDLE);
 				currentAction = ActionType.IDLE;
 			} else {
 				parentObject.setCurrentAction(ActionType.DEATH);
@@ -80,9 +82,9 @@ public class TheSourceComponent extends GameComponent {
 				}
 				mDead = true;
 			}
-			
+
 		}
-		
+
 		mTimer -= timeDelta;
 
 		if (mDead) {
@@ -92,42 +94,38 @@ public class TheSourceComponent extends GameComponent {
 			if (camera != null && manager != null && camera.getTarget() == manager.getPlayer()) {
 				camera.setTarget(parentObject);
 			}
-			
+
 			final float offset = SINK_SPEED * timeDelta;
 			parentObject.getPosition().y += offset;
-			
+
 			mExplosionTimer -= timeDelta;
 			if (mExplosionTimer < 0.0f) {
 				GameObjectFactory factory = sSystemRegistry.gameObjectFactory;
 				if (factory != null) {
-					float x = ((float)Math.random() - 0.5f) * (parentObject.width * 0.75f);
-					float y = ((float)Math.random() - 0.5f) * (parentObject.height * 0.75f);
-					GameObject object =
-						factory.spawn(GameObjectFactory.GameObjectType.EXPLOSION_GIANT, 
-							parentObject.getCenteredPositionX() + x, 
-							parentObject.getCenteredPositionY() + y, 
-							false);
+					float x = ((float) Math.random() - 0.5f) * (parentObject.width * 0.75f);
+					float y = ((float) Math.random() - 0.5f) * (parentObject.height * 0.75f);
+					GameObject object = factory.spawn(GameObjectFactory.GameObjectType.EXPLOSION_GIANT, parentObject.getCenteredPositionX() + x, parentObject.getCenteredPositionY() + y, false);
 					if (object != null) {
 						manager.add(object);
 					}
 					mExplosionTimer = EXPLOSION_TIME;
 				}
 			}
-				
+
 			if (mTimer - timeDelta <= 0.0f) {
 				mTimer = 0.0f;
 				if (mGameEvent != -1) {
 					HudSystem hud = sSystemRegistry.hudSystem;
-    	        	if (hud != null) {
-    	        		hud.startFade(false, 1.5f);
-    	        		hud.sendGameEventOnFadeComplete(mGameEvent, mGameEventIndex);
-    	        		mGameEvent = -1;
-    	        	}
-	    		}
+					if (hud != null) {
+						hud.startFade(false, 1.5f);
+						hud.sendGameEventOnFadeComplete(mGameEvent, mGameEventIndex);
+						mGameEvent = -1;
+					}
+				}
 			}
 		} else if (mTimer > 0) {
 			// shake
-			float delta = (float)Math.sin(mTimer * SHAKE_SCALE);
+			float delta = (float) Math.sin(mTimer * SHAKE_SCALE);
 			delta *= SHAKE_MAGNITUDE;
 			parentObject.getPosition().x = mShakeStartPosition + delta;
 			if (mTimer - timeDelta <= 0.0f) {
@@ -137,12 +135,15 @@ public class TheSourceComponent extends GameComponent {
 			}
 		}
 	}
-	
-	public void setChannel(ChannelSystem.Channel channel) {
+
+	public void setChannel(
+			ChannelSystem.Channel channel) {
 		mChannel = channel;
 	}
 
-	public void setGameEvent(int event, int index) {
+	public void setGameEvent(
+			int event,
+			int index) {
 		mGameEvent = event;
 		mGameEventIndex = index;
 	}

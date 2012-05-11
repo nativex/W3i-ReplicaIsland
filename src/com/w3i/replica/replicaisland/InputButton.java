@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 package com.w3i.replica.replicaisland;
 
 public class InputButton {
@@ -22,16 +21,18 @@ public class InputButton {
 	private float mLastPressedTime;
 	private float mDownTime;
 	private float mMagnitude;
-	
-	public void press(float currentTime, float magnitude) {
+
+	public void press(
+			float currentTime,
+			float magnitude) {
 		if (!mDown) {
 			mDown = true;
 			mDownTime = currentTime;
-		} 
+		}
 		mMagnitude = magnitude;
 		mLastPressedTime = currentTime;
 	}
-	
+
 	public void release() {
 		mDown = false;
 	}
@@ -39,19 +40,21 @@ public class InputButton {
 	public final boolean getPressed() {
 		return mDown;
 	}
-	
-	public final boolean getTriggered(float currentTime) {
+
+	public final boolean getTriggered(
+			float currentTime) {
 		return mDown && currentTime - mDownTime <= BaseObject.sSystemRegistry.timeSystem.getFrameDelta() * 2.0f;
 	}
-	
-	public final float getPressedDuration(float currentTime) {
+
+	public final float getPressedDuration(
+			float currentTime) {
 		return currentTime - mDownTime;
 	}
-	
+
 	public final float getLastPressedTime() {
 		return mLastPressedTime;
 	}
-	
+
 	public final float getMagnitude() {
 		float magnitude = 0.0f;
 		if (mDown) {
@@ -59,11 +62,12 @@ public class InputButton {
 		}
 		return magnitude;
 	}
-	
-	public final void setMagnitude(float magnitude) {
+
+	public final void setMagnitude(
+			float magnitude) {
 		mMagnitude = magnitude;
 	}
-	
+
 	public final void reset() {
 		mDown = false;
 		mMagnitude = 0.0f;

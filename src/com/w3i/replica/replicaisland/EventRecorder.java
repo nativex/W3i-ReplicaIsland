@@ -13,57 +13,64 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
- package com.w3i.replica.replicaisland;
+
+package com.w3i.replica.replicaisland;
+
+import com.w3i.replica.replicaisland.store.FundsManager;
 
 public class EventRecorder extends BaseObject {
 	public final static int COUNTER_ROBOTS_DESTROYED = 0;
 	public final static int COUNTER_PEARLS_COLLECTED = 1;
 	public final static int COUNTER_PEARLS_TOTAL = 2;
-	
+
 	private Vector2 mLastDeathPosition = new Vector2();
 	private int mLastEnding = -1;
 	private int mRobotsDestroyed = 0;
 	private int mPearlsCollected = 0;
 	private int mPearlsTotal = 0;
-	
+
 	@Override
 	public void reset() {
 		mRobotsDestroyed = 0;
 		mPearlsCollected = 0;
 		mPearlsTotal = 0;
 	}
-	
-	synchronized void setLastDeathPosition(Vector2 position) {
+
+	synchronized void setLastDeathPosition(
+			Vector2 position) {
 		mLastDeathPosition.set(position);
 	}
-	
+
 	synchronized Vector2 getLastDeathPosition() {
 		return mLastDeathPosition;
 	}
-	
-	synchronized void setLastEnding(int ending) {
+
+	synchronized void setLastEnding(
+			int ending) {
 		mLastEnding = ending;
 	}
-	
+
 	synchronized int getLastEnding() {
 		return mLastEnding;
 	}
-	
-	synchronized void incrementEventCounter(int event) {
+
+	synchronized void incrementEventCounter(
+			int event) {
 		if (event == COUNTER_ROBOTS_DESTROYED) {
+			FundsManager.addPearls(FundsManager.getPearlsPerKill());
 			mRobotsDestroyed++;
 		} else if (event == COUNTER_PEARLS_COLLECTED) {
+			FundsManager.addPearls(1);
 			mPearlsCollected++;
 		} else if (event == COUNTER_PEARLS_TOTAL) {
 			mPearlsTotal++;
 		}
 	}
-	
+
 	synchronized int getRobotsDestroyed() {
 		return mRobotsDestroyed;
 	}
-	
+
 	synchronized int getPearlsCollected() {
 		return mPearlsCollected;
 	}

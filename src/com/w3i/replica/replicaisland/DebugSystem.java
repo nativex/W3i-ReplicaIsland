@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 package com.w3i.replica.replicaisland;
 
 public final class DebugSystem extends BaseObject {
@@ -23,16 +22,16 @@ public final class DebugSystem extends BaseObject {
 	public static final int COLOR_OUTLINE = 2;
 	public static final int SHAPE_BOX = 0;
 	public static final int SHAPE_CIRCLE = 1;
-	
+
 	private Texture mRedBoxTexture;
 	private Texture mBlueBoxTexture;
 	private Texture mOutlineBoxTexture;
 	private Texture mRedCircleTexture;
 	private Texture mBlueCircleTexture;
 	private Texture mOutlineCircleTexture;
-	
+
 	private Vector2 mWorkVector;
-	
+
 	public DebugSystem(TextureLibrary library) {
 		super();
 		if (library != null) {
@@ -42,57 +41,62 @@ public final class DebugSystem extends BaseObject {
 			mRedCircleTexture = library.allocateTexture(R.drawable.debug_circle_red);
 			mBlueCircleTexture = library.allocateTexture(R.drawable.debug_circle_blue);
 			mOutlineCircleTexture = library.allocateTexture(R.drawable.debug_circle_outline);
-			
+
 		}
-		
+
 		mWorkVector = new Vector2();
 	}
-	
+
 	@Override
 	public void reset() {
 	}
-	
-	public void drawShape(float x, float y, float width, float height, int shapeType, int colorType) {
-        final RenderSystem render = sSystemRegistry.renderSystem;
-        final DrawableFactory factory = sSystemRegistry.drawableFactory;
-        CameraSystem camera = sSystemRegistry.cameraSystem;
-        ContextParameters params = sSystemRegistry.contextParameters;
-        mWorkVector.set(x, y);
-        mWorkVector.x = (mWorkVector.x - camera.getFocusPositionX()
-                        + (params.gameWidth / 2));
-        mWorkVector.y = (mWorkVector.y - camera.getFocusPositionY()
-                        + (params.gameHeight / 2));
 
-        if (mWorkVector.x + width >= 0.0f && mWorkVector.x < params.gameWidth 
-                && mWorkVector.y + height >= 0.0f && mWorkVector.y < params.gameHeight) {
-	        DrawableBitmap bitmap = factory.allocateDrawableBitmap();
-	        if (bitmap != null) {
-	        	Texture texture = getTexture(shapeType, colorType);
-	            bitmap.resize((int)texture.width, (int)texture.height);
-	            // TODO: scale stretch hack.  fix!
-	            bitmap.setWidth((int)width);
-	            bitmap.setHeight((int)height);
-	            bitmap.setTexture(texture);
-	            mWorkVector.set(x, y);
+	public void drawShape(
+			float x,
+			float y,
+			float width,
+			float height,
+			int shapeType,
+			int colorType) {
+		final RenderSystem render = sSystemRegistry.renderSystem;
+		final DrawableFactory factory = sSystemRegistry.drawableFactory;
+		CameraSystem camera = sSystemRegistry.cameraSystem;
+		ContextParameters params = sSystemRegistry.contextParameters;
+		mWorkVector.set(x, y);
+		mWorkVector.x = (mWorkVector.x - camera.getFocusPositionX() + (params.gameWidth / 2));
+		mWorkVector.y = (mWorkVector.y - camera.getFocusPositionY() + (params.gameHeight / 2));
 
-	            render.scheduleForDraw(bitmap, mWorkVector, SortConstants.HUD, true);
-	        }
-        }
+		if (mWorkVector.x + width >= 0.0f && mWorkVector.x < params.gameWidth && mWorkVector.y + height >= 0.0f && mWorkVector.y < params.gameHeight) {
+			DrawableBitmap bitmap = factory.allocateDrawableBitmap();
+			if (bitmap != null) {
+				Texture texture = getTexture(shapeType, colorType);
+				bitmap.resize((int) texture.width, (int) texture.height);
+				// TODO: scale stretch hack. fix!
+				bitmap.setWidth((int) width);
+				bitmap.setHeight((int) height);
+				bitmap.setTexture(texture);
+				mWorkVector.set(x, y);
+
+				render.scheduleForDraw(bitmap, mWorkVector, SortConstants.HUD, true);
+			}
+		}
 	}
-	
-	private final Texture getTexture(int shapeType, int colorType) {
+
+	private final Texture getTexture(
+			int shapeType,
+			int colorType) {
 		Texture result = null;
 		if (shapeType == SHAPE_BOX) {
 			switch (colorType) {
-				case COLOR_RED:
-					result = mRedBoxTexture;
-					break;
-				case COLOR_BLUE:
-					result = mBlueBoxTexture;
-					break;
-				case COLOR_OUTLINE:
-					result = mOutlineBoxTexture;
-					break;
+			case COLOR_RED:
+				result = mRedBoxTexture;
+				break;
+			case COLOR_BLUE:
+				result = mBlueBoxTexture;
+				break;
+			case COLOR_OUTLINE:
+				result = mOutlineBoxTexture;
+				break;
 			}
 		} else if (shapeType == SHAPE_CIRCLE) {
 			switch (colorType) {
@@ -109,6 +113,5 @@ public final class DebugSystem extends BaseObject {
 		}
 		return result;
 	}
-	
 
 }

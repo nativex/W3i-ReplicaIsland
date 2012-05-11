@@ -36,7 +36,9 @@ public class OfferwallManager {
 		return instance;
 	}
 
-	public static synchronized void initialize(Activity activity, W3iAdvertiser listener) {
+	public static synchronized void initialize(
+			Activity activity,
+			W3iAdvertiser listener) {
 		if (instance != null) {
 			Log.d("OfferwallManager already initialized.");
 			return;
@@ -44,7 +46,8 @@ public class OfferwallManager {
 		instance = new OfferwallManager(activity, listener);
 	}
 
-	public static void initialize(Activity activity) {
+	public static void initialize(
+			Activity activity) {
 		initialize(activity, null);
 	}
 
@@ -58,11 +61,13 @@ public class OfferwallManager {
 
 	}
 
-	public static void setAdvertiserListener(W3iAdvertiser listener) {
+	public static void setAdvertiserListener(
+			W3iAdvertiser listener) {
 		getInstance().advertiser.setW3iAdvertiser(listener);
 	}
 
-	public static void actionTaken(int actionId) {
+	public static void actionTaken(
+			int actionId) {
 		if (actionTakenExecuted == false) {
 			getInstance().advertiser.actionTaken(actionId);
 			actionTakenExecuted = true;
@@ -75,16 +80,23 @@ public class OfferwallManager {
 		getInstance().publisher.createSession();
 	}
 
-	public static void showFeaturedOffer(Activity activity) {
+	public static void showFeaturedOffer(
+			Activity activity) {
 		getInstance().publisher.showFeaturedOffer(activity);
 	}
 
-	public static void showUpgradeDialog(Activity activity, DialogInputs inputs, W3iClickListener clickListener) {
+	public static void showUpgradeDialog(
+			Activity activity,
+			DialogInputs inputs,
+			W3iClickListener clickListener) {
 		OfferwallManager manager = getInstance();
 		manager.publisher.upgradeMyApp(activity, inputs, clickListener);
 	}
 
-	public static void showRateAppDialog(Activity activity, DialogInputs inputs, W3iClickListener clickListener) {
+	public static void showRateAppDialog(
+			Activity activity,
+			DialogInputs inputs,
+			W3iClickListener clickListener) {
 		OfferwallManager manager = getInstance();
 		manager.publisher.rateMyApp(activity, inputs, clickListener);
 	}
@@ -93,17 +105,20 @@ public class OfferwallManager {
 		getInstance().publisher.showOfferWall();
 	}
 
-	public static void enableLogging(boolean isEnabled) {
+	public static void enableLogging(
+			boolean isEnabled) {
 		getInstance().publisher.enableLogging(isEnabled);
 
 	}
 
-	public static void redeemCurrency(Activity activity) {
+	public static void redeemCurrency(
+			Activity activity) {
 		OfferwallManager manager = getInstance();
 		manager.publisher.redeemCurrency(activity, manager.currencyListener);
 	}
 
-	public static void setCurrencyRedemptionListener(W3iListener listener) {
+	public static void setCurrencyRedemptionListener(
+			W3iListener listener) {
 		getInstance().currencyListener = listener;
 	}
 

@@ -13,23 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
- package com.w3i.replica.replicaisland;
+
+package com.w3i.replica.replicaisland;
 
 public class HitPointPool extends TObjectPool<HitPoint> {
 
-    @Override
-    protected void fill() {
-        final int size = getSize();
-        for (int x = 0; x < size; x++) {
-            getAvailable().add(new HitPoint());
-        }
-    }
-    
-    @Override
-    public void release(Object entry) {
-        ((HitPoint)entry).reset();
-        super.release(entry);
-    }
+	@Override
+	protected void fill() {
+		final int size = getSize();
+		for (int x = 0; x < size; x++) {
+			getAvailable().add(new HitPoint());
+		}
+	}
+
+	@Override
+	public void release(
+			Object entry) {
+		((HitPoint) entry).reset();
+		super.release(entry);
+	}
 
 }

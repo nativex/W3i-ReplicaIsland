@@ -26,7 +26,7 @@ public class MotionBlurComponent extends GameComponent {
 	private int mCurrentStep;
 	private float mTimeSinceLastStep;
 	private int mTargetPriority;
-	
+
 	private class BlurRecord {
 		public Vector2 position = new Vector2();
 		public Texture texture;
@@ -34,43 +34,47 @@ public class MotionBlurComponent extends GameComponent {
 		public int height;
 		public int[] crop = new int[4];
 	}
+
 	public MotionBlurComponent() {
-        super();
-        mHistory = new BlurRecord[STEP_COUNT];
-        for (int x = 0; x < STEP_COUNT; x++) {
-        	mHistory[x] = new BlurRecord();
-        }
-        reset();
-        setPhase(ComponentPhases.PRE_DRAW.ordinal());
-    }
-	
+		super();
+		mHistory = new BlurRecord[STEP_COUNT];
+		for (int x = 0; x < STEP_COUNT; x++) {
+			mHistory[x] = new BlurRecord();
+		}
+		reset();
+		setPhase(ComponentPhases.PRE_DRAW.ordinal());
+	}
+
 	@Override
 	public void reset() {
 		for (int x = 0; x < STEP_COUNT; x++) {
 			mHistory[x].texture = null;
 			mHistory[x].position.zero();
-        }
+		}
 		mStepDelay = STEP_DELAY;
 		mBlurTarget = null;
 		mCurrentStep = 0;
 		mTimeSinceLastStep = 0.0f;
 	}
-	
-	public void setTarget(RenderComponent target) {
+
+	public void setTarget(
+			RenderComponent target) {
 		mBlurTarget = target;
 	}
-	
+
 	@Override
-	public void update(float timeDelta, BaseObject parent) {
+	public void update(
+			float timeDelta,
+			BaseObject parent) {
 		if (mBlurTarget != null) {
 			mTimeSinceLastStep += timeDelta;
 			if (mTimeSinceLastStep > mStepDelay) {
-				DrawableBitmap drawable = (DrawableBitmap)mBlurTarget.getDrawable();
+				DrawableBitmap drawable = (DrawableBitmap) mBlurTarget.getDrawable();
 				if (drawable != null) {
 					Texture currentTexture = drawable.getTexture();
 					mTargetPriority = mBlurTarget.getPriority();
 					mHistory[mCurrentStep].texture = currentTexture;
-					mHistory[mCurrentStep].position.set(((GameObject)parent).getPosition());
+					mHistory[mCurrentStep].position.set(((GameObject) parent).getPosition());
 					mHistory[mCurrentStep].width = drawable.getWidth();
 					mHistory[mCurrentStep].height = drawable.getHeight();
 					final int[] drawableCrop = drawable.getCrop();
@@ -82,11 +86,9 @@ public class MotionBlurComponent extends GameComponent {
 					mTimeSinceLastStep = 0.0f;
 				}
 			}
-			
 
-            RenderSystem renderer = sSystemRegistry.renderSystem;
-            
-            
+			RenderSystem renderer = sSystemRegistry.renderSystem;
+
 			final int startStep = mCurrentStep > 0 ? mCurrentStep - 1 : STEP_COUNT - 1;
 			// draw each step
 			for (int x = 0; x < STEP_COUNT; x++) {
@@ -100,9 +102,8 @@ public class MotionBlurComponent extends GameComponent {
 					stepImage.setCrop(record.crop[0], record.crop[1], record.crop[2], -record.crop[3]);
 					final float opacity = (STEP_COUNT - x) * OPACITY_STEP;
 					stepImage.setOpacity(opacity);
-					
-	             
-                    renderer.scheduleForDraw(stepImage, record.position, mTargetPriority - (x + 1), true);
+
+					renderer.scheduleForDraw(stepImage, record.position, mTargetPriority - (x + 1), true);
 				}
 			}
 		}
