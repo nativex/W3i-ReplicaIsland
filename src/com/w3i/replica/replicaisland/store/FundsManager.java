@@ -79,6 +79,7 @@ public class FundsManager {
 				crystals -= e.getValue();
 			}
 		}
+		writeFunds();
 	}
 
 	public static int getPearls() {

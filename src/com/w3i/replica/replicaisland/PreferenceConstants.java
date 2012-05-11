@@ -23,6 +23,8 @@ public class PreferenceConstants {
 	public static final String PREFERENCE_LEVEL_INDEX = "levelIndex";
 	public static final String PREFERENCE_LEVEL_COMPLETED = "levelsCompleted";
 	public static final String PREFERENCE_LIFE_UPGRADE = "lifeUpgrade";
+	public static final String PREFERENCE_JETPACK_UPGRADE = "jetpackUpgrade";
+	public static final String PREFERENCE_JETPACK_GROUND_UPGRADE = "jetpackGroundUpgrade";
 	public static final String PREFERENCE_SOUND_ENABLED = "enableSound";
 	public static final String PREFERENCE_SAFE_MODE = "safeMode";
 	public static final String PREFERENCE_SESSION_ID = "session";
