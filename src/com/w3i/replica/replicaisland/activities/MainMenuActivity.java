@@ -261,6 +261,8 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		GamesPlatformManager.createInstance(this);
 		FundsManager.createInstance(this);
 		PowerupManager.initialize(this);
+		FundsManager.setCrystals(30);
+		FundsManager.setPearls(2000);
 
 		com.w3i.common.Log.i("PowerupManager: Life upgrade - " + PowerupManager.getLifeUpgrade());
 		com.w3i.common.Log.i("PowerupManager: Jetpack upgrade - " + PowerupManager.getJetpackAirUpgrade());

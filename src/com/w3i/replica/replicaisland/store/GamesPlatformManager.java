@@ -179,6 +179,7 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 
 			}
 			purchasedItems = itemsStored;
+			purchasedItems = null;
 			Log.i("GamesPlatformManager: Stored Purchased Items Ids: " + json);
 		} catch (Exception e) {
 			Log.e("GamesPlatformManager: Unexpected exception caught while reading from shared preferences", e);

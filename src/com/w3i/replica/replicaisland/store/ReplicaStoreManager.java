@@ -51,6 +51,7 @@ public class ReplicaStoreManager {
 				Item item = selectedItem.getItem();
 				PowerupManager.handleItem(item);
 				GamesPlatformManager.storePurchasedItem(item.getId());
+				FundsManager.buyItem(item);
 				addHistoryItem(item);
 				selectedItem.release();
 				selectedItem = null;
@@ -73,7 +74,7 @@ public class ReplicaStoreManager {
 				infoDialog = new ReplicaInfoDialog(arg0.getContext());
 				infoDialog.setTitle(item.getDisplayName());
 				infoDialog.setIcon(item.getStoreImageUrl());
-				if (!storeItem.isAvailable()) {
+				if (storeItem.isAvailable()) {
 					infoDialog.setButtonText("Purchase");
 					infoDialog.setButtonListener(onPurchaseClicked);
 				} else {
@@ -176,6 +177,7 @@ public class ReplicaStoreManager {
 		private String notAvailableMessage = null;
 
 		public boolean isAvailable() {
+			notAvailableMessage = PowerupManager.isAvailable(storeItem);
 			return notAvailableMessage == null;
 		}
 
@@ -218,7 +220,6 @@ public class ReplicaStoreManager {
 
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 			itemLayout.setLayoutParams(params);
-			notAvailableMessage = PowerupManager.isAvailable(item);
 		}
 
 		public void setPrice(
