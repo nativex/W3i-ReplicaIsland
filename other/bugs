@@ -1,0 +1,10 @@
+Stomping on diagonal surfice sometimes would cause a glitch in collision detection and move the character
+through the ground.
+
+Sometimes the game would become unresponsive and would either go to the main screen or stay frozen.
+
+The movement controls behave weird from time to time and the character would move very slow.
+
+When using jetpack and movement controls at the same time, releasing the movement controls would cause the jetpack
+to stop until the jetpack button is pressed again.
+
