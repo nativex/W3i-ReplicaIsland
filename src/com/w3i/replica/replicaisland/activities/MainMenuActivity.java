@@ -37,7 +37,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.w3i.advertiser.W3iAdvertiser;
 import com.w3i.offerwall.W3iCurrencyListener;

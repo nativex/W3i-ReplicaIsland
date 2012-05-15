@@ -16,7 +16,6 @@
 
 package com.w3i.replica.replicaisland;
 
-import com.w3i.common.Log;
 import com.w3i.replica.replicaisland.CollisionParameters.HitType;
 import com.w3i.replica.replicaisland.GameObject.ActionType;
 
@@ -117,10 +116,10 @@ public class PlayerComponent extends GameComponent {
 			if (mFuel < FUEL_AMOUNT) {
 				if (mTouchingGround) {
 					mFuel += mDifficultyConstants.getFuelGroundRefillSpeed() * timeDelta;
-//					Log.i("Ground refill portion " + mDifficultyConstants.getFuelGroundRefillSpeed() * timeDelta);
+					// Log.i("Ground refill portion " + mDifficultyConstants.getFuelGroundRefillSpeed() * timeDelta);
 				} else {
 					mFuel += mFuelAirRefillSpeed * timeDelta;
-//					Log.i("Air refill portion " + mDifficultyConstants.getFuelAirRefillSpeed() * timeDelta);
+					// Log.i("Air refill portion " + mDifficultyConstants.getFuelAirRefillSpeed() * timeDelta);
 				}
 
 				if (mFuel > FUEL_AMOUNT) {
