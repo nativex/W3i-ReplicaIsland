@@ -19,6 +19,8 @@ package com.w3i.replica.replicaisland;
 public class PreferenceConstants {
 	public static final String PREFERENCE_FUNDS_CRYSTALS = "fundsCrystals";
 	public static final String PREFERENCE_FUNDS_PEARLS = "fundsPearls";
+	public static final String PREFERENCE_SHIELD_STABILIZER = "shieldStabilizer";
+	public static final String PREFERENCE_POWER_CELLS = "powerCellsStrength";
 	public static final String PREFERENCE_LEVEL_ROW = "levelRow";
 	public static final String PREFERENCE_LEVEL_INDEX = "levelIndex";
 	public static final String PREFERENCE_LEVEL_COMPLETED = "levelsCompleted";

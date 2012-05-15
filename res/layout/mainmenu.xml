@@ -2,7 +2,8 @@
 <FrameLayout
 		android:layout_width="fill_parent"
   		android:layout_height="fill_parent" 
-  		xmlns:android="http://schemas.android.com/apk/res/android">
+  		xmlns:android="http://schemas.android.com/apk/res/android"
+  		android:id = "@+id/mainMenuLayout">
 	<ImageView 
           android:id="@+id/mainMenuBackground"
           android:src="@drawable/title_background"

@@ -52,12 +52,12 @@ public class KidsDifficultyConstants extends DifficultyConstants {
 
 	@Override
 	public int getCoinsPerPowerup() {
-		return COINS_PER_POWERUP;
+		return COINS_PER_POWERUP - PowerupManager.getPowerCellsStrength();
 	}
 
 	@Override
 	public float getGlowDuration() {
-		return GLOW_DURATION;
+		return GLOW_DURATION + PowerupManager.getShieldStabilizerStrenght();
 	}
 
 	@Override

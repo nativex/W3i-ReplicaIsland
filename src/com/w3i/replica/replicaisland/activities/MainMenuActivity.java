@@ -35,6 +35,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +43,8 @@ import android.widget.Toast;
 import com.w3i.advertiser.W3iAdvertiser;
 import com.w3i.offerwall.W3iCurrencyListener;
 import com.w3i.offerwall.business.Balance;
+import com.w3i.offerwall.custom.views.Banner;
+import com.w3i.offerwall.manager.BannerManager;
 import com.w3i.replica.replicaisland.DebugLog;
 import com.w3i.replica.replicaisland.LevelTree;
 import com.w3i.replica.replicaisland.MultiTouchFilter;
@@ -224,6 +227,10 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		// MediaPlayer mp = MediaPlayer.create(this, R.raw.bwv_115);
 		// mp.start();
 		doW3iInitialization();
+		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(350, FrameLayout.LayoutParams.WRAP_CONTENT);
+		FrameLayout mainLayout = (FrameLayout) findViewById(R.id.mainMenuLayout);
+		Banner banner = BannerManager.createBanner(this, params);
+		mainLayout.addView(banner);
 
 		mTotalCoins.setText(FundsManager.PEARLS + ": " + FundsManager.getPearls() + "\n" + FundsManager.CRYSTALS + ": " + FundsManager.getCrystals());
 	}
@@ -234,6 +241,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		OfferwallManager.release();
 		GamesPlatformManager.release();
 		FundsManager.release();
+		BannerManager.release();
 	}
 
 	/**
