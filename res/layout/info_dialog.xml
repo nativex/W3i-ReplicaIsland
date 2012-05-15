@@ -20,11 +20,26 @@
             android:padding="5dip" />
 
         <TextView
+            android:id="@+id/infoDialogError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dip"
+            android:layout_marginRight="5dip"
+            android:layout_marginTop="5dip"
+            android:layout_toRightOf="@+id/infoDialogIcon"
+            android:text="@string/info_dialog_error_message"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#ffff0000"
+            android:visibility="gone" />
+
+        <TextView
             android:id="@+id/infoDialogDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/infoDialogError"
             android:layout_margin="5dip"
-            android:layout_toRightOf="@+id/infoDialogIcon" >
+            android:layout_toRightOf="@+id/infoDialogIcon"
+            android:text="@string/info_dialog_description" >
         </TextView>
     </RelativeLayout>
 

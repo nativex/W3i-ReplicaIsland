@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -72,26 +73,29 @@ public class ReplicaStoreManager {
 				infoDialog = new ReplicaInfoDialog(arg0.getContext());
 				infoDialog.setTitle(item.getDisplayName());
 				infoDialog.setIcon(item.getStoreImageUrl());
-				if (storeItem.isAvailable()) {
+				if (!storeItem.isAvailable()) {
 					infoDialog.setButtonText("Purchase");
-					infoDialog.setDescripton(item.getDescription());
 					infoDialog.setButtonListener(onPurchaseClicked);
-					selectedItem = storeItem;
 				} else {
 					infoDialog.setButtonText("Ok");
-					infoDialog.setDescripton("[" + storeItem.notAvailableMessage + "]\n" + item.getDescription());
+					infoDialog.setErrorMessage("[" + storeItem.notAvailableMessage + "]");
 				}
+				infoDialog.setDescripton(item.getDescription());
 				infoDialog.show();
+				selectedItem = storeItem;
 			}
 		}
 	};
 
-	private View.OnClickListener onHistoryItemClicked = new View.OnClickListener() {
+	private AdapterView.OnItemClickListener onHistoryItemClicked = new AdapterView.OnItemClickListener() {
 
-		@Override
-		public void onClick(
-				View arg0) {
-			Object o = arg0.getTag();
+		public void onItemClick(
+				android.widget.AdapterView<?> arg0,
+				View arg1,
+				int arg2,
+				long arg3) {
+			Object o = arg1.getTag();
+			// Toast.makeText(arg1.getContext(), "Item clicked", Toast.LENGTH_LONG).show();
 			if (o instanceof HistoryItem) {
 				HistoryItem historyItem = (HistoryItem) o;
 				Item item = historyItem.getItem();
@@ -102,7 +106,8 @@ public class ReplicaStoreManager {
 				infoDialog.setDescripton(item.getDescription());
 				infoDialog.show();
 			}
-		}
+
+		};
 	};
 
 	public ReplicaStoreManager(LinearLayout itemsList, GridView historyList) {
@@ -112,6 +117,7 @@ public class ReplicaStoreManager {
 		this.historyList = historyList;
 		adapter = new HistoryListAdapter();
 		historyList.setAdapter(adapter);
+		historyList.setOnItemClickListener(onHistoryItemClicked);
 		List<Long> purchasedItems = GamesPlatformManager.getPurchasedItemIds();
 		for (Category c : GamesPlatformManager.getCategories()) {
 			CategoryRow categoryRow = new CategoryRow(itemsList.getContext());
@@ -144,7 +150,7 @@ public class ReplicaStoreManager {
 
 	public void addHistoryItem(
 			Item item) {
-		addHistoryItem(item, onHistoryItemClicked);
+		addHistoryItem(item, null);
 	}
 
 	public void addHistoryItem(
@@ -153,7 +159,9 @@ public class ReplicaStoreManager {
 		HistoryItem historyItem = new HistoryItem();
 		historyItems.add(historyItem);
 		historyItem.addItem(item);
-		historyItem.setOnClickListener(listener);
+		if (listener != null) {
+			historyItem.setOnClickListener(listener);
+		}
 	}
 
 	public class StoreItem {

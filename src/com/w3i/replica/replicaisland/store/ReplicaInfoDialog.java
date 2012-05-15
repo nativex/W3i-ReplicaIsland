@@ -62,6 +62,17 @@ public class ReplicaInfoDialog extends Dialog {
 		setTitle(title);
 	}
 
+	public void setErrorMessage(
+			String text) {
+		TextView errorView = (TextView) findViewById(R.id.infoDialogError);
+		if (text == null) {
+			errorView.setVisibility(View.GONE);
+		} else {
+			errorView.setVisibility(View.VISIBLE);
+			errorView.setText(text);
+		}
+	}
+
 	public void setIcon(
 			String url) {
 		CustomImageView icon = (CustomImageView) findViewById(R.id.infoDialogIcon);

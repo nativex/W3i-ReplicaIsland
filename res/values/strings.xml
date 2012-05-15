@@ -431,4 +431,8 @@ If I am honest with myself, there is another reason the adventurers had to die. 
 
 <string name="store_button_text">Store</string>
 
+<string name="info_dialog_error_message">[Error Message]</string>
+
+<string name="info_dialog_description">Info Dialog Description</string>
+
 </resources>

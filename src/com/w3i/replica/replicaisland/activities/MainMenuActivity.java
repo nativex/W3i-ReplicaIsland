@@ -26,7 +26,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -131,7 +130,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 				mPaused = true;
 
 			}
-			Toast.makeText(MainMenuActivity.this, "Lifes " + PowerupManager.getLifeUpgrade(), Toast.LENGTH_SHORT).show();
 		}
 	};
 
@@ -264,9 +262,12 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		GamesPlatformManager.createInstance(this);
 		FundsManager.createInstance(this);
 		PowerupManager.initialize(this);
-		Editor edit = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE).edit();
-		edit.putString(PreferenceConstants.PREFERENCE_PURCHASED_ITEMS, null);
-		edit.commit();
+
+		com.w3i.common.Log.i("PowerupManager: Life upgrade - " + PowerupManager.getLifeUpgrade());
+		com.w3i.common.Log.i("PowerupManager: Jetpack upgrade - " + PowerupManager.getJetpackAirUpgrade());
+		com.w3i.common.Log.i("PowerupManager: Jetpack recharge upgrade - " + PowerupManager.getJetpackGroundUpgrade());
+		com.w3i.common.Log.i("PowerupManager: Shield duration upgrade - " + PowerupManager.getShieldStabilizerStrenght());
+		com.w3i.common.Log.i("PowerupManager: Shield energy upgrade - " + PowerupManager.getPowerCellsStrength());
 
 		Log.d("com.w3i.replica.replicaisland", "end");
 	}

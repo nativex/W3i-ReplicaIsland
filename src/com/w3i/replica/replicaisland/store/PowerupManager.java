@@ -78,9 +78,7 @@ public class PowerupManager {
 			Item i) {
 		List<Attribute> attributes = i.getAttributes();
 		for (Attribute a : attributes) {
-			if (handleAttribute(a)) {
-				return;
-			}
+			handleAttribute(a);
 		}
 	}
 
@@ -99,6 +97,7 @@ public class PowerupManager {
 			} else if (a.getName().equals(SHIELD_STABILIZER)) {
 				shieldStabilizer += Float.parseFloat(a.getValue());
 			}
+			Log.i("PowerupManager: Attribute Name: " + a.getName());
 			return true;
 		} catch (Exception e) {
 			Log.e("PowerupManager: Couldn't parse Life Points", e);

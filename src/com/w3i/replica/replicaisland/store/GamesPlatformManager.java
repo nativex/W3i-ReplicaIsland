@@ -113,7 +113,7 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 		return instance.currencies;
 	}
 
-	public static Currency getSelectedCurrenct() {
+	public static Currency getSelectedCurrency() {
 		checkInstance();
 		if ((instance.currencies == null) || (instance.currencies.size() <= 0)) {
 			return null;
@@ -165,7 +165,21 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 	private void readPurchasedItemIds() {
 		try {
 			String json = preferences.getString(PreferenceConstants.PREFERENCE_PURCHASED_ITEMS, null);
-			purchasedItems = new Gson().fromJson(json, StorePurchasedItems.class);
+			StorePurchasedItems itemsStored = new Gson().fromJson(json, StorePurchasedItems.class);
+			if ((purchasedItems != null) && (purchasedItems.getItems() != null) && (purchasedItems.getItems().size() > 0)) {
+				if (itemsStored.getItems() != null) {
+					if (itemsStored.getItems().size() > 0) {
+						for (Long l : purchasedItems.getItems()) {
+							itemsStored.getItems().add(l);
+						}
+					} else {
+						itemsStored.setItems(purchasedItems.getItems());
+					}
+				}
+
+			}
+			purchasedItems = itemsStored;
+			Log.i("GamesPlatformManager: Stored Purchased Items Ids: " + json);
 		} catch (Exception e) {
 			Log.e("GamesPlatformManager: Unexpected exception caught while reading from shared preferences", e);
 		}
