@@ -109,4 +109,10 @@ public class ReplicaInfoDialog extends Dialog {
 		button.setOnClickListener(listener);
 	}
 
+	public void setCloseListener(
+			View.OnClickListener listener) {
+		View close = findViewById(R.id.infoDialogCloseButton);
+		close.setOnClickListener(listener);
+	}
+
 }

@@ -2,63 +2,35 @@ package com.w3i.replica.replicaisland.store;
 
 import java.util.Map;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-
-import com.w3i.common.Log;
 import com.w3i.gamesplatformsdk.rest.entities.Currency;
 import com.w3i.gamesplatformsdk.rest.entities.Item;
-import com.w3i.replica.replicaisland.PreferenceConstants;
 
 public class FundsManager {
 	public static final String PEARLS = "Pearls";
 	public static final String CRYSTALS = "Crystals";
-	private int pearls;
-	private int crystals;
-	private SharedPreferences preferences;
+	private int pearls = 0;
+	private int crystals = 0;
 	private static FundsManager instance = null;
 	private int pearlsPerKill = 5;
 
-	private FundsManager(Context context) {
-		preferences = context.getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, Context.MODE_PRIVATE);
-		loadFunds();
+	private FundsManager() {
 		instance = this;
-	}
-
-	private void loadFunds() {
-		try {
-			pearls = preferences.getInt(PreferenceConstants.PREFERENCE_FUNDS_PEARLS, 0);
-			crystals = preferences.getInt(PreferenceConstants.PREFERENCE_FUNDS_CRYSTALS, 0);
-		} catch (Exception e) {
-			Log.e("FundsManager: Unable to read SharedPreferences", e);
-		}
-	}
-
-	public static void createInstance(
-			Context context) {
-		new FundsManager(context);
 	}
 
 	private static void checkInstance() {
 		if (instance == null) {
-			throw new IllegalStateException("You must call FundsManager.createInstance() before using the other methods.");
+			new FundsManager();
 		}
+	}
+
+	public static void loadFunds() {
+		checkInstance();
+		SharedPreferenceManager.storeFunds();
 	}
 
 	public static void storeFunds() {
 		checkInstance();
-		instance.writeFunds();
-	}
-
-	private void writeFunds() {
-		try {
-			SharedPreferences.Editor editor = preferences.edit();
-			editor.putInt(PreferenceConstants.PREFERENCE_FUNDS_CRYSTALS, crystals);
-			editor.putInt(PreferenceConstants.PREFERENCE_FUNDS_PEARLS, pearls);
-			editor.commit();
-		} catch (Exception e) {
-			Log.e("FundsManager: Unable to write to SharedPreferences", e);
-		}
+		SharedPreferenceManager.storeFunds();
 	}
 
 	public static void buyItem(
@@ -79,15 +51,15 @@ public class FundsManager {
 				crystals -= e.getValue();
 			}
 		}
-		writeFunds();
+		SharedPreferenceManager.storeFunds();
 	}
 
-	public static int getPearls() {
+	public static Integer getPearls() {
 		checkInstance();
 		return instance.pearls;
 	}
 
-	public static int getCrystals() {
+	public static Integer getCrystals() {
 		checkInstance();
 		return instance.crystals;
 	}
@@ -96,33 +68,31 @@ public class FundsManager {
 			int crystals) {
 		checkInstance();
 		instance.crystals = crystals;
-		instance.writeFunds();
+		SharedPreferenceManager.storeFunds();
 	}
 
 	public static void addCrystals(
 			int crystals) {
 		checkInstance();
 		instance.crystals += crystals;
-		instance.writeFunds();
+		SharedPreferenceManager.storeFunds();
 	}
 
 	public static void setPearls(
 			int pearls) {
 		checkInstance();
 		instance.pearls = pearls;
-		instance.writeFunds();
+		SharedPreferenceManager.storeFunds();
 	}
 
 	public static void addPearls(
 			int pearls) {
 		checkInstance();
 		instance.pearls += pearls;
-		instance.writeFunds();
+		SharedPreferenceManager.storeFunds();
 	}
 
 	public static void release() {
-		checkInstance();
-		instance.preferences = null;
 		instance = null;
 	}
 

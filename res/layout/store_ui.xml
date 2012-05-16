@@ -5,9 +5,11 @@
 
     <TextView
         android:id="@+id/storeTitle"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_margin="5dip"
+        android:layout_toLeftOf="@+id/storeFunds"
         android:gravity="center"
         android:text="@string/store_title"
         android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -34,5 +36,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true" />
+
+    <include
+        android:id="@+id/storeFunds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="10dip"
+        android:layout_toLeftOf="@+id/storeScrollStore"
+        layout="@layout/coin_layout" />
 
 </RelativeLayout>

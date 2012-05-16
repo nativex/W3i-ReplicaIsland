@@ -54,7 +54,9 @@ import com.w3i.replica.replicaisland.UIConstants;
 import com.w3i.replica.replicaisland.publisher.OfferwallManager;
 import com.w3i.replica.replicaisland.store.FundsManager;
 import com.w3i.replica.replicaisland.store.GamesPlatformManager;
+import com.w3i.replica.replicaisland.store.ItemManager;
 import com.w3i.replica.replicaisland.store.PowerupManager;
+import com.w3i.replica.replicaisland.store.SharedPreferenceManager;
 
 public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	private boolean mPaused;
@@ -62,7 +64,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	private View mOptionsButton;
 	private View mExtrasButton;
 	private View mBackground;
-	private TextView mTotalCoins;
 	private View mTicker;
 	private Animation mButtonFlickerAnimation;
 	private Animation mFadeOutAnimation;
@@ -163,10 +164,22 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 						com.w3i.common.Log.e("MainMenuActivity: Unable to read balances", e);
 					}
 				}
-				mTotalCoins.setText(FundsManager.PEARLS + ": " + FundsManager.getPearls() + "\n" + FundsManager.CRYSTALS + ": " + FundsManager.getCrystals());
+				setFunds();
 			}
 		}
 	};
+
+	private void setFunds() {
+		try {
+			TextView pearls = (TextView) findViewById(R.id.fundsPearlsQuantity);
+			TextView crystals = (TextView) findViewById(R.id.fundsCrystalQuantity);
+
+			pearls.setText(FundsManager.getPearls().toString());
+			crystals.setText(FundsManager.getCrystals().toString());
+		} catch (Exception e) {
+			Log.e("ReplicaIsland", "MainMenuActivity: Unexpected exception caught while writing the resources.", e);
+		}
+	}
 
 	@Override
 	public void onCreate(
@@ -178,8 +191,9 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		mStartButton = findViewById(R.id.startButton);
 		mOptionsButton = findViewById(R.id.optionButton);
 		mBackground = findViewById(R.id.mainMenuBackground);
-		mTotalCoins = (TextView) findViewById(R.id.coinQuantity);
-		findViewById(R.id.coinLayout).setOnClickListener(sCoinsClicked);
+		View fundsLayout = findViewById(R.id.fundsLayout);
+		fundsLayout.setOnClickListener(sCoinsClicked);
+		fundsLayout.setBackgroundResource(R.drawable.coins_frame);
 
 		if (mOptionsButton != null) {
 			mOptionsButton.setOnClickListener(sOptionButtonListener);
@@ -223,13 +237,12 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 
 		// MediaPlayer mp = MediaPlayer.create(this, R.raw.bwv_115);
 		// mp.start();
+
 		doW3iInitialization();
 		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(350, FrameLayout.LayoutParams.WRAP_CONTENT);
 		FrameLayout mainLayout = (FrameLayout) findViewById(R.id.mainMenuLayout);
 		Banner banner = BannerManager.createBanner(this, params);
 		mainLayout.addView(banner);
-
-		mTotalCoins.setText(FundsManager.PEARLS + ": " + FundsManager.getPearls() + "\n" + FundsManager.CRYSTALS + ": " + FundsManager.getCrystals());
 	}
 
 	@Override
@@ -239,6 +252,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		GamesPlatformManager.release();
 		FundsManager.release();
 		BannerManager.release();
+		ItemManager.release();
 	}
 
 	/**
@@ -258,19 +272,26 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		OfferwallManager.setCurrencyRedemptionListener(w3iCurrencyRedemptionCallback);
 		OfferwallManager.createSession();
 		OfferwallManager.showFeaturedOffer(this);
-		GamesPlatformManager.createInstance(this);
-		FundsManager.createInstance(this);
-		PowerupManager.initialize(this);
+
+		SharedPreferenceManager.initialize(this);
+		com.w3i.common.Log.i("MainMenuActivity: Initialization of GamesPlatform begins");
+		GamesPlatformManager.initialize(this);
+		FundsManager.loadFunds();
+		PowerupManager.loadPowerups();
+
+		com.w3i.common.Log.i("PowerupManager: Life upgrade - " + PowerupManager.getLifeUpgrade());
+		com.w3i.common.Log.i("PowerupManager: Pearls per kill upgrade - " + PowerupManager.getMonsterValue());
+		com.w3i.common.Log.i("PowerupManager: Jetpack duration upgrade - " + PowerupManager.getJetpackDuration());
+		com.w3i.common.Log.i("PowerupManager: Jetpack air upgrade - " + PowerupManager.getJetpackAirRefill());
+		com.w3i.common.Log.i("PowerupManager: Jetpack ground upgrade - " + PowerupManager.getJetpackGroundRefill());
+		com.w3i.common.Log.i("PowerupManager: Shield duration upgrade - " + PowerupManager.getShieldDuration());
+		com.w3i.common.Log.i("PowerupManager: Shield energy upgrade - " + PowerupManager.getShiledPearls());
+
+		Log.d("com.w3i.replica.replicaisland", "end");
+
 		FundsManager.setCrystals(30);
 		FundsManager.setPearls(2000);
 
-		com.w3i.common.Log.i("PowerupManager: Life upgrade - " + PowerupManager.getLifeUpgrade());
-		com.w3i.common.Log.i("PowerupManager: Jetpack upgrade - " + PowerupManager.getJetpackAirUpgrade());
-		com.w3i.common.Log.i("PowerupManager: Jetpack recharge upgrade - " + PowerupManager.getJetpackGroundUpgrade());
-		com.w3i.common.Log.i("PowerupManager: Shield duration upgrade - " + PowerupManager.getShieldStabilizerStrenght());
-		com.w3i.common.Log.i("PowerupManager: Shield energy upgrade - " + PowerupManager.getPowerCellsStrength());
-
-		Log.d("com.w3i.replica.replicaisland", "end");
 	}
 
 	public void onActionComplete(
@@ -285,7 +306,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	protected void onPause() {
 		super.onPause();
 		mPaused = true;
-		PowerupManager.storePowerupData(this);
+		PowerupManager.storePowerups();
 	}
 
 	@Override
@@ -447,9 +468,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 			mExtrasButton.clearAnimation();
 		}
 
-		if (mTotalCoins != null) {
-			mTotalCoins.setText(FundsManager.PEARLS + ": " + FundsManager.getPearls() + "\n" + FundsManager.CRYSTALS + ": " + FundsManager.getCrystals());
-		}
+		setFunds();
 	}
 
 	@Override

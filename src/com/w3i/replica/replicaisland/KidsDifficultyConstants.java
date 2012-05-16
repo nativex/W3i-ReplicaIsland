@@ -37,12 +37,12 @@ public class KidsDifficultyConstants extends DifficultyConstants {
 
 	@Override
 	public float getFuelAirRefillSpeed() {
-		return FUEL_AIR_REFILL_SPEED + PowerupManager.getJetpackAirUpgrade();
+		return FUEL_AIR_REFILL_SPEED + PowerupManager.getJetpackAirRefill();
 	}
 
 	@Override
 	public float getFuelGroundRefillSpeed() {
-		return FUEL_GROUND_REFILL_SPEED + PowerupManager.getJetpackGroundUpgrade();
+		return FUEL_GROUND_REFILL_SPEED + PowerupManager.getJetpackGroundRefill();
 	}
 
 	@Override
@@ -52,12 +52,12 @@ public class KidsDifficultyConstants extends DifficultyConstants {
 
 	@Override
 	public int getCoinsPerPowerup() {
-		return COINS_PER_POWERUP - PowerupManager.getPowerCellsStrength();
+		return COINS_PER_POWERUP - PowerupManager.getShiledPearls();
 	}
 
 	@Override
 	public float getGlowDuration() {
-		return GLOW_DURATION + PowerupManager.getShieldStabilizerStrenght();
+		return GLOW_DURATION + PowerupManager.getShieldDuration();
 	}
 
 	@Override
@@ -82,12 +82,12 @@ public class KidsDifficultyConstants extends DifficultyConstants {
 
 	@Override
 	public float getDDAStage1FuelAirRefillSpeed() {
-		return DDA_STAGE_1_FUEL_AIR_REFILL_SPEED + PowerupManager.getJetpackAirUpgrade();
+		return DDA_STAGE_1_FUEL_AIR_REFILL_SPEED + PowerupManager.getJetpackAirRefill();
 	}
 
 	@Override
 	public float getDDAStage2FuelAirRefillSpeed() {
-		return DDA_STAGE_2_FUEL_AIR_REFILL_SPEED + PowerupManager.getJetpackAirUpgrade();
+		return DDA_STAGE_2_FUEL_AIR_REFILL_SPEED + PowerupManager.getJetpackAirRefill();
 	}
 
 }

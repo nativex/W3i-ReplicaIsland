@@ -2,19 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="horizontal" android:gravity="center" android:clickable="true" android:id="@+id/coinLayout" android:background="@drawable/coins_frame">
+    android:orientation="horizontal" android:gravity="center" android:clickable="true" android:id="@+id/fundsLayout">
 
     <ImageView
-        android:id="@+id/coinImage"
+        android:id="@+id/fundsPearlsIcon"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:src="@drawable/coin" />
+        android:src="@drawable/object_coin01" />
 
     <TextView
-        android:id="@+id/coinQuantity"
+        android:id="@+id/fundsPearlsQuantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Coins: 0"
-        android:textAppearance="?android:attr/textAppearanceLarge" android:textColor="#ff222222" android:layout_marginLeft="5dp" android:textSize="18dp"/>
+        android:text="0"
+        android:textAppearance="?android:attr/textAppearanceLarge" android:textColor="#ff222222" android:layout_marginLeft="5dip" android:textSize="18dp"/>
+
+    <ImageView
+        android:id="@+id/fundsCrystalsIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/object_ruby01" android:layout_marginLeft="15dip"/>
+
+    <TextView
+        android:id="@+id/fundsCrystalQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dip"
+        android:text="0"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ff222222"
+        android:textSize="18dp" />
 
 </LinearLayout>
