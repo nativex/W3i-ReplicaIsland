@@ -41,18 +41,18 @@ public class ItemManager {
 		return instance.categories;
 	}
 
-	static void addPurchasedItem(
+	static boolean addPurchasedItem(
 			Item i,
 			String category) {
 		checkInstance();
-		instance._addPurchasedItem(i, category);
+		return instance._addPurchasedItem(i, category);
 	}
 
-	private void _addPurchasedItem(
+	private boolean _addPurchasedItem(
 			Item i,
 			String category) {
 		if (i == null) {
-			return;
+			return false;
 		}
 		List<Item> items;
 		if (purchasedItems == null) {
@@ -66,6 +66,21 @@ public class ItemManager {
 			items = purchasedItems.get(category);
 		}
 		items.add(i);
+		if (availableItems.containsKey(category)) {
+			List<Item> itemsInCategory = availableItems.get(category);
+			if (itemsInCategory == null) {
+				availableItems.remove(category);
+				return true;
+			}
+			itemsInCategory.remove(i);
+			if (itemsInCategory.size() <= 0) {
+				availableItems.remove(category);
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	static void setPurchasedItems(
@@ -157,35 +172,46 @@ public class ItemManager {
 		return instance.availableItems;
 	}
 
-	static String isAvailable(
+	static Availability isAvailable(
 			Item i) {
 		checkInstance();
 		return instance._isAvailable(i);
 	}
 
-	private String _isAvailable(
+	private Availability _isAvailable(
 			Item i) {
+		Availability available = new Availability();
 		if (i == null) {
-			return "Unavailable";
+			available.setErrorMessage("Unavailable");
+			return available;
 		}
 		List<Currency> currencies = GamesPlatformManager.getCurrencies();
 		if (currencies == null) {
-			return "Unavailable";
+			available.setErrorMessage("Unavailable");
+			return available;
 		}
 		Map<Currency, Double> prices = i.getItemPrice(currencies);
 		for (Entry<Currency, Double> e : prices.entrySet()) {
 			Currency c = e.getKey();
 			if (c.getDisplayName().equals(FundsManager.PEARLS)) {
 				if (FundsManager.getPearls() < e.getValue()) {
-					return "Insufficient " + FundsManager.PEARLS;
+					available.setAvailable(true);
+					available.setAffordable(false);
+					available.setErrorMessage("Insufficient " + FundsManager.PEARLS);
+					return available;
 				}
 			} else if (c.getDisplayName().equals(FundsManager.CRYSTALS)) {
 				if (FundsManager.getCrystals() < e.getValue()) {
-					return "Insufficient " + FundsManager.CRYSTALS;
+					available.setAvailable(true);
+					available.setAffordable(false);
+					available.setErrorMessage("Insufficient " + FundsManager.CRYSTALS);
+					return available;
 				}
 			}
 		}
-		return null;
+		available.setAvailable(true);
+		available.setAffordable(true);
+		return available;
 	}
 
 	public static void release() {
@@ -206,5 +232,42 @@ public class ItemManager {
 			categories.clear();
 		}
 		instance = null;
+	}
+
+	public class Availability {
+		private boolean isAffordable = false;
+		private boolean isAvailable = false;
+		private String errorMessage = null;
+
+		private Availability() {
+		}
+
+		public boolean isAffordable() {
+			return isAffordable;
+		}
+
+		public boolean isAvailable() {
+			return isAvailable;
+		}
+
+		public String getErrorMessage() {
+			return errorMessage;
+		}
+
+		private void setAffordable(
+				boolean isAffordable) {
+			this.isAffordable = isAffordable;
+		}
+
+		private void setAvailable(
+				boolean isAvailable) {
+			this.isAvailable = isAvailable;
+		}
+
+		private void setErrorMessage(
+				String errorMessage) {
+			this.errorMessage = "[" + errorMessage + "]";
+		}
+
 	}
 }

@@ -24,10 +24,22 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/itemDescription"
+        android:id="@+id/itemErrorMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/itemName"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
+        android:layout_toRightOf="@+id/itemIcon"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#ffff0000"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/itemDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/itemErrorMessage"
         android:layout_marginLeft="5dip"
         android:layout_marginRight="5dip"
         android:layout_toRightOf="@+id/itemIcon"

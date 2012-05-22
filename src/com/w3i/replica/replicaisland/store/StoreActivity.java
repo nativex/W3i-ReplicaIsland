@@ -29,14 +29,16 @@ import com.w3i.offerwall.custom.views.AdvancedTextView;
 import com.w3i.offerwall.custom.views.AdvancedTextView.Text;
 import com.w3i.offerwall.custom.views.CustomImageView;
 import com.w3i.replica.replicaisland.R;
+import com.w3i.replica.replicaisland.store.ItemManager.Availability;
 import com.w3i.replica.replicaisland.store.VerticalTextView.ORIENTATION;
 
 public class StoreActivity extends Activity {
 	private LinearLayout itemsList;
 	private GridView historyList;
 	private HistoryListAdapter adapter;
-	private ArrayList<BaseStoreItem> storeItems;
-	private ArrayList<BaseStoreItem> historyItems;
+	private List<BaseStoreItem> storeItems;
+	private List<BaseStoreItem> historyItems;
+	private List<CategoryRow> categories;
 	private BaseStoreItem selectedItem = null;
 
 	private static final int STORE_ITEM_PRICE_LABEL_COLOR = Color.GRAY;
@@ -78,9 +80,11 @@ public class StoreActivity extends Activity {
 	private void loadItems() {
 		Map<String, List<Item>> storeItems = ItemManager.getStoreItems();
 		if (storeItems != null) {
+			categories = new ArrayList<StoreActivity.CategoryRow>();
 			for (Entry<String, List<Item>> e : storeItems.entrySet()) {
 				if ((e.getValue() != null) && (e.getValue().size() > 0)) {
 					CategoryRow catRow = new CategoryRow(this);
+					categories.add(catRow);
 					catRow.setText(e.getKey());
 					itemsList.addView(catRow);
 					for (Item i : e.getValue()) {
@@ -162,16 +166,15 @@ public class StoreActivity extends Activity {
 				infoDialog.setTitle(selectedItem.getItem().getDisplayName());
 				infoDialog.setIcon(selectedItem.getItem().getStoreImageUrl());
 				infoDialog.setDescripton(selectedItem.getItem().getDescription());
-				String errorMsg = ItemManager.isAvailable(selectedItem.getItem());
-				if (errorMsg == null) {
+				ItemManager.Availability itemAvailability = ItemManager.isAvailable(selectedItem.getItem());
+				if ((itemAvailability.isAvailable()) && (itemAvailability.isAffordable())) {
 					infoDialog.setButtonText("Purchase");
 					infoDialog.setButtonListener(onPurchaseClicked);
 				} else {
 					infoDialog.setButtonText("Ok");
-					infoDialog.setErrorMessage("[" + errorMsg + "]");
+					infoDialog.setErrorMessage(itemAvailability.getErrorMessage());
 					infoDialog.setButtonListener(onStoreCloseClicked);
 				}
-				infoDialog.setCloseListener(onStoreCloseClicked);
 				dialog = infoDialog;
 			}
 		}
@@ -224,16 +227,7 @@ public class StoreActivity extends Activity {
 		public void onClick(
 				View arg0) {
 			if (selectedItem != null) {
-				Item item = selectedItem.getItem();
-				PowerupManager.handleItem(item);
-				ItemManager.addPurchasedItem(item, selectedItem.getCategory());
-				FundsManager.buyItem(item);
-				addHistoryItem(item, selectedItem.getCategory());
-				storeItems.remove(selectedItem);
-				selectedItem.release();
-				selectedItem = null;
-				removeDialog(DIALOG_INFO_STORE);
-				setFunds();
+
 			}
 		}
 	};
@@ -245,8 +239,11 @@ public class StoreActivity extends Activity {
 				View arg0) {
 			Object o = arg0.getTag();
 			if (o instanceof StoreItem) {
-				selectedItem = (BaseStoreItem) o;
-				showDialog(DIALOG_INFO_STORE);
+				StoreItem selectedItem = (StoreItem) o;
+				ItemManager.Availability itemAvailability = selectedItem.getItemAvailability();
+				if ((itemAvailability.isAvailable()) && (itemAvailability.isAffordable())) {
+					handlePurchase(selectedItem);
+				}
 			}
 		}
 	};
@@ -295,6 +292,7 @@ public class StoreActivity extends Activity {
 
 	public class StoreItem extends BaseStoreItem {
 		ViewGroup itemLayout;
+		ItemManager.Availability itemAvailability;
 
 		private StoreItem() {
 			init();
@@ -336,6 +334,26 @@ public class StoreActivity extends Activity {
 
 			itemLayout.setTag(this);
 			itemsList.addView(itemLayout);
+			checkItemAvailability();
+		}
+
+		public void checkItemAvailability() {
+			Availability itemAvailability = ItemManager.isAvailable(getItem());
+			this.itemAvailability = itemAvailability;
+			TextView errorMessage = (TextView) itemLayout.findViewById(R.id.itemErrorMessage);
+			if ((!itemAvailability.isAvailable()) || (!itemAvailability.isAffordable())) {
+				errorMessage.setVisibility(View.VISIBLE);
+				errorMessage.setText(itemAvailability.getErrorMessage());
+			} else {
+				errorMessage.setVisibility(View.GONE);
+			}
+		}
+
+		public ItemManager.Availability getItemAvailability() {
+			if (itemAvailability == null) {
+				checkItemAvailability();
+			}
+			return itemAvailability;
 		}
 
 		public void setPrice(
@@ -482,5 +500,45 @@ public class StoreActivity extends Activity {
 			setPadding(5, 5, 5, 5);
 		}
 
+	}
+
+	public void removeCategory(
+			String categoryName) {
+		for (CategoryRow row : categories) {
+			if (row.getText().equals(categoryName)) {
+				Log.i("StoreActivity.removeCategory: Category is empty and removed. (" + categoryName + ")");
+				itemsList.removeView(row);
+				return;
+			}
+		}
+		Log.e("StoreActivity.removeCategory: Category is not found. (" + categoryName + ")");
+	}
+
+	private void resetItemsAvailability() {
+		for (BaseStoreItem i : storeItems) {
+			if (i instanceof StoreItem) {
+				((StoreItem) i).checkItemAvailability();
+			}
+		}
+	}
+
+	private void handlePurchase(
+			StoreItem selectedItem) {
+		Item item = selectedItem.getItem();
+		PowerupManager.handleItem(item);
+		boolean shouldRemoveCategory = ItemManager.addPurchasedItem(item, selectedItem.getCategory());
+		FundsManager.buyItem(item);
+		addHistoryItem(selectedItem.getItem(), selectedItem.getCategory());
+		storeItems.remove(selectedItem);
+		if (shouldRemoveCategory) {
+			removeCategory(selectedItem.getCategory());
+		} else {
+			Log.i("StoreActivity.handlePurchase: Category is not empty and does not require to be removed. (" + selectedItem.getCategory() + ")");
+		}
+		selectedItem.release();
+		selectedItem = null;
+		setFunds();
+		ReplicaIslandToast.makeStoreToast(this, item).show();
+		resetItemsAvailability();
 	}
 }

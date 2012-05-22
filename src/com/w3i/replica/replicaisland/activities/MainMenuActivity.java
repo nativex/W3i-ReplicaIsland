@@ -290,7 +290,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		Log.d("com.w3i.replica.replicaisland", "end");
 
 		FundsManager.setCrystals(30);
-		FundsManager.setPearls(2000);
+		FundsManager.setPearls(10000);
 
 	}
 
