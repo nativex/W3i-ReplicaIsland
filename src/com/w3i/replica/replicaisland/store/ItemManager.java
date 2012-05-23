@@ -6,15 +6,36 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.w3i.gamesplatformsdk.rest.entities.Attribute;
 import com.w3i.gamesplatformsdk.rest.entities.Category;
 import com.w3i.gamesplatformsdk.rest.entities.Currency;
 import com.w3i.gamesplatformsdk.rest.entities.Item;
 
 public class ItemManager {
+	private static final String KILLING_SPREE = "Killing Spree";
+	private static final String GARBAGE_COLLECTOR = "Garbage Collector";
 	private static ItemManager instance;
 	private List<Category> categories;
 	private Map<String, List<Item>> purchasedItems;
 	private Map<String, List<Item>> availableItems;
+	private Map<Long, ItemInfo> itemsByIds;
+
+	private class ItemInfo {
+		private Item i;
+		private boolean purchased = false;
+		@SuppressWarnings("unused")
+		private String category = null;
+
+		public ItemInfo(Item item, boolean isPurchased) {
+			i = item;
+			purchased = isPurchased;
+		}
+
+		public ItemInfo(Item item, boolean isPurchased, String category) {
+			this(item, isPurchased);
+			this.category = category;
+		}
+	}
 
 	private ItemManager() {
 		instance = this;
@@ -80,6 +101,14 @@ public class ItemManager {
 				return false;
 			}
 		}
+		if (itemsByIds.containsKey(i.getId())) {
+			itemsByIds.get(i.getId()).purchased = true;
+		}
+		if (i.getDisplayName().equals(GARBAGE_COLLECTOR)) {
+			PowerupManager.setGarbageCollector(true);
+		} else if (i.getDisplayName().equals(KILLING_SPREE)) {
+			PowerupManager.setKillingSpreeEnabled(true);
+		}
 		return true;
 	}
 
@@ -95,20 +124,25 @@ public class ItemManager {
 		if (categories == null) {
 			return;
 		}
+		if (availableItems == null) {
+			availableItems = new HashMap<String, List<Item>>();
+		}
+		if (purchasedItems == null) {
+			purchasedItems = new HashMap<String, List<Item>>();
+		}
+		if (itemsByIds == null) {
+			itemsByIds = new HashMap<Long, ItemManager.ItemInfo>();
+		}
 		if ((purchasedItemIds != null) && (purchasedItemIds.size() > 0)) {
-			if (availableItems == null) {
-				availableItems = new HashMap<String, List<Item>>();
-			}
-			if (purchasedItems == null) {
-				purchasedItems = new HashMap<String, List<Item>>();
-			}
 			for (Category c : categories) {
 				for (Item i : c.getItems()) {
 					Map<String, List<Item>> itemContainer;
 					if (purchasedItemIds.contains(i.getId())) {
 						itemContainer = purchasedItems;
+						itemsByIds.put(i.getId(), new ItemInfo(i, true, c.getDisplayName()));
 					} else {
 						itemContainer = availableItems;
+						itemsByIds.put(i.getId(), new ItemInfo(i, false, c.getDisplayName()));
 					}
 					List<Item> items = null;
 					if (itemContainer.containsKey(c.getDisplayName())) {
@@ -121,9 +155,6 @@ public class ItemManager {
 				}
 			}
 		} else {
-			if (availableItems == null) {
-				availableItems = new HashMap<String, List<Item>>();
-			}
 			for (Category c : categories) {
 				for (Item i : c.getItems()) {
 					List<Item> items = null;
@@ -132,6 +163,7 @@ public class ItemManager {
 					} else {
 						items = new ArrayList<Item>();
 						availableItems.put(c.getDisplayName(), items);
+						itemsByIds.put(i.getId(), new ItemInfo(i, false, c.getDisplayName()));
 					}
 					items.add(i);
 				}
@@ -184,6 +216,19 @@ public class ItemManager {
 		if (i == null) {
 			available.setErrorMessage("Unavailable");
 			return available;
+		}
+		for (Attribute a : i.getAttributes()) {
+			String attributeName = a.getDisplayName();
+			if (PowerupManager.UpgradeAttributes.REQUIREMENT.getAttributeName().equals(attributeName)) {
+				long requiredItemId = Long.parseLong(a.getValue());
+				if ((itemsByIds != null) && (itemsByIds.containsKey(requiredItemId))) {
+					ItemInfo info = itemsByIds.get(requiredItemId);
+					if (!info.purchased) {
+						available.setErrorMessage("Requires " + info.i.getDisplayName());
+						return available;
+					}
+				}
+			}
 		}
 		List<Currency> currencies = GamesPlatformManager.getCurrencies();
 		if (currencies == null) {

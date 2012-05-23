@@ -11,7 +11,6 @@ public class FundsManager {
 	private int pearls = 0;
 	private int crystals = 0;
 	private static FundsManager instance = null;
-	private int pearlsPerKill = 5;
 
 	private FundsManager() {
 		instance = this;
@@ -73,9 +72,17 @@ public class FundsManager {
 
 	public static void addCrystals(
 			int crystals) {
+		addCrystals(crystals, false);
+	}
+
+	public static void addCrystals(
+			int crystals,
+			boolean storeToSharedPreferences) {
 		checkInstance();
 		instance.crystals += crystals;
-		SharedPreferenceManager.storeFunds();
+		if (storeToSharedPreferences) {
+			SharedPreferenceManager.storeFunds();
+		}
 	}
 
 	public static void setPearls(
@@ -87,23 +94,33 @@ public class FundsManager {
 
 	public static void addPearls(
 			int pearls) {
+		addPearls(pearls, false);
+	}
+
+	public static void addPearls(
+			int pearls,
+			boolean storeToSharedPreferences) {
 		checkInstance();
 		instance.pearls += pearls;
-		SharedPreferenceManager.storeFunds();
+		if (storeToSharedPreferences) {
+			SharedPreferenceManager.storeFunds();
+		}
 	}
 
 	public static void release() {
+		KillingSpreeDetector.release();
 		instance = null;
 	}
 
-	public static int getPearlsPerKill() {
-		checkInstance();
-		return instance.pearlsPerKill;
-	}
-
-	public static void setPearlsPerKill(
-			int pearlsPerKill) {
-		checkInstance();
-		instance.pearlsPerKill = pearlsPerKill;
+	public static void recordKill() {
+		if (PowerupManager.hasGarbageCollector()) {
+			if (PowerupManager.isKillingSpreeEnabled()) {
+				KillingSpreeDetector.recordKill();
+				float pearlsAwarder = ((float) PowerupManager.getPearlsPerKill()) * KillingSpreeDetector.getMultiplier() + 0.5f;
+				FundsManager.addPearls((int) pearlsAwarder);
+			} else {
+				FundsManager.addPearls(PowerupManager.getPearlsPerKill());
+			}
+		}
 	}
 }

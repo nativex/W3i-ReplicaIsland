@@ -9,83 +9,188 @@ import com.w3i.gamesplatformsdk.rest.entities.Attribute;
 import com.w3i.gamesplatformsdk.rest.entities.Item;
 
 public class PowerupManager {
-	private static final String LIFE_POINTS_ATTRIBUTE = "Life Points";
-	private static final String BATTERY_STRENGTH_ATTRIBUTE = "Battery Strength";
-	private static final String BATTERY_RECHARGE_ATTRIBUTE = "Battery Recharge";
-	private static final String SHIELD_POWER_CELLS = "Power Cells Strength";
-	private static final String SHIELD_STABILIZER = "Stabilizer Strength";
 
-	private static int lifeUpgrade = 0;
-	private static int monsterValue = 0;
+	public enum UpgradeAttributes {
 
-	private static float jetpackDuration = 0.0f;
-	private static float jetpackGroundRefill = 0.0f;
-	private static float jetpackAirRefill = 0.0f;
+		LIFE_POINTS_ATTRIBUTE("Life Points", lifeUpgrade),
+		BATTERY_STRENGTH_ATTRIBUTE("Battery Strength", jetpackDuration),
+		BATTERY_RECHARGE_ATTRIBUTE("Battery Recharge", jetpackGroundRefill),
+		SHIELD_POWER_CELLS("Power Cells Strength", shieldPearls),
+		SHIELD_STABILIZER("Stabilizer Strength", shieldDuration),
+		CRYSTALS_PER_KILL("Crystals per Kill", crystalsPerKill),
+		KILLS_FOR_CRYSTAL("Kills for Crystal", killsForCrystal),
+		PEARLS_PER_KILL("Pearls per Kill", pearlsPerKill),
+		KILLING_SPREE("Killing Spree Multiplier", killingSpreeBonus),
+		REQUIREMENT("Requirement", null);
 
-	private static float shieldDuration = 0.0f;
-	private static int shiledPearls = 0;
+		private String value;
+		private UpgradeValue<?> variableToIncrement;
+
+		private UpgradeAttributes(String s, UpgradeValue<?> o) {
+			value = s;
+			variableToIncrement = o;
+		}
+
+		public String getAttributeName() {
+			return value;
+		}
+
+		public void handle(
+				Attribute a) {
+			if (variableToIncrement == null) {
+				return;
+			}
+			try {
+				Number value = variableToIncrement.getValue();
+				if (value instanceof Integer) {
+					variableToIncrement.setInt(Integer.valueOf(value.intValue() + Integer.parseInt(a.getValue())));
+				} else if (value instanceof Float) {
+					variableToIncrement.setFloat(Float.valueOf(value.floatValue() + Float.parseFloat(a.getValue())));
+				}
+			} catch (Exception e) {
+				Log.e("PowerupManager: Unexpected exception caught while parsing an attribute value (" + a.getName() + ").", e);
+			}
+		}
+	}
+
+	private static UpgradeValue<Integer> lifeUpgrade;
+	private static UpgradeValue<Integer> monsterValue;
+	private static UpgradeValue<Float> jetpackDuration;
+	private static UpgradeValue<Float> jetpackGroundRefill;
+	private static UpgradeValue<Float> jetpackAirRefill;
+	private static UpgradeValue<Float> shieldDuration;
+	private static UpgradeValue<Integer> shieldPearls;
+	private static UpgradeValue<Integer> pearlsPerKill;
+	private static UpgradeValue<Integer> killsForCrystal;
+	private static UpgradeValue<Integer> crystalsPerKill;
+	private static UpgradeValue<Float> killingSpreeBonus;
+
+	private static boolean killingSpreeEnabled = false;
+	private static boolean garbageCollectorEnabled = false;
+
+	static {
+		reset();
+	}
+
+	public static class UpgradeValue<T extends Number> {
+		private T value;
+
+		public UpgradeValue(T value) {
+			this.value = value;
+		}
+
+		public T getValue() {
+			return value;
+		}
+
+		@SuppressWarnings("unchecked")
+		public void setFloat(
+				Float value) {
+			if (value instanceof Float) {
+				this.value = (T) value;
+			}
+		}
+
+		@SuppressWarnings("unchecked")
+		public void setInt(
+				Integer value) {
+			if (value instanceof Integer) {
+				this.value = (T) value;
+			}
+		}
+
+		public int getType() {
+			if (value instanceof Integer) {
+				return 0;
+			} else if (value instanceof Float) {
+				return 1;
+			}
+			return -1;
+		}
+	}
 
 	public static int getLifeUpgrade() {
-		return lifeUpgrade;
+		return lifeUpgrade.getValue();
+	}
+
+	public static int getKillsForCrystal() {
+		return killsForCrystal.getValue();
+	}
+
+	public static int getCrystalsPerKill() {
+		return crystalsPerKill.getValue();
+	}
+
+	public static float getKillingSpreeBonus() {
+		return killingSpreeBonus.getValue();
 	}
 
 	static void setLifeUpgrade(
 			int lifeUpgrade) {
-		PowerupManager.lifeUpgrade = lifeUpgrade;
+		PowerupManager.lifeUpgrade.setInt(lifeUpgrade);
+	}
+
+	static void setPearlsPerKill(
+			int pearlsPerKill) {
+		PowerupManager.pearlsPerKill.setInt(pearlsPerKill);
+	}
+
+	public static int getPearlsPerKill() {
+		return pearlsPerKill.getValue();
 	}
 
 	public static int getMonsterValue() {
-		return monsterValue;
+		return monsterValue.getValue();
 	}
 
 	static void setMonsterValue(
 			int monsterValue) {
-		PowerupManager.monsterValue = monsterValue;
+		PowerupManager.monsterValue.setInt(monsterValue);
 	}
 
 	public static float getJetpackDuration() {
-		return jetpackDuration;
+		return jetpackDuration.getValue();
 	}
 
 	static void setJetpackDuration(
 			float jetpackDuration) {
-		PowerupManager.jetpackDuration = jetpackDuration;
+		PowerupManager.jetpackDuration.setFloat(jetpackDuration);
 	}
 
 	public static float getJetpackGroundRefill() {
-		return jetpackGroundRefill;
+		return jetpackGroundRefill.getValue();
 	}
 
 	static void setJetpackGroundRefill(
 			float jetpackGroundRefill) {
-		PowerupManager.jetpackGroundRefill = jetpackGroundRefill;
+		PowerupManager.jetpackGroundRefill.setFloat(jetpackGroundRefill);
 	}
 
 	public static float getJetpackAirRefill() {
-		return jetpackAirRefill;
+		return jetpackAirRefill.getValue();
 	}
 
 	static void setJetpackAirRefill(
 			float jetpackAirRefill) {
-		PowerupManager.jetpackAirRefill = jetpackAirRefill;
+		PowerupManager.jetpackAirRefill.setFloat(jetpackAirRefill);
 	}
 
 	public static float getShieldDuration() {
-		return shieldDuration;
+		return shieldDuration.getValue();
 	}
 
 	static void setShieldDuration(
 			float shieldDuration) {
-		PowerupManager.shieldDuration = shieldDuration;
+		PowerupManager.shieldDuration.setFloat(shieldDuration);
 	}
 
 	public static int getShiledPearls() {
-		return shiledPearls;
+		return shieldPearls.getValue();
 	}
 
 	static void setShiledPearls(
 			int shiledPearls) {
-		PowerupManager.shiledPearls = shiledPearls;
+		PowerupManager.shieldPearls.setInt(shiledPearls);
 	}
 
 	public static void handleItem(
@@ -98,23 +203,16 @@ public class PowerupManager {
 
 	private static boolean handleAttribute(
 			Attribute a) {
-
-		try {
-			if (a.getName().equals(LIFE_POINTS_ATTRIBUTE)) {
-				lifeUpgrade += Integer.parseInt(a.getValue());
-			} else if (a.getName().equals(BATTERY_STRENGTH_ATTRIBUTE)) {
-				jetpackAirRefill += Float.parseFloat(a.getValue());
-			} else if (a.getName().equals(BATTERY_RECHARGE_ATTRIBUTE)) {
-				jetpackGroundRefill += Float.parseFloat(a.getValue());
-			} else if (a.getName().equals(SHIELD_POWER_CELLS)) {
-				shiledPearls += Integer.parseInt(a.getValue());
-			} else if (a.getName().equals(SHIELD_STABILIZER)) {
-				shieldDuration += Float.parseFloat(a.getValue());
+		for (UpgradeAttributes ua : UpgradeAttributes.values()) {
+			try {
+				if (ua.getAttributeName().equals(a.getName())) {
+					ua.handle(a);
+					Log.i("PowerupManager: Attribute Name: " + a.getName());
+					return true;
+				}
+			} catch (Exception e) {
+				Log.e("PowerupManager: Couldn't parse Life Points", e);
 			}
-			Log.i("PowerupManager: Attribute Name: " + a.getName());
-			return true;
-		} catch (Exception e) {
-			Log.e("PowerupManager: Couldn't parse Life Points", e);
 		}
 		return false;
 	}
@@ -158,15 +256,37 @@ public class PowerupManager {
 	}
 
 	static void reset() {
-		lifeUpgrade = 0;
-		monsterValue = 0;
+		lifeUpgrade = new UpgradeValue<Integer>(0);
+		monsterValue = new UpgradeValue<Integer>(0);
 
-		jetpackDuration = 0.0f;
-		jetpackGroundRefill = 0.0f;
-		jetpackAirRefill = 0.0f;
+		jetpackDuration = new UpgradeValue<Float>(0f);
+		jetpackGroundRefill = new UpgradeValue<Float>(0f);
+		jetpackAirRefill = new UpgradeValue<Float>(0f);
 
-		shieldDuration = 0.0f;
-		shiledPearls = 0;
+		shieldDuration = new UpgradeValue<Float>(0f);
+		shieldPearls = new UpgradeValue<Integer>(0);
+
+		pearlsPerKill = new UpgradeValue<Integer>(0);
+		killsForCrystal = new UpgradeValue<Integer>(0);
+		crystalsPerKill = new UpgradeValue<Integer>(0);
+		killingSpreeBonus = new UpgradeValue<Float>(0f);
 	}
 
+	public static boolean isKillingSpreeEnabled() {
+		return killingSpreeEnabled;
+	}
+
+	static void setKillingSpreeEnabled(
+			boolean isEnabled) {
+		killingSpreeEnabled = isEnabled;
+	}
+
+	public static boolean hasGarbageCollector() {
+		return garbageCollectorEnabled;
+	}
+
+	static void setGarbageCollector(
+			boolean isEnabled) {
+		garbageCollectorEnabled = isEnabled;
+	}
 }

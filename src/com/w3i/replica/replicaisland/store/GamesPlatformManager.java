@@ -9,6 +9,7 @@ import com.w3i.gamesplatformsdk.GamesPLatformListenerAdapter;
 import com.w3i.gamesplatformsdk.GamesPlatformSDK;
 import com.w3i.gamesplatformsdk.rest.entities.Category;
 import com.w3i.gamesplatformsdk.rest.entities.Currency;
+import com.w3i.gamesplatformsdk.rest.entities.Item;
 import com.w3i.gamesplatformsdk.rest.entities.enums.RootCategoryType;
 
 public class GamesPlatformManager extends GamesPLatformListenerAdapter {
@@ -58,6 +59,12 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 		if (success) {
 			this.currencies = currencies;
 		}
+	}
+
+	public static void trackItemPurchase(
+			Item item) {
+		checkInstance();
+//		GamesPlatformSDK.getInstance().trackItemPurchase(item.getId(), 1, item.getItemPrice(instance.currencies), userBalance, instance);
 	}
 
 	private static void checkInstance() throws IllegalStateException {

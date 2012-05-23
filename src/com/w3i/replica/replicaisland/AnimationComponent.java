@@ -166,15 +166,15 @@ public class AnimationComponent extends GameComponent {
 					switch (rubyCount) {
 					case 1:
 						sound.play(mRubySound1, false, SoundSystem.PRIORITY_NORMAL);
-						FundsManager.addCrystals(1);
+						FundsManager.addCrystals(1, true);
 						break;
 					case 2:
 						sound.play(mRubySound2, false, SoundSystem.PRIORITY_NORMAL);
-						FundsManager.addCrystals(1);
+						FundsManager.addCrystals(1, true);
 						break;
 					case 3:
 						sound.play(mRubySound3, false, SoundSystem.PRIORITY_NORMAL);
-						FundsManager.addCrystals(1);
+						FundsManager.addCrystals(1, true);
 						break;
 					}
 

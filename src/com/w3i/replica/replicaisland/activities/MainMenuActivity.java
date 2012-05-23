@@ -156,9 +156,9 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 				for (Balance b : balances) {
 					try {
 						if (b.getDisplayName().equals(FundsManager.PEARLS)) {
-							FundsManager.addPearls(Integer.parseInt(b.getAmount()));
+							FundsManager.addPearls(Integer.parseInt(b.getAmount()), true);
 						} else if (b.getDisplayName().equals(FundsManager.CRYSTALS)) {
-							FundsManager.addCrystals(Integer.parseInt(b.getAmount()));
+							FundsManager.addCrystals(Integer.parseInt(b.getAmount()), true);
 						}
 					} catch (Exception e) {
 						com.w3i.common.Log.e("MainMenuActivity: Unable to read balances", e);
@@ -278,14 +278,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		GamesPlatformManager.initialize(this);
 		FundsManager.loadFunds();
 		PowerupManager.loadPowerups();
-
-		com.w3i.common.Log.i("PowerupManager: Life upgrade - " + PowerupManager.getLifeUpgrade());
-		com.w3i.common.Log.i("PowerupManager: Pearls per kill upgrade - " + PowerupManager.getMonsterValue());
-		com.w3i.common.Log.i("PowerupManager: Jetpack duration upgrade - " + PowerupManager.getJetpackDuration());
-		com.w3i.common.Log.i("PowerupManager: Jetpack air upgrade - " + PowerupManager.getJetpackAirRefill());
-		com.w3i.common.Log.i("PowerupManager: Jetpack ground upgrade - " + PowerupManager.getJetpackGroundRefill());
-		com.w3i.common.Log.i("PowerupManager: Shield duration upgrade - " + PowerupManager.getShieldDuration());
-		com.w3i.common.Log.i("PowerupManager: Shield energy upgrade - " + PowerupManager.getShiledPearls());
 
 		Log.d("com.w3i.replica.replicaisland", "end");
 
@@ -469,6 +461,13 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		}
 
 		setFunds();
+		com.w3i.common.Log.i("PowerupManager: Life upgrade - " + PowerupManager.getLifeUpgrade());
+		com.w3i.common.Log.i("PowerupManager: Pearls per kill upgrade - " + PowerupManager.getMonsterValue());
+		com.w3i.common.Log.i("PowerupManager: Jetpack duration upgrade - " + PowerupManager.getJetpackDuration());
+		com.w3i.common.Log.i("PowerupManager: Jetpack air upgrade - " + PowerupManager.getJetpackAirRefill());
+		com.w3i.common.Log.i("PowerupManager: Jetpack ground upgrade - " + PowerupManager.getJetpackGroundRefill());
+		com.w3i.common.Log.i("PowerupManager: Shield duration upgrade - " + PowerupManager.getShieldDuration());
+		com.w3i.common.Log.i("PowerupManager: Shield energy upgrade - " + PowerupManager.getShiledPearls());
 	}
 
 	@Override

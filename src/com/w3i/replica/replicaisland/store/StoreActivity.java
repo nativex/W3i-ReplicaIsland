@@ -525,6 +525,7 @@ public class StoreActivity extends Activity {
 	private void handlePurchase(
 			StoreItem selectedItem) {
 		Item item = selectedItem.getItem();
+		GamesPlatformManager.trackItemPurchase(item);
 		PowerupManager.handleItem(item);
 		boolean shouldRemoveCategory = ItemManager.addPurchasedItem(item, selectedItem.getCategory());
 		FundsManager.buyItem(item);

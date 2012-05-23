@@ -57,7 +57,7 @@ public class EventRecorder extends BaseObject {
 	synchronized void incrementEventCounter(
 			int event) {
 		if (event == COUNTER_ROBOTS_DESTROYED) {
-			FundsManager.addPearls(FundsManager.getPearlsPerKill());
+			FundsManager.recordKill();
 			mRobotsDestroyed++;
 		} else if (event == COUNTER_PEARLS_COLLECTED) {
 			FundsManager.addPearls(1);

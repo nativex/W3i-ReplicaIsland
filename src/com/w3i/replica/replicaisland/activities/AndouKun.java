@@ -50,6 +50,7 @@ import com.w3i.replica.replicaisland.LevelTree;
 import com.w3i.replica.replicaisland.PreferenceConstants;
 import com.w3i.replica.replicaisland.R;
 import com.w3i.replica.replicaisland.UIConstants;
+import com.w3i.replica.replicaisland.store.FundsManager;
 
 /**
  * Core activity for the game. Sets up a surface view for OpenGL, bootstraps the game engine, and manages UI events. Also manages game progression, transitioning to other activites, save game, and
@@ -654,6 +655,7 @@ public class AndouKun extends Activity implements SensorEventListener {
 
 	protected void saveGame() {
 		if (mPrefsEditor != null) {
+			FundsManager.storeFunds();
 			final int completed = LevelTree.packCompletedLevels(mLevelRow);
 			mPrefsEditor.putInt(PreferenceConstants.PREFERENCE_LEVEL_ROW, mLevelRow);
 			mPrefsEditor.putInt(PreferenceConstants.PREFERENCE_LEVEL_INDEX, mLevelIndex);
@@ -668,6 +670,7 @@ public class AndouKun extends Activity implements SensorEventListener {
 			mPrefsEditor.putBoolean(PreferenceConstants.PREFERENCE_EXTRAS_UNLOCKED, mExtrasUnlocked);
 			mPrefsEditor.putInt(PreferenceConstants.PREFERENCE_DIFFICULTY, mDifficulty);
 			mPrefsEditor.commit();
+
 		}
 	}
 
