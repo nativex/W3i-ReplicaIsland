@@ -12,29 +12,58 @@ import com.w3i.gamesplatformsdk.rest.entities.Currency;
 import com.w3i.gamesplatformsdk.rest.entities.Item;
 
 public class ItemManager {
-	private static final String KILLING_SPREE = "Killing Spree";
-	private static final String GARBAGE_COLLECTOR = "Garbage Collector";
+	private static final long GARBAGE_COLLECTOR_ID = 1049;
+	private static final long KILLING_SPREE_ID = 1050;
 	private static ItemManager instance;
 	private List<Category> categories;
-	private Map<String, List<Item>> purchasedItems;
-	private Map<String, List<Item>> availableItems;
 	private Map<Long, ItemInfo> itemsByIds;
+	private List<ItemInfo> purchasedItems;
+	private List<ItemInfo> availableItems;
+	private boolean purchasedItemsLoaded = false;
 
-	private class ItemInfo {
-		private Item i;
+	public class ItemInfo {
+		private Item item;
 		private boolean purchased = false;
-		@SuppressWarnings("unused")
-		private String category = null;
+		private Category category = null;
 
-		public ItemInfo(Item item, boolean isPurchased) {
-			i = item;
+		private ItemInfo(Item item, boolean isPurchased) {
+			this.item = item;
 			purchased = isPurchased;
+			if (categories != null) {
+				for (Category c : categories) {
+					if (category != null) {
+						break;
+					}
+					if (c.getItems() != null) {
+						for (Item i : c.getItems()) {
+							if (i.getId() == item.getId()) {
+								category = c;
+								break;
+							}
+						}
+					}
+				}
+			}
 		}
 
-		public ItemInfo(Item item, boolean isPurchased, String category) {
-			this(item, isPurchased);
+		private ItemInfo(Item item, boolean isPurchased, Category category) {
+			this.item = item;
+			purchased = isPurchased;
 			this.category = category;
 		}
+
+		public Item getItem() {
+			return item;
+		}
+
+		public boolean isPurchased() {
+			return purchased;
+		}
+
+		public Category getCategory() {
+			return category;
+		}
+
 	}
 
 	private ItemManager() {
@@ -51,6 +80,11 @@ public class ItemManager {
 		}
 	}
 
+	public static Map<Long, ItemInfo> getItemsByIds() {
+		checkInstance();
+		return instance.itemsByIds;
+	}
+
 	static void setCategories(
 			List<Category> categories) {
 		checkInstance();
@@ -63,117 +97,91 @@ public class ItemManager {
 	}
 
 	static boolean addPurchasedItem(
-			Item i,
-			String category) {
+			Item i) {
 		checkInstance();
-		return instance._addPurchasedItem(i, category);
+		return instance._addPurchasedItem(i);
 	}
 
 	private boolean _addPurchasedItem(
-			Item i,
-			String category) {
-		if (i == null) {
+			Item item) {
+		if (item == null) {
 			return false;
 		}
-		List<Item> items;
-		if (purchasedItems == null) {
-			purchasedItems = new HashMap<String, List<Item>>();
-			items = new ArrayList<Item>();
-			purchasedItems.put(category, items);
-		} else if (!purchasedItems.containsKey(category)) {
-			items = new ArrayList<Item>();
-			purchasedItems.put(category, items);
+		ItemInfo itemInfo;
+		if (itemsByIds.containsKey(item.getId())) {
+			itemInfo = itemsByIds.get(item.getId());
+			itemInfo.purchased = true;
 		} else {
-			items = purchasedItems.get(category);
+			itemInfo = new ItemInfo(item, true);
 		}
-		items.add(i);
-		if (availableItems.containsKey(category)) {
-			List<Item> itemsInCategory = availableItems.get(category);
-			if (itemsInCategory == null) {
-				availableItems.remove(category);
-				return true;
-			}
-			itemsInCategory.remove(i);
-			if (itemsInCategory.size() <= 0) {
-				availableItems.remove(category);
-				return true;
-			} else {
-				return false;
+		if (purchasedItems == null) {
+			purchasedItems = new ArrayList<ItemManager.ItemInfo>();
+			purchasedItems.add(itemInfo);
+		} else {
+			if (!purchasedItems.contains(itemInfo)) {
+				purchasedItems.add(itemInfo);
 			}
 		}
-		if (itemsByIds.containsKey(i.getId())) {
-			itemsByIds.get(i.getId()).purchased = true;
+
+		if ((availableItems != null)) {
+			availableItems.remove(itemInfo);
 		}
-		if (i.getDisplayName().equals(GARBAGE_COLLECTOR)) {
+
+		if (item.getId() == GARBAGE_COLLECTOR_ID) {
 			PowerupManager.setGarbageCollector(true);
-		} else if (i.getDisplayName().equals(KILLING_SPREE)) {
+		} else if (item.getId() == KILLING_SPREE_ID) {
 			PowerupManager.setKillingSpreeEnabled(true);
 		}
 		return true;
 	}
 
-	static void setPurchasedItems(
-			List<Long> purchasedItems) {
+	static void loadPurchasedItems(
+			List<Long> purchasedItemsIds) {
 		checkInstance();
-		instance._setPurchasedItems(purchasedItems);
-
+		instance._loadPurchasedItems(purchasedItemsIds);
 	}
 
-	private void _setPurchasedItems(
-			List<Long> purchasedItemIds) {
+	private void _loadPurchasedItems(
+			List<Long> purchasedItemsIds) {
+		if (purchasedItemsLoaded) {
+			return;
+		}
+		purchasedItemsLoaded = true;
 		if (categories == null) {
 			return;
 		}
-		if (availableItems == null) {
-			availableItems = new HashMap<String, List<Item>>();
-		}
-		if (purchasedItems == null) {
-			purchasedItems = new HashMap<String, List<Item>>();
-		}
-		if (itemsByIds == null) {
-			itemsByIds = new HashMap<Long, ItemManager.ItemInfo>();
-		}
-		if ((purchasedItemIds != null) && (purchasedItemIds.size() > 0)) {
+		itemsByIds = new HashMap<Long, ItemManager.ItemInfo>();
+		if (purchasedItemsIds == null) {
 			for (Category c : categories) {
-				for (Item i : c.getItems()) {
-					Map<String, List<Item>> itemContainer;
-					if (purchasedItemIds.contains(i.getId())) {
-						itemContainer = purchasedItems;
-						itemsByIds.put(i.getId(), new ItemInfo(i, true, c.getDisplayName()));
-					} else {
-						itemContainer = availableItems;
-						itemsByIds.put(i.getId(), new ItemInfo(i, false, c.getDisplayName()));
+				List<Item> itemsInCategory = c.getItems();
+				if (itemsInCategory != null) {
+					for (Item i : itemsInCategory) {
+						itemsByIds.put(i.getId(), new ItemInfo(i, false));
 					}
-					List<Item> items = null;
-					if (itemContainer.containsKey(c.getDisplayName())) {
-						items = itemContainer.get(c.getDisplayName());
-					} else {
-						items = new ArrayList<Item>();
-						itemContainer.put(c.getDisplayName(), items);
-					}
-					items.add(i);
 				}
 			}
 		} else {
 			for (Category c : categories) {
-				for (Item i : c.getItems()) {
-					List<Item> items = null;
-					if (availableItems.containsKey(c.getDisplayName())) {
-						items = availableItems.get(c.getDisplayName());
-					} else {
-						items = new ArrayList<Item>();
-						availableItems.put(c.getDisplayName(), items);
-						itemsByIds.put(i.getId(), new ItemInfo(i, false, c.getDisplayName()));
+				List<Item> itemsInCategory = c.getItems();
+				if (itemsInCategory != null) {
+					for (Item i : itemsInCategory) {
+						itemsByIds.put(i.getId(), new ItemInfo(i, purchasedItems.contains(i.getId())));
 					}
-					items.add(i);
 				}
 			}
 		}
 	}
 
-	public static Map<String, List<Item>> getPurchasedItems() {
+	public static List<ItemInfo> getPurchasedItems() {
 		checkInstance();
-		return instance.purchasedItems;
+		return instance._getPurchasedItems();
+	}
+
+	private List<ItemInfo> _getPurchasedItems() {
+		if (!purchasedItemsLoaded) {
+			SharedPreferenceManager.loadPurchasedItems();
+		}
+		return purchasedItems;
 	}
 
 	static List<Long> getPurchasedItemsIds() {
@@ -189,17 +197,15 @@ public class ItemManager {
 			return null;
 		}
 		List<Long> purchasedItemsIds = new ArrayList<Long>();
-		for (Entry<String, List<Item>> e : purchasedItems.entrySet()) {
-			if ((e.getValue() != null) && (e.getValue().size() > 0)) {
-				for (Item i : e.getValue()) {
-					purchasedItemsIds.add(i.getId());
-				}
+		for (ItemInfo itemInfo : availableItems) {
+			if (itemInfo.purchased) {
+				purchasedItemsIds.add(itemInfo.item.getId());
 			}
 		}
 		return purchasedItemsIds;
 	}
 
-	public static Map<String, List<Item>> getStoreItems() {
+	public static List<ItemInfo> getStoreItems() {
 		checkInstance();
 		return instance.availableItems;
 	}
@@ -211,52 +217,40 @@ public class ItemManager {
 	}
 
 	private Availability _isAvailable(
-			Item i) {
-		Availability available = new Availability();
-		if (i == null) {
-			available.setErrorMessage("Unavailable");
-			return available;
+			Item item) {
+		if (item == null) {
+			return new Availability("Unavailable");
 		}
-		for (Attribute a : i.getAttributes()) {
+		for (Attribute a : item.getAttributes()) {
 			String attributeName = a.getDisplayName();
 			if (PowerupManager.UpgradeAttributes.REQUIREMENT.getAttributeName().equals(attributeName)) {
 				long requiredItemId = Long.parseLong(a.getValue());
 				if ((itemsByIds != null) && (itemsByIds.containsKey(requiredItemId))) {
 					ItemInfo info = itemsByIds.get(requiredItemId);
 					if (!info.purchased) {
-						available.setErrorMessage("Requires " + info.i.getDisplayName());
-						return available;
+						return new Availability("Requires " + info.item.getDisplayName());
 					}
 				}
 			}
 		}
 		List<Currency> currencies = GamesPlatformManager.getCurrencies();
 		if (currencies == null) {
-			available.setErrorMessage("Unavailable");
-			return available;
+			return new Availability("Unavailable");
 		}
-		Map<Currency, Double> prices = i.getItemPrice(currencies);
+		Map<Currency, Double> prices = item.getItemPrice(currencies);
 		for (Entry<Currency, Double> e : prices.entrySet()) {
 			Currency c = e.getKey();
 			if (c.getDisplayName().equals(FundsManager.PEARLS)) {
 				if (FundsManager.getPearls() < e.getValue()) {
-					available.setAvailable(true);
-					available.setAffordable(false);
-					available.setErrorMessage("Insufficient " + FundsManager.PEARLS);
-					return available;
+					return new Availability(false, true, "Insufficient " + FundsManager.PEARLS);
 				}
 			} else if (c.getDisplayName().equals(FundsManager.CRYSTALS)) {
 				if (FundsManager.getCrystals() < e.getValue()) {
-					available.setAvailable(true);
-					available.setAffordable(false);
-					available.setErrorMessage("Insufficient " + FundsManager.CRYSTALS);
-					return available;
+					return new Availability(false, true, "Insufficient " + FundsManager.CRYSTALS);
 				}
 			}
 		}
-		available.setAvailable(true);
-		available.setAffordable(true);
-		return available;
+		return new Availability(true, true);
 	}
 
 	public static void release() {
@@ -287,6 +281,21 @@ public class ItemManager {
 		private Availability() {
 		}
 
+		private Availability(String msg) {
+			errorMessage = msg;
+		}
+
+		private Availability(boolean isAffordable, boolean isAvailable, String msg) {
+			this.isAffordable = isAffordable;
+			this.isAvailable = isAvailable;
+			errorMessage = msg;
+		}
+
+		private Availability(boolean isAffordable, boolean isAvailable) {
+			this.isAffordable = isAffordable;
+			this.isAvailable = isAvailable;
+		}
+
 		public boolean isAffordable() {
 			return isAffordable;
 		}
@@ -297,21 +306,6 @@ public class ItemManager {
 
 		public String getErrorMessage() {
 			return errorMessage;
-		}
-
-		private void setAffordable(
-				boolean isAffordable) {
-			this.isAffordable = isAffordable;
-		}
-
-		private void setAvailable(
-				boolean isAvailable) {
-			this.isAvailable = isAvailable;
-		}
-
-		private void setErrorMessage(
-				String errorMessage) {
-			this.errorMessage = "[" + errorMessage + "]";
 		}
 
 	}

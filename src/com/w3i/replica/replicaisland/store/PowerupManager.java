@@ -1,12 +1,11 @@
 package com.w3i.replica.replicaisland.store;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import com.w3i.common.Log;
 import com.w3i.gamesplatformsdk.rest.entities.Attribute;
 import com.w3i.gamesplatformsdk.rest.entities.Item;
+import com.w3i.replica.replicaisland.store.ItemManager.ItemInfo;
 
 public class PowerupManager {
 
@@ -218,31 +217,16 @@ public class PowerupManager {
 	}
 
 	static void handleItems(
-			List<Item> items) {
+			List<ItemInfo> items) {
 		if (items != null) {
-			for (Item i : items) {
-				handleItem(i);
-			}
-		}
-	}
-
-	static void handleItems(
-			Map<String, List<Item>> items) {
-		if (items != null) {
-			for (Entry<String, List<Item>> e : items.entrySet()) {
-				handleItems(e.getValue());
+			for (ItemInfo i : items) {
+				handleItem(i.getItem());
 			}
 		}
 	}
 
 	static void reloadItems(
-			List<Item> items) {
-		reset();
-		handleItems(items);
-	}
-
-	static void reloadItems(
-			Map<String, List<Item>> items) {
+			List<ItemInfo> items) {
 		reset();
 		handleItems(items);
 	}

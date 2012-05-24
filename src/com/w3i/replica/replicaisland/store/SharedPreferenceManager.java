@@ -91,7 +91,7 @@ public class SharedPreferenceManager {
 				}.getType();
 				purchasedItemsIds = new Gson().fromJson(jsonItems, arrayType);
 			}
-			ItemManager.setPurchasedItems(purchasedItemsIds);
+			ItemManager.loadPurchasedItems(purchasedItemsIds);
 		} catch (Exception e) {
 			Log.e("SharedPreferenceManager: Unexpected exception caught while loading purchased items", e);
 		}

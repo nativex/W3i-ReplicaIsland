@@ -58,4 +58,12 @@
         android:text="@string/store_item_price_label"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
+    <include
+        android:id="@+id/itemLayoutFunds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/itemDescription"
+        layout="@layout/coin_layout" />
+
 </RelativeLayout>
