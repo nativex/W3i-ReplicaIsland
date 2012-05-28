@@ -1,6 +1,8 @@
 package com.w3i.replica.replicaisland.store;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.content.Context;
 
@@ -64,7 +66,22 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 	public static void trackItemPurchase(
 			Item item) {
 		checkInstance();
-//		GamesPlatformSDK.getInstance().trackItemPurchase(item.getId(), 1, item.getItemPrice(instance.currencies), userBalance, instance);
+		if (isInitialized()) {
+			Map<Currency, Double> userBalance = new HashMap<Currency, Double>();
+			if (getCurrencies() != null) {
+				List<Currency> currencies = getCurrencies();
+				for (Currency c : currencies) {
+					if (FundsManager.PEARLS.equals(c.getDisplayName())) {
+						userBalance.put(c, (double) FundsManager.getPearls());
+
+					} else if (FundsManager.CRYSTALS.equals(c.getDisplayName())) {
+						userBalance.put(c, (double) FundsManager.getCrystals());
+					}
+				}
+
+			}
+			GamesPlatformSDK.getInstance().trackItemPurchase(item.getId(), 1L, item.getItemPrice(instance.currencies), userBalance, instance);
+		}
 	}
 
 	private static void checkInstance() throws IllegalStateException {

@@ -51,6 +51,8 @@ import com.w3i.replica.replicaisland.PreferenceConstants;
 import com.w3i.replica.replicaisland.R;
 import com.w3i.replica.replicaisland.UIConstants;
 import com.w3i.replica.replicaisland.store.FundsManager;
+import com.w3i.replica.replicaisland.store.KillingSpreeDetector;
+import com.w3i.replica.replicaisland.store.ReplicaIslandToast;
 
 /**
  * Core activity for the game. Sets up a surface view for OpenGL, bootstraps the game engine, and manages UI events. Also manages game progression, transitioning to other activites, save game, and
@@ -102,6 +104,18 @@ public class AndouKun extends Activity implements SensorEventListener {
 	private Thread mEventReporterThread;
 
 	private long mSessionId = 0L;
+
+	private KillingSpreeDetector.OnKillingSpreeEnd killingSpreeListener = new KillingSpreeDetector.OnKillingSpreeEnd() {
+
+		@Override
+		public void killingSpreeEnded(
+				int kills,
+				int pearlsEarned) {
+			if (kills > 1) {
+				ReplicaIslandToast.makeKillingSpreeToast(AndouKun.this, kills, pearlsEarned).show();
+			}
+		}
+	};
 
 	/** Called when the activity is first created. */
 	@Override
@@ -241,6 +255,8 @@ public class AndouKun extends Activity implements SensorEventListener {
 			mEventReporterThread.setName("EventReporter");
 			mEventReporterThread.start();
 		}
+
+		KillingSpreeDetector.setKillingSpreeListener(killingSpreeListener);
 	}
 
 	@Override
@@ -255,6 +271,7 @@ public class AndouKun extends Activity implements SensorEventListener {
 				mEventReporterThread.interrupt();
 			}
 		}
+		KillingSpreeDetector.setKillingSpreeListener(null);
 		super.onDestroy();
 
 	}

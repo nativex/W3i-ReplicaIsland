@@ -77,7 +77,7 @@ public class GameThread implements Runnable {
 					mProfileTime += finalDelta;
 					mProfileFrames++;
 					if (mProfileTime > PROFILE_REPORT_DELAY * 1000) {
-						final long averageFrameTime = mProfileTime / mProfileFrames;
+						final long averageFrameTime = 1L + (mProfileTime / mProfileFrames);
 						DebugLog.d("Game Profile", "Average: " + averageFrameTime);
 						mProfileTime = 0;
 						mProfileFrames = 0;

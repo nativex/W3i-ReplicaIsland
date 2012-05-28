@@ -16,12 +16,21 @@
 
 package com.w3i.replica.replicaisland;
 
+import com.w3i.common.Log;
 import com.w3i.replica.replicaisland.store.FundsManager;
 
 public class EventRecorder extends BaseObject {
 	public final static int COUNTER_ROBOTS_DESTROYED = 0;
 	public final static int COUNTER_PEARLS_COLLECTED = 1;
 	public final static int COUNTER_PEARLS_TOTAL = 2;
+	public final static int COUNTER_SNAILS_DESTROYED = 3;
+	public final static int COUNTER_BATS_DESTROYED = 4;
+	public final static int COUNTER_KARAGUINS_DESTROYED = 5;
+	public static final int COUNTER_ONIONS_DESTROYED = 6;
+	public static final int COUNTER_SKELETONS_DESTROYED = 7;
+	public static final int COUNTER_EVENT_STING_DESTROYED = 8;
+	public static final int COUNTER_TURRET_DESTROYED = 10;
+	public static final int COUNTER_SNAIL_BOMBS_DESTROYED = 11;
 
 	private Vector2 mLastDeathPosition = new Vector2();
 	private int mLastEnding = -1;
@@ -56,14 +65,53 @@ public class EventRecorder extends BaseObject {
 
 	synchronized void incrementEventCounter(
 			int event) {
-		if (event == COUNTER_ROBOTS_DESTROYED) {
+		switch (event) {
+		case COUNTER_ROBOTS_DESTROYED:
 			FundsManager.recordKill();
 			mRobotsDestroyed++;
-		} else if (event == COUNTER_PEARLS_COLLECTED) {
+			Log.i("EventRecorder: Robot Killed");
+			break;
+		case COUNTER_PEARLS_COLLECTED:
 			FundsManager.addPearls(1);
 			mPearlsCollected++;
-		} else if (event == COUNTER_PEARLS_TOTAL) {
+			break;
+		case COUNTER_PEARLS_TOTAL:
 			mPearlsTotal++;
+			break;
+
+		case COUNTER_SNAILS_DESTROYED:
+			FundsManager.recordKill();
+			Log.i("EventRecorder: Snail Killed");
+			break;
+
+		case COUNTER_SNAIL_BOMBS_DESTROYED:
+			FundsManager.recordKill();
+			Log.i("EventRecorder: Snail Bombs Killed");
+			break;
+		case COUNTER_BATS_DESTROYED:
+			FundsManager.recordKill();
+			Log.i("EventRecorder: Bat Killed");
+			break;
+		case COUNTER_KARAGUINS_DESTROYED:
+			FundsManager.recordKill();
+			Log.i("EventRecorder: Karaguin Killed");
+			break;
+		case COUNTER_ONIONS_DESTROYED:
+			FundsManager.recordKill();
+			Log.i("EventRecorder: Onion Killed");
+			break;
+		case COUNTER_SKELETONS_DESTROYED:
+			FundsManager.recordKill();
+			Log.i("EventRecorder: Skeleton Killed");
+			break;
+		case COUNTER_EVENT_STING_DESTROYED:
+			FundsManager.recordKill();
+			Log.i("EventRecorder: Sting Killed");
+			break;
+		case COUNTER_TURRET_DESTROYED:
+			FundsManager.recordKill();
+			Log.i("EventRecorder: Turret Killed");
+			break;
 		}
 	}
 

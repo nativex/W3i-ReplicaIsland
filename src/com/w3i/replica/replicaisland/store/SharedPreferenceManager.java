@@ -26,6 +26,12 @@ public class SharedPreferenceManager {
 	private static final String PREF_POWERUP_SHIELD_DURATION_UPGRADE = "shieldDurationUpgrade";
 	private static final String PREF_POWERUP_SHIELD_PEARLS_UPGRADE = "siheldPearlsUpgrade";
 	private static final String PREF_POWERUP_MONSTER_KILL_VALUE_UPGRADE = "monsterKillValueUpgrade";
+	private static final String PREF_POWERUP_KILLING_SPREE_ENABLED = "killingSpreeEnabled";
+	private static final String PREF_POWERUP_KILLING_SPREE_VALUE = "killingSpreeValue";
+	private static final String PREF_POWERUP_GARBAGE_COLLECTOR_ENABLED = "garbageCollectorEnabled";
+	private static final String PREF_POWERUP_GARBAGE_COLLECTOR_PEARLS = "garbageCollectorPearls";
+	private static final String PREF_CRYSTAL_EXTRACTOR_CRYSTALS = "crystalExtractorCrystals";
+	private static final String PREF_CRYSTAL_EXTRACTRO_MONSTERS = "crystalExctactorMonsters";
 
 	private SharedPreferenceManager(Context context) {
 		instance = this;
@@ -86,6 +92,7 @@ public class SharedPreferenceManager {
 		try {
 			String jsonItems = preferences.getString(PREF_PURCHASED_ITEMS, null);
 			List<Long> purchasedItemsIds = null;
+			Log.i("SharedPreferenceManager: Loaded item ids: " + jsonItems);
 			if (jsonItems != null) {
 				Type arrayType = new TypeToken<List<Long>>() {
 				}.getType();
@@ -142,6 +149,26 @@ public class SharedPreferenceManager {
 			PowerupManager.setJetpackGroundRefill(jetpackGroundRefill);
 			PowerupManager.setShieldDuration(shieldDuration);
 			PowerupManager.setShiledPearls(shiledPearls);
+
+			boolean isGarbageCollectorEnabled = preferences.getBoolean(PREF_POWERUP_GARBAGE_COLLECTOR_ENABLED, false);
+			PowerupManager.setGarbageCollector(isGarbageCollectorEnabled);
+
+			if (isGarbageCollectorEnabled) {
+				int garbageCollectorPearls = preferences.getInt(PREF_POWERUP_GARBAGE_COLLECTOR_PEARLS, 0);
+				boolean isKillinSpreeEnabled = preferences.getBoolean(PREF_POWERUP_KILLING_SPREE_ENABLED, false);
+				int crystalsPerKill = preferences.getInt(PREF_CRYSTAL_EXTRACTOR_CRYSTALS, 0);
+				int monstersForCrystal = preferences.getInt(PREF_CRYSTAL_EXTRACTRO_MONSTERS, 0);
+				PowerupManager.setMonsterValue(garbageCollectorPearls);
+				PowerupManager.setCrystalsPerKill(crystalsPerKill);
+				PowerupManager.setKillsForCrystal(monstersForCrystal);
+				PowerupManager.setKillingSpreeEnabled(isKillinSpreeEnabled);
+
+				if (isKillinSpreeEnabled) {
+					float killingSpreeMultiplier = preferences.getFloat(PREF_POWERUP_KILLING_SPREE_VALUE, 0);
+					PowerupManager.setKillingSpreeBonus(killingSpreeMultiplier);
+				}
+			}
+
 		} catch (Exception e) {
 			Log.e("SharedPreferenceManager: Unexpected exception caught while loading powerups");
 		}
@@ -164,6 +191,18 @@ public class SharedPreferenceManager {
 
 			edit.putFloat(PREF_POWERUP_SHIELD_DURATION_UPGRADE, PowerupManager.getShieldDuration());
 			edit.putInt(PREF_POWERUP_SHIELD_PEARLS_UPGRADE, PowerupManager.getShiledPearls());
+			edit.putBoolean(PREF_POWERUP_GARBAGE_COLLECTOR_ENABLED, PowerupManager.hasGarbageCollector());
+
+			if (PowerupManager.hasGarbageCollector()) {
+				edit.putInt(PREF_POWERUP_GARBAGE_COLLECTOR_PEARLS, PowerupManager.getPearlsPerKill());
+				edit.putInt(PREF_CRYSTAL_EXTRACTOR_CRYSTALS, PowerupManager.getCrystalsPerKill());
+				edit.putInt(PREF_CRYSTAL_EXTRACTRO_MONSTERS, PowerupManager.getKillsForCrystal());
+				edit.putBoolean(PREF_POWERUP_KILLING_SPREE_ENABLED, PowerupManager.isKillingSpreeEnabled());
+
+				if (PowerupManager.isKillingSpreeEnabled()) {
+					edit.putFloat(PREF_POWERUP_KILLING_SPREE_VALUE, PowerupManager.getKillingSpreeBonus());
+				}
+			}
 			edit.commit();
 		} catch (Exception e) {
 			Log.e("SharedPreferenceManager: Unexpected exception caught while storing powerups");

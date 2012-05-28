@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/store_toast_background"
+    android:padding="5dip" >
+
+    <TextView
+        android:id="@+id/killingSpreeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/killingSpreeText"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:text="Killing Spree"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ffff0000" />
+
+    <com.w3i.offerwall.custom.views.AdvancedTextView
+        android:id="@+id/killingSpreeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/killingSpreeTitle"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</RelativeLayout>

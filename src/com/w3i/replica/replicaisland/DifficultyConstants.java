@@ -38,4 +38,6 @@ public abstract class DifficultyConstants {
 	public abstract float getDDAStage1FuelAirRefillSpeed();
 
 	public abstract float getDDAStage2FuelAirRefillSpeed();
+
+	public abstract float getAdditionalFuelAmount();
 }

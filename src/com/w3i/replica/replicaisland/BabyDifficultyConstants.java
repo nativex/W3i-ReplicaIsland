@@ -37,12 +37,12 @@ public class BabyDifficultyConstants extends DifficultyConstants {
 
 	@Override
 	public float getFuelAirRefillSpeed() {
-		return FUEL_AIR_REFILL_SPEED + PowerupManager.getJetpackAirRefill();
+		return FUEL_AIR_REFILL_SPEED * (1 + PowerupManager.getJetpackAirRefill());
 	}
 
 	@Override
 	public float getFuelGroundRefillSpeed() {
-		return FUEL_GROUND_REFILL_SPEED + PowerupManager.getJetpackGroundRefill();
+		return FUEL_GROUND_REFILL_SPEED * (1 + PowerupManager.getJetpackGroundRefill());
 	}
 
 	@Override
@@ -82,12 +82,17 @@ public class BabyDifficultyConstants extends DifficultyConstants {
 
 	@Override
 	public float getDDAStage1FuelAirRefillSpeed() {
-		return DDA_STAGE_1_FUEL_AIR_REFILL_SPEED + PowerupManager.getJetpackAirRefill();
+		return DDA_STAGE_1_FUEL_AIR_REFILL_SPEED * (1 + PowerupManager.getJetpackAirRefill());
 	}
 
 	@Override
 	public float getDDAStage2FuelAirRefillSpeed() {
-		return DDA_STAGE_2_FUEL_AIR_REFILL_SPEED + PowerupManager.getJetpackAirRefill();
+		return DDA_STAGE_2_FUEL_AIR_REFILL_SPEED * (1 + PowerupManager.getJetpackAirRefill());
+	}
+
+	@Override
+	public float getAdditionalFuelAmount() {
+		return (1 + PowerupManager.getJetpackDuration());
 	}
 
 }

@@ -26,7 +26,6 @@ import com.w3i.gamesplatformsdk.rest.entities.Item;
 import com.w3i.offerwall.custom.views.CustomImageView;
 import com.w3i.replica.replicaisland.R;
 import com.w3i.replica.replicaisland.store.ItemManager.Availability;
-import com.w3i.replica.replicaisland.store.ItemManager.ItemInfo;
 import com.w3i.replica.replicaisland.store.VerticalTextView.ORIENTATION;
 
 public class StoreActivity extends Activity {
@@ -103,7 +102,7 @@ public class StoreActivity extends Activity {
 	private void loadStoreItems() {
 		List<Category> categories = ItemManager.getCategories();
 		for (Category c : categories) {
-			List<ItemInfo> availableItems = getAvailableCategoryItems(c);
+			List<Item> availableItems = getAvailableCategoryItems(c);
 			if ((availableItems != null) && (availableItems.size() > 0)) {
 				createCategory(availableItems, c);
 			}
@@ -111,12 +110,12 @@ public class StoreActivity extends Activity {
 	}
 
 	private void loadHistoryItems() {
-		List<ItemInfo> items = ItemManager.getPurchasedItems();
+		List<Item> items = ItemManager.getPurchasedItems();
 		if (items == null) {
 			return;
 		}
-		for (ItemInfo itemInfo : items) {
-			createHistoryItem(itemInfo.getItem());
+		for (Item itemInfo : items) {
+			createHistoryItem(itemInfo);
 		}
 	}
 
@@ -132,7 +131,7 @@ public class StoreActivity extends Activity {
 	}
 
 	private void createCategory(
-			List<ItemInfo> items,
+			List<Item> items,
 			Category category) {
 		if (categoryBlocks == null) {
 			categoryBlocks = new ArrayList<StoreActivity.CategoryBlock>();
@@ -169,15 +168,24 @@ public class StoreActivity extends Activity {
 	}
 
 	private void release() {
-		for (CategoryBlock c : categoryBlocks) {
-			c.release();
+		if (categoryBlocks != null) {
+			for (CategoryBlock c : categoryBlocks) {
+				c.release();
+			}
 		}
-		categoryBlocks.clear();
+		if (historyItems != null) {
+			for (HistoryItem item : historyItems) {
+				item.release();
+			}
+			historyItems.clear();
+		}
+		historyList.setAdapter(null);
+		adapter.release();
 	}
 
 	private void setFunds() {
 		try {
-			View fundsLayout = findViewById(R.id.fundsLayout);
+			View fundsLayout = findViewById(R.id.storeFunds);
 			TextView pearls = (TextView) fundsLayout.findViewById(R.id.fundsPearlsQuantity);
 			TextView crystals = (TextView) fundsLayout.findViewById(R.id.fundsCrystalQuantity);
 
@@ -211,24 +219,23 @@ public class StoreActivity extends Activity {
 		return dialog;
 	}
 
-	private List<ItemInfo> getAvailableCategoryItems(
+	private List<Item> getAvailableCategoryItems(
 			Category category) {
 		List<Item> items = category.getItems();
 		if (items == null) {
 			return null;
 		}
 
-		Map<Long, ItemInfo> itemsById = ItemManager.getItemsByIds();
-		if (itemsById == null) {
+		List<Item> storeItems = ItemManager.getStoreItems();
+		if (storeItems == null) {
 			return null;
 		}
 
-		List<ItemInfo> availableItems = new ArrayList<ItemManager.ItemInfo>();
+		List<Item> availableItems = new ArrayList<Item>();
 
 		for (Item item : items) {
-			ItemInfo itemInfo = itemsById.get(item.getId());
-			if (itemInfo != null) {
-				availableItems.add(itemInfo);
+			if (storeItems.contains(item)) {
+				availableItems.add(item);
 			}
 		}
 
@@ -257,6 +264,7 @@ public class StoreActivity extends Activity {
 			ItemManager.addPurchasedItem(item);
 			ReplicaIslandToast.makeStoreToast(this, item).show();
 			CategoryBlock parent = storeItem.getParent();
+			SharedPreferenceManager.storePurchasedItems();
 			storeItem.removeItemFromCategory();
 			if (parent.getItemsCount() <= 0) {
 				storeList.removeView(parent);
@@ -264,6 +272,7 @@ public class StoreActivity extends Activity {
 				categoryBlocks.remove(parent);
 			}
 			resetItemAvailability();
+			setFunds();
 			createHistoryItem(item);
 		}
 	}
@@ -340,9 +349,9 @@ public class StoreActivity extends Activity {
 		}
 
 		public void addItems(
-				List<ItemInfo> items) {
-			for (ItemInfo itemInfo : items) {
-				createStoreItem(itemInfo.getItem());
+				List<Item> items) {
+			for (Item itemInfo : items) {
+				createStoreItem(itemInfo);
 			}
 		}
 
@@ -448,9 +457,7 @@ public class StoreActivity extends Activity {
 
 		public void setAvailability() {
 			Availability itemAvailability = ItemManager.isAvailable(item);
-			if (itemAvailability.getErrorMessage() != null) {
-				setItemErrorMessage(itemAvailability.getErrorMessage());
-			}
+			setItemErrorMessage(itemAvailability.getErrorMessage());
 		}
 
 		public void setVisibility(
@@ -491,7 +498,12 @@ public class StoreActivity extends Activity {
 				String text) {
 			TextView error = (TextView) itemLayout.findViewById(R.id.itemErrorMessage);
 			if (error != null) {
-				error.setText(text);
+				if (text != null) {
+					error.setVisibility(View.VISIBLE);
+					error.setText(text);
+				} else {
+					error.setVisibility(View.GONE);
+				}
 			}
 		}
 
@@ -526,7 +538,7 @@ public class StoreActivity extends Activity {
 		public void release() {
 			CustomImageView icon = (CustomImageView) itemLayout.findViewById(R.id.itemIcon);
 			if (icon != null) {
-				icon.setImageFromInternet(null);
+				icon.setImageBitmap(null);
 			}
 			setOnClickListener(null);
 		}

@@ -51,7 +51,13 @@ public class PlayerComponent extends GameComponent {
 	private static final float TWO_GEMS_GHOST_TIME = 0.0f; // no limit.
 
 	public enum State {
-		MOVE, STOMP, HIT_REACT, DEAD, WIN, FROZEN, POST_GHOST_DELAY
+		MOVE,
+		STOMP,
+		HIT_REACT,
+		DEAD,
+		WIN,
+		FROZEN,
+		POST_GHOST_DELAY
 	}
 
 	private boolean mTouchingGround;
@@ -72,6 +78,7 @@ public class PlayerComponent extends GameComponent {
 	private DifficultyConstants mDifficultyConstants;
 	private final static DifficultyConstants sDifficultyArray[] = { new BabyDifficultyConstants(), new KidsDifficultyConstants(), new AdultsDifficultyConstants() };
 	private FadeDrawableComponent mInvincibleFader; // HACK!
+	private float mFuelAmout;
 
 	// Variables recorded for animation decisions.
 	private boolean mRocketsOn;
@@ -102,6 +109,7 @@ public class PlayerComponent extends GameComponent {
 		mDifficultyConstants = getDifficultyConstants();
 		mFuelAirRefillSpeed = mDifficultyConstants.getFuelAirRefillSpeed();
 		mInvincibleFader = null;
+		mFuelAmout = FUEL_AMOUNT * mDifficultyConstants.getAdditionalFuelAmount();
 	}
 
 	protected void move(
@@ -113,7 +121,7 @@ public class PlayerComponent extends GameComponent {
 
 		if (pool != null && input != null) {
 
-			if (mFuel < FUEL_AMOUNT) {
+			if (mFuel < mFuelAmout) {
 				if (mTouchingGround) {
 					mFuel += mDifficultyConstants.getFuelGroundRefillSpeed() * timeDelta;
 					// Log.i("Ground refill portion " + mDifficultyConstants.getFuelGroundRefillSpeed() * timeDelta);
@@ -122,8 +130,8 @@ public class PlayerComponent extends GameComponent {
 					// Log.i("Air refill portion " + mDifficultyConstants.getFuelAirRefillSpeed() * timeDelta);
 				}
 
-				if (mFuel > FUEL_AMOUNT) {
-					mFuel = FUEL_AMOUNT;
+				if (mFuel > mFuelAmout) {
+					mFuel = mFuelAmout;
 				}
 			}
 
@@ -306,7 +314,7 @@ public class PlayerComponent extends GameComponent {
 		final HudSystem hud = sSystemRegistry.hudSystem;
 		final InputGameInterface input = sSystemRegistry.inputGameInterface;
 		if (hud != null) {
-			hud.setFuelPercent(mFuel / FUEL_AMOUNT);
+			hud.setFuelPercent(mFuel / mFuelAmout);
 		}
 
 	}

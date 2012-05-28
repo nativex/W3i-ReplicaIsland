@@ -5,7 +5,6 @@ import java.util.List;
 import com.w3i.common.Log;
 import com.w3i.gamesplatformsdk.rest.entities.Attribute;
 import com.w3i.gamesplatformsdk.rest.entities.Item;
-import com.w3i.replica.replicaisland.store.ItemManager.ItemInfo;
 
 public class PowerupManager {
 
@@ -13,7 +12,8 @@ public class PowerupManager {
 
 		LIFE_POINTS_ATTRIBUTE("Life Points", lifeUpgrade),
 		BATTERY_STRENGTH_ATTRIBUTE("Battery Strength", jetpackDuration),
-		BATTERY_RECHARGE_ATTRIBUTE("Battery Recharge", jetpackGroundRefill),
+		BATTERY_RECHARGE_ATTRIBUTE("Battery Ground Recharge", jetpackGroundRefill),
+		BATTERY_RECHARGE_AIR_ATTRIBUTE("Battery Air Recharge", jetpackAirRefill),
 		SHIELD_POWER_CELLS("Power Cells Strength", shieldPearls),
 		SHIELD_STABILIZER("Stabilizer Strength", shieldDuration),
 		CRYSTALS_PER_KILL("Crystals per Kill", crystalsPerKill),
@@ -116,12 +116,27 @@ public class PowerupManager {
 		return killsForCrystal.getValue();
 	}
 
+	static void setKillsForCrystal(
+			int kills) {
+		killsForCrystal.setInt(kills);
+	}
+
 	public static int getCrystalsPerKill() {
 		return crystalsPerKill.getValue();
 	}
 
+	static void setCrystalsPerKill(
+			int crystals) {
+		crystalsPerKill.setInt(crystals);
+	}
+
 	public static float getKillingSpreeBonus() {
 		return killingSpreeBonus.getValue();
+	}
+
+	public static void setKillingSpreeBonus(
+			float bonus) {
+		killingSpreeBonus.setFloat(bonus);
 	}
 
 	static void setLifeUpgrade(
@@ -206,27 +221,27 @@ public class PowerupManager {
 			try {
 				if (ua.getAttributeName().equals(a.getName())) {
 					ua.handle(a);
-					Log.i("PowerupManager: Attribute Name: " + a.getName());
+					Log.i("PowerupManager: Attribute Name: " + a.getName() + " Attribute Value: " + a.getValue());
 					return true;
 				}
 			} catch (Exception e) {
-				Log.e("PowerupManager: Couldn't parse Life Points", e);
+				Log.e("PowerupManager: Couldn't parse " + a.getName(), e);
 			}
 		}
 		return false;
 	}
 
 	static void handleItems(
-			List<ItemInfo> items) {
+			List<Item> items) {
 		if (items != null) {
-			for (ItemInfo i : items) {
-				handleItem(i.getItem());
+			for (Item i : items) {
+				handleItem(i);
 			}
 		}
 	}
 
 	static void reloadItems(
-			List<ItemInfo> items) {
+			List<Item> items) {
 		reset();
 		handleItems(items);
 	}

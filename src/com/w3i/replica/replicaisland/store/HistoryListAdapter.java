@@ -47,6 +47,9 @@ public class HistoryListAdapter extends BaseAdapter {
 
 	public void release() {
 		if (items != null) {
+			for (ImageView image : items) {
+				image.setImageBitmap(null);
+			}
 			items.clear();
 			items = null;
 		}

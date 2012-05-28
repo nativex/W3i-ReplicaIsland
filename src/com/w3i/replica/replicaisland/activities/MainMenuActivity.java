@@ -468,6 +468,9 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		com.w3i.common.Log.i("PowerupManager: Jetpack ground upgrade - " + PowerupManager.getJetpackGroundRefill());
 		com.w3i.common.Log.i("PowerupManager: Shield duration upgrade - " + PowerupManager.getShieldDuration());
 		com.w3i.common.Log.i("PowerupManager: Shield energy upgrade - " + PowerupManager.getShiledPearls());
+		com.w3i.common.Log.i("PowerupManager: Garbage collector upgrade - " + PowerupManager.hasGarbageCollector());
+		com.w3i.common.Log.i("PowerupManager: Killing spree upgrade - " + PowerupManager.isKillingSpreeEnabled());
+
 	}
 
 	@Override

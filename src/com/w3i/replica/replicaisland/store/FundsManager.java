@@ -116,8 +116,8 @@ public class FundsManager {
 		if (PowerupManager.hasGarbageCollector()) {
 			if (PowerupManager.isKillingSpreeEnabled()) {
 				KillingSpreeDetector.recordKill();
-				float pearlsAwarder = ((float) PowerupManager.getPearlsPerKill()) * KillingSpreeDetector.getMultiplier() + 0.5f;
-				FundsManager.addPearls((int) pearlsAwarder);
+				float pearlsAwarded = ((float) PowerupManager.getPearlsPerKill()) * KillingSpreeDetector.getMultiplier() + 0.5f;
+				FundsManager.addPearls((int) pearlsAwarded);
 			} else {
 				FundsManager.addPearls(PowerupManager.getPearlsPerKill());
 			}
