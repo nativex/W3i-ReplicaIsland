@@ -3,26 +3,33 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/store_toast_background"
-    android:padding="5dip" >
+    android:padding="10dip" >
+
+    <ImageView
+        android:id="@+id/killingSpreeIcon"
+        android:layout_width="65dip"
+        android:layout_height="65dip"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/killing_spree" />
 
     <TextView
         android:id="@+id/killingSpreeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/killingSpreeText"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/killingSpreeIcon"
         android:gravity="center"
         android:text="Killing Spree"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffff0000" />
 
-    <com.w3i.offerwall.custom.views.AdvancedTextView
+    <TextView
         android:id="@+id/killingSpreeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_below="@+id/killingSpreeTitle"
+        android:layout_toRightOf="@+id/killingSpreeIcon"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 

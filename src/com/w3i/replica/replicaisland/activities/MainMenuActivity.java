@@ -31,6 +31,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -41,8 +42,6 @@ import android.widget.TextView;
 import com.w3i.advertiser.W3iAdvertiser;
 import com.w3i.offerwall.W3iCurrencyListener;
 import com.w3i.offerwall.business.Balance;
-import com.w3i.offerwall.custom.views.Banner;
-import com.w3i.offerwall.manager.BannerManager;
 import com.w3i.replica.replicaisland.DebugLog;
 import com.w3i.replica.replicaisland.LevelTree;
 import com.w3i.replica.replicaisland.MultiTouchFilter;
@@ -78,8 +77,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 
 	// Create an anonymous implementation of OnClickListener
 	private View.OnClickListener sContinueButtonListener = new View.OnClickListener() {
-		public void onClick(
-				View v) {
+		public void onClick(View v) {
 			if (!mPaused) {
 				Intent i = new Intent(getBaseContext(), AndouKun.class);
 				v.startAnimation(mButtonFlickerAnimation);
@@ -96,15 +94,13 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	private View.OnClickListener sCoinsClicked = new View.OnClickListener() {
 
 		@Override
-		public void onClick(
-				View v) {
+		public void onClick(View v) {
 			OfferwallManager.showOfferwall();
 		}
 	};
 
 	private View.OnClickListener sOptionButtonListener = new View.OnClickListener() {
-		public void onClick(
-				View v) {
+		public void onClick(View v) {
 			if (!mPaused) {
 				Intent i = new Intent(getBaseContext(), SetPreferencesActivity.class);
 
@@ -120,8 +116,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	};
 
 	private View.OnClickListener sExtrasButtonListener = new View.OnClickListener() {
-		public void onClick(
-				View v) {
+		public void onClick(View v) {
 			if (!mPaused) {
 				Intent i = new Intent(getBaseContext(), ExtrasMenuActivity.class);
 
@@ -134,8 +129,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	};
 
 	private View.OnClickListener sStartButtonListener = new View.OnClickListener() {
-		public void onClick(
-				View v) {
+		public void onClick(View v) {
 			if (!mPaused) {
 				Intent i = new Intent(getBaseContext(), DifficultyMenuActivity.class);
 				i.putExtra("newGame", true);
@@ -149,8 +143,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	};
 
 	private W3iCurrencyListener w3iCurrencyRedemptionCallback = new W3iCurrencyListener() {
-		public void onRedeem(
-				List<Balance> balances) {
+		public void onRedeem(List<Balance> balances) {
 			Log.d("com.w3i.replica.replicaisland", "currency redemption success");
 			if (balances != null && balances.size() > 0) {
 				for (Balance b : balances) {
@@ -182,8 +175,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	}
 
 	@Override
-	public void onCreate(
-			Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mainmenu);
 		mPaused = true;
@@ -239,10 +231,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		// mp.start();
 
 		doW3iInitialization();
-		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(350, FrameLayout.LayoutParams.WRAP_CONTENT);
-		FrameLayout mainLayout = (FrameLayout) findViewById(R.id.mainMenuLayout);
-		Banner banner = BannerManager.createBanner(this, params);
-		mainLayout.addView(banner);
 	}
 
 	@Override
@@ -251,7 +239,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		OfferwallManager.release();
 		GamesPlatformManager.release();
 		FundsManager.release();
-		BannerManager.release();
 		ItemManager.release();
 	}
 
@@ -271,13 +258,18 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		OfferwallManager.appWasRun();
 		OfferwallManager.setCurrencyRedemptionListener(w3iCurrencyRedemptionCallback);
 		OfferwallManager.createSession();
-		OfferwallManager.showFeaturedOffer(this);
+		// OfferwallManager.showFeaturedOffer(this);
 
 		SharedPreferenceManager.initialize(this);
 		com.w3i.common.Log.i("MainMenuActivity: Initialization of GamesPlatform begins");
 		GamesPlatformManager.initialize(this);
 		FundsManager.loadFunds();
 		PowerupManager.loadPowerups();
+
+		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.FILL_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+		params.gravity = Gravity.BOTTOM;
+		FrameLayout mainLayout = (FrameLayout) findViewById(R.id.mainMenuLayout);
+		OfferwallManager.showFeaturedOfferBanner(mainLayout, params);
 
 		Log.d("com.w3i.replica.replicaisland", "end");
 
@@ -286,8 +278,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 
 	}
 
-	public void onActionComplete(
-			Boolean success) {
+	public void onActionComplete(Boolean success) {
 
 		if (success == true) {
 			Log.d("com.w3i.replica.replicaisland", "awr success");
@@ -378,14 +369,14 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 				// Useful reference:
 				// http://en.wikipedia.org/wiki/List_of_Android_devices
 				if (Build.PRODUCT.contains("morrison") || // Motorola Cliq/Dext
-						Build.MODEL.contains("Pulse") || // Huawei Pulse
-						Build.MODEL.contains("U8220") || // Huawei Pulse
-						Build.MODEL.contains("U8230") || // Huawei U8230
-						Build.MODEL.contains("MB300") || // Motorola Backflip
-						Build.MODEL.contains("MB501") || // Motorola Quench /
-															// Cliq XT
-						Build.MODEL.contains("Behold+II")) { // Samsung Behold
-																// II
+				Build.MODEL.contains("Pulse") || // Huawei Pulse
+				Build.MODEL.contains("U8220") || // Huawei Pulse
+				Build.MODEL.contains("U8230") || // Huawei U8230
+				Build.MODEL.contains("MB300") || // Motorola Backflip
+				Build.MODEL.contains("MB501") || // Motorola Quench /
+													// Cliq XT
+				Build.MODEL.contains("Behold+II")) { // Samsung Behold
+														// II
 					// These are all models that users have complained about.
 					// They likely use
 					// the same buggy QTC graphics driver. Turn on Safe Mode by
@@ -470,20 +461,16 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		com.w3i.common.Log.i("PowerupManager: Shield energy upgrade - " + PowerupManager.getShiledPearls());
 		com.w3i.common.Log.i("PowerupManager: Garbage collector upgrade - " + PowerupManager.hasGarbageCollector());
 		com.w3i.common.Log.i("PowerupManager: Killing spree upgrade - " + PowerupManager.isKillingSpreeEnabled());
-
 	}
 
 	@Override
-	protected Dialog onCreateDialog(
-			int id) {
+	protected Dialog onCreateDialog(int id) {
 		Dialog dialog;
 		if (id == WHATS_NEW_DIALOG) {
 			dialog = new AlertDialog.Builder(this).setTitle(R.string.whats_new_dialog_title).setPositiveButton(R.string.whats_new_dialog_ok, null).setMessage(R.string.whats_new_dialog_message).create();
 		} else if (id == TILT_TO_SCREEN_CONTROLS_DIALOG) {
 			dialog = new AlertDialog.Builder(this).setTitle(R.string.onscreen_tilt_dialog_title).setPositiveButton(R.string.onscreen_tilt_dialog_ok, new DialogInterface.OnClickListener() {
-				public void onClick(
-						DialogInterface dialog,
-						int whichButton) {
+				public void onClick(DialogInterface dialog, int whichButton) {
 					SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
 					SharedPreferences.Editor editor = prefs.edit();
 					editor.putBoolean(PreferenceConstants.PREFERENCE_SCREEN_CONTROLS, true);
@@ -495,9 +482,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 			String message = String.format(messageFormat, mSelectedControlsString);
 			CharSequence sytledMessage = Html.fromHtml(message); // lame.
 			dialog = new AlertDialog.Builder(this).setTitle(R.string.control_setup_dialog_title).setPositiveButton(R.string.control_setup_dialog_ok, null).setNegativeButton(R.string.control_setup_dialog_change, new DialogInterface.OnClickListener() {
-				public void onClick(
-						DialogInterface dialog,
-						int whichButton) {
+				public void onClick(DialogInterface dialog, int whichButton) {
 					Intent i = new Intent(getBaseContext(), SetPreferencesActivity.class);
 					i.putExtra("controlConfig", true);
 					startActivity(i);
@@ -516,8 +501,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 			mIntent = intent;
 		}
 
-		public void onAnimationEnd(
-				Animation animation) {
+		public void onAnimationEnd(Animation animation) {
 
 			startActivity(mIntent);
 
@@ -532,14 +516,12 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 			}
 		}
 
-		public void onAnimationRepeat(
-				Animation animation) {
+		public void onAnimationRepeat(Animation animation) {
 			// TODO Auto-generated method stub
 
 		}
 
-		public void onAnimationStart(
-				Animation animation) {
+		public void onAnimationStart(Animation animation) {
 			// TODO Auto-generated method stub
 
 		}

@@ -2,13 +2,14 @@ package com.w3i.replica.replicaisland.store;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.Html;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.w3i.gamesplatformsdk.rest.entities.Item;
-import com.w3i.offerwall.custom.views.AdvancedTextView;
 import com.w3i.offerwall.custom.views.CustomImageView;
 import com.w3i.replica.replicaisland.R;
 
@@ -19,9 +20,7 @@ public class ReplicaIslandToast {
 	public static final int KILLING_SPREE_KILLS_SIZE = 16;
 	public static final int KILLING_SPREE_KILLS_COLOR = Color.BLUE;
 
-	public static Toast makeStoreToast(
-			Context context,
-			Item item) {
+	public static Toast makeStoreToast(Context context, Item item) {
 		Toast toast = new Toast(context);
 
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -36,36 +35,18 @@ public class ReplicaIslandToast {
 		return toast;
 	}
 
-	public static Toast makeKillingSpreeToast(
-			Context context,
-			int kills,
-			int pearlsEarned) {
+	public static Toast makeKillingSpreeToast(Context context, int kills, int pearlsEarned) {
 		Toast toast = new Toast(context);
 
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View toastLayout = inflater.inflate(R.layout.toast_killing_spree, null);
 		toast.setView(toastLayout);
-		AdvancedTextView killingSpreeText = (AdvancedTextView) toastLayout.findViewById(R.id.killingSpreeText);
+		TextView killingSpreeText = (TextView) toastLayout.findViewById(R.id.killingSpreeText);
+		String formattedKillingSpreeString = "<font color=orange>" + kills + "<font/><font color=yellow> enemies killed<font/>";
+		killingSpreeText.setText(Html.fromHtml(formattedKillingSpreeString));
 
-		AdvancedTextView.Text text = killingSpreeText.new Text();
-		text.setText("You destroyed ");
-		text.setColor(KILLING_SPREE_TEXT_COLOR);
-		text.setSize(KILLING_SPREE_TEXT_SIZE);
-		killingSpreeText.addText(text);
-
-		text = killingSpreeText.new Text();
-		text.setText(Integer.toString(kills));
-		text.setColor(KILLING_SPREE_KILLS_COLOR);
-		text.setSize(KILLING_SPREE_KILLS_SIZE);
-		killingSpreeText.addText(text);
-
-		text = killingSpreeText.new Text();
-		text.setText(" enemies in a row(" + pearlsEarned + ").");
-		text.setColor(KILLING_SPREE_TEXT_COLOR);
-		text.setSize(KILLING_SPREE_TEXT_SIZE);
-		killingSpreeText.addText(text);
-
-		toast.setDuration(Toast.LENGTH_SHORT);
+		toast.setDuration(Toast.LENGTH_LONG);
+		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 10);
 		return toast;
 	}
 }
