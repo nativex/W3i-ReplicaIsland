@@ -294,7 +294,8 @@
 </group>
 
 <group>
-	<level resource="@raw/level_4_9_underground" title = "@string/level_4_9_underground" time = "@string/level_4_9_time">
+	<level resource="
+" title = "@string/level_4_9_underground" time = "@string/level_4_9_time">
 	<dialog>
 		<character1 resource ="@xml/level_4_9_dialog_wanda"/>
 	</dialog>
