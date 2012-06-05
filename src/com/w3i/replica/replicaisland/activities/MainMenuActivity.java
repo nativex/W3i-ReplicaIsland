@@ -31,9 +31,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -271,12 +273,12 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		FundsManager.loadFunds();
 		PowerupManager.loadPowerups();
 
-		// FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.FILL_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-		// params.gravity = Gravity.BOTTOM;
-		// FrameLayout mainLayout = (FrameLayout) findViewById(R.id.mainMenuLayout);
-		// OfferwallManager.showFeaturedOfferBanner(mainLayout, params);
+		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.FILL_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+		params.gravity = Gravity.BOTTOM;
+		FrameLayout mainLayout = (FrameLayout) findViewById(R.id.mainMenuLayout);
+		OfferwallManager.showFeaturedOfferBanner(mainLayout, params);
 
-		OfferwallManager.showFeaturedOffer(this);
+		// OfferwallManager.showFeaturedOffer(this);
 
 		Log.d("com.w3i.replica.replicaisland", "end");
 
