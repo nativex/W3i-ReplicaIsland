@@ -263,6 +263,9 @@ public class PlayerComponent extends GameComponent {
 			}
 		}
 
+		final HudSystem hud = sSystemRegistry.hudSystem;
+		final InputGameInterface input = sSystemRegistry.inputGameInterface;
+
 		// Watch for hit reactions or death interrupting the state machine.
 		if (mState != State.DEAD && mState != State.WIN) {
 			if (parentObject.life <= 0) {
@@ -283,6 +286,7 @@ public class PlayerComponent extends GameComponent {
 					}
 				}
 			}
+			hud.setLifes(parentObject.life);
 		}
 
 		switch (mState) {
@@ -311,8 +315,6 @@ public class PlayerComponent extends GameComponent {
 			break;
 		}
 
-		final HudSystem hud = sSystemRegistry.hudSystem;
-		final InputGameInterface input = sSystemRegistry.inputGameInterface;
 		if (hud != null) {
 			hud.setFuelPercent(mFuel / mFuelAmout);
 		}

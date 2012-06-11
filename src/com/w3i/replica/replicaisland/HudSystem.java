@@ -38,6 +38,7 @@ public class HudSystem extends BaseObject {
 	private static final float FLY_BUTTON_WIDTH = 128;
 	private static final float STOMP_BUTTON_WIDTH = FLY_BUTTON_WIDTH * STOMP_BUTTON_SCALE;
 	private static final float MOVEMENT_SLIDER_WIDTH = 128;
+	private static final int MAX_LIFES_SHOWN = 3;
 
 	private DrawableBitmap mFuelDrawable;
 	private DrawableBitmap mFuelBackgroundDrawable;
@@ -78,6 +79,10 @@ public class HudSystem extends BaseObject {
 	private DrawableBitmap mRubyDrawable;
 	private DrawableBitmap mCoinDrawable;
 	private DrawableBitmap mLifetimeCoinDrawable;
+	private DrawableBitmap mLifeDrawable;
+
+	private int mLifesAvailable;
+	private int mLifesTotal;
 
 	private int mCoinCount;
 	private int mRubyCount;
@@ -88,9 +93,11 @@ public class HudSystem extends BaseObject {
 	private int[] mCoinDigits;
 	private int[] mLifetimeCoinDigits;
 	private int[] mRubyDigits;
+	private int[] mLifesDigits;
 	private boolean mCoinDigitsChanged;
 	private boolean mLifetimeCoinDigitsChanged;
 	private boolean mRubyDigitsChanged;
+	private boolean mLifeDigitsChanged;
 
 	private int mFPS;
 	private Vector2 mFPSLocation;
@@ -111,6 +118,7 @@ public class HudSystem extends BaseObject {
 		mFPSLocation = new Vector2();
 		mDigitDrawables = new DrawableBitmap[10];
 		mCoinDigits = new int[MAX_DIGITS];
+		mLifesDigits = new int[MAX_DIGITS];
 		mLifetimeCoinDigits = new int[MAX_DIGITS];
 		mRubyDigits = new int[MAX_DIGITS];
 		mFPSDigits = new int[MAX_DIGITS];
@@ -124,6 +132,7 @@ public class HudSystem extends BaseObject {
 	public void reset() {
 		mFuelDrawable = null;
 		mFadeTexture = null;
+		mLifeDrawable = null;
 		mFuelPercent = 1.0f;
 		mFuelTargetPercent = 1.0f;
 		mFading = false;
@@ -144,14 +153,20 @@ public class HudSystem extends BaseObject {
 		mLifetimeCoinDigits[1] = -1;
 		mLifetimeCoinDigitsChanged = true;
 
+		mLifesTotal = 0;
+		mLifesAvailable = 0;
+
 		mCoinCount = 0;
 		mRubyCount = 0;
 		mCoinDigits[0] = 0;
 		mCoinDigits[1] = -1;
 		mRubyDigits[0] = 0;
 		mRubyDigits[1] = -1;
+		mLifesDigits[0] = 0;
+		mLifesDigits[0] = -1;
 		mCoinDigitsChanged = true;
 		mRubyDigitsChanged = true;
+		mLifeDigitsChanged = true;
 		mFPS = 0;
 		mFPSDigits[0] = 0;
 		mFPSDigits[1] = -1;
@@ -185,9 +200,22 @@ public class HudSystem extends BaseObject {
 		mFuelBackgroundDrawable = background;
 	}
 
+	public void setLifes(
+			int lifesAvailable) {
+		if (mLifesAvailable != lifesAvailable) {
+			mLifeDigitsChanged = true;
+		}
+		mLifesAvailable = lifesAvailable;
+	}
+
 	public void setFadeTexture(
 			Texture texture) {
 		mFadeTexture = texture;
+	}
+
+	public void setLifeDrawable(
+			DrawableBitmap iconLife) {
+		mLifeDrawable = iconLife;
 	}
 
 	public void setButtonDrawables(
@@ -344,6 +372,41 @@ public class HudSystem extends BaseObject {
 					}
 				}
 
+				pool.release(location);
+			}
+
+			if ((mLifesAvailable > 0) && (mLifeDrawable != null) && (render != null) && (factory != null) && (params != null)) {
+				if (mLifeDrawable.getWidth() == 0) {
+					Texture text = mLifeDrawable.getTexture();
+					mLifeDrawable.resize(text.width, text.height);
+				}
+
+				final int fuelBarHeight = mFuelDrawable.getHeight();
+				Vector2 location = pool.allocate();
+
+				if (mLifesAvailable <= MAX_LIFES_SHOWN) {
+
+					int x = FUEL_BAR_EDGE_PADDING;
+					int y = params.gameHeight - fuelBarHeight - mLifeDrawable.getHeight() - FUEL_BAR_EDGE_PADDING;
+					final int dx = mLifeDrawable.getWidth();
+
+					for (int i = 0; i < mLifesAvailable; i++) {
+						location.set(x, y);
+						render.scheduleForDraw(mLifeDrawable, location, SortConstants.HUD, false);
+						x += dx;
+					}
+				} else {
+					location.set(FUEL_BAR_EDGE_PADDING, params.gameHeight - fuelBarHeight - mLifeDrawable.getHeight() - FUEL_BAR_EDGE_PADDING);
+					render.scheduleForDraw(mLifeDrawable, location, SortConstants.HUD, false);
+
+					if (mLifeDigitsChanged) {
+						intToDigitArray(mLifesAvailable, mLifesDigits);
+						mLifeDigitsChanged = false;
+					}
+					final float offset = mLifeDrawable.getWidth() * 0.75f;
+					location.x += offset;
+					drawNumber(location, mLifesDigits, true);
+				}
 				pool.release(location);
 			}
 
