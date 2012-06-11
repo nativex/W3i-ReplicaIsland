@@ -26,7 +26,6 @@ import com.w3i.gamesplatformsdk.rest.entities.Item;
 import com.w3i.offerwall.custom.views.CustomImageView;
 import com.w3i.replica.replicaisland.R;
 import com.w3i.replica.replicaisland.store.ItemManager.Availability;
-import com.w3i.replica.replicaisland.store.VerticalTextView.ORIENTATION;
 
 public class StoreActivity extends Activity {
 	private LinearLayout storeList;
@@ -89,7 +88,6 @@ public class StoreActivity extends Activity {
 		pearls.setTextColor(Color.WHITE);
 		crystals.setTextColor(Color.RED);
 
-		setupScrollerTextView();
 		loadItems();
 		setFunds();
 	}
@@ -144,16 +142,6 @@ public class StoreActivity extends Activity {
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 		block.setLayoutParams(params);
 		storeList.addView(block);
-	}
-
-	private void setupScrollerTextView() {
-		VerticalTextView v = (VerticalTextView) findViewById(R.id.storeScrollHistory);
-		v.setOrientation(ORIENTATION.LEFT);
-		v.setText("Store");
-
-		v = (VerticalTextView) findViewById(R.id.storeScrollStore);
-		v.setOrientation(ORIENTATION.RIGHT);
-		v.setText("Purchased Items");
 	}
 
 	@Override

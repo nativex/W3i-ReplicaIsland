@@ -1,36 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:background="@drawable/ui_store_background" >
 
-    <TextView
-        android:id="@+id/storeHistoryTitle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dip"
-        android:gravity="center"
-        android:text="@string/store_history_title"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <ImageView
+        android:id="@+id/historyToStoreImage"
+        android:layout_width="wrap_content"
+        android:layout_height="50dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dip"
+        android:layout_marginTop="5dip"
+        android:background="@drawable/ui_store_to_store" />
+
+    <ImageView
+        android:id="@+id/historyTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="50dip"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="5dip"
+        android:layout_marginTop="5dip"
+        android:background="@drawable/ui_store_title" />
 
     <GridView
         android:id="@+id/historyItems"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/storeHistoryTitle"
+        android:layout_below="@+id/historyTitle"
         android:layout_margin="5dip"
-        android:layout_toRightOf="@+id/storeScrollHistory"
+        android:background="@drawable/ui_store_overlay"
         android:listSelector="#00000000"
         android:numColumns="4"
+        android:padding="5dip"
         android:stretchMode="columnWidth" >
     </GridView>
-
-    <com.w3i.replica.replicaisland.store.VerticalTextView
-        android:id="@+id/storeScrollHistory"
-        style="@style/StoreScrollerStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true" />
 
 </RelativeLayout>

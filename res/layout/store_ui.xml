@@ -1,26 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:background="@drawable/ui_store_background" >
 
-    <TextView
+    <ImageView
+        android:id="@+id/storeToHistoryImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="5dip"
+        android:layout_marginTop="5dip"
+        android:background="@drawable/ui_store_to_store" />
+
+    <ImageView
         android:id="@+id/storeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_margin="5dip"
-        android:layout_toLeftOf="@+id/storeFunds"
-        android:gravity="center"
-        android:text="@string/store_title"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dip"
+        android:layout_marginTop="5dip"
+        android:background="@drawable/ui_store_to_store" />
+
+    <include
+        android:id="@+id/storeFunds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="10dip"
+        layout="@layout/coin_layout" />
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/storeTitle"
         android:layout_margin="5dip"
-        android:layout_toLeftOf="@+id/storeScrollStore" >
+        android:background="@drawable/ui_store_overlay" >
 
         <LinearLayout
             android:id="@+id/storeItemsList"
@@ -28,22 +47,5 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" />
     </ScrollView>
-
-    <com.w3i.replica.replicaisland.store.VerticalTextView
-        android:id="@+id/storeScrollStore"
-        style="@style/StoreScrollerStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true" />
-
-    <include
-        android:id="@+id/storeFunds"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_margin="10dip"
-        android:layout_toLeftOf="@+id/storeScrollStore"
-        layout="@layout/coin_layout" />
 
 </RelativeLayout>
