@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.egoclean.android.widget.flinger.ViewFlinger;
 import com.w3i.gamesplatformsdk.Log;
 import com.w3i.gamesplatformsdk.rest.entities.Category;
 import com.w3i.gamesplatformsdk.rest.entities.Currency;
@@ -34,6 +36,7 @@ public class StoreActivity extends Activity {
 	private List<CategoryBlock> categoryBlocks;
 	private List<HistoryItem> historyItems;
 	private Item selectedHistoryItem = null;
+	private ViewFlinger flinger;
 
 	private AdapterView.OnItemClickListener onHistoryItemClicked = new AdapterView.OnItemClickListener() {
 
@@ -58,12 +61,37 @@ public class StoreActivity extends Activity {
 		}
 	};
 
+	private View.OnClickListener onToStoreClicked = new View.OnClickListener() {
+
+		@Override
+		public void onClick(
+				View v) {
+			if (flinger != null) {
+				flinger.scrollLeft();
+			}
+		}
+	};
+
+	private View.OnClickListener onToHistoryClicked = new View.OnClickListener() {
+
+		@Override
+		public void onClick(
+				View v) {
+			if (flinger != null) {
+				flinger.scrollRight();
+			}
+		}
+	};
+
 	public static final int DEFAULT_CATEGORY_BACKGROUND_COLOR = Color.DKGRAY;
 	public static final int DEFAULT_CATEGORY_TEXT_COLOR = Color.WHITE;
 	public static final int DEFAULT_PRICE_PEARLS_COLOR = Color.WHITE;
 	public static final int DEFAULT_PRICE_CRYSTALS_COLOR = Color.RED;
+	public static final String FONT_ITEM_NAME = "BEATSVIL.TTF";
 
 	private static final int DIALOG_INFO_HISTORY = 233;
+
+	private Typeface fontItemName;
 
 	@Override
 	protected void onCreate(
@@ -71,6 +99,12 @@ public class StoreActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.store_layout);
 
+		fontItemName = Typeface.createFromAsset(getAssets(), "fonts/" + FONT_ITEM_NAME);
+		flinger = (ViewFlinger) findViewById(R.id.storeFlinger);
+		View toStore = findViewById(R.id.historyToStoreImage);
+		toStore.setOnClickListener(onToStoreClicked);
+		View toHistory = findViewById(R.id.storeToHistoryImage);
+		toHistory.setOnClickListener(onToHistoryClicked);
 		storeList = (LinearLayout) findViewById(R.id.storeItemsList);
 		historyList = (GridView) findViewById(R.id.historyItems);
 		if (storeList == null) {
@@ -139,9 +173,7 @@ public class StoreActivity extends Activity {
 		block.addItems(items);
 		categoryBlocks.add(block);
 
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-		block.setLayoutParams(params);
-		storeList.addView(block);
+		storeList.addView(block.getCategoryBlock());
 	}
 
 	@Override
@@ -195,14 +227,12 @@ public class StoreActivity extends Activity {
 			}
 			ReplicaInfoDialog infoDialog = new ReplicaInfoDialog(this);
 			infoDialog.setTitle(selectedHistoryItem.getDisplayName());
-			infoDialog.setButtonText("Ok");
 			infoDialog.setIcon(selectedHistoryItem.getStoreImageUrl());
 			infoDialog.setDescripton(selectedHistoryItem.getDescription());
 			infoDialog.setButtonListener(onHistoryCloseClicked);
 			infoDialog.setCloseListener(onHistoryCloseClicked);
 			dialog = infoDialog;
 			break;
-
 		}
 		return dialog;
 	}
@@ -255,7 +285,7 @@ public class StoreActivity extends Activity {
 			SharedPreferenceManager.storePurchasedItems();
 			storeItem.removeItemFromCategory();
 			if (parent.getItemsCount() <= 0) {
-				storeList.removeView(parent);
+				storeList.removeView(parent.getCategoryBlock());
 				parent.release();
 				categoryBlocks.remove(parent);
 			}
@@ -271,11 +301,12 @@ public class StoreActivity extends Activity {
 		}
 	}
 
-	public class CategoryBlock extends LinearLayout {
+	public class CategoryBlock {
 		private ArrayList<StoreItem> items;
 		private TextView categoryName;
 		private Category category;
 		private boolean collapsed = true;
+		private LinearLayout categoryBlock;
 
 		private View.OnClickListener onCategoryNameClick = new View.OnClickListener() {
 
@@ -290,11 +321,6 @@ public class StoreActivity extends Activity {
 			}
 		};
 
-		public CategoryBlock(Context context, AttributeSet attrs) {
-			super(context, attrs);
-			init();
-		}
-
 		public void resetItemAvailability() {
 			for (StoreItem item : items) {
 				item.setAvailability();
@@ -302,27 +328,22 @@ public class StoreActivity extends Activity {
 		}
 
 		public CategoryBlock(Context context) {
-			super(context);
-			init();
+			init(context);
 		}
 
-		private void init() {
-			setOrientation(VERTICAL);
+		private void init(
+				Context context) {
+			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			categoryBlock = (LinearLayout) inflater.inflate(R.layout.ui_store_list_category, null);
 
-			categoryName = new TextView(getContext());
-			categoryName.setBackgroundColor(DEFAULT_CATEGORY_BACKGROUND_COLOR);
-			categoryName.setTextColor(DEFAULT_CATEGORY_TEXT_COLOR);
-
-			LayoutParams params = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-			categoryName.setLayoutParams(params);
-
-			categoryName.setPadding(10, 10, 10, 10);
-			categoryName.setMinHeight(50);
+			categoryName = (TextView) categoryBlock.findViewById(R.id.storeCategoryName);
 			categoryName.setOnClickListener(onCategoryNameClick);
 
-			addView(categoryName);
-
 			items = new ArrayList<StoreActivity.StoreItem>();
+		}
+
+		public LinearLayout getCategoryBlock() {
+			return categoryBlock;
 		}
 
 		public int getItemsCount() {
@@ -345,7 +366,7 @@ public class StoreActivity extends Activity {
 
 		private void removeItem(
 				StoreItem item) {
-			removeView(item.getItemLayout());
+			categoryBlock.removeView(item.getItemLayout());
 			item.release();
 			items.remove(item);
 		}
@@ -360,7 +381,7 @@ public class StoreActivity extends Activity {
 			itemLayout.setOnClickListener(onStoreItemClickListener);
 			storeItem.setParent(this);
 
-			addView(itemLayout);
+			categoryBlock.addView(itemLayout);
 			items.add(storeItem);
 		}
 
@@ -383,7 +404,7 @@ public class StoreActivity extends Activity {
 				item.release();
 			}
 			items.clear();
-			removeAllViews();
+			categoryBlock.removeAllViews();
 		}
 	}
 
@@ -478,6 +499,7 @@ public class StoreActivity extends Activity {
 				String text) {
 			TextView name = (TextView) itemLayout.findViewById(R.id.itemName);
 			if (name != null) {
+				name.setTypeface(fontItemName);
 				name.setText(text);
 			}
 		}

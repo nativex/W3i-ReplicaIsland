@@ -27,7 +27,6 @@ import com.w3i.replica.replicaisland.store.StoreActivity;
 public class ExtrasMenuActivity extends Activity {
 	private static final String DIALOG_STORE_NOT_READY_TITLE = "Warning";
 	private static final String DIALOG_STORE_NOT_READY_MESSAGE = "The store is not ready or is unavailable.\nPlease try again later.";
-	private static final String DIALOG_STORE_NOT_READY_BUTON = "Ok";
 	private View mLinearModeButton;
 	private View mLevelSelectButton;
 	private View mControlsButton;
@@ -200,7 +199,6 @@ public class ExtrasMenuActivity extends Activity {
 			infoDialog.setTitle(DIALOG_STORE_NOT_READY_TITLE);
 			infoDialog.setDescripton(DIALOG_STORE_NOT_READY_MESSAGE);
 			infoDialog.setIcon(android.R.drawable.ic_dialog_alert);
-			infoDialog.setButtonText(DIALOG_STORE_NOT_READY_BUTON);
 			dialog = infoDialog;
 		}
 		return dialog;

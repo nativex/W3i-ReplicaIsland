@@ -366,6 +366,7 @@ public class PlayerComponent extends GameComponent {
 						}
 					}
 				}
+				// TODO: Anton - Laser beam can be added here.
 			} else if (!attackButton.getPressed()) {
 				mGhostChargeTime = 0.0f;
 			}

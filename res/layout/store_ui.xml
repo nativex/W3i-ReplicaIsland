@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/storeToHistoryImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dip"
+        android:layout_height="40dip"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="5dip"
@@ -17,21 +17,30 @@
     <ImageView
         android:id="@+id/storeTitle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dip"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="5dip"
         android:layout_marginTop="5dip"
-        android:background="@drawable/ui_store_to_store" />
+        android:background="@drawable/ui_store_title" />
 
-    <include
-        android:id="@+id/storeFunds"
+    <LinearLayout
+        android:id="@+id/storeCoinsHolder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="10dip"
-        layout="@layout/coin_layout" />
+        android:layout_toLeftOf="@+id/storeToHistoryImage"
+        android:layout_toRightOf="@+id/storeTitle"
+        android:gravity="center" >
+
+        <include
+            android:id="@+id/storeFunds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="10dip"
+            layout="@layout/coin_layout" />
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="fill_parent"

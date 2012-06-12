@@ -76,13 +76,12 @@
 
     <Button
         android:id="@+id/infoDialogButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dip"
+        android:layout_height="40dip"
         android:layout_below="@+id/infoDialogItemLayout"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dip"
         android:background="@drawable/info_dialog_button"
-        android:minWidth="150dip"
         android:textColor="@android:color/white" />
 
 </RelativeLayout>
