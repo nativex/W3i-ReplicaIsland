@@ -697,10 +697,21 @@ public class GameObjectFactory extends BaseObject {
 			pressAndCollectVolume.add(pressCollisionVolume);
 
 			SpriteAnimation idle = new SpriteAnimation(PlayerAnimations.IDLE.ordinal(), 1);
-			idle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_stand), 1.0f, pressAndCollectVolume, basicVulnerabilityVolume));
+			idle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_stand_01), 1.0f, pressAndCollectVolume, basicVulnerabilityVolume));
 
-			SpriteAnimation angle = new SpriteAnimation(PlayerAnimations.MOVE.ordinal(), 1);
-			angle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_diag01), 0.0416f, pressAndCollectVolume, basicVulnerabilityVolume));
+			SpriteAnimation angle = new SpriteAnimation(PlayerAnimations.MOVE.ordinal(), 10);
+			// angle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_diag01), 0.0416f, pressAndCollectVolume, basicVulnerabilityVolume));
+			angle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_walk_01), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
+			angle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_walk_02), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
+			angle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_walk_03), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
+			angle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_walk_04), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
+			angle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_walk_05), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
+			angle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_walk_06), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
+			angle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_walk_07), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
+			angle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_walk_08), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
+			angle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_walk_09), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
+			angle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_walk_10), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
+			angle.setLoop(true);
 
 			SpriteAnimation extremeAngle = new SpriteAnimation(PlayerAnimations.MOVE_FAST.ordinal(), 1);
 			extremeAngle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_diagmore01), 0.0416f, pressAndCollectVolume, basicVulnerabilityVolume));
@@ -719,6 +730,9 @@ public class GameObjectFactory extends BaseObject {
 			boostExtremeAngle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_diagmore02), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
 			boostExtremeAngle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_diagmore03), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
 			boostExtremeAngle.setLoop(true);
+
+			SpriteAnimation moveAir = new SpriteAnimation(PlayerAnimations.MOVE_AIR.ordinal(), 1);
+			moveAir.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_stand_01), 1.0f, pressAndCollectVolume, basicVulnerabilityVolume));
 
 			FixedSizeArray<CollisionVolume> stompAttackVolume = new FixedSizeArray<CollisionVolume>(3);
 			stompAttackVolume.add(new AABoxCollisionVolume(16, -5.0f, 32, 37, HitType.HIT));
@@ -772,6 +786,7 @@ public class GameObjectFactory extends BaseObject {
 			staticData.add(hitReactAnim);
 			staticData.add(deathAnim);
 			staticData.add(frozenAnim);
+			staticData.add(moveAir);
 
 			setStaticData(GameObjectType.PLAYER, staticData);
 		}

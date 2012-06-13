@@ -117,8 +117,8 @@ public class StoreActivity extends Activity {
 		historyList.setAdapter(adapter);
 		historyList.setOnItemClickListener(onHistoryItemClicked);
 
-		TextView pearls = (TextView) findViewById(R.id.fundsPearlsQuantity);
-		TextView crystals = (TextView) findViewById(R.id.fundsCrystalQuantity);
+		TextView pearls = (TextView) findViewById(R.id.storeFundsPearlsQuantity);
+		TextView crystals = (TextView) findViewById(R.id.storeFundsCrystalsQuantity);
 		pearls.setTextColor(Color.WHITE);
 		crystals.setTextColor(Color.RED);
 
@@ -206,8 +206,8 @@ public class StoreActivity extends Activity {
 	private void setFunds() {
 		try {
 			View fundsLayout = findViewById(R.id.storeFunds);
-			TextView pearls = (TextView) fundsLayout.findViewById(R.id.fundsPearlsQuantity);
-			TextView crystals = (TextView) fundsLayout.findViewById(R.id.fundsCrystalQuantity);
+			TextView pearls = (TextView) fundsLayout.findViewById(R.id.storeFundsPearlsQuantity);
+			TextView crystals = (TextView) fundsLayout.findViewById(R.id.storeFundsCrystalsQuantity);
 
 			pearls.setText(FundsManager.getPearls().toString());
 			crystals.setText(FundsManager.getCrystals().toString());

@@ -7,7 +7,7 @@
     <ImageView
         android:id="@+id/historyToStoreImage"
         android:layout_width="wrap_content"
-        android:layout_height="50dip"
+        android:layout_height="40dip"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="5dip"
@@ -16,8 +16,8 @@
 
     <ImageView
         android:id="@+id/historyTitle"
-        android:layout_width="300dip"
-        android:layout_height="40dip"
+        android:layout_width="265dip"
+        android:layout_height="30dip"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="5dip"

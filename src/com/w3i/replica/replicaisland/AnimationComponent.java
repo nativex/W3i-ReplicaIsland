@@ -27,7 +27,17 @@ import com.w3i.replica.replicaisland.store.FundsManager;
 public class AnimationComponent extends GameComponent {
 
 	public enum PlayerAnimations {
-		IDLE, MOVE, MOVE_FAST, BOOST_UP, BOOST_MOVE, BOOST_MOVE_FAST, STOMP, HIT_REACT, DEATH, FROZEN
+		IDLE,
+		MOVE,
+		MOVE_FAST,
+		BOOST_UP,
+		BOOST_MOVE,
+		BOOST_MOVE_FAST,
+		STOMP,
+		HIT_REACT,
+		DEATH,
+		FROZEN,
+		MOVE_AIR
 	}
 
 	private static final float MIN_ROCKET_TIME = 0.0f;
@@ -241,7 +251,7 @@ public class AnimationComponent extends GameComponent {
 						} else if (Math.abs(velocityX) > 300.0f) {
 							mSprite.playAnimation(PlayerAnimations.MOVE_FAST.ordinal());
 						} else {
-							mSprite.playAnimation(PlayerAnimations.MOVE.ordinal());
+							mSprite.playAnimation(PlayerAnimations.MOVE_AIR.ordinal());
 						}
 					}
 

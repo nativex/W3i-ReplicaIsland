@@ -6,7 +6,7 @@
 
     <ImageView
         android:id="@+id/storeToHistoryImage"
-        android:layout_width="200dip"
+        android:layout_width="206dip"
         android:layout_height="40dip"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
@@ -16,8 +16,8 @@
 
     <ImageView
         android:id="@+id/storeTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="40dip"
+        android:layout_width="91dip"
+        android:layout_height="30dip"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="5dip"
@@ -36,10 +36,8 @@
             android:id="@+id/storeFunds"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_margin="10dip"
-            layout="@layout/coin_layout" />
+            android:layout_margin="5dip"
+            layout="@layout/store_funds" />
     </LinearLayout>
 
     <ScrollView

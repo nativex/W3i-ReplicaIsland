@@ -1,6 +1,8 @@
 package com.w3i.replica.replicaisland.store;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -125,6 +127,7 @@ public class ItemManager {
 
 		for (Category c : categories) {
 			List<Item> items = c.getItems();
+			sortArray(items);
 			if (items != null) {
 				for (Item i : items) {
 					ItemInfo itemInfo = new ItemInfo(i, false, c);
@@ -135,6 +138,23 @@ public class ItemManager {
 			}
 
 		}
+	}
+
+	private void sortArray(
+			List<Item> array) {
+		Collections.sort(array, new Comparator<Item>() {
+			@Override
+			public int compare(
+					Item object1,
+					Item object2) {
+				if (object1.getId() < object2.getId()) {
+					return -1;
+				} else if (object1.getId() > object2.getId()) {
+					return 1;
+				}
+				return 0;
+			}
+		});
 	}
 
 	public static List<Category> getCategories() {
