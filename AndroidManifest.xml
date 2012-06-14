@@ -4,8 +4,35 @@
     android:versionCode="14"
     android:versionName="1.4" >
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:name="android.permission.INTERNET" />
+
+    <uses-sdk
+        android:minSdkVersion="3"
+        android:targetSdkVersion="8" />
+    <!--
+    Actually, this game works fine on small screens, but the only one out 
+	right now has no 3D acceleration, so it's slow and unplayable.
+    -->
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="false" />
+
+    <service android:name="org.OpenUDID.OpenUDID_service" >
+        <intent-filter>
+            <action android:name="org.OpenUDID.GETUDID" />
+        </intent-filter>
+    </service>
+
     <application
-        android:debuggable="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
@@ -72,42 +99,18 @@
             android:name="com.w3i.offerwall.ui.ComplexVideoOfferActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
 
-        <service android:name="org.OpenUDID.OpenUDID_service" >
-            <intent-filter>
-                <action android:name="org.OpenUDID.GETUDID" />
-            </intent-filter>
-        </service>
-
         <receiver android:name="com.w3i.advertiser.ReferralReceiver" >
             <intent-filter>
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
         </receiver>
-        <activity android:name=".store.StoreActivity" android:screenOrientation="landscape"></activity>
-        <activity android:name="com.w3i.gamesplatformsdk.ui.StoreUI"></activity>
+
+        <activity
+            android:name=".store.StoreActivity"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity android:name="com.w3i.gamesplatformsdk.ui.StoreUI" >
+        </activity>
     </application>
-
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:name="android.permission.INTERNET" />
-
-    <uses-sdk
-        android:minSdkVersion="3"
-        android:targetSdkVersion="8" />
-
-    <!--
-    Actually, this game works fine on small screens, but the only one out 
-	right now has no 3D acceleration, so it's slow and unplayable.
-    -->
-    <supports-screens
-        android:anyDensity="true"
-        android:largeScreens="true"
-        android:normalScreens="true"
-        android:smallScreens="false" />
-    <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission> -->
 
 </manifest>
