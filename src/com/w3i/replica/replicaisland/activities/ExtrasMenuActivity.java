@@ -128,7 +128,7 @@ public class ExtrasMenuActivity extends Activity {
 		mLinearModeLocked = findViewById(R.id.linearModeLocked);
 		mLevelSelectLocked = findViewById(R.id.levelSelectLocked);
 
-		Button store = (Button) findViewById(R.id.storeButton);
+		View store = findViewById(R.id.storeButton);
 		store.setOnClickListener(sStoreButtonListener);
 
 		mBackground = findViewById(R.id.mainMenuBackground);
