@@ -11,16 +11,24 @@
         android:adjustViewBounds="true"
         android:gravity="center_vertical"
         android:scaleType="fitXY"
-        android:src="@drawable/title_background" />
+        android:src="@drawable/ui_main_screen_backgroun" />
 
     <ImageView
         android:id="@+id/mainMenuTitle"
-        android:layout_width="336dp"
-        android:layout_height="153dp"
+        android:layout_width="300dip"
+        android:layout_height="70dip"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="60dip"
         android:adjustViewBounds="true"
-        android:src="@drawable/title" />
+        android:src="@drawable/ui_main_screen_title" />
+
+    <ImageView
+        android:id="@+id/mainMenuCharacter"
+        android:layout_width="155dip"
+        android:layout_height="240dip"
+        android:layout_gravity="left|bottom"
+        android:layout_margin="5dip"
+        android:src="@drawable/ui_main_screen_character" />
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -45,7 +53,7 @@
             android:layout_gravity="center_horizontal"
             android:clickable="true"
             android:paddingTop="10dp"
-            android:src="@drawable/ui_button_extras" />
+            android:src="@drawable/ui_main_screen_extras" />
 
         <ImageView
             android:id="@+id/optionButton"
@@ -54,7 +62,7 @@
             android:layout_gravity="center_horizontal"
             android:clickable="true"
             android:paddingTop="10dp"
-            android:src="@drawable/ui_button_options" />
+            android:src="@drawable/ui_main_screen_options" />
 
         <TextView
             android:id="@+id/ticker"
@@ -83,7 +91,7 @@
         android:paddingLeft="280dp"
         android:paddingTop="160dp"
         android:src="@drawable/ui_new"
-        android:visibility="invisible" />
+        android:visibility="gone" />
 
     <include
         android:layout_width="wrap_content"

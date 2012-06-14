@@ -276,7 +276,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.FILL_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
 		params.gravity = Gravity.BOTTOM;
 		FrameLayout mainLayout = (FrameLayout) findViewById(R.id.mainMenuLayout);
-		OfferwallManager.showFeaturedOfferBanner(mainLayout, params);
+		// OfferwallManager.showFeaturedOfferBanner(mainLayout, params);
 
 		// OfferwallManager.showFeaturedOffer(this);
 

@@ -10,16 +10,16 @@
         android:adjustViewBounds="true"
         android:gravity="center_vertical"
         android:scaleType="fitXY"
-        android:src="@drawable/title_background" />
+        android:src="@drawable/ui_main_screen_backgroun" />
 
     <ImageView
         android:id="@+id/mainMenuTitle"
-        android:layout_width="336dp"
-        android:layout_height="153dp"
+        android:layout_width="300dip"
+        android:layout_height="70dip"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="60dip"
         android:adjustViewBounds="true"
-        android:src="@drawable/title" />
+        android:src="@drawable/ui_main_screen_title" />
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -29,13 +29,12 @@
         android:gravity="bottom"
         android:orientation="vertical" >
 
-        <Button
+        <ImageView
             android:id="@+id/storeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:minWidth="200dip"
-            android:text="@string/store_button_text" />
+            android:src="@drawable/ui_extras_store" />
 
         <FrameLayout
             android:layout_width="wrap_content"
@@ -48,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:src="@drawable/ui_button_linear_mode" />
+                android:src="@drawable/ui_extras_linear_mode" />
 
             <ImageView
                 android:id="@+id/linearModeLocked"
@@ -69,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:src="@drawable/ui_button_level_select" />
+                android:src="@drawable/ui_extras_level_select" />
 
             <ImageView
                 android:id="@+id/levelSelectLocked"
@@ -87,7 +86,7 @@
             android:clickable="true"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:src="@drawable/ui_button_controls" />
+            android:src="@drawable/ui_extras_controls" />
     </LinearLayout>
 
 </FrameLayout>
