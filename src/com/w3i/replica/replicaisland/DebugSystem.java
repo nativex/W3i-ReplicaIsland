@@ -70,7 +70,7 @@ public final class DebugSystem extends BaseObject {
 			DrawableBitmap bitmap = factory.allocateDrawableBitmap();
 			if (bitmap != null) {
 				Texture texture = getTexture(shapeType, colorType);
-				bitmap.resize((int) texture.width, (int) texture.height);
+				bitmap.resize(texture.width, texture.height);
 				// TODO: scale stretch hack. fix!
 				bitmap.setWidth((int) width);
 				bitmap.setHeight((int) height);

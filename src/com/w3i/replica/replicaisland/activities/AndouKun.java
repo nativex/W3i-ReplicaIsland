@@ -73,7 +73,8 @@ public class AndouKun extends Activity implements SensorEventListener {
 
 	public static final int QUIT_GAME_DIALOG = 0;
 
-	// If the version is a negative number, debug features (logging and a debug menu)
+	// If the version is a negative number, debug features (logging and a debug
+	// menu)
 	// are enabled.
 	public static final int VERSION = 14;
 
@@ -107,7 +108,6 @@ public class AndouKun extends Activity implements SensorEventListener {
 
 	private KillingSpreeDetector.OnKillingSpreeEnd killingSpreeListener = new KillingSpreeDetector.OnKillingSpreeEnd() {
 
-		@Override
 		public void killingSpreeEnded(
 				int kills,
 				int pearlsEarned) {
@@ -118,7 +118,6 @@ public class AndouKun extends Activity implements SensorEventListener {
 	};
 
 	/** Called when the activity is first created. */
-	@Override
 	protected void onCreate(
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -144,7 +143,8 @@ public class AndouKun extends Activity implements SensorEventListener {
 
 		// mGLSurfaceView.setGLWrapper(new GLErrorLogger());
 		mGLSurfaceView.setEGLConfigChooser(false); // 16 bit, no z-buffer
-		// mGLSurfaceView.setDebugFlags(GLSurfaceView.DEBUG_CHECK_GL_ERROR | GLSurfaceView.DEBUG_LOG_GL_CALLS);
+		// mGLSurfaceView.setDebugFlags(GLSurfaceView.DEBUG_CHECK_GL_ERROR |
+		// GLSurfaceView.DEBUG_LOG_GL_CALLS);
 		mGame = new Game();
 		mGame.setSurfaceView(mGLSurfaceView);
 		DisplayMetrics dm = new DisplayMetrics();
@@ -161,7 +161,8 @@ public class AndouKun extends Activity implements SensorEventListener {
 		mLevelIndex = 0;
 
 		mPrefsEditor = prefs.edit();
-		// Make sure that old game information is cleared when we start a new game.
+		// Make sure that old game information is cleared when we start a new
+		// game.
 		if (getIntent().getBooleanExtra("newGame", false)) {
 			mPrefsEditor.remove(PreferenceConstants.PREFERENCE_LEVEL_ROW);
 			mPrefsEditor.remove(PreferenceConstants.PREFERENCE_LEVEL_INDEX);
@@ -194,8 +195,10 @@ public class AndouKun extends Activity implements SensorEventListener {
 			levelTreeResource = R.xml.linear_level_tree;
 		}
 
-		// Android activity lifecycle rules make it possible for this activity to be created
-		// and come to the foreground without the MainMenu Activity ever running, so in that
+		// Android activity lifecycle rules make it possible for this activity
+		// to be created
+		// and come to the foreground without the MainMenu Activity ever
+		// running, so in that
 		// case we need to make sure that this static data is valid.
 		if (!LevelTree.isLoaded(levelTreeResource)) {
 			LevelTree.loadLevelTree(levelTreeResource, this);
@@ -259,7 +262,6 @@ public class AndouKun extends Activity implements SensorEventListener {
 		KillingSpreeDetector.setKillingSpreeListener(killingSpreeListener);
 	}
 
-	@Override
 	protected void onDestroy() {
 		DebugLog.d("AndouKun", "onDestroy()");
 		mGame.stop();
@@ -276,7 +278,6 @@ public class AndouKun extends Activity implements SensorEventListener {
 
 	}
 
-	@Override
 	protected void onPause() {
 		super.onPause();
 		DebugLog.d("AndouKun", "onPause");
@@ -296,7 +297,6 @@ public class AndouKun extends Activity implements SensorEventListener {
 		}
 	}
 
-	@Override
 	protected void onResume() {
 		super.onResume();
 
@@ -359,7 +359,8 @@ public class AndouKun extends Activity implements SensorEventListener {
 
 			final long time = System.currentTimeMillis();
 			if (event.getAction() == MotionEvent.ACTION_MOVE && time - mLastTouchTime < 32) {
-				// Sleep so that the main thread doesn't get flooded with UI events.
+				// Sleep so that the main thread doesn't get flooded with UI
+				// events.
 				try {
 					Thread.sleep(32);
 				} catch (InterruptedException e) {
@@ -395,7 +396,8 @@ public class AndouKun extends Activity implements SensorEventListener {
 					mGame.onPause();
 				}
 				if (VERSION < 0) {
-					result = false; // Allow the debug menu to come up in debug mode.
+					result = false; // Allow the debug menu to come up in debug
+									// mode.
 				}
 			}
 		} else {
@@ -419,7 +421,8 @@ public class AndouKun extends Activity implements SensorEventListener {
 			result = true;
 		} else if (keyCode == KeyEvent.KEYCODE_MENU) {
 			if (VERSION < 0) {
-				result = false; // Allow the debug menu to come up in debug mode.
+				result = false; // Allow the debug menu to come up in debug
+								// mode.
 			}
 		} else {
 			result = mGame.onKeyUpEvent(keyCode);

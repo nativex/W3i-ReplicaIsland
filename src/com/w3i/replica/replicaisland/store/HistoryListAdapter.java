@@ -20,24 +20,20 @@ public class HistoryListAdapter extends BaseAdapter {
 		notifyDataSetChanged();
 	}
 
-	@Override
 	public int getCount() {
 		return items.size();
 	}
 
-	@Override
 	public Object getItem(
 			int arg0) {
 		return items.get(arg0);
 	}
 
-	@Override
 	public long getItemId(
 			int arg0) {
 		return arg0;
 	}
 
-	@Override
 	public View getView(
 			int arg0,
 			View arg1,

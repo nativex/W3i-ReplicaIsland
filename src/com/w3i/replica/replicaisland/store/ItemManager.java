@@ -143,7 +143,6 @@ public class ItemManager {
 	private void sortArray(
 			List<Item> array) {
 		Collections.sort(array, new Comparator<Item>() {
-			@Override
 			public int compare(
 					Item object1,
 					Item object2) {

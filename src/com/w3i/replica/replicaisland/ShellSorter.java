@@ -24,6 +24,7 @@ public class ShellSorter<Type> extends Sorter<Type> {
 	 * adjusting the size of the increment used to pass over the array each time. Currently this function uses Robert Cruse's suggestion of increment = increment / 3 + 1.
 	 */
 
+	@Override
 	public void sort(
 			Type[] array,
 			int count,

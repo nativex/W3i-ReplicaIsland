@@ -114,7 +114,7 @@ public class FadeDrawableComponent extends GameComponent {
 					if (factory != null) {
 						GameObject parentObject = ((GameObject) parent);
 						DrawableBitmap bitmap = factory.allocateDrawableBitmap();
-						bitmap.resize((int) mTexture.width, (int) mTexture.height);
+						bitmap.resize(mTexture.width, mTexture.height);
 						// TODO: Super tricky scale. fix this!
 						bitmap.setWidth((int) parentObject.width);
 						bitmap.setHeight((int) parentObject.height);

@@ -47,6 +47,7 @@ public class RenderComponent extends GameComponent {
 		mDrawOffset.zero();
 	}
 
+	@Override
 	public void update(
 			float timeDelta,
 			BaseObject parent) {

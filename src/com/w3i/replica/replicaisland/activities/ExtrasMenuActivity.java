@@ -14,7 +14,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 
 import com.w3i.replica.replicaisland.DebugLog;
 import com.w3i.replica.replicaisland.PreferenceConstants;
@@ -49,7 +48,6 @@ public class ExtrasMenuActivity extends Activity {
 
 	private View.OnClickListener sStoreButtonListener = new View.OnClickListener() {
 
-		@Override
 		public void onClick(
 				View arg0) {
 			if (!GamesPlatformManager.isInitialized()) {

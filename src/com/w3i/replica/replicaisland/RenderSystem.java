@@ -126,6 +126,7 @@ public class RenderSystem extends BaseObject {
 			setPhase(sortBucket + sortOffset);
 		}
 
+		@Override
 		public void reset() {
 			mDrawable = null;
 			x = 0.0f;

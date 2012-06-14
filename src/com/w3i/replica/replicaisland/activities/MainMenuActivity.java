@@ -33,6 +33,7 @@ import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
@@ -94,7 +95,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 
 	private View.OnClickListener sCoinsClicked = new View.OnClickListener() {
 
-		@Override
 		public void onClick(
 				View v) {
 			OfferwallManager.showOfferwall();
@@ -273,7 +273,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		FundsManager.loadFunds();
 		PowerupManager.loadPowerups();
 
-		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.FILL_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
 		params.gravity = Gravity.BOTTOM;
 		FrameLayout mainLayout = (FrameLayout) findViewById(R.id.mainMenuLayout);
 		// OfferwallManager.showFeaturedOfferBanner(mainLayout, params);

@@ -209,6 +209,7 @@ public class PlayerComponent extends GameComponent {
 		}
 	}
 
+	@Override
 	public void update(
 			float timeDelta,
 			BaseObject parent) {

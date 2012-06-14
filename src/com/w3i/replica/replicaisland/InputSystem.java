@@ -145,8 +145,8 @@ public class InputSystem extends BaseObject {
 				{ 1, 1, 1, 0 } }; // ROTATION_270
 
 		final int[] as = axisSwap[displayRotation];
-		screenVec[0] = (float) as[0] * canVec[as[2]];
-		screenVec[1] = (float) as[1] * canVec[as[3]];
+		screenVec[0] = as[0] * canVec[as[2]];
+		screenVec[1] = as[1] * canVec[as[3]];
 		screenVec[2] = canVec[2];
 	}
 

@@ -100,7 +100,7 @@ public class SliderPreference extends Preference implements OnSeekBarChangeListe
 	protected Object onGetDefaultValue(
 			TypedArray ta,
 			int index) {
-		int dValue = (int) ta.getInt(index, INITIAL_VALUE);
+		int dValue = ta.getInt(index, INITIAL_VALUE);
 
 		return (int) Utils.clamp(dValue, 0, MAX_SLIDER_VALUE);
 	}

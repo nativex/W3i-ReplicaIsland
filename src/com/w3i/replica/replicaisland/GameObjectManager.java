@@ -94,7 +94,7 @@ public class GameObjectManager extends ObjectManager {
 					if (gameObject.destroyOnDeactivation) {
 						mMarkedForDeathObjects.add(gameObject);
 					} else {
-						mInactiveObjects.add((BaseObject) gameObject);
+						mInactiveObjects.add(gameObject);
 					}
 				}
 			}
