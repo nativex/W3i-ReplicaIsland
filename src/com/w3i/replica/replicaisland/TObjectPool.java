@@ -32,6 +32,7 @@ public abstract class TObjectPool<T> extends ObjectPool {
 		super(size);
 	}
 
+	@Override
 	public T allocate() {
 		T object = (T) super.allocate();
 		return object;

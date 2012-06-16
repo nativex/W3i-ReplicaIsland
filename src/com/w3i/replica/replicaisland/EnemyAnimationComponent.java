@@ -23,11 +23,19 @@ package com.w3i.replica.replicaisland;
 public class EnemyAnimationComponent extends GameComponent {
 
 	public enum EnemyAnimations {
-		IDLE, MOVE, ATTACK, HIDDEN, APPEAR,
+		IDLE,
+		MOVE,
+		ATTACK,
+		HIDDEN,
+		APPEAR,
 	}
 
 	private enum AnimationState {
-		IDLING, MOVING, HIDING, APPEARING, ATTACKING
+		IDLING,
+		MOVING,
+		HIDING,
+		APPEARING,
+		ATTACKING
 	}
 
 	private SpriteComponent mSprite;

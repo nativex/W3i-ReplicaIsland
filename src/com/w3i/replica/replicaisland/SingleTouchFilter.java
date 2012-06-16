@@ -4,6 +4,7 @@ import android.view.MotionEvent;
 
 public class SingleTouchFilter extends TouchFilter {
 
+	@Override
 	public void updateTouch(
 			MotionEvent event) {
 		ContextParameters params = sSystemRegistry.contextParameters;

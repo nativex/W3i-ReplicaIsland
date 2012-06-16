@@ -70,6 +70,7 @@ public class InventoryComponent extends GameComponent {
 			super();
 		}
 
+		@Override
 		public void reset() {
 			rubyCount = 0;
 			coinCount = 0;

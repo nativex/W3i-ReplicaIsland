@@ -15,6 +15,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
@@ -54,7 +55,6 @@ public class StoreActivity extends Activity {
 	};
 	private View.OnClickListener onHistoryCloseClicked = new View.OnClickListener() {
 
-		@Override
 		public void onClick(
 				View v) {
 			removeDialog(DIALOG_INFO_HISTORY);
@@ -63,7 +63,6 @@ public class StoreActivity extends Activity {
 
 	private View.OnClickListener onToStoreClicked = new View.OnClickListener() {
 
-		@Override
 		public void onClick(
 				View v) {
 			if (flinger != null) {
@@ -74,7 +73,6 @@ public class StoreActivity extends Activity {
 
 	private View.OnClickListener onToHistoryClicked = new View.OnClickListener() {
 
-		@Override
 		public void onClick(
 				View v) {
 			if (flinger != null) {
@@ -262,7 +260,6 @@ public class StoreActivity extends Activity {
 
 	private View.OnClickListener onStoreItemClickListener = new View.OnClickListener() {
 
-		@Override
 		public void onClick(
 				View v) {
 			Object tag = v.getTag();
@@ -310,7 +307,6 @@ public class StoreActivity extends Activity {
 
 		private View.OnClickListener onCategoryNameClick = new View.OnClickListener() {
 
-			@Override
 			public void onClick(
 					View v) {
 				if (collapsed) {
@@ -376,7 +372,7 @@ public class StoreActivity extends Activity {
 			StoreItem storeItem = new StoreItem(item);
 			ViewGroup itemLayout = storeItem.getItemLayout();
 
-			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
 			itemLayout.setLayoutParams(params);
 			itemLayout.setOnClickListener(onStoreItemClickListener);
 			storeItem.setParent(this);
@@ -583,6 +579,7 @@ public class StoreActivity extends Activity {
 			setImageFromInternet(item.getStoreImageUrl());
 		}
 
+		@Override
 		public void release() {
 			setImageBitmap(null);
 		}

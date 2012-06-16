@@ -48,7 +48,6 @@ public class ExtrasMenuActivity extends Activity {
 
 	private View.OnClickListener sStoreButtonListener = new View.OnClickListener() {
 
-		@Override
 		public void onClick(
 				View arg0) {
 			if (!GamesPlatformManager.isInitialized()) {

@@ -20,7 +20,9 @@ public class ReplicaIslandToast {
 	public static final int KILLING_SPREE_KILLS_SIZE = 16;
 	public static final int KILLING_SPREE_KILLS_COLOR = Color.BLUE;
 
-	public static Toast makeStoreToast(Context context, Item item) {
+	public static Toast makeStoreToast(
+			Context context,
+			Item item) {
 		Toast toast = new Toast(context);
 
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -35,7 +37,10 @@ public class ReplicaIslandToast {
 		return toast;
 	}
 
-	public static Toast makeKillingSpreeToast(Context context, int kills, int pearlsEarned) {
+	public static Toast makeKillingSpreeToast(
+			Context context,
+			int kills,
+			int pearlsEarned) {
 		Toast toast = new Toast(context);
 
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

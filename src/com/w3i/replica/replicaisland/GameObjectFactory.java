@@ -615,7 +615,7 @@ public class GameObjectFactory extends BaseObject {
 			for (int x = 0; x < staticDataCount; x++) {
 				BaseObject entry = staticData.get(x);
 				if (entry instanceof GameComponent && object != null) {
-					object.add((GameComponent) entry);
+					object.add(entry);
 				} else if (entry instanceof SpriteAnimation && sprite != null) {
 					sprite.addAnimation((SpriteAnimation) entry);
 				}

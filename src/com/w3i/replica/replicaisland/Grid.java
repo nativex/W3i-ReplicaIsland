@@ -244,7 +244,7 @@ class Grid {
 			gl.glDrawElements(GL10.GL_TRIANGLES, count, GL10.GL_UNSIGNED_SHORT, mIndexBuffer.position(startIndex));
 		} else {
 			GL11 gl11 = (GL11) gl;
-			gl11.glDrawElements(GL11.GL_TRIANGLES, count, GL11.GL_UNSIGNED_SHORT, startIndex * CHAR_SIZE);
+			gl11.glDrawElements(GL10.GL_TRIANGLES, count, GL10.GL_UNSIGNED_SHORT, startIndex * CHAR_SIZE);
 
 		}
 	}
@@ -270,7 +270,7 @@ class Grid {
 			gl11.glTexCoordPointer(2, mCoordinateType, 0, 0);
 
 			gl11.glBindBuffer(GL11.GL_ELEMENT_ARRAY_BUFFER, mIndexBufferIndex);
-			gl11.glDrawElements(GL11.GL_TRIANGLES, mIndexCount, GL11.GL_UNSIGNED_SHORT, 0);
+			gl11.glDrawElements(GL10.GL_TRIANGLES, mIndexCount, GL10.GL_UNSIGNED_SHORT, 0);
 
 			gl11.glBindBuffer(GL11.GL_ARRAY_BUFFER, 0);
 			gl11.glBindBuffer(GL11.GL_ELEMENT_ARRAY_BUFFER, 0);

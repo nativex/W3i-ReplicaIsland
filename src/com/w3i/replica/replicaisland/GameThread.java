@@ -61,7 +61,7 @@ public class GameThread implements Runnable {
 
 					mGameRoot.update(secondsDelta, null);
 
-					CameraSystem camera = mGameRoot.sSystemRegistry.cameraSystem;
+					CameraSystem camera = BaseObject.sSystemRegistry.cameraSystem;
 					float x = 0.0f;
 					float y = 0.0f;
 					if (camera != null) {
@@ -81,7 +81,7 @@ public class GameThread implements Runnable {
 						DebugLog.d("Game Profile", "Average: " + averageFrameTime);
 						mProfileTime = 0;
 						mProfileFrames = 0;
-						mGameRoot.sSystemRegistry.hudSystem.setFPS(1000 / (int) averageFrameTime);
+						BaseObject.sSystemRegistry.hudSystem.setFPS(1000 / (int) averageFrameTime);
 					}
 				}
 				// If the game logic completed in less than 16ms, that means it's running

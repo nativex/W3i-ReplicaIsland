@@ -29,6 +29,7 @@ public class KillingSpreeDetector {
 
 	private Handler handler = new Handler() {
 
+		@Override
 		public void handleMessage(
 				Message msg) {
 			switch (msg.what) {
@@ -57,7 +58,7 @@ public class KillingSpreeDetector {
 		if (inSpree) {
 			killingSpreeMultiplier += PowerupManager.getKillingSpreeBonus();
 			monstersKilled++;
-			pearlsEarned = (int) ((float) PowerupManager.getPearlsPerKill() * killingSpreeMultiplier + 0.5f);
+			pearlsEarned = (int) (PowerupManager.getPearlsPerKill() * killingSpreeMultiplier + 0.5f);
 		} else {
 			pearlsEarned = PowerupManager.getPearlsPerKill();
 			inSpree = true;

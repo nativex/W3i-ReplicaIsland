@@ -16,7 +16,6 @@ public class ReplicaInfoDialog extends Dialog {
 
 	private View.OnClickListener onCloseClicked = new View.OnClickListener() {
 
-		@Override
 		public void onClick(
 				View arg0) {
 			dismiss();

@@ -18,7 +18,8 @@ public class VerticalTextView extends View {
 	private static final int DEFAULT_TEXT_COLOR = Color.GRAY;
 
 	public enum ORIENTATION {
-		LEFT, RIGHT
+		LEFT,
+		RIGHT
 	}
 
 	public VerticalTextView(Context context, AttributeSet attrs, int defStyle) {
