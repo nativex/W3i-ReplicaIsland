@@ -14,7 +14,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 
 import com.w3i.replica.replicaisland.DebugLog;
 import com.w3i.replica.replicaisland.PreferenceConstants;

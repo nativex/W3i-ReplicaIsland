@@ -25,6 +25,8 @@ import com.w3i.replica.replicaisland.GameObject.ActionType;
 import com.w3i.replica.replicaisland.GameObject.Team;
 import com.w3i.replica.replicaisland.GenericAnimationComponent.Animation;
 import com.w3i.replica.replicaisland.activities.AnimationPlayerActivity;
+import com.w3i.replica.replicaisland.skins.Skin;
+import com.w3i.replica.replicaisland.skins.SkinManager;
 
 /**
  * A class for generating game objects at runtime. This should really be replaced with something that is data-driven, but it is hard to do data parsing quickly at runtime. For the moment this class is
@@ -673,6 +675,9 @@ public class GameObjectFactory extends BaseObject {
 		FixedSizeArray<BaseObject> staticData = getStaticData(GameObjectType.PLAYER);
 
 		if (staticData == null) {
+			Skin selectedSkin = SkinManager.getSelectedSkin();
+			selectedSkin.setTextureLibrary(textureLibrary);
+
 			final int staticObjectCount = 13;
 			staticData = new FixedSizeArray<BaseObject>(staticObjectCount);
 
@@ -696,79 +701,32 @@ public class GameObjectFactory extends BaseObject {
 			pressCollisionVolume.setHitType(HitType.DEPRESS);
 			pressAndCollectVolume.add(pressCollisionVolume);
 
-			SpriteAnimation idle = new SpriteAnimation(PlayerAnimations.IDLE.ordinal(), 1);
-			idle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_stand_01), 1.0f, pressAndCollectVolume, basicVulnerabilityVolume));
+			SpriteAnimation idle = selectedSkin.getSpriteAnimation(PlayerAnimations.IDLE, 1.0f, pressAndCollectVolume, basicVulnerabilityVolume, false);
 
-			SpriteAnimation angle = new SpriteAnimation(PlayerAnimations.MOVE.ordinal(), 10);
-			// angle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_diag01), 0.0416f, pressAndCollectVolume, basicVulnerabilityVolume));
-			angle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_walk_01), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
-			angle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_walk_02), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
-			angle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_walk_03), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
-			angle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_walk_04), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
-			angle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_walk_05), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
-			angle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_walk_06), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
-			angle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_walk_07), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
-			angle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_walk_08), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
-			angle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_walk_09), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
-			angle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_walk_10), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
-			angle.setLoop(true);
+			SpriteAnimation angle = selectedSkin.getSpriteAnimation(PlayerAnimations.MOVE, Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume, true);
 
-			SpriteAnimation extremeAngle = new SpriteAnimation(PlayerAnimations.MOVE_FAST.ordinal(), 1);
-			extremeAngle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_diagmore01), 0.0416f, pressAndCollectVolume, basicVulnerabilityVolume));
+			SpriteAnimation extremeAngle = selectedSkin.getSpriteAnimation(PlayerAnimations.MOVE_FAST, 0.0416f, pressAndCollectVolume, basicVulnerabilityVolume, false);
 
-			SpriteAnimation up = new SpriteAnimation(PlayerAnimations.BOOST_UP.ordinal(), 2);
-			up.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_flyup02), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
-			up.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_flyup03), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
-			up.setLoop(true);
+			SpriteAnimation up = selectedSkin.getSpriteAnimation(PlayerAnimations.BOOST_UP, Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume, true);
 
-			SpriteAnimation boostAngle = new SpriteAnimation(PlayerAnimations.BOOST_MOVE.ordinal(), 2);
-			boostAngle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_diag02), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
-			boostAngle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_diag03), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
-			boostAngle.setLoop(true);
+			SpriteAnimation boostAngle = selectedSkin.getSpriteAnimation(PlayerAnimations.BOOST_MOVE, Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume, true);
 
-			SpriteAnimation boostExtremeAngle = new SpriteAnimation(PlayerAnimations.BOOST_MOVE_FAST.ordinal(), 2);
-			boostExtremeAngle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_diagmore02), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
-			boostExtremeAngle.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_diagmore03), Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume));
-			boostExtremeAngle.setLoop(true);
+			SpriteAnimation boostExtremeAngle = selectedSkin.getSpriteAnimation(PlayerAnimations.BOOST_MOVE_FAST, Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume, true);
 
-			SpriteAnimation moveAir = new SpriteAnimation(PlayerAnimations.MOVE_AIR.ordinal(), 1);
-			moveAir.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.captain_stand_01), 1.0f, pressAndCollectVolume, basicVulnerabilityVolume));
+			SpriteAnimation moveAir = selectedSkin.getSpriteAnimation(PlayerAnimations.MOVE_AIR, Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume, false);
 
 			FixedSizeArray<CollisionVolume> stompAttackVolume = new FixedSizeArray<CollisionVolume>(3);
 			stompAttackVolume.add(new AABoxCollisionVolume(16, -5.0f, 32, 37, HitType.HIT));
 			stompAttackVolume.add(pressCollisionVolume);
 			stompAttackVolume.add(collectionVolume);
 
-			SpriteAnimation stomp = new SpriteAnimation(PlayerAnimations.STOMP.ordinal(), 4);
-			stomp.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_stomp01), Utils.framesToTime(24, 1), stompAttackVolume, null));
-			stomp.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_stomp02), Utils.framesToTime(24, 1), stompAttackVolume, null));
-			stomp.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_stomp03), Utils.framesToTime(24, 1), stompAttackVolume, null));
-			stomp.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_stomp04), Utils.framesToTime(24, 1), stompAttackVolume, null));
+			SpriteAnimation stomp = selectedSkin.getSpriteAnimation(PlayerAnimations.STOMP, Utils.framesToTime(24, 1), stompAttackVolume, null, false);
 
-			SpriteAnimation hitReactAnim = new SpriteAnimation(PlayerAnimations.HIT_REACT.ordinal(), 1);
-			hitReactAnim.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_hit), 0.1f, pressAndCollectVolume, null));
+			SpriteAnimation hitReactAnim = selectedSkin.getSpriteAnimation(PlayerAnimations.HIT_REACT, 0.1f, pressAndCollectVolume, null, false);
 
-			SpriteAnimation deathAnim = new SpriteAnimation(PlayerAnimations.DEATH.ordinal(), 16);
-			AnimationFrame death1 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_die01), Utils.framesToTime(24, 1), null, null);
-			AnimationFrame death2 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_die02), Utils.framesToTime(24, 1), null, null);
-			deathAnim.addFrame(death1);
-			deathAnim.addFrame(death2);
-			deathAnim.addFrame(death1);
-			deathAnim.addFrame(death2);
-			deathAnim.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_explode01), Utils.framesToTime(24, 1), null, null));
-			deathAnim.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_explode02), Utils.framesToTime(24, 1), null, null));
-			deathAnim.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_explode03), Utils.framesToTime(24, 1), null, null));
-			deathAnim.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_explode04), Utils.framesToTime(24, 1), null, null));
-			deathAnim.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_explode05), Utils.framesToTime(24, 2), null, null));
-			deathAnim.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_explode06), Utils.framesToTime(24, 2), null, null));
-			deathAnim.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_explode07), Utils.framesToTime(24, 2), null, null));
-			deathAnim.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_explode08), Utils.framesToTime(24, 2), null, null));
-			deathAnim.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_explode09), Utils.framesToTime(24, 2), null, null));
-			deathAnim.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_explode10), Utils.framesToTime(24, 2), null, null));
-			deathAnim.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_explode11), Utils.framesToTime(24, 2), null, null));
-			deathAnim.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_explode12), Utils.framesToTime(24, 2), null, null));
+			SpriteAnimation deathAnim = selectedSkin.getSpriteAnimation(PlayerAnimations.DEATH, 0, null, null, false);
 
-			SpriteAnimation frozenAnim = new SpriteAnimation(PlayerAnimations.FROZEN.ordinal(), 1);
+			SpriteAnimation frozenAnim = selectedSkin.getSpriteAnimation(PlayerAnimations.FROZEN, 0, null, null, false);
 			// Frozen has no frames!
 
 			// Save static data

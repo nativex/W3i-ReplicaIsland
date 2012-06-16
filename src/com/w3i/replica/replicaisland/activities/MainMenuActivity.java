@@ -75,6 +75,16 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	private final static int TILT_TO_SCREEN_CONTROLS_DIALOG = 1;
 	private final static int CONTROL_SETUP_DIALOG = 2;
 
+	private View.OnClickListener sPirateClicked = new View.OnClickListener() {
+
+		@Override
+		public void onClick(
+				View v) {
+			Intent intent = new Intent(v.getContext(), SkinSelectionActivity.class);
+			v.getContext().startActivity(intent);
+		}
+	};
+
 	// Create an anonymous implementation of OnClickListener
 	private View.OnClickListener sContinueButtonListener = new View.OnClickListener() {
 		public void onClick(
@@ -284,6 +294,9 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 
 		FundsManager.setCrystals(30);
 		FundsManager.setPearls(10000);
+
+		View v = findViewById(R.id.mainMenuCharacter);
+		v.setOnClickListener(sPirateClicked);
 
 	}
 
