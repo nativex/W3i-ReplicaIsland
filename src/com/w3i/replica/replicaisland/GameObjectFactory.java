@@ -715,6 +715,8 @@ public class GameObjectFactory extends BaseObject {
 
 			SpriteAnimation moveAir = selectedSkin.getSpriteAnimation(PlayerAnimations.MOVE_AIR, Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume, false);
 
+			SpriteAnimation airFall = selectedSkin.getSpriteAnimation(PlayerAnimations.FALL, Utils.framesToTime(24, 1), pressAndCollectVolume, basicVulnerabilityVolume, true);
+
 			FixedSizeArray<CollisionVolume> stompAttackVolume = new FixedSizeArray<CollisionVolume>(3);
 			stompAttackVolume.add(new AABoxCollisionVolume(16, -5.0f, 32, 37, HitType.HIT));
 			stompAttackVolume.add(pressCollisionVolume);
@@ -724,7 +726,7 @@ public class GameObjectFactory extends BaseObject {
 
 			SpriteAnimation hitReactAnim = selectedSkin.getSpriteAnimation(PlayerAnimations.HIT_REACT, 0.1f, pressAndCollectVolume, null, false);
 
-			SpriteAnimation deathAnim = selectedSkin.getSpriteAnimation(PlayerAnimations.DEATH, 0, null, null, false);
+			SpriteAnimation deathAnim = selectedSkin.getSpriteAnimation(PlayerAnimations.DEATH, Utils.framesToTime(24, 1), null, null, false);
 
 			SpriteAnimation frozenAnim = selectedSkin.getSpriteAnimation(PlayerAnimations.FROZEN, 0, null, null, false);
 			// Frozen has no frames!
@@ -743,8 +745,9 @@ public class GameObjectFactory extends BaseObject {
 			staticData.add(stomp);
 			staticData.add(hitReactAnim);
 			staticData.add(deathAnim);
-			staticData.add(frozenAnim);
 			staticData.add(moveAir);
+			staticData.add(airFall);
+			staticData.add(frozenAnim);
 
 			setStaticData(GameObjectType.PLAYER, staticData);
 		}
@@ -851,11 +854,13 @@ public class GameObjectFactory extends BaseObject {
 			FixedSizeArray<BaseObject> jetStaticData = getStaticData(GameObjectType.PLAYER_JETS);
 			if (jetStaticData == null) {
 				jetStaticData = new FixedSizeArray<BaseObject>(1);
+				Skin selectedSkin = SkinManager.getSelectedSkin();
+				selectedSkin.setTextureLibrary(textureLibrary);
 
-				SpriteAnimation jetAnim = new SpriteAnimation(0, 2);
-				jetAnim.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.jetfire01), Utils.framesToTime(24, 1)));
-				jetAnim.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.jetfire02), Utils.framesToTime(24, 1)));
-				jetAnim.setLoop(true);
+				SpriteAnimation jetAnim = selectedSkin.getSpriteAnimation(PlayerAnimations.JET, Utils.framesToTime(24, 1), null, null, true, true);
+				// jetAnim.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.jetfire01), Utils.framesToTime(24, 1)));
+				// jetAnim.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.jetfire02), Utils.framesToTime(24, 1)));
+				// jetAnim.setLoop(true);
 
 				jetStaticData.add(jetAnim);
 
@@ -917,15 +922,19 @@ public class GameObjectFactory extends BaseObject {
 			FixedSizeArray<BaseObject> glowStaticData = getStaticData(GameObjectType.PLAYER_GLOW);
 			if (glowStaticData == null) {
 				glowStaticData = new FixedSizeArray<BaseObject>(1);
+				Skin selectedSkin = SkinManager.getSelectedSkin();
+				selectedSkin.setTextureLibrary(textureLibrary);
 
 				FixedSizeArray<CollisionVolume> glowAttackVolume = new FixedSizeArray<CollisionVolume>(1);
 				glowAttackVolume.add(new SphereCollisionVolume(40, 40, 40, HitType.HIT));
 
-				SpriteAnimation glowAnim = new SpriteAnimation(0, 3);
-				glowAnim.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.effect_glow01), Utils.framesToTime(24, 1), glowAttackVolume, null));
-				glowAnim.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.effect_glow02), Utils.framesToTime(24, 1), glowAttackVolume, null));
-				glowAnim.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.effect_glow03), Utils.framesToTime(24, 1), glowAttackVolume, null));
-				glowAnim.setLoop(true);
+				SpriteAnimation glowAnim = selectedSkin.getSpriteAnimation(PlayerAnimations.SHIELD, Utils.framesToTime(24, 1), glowAttackVolume, null, true, true);
+
+				// SpriteAnimation glowAnim = new SpriteAnimation(0, 3);
+				// glowAnim.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.effect_glow01), Utils.framesToTime(24, 1), glowAttackVolume, null));
+				// glowAnim.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.effect_glow02), Utils.framesToTime(24, 1), glowAttackVolume, null));
+				// glowAnim.addFrame(new AnimationFrame(textureLibrary.allocateTexture(R.drawable.effect_glow03), Utils.framesToTime(24, 1), glowAttackVolume, null));
+				// glowAnim.setLoop(true);
 
 				glowStaticData.add(glowAnim);
 

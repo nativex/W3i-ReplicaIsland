@@ -38,11 +38,20 @@ public class DefaultPlayerSkin extends Skin {
 		// move air
 		setAnimationFrames(PlayerAnimations.MOVE_AIR, R.drawable.andou_diag01, R.drawable.andou_diag02, R.drawable.andou_diag03);
 
+		// fall
+		setAnimationFrames(PlayerAnimations.FALL, R.drawable.andou_stand);
+
 		// stomp
 		setAnimationFrames(PlayerAnimations.STOMP, R.drawable.andou_stomp01, R.drawable.andou_stomp02, R.drawable.andou_stomp03, R.drawable.andou_stomp04);
 
 		// hit react
 		setAnimationFrames(PlayerAnimations.HIT_REACT, R.drawable.andou_hit);
+
+		// jet animation
+		setAnimationFrames(PlayerAnimations.JET, R.drawable.jetfire01, R.drawable.jetfire02);
+
+		// glow
+		setAnimationFrames(PlayerAnimations.SHIELD, R.drawable.effect_glow01, R.drawable.effect_glow02, R.drawable.effect_glow03);
 
 		// death
 		int[] deathAnimationFrames = new int[16];
@@ -67,6 +76,7 @@ public class DefaultPlayerSkin extends Skin {
 		// frozen
 		setAnimationFrames(PlayerAnimations.FROZEN, new int[0]);
 
+		setTitleImage(R.drawable.andou_stand);
 		setSkinType(SkinType.PLAYER);
 		setImage(R.drawable.andou_stand);
 		setName("Android");

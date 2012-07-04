@@ -37,7 +37,10 @@ public class AnimationComponent extends GameComponent {
 		HIT_REACT,
 		DEATH,
 		FROZEN,
-		MOVE_AIR
+		MOVE_AIR,
+		JET,
+		SHIELD,
+		FALL
 	}
 
 	private static final float MIN_ROCKET_TIME = 0.0f;
@@ -247,11 +250,11 @@ public class AnimationComponent extends GameComponent {
 					} else {
 
 						if (Utils.close(velocityX, 0.0f, 1.0f)) {
-							mSprite.playAnimation(PlayerAnimations.IDLE.ordinal());
+							mSprite.playAnimation(PlayerAnimations.FALL.ordinal());
 						} else if (Math.abs(velocityX) > 300.0f) {
-							mSprite.playAnimation(PlayerAnimations.MOVE_FAST.ordinal());
-						} else {
 							mSprite.playAnimation(PlayerAnimations.MOVE_AIR.ordinal());
+						} else {
+							mSprite.playAnimation(PlayerAnimations.FALL.ordinal());
 						}
 					}
 

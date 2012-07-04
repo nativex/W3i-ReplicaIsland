@@ -52,6 +52,7 @@ import com.w3i.replica.replicaisland.SingleTouchFilter;
 import com.w3i.replica.replicaisland.TouchFilter;
 import com.w3i.replica.replicaisland.UIConstants;
 import com.w3i.replica.replicaisland.publisher.OfferwallManager;
+import com.w3i.replica.replicaisland.skins.SkinManager;
 import com.w3i.replica.replicaisland.store.FundsManager;
 import com.w3i.replica.replicaisland.store.GamesPlatformManager;
 import com.w3i.replica.replicaisland.store.ItemManager;
@@ -484,6 +485,9 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		com.w3i.common.Log.i("PowerupManager: Shield energy upgrade - " + PowerupManager.getShiledPearls());
 		com.w3i.common.Log.i("PowerupManager: Garbage collector upgrade - " + PowerupManager.hasGarbageCollector());
 		com.w3i.common.Log.i("PowerupManager: Killing spree upgrade - " + PowerupManager.isKillingSpreeEnabled());
+
+		ImageView character = (ImageView) findViewById(R.id.mainMenuCharacter);
+		SkinManager.changeTitleScreenImage(character);
 	}
 
 	@Override

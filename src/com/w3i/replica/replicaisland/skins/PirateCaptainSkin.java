@@ -31,6 +31,7 @@ public class PirateCaptainSkin extends Skin {
 		// move air
 		setAnimationFrames(PlayerAnimations.MOVE_AIR, R.drawable.captain_stand_01);
 
+		setTitleImage(R.drawable.ui_main_screen_character);
 		setSkinType(SkinType.PLAYER);
 		setImage(R.drawable.captain_stand_01);
 		setName("Pirate Captain");

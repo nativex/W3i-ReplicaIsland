@@ -15,6 +15,7 @@ public class Skin {
 	private TextureLibrary texLib;
 	private DefaultPlayerSkin defaultSkin;
 	private int image;
+	private int titleImage;
 	private String name;
 	private String description;
 	private SkinType skinType = SkinType.UNDEFINED;
@@ -70,21 +71,9 @@ public class Skin {
 		if (animationFrames == null) {
 			if (loadDefaultOnFail) {
 				if (defaultSkin == null) {
-					switch (skinType) {
-					case ENEMY:
+					if (!setDefaultSkin()) {
 						return null;
-					case NPC:
-						return null;
-					case PLAYER:
-						defaultSkin = new DefaultPlayerSkin();
-						defaultSkin.setTextureLibrary(texLib);
-						break;
-					case PROJECTILE:
-						return null;
-					case UNDEFINED:
-						throw new NullPointerException("Skin doesn't have type (" + getClass().getSimpleName() + ")");
 					}
-
 				}
 				animation = defaultSkin.getSpriteAnimation(animationType, animationHoldTime, pressAndCollectVolume, vulnerabilityVolume, isLooping, false);
 			}
@@ -98,6 +87,24 @@ public class Skin {
 			animation.setLoop(true);
 		}
 		return animation;
+	}
+
+	private boolean setDefaultSkin() {
+		switch (skinType) {
+		case ENEMY:
+			defaultSkin = null;
+		case NPC:
+			defaultSkin = null;
+		case PLAYER:
+			defaultSkin = new DefaultPlayerSkin();
+			defaultSkin.setTextureLibrary(texLib);
+			break;
+		case PROJECTILE:
+			defaultSkin = null;
+		case UNDEFINED:
+			throw new NullPointerException("Skin doesn't have type (" + getClass().getSimpleName() + ")");
+		}
+		return defaultSkin != null;
 	}
 
 	protected void setAnimationFrames(
@@ -160,6 +167,22 @@ public class Skin {
 	protected void setDescription(
 			String description) {
 		this.description = description;
+	}
+
+	/**
+	 * @return the titleImage
+	 */
+	public int getTitleImage() {
+		return titleImage;
+	}
+
+	/**
+	 * @param titleImage
+	 *            the titleImage to set
+	 */
+	public void setTitleImage(
+			int titleImage) {
+		this.titleImage = titleImage;
 	}
 
 }
