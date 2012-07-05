@@ -11,4 +11,19 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="AchivementsProgressTextStyle">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="AchivementNameStyle">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="AchivementDescriptionStyle">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
 </resources>

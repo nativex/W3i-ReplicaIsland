@@ -678,7 +678,7 @@ public class GameObjectFactory extends BaseObject {
 			Skin selectedSkin = SkinManager.getSelectedSkin();
 			selectedSkin.setTextureLibrary(textureLibrary);
 
-			final int staticObjectCount = 13;
+			final int staticObjectCount = 15;
 			staticData = new FixedSizeArray<BaseObject>(staticObjectCount);
 
 			GameComponent gravity = allocateComponent(GravityComponent.class);

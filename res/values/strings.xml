@@ -435,4 +435,8 @@ If I am honest with myself, there is another reason the adventurers had to die. 
 
 <string name="info_dialog_description">Info Dialog Description</string>
 
+<string name="default_image_view_description">Default Image View Description</string>
+
+<string name="achivements">Achivements</string>
+
 </resources>

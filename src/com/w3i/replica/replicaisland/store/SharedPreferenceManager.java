@@ -33,6 +33,9 @@ public class SharedPreferenceManager {
 	private static final String PREF_CRYSTAL_EXTRACTOR_CRYSTALS = "crystalExtractorCrystals";
 	private static final String PREF_CRYSTAL_EXTRACTRO_MONSTERS = "crystalExctactorMonsters";
 
+	private static final String PREF_ACHIVEMENT_CRYSTALS = "achvCrystals";
+	private static final String PREF_ACHIVEMENT_PEARLS = "achvPearls";
+
 	private SharedPreferenceManager(Context context) {
 		instance = this;
 		preferences = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
@@ -208,6 +211,30 @@ public class SharedPreferenceManager {
 			Log.e("SharedPreferenceManager: Unexpected exception caught while storing powerups");
 		}
 
+	}
+
+	public static void storeAchivements() {
+		checkInstance();
+		instance._storeAchivements();
+	}
+
+	private void _storeAchivements() {
+		try {
+		} catch (Exception e) {
+			Log.e("SharedPreferenceManager: Unexpected exception caught while storing achivements");
+		}
+	}
+
+	public static void loadAchivements() {
+		checkInstance();
+		instance._loadAchivements();
+	}
+
+	private void _loadAchivements() {
+		try {
+		} catch (Exception e) {
+			Log.e("SharedPreferenceManager: Unexpected exception caught while loading achivements");
+		}
 	}
 
 	public static void release() {

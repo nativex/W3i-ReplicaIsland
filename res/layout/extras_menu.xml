@@ -29,6 +29,13 @@
         android:gravity="bottom"
         android:orientation="vertical" >
 
+        <Button
+            android:id="@+id/extrasAchievements"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Achievements" />
+
         <ImageView
             android:id="@+id/storeButton"
             android:layout_width="wrap_content"

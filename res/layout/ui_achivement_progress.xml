@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/uiAchvIcon"
+        android:layout_width="76dip"
+        android:layout_height="76dip"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="5dip"
+        android:layout_marginLeft="5dip"
+        android:layout_marginTop="5dip"
+        android:contentDescription="@string/default_image_view_description"
+        android:src="@drawable/achv_locked" />
+
+    <TextView
+        android:id="@+id/uiAchvName"
+        style="@style/AchivementNameStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
+        android:layout_marginTop="5dip"
+        android:layout_toRightOf="@+id/uiAchvIcon" />
+
+    <TextView
+        android:id="@+id/uiAchvDescription"
+        style="@style/AchivementDescriptionStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/uiAchvName"
+        android:layout_below="@+id/uiAchvName"
+        android:layout_marginBottom="5dip"
+        android:layout_marginRight="5dip"
+        android:layout_marginTop="5dip" >
+    </TextView>
+
+    <ProgressBar
+        android:id="@+id/achvProgress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/uiAchvDescription"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/uiAchvDescription"
+        android:layout_marginBottom="5dip"
+        android:layout_marginRight="5dip" />
+
+    <TextView
+        android:id="@+id/achvProgressText"
+        style="@style/AchivementsProgressTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/achvProgress"
+        android:layout_alignLeft="@+id/achvProgress"
+        android:layout_alignRight="@+id/achvProgress"
+        android:layout_alignTop="@+id/achvProgress"
+        android:gravity="center" />
+
+</RelativeLayout>

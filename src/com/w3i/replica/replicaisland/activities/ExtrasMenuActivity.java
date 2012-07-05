@@ -46,6 +46,16 @@ public class ExtrasMenuActivity extends Activity {
 	private static final int START_LEVEL_SELECT = 1;
 	private static final int EXTRAS_STORE_NOT_READY_DIALOG = 1001;
 
+	private View.OnClickListener sAchievementsListener = new View.OnClickListener() {
+
+		@Override
+		public void onClick(
+				View v) {
+			Intent intent = new Intent(ExtrasMenuActivity.this, AchievementsActivity.class);
+			ExtrasMenuActivity.this.startActivity(intent);
+		}
+	};
+
 	private View.OnClickListener sStoreButtonListener = new View.OnClickListener() {
 
 		public void onClick(
@@ -128,6 +138,8 @@ public class ExtrasMenuActivity extends Activity {
 
 		View store = findViewById(R.id.storeButton);
 		store.setOnClickListener(sStoreButtonListener);
+		View achievements = findViewById(R.id.extrasAchievements);
+		achievements.setOnClickListener(sAchievementsListener);
 
 		mBackground = findViewById(R.id.mainMenuBackground);
 
