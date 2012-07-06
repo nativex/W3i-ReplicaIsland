@@ -1,14 +1,13 @@
 package com.w3i.replica.replicaisland.achivements;
 
 public class CrystalsAchievement extends ProgressAchievement {
-	public static final int GOAL = 200;
 
 	public CrystalsAchievement() {
-		setName("Crystal Collector");
-		setDescription("Collect 200 crystals");
+		super(AchievementConstants.CRYSTALS_GOLD);
+		setName(AchievementConstants.CRYSTALS_DESCRIPTION);
+		setDescription(AchievementConstants.CRYSTALS_NAME);
 		setType(Type.CRYSTALS);
 		setProgress(true);
-		setGoal(GOAL);
 	}
 
 }

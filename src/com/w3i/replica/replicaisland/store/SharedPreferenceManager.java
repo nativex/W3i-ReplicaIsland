@@ -10,15 +10,27 @@ import android.content.SharedPreferences.Editor;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.w3i.common.Log;
+import com.w3i.replica.replicaisland.achivements.Achievement;
+import com.w3i.replica.replicaisland.achivements.AchievementManager;
+import com.w3i.replica.replicaisland.achivements.CrystalsAchievement;
+import com.w3i.replica.replicaisland.achivements.GoodEndingAchievement;
+import com.w3i.replica.replicaisland.achivements.PearlsAchievement;
+import com.w3i.replica.replicaisland.achivements.ProgressAchievement;
 
 public class SharedPreferenceManager {
 	private SharedPreferences preferences;
 	private static SharedPreferenceManager instance;
 
 	private static final String PREF_FILE_NAME = "ReplicaIslandStorePreferences";
-	private static final String PREF_PURCHASED_ITEMS = "purchasedItems";
+
+	// Funds Manager preferences
 	private static final String PREF_FUNDS_PEARLS = "totalPearls";
 	private static final String PREF_FUNDS_CRYSTALS = "totalCrystals";
+
+	// Store preferences
+	private static final String PREF_PURCHASED_ITEMS = "purchasedItems";
+
+	// Items preferences
 	private static final String PREF_POWERUP_LIFE_UPGRADE = "lifeUpgrade";
 	private static final String PREF_POWERUP_JETPACK_DURATION_UPGRADE = "jetpackDurationUpgrade";
 	private static final String PREF_POWERUP_JETPACK_GROUND_REFILL_UPGRADE = "jetpackGroundRefillUpgrade";
@@ -33,8 +45,15 @@ public class SharedPreferenceManager {
 	private static final String PREF_CRYSTAL_EXTRACTOR_CRYSTALS = "crystalExtractorCrystals";
 	private static final String PREF_CRYSTAL_EXTRACTRO_MONSTERS = "crystalExctactorMonsters";
 
-	private static final String PREF_ACHIVEMENT_CRYSTALS = "achvCrystals";
-	private static final String PREF_ACHIVEMENT_PEARLS = "achvPearls";
+	// Achievements preferences
+	private static final String PREF_ACHIEVEMENT_CRYSTALS = "achvCrystals";
+	private static final String PREF_ACHIEVEMENT_CRYSTALS_DONE = "achvCrystalsDone";
+	private static final String PREF_ACHIEVEMENT_CRYSTALS_PROGRESS = "achvCrystalsProgress";
+	private static final String PREF_ACHIEVEMENT_PEARLS = "achvPearls";
+	private static final String PREF_ACHIEVEMENT_PEARLS_DONE = "achvPearlsDone";
+	private static final String PREF_ACHIEVEMENT_PEARLS_PROGRESS = "achvPearlsProgress";
+	private static final String PREF_ACHIEVEMENT_GOOD_ENDINNG = "achvGoodEnding";
+	private static final String PREF_ACHIEVEMENT_GOOD_ENDINNG_DONE = "achvGoodEndingDone";
 
 	private SharedPreferenceManager(Context context) {
 		instance = this;
@@ -220,8 +239,34 @@ public class SharedPreferenceManager {
 
 	private void _storeAchivements() {
 		try {
+			Editor edit = preferences.edit();
+			for (Achievement achv : AchievementManager.getAchivements()) {
+				_storeAchievement(achv, edit);
+			}
+			edit.commit();
 		} catch (Exception e) {
 			Log.e("SharedPreferenceManager: Unexpected exception caught while storing achivements");
+		}
+	}
+
+	private void _storeAchievement(
+			Achievement achv,
+			Editor edit) {
+		switch (achv.getType()) {
+		case CRYSTALS:
+			edit.putBoolean(PREF_ACHIEVEMENT_CRYSTALS, achv.isDisabled());
+			edit.putBoolean(PREF_ACHIEVEMENT_CRYSTALS_DONE, achv.isDone());
+			edit.putInt(PREF_ACHIEVEMENT_CRYSTALS_PROGRESS, ((ProgressAchievement) achv).getProgress());
+			break;
+		case GOOD_ENDING:
+			edit.putBoolean(PREF_ACHIEVEMENT_GOOD_ENDINNG, achv.isDisabled());
+			edit.putBoolean(PREF_ACHIEVEMENT_GOOD_ENDINNG_DONE, achv.isDone());
+			break;
+		case PEARLS:
+			edit.putBoolean(PREF_ACHIEVEMENT_PEARLS, achv.isDisabled());
+			edit.putBoolean(PREF_ACHIEVEMENT_PEARLS_DONE, achv.isDone());
+			edit.putInt(PREF_ACHIEVEMENT_PEARLS_PROGRESS, ((ProgressAchievement) achv).getProgress());
+			break;
 		}
 	}
 
@@ -232,6 +277,34 @@ public class SharedPreferenceManager {
 
 	private void _loadAchivements() {
 		try {
+			boolean crystalsDisabled = preferences.getBoolean(PREF_ACHIEVEMENT_CRYSTALS, false);
+			boolean crystalsDone = preferences.getBoolean(PREF_ACHIEVEMENT_CRYSTALS_DONE, false);
+			int crystalsProgress = preferences.getInt(PREF_ACHIEVEMENT_CRYSTALS_PROGRESS, 0);
+			if (!crystalsDisabled) {
+				CrystalsAchievement crystalsAchievement = new CrystalsAchievement();
+				crystalsAchievement.setProgress(crystalsProgress);
+				crystalsAchievement.setDone(crystalsDone);
+				AchievementManager.addAchivement(crystalsAchievement);
+			}
+
+			boolean goodEndingDisabled = preferences.getBoolean(PREF_ACHIEVEMENT_GOOD_ENDINNG, false);
+			boolean goodEndingDone = preferences.getBoolean(PREF_ACHIEVEMENT_GOOD_ENDINNG_DONE, false);
+			if (!goodEndingDisabled) {
+				GoodEndingAchievement goodEndingAchievement = new GoodEndingAchievement();
+				goodEndingAchievement.setDone(goodEndingDone);
+				AchievementManager.addAchivement(goodEndingAchievement);
+			}
+
+			boolean pearlsDisabled = preferences.getBoolean(PREF_ACHIEVEMENT_PEARLS, false);
+			boolean pearlsDone = preferences.getBoolean(PREF_ACHIEVEMENT_PEARLS_DONE, false);
+			int pearlsProgress = preferences.getInt(PREF_ACHIEVEMENT_PEARLS_PROGRESS, 0);
+			if (!pearlsDisabled) {
+				PearlsAchievement pearlsAchievement = new PearlsAchievement();
+				pearlsAchievement.setDone(pearlsDone);
+				pearlsAchievement.setProgress(pearlsProgress);
+				AchievementManager.addAchivement(pearlsAchievement);
+			}
+
 		} catch (Exception e) {
 			Log.e("SharedPreferenceManager: Unexpected exception caught while loading achivements");
 		}

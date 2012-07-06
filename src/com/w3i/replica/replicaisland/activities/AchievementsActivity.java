@@ -13,9 +13,6 @@ import android.widget.TextView;
 import com.w3i.replica.replicaisland.R;
 import com.w3i.replica.replicaisland.achivements.Achievement;
 import com.w3i.replica.replicaisland.achivements.AchievementManager;
-import com.w3i.replica.replicaisland.achivements.CrystalsAchievement;
-import com.w3i.replica.replicaisland.achivements.GoodEndingAchievement;
-import com.w3i.replica.replicaisland.achivements.PearlsAchievement;
 import com.w3i.replica.replicaisland.achivements.ProgressAchievement;
 
 public class AchievementsActivity extends Activity {
@@ -29,12 +26,6 @@ public class AchievementsActivity extends Activity {
 
 		achvContainer = (LinearLayout) findViewById(R.id.achvMainList);
 
-		ProgressAchievement achv = new PearlsAchievement();
-		achv.setProgress(536);
-
-		AchievementManager.addAchivement(achv);
-		AchievementManager.addAchivement(new CrystalsAchievement());
-		AchievementManager.addAchivement(new GoodEndingAchievement());
 		addAchivements();
 
 	}

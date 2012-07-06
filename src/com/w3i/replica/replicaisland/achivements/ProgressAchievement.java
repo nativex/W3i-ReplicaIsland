@@ -2,19 +2,18 @@ package com.w3i.replica.replicaisland.achivements;
 
 public class ProgressAchievement extends Achievement {
 	private int progress;
-	private int goal;
+	private final int GOAL;
+
+	protected ProgressAchievement(int goal) {
+		GOAL = goal;
+	}
 
 	public void setProgress(
 			int progress) {
 		this.progress = progress;
-		if (progress >= goal) {
+		if (progress >= GOAL) {
 			setDone(true);
 		}
-	}
-
-	protected void setGoal(
-			int goal) {
-		this.goal = goal;
 	}
 
 	public int getProgress() {
@@ -22,6 +21,6 @@ public class ProgressAchievement extends Achievement {
 	}
 
 	public int getGoal() {
-		return goal;
+		return GOAL;
 	}
 }
