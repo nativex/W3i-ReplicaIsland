@@ -14,6 +14,8 @@ import com.w3i.replica.replicaisland.R;
 import com.w3i.replica.replicaisland.achivements.Achievement;
 import com.w3i.replica.replicaisland.achivements.AchievementManager;
 import com.w3i.replica.replicaisland.achivements.ProgressAchievement;
+import com.w3i.replica.replicaisland.achivements.Achievement.Type;
+import com.w3i.replica.replicaisland.store.SharedPreferenceManager;
 
 public class AchievementsActivity extends Activity {
 	private LinearLayout achvContainer;
@@ -25,7 +27,8 @@ public class AchievementsActivity extends Activity {
 		setContentView(R.layout.ui_achivements_activity);
 
 		achvContainer = (LinearLayout) findViewById(R.id.achvMainList);
-
+		SharedPreferenceManager.loadAchivements();
+		((ProgressAchievement) AchievementManager.getAchivement(Type.CRYSTALS)).setProgress(134);
 		addAchivements();
 
 	}
