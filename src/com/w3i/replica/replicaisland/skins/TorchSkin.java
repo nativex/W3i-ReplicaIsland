@@ -12,9 +12,9 @@ public class TorchSkin extends Skin {
 		setMovementAnimations();
 		setActionAnimations();
 
-		setTitleImage(R.drawable.skin_player_torch_move_01);
+		setTitleImage(R.drawable.ui_main_menu_torch);
 		setSkinType(SkinType.PLAYER);
-		setImage(R.drawable.skin_player_torch_move_01);
+		setImage(R.drawable.skin_player_torch_stand_01);
 		setName("Torch");
 		setDescription("A robot.");
 	}
@@ -62,7 +62,7 @@ public class TorchSkin extends Skin {
 		setAnimationFrames(PlayerAnimations.BOOST_MOVE_FAST, R.drawable.skin_player_torch_fly_move_fast_01, R.drawable.skin_player_torch_fly_move_fast_02, R.drawable.skin_player_torch_fly_move_fast_03);
 
 		// MOVE AIR
-		setAnimationFrames(PlayerAnimations.MOVE_AIR, R.drawable.skin_player_torch_air_fall_01, R.drawable.skin_player_torch_air_fall_02);
+		setAnimationFrames(PlayerAnimations.MOVE_AIR, R.drawable.skin_player_torch_move_01, R.drawable.skin_player_torch_move_01);
 
 		// FALL
 		setAnimationFrames(PlayerAnimations.FALL, R.drawable.skin_player_torch_air_fall_01, R.drawable.skin_player_torch_air_fall_02);
@@ -79,6 +79,8 @@ public class TorchSkin extends Skin {
 		// JET
 		setAnimationFrames(PlayerAnimations.JET, R.drawable.skin_player_torch_jet_fire_01, R.drawable.skin_player_torch_jet_fire_02);
 
+		// SHIELD
+		setAnimationFrames(PlayerAnimations.SHIELD, R.drawable.skin_player_torch_ghost_01, R.drawable.skin_player_torch_ghost_02, R.drawable.skin_player_torch_ghost_03);
 	}
 
 }

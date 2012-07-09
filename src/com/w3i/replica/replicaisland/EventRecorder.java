@@ -17,6 +17,8 @@
 package com.w3i.replica.replicaisland;
 
 import com.w3i.common.Log;
+import com.w3i.replica.replicaisland.achivements.Achievement.Type;
+import com.w3i.replica.replicaisland.achivements.AchievementManager;
 import com.w3i.replica.replicaisland.store.FundsManager;
 
 public class EventRecorder extends BaseObject {
@@ -73,6 +75,7 @@ public class EventRecorder extends BaseObject {
 			break;
 		case COUNTER_PEARLS_COLLECTED:
 			FundsManager.addPearls(1);
+			AchievementManager.incrementAchievementProgress(Type.PEARLS, 1);
 			mPearlsCollected++;
 			break;
 		case COUNTER_PEARLS_TOTAL:

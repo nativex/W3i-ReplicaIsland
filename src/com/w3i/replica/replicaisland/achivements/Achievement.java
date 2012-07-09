@@ -1,5 +1,7 @@
 package com.w3i.replica.replicaisland.achivements;
 
+import com.w3i.replica.replicaisland.store.SharedPreferenceManager;
+
 public abstract class Achievement {
 	private Type type;
 	private boolean disabled = false;
@@ -12,7 +14,9 @@ public abstract class Achievement {
 	public enum Type {
 		CRYSTALS,
 		PEARLS,
-		GOOD_ENDING
+		GOOD_ENDING,
+		FLY_TIME,
+		JETPACK_TIME
 	}
 
 	public Type getType() {
@@ -39,7 +43,7 @@ public abstract class Achievement {
 		this.disabled = disabled;
 	}
 
-	protected void setProgress(
+	protected void setProgressAchievement(
 			boolean hasProgress) {
 		progress = hasProgress;
 	}
@@ -68,13 +72,14 @@ public abstract class Achievement {
 	public void setDone(
 			boolean done) {
 		this.done = done;
+		AchievementManager.storeAchievements();
 	}
 
 	public boolean isDone() {
 		return done;
 	}
 
-	public boolean hasProgress() {
+	public boolean isProgressAchievement() {
 		return progress;
 	}
 

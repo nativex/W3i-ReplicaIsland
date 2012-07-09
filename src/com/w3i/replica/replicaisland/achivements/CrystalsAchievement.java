@@ -7,7 +7,6 @@ public class CrystalsAchievement extends ProgressAchievement {
 		setName(AchievementConstants.CRYSTALS_DESCRIPTION);
 		setDescription(AchievementConstants.CRYSTALS_NAME);
 		setType(Type.CRYSTALS);
-		setProgress(true);
 	}
 
 }

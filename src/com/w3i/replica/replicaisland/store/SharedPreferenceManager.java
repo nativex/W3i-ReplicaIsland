@@ -13,7 +13,9 @@ import com.w3i.common.Log;
 import com.w3i.replica.replicaisland.achivements.Achievement;
 import com.w3i.replica.replicaisland.achivements.AchievementManager;
 import com.w3i.replica.replicaisland.achivements.CrystalsAchievement;
+import com.w3i.replica.replicaisland.achivements.FlyTime;
 import com.w3i.replica.replicaisland.achivements.GoodEndingAchievement;
+import com.w3i.replica.replicaisland.achivements.JetpackTime;
 import com.w3i.replica.replicaisland.achivements.PearlsAchievement;
 import com.w3i.replica.replicaisland.achivements.ProgressAchievement;
 
@@ -54,6 +56,12 @@ public class SharedPreferenceManager {
 	private static final String PREF_ACHIEVEMENT_PEARLS_PROGRESS = "achvPearlsProgress";
 	private static final String PREF_ACHIEVEMENT_GOOD_ENDINNG = "achvGoodEnding";
 	private static final String PREF_ACHIEVEMENT_GOOD_ENDINNG_DONE = "achvGoodEndingDone";
+	private static final String PREF_ACHIEVEMENT_AIR_TIME = "achvAirTime";
+	private static final String PREF_ACHIEVEMENT_AIR_TIME_DONE = "achvAirTimeDone";
+	private static final String PREF_ACHIEVEMENT_AIR_TIME_PROGRESS = "achvAirTimeProgress";
+	private static final String PREF_ACHIEVEMENT_JETPACK_TIME = "achvJetpackTime";
+	private static final String PREF_ACHIEVEMENT_JETPACK_TIME_DONE = "achvJetpackTimeDone";
+	private static final String PREF_ACHIEVEMENT_JETPACK_TIME_PROGRESS = "achvJetpackTimeProgress";
 
 	private SharedPreferenceManager(Context context) {
 		instance = this;
@@ -267,6 +275,16 @@ public class SharedPreferenceManager {
 			edit.putBoolean(PREF_ACHIEVEMENT_PEARLS_DONE, achv.isDone());
 			edit.putInt(PREF_ACHIEVEMENT_PEARLS_PROGRESS, ((ProgressAchievement) achv).getProgress());
 			break;
+		case FLY_TIME:
+			edit.putBoolean(PREF_ACHIEVEMENT_AIR_TIME, achv.isDisabled());
+			edit.putBoolean(PREF_ACHIEVEMENT_AIR_TIME_DONE, achv.isDone());
+			edit.putInt(PREF_ACHIEVEMENT_AIR_TIME_PROGRESS, ((ProgressAchievement) achv).getProgress());
+			break;
+		case JETPACK_TIME:
+			edit.putBoolean(PREF_ACHIEVEMENT_JETPACK_TIME, achv.isDisabled());
+			edit.putBoolean(PREF_ACHIEVEMENT_JETPACK_TIME_DONE, achv.isDone());
+			edit.putInt(PREF_ACHIEVEMENT_JETPACK_TIME_PROGRESS, ((ProgressAchievement) achv).getProgress());
+			break;
 		}
 	}
 
@@ -303,6 +321,26 @@ public class SharedPreferenceManager {
 				pearlsAchievement.setDone(pearlsDone);
 				pearlsAchievement.setProgress(pearlsProgress);
 				AchievementManager.addAchivement(pearlsAchievement);
+			}
+
+			boolean airTimeDisabled = preferences.getBoolean(PREF_ACHIEVEMENT_AIR_TIME, false);
+			boolean airTimeDone = preferences.getBoolean(PREF_ACHIEVEMENT_AIR_TIME_DONE, false);
+			int airTimeProgress = preferences.getInt(PREF_ACHIEVEMENT_AIR_TIME_PROGRESS, 0);
+			if (!airTimeDisabled) {
+				FlyTime airTimeAchievement = new FlyTime();
+				airTimeAchievement.setDone(airTimeDone);
+				airTimeAchievement.setProgress(airTimeProgress);
+				AchievementManager.addAchivement(airTimeAchievement);
+			}
+
+			boolean jetpackDisabled = preferences.getBoolean(PREF_ACHIEVEMENT_JETPACK_TIME, false);
+			boolean jetpackDone = preferences.getBoolean(PREF_ACHIEVEMENT_JETPACK_TIME_DONE, false);
+			int jetpackProgress = preferences.getInt(PREF_ACHIEVEMENT_JETPACK_TIME_PROGRESS, 0);
+			if (!jetpackDisabled) {
+				JetpackTime jetPackTimeAchievement = new JetpackTime();
+				jetPackTimeAchievement.setDone(jetpackDone);
+				jetPackTimeAchievement.setProgress(jetpackProgress);
+				AchievementManager.addAchivement(jetPackTimeAchievement);
 			}
 
 		} catch (Exception e) {

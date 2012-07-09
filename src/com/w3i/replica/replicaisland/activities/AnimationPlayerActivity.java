@@ -35,6 +35,8 @@ import android.widget.ImageView;
 import com.w3i.replica.replicaisland.DebugLog;
 import com.w3i.replica.replicaisland.R;
 import com.w3i.replica.replicaisland.UIConstants;
+import com.w3i.replica.replicaisland.achivements.AchievementManager;
+import com.w3i.replica.replicaisland.achivements.Achievement.Type;
 
 public class AnimationPlayerActivity extends Activity {
 	public static final int KYLE_DEATH = 0;
@@ -95,7 +97,7 @@ public class AnimationPlayerActivity extends Activity {
 				if (mAnimationType == WANDA_ENDING) {
 					setContentView(R.layout.good_ending_animation);
 					startX = 200 * metrics.density;
-
+					AchievementManager.setAchivementDone(Type.GOOD_ENDING, true);
 				} else {
 					setContentView(R.layout.kabocha_ending_animation);
 					startX = -200 * metrics.density;

@@ -51,6 +51,7 @@ import com.w3i.replica.replicaisland.R;
 import com.w3i.replica.replicaisland.SingleTouchFilter;
 import com.w3i.replica.replicaisland.TouchFilter;
 import com.w3i.replica.replicaisland.UIConstants;
+import com.w3i.replica.replicaisland.achivements.AchievementManager;
 import com.w3i.replica.replicaisland.publisher.OfferwallManager;
 import com.w3i.replica.replicaisland.skins.SkinManager;
 import com.w3i.replica.replicaisland.store.FundsManager;
@@ -258,6 +259,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		GamesPlatformManager.release();
 		FundsManager.release();
 		ItemManager.release();
+
 	}
 
 	/**
@@ -283,10 +285,11 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		GamesPlatformManager.initialize(this);
 		FundsManager.loadFunds();
 		PowerupManager.loadPowerups();
+		AchievementManager.loadAchievements();
 
 		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
 		params.gravity = Gravity.BOTTOM;
-		FrameLayout mainLayout = (FrameLayout) findViewById(R.id.mainMenuLayout);
+		// FrameLayout mainLayout = (FrameLayout) findViewById(R.id.mainMenuLayout);
 		// OfferwallManager.showFeaturedOfferBanner(mainLayout, params);
 
 		// OfferwallManager.showFeaturedOffer(this);
@@ -314,6 +317,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		super.onPause();
 		mPaused = true;
 		PowerupManager.storePowerups();
+		AchievementManager.storeAchievements();
 	}
 
 	@Override

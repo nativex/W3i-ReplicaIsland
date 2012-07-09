@@ -12,13 +12,20 @@
         android:gravity="center_horizontal"
         android:text="@string/achivements" />
 
-    <LinearLayout
-        android:id="@+id/achvMainList"
+    <ScrollView
+        android:id="@+id/achvMainScroller"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/achvMainTitle"
-        android:layout_margin="5dip"
-        android:orientation="vertical" >
-    </LinearLayout>
+        android:layout_margin="5dip" >
+
+        <LinearLayout
+            android:id="@+id/achvMainList"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:orientation="vertical" >
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

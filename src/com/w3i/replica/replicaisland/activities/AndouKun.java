@@ -50,6 +50,7 @@ import com.w3i.replica.replicaisland.LevelTree;
 import com.w3i.replica.replicaisland.PreferenceConstants;
 import com.w3i.replica.replicaisland.R;
 import com.w3i.replica.replicaisland.UIConstants;
+import com.w3i.replica.replicaisland.achivements.AchievementManager;
 import com.w3i.replica.replicaisland.store.FundsManager;
 import com.w3i.replica.replicaisland.store.KillingSpreeDetector;
 import com.w3i.replica.replicaisland.store.ReplicaIslandToast;
@@ -295,6 +296,10 @@ public class AndouKun extends Activity implements SensorEventListener {
 		if (mSensorManager != null) {
 			mSensorManager.unregisterListener(this);
 		}
+		AchievementManager.endFlyTime();
+		AchievementManager.endJetpackTime();
+		AchievementManager.storeAchievements();
+
 	}
 
 	protected void onResume() {

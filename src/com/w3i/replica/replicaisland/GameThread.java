@@ -16,6 +16,8 @@
 
 package com.w3i.replica.replicaisland;
 
+import com.w3i.replica.replicaisland.achivements.AchievementManager;
+
 import android.os.SystemClock;
 
 /**

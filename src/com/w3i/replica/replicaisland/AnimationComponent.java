@@ -19,6 +19,8 @@ package com.w3i.replica.replicaisland;
 import com.w3i.replica.replicaisland.CollisionParameters.HitType;
 import com.w3i.replica.replicaisland.GameObject.ActionType;
 import com.w3i.replica.replicaisland.SoundSystem.Sound;
+import com.w3i.replica.replicaisland.achivements.Achievement.Type;
+import com.w3i.replica.replicaisland.achivements.AchievementManager;
 import com.w3i.replica.replicaisland.store.FundsManager;
 
 /**
@@ -134,7 +136,15 @@ public class AnimationComponent extends GameComponent {
 
 			final boolean touchingGround = parentObject.touchingGround();
 
+			if (!touchingGround) {
+				AchievementManager.increaseFlyTime(timeDelta);
+			}
+
 			boolean boosting = mPlayer != null ? mPlayer.getRocketsOn() : false;
+
+			if (boosting) {
+				AchievementManager.startJetpackTime(timeDelta);
+			}
 
 			boolean visible = true;
 
@@ -180,14 +190,17 @@ public class AnimationComponent extends GameComponent {
 					case 1:
 						sound.play(mRubySound1, false, SoundSystem.PRIORITY_NORMAL);
 						FundsManager.addCrystals(1, true);
+						AchievementManager.incrementAchievementProgress(Type.CRYSTALS, 1);
 						break;
 					case 2:
 						sound.play(mRubySound2, false, SoundSystem.PRIORITY_NORMAL);
 						FundsManager.addCrystals(1, true);
+						AchievementManager.incrementAchievementProgress(Type.CRYSTALS, 1);
 						break;
 					case 3:
 						sound.play(mRubySound3, false, SoundSystem.PRIORITY_NORMAL);
 						FundsManager.addCrystals(1, true);
+						AchievementManager.incrementAchievementProgress(Type.CRYSTALS, 1);
 						break;
 					}
 
@@ -254,7 +267,7 @@ public class AnimationComponent extends GameComponent {
 						} else if (Math.abs(velocityX) > 300.0f) {
 							mSprite.playAnimation(PlayerAnimations.MOVE_AIR.ordinal());
 						} else {
-							mSprite.playAnimation(PlayerAnimations.FALL.ordinal());
+							mSprite.playAnimation(PlayerAnimations.MOVE_AIR.ordinal());
 						}
 					}
 
