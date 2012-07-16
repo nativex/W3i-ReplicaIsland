@@ -35,8 +35,8 @@ import android.widget.ImageView;
 import com.w3i.replica.replicaisland.DebugLog;
 import com.w3i.replica.replicaisland.R;
 import com.w3i.replica.replicaisland.UIConstants;
-import com.w3i.replica.replicaisland.achivements.AchievementManager;
 import com.w3i.replica.replicaisland.achivements.Achievement.Type;
+import com.w3i.replica.replicaisland.achivements.AchievementManager;
 
 public class AnimationPlayerActivity extends Activity {
 	public static final int KYLE_DEATH = 0;

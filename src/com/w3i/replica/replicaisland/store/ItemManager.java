@@ -13,10 +13,13 @@ import com.w3i.gamesplatformsdk.rest.entities.Attribute;
 import com.w3i.gamesplatformsdk.rest.entities.Category;
 import com.w3i.gamesplatformsdk.rest.entities.Currency;
 import com.w3i.gamesplatformsdk.rest.entities.Item;
+import com.w3i.replica.replicaisland.achivements.Achievement.Type;
+import com.w3i.replica.replicaisland.achivements.AchievementManager;
 
 public class ItemManager {
 	private static final long GARBAGE_COLLECTOR_ID = 1049;
 	private static final long KILLING_SPREE_ID = 1050;
+	private static final long ULTIMATE_HEALTH_ID = 1004;
 	private static ItemManager instance;
 	private List<Category> categories;
 	private Map<Long, Item> itemsByIds;
@@ -198,6 +201,8 @@ public class ItemManager {
 			PowerupManager.setGarbageCollector(true);
 		} else if (item.getId() == KILLING_SPREE_ID) {
 			PowerupManager.setKillingSpreeEnabled(true);
+		} else if (item.getId() == ULTIMATE_HEALTH_ID) {
+			AchievementManager.setAchivementDone(Type.HEALTH, true);
 		}
 		return true;
 	}

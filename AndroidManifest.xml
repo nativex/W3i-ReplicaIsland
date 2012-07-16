@@ -17,7 +17,7 @@
         android:targetSdkVersion="8" />
     <!--
     Actually, this game works fine on small screens, but the only one out 
-	right now has no 3D acceleration, so it's slow and unplayable.
+	right now has no 3D acceleration, so it's slow and unplayable.
     -->
 
     <supports-screens
@@ -111,8 +111,16 @@
         </activity>
         <activity android:name="com.w3i.gamesplatformsdk.ui.StoreUI" >
         </activity>
-        <activity android:name=".activities.SkinSelectionActivity" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:screenOrientation="landscape"></activity>
-        <activity android:name=".activities.AchievementsActivity" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".activities.SkinSelectionActivity"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name=".activities.AchievementsActivity"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
     </application>
 
 </manifest>

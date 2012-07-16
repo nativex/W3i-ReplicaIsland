@@ -1,7 +1,5 @@
 package com.w3i.replica.replicaisland.achivements;
 
-import com.w3i.replica.replicaisland.store.SharedPreferenceManager;
-
 public abstract class Achievement {
 	private Type type;
 	private boolean disabled = false;
@@ -16,7 +14,14 @@ public abstract class Achievement {
 		PEARLS,
 		GOOD_ENDING,
 		FLY_TIME,
-		JETPACK_TIME
+		JETPACK_TIME,
+		KILLS,
+		MEGA_KILL,
+		MULTI_KILL,
+		LEVELS,
+		HEALTH,
+		BONUS_PEARLS,
+		BONUS_CRYSTALS
 	}
 
 	public Type getType() {
@@ -71,8 +76,19 @@ public abstract class Achievement {
 
 	public void setDone(
 			boolean done) {
+		setDone(done, true);
+	}
+
+	public void setDone(
+			boolean done,
+			boolean notify) {
+		boolean fireListener = notify && done && !this.done;
+
 		this.done = done;
 		AchievementManager.storeAchievements();
+		if (fireListener) {
+			AchievementManager.notifyAchievementDone(this);
+		}
 	}
 
 	public boolean isDone() {

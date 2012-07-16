@@ -14,6 +14,7 @@ public class AchievementManager {
 
 	private FlyTime flyTime;
 	private JetpackTime jetpackTime;
+	private AchievementListener achievementListener;
 
 	private AchievementManager() {
 		achivements = new ArrayList<Achievement>();
@@ -131,11 +132,28 @@ public class AchievementManager {
 			Achievement.Type type,
 			boolean isDone) {
 		Achievement achv = _getAchivement(type);
-		if (achv != null) {
+		if ((achv != null) && (achv.isDone() != isDone)) {
 			achv.setDone(isDone);
 		} else {
 			Log.e("AchivementManager._setAchivementDone: cannot find achivement of type: " + type.toString());
 		}
+	}
+
+	public static boolean isAchievementDone(
+			Achievement.Type type) {
+		if (instance == null) {
+			return false;
+		}
+		return instance._isAchievementDone(type);
+	}
+
+	private boolean _isAchievementDone(
+			Achievement.Type type) {
+		Achievement achievement = _getAchivement(type);
+		if (achievement != null) {
+			return achievement.isDone();
+		}
+		return false;
 	}
 
 	public static void increaseFlyTime(
@@ -228,6 +246,46 @@ public class AchievementManager {
 	public static void loadAchievements() {
 		checkInstance();
 		SharedPreferenceManager.loadAchivements();
+	}
+
+	public static void notifyAchievementDone(
+			Achievement achievement) {
+		checkInstance();
+		instance._notifyAchievementDone(achievement);
+	}
+
+	private void _notifyAchievementDone(
+			Achievement achievement) {
+		if (achievementListener != null) {
+			achievementListener.achievementDone(achievement);
+		}
+	}
+
+	public static void registerAchievementListener(
+			AchievementListener listener) {
+		checkInstance();
+		instance._registerAchievementListener(listener);
+	}
+
+	private void _registerAchievementListener(
+			AchievementListener listener) {
+		achievementListener = listener;
+	}
+
+	/**
+	 * TEST METHOD
+	 */
+	public static void resetAchievements() {
+		if (instance == null) {
+			return;
+		}
+
+		for (Achievement a : instance.achivements) {
+			a.setDone(false, false);
+			if (a instanceof ProgressAchievement) {
+				((ProgressAchievement) a).setProgress(0);
+			}
+		}
 	}
 
 	private void _release() {

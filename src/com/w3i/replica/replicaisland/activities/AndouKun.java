@@ -50,6 +50,8 @@ import com.w3i.replica.replicaisland.LevelTree;
 import com.w3i.replica.replicaisland.PreferenceConstants;
 import com.w3i.replica.replicaisland.R;
 import com.w3i.replica.replicaisland.UIConstants;
+import com.w3i.replica.replicaisland.achivements.Achievement;
+import com.w3i.replica.replicaisland.achivements.AchievementListener;
 import com.w3i.replica.replicaisland.achivements.AchievementManager;
 import com.w3i.replica.replicaisland.store.FundsManager;
 import com.w3i.replica.replicaisland.store.KillingSpreeDetector;
@@ -114,6 +116,17 @@ public class AndouKun extends Activity implements SensorEventListener {
 				int pearlsEarned) {
 			if (kills > 1) {
 				ReplicaIslandToast.makeKillingSpreeToast(AndouKun.this, kills, pearlsEarned).show();
+			}
+		}
+	};
+
+	private AchievementListener onAchievementDone = new AchievementListener() {
+
+		@Override
+		public void achievementDone(
+				Achievement achievement) {
+			if (achievement.isDone()) {
+				ReplicaIslandToast.makeAchievementToast(AndouKun.this, achievement).show();
 			}
 		}
 	};
@@ -261,6 +274,7 @@ public class AndouKun extends Activity implements SensorEventListener {
 		}
 
 		KillingSpreeDetector.setKillingSpreeListener(killingSpreeListener);
+		AchievementManager.registerAchievementListener(onAchievementDone);
 	}
 
 	protected void onDestroy() {
@@ -275,6 +289,7 @@ public class AndouKun extends Activity implements SensorEventListener {
 			}
 		}
 		KillingSpreeDetector.setKillingSpreeListener(null);
+		AchievementManager.registerAchievementListener(null);
 		super.onDestroy();
 
 	}

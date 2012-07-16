@@ -4,6 +4,8 @@ import java.util.Map;
 
 import com.w3i.gamesplatformsdk.rest.entities.Currency;
 import com.w3i.gamesplatformsdk.rest.entities.Item;
+import com.w3i.replica.replicaisland.achivements.Achievement.Type;
+import com.w3i.replica.replicaisland.achivements.AchievementManager;
 
 public class FundsManager {
 	public static final String PEARLS = "Pearls";
@@ -114,13 +116,16 @@ public class FundsManager {
 
 	public static void recordKill() {
 		if (PowerupManager.hasGarbageCollector()) {
+			int pearlsAwarded = 0;
 			if (PowerupManager.isKillingSpreeEnabled()) {
 				KillingSpreeDetector.recordKill();
-				float pearlsAwarded = PowerupManager.getPearlsPerKill() * KillingSpreeDetector.getMultiplier() + 0.5f;
-				FundsManager.addPearls((int) pearlsAwarded);
+				pearlsAwarded = (int) (PowerupManager.getPearlsPerKill() * KillingSpreeDetector.getMultiplier() + 0.5f);
 			} else {
-				FundsManager.addPearls(PowerupManager.getPearlsPerKill());
+				pearlsAwarded = PowerupManager.getPearlsPerKill();
 			}
+			FundsManager.addPearls(pearlsAwarded);
+			AchievementManager.incrementAchievementProgress(Type.BONUS_PEARLS, pearlsAwarded);
 		}
+		AchievementManager.incrementAchievementProgress(Type.KILLS, 1);
 	}
 }

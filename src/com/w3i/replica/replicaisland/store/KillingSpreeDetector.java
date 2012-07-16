@@ -4,6 +4,9 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.w3i.common.Log;
+import com.w3i.replica.replicaisland.achivements.Achievement.Type;
+import com.w3i.replica.replicaisland.achivements.AchievementConstants;
+import com.w3i.replica.replicaisland.achivements.AchievementManager;
 
 public class KillingSpreeDetector {
 	public static final long KILLING_SPREE_DURATION = 1000; // 1 sec
@@ -37,13 +40,26 @@ public class KillingSpreeDetector {
 				if (killingSpreeListener != null) {
 					killingSpreeListener.killingSpreeEnded(monstersKilled, pearlsEarned);
 				}
+				_handleKillingSpreeEndAchievements(monstersKilled);
 				killingSpreeMultiplier = 1f;
 				monstersKilled = 0;
 				inSpree = false;
 				removeMessages(MSG_END_KILLING_SPREE);
 			}
-		};
+		}
+
 	};
+
+	private void _handleKillingSpreeEndAchievements(
+			int monstersKilled) {
+		if (monstersKilled > 1) {
+			AchievementManager.incrementAchievementProgress(Type.MULTI_KILL, 1);
+		}
+		if (monstersKilled >= AchievementConstants.MEGA_KILL_GOAL) {
+			AchievementManager.setAchivementDone(Type.MEGA_KILL, true);
+		}
+
+	}
 
 	private KillingSpreeDetector() {
 		instance = this;
@@ -71,10 +87,13 @@ public class KillingSpreeDetector {
 	}
 
 	private void recordCrystals() {
-		killsToCrystal--;
-		if (killsToCrystal <= 0) {
-			FundsManager.addCrystals(PowerupManager.getCrystalsPerKill());
-			killsToCrystal = PowerupManager.getKillsForCrystal();
+		if (PowerupManager.getCrystalsPerKill() > 0) {
+			killsToCrystal--;
+			if (killsToCrystal <= 0) {
+				FundsManager.addCrystals(PowerupManager.getCrystalsPerKill());
+				killsToCrystal = PowerupManager.getKillsForCrystal();
+				AchievementManager.incrementAchievementProgress(Type.BONUS_CRYSTALS, PowerupManager.getCrystalsPerKill());
+			}
 		}
 	}
 

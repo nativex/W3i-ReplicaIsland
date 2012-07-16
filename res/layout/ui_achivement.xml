@@ -21,9 +21,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dip"
         android:layout_marginRight="5dip"
         android:layout_marginTop="5dip"
-        android:layout_toRightOf="@+id/uiAchvIcon" android:layout_marginLeft="5dip"/>
+        android:layout_toRightOf="@+id/uiAchvIcon" />
 
     <TextView
         android:id="@+id/uiAchvDescription"

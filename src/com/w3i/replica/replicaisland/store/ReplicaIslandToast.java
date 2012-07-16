@@ -6,12 +6,14 @@ import android.text.Html;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.w3i.gamesplatformsdk.rest.entities.Item;
 import com.w3i.offerwall.custom.views.CustomImageView;
 import com.w3i.replica.replicaisland.R;
+import com.w3i.replica.replicaisland.achivements.Achievement;
 
 public class ReplicaIslandToast {
 
@@ -49,6 +51,27 @@ public class ReplicaIslandToast {
 		TextView killingSpreeText = (TextView) toastLayout.findViewById(R.id.killingSpreeText);
 		String formattedKillingSpreeString = "<font color=orange>" + kills + "<font/><font color=yellow> enemies killed<font/>";
 		killingSpreeText.setText(Html.fromHtml(formattedKillingSpreeString));
+
+		toast.setDuration(Toast.LENGTH_LONG);
+		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 10);
+		return toast;
+	}
+
+	public static Toast makeAchievementToast(
+			Context context,
+			Achievement achievement) {
+		Toast toast = new Toast(context);
+
+		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View toastLayout = inflater.inflate(R.layout.toast_killing_spree, null);
+		toast.setView(toastLayout);
+		TextView killingSpreeTitle = (TextView) toastLayout.findViewById(R.id.killingSpreeTitle);
+		killingSpreeTitle.setText("Achievement earned");
+		TextView killingSpreeText = (TextView) toastLayout.findViewById(R.id.killingSpreeText);
+		String formattedKillingSpreeString = "You have earned <font color=GREEN> " + achievement.getName() + "</font>.";
+		killingSpreeText.setText(Html.fromHtml(formattedKillingSpreeString));
+		ImageView killingSpreeIcon = (ImageView) toastLayout.findViewById(R.id.killingSpreeIcon);
+		killingSpreeIcon.setImageResource(R.drawable.achv_locked);
 
 		toast.setDuration(Toast.LENGTH_LONG);
 		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 10);

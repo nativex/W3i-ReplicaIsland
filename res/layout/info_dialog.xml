@@ -88,7 +88,7 @@
         android:id="@+id/infoDialogButton"
         android:layout_width="110dip"
         android:layout_height="40dip"
-        android:layout_alignParentRight="true"
+        android:layout_alignRight="@+id/infoDialogCloseButton"
         android:layout_below="@+id/infoDialogItemLayout"
         android:layout_margin="10dip"
         android:background="@drawable/info_dialog_button"

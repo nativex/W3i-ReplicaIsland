@@ -1,5 +1,7 @@
 package com.w3i.replica.replicaisland.achivements;
 
+import com.w3i.replica.replicaisland.utils.TimeUtils;
+
 public class FlyTime extends ProgressAchievement {
 	private double flyTime = 0;
 	private boolean flying = false;
@@ -33,12 +35,7 @@ public class FlyTime extends ProgressAchievement {
 	@Override
 	protected String convertProgress(
 			int progress) {
-		int seconds = progress % 60;
-		int minutes = progress / 60;
-
-		String time = (minutes < 10 ? "0" + minutes : Integer.toString(minutes)) + ":";
-		time += (seconds < 10 ? "0" + seconds : Integer.toString(seconds));
-		return time;
+		return TimeUtils.convertSecondsToString(progress);
 
 	}
 
