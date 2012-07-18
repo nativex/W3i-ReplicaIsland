@@ -9,7 +9,7 @@ import com.w3i.replica.replicaisland.store.SharedPreferenceManager;
 
 public class AchievementManager {
 	private static AchievementManager instance = null;
-	private ArrayList<Achievement> achivements = null;
+	private ArrayList<Achievement> achievements = null;
 	private static int instances = 0;
 
 	private FlyTime flyTime;
@@ -17,7 +17,7 @@ public class AchievementManager {
 	private AchievementListener achievementListener;
 
 	private AchievementManager() {
-		achivements = new ArrayList<Achievement>();
+		achievements = new ArrayList<Achievement>();
 		instances++;
 		if (instances > 1) {
 			Log.e("AchivementManager: too many instances created");
@@ -39,7 +39,7 @@ public class AchievementManager {
 	private void _addAchivement(
 			Achievement achivement) {
 		if (achivement != null) {
-			achivements.add(achivement);
+			achievements.add(achivement);
 		}
 	}
 
@@ -49,7 +49,7 @@ public class AchievementManager {
 	}
 
 	private List<Achievement> _getAchivements() {
-		return achivements;
+		return achievements;
 	}
 
 	public static Achievement getAchivement(
@@ -60,7 +60,7 @@ public class AchievementManager {
 
 	private Achievement _getAchivement(
 			Achievement.Type type) {
-		for (Achievement a : achivements) {
+		for (Achievement a : achievements) {
 			if (a.getType() == type) {
 				return a;
 			}
@@ -121,21 +121,21 @@ public class AchievementManager {
 		instance._release();
 	}
 
-	public static void setAchivementDone(
+	public static void setAchievementDone(
 			Achievement.Type type,
 			boolean isDone) {
 		checkInstance();
-		instance._setAchivementDone(type, isDone);
+		instance._setAchievementDone(type, isDone);
 	}
 
-	private void _setAchivementDone(
+	private void _setAchievementDone(
 			Achievement.Type type,
 			boolean isDone) {
 		Achievement achv = _getAchivement(type);
 		if ((achv != null) && (achv.isDone() != isDone)) {
 			achv.setDone(isDone);
 		} else {
-			Log.e("AchivementManager._setAchivementDone: cannot find achivement of type: " + type.toString());
+			Log.e("AchivementManager._setAchievementDone: cannot find achivement of type: " + type.toString());
 		}
 	}
 
@@ -245,6 +245,7 @@ public class AchievementManager {
 
 	public static void loadAchievements() {
 		checkInstance();
+		instance._initializeAchievements();
 		SharedPreferenceManager.loadAchivements();
 	}
 
@@ -280,19 +281,69 @@ public class AchievementManager {
 			return;
 		}
 
-		for (Achievement a : instance.achivements) {
-			a.setDone(false, false);
-			if (a instanceof ProgressAchievement) {
-				((ProgressAchievement) a).setProgress(0);
-			}
+		instance._initializeAchievements();
+	}
+
+	public static void setAchievementLocked(
+			Achievement.Type type,
+			boolean isLocked) {
+		checkInstance();
+		instance._setAchievementLocked(type, isLocked);
+	}
+
+	private void _setAchievementLocked(
+			Achievement.Type type,
+			boolean isLocked) {
+		Achievement achievement = _getAchivement(type);
+		if (achievement != null) {
+			achievement.setLocked(isLocked);
 		}
 	}
 
+	private void _initializeAchievements() {
+		achievements.clear();
+		achievements.add(new BonusCrystalsAchievement());
+		achievements.add(new BonusPearlsAchievement());
+		achievements.add(new CrystalsAchievement());
+		achievements.add(new DeathAchievement());
+		achievements.add(new FlyTime());
+		achievements.add(new GameBeatAchievement());
+		achievements.add(new GoodEndingAchievement());
+		achievements.add(new HitAchievement());
+		achievements.add(new JetpackTime());
+		achievements.add(new KillsAchievement());
+		achievements.add(new LevelsAchievement());
+		achievements.add(new LifeAchievement());
+		achievements.add(new MegakillAchievement());
+		achievements.add(new MultikillAchievement());
+		achievements.add(new PearlsAchievement());
+		achievements.add(new PossessionAchievement());
+		achievements.add(new ShieldAchievement());
+		achievements.add(new KyleDefeatedAchievement());
+		achievements.add(new KaboochaDefeated());
+		achievements.add(new RodokouDefeated());
+	}
+
 	private void _release() {
-		instance.achivements.clear();
-		instance.achivements = null;
+		instance.achievements.clear();
+		instance.achievements = null;
 		instance = null;
 		instances--;
+	}
+
+	public static void notifyAchievementUnlocked(
+			Achievement achievement) {
+		if (instance == null) {
+			return;
+		}
+		instance._notifyAchievementUnlocked(achievement);
+	}
+
+	private void _notifyAchievementUnlocked(
+			Achievement achievement) {
+		if (achievementListener != null) {
+			achievementListener.achievementUnlocked(achievement);
+		}
 	}
 
 }

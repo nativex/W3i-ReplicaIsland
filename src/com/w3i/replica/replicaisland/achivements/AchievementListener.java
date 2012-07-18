@@ -4,4 +4,7 @@ public interface AchievementListener {
 
 	public void achievementDone(
 			Achievement achievement);
+
+	public void achievementUnlocked(
+			Achievement achievement);
 }

@@ -20,6 +20,7 @@ public class ItemManager {
 	private static final long GARBAGE_COLLECTOR_ID = 1049;
 	private static final long KILLING_SPREE_ID = 1050;
 	private static final long ULTIMATE_HEALTH_ID = 1004;
+	private static final long CRYSTAL_EXTRACTOR = 1051;
 	private static ItemManager instance;
 	private List<Category> categories;
 	private Map<Long, Item> itemsByIds;
@@ -201,9 +202,12 @@ public class ItemManager {
 			PowerupManager.setGarbageCollector(true);
 		} else if (item.getId() == KILLING_SPREE_ID) {
 			PowerupManager.setKillingSpreeEnabled(true);
+		} else if (item.getId() == CRYSTAL_EXTRACTOR) {
+			AchievementManager.setAchievementLocked(Type.BONUS_CRYSTALS, false);
 		} else if (item.getId() == ULTIMATE_HEALTH_ID) {
-			AchievementManager.setAchivementDone(Type.HEALTH, true);
+			AchievementManager.setAchievementDone(Type.HEALTH, true);
 		}
+
 		return true;
 	}
 

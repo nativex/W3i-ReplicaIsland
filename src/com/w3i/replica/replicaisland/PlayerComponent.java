@@ -18,6 +18,8 @@ package com.w3i.replica.replicaisland;
 
 import com.w3i.replica.replicaisland.CollisionParameters.HitType;
 import com.w3i.replica.replicaisland.GameObject.ActionType;
+import com.w3i.replica.replicaisland.achivements.AchievementManager;
+import com.w3i.replica.replicaisland.achivements.Achievement.Type;
 
 public class PlayerComponent extends GameComponent {
 
@@ -229,6 +231,7 @@ public class PlayerComponent extends GameComponent {
 		if (mInventory != null && mState != State.WIN) {
 			InventoryComponent.UpdateRecord inventory = mInventory.getRecord();
 			if (inventory.coinCount >= mDifficultyConstants.getCoinsPerPowerup()) {
+				AchievementManager.incrementAchievementProgress(Type.SHIELD, 1);
 				inventory.coinCount = 0;
 				mInventory.setChanged();
 				parentObject.life = mDifficultyConstants.getMaxPlayerLife();
@@ -439,8 +442,8 @@ public class PlayerComponent extends GameComponent {
 		} else {
 			mState = State.HIT_REACT;
 			mTimer = time;
-
 		}
+		AchievementManager.incrementAchievementProgress(Type.HIT, 1);
 	}
 
 	protected void stateHitReact(
@@ -457,6 +460,7 @@ public class PlayerComponent extends GameComponent {
 			float time) {
 		mState = State.DEAD;
 		mTimer = time;
+		AchievementManager.incrementAchievementProgress(Type.DEATH, 1);
 	}
 
 	protected void stateDead(
@@ -499,6 +503,7 @@ public class PlayerComponent extends GameComponent {
 		TimeSystem timeSystem = sSystemRegistry.timeSystem;
 		mTimer = timeSystem.getRealTime();
 		timeSystem.appyScale(0.1f, 8.0f, true);
+		AchievementManager.incrementAchievementProgress(Type.LEVELS, 1);
 	}
 
 	protected void stateWin(
@@ -513,7 +518,6 @@ public class PlayerComponent extends GameComponent {
 				if (elapsed > 2.0f) {
 					hud.startFade(false, 1.5f);
 					hud.sendGameEventOnFadeComplete(GameFlowEvent.EVENT_GO_TO_NEXT_LEVEL, 0);
-
 				}
 			}
 

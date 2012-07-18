@@ -1,5 +1,7 @@
 package com.w3i.replica.replicaisland.achivements;
 
+import com.w3i.common.Log;
+
 public abstract class Achievement {
 	private Type type;
 	private boolean disabled = false;
@@ -8,20 +10,44 @@ public abstract class Achievement {
 	private String description = null;
 	private String name = null;
 	private int image = -1;
+	private boolean locked = false;
+	private String preferencesName;
 
 	public enum Type {
-		CRYSTALS,
-		PEARLS,
-		GOOD_ENDING,
-		FLY_TIME,
-		JETPACK_TIME,
-		KILLS,
-		MEGA_KILL,
-		MULTI_KILL,
-		LEVELS,
-		HEALTH,
-		BONUS_PEARLS,
-		BONUS_CRYSTALS
+		CRYSTALS("Crystals"),
+		PEARLS("Pearls"),
+		GOOD_ENDING("GoodEnding"),
+		FLY_TIME("FlyTime"),
+		JETPACK_TIME("JetpackTime"),
+		KILLS("Kills"),
+		MEGA_KILL("MegaKill"),
+		MULTI_KILL("MultiKill"),
+		LEVELS("Levels"),
+		HEALTH("Health"),
+		BONUS_PEARLS("BonusPearls"),
+		BONUS_CRYSTALS("BonusCrystals"),
+		DEATH("Death"),
+		HIT("Hit"),
+		SHIELD("Shield"),
+		POSSESSION("Possession"),
+		KYLE_DEFEATED("KyleDefeated"),
+		KABOOCHA_DEFEATED("KaboochaDefeated"),
+		RODOKOU_DEFEATED("RodokouDefeated"),
+		GAME_BEAT("GameBeat");
+
+		private String preferencesString;
+
+		private Type(String s) {
+			preferencesString = "achv" + s;
+		}
+
+		public String getPreferencesString() {
+			return preferencesString;
+		}
+	}
+
+	protected Achievement() {
+		preferencesName = getClass().getSimpleName();
 	}
 
 	public Type getType() {
@@ -31,6 +57,7 @@ public abstract class Achievement {
 	protected void setType(
 			Type type) {
 		this.type = type;
+		preferencesName = type.getPreferencesString();
 	}
 
 	protected void setDescription(
@@ -43,7 +70,7 @@ public abstract class Achievement {
 		this.name = name;
 	}
 
-	protected void setDisabled(
+	public void setDisabled(
 			boolean disabled) {
 		this.disabled = disabled;
 	}
@@ -84,10 +111,14 @@ public abstract class Achievement {
 			boolean notify) {
 		boolean fireListener = notify && done && !this.done;
 
+		Log.i("Achievement (" + getName() + ") is done: " + done);
 		this.done = done;
 		AchievementManager.storeAchievements();
 		if (fireListener) {
 			AchievementManager.notifyAchievementDone(this);
+		}
+		if (locked) {
+			setLocked(false);
 		}
 	}
 
@@ -97,6 +128,48 @@ public abstract class Achievement {
 
 	public boolean isProgressAchievement() {
 		return progress;
+	}
+
+	/**
+	 * @return the locked
+	 */
+	public boolean isLocked() {
+		return locked;
+	}
+
+	/**
+	 * @param locked
+	 *            the locked to set
+	 */
+	public void setLocked(
+			boolean locked) {
+		Log.d("Achievement " + getName() + " locked status changed: " + locked);
+		boolean notify = (!locked) && (this.locked);
+		this.locked = locked;
+		if (notify) {
+			AchievementManager.notifyAchievementUnlocked(this);
+		}
+	}
+
+	public void setPrefernecesName(
+			String name) {
+		preferencesName = name;
+	}
+
+	public String getPreferencesDisabled() {
+		return preferencesName;
+	}
+
+	public String getPreferencesDone() {
+		return preferencesName + "Done";
+	}
+
+	public String getPreferencesProgress() {
+		return preferencesName + "Progress";
+	}
+
+	public String getPreferencesLocked() {
+		return preferencesName + "Locked";
 	}
 
 }

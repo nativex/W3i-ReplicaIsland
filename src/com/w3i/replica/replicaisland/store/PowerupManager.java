@@ -5,6 +5,8 @@ import java.util.List;
 import com.w3i.common.Log;
 import com.w3i.gamesplatformsdk.rest.entities.Attribute;
 import com.w3i.gamesplatformsdk.rest.entities.Item;
+import com.w3i.replica.replicaisland.achivements.Achievement.Type;
+import com.w3i.replica.replicaisland.achivements.AchievementManager;
 
 public class PowerupManager {
 
@@ -278,6 +280,8 @@ public class PowerupManager {
 	static void setKillingSpreeEnabled(
 			boolean isEnabled) {
 		killingSpreeEnabled = isEnabled;
+		AchievementManager.setAchievementLocked(Type.MEGA_KILL, !isEnabled);
+		AchievementManager.setAchievementLocked(Type.MULTI_KILL, !isEnabled);
 	}
 
 	public static boolean hasGarbageCollector() {
@@ -287,5 +291,6 @@ public class PowerupManager {
 	static void setGarbageCollector(
 			boolean isEnabled) {
 		garbageCollectorEnabled = isEnabled;
+		AchievementManager.setAchievementLocked(Type.BONUS_PEARLS, !isEnabled);
 	}
 }

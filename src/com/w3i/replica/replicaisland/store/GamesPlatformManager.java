@@ -27,8 +27,8 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 	private List<Currency> currencies;
 
 	private GamesPlatformManager(Context context) {
-		GamesPlatformSDK.createInstance(PUBLISHER_ID, APP_ID, REST_URL, null, context);
 		instance = this;
+		GamesPlatformSDK.createInstance(PUBLISHER_ID, APP_ID, REST_URL, null, context);
 		downloadStoreTree();
 	}
 

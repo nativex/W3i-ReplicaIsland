@@ -28,6 +28,9 @@ import com.w3i.gamesplatformsdk.rest.entities.Currency;
 import com.w3i.gamesplatformsdk.rest.entities.Item;
 import com.w3i.offerwall.custom.views.CustomImageView;
 import com.w3i.replica.replicaisland.R;
+import com.w3i.replica.replicaisland.achivements.Achievement;
+import com.w3i.replica.replicaisland.achivements.AchievementListener;
+import com.w3i.replica.replicaisland.achivements.AchievementManager;
 import com.w3i.replica.replicaisland.store.ItemManager.Availability;
 
 public class StoreActivity extends Activity {
@@ -81,6 +84,22 @@ public class StoreActivity extends Activity {
 		}
 	};
 
+	private AchievementListener achievementListener = new AchievementListener() {
+
+		@Override
+		public void achievementUnlocked(
+				Achievement achievement) {
+			ReplicaIslandToast.makeAchievementUnlockedToast(StoreActivity.this, achievement).show();
+		}
+
+		@Override
+		public void achievementDone(
+				Achievement achievement) {
+			ReplicaIslandToast.makeAchievementDoneToast(StoreActivity.this, achievement).show();
+
+		}
+	};
+
 	public static final int DEFAULT_CATEGORY_BACKGROUND_COLOR = Color.DKGRAY;
 	public static final int DEFAULT_CATEGORY_TEXT_COLOR = Color.WHITE;
 	public static final int DEFAULT_PRICE_PEARLS_COLOR = Color.WHITE;
@@ -122,6 +141,18 @@ public class StoreActivity extends Activity {
 
 		loadItems();
 		setFunds();
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		AchievementManager.registerAchievementListener(achievementListener);
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		AchievementManager.registerAchievementListener(null);
 	}
 
 	private void loadItems() {
@@ -274,10 +305,10 @@ public class StoreActivity extends Activity {
 		if (storeItem.canBePurchased()) {
 			Item item = storeItem.getItem();
 			FundsManager.buyItem(item);
+			ReplicaIslandToast.makeStoreToast(this, item).show();
 			PowerupManager.handleItem(item);
 			GamesPlatformManager.trackItemPurchase(item);
 			ItemManager.addPurchasedItem(item);
-			ReplicaIslandToast.makeStoreToast(this, item).show();
 			CategoryBlock parent = storeItem.getParent();
 			SharedPreferenceManager.storePurchasedItems();
 			storeItem.removeItemFromCategory();

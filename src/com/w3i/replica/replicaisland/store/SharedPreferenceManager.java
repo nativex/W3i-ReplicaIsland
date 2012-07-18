@@ -12,17 +12,6 @@ import com.google.gson.reflect.TypeToken;
 import com.w3i.common.Log;
 import com.w3i.replica.replicaisland.achivements.Achievement;
 import com.w3i.replica.replicaisland.achivements.AchievementManager;
-import com.w3i.replica.replicaisland.achivements.BonusCrystalsAchievement;
-import com.w3i.replica.replicaisland.achivements.BonusPearlsAchievement;
-import com.w3i.replica.replicaisland.achivements.CrystalsAchievement;
-import com.w3i.replica.replicaisland.achivements.FlyTime;
-import com.w3i.replica.replicaisland.achivements.GoodEndingAchievement;
-import com.w3i.replica.replicaisland.achivements.JetpackTime;
-import com.w3i.replica.replicaisland.achivements.KillsAchievement;
-import com.w3i.replica.replicaisland.achivements.LifeAchievement;
-import com.w3i.replica.replicaisland.achivements.MegakillAchievement;
-import com.w3i.replica.replicaisland.achivements.MultikillAchievement;
-import com.w3i.replica.replicaisland.achivements.PearlsAchievement;
 import com.w3i.replica.replicaisland.achivements.ProgressAchievement;
 
 public class SharedPreferenceManager {
@@ -52,41 +41,6 @@ public class SharedPreferenceManager {
 	private static final String PREF_POWERUP_GARBAGE_COLLECTOR_PEARLS = "garbageCollectorPearls";
 	private static final String PREF_CRYSTAL_EXTRACTOR_CRYSTALS = "crystalExtractorCrystals";
 	private static final String PREF_CRYSTAL_EXTRACTRO_MONSTERS = "crystalExctactorMonsters";
-
-	// Achievements preferences
-	private static final String PREF_ACHIEVEMENT_CRYSTALS = "achvCrystals";
-	private static final String PREF_ACHIEVEMENT_CRYSTALS_DONE = "achvCrystalsDone";
-	private static final String PREF_ACHIEVEMENT_CRYSTALS_PROGRESS = "achvCrystalsProgress";
-	private static final String PREF_ACHIEVEMENT_PEARLS = "achvPearls";
-	private static final String PREF_ACHIEVEMENT_PEARLS_DONE = "achvPearlsDone";
-	private static final String PREF_ACHIEVEMENT_PEARLS_PROGRESS = "achvPearlsProgress";
-	private static final String PREF_ACHIEVEMENT_GOOD_ENDINNG = "achvGoodEnding";
-	private static final String PREF_ACHIEVEMENT_GOOD_ENDINNG_DONE = "achvGoodEndingDone";
-	private static final String PREF_ACHIEVEMENT_AIR_TIME = "achvAirTime";
-	private static final String PREF_ACHIEVEMENT_AIR_TIME_DONE = "achvAirTimeDone";
-	private static final String PREF_ACHIEVEMENT_AIR_TIME_PROGRESS = "achvAirTimeProgress";
-	private static final String PREF_ACHIEVEMENT_JETPACK_TIME = "achvJetpackTime";
-	private static final String PREF_ACHIEVEMENT_JETPACK_TIME_DONE = "achvJetpackTimeDone";
-	private static final String PREF_ACHIEVEMENT_JETPACK_TIME_PROGRESS = "achvJetpackTimeProgress";
-	private static final String PREF_ACHIEVEMENT_KILLS = "achvKills";
-	private static final String PREF_ACHIEVEMENT_KILLS_DONE = "achvKillsDone";
-	private static final String PREF_ACHIEVEMENT_KILLS_PROGRESS = "achvKillsProgress";
-	private static final String PREF_ACHIEVEMENT_MEGA_KILL = "achvMegaKill";
-	private static final String PREF_ACHIEVEMENT_MEGA_KILL_DONE = "achvMegaKillDone";
-	private static final String PREF_ACHIEVEMENT_MULTI_KILL = "achvMultiKill";
-	private static final String PREF_ACHIEVEMENT_MULTI_KILL_DONE = "achvMultiKillDone";
-	private static final String PREF_ACHIEVEMENT_MULTI_KILL_PROGRESS = "achvMultiKillProgress";
-	private static final String PREF_ACHIEVEMENT_LEVELS = "achvLevels";
-	private static final String PREF_ACHIEVEMENT_LEVELS_DONE = "achvLevelsDone:";
-	private static final String PREF_ACHIEVEMENT_LEVELS_PROGRESS = "achvLevelsProgress";
-	private static final String PREF_ACHIEVEMENT_HEALTH = "achvHealth";
-	private static final String PREF_ACHIEVEMENT_HEALTH_DONE = "achvHealthDone";
-	private static final String PREF_ACHIEVEMENT_BONUS_PEARLS = "achvBonusPearls";
-	private static final String PREF_ACHIEVEMENT_BONUS_PEARLS_DONE = "achvBonusPearlsDone";
-	private static final String PREF_ACHIEVEMENT_BONUS_PEARLS_PROGRESS = "achvBonusPearlsProgress";
-	private static final String PREF_ACHIEVEMENT_BONUS_CRYSTALS = "achvBonusCrystals";
-	private static final String PREF_ACHIEVEMENT_BONUS_CRYSTALS_DONE = "achvBonusCrystalsDone";
-	private static final String PREF_ACHIEVEMENT_BONUS_CRYSTALS_PROGRESS = "achvBonusCrystalsProgress";
 
 	private SharedPreferenceManager(Context context) {
 		instance = this;
@@ -274,76 +228,20 @@ public class SharedPreferenceManager {
 		try {
 			Editor edit = preferences.edit();
 			for (Achievement achv : AchievementManager.getAchivements()) {
-				_storeAchievement(achv, edit);
+				try {
+					edit.putBoolean(achv.getPreferencesDisabled(), achv.isDisabled());
+					edit.putBoolean(achv.getPreferencesDone(), achv.isDone());
+					edit.putBoolean(achv.getPreferencesLocked(), achv.isLocked());
+					if (achv.isProgressAchievement()) {
+						edit.putInt(achv.getPreferencesProgress(), ((ProgressAchievement) achv).getProgress());
+					}
+				} catch (Exception e) {
+					Log.e("SharedPreferencesManager._storeAchievements(): Unexpected exception caught while storing " + achv.getName() + " achievement.", e);
+				}
 			}
 			edit.commit();
 		} catch (Exception e) {
 			Log.e("SharedPreferenceManager: Unexpected exception caught while storing achivements");
-		}
-	}
-
-	private void _storeAchievement(
-			Achievement achv,
-			Editor edit) {
-		switch (achv.getType()) {
-		case CRYSTALS:
-			edit.putBoolean(PREF_ACHIEVEMENT_CRYSTALS, achv.isDisabled());
-			edit.putBoolean(PREF_ACHIEVEMENT_CRYSTALS_DONE, achv.isDone());
-			edit.putInt(PREF_ACHIEVEMENT_CRYSTALS_PROGRESS, ((ProgressAchievement) achv).getProgress());
-			break;
-		case GOOD_ENDING:
-			edit.putBoolean(PREF_ACHIEVEMENT_GOOD_ENDINNG, achv.isDisabled());
-			edit.putBoolean(PREF_ACHIEVEMENT_GOOD_ENDINNG_DONE, achv.isDone());
-			break;
-		case PEARLS:
-			edit.putBoolean(PREF_ACHIEVEMENT_PEARLS, achv.isDisabled());
-			edit.putBoolean(PREF_ACHIEVEMENT_PEARLS_DONE, achv.isDone());
-			edit.putInt(PREF_ACHIEVEMENT_PEARLS_PROGRESS, ((ProgressAchievement) achv).getProgress());
-			break;
-		case FLY_TIME:
-			edit.putBoolean(PREF_ACHIEVEMENT_AIR_TIME, achv.isDisabled());
-			edit.putBoolean(PREF_ACHIEVEMENT_AIR_TIME_DONE, achv.isDone());
-			edit.putInt(PREF_ACHIEVEMENT_AIR_TIME_PROGRESS, ((ProgressAchievement) achv).getProgress());
-			break;
-		case JETPACK_TIME:
-			edit.putBoolean(PREF_ACHIEVEMENT_JETPACK_TIME, achv.isDisabled());
-			edit.putBoolean(PREF_ACHIEVEMENT_JETPACK_TIME_DONE, achv.isDone());
-			edit.putInt(PREF_ACHIEVEMENT_JETPACK_TIME_PROGRESS, ((ProgressAchievement) achv).getProgress());
-			break;
-		case KILLS:
-			edit.putBoolean(PREF_ACHIEVEMENT_KILLS, achv.isDisabled());
-			edit.putBoolean(PREF_ACHIEVEMENT_KILLS_DONE, achv.isDone());
-			edit.putInt(PREF_ACHIEVEMENT_KILLS_PROGRESS, ((ProgressAchievement) achv).getProgress());
-			break;
-		case LEVELS:
-			edit.putBoolean(PREF_ACHIEVEMENT_LEVELS, achv.isDisabled());
-			edit.putBoolean(PREF_ACHIEVEMENT_LEVELS_DONE, achv.isDone());
-			edit.putInt(PREF_ACHIEVEMENT_LEVELS_PROGRESS, ((ProgressAchievement) achv).getProgress());
-			break;
-		case MEGA_KILL:
-			edit.putBoolean(PREF_ACHIEVEMENT_MEGA_KILL, achv.isDisabled());
-			edit.putBoolean(PREF_ACHIEVEMENT_MEGA_KILL_DONE, achv.isDone());
-			break;
-		case MULTI_KILL:
-			edit.putBoolean(PREF_ACHIEVEMENT_MULTI_KILL, achv.isDisabled());
-			edit.putBoolean(PREF_ACHIEVEMENT_MULTI_KILL_DONE, achv.isDone());
-			edit.putInt(PREF_ACHIEVEMENT_MULTI_KILL_PROGRESS, ((ProgressAchievement) achv).getProgress());
-			break;
-		case HEALTH:
-			edit.putBoolean(PREF_ACHIEVEMENT_HEALTH, achv.isDisabled());
-			edit.putBoolean(PREF_ACHIEVEMENT_HEALTH_DONE, achv.isDone());
-			break;
-		case BONUS_CRYSTALS:
-			edit.putBoolean(PREF_ACHIEVEMENT_BONUS_CRYSTALS, achv.isDisabled());
-			edit.putBoolean(PREF_ACHIEVEMENT_BONUS_CRYSTALS_DONE, achv.isDone());
-			edit.putInt(PREF_ACHIEVEMENT_BONUS_CRYSTALS_PROGRESS, ((ProgressAchievement) achv).getProgress());
-			break;
-		case BONUS_PEARLS:
-			edit.putBoolean(PREF_ACHIEVEMENT_BONUS_PEARLS, achv.isDisabled());
-			edit.putBoolean(PREF_ACHIEVEMENT_BONUS_PEARLS_DONE, achv.isDone());
-			edit.putInt(PREF_ACHIEVEMENT_BONUS_PEARLS_PROGRESS, ((ProgressAchievement) achv).getProgress());
-			break;
-
 		}
 	}
 
@@ -354,110 +252,21 @@ public class SharedPreferenceManager {
 
 	private void _loadAchivements() {
 		try {
-			boolean crystalsDisabled = preferences.getBoolean(PREF_ACHIEVEMENT_CRYSTALS, false);
-			boolean crystalsDone = preferences.getBoolean(PREF_ACHIEVEMENT_CRYSTALS_DONE, false);
-			int crystalsProgress = preferences.getInt(PREF_ACHIEVEMENT_CRYSTALS_PROGRESS, 0);
-			if (!crystalsDisabled) {
-				CrystalsAchievement crystalsAchievement = new CrystalsAchievement();
-				crystalsAchievement.setProgress(crystalsProgress);
-				crystalsAchievement.setDone(crystalsDone, false);
-				AchievementManager.addAchivement(crystalsAchievement);
-			}
+			for (Achievement achv : AchievementManager.getAchivements()) {
+				try {
+					achv.setDisabled(preferences.getBoolean(achv.getPreferencesDisabled(), false));
+					achv.setDone(preferences.getBoolean(achv.getPreferencesDone(), false));
+					if (preferences.contains(achv.getPreferencesLocked())) {
+						achv.setLocked(preferences.getBoolean(achv.getPreferencesLocked(), false));
+					}
+					if (achv instanceof ProgressAchievement) {
+						((ProgressAchievement) achv).setProgress(preferences.getInt(achv.getPreferencesProgress(), 0));
+					}
+				} catch (Exception e) {
+					Log.e("SharedPreferencesManager._loadAchievements: Unexpected exception caught while loading " + achv.getName() + "achievement.", e);
+				}
 
-			boolean goodEndingDisabled = preferences.getBoolean(PREF_ACHIEVEMENT_GOOD_ENDINNG, false);
-			boolean goodEndingDone = preferences.getBoolean(PREF_ACHIEVEMENT_GOOD_ENDINNG_DONE, false);
-			if (!goodEndingDisabled) {
-				GoodEndingAchievement goodEndingAchievement = new GoodEndingAchievement();
-				goodEndingAchievement.setDone(goodEndingDone, false);
-				AchievementManager.addAchivement(goodEndingAchievement);
 			}
-
-			boolean pearlsDisabled = preferences.getBoolean(PREF_ACHIEVEMENT_PEARLS, false);
-			boolean pearlsDone = preferences.getBoolean(PREF_ACHIEVEMENT_PEARLS_DONE, false);
-			int pearlsProgress = preferences.getInt(PREF_ACHIEVEMENT_PEARLS_PROGRESS, 0);
-			if (!pearlsDisabled) {
-				PearlsAchievement pearlsAchievement = new PearlsAchievement();
-				pearlsAchievement.setDone(pearlsDone, false);
-				pearlsAchievement.setProgress(pearlsProgress);
-				AchievementManager.addAchivement(pearlsAchievement);
-			}
-
-			boolean airTimeDisabled = preferences.getBoolean(PREF_ACHIEVEMENT_AIR_TIME, false);
-			boolean airTimeDone = preferences.getBoolean(PREF_ACHIEVEMENT_AIR_TIME_DONE, false);
-			int airTimeProgress = preferences.getInt(PREF_ACHIEVEMENT_AIR_TIME_PROGRESS, 0);
-			if (!airTimeDisabled) {
-				FlyTime airTimeAchievement = new FlyTime();
-				airTimeAchievement.setDone(airTimeDone, false);
-				airTimeAchievement.setProgress(airTimeProgress);
-				AchievementManager.addAchivement(airTimeAchievement);
-			}
-
-			boolean jetpackDisabled = preferences.getBoolean(PREF_ACHIEVEMENT_JETPACK_TIME, false);
-			boolean jetpackDone = preferences.getBoolean(PREF_ACHIEVEMENT_JETPACK_TIME_DONE, false);
-			int jetpackProgress = preferences.getInt(PREF_ACHIEVEMENT_JETPACK_TIME_PROGRESS, 0);
-			if (!jetpackDisabled) {
-				JetpackTime jetPackTimeAchievement = new JetpackTime();
-				jetPackTimeAchievement.setDone(jetpackDone, false);
-				jetPackTimeAchievement.setProgress(jetpackProgress);
-				AchievementManager.addAchivement(jetPackTimeAchievement);
-			}
-
-			boolean killsDisabled = preferences.getBoolean(PREF_ACHIEVEMENT_KILLS, false);
-			boolean killsDone = preferences.getBoolean(PREF_ACHIEVEMENT_KILLS_DONE, false);
-			int killsProgress = preferences.getInt(PREF_ACHIEVEMENT_KILLS_PROGRESS, 0);
-			if (!killsDisabled) {
-				KillsAchievement killsAchievement = new KillsAchievement();
-				killsAchievement.setDone(killsDone, false);
-				killsAchievement.setProgress(killsProgress);
-				AchievementManager.addAchivement(killsAchievement);
-			}
-
-			boolean multiKillDisabled = preferences.getBoolean(PREF_ACHIEVEMENT_MULTI_KILL, false);
-			boolean multiKillDone = preferences.getBoolean(PREF_ACHIEVEMENT_MULTI_KILL_DONE, false);
-			int multiKillProgress = preferences.getInt(PREF_ACHIEVEMENT_MULTI_KILL_PROGRESS, 0);
-			if (!multiKillDisabled) {
-				MultikillAchievement multiKillAchievement = new MultikillAchievement();
-				multiKillAchievement.setDone(multiKillDone, false);
-				multiKillAchievement.setProgress(multiKillProgress);
-				AchievementManager.addAchivement(multiKillAchievement);
-			}
-
-			boolean megaKillDisabled = preferences.getBoolean(PREF_ACHIEVEMENT_MEGA_KILL, false);
-			boolean megaKillDone = preferences.getBoolean(PREF_ACHIEVEMENT_MEGA_KILL_DONE, false);
-			if (!megaKillDisabled) {
-				MegakillAchievement megaKillAchievement = new MegakillAchievement();
-				megaKillAchievement.setDone(megaKillDone, false);
-				AchievementManager.addAchivement(megaKillAchievement);
-			}
-
-			boolean healthDisabled = preferences.getBoolean(PREF_ACHIEVEMENT_HEALTH, false);
-			boolean healthDone = preferences.getBoolean(PREF_ACHIEVEMENT_HEALTH_DONE, false);
-			if (!healthDisabled) {
-				LifeAchievement lifeAchievement = new LifeAchievement();
-				lifeAchievement.setDone(healthDone, false);
-				AchievementManager.addAchivement(lifeAchievement);
-			}
-
-			boolean bonusPearlsDisabled = preferences.getBoolean(PREF_ACHIEVEMENT_BONUS_PEARLS, false);
-			boolean bonusPearlsDone = preferences.getBoolean(PREF_ACHIEVEMENT_BONUS_PEARLS_DONE, false);
-			int bonusPearlsProgress = preferences.getInt(PREF_ACHIEVEMENT_BONUS_PEARLS_PROGRESS, 0);
-			if (!bonusPearlsDisabled) {
-				BonusPearlsAchievement bonusPearlsAchievement = new BonusPearlsAchievement();
-				bonusPearlsAchievement.setDone(bonusPearlsDone, false);
-				bonusPearlsAchievement.setProgress(bonusPearlsProgress);
-				AchievementManager.addAchivement(bonusPearlsAchievement);
-			}
-
-			boolean bonusCrystalsDisabled = preferences.getBoolean(PREF_ACHIEVEMENT_BONUS_CRYSTALS, false);
-			boolean bonusCrystalsDone = preferences.getBoolean(PREF_ACHIEVEMENT_BONUS_CRYSTALS_DONE, false);
-			int bonusCrystalsProgress = preferences.getInt(PREF_ACHIEVEMENT_BONUS_CRYSTALS_PROGRESS, 0);
-			if (!bonusCrystalsDisabled) {
-				BonusCrystalsAchievement bonusCrystalsAchievement = new BonusCrystalsAchievement();
-				bonusCrystalsAchievement.setDone(bonusCrystalsDone, false);
-				bonusCrystalsAchievement.setProgress(bonusCrystalsProgress);
-				AchievementManager.addAchivement(bonusCrystalsAchievement);
-			}
-
 		} catch (Exception e) {
 			Log.e("SharedPreferenceManager: Unexpected exception caught while loading achivements");
 		}

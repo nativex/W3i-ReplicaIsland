@@ -6,5 +6,6 @@ public class MegakillAchievement extends Achievement {
 		setName(AchievementConstants.MEGA_KILL_NAME);
 		setDescription(AchievementConstants.MEGA_KILL_DESCRIPTION);
 		setType(Type.MEGA_KILL);
+		setLocked(true);
 	}
 }

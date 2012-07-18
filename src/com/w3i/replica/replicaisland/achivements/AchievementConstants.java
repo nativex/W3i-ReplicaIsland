@@ -61,4 +61,40 @@ public class AchievementConstants {
 	public static final String BONUS_CRYSTALS_NAME = "Bonus Crystals";
 	public static final String BONUS_CRYSTALS_DESCRIPTION = "Generate " + BONUS_CRYSTALS_GOAL + " crystals with the Garbage Collector.";
 
+	// Death
+	public static final int DEATH_GOAL = 25;
+	public static final String DEATH_NAME = "Death";
+	public static final String DEATH_DESCRIPTION = "Die " + DEATH_GOAL + " times.";
+
+	// Hit
+	public static final int HIT_GOAL = 150;
+	public static final String HIT_NAME = "HIT";
+	public static final String HIT_DESCRIPTION = "Get hit " + HIT_GOAL + " times.";
+
+	// Shield
+	public static final int SHIELD_GOAL = 100;
+	public static final String SHIELD_NAME = "Shield";
+	public static final String SHIELD_DESCRIPTION = "Activate shield " + SHIELD_GOAL + " times.";
+
+	// Possession
+	public static final int POSSESSION_GOAL = 100;
+	public static final String POSSESSION_NAME = "Possession";
+	public static final String POSSESSION_DESCRIPTION = "Gain control over " + POSSESSION_GOAL + " robots.";
+
+	// Kyle
+	public static final String KYLE_NAME = "Kyle";
+	public static final String KYLE_DESCRIPTION = "Defeat Kyle.";
+
+	// Rodokuo
+	public static final String RODOKUO_NAME = "Rodokuo";
+	public static final String RODOKUO_DESCRIPTION = "Defeat Rodokuo.";
+
+	// Kaboocha
+	public static final String KABOOCHA_NAME = "Kaboocha";
+	public static final String KABOOCHA_DESCRIPTION = "Defeat Kaboocha";
+
+	// Game Beat
+	public static final String GAME_BEAT_NAME = "Game Beat";
+	public static final String GAME_BEAT_DESCRIPTION = "Beat the game.";
+
 }

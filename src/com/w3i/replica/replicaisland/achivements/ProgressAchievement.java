@@ -1,5 +1,7 @@
 package com.w3i.replica.replicaisland.achivements;
 
+import com.w3i.common.Log;
+
 public class ProgressAchievement extends Achievement {
 	private int achievementProgress;
 	private final int GOAL;
@@ -12,6 +14,7 @@ public class ProgressAchievement extends Achievement {
 	public void setProgress(
 			int progress) {
 		if (!isDone()) {
+			Log.i("Achievement " + getName() + " (" + getDescription() + ") updated : " + progress + "/" + getGoal());
 			this.achievementProgress = progress;
 			if (progress >= GOAL) {
 				setDone(true);

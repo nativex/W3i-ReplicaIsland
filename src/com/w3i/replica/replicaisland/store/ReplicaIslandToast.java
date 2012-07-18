@@ -25,7 +25,7 @@ public class ReplicaIslandToast {
 	public static Toast makeStoreToast(
 			Context context,
 			Item item) {
-		Toast toast = new Toast(context);
+		Toast toast = Toast.makeText(context, "", Toast.LENGTH_LONG);
 
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View toastLayout = inflater.inflate(R.layout.store_toast, null);
@@ -43,7 +43,7 @@ public class ReplicaIslandToast {
 			Context context,
 			int kills,
 			int pearlsEarned) {
-		Toast toast = new Toast(context);
+		Toast toast = Toast.makeText(context, "", Toast.LENGTH_LONG);
 
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View toastLayout = inflater.inflate(R.layout.toast_killing_spree, null);
@@ -57,10 +57,10 @@ public class ReplicaIslandToast {
 		return toast;
 	}
 
-	public static Toast makeAchievementToast(
+	public static Toast makeAchievementDoneToast(
 			Context context,
 			Achievement achievement) {
-		Toast toast = new Toast(context);
+		Toast toast = Toast.makeText(context, "", Toast.LENGTH_LONG);
 
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View toastLayout = inflater.inflate(R.layout.toast_killing_spree, null);
@@ -68,7 +68,28 @@ public class ReplicaIslandToast {
 		TextView killingSpreeTitle = (TextView) toastLayout.findViewById(R.id.killingSpreeTitle);
 		killingSpreeTitle.setText("Achievement earned");
 		TextView killingSpreeText = (TextView) toastLayout.findViewById(R.id.killingSpreeText);
-		String formattedKillingSpreeString = "You have earned <font color=GREEN> " + achievement.getName() + "</font>.";
+		String formattedKillingSpreeString = "You have earned <font color=#00FF00> " + achievement.getName() + "</font>.";
+		killingSpreeText.setText(Html.fromHtml(formattedKillingSpreeString));
+		ImageView killingSpreeIcon = (ImageView) toastLayout.findViewById(R.id.killingSpreeIcon);
+		killingSpreeIcon.setImageResource(R.drawable.achv_locked);
+
+		toast.setDuration(Toast.LENGTH_LONG);
+		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 10);
+		return toast;
+	}
+
+	public static Toast makeAchievementUnlockedToast(
+			Context context,
+			Achievement achievement) {
+		Toast toast = Toast.makeText(context, "", Toast.LENGTH_LONG);
+
+		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View toastLayout = inflater.inflate(R.layout.toast_killing_spree, null);
+		toast.setView(toastLayout);
+		TextView killingSpreeTitle = (TextView) toastLayout.findViewById(R.id.killingSpreeTitle);
+		killingSpreeTitle.setText("Achievement unlocked");
+		TextView killingSpreeText = (TextView) toastLayout.findViewById(R.id.killingSpreeText);
+		String formattedKillingSpreeString = "You have unlocked <font color=#FFFF00> " + achievement.getName() + "</font>.";
 		killingSpreeText.setText(Html.fromHtml(formattedKillingSpreeString));
 		ImageView killingSpreeIcon = (ImageView) toastLayout.findViewById(R.id.killingSpreeIcon);
 		killingSpreeIcon.setImageResource(R.drawable.achv_locked);

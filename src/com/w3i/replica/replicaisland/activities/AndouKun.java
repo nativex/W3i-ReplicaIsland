@@ -126,7 +126,15 @@ public class AndouKun extends Activity implements SensorEventListener {
 		public void achievementDone(
 				Achievement achievement) {
 			if (achievement.isDone()) {
-				ReplicaIslandToast.makeAchievementToast(AndouKun.this, achievement).show();
+				ReplicaIslandToast.makeAchievementDoneToast(AndouKun.this, achievement).show();
+			}
+		}
+
+		@Override
+		public void achievementUnlocked(
+				Achievement achievement) {
+			if (!achievement.isLocked()) {
+				ReplicaIslandToast.makeAchievementUnlockedToast(AndouKun.this, achievement).show();
 			}
 		}
 	};

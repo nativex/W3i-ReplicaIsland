@@ -20,6 +20,8 @@ import com.w3i.replica.replicaisland.CollisionParameters.HitType;
 import com.w3i.replica.replicaisland.GameObject.ActionType;
 import com.w3i.replica.replicaisland.GameObject.Team;
 import com.w3i.replica.replicaisland.GameObjectFactory.GameObjectType;
+import com.w3i.replica.replicaisland.achivements.AchievementManager;
+import com.w3i.replica.replicaisland.achivements.Achievement.Type;
 
 /**
  * A general-purpose component that responds to dynamic collision notifications. This component may be configured to produce common responses to hit (taking damage, being knocked back, etc), or it can
@@ -209,6 +211,7 @@ public class HitReactionComponent extends GameComponent {
 		case CollisionParameters.HitType.POSSESS:
 			if (mPossessionComponent != null && parent.life > 0 && attacker.life > 0) {
 				mPossessionComponent.activate(parent);
+				AchievementManager.incrementAchievementProgress(Type.POSSESSION, 1);
 			} else {
 				hitType = CollisionParameters.HitType.INVALID;
 			}

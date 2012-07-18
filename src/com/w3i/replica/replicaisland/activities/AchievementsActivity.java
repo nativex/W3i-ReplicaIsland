@@ -15,11 +15,29 @@ import android.widget.TextView;
 
 import com.w3i.replica.replicaisland.R;
 import com.w3i.replica.replicaisland.achivements.Achievement;
+import com.w3i.replica.replicaisland.achivements.AchievementListener;
 import com.w3i.replica.replicaisland.achivements.AchievementManager;
 import com.w3i.replica.replicaisland.achivements.ProgressAchievement;
+import com.w3i.replica.replicaisland.store.ReplicaIslandToast;
 
 public class AchievementsActivity extends Activity {
 	private LinearLayout achvContainer;
+
+	private AchievementListener achievementListener = new AchievementListener() {
+
+		@Override
+		public void achievementUnlocked(
+				Achievement achievement) {
+			ReplicaIslandToast.makeAchievementUnlockedToast(AchievementsActivity.this, achievement).show();
+		}
+
+		@Override
+		public void achievementDone(
+				Achievement achievement) {
+			ReplicaIslandToast.makeAchievementDoneToast(AchievementsActivity.this, achievement).show();
+
+		}
+	};
 
 	@Override
 	public boolean onCreateOptionsMenu(
@@ -54,9 +72,24 @@ public class AchievementsActivity extends Activity {
 
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		AchievementManager.registerAchievementListener(achievementListener);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		AchievementManager.registerAchievementListener(null);
+	}
+
 	private void addAchivements() {
 		List<Achievement> achivements = AchievementManager.getAchivements();
 		for (Achievement a : achivements) {
+			if (a.isLocked()) {
+				continue;
+			}
 			if (a instanceof ProgressAchievement) {
 				addProgressAchievement((ProgressAchievement) a);
 			} else {

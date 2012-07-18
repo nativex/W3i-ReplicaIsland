@@ -56,7 +56,7 @@ public class KillingSpreeDetector {
 			AchievementManager.incrementAchievementProgress(Type.MULTI_KILL, 1);
 		}
 		if (monstersKilled >= AchievementConstants.MEGA_KILL_GOAL) {
-			AchievementManager.setAchivementDone(Type.MEGA_KILL, true);
+			AchievementManager.setAchievementDone(Type.MEGA_KILL, true);
 		}
 
 	}
