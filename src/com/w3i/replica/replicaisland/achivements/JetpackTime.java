@@ -1,5 +1,6 @@
 package com.w3i.replica.replicaisland.achivements;
 
+import com.w3i.common.Log;
 import com.w3i.replica.replicaisland.utils.TimeUtils;
 
 public class JetpackTime extends ProgressAchievement {
@@ -21,7 +22,7 @@ public class JetpackTime extends ProgressAchievement {
 	public void updateFlying(
 			double delta) {
 		flyTime += delta;
-		// Log.d("JetpackTime: Flown " + flyTime);
+		Log.d("JetpackTime: Flown " + flyTime);
 	}
 
 	public boolean isFlying() {

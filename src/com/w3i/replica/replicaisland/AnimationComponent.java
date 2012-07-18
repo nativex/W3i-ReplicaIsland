@@ -135,16 +135,10 @@ public class AnimationComponent extends GameComponent {
 			}
 
 			final boolean touchingGround = parentObject.touchingGround();
-
-			if (!touchingGround) {
-				AchievementManager.increaseFlyTime(timeDelta);
-			}
-
 			boolean boosting = mPlayer != null ? mPlayer.getRocketsOn() : false;
 
-			if (boosting) {
-				AchievementManager.startJetpackTime(timeDelta);
-			}
+			AchievementManager.updateFlyTime(timeDelta, touchingGround);
+			AchievementManager.updateJetpackTime(timeDelta, boosting);
 
 			boolean visible = true;
 

@@ -232,14 +232,15 @@ public class SharedPreferenceManager {
 					edit.putBoolean(achv.getPreferencesDisabled(), achv.isDisabled());
 					edit.putBoolean(achv.getPreferencesDone(), achv.isDone());
 					edit.putBoolean(achv.getPreferencesLocked(), achv.isLocked());
-					if (achv.isProgressAchievement()) {
+					if (achv instanceof ProgressAchievement) {
 						edit.putInt(achv.getPreferencesProgress(), ((ProgressAchievement) achv).getProgress());
 					}
+					edit.commit();
 				} catch (Exception e) {
 					Log.e("SharedPreferencesManager._storeAchievements(): Unexpected exception caught while storing " + achv.getName() + " achievement.", e);
 				}
 			}
-			edit.commit();
+
 		} catch (Exception e) {
 			Log.e("SharedPreferenceManager: Unexpected exception caught while storing achivements");
 		}

@@ -1,11 +1,11 @@
 package com.w3i.replica.replicaisland.achivements;
 
-public class KaboochaDefeated extends Achievement {
+public class KabochaDefeated extends Achievement {
 
-	public KaboochaDefeated() {
+	public KabochaDefeated() {
 		setName(AchievementConstants.KABOOCHA_NAME);
 		setDescription(AchievementConstants.KABOOCHA_DESCRIPTION);
-		setType(Type.KABOOCHA_DEFEATED);
+		setType(Type.KABOCHA_DEFEATED);
 		setLocked(true);
 	}
 }

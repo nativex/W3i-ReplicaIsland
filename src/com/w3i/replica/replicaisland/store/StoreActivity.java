@@ -88,14 +88,30 @@ public class StoreActivity extends Activity {
 
 		@Override
 		public void achievementUnlocked(
-				Achievement achievement) {
-			ReplicaIslandToast.makeAchievementUnlockedToast(StoreActivity.this, achievement).show();
+				final Achievement achievement) {
+			final Activity context = StoreActivity.this;
+			context.runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					ReplicaIslandToast.makeAchievementUnlockedToast(context, achievement).show();
+
+				}
+			});
 		}
 
 		@Override
 		public void achievementDone(
-				Achievement achievement) {
-			ReplicaIslandToast.makeAchievementDoneToast(StoreActivity.this, achievement).show();
+				final Achievement achievement) {
+			final Activity context = StoreActivity.this;
+			context.runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					ReplicaIslandToast.makeAchievementDoneToast(context, achievement).show();
+
+				}
+			});
 
 		}
 	};

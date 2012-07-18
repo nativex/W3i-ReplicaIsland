@@ -88,7 +88,6 @@ public class AnimationPlayerActivity extends Activity {
 			ImageView canvasImage = (ImageView) findViewById(R.id.animation_canvas);
 			canvasImage.setImageResource(R.anim.kyle_fall);
 			mAnimation = (AnimationDrawable) canvasImage.getDrawable();
-			AchievementManager.setAchievementDone(Type.KYLE_DEFEATED, true);
 		} else {
 
 			if (mAnimationType == WANDA_ENDING || mAnimationType == KABOCHA_ENDING) {
@@ -98,9 +97,7 @@ public class AnimationPlayerActivity extends Activity {
 				if (mAnimationType == WANDA_ENDING) {
 					setContentView(R.layout.good_ending_animation);
 					startX = 200 * metrics.density;
-					AchievementManager.setAchievementDone(Type.GOOD_ENDING, true);
 				} else {
-					AchievementManager.setAchievementDone(Type.RODOKOU_DEFEATED, true);
 					setContentView(R.layout.kabocha_ending_animation);
 					startX = -200 * metrics.density;
 				}
@@ -149,7 +146,6 @@ public class AnimationPlayerActivity extends Activity {
 				rokudou.startAnimation(rokudouAnim);
 				gameOver.startAnimation(gameOverAnim);
 				mAnimationEndTime = gameOverAnim.getDuration() + System.currentTimeMillis();
-				AchievementManager.setAchievementDone(Type.RODOKOU_DEFEATED, true);
 			} else {
 				assert false;
 			}

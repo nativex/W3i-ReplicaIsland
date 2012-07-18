@@ -11,9 +11,13 @@ public class AchievementManager {
 	private static AchievementManager instance = null;
 	private ArrayList<Achievement> achievements = null;
 	private static int instances = 0;
+	private double flyTime = 0d;
+	private double jetpackTime = 0d;
+	private boolean flying = false;
+	private boolean boosting = false;
 
-	private FlyTime flyTime;
-	private JetpackTime jetpackTime;
+	private FlyTime flyTimeAchievement;
+	private JetpackTime jetpackTimeAchievement;
 	private AchievementListener achievementListener;
 
 	private AchievementManager() {
@@ -156,85 +160,65 @@ public class AchievementManager {
 		return false;
 	}
 
-	public static void increaseFlyTime(
-			double delta) {
+	public static void updateFlyTime(
+			double delta,
+			boolean touchingGround) {
 		checkInstance();
-		instance._increseFlyTime(delta);
+		instance._updateFlyTime(delta, touchingGround);
 	}
 
-	private void _increseFlyTime(
-			double delta) {
-		if (flyTime == null) {
-			Achievement achv = AchievementManager.getAchivement(Type.FLY_TIME);
-			if ((achv != null) && (achv instanceof FlyTime)) {
-				flyTime = (FlyTime) achv;
-			} else {
-				return;
+	private synchronized void _updateFlyTime(
+			double delta,
+			boolean touchingGround) {
+		if (!touchingGround) {
+			flyTime += delta;
+			flying = true;
+			// Log.d("Flytime till now " + flyTime);
+		} else if (flying) {
+			if (flyTimeAchievement == null) {
+				Achievement achv = AchievementManager.getAchivement(Type.FLY_TIME);
+				if ((achv != null) && (achv instanceof FlyTime)) {
+					flyTimeAchievement = (FlyTime) achv;
+				} else {
+					return;
+				}
 			}
+			int timeFlown = (int) (flyTime + 0.5);
+			// Log.d("Flytime flown = " + timeFlown);
+			flyTimeAchievement.increaseProgress(timeFlown);
+			flyTime = 0d;
+			flying = false;
 		}
-		flyTime.updateFlying(delta);
 	}
 
-	public static void endFlyTime() {
+	public static void updateJetpackTime(
+			double delta,
+			boolean usingJetpack) {
 		checkInstance();
-		instance._endFlyTime();
+		instance._updateJetpackTime(delta, usingJetpack);
 	}
 
-	private void _endFlyTime() {
-		if (flyTime == null) {
-			Achievement achv = AchievementManager.getAchivement(Type.FLY_TIME);
-			if ((achv != null) && (achv instanceof FlyTime)) {
-				flyTime = (FlyTime) achv;
-			} else {
-				return;
+	private synchronized void _updateJetpackTime(
+			double delta,
+			boolean usingJetpack) {
+		if (usingJetpack) {
+			jetpackTime += delta;
+			boosting = true;
+		} else if (boosting) {
+			if (jetpackTimeAchievement == null) {
+				Achievement achv = AchievementManager.getAchivement(Type.JETPACK_TIME);
+				if ((achv != null) && (achv instanceof JetpackTime)) {
+					jetpackTimeAchievement = (JetpackTime) achv;
+				} else {
+					return;
+				}
 			}
+			int timeFlown = (int) (jetpackTime + 0.5);
+			// Log.d("JetpackTime flown = " + timeFlown);
+			jetpackTimeAchievement.increaseProgress(timeFlown);
+			jetpackTime = 0d;
+			boosting = false;
 		}
-		flyTime.endFlying();
-
-	}
-
-	public static void startJetpackTime(
-			double delta) {
-		checkInstance();
-		instance._startJetpackTime(delta);
-	}
-
-	private void _startJetpackTime(
-			double delta) {
-		if (jetpackTime == null) {
-			Achievement achv = AchievementManager.getAchivement(Type.JETPACK_TIME);
-			if ((achv != null) && (achv instanceof JetpackTime)) {
-				jetpackTime = (JetpackTime) achv;
-			} else {
-				return;
-			}
-		}
-		if (jetpackTime.isFlying()) {
-			jetpackTime.updateFlying(delta);
-		} else {
-			jetpackTime.startedFlaying();
-		}
-	}
-
-	public static void endJetpackTime() {
-		checkInstance();
-		instance._endJetpackTime();
-	}
-
-	private void _endJetpackTime() {
-		if (jetpackTime == null) {
-			Achievement achv = AchievementManager.getAchivement(Type.JETPACK_TIME);
-			if ((achv != null) && (achv instanceof JetpackTime)) {
-				jetpackTime = (JetpackTime) achv;
-			} else {
-				return;
-			}
-		}
-		if (!jetpackTime.isFlying()) {
-			return;
-		}
-		jetpackTime.endFlying();
-
 	}
 
 	public static void storeAchievements() {
@@ -280,7 +264,6 @@ public class AchievementManager {
 		if (instance == null) {
 			return;
 		}
-
 		instance._initializeAchievements();
 	}
 
@@ -320,8 +303,11 @@ public class AchievementManager {
 		achievements.add(new PossessionAchievement());
 		achievements.add(new ShieldAchievement());
 		achievements.add(new KyleDefeatedAchievement());
-		achievements.add(new KaboochaDefeated());
+		achievements.add(new KabochaDefeated());
 		achievements.add(new RodokouDefeated());
+		achievements.add(new BabyDifficultyAchievement());
+		achievements.add(new KidsDifficultyAchievement());
+		achievements.add(new AdultsDifficultyAchievement());
 	}
 
 	private void _release() {

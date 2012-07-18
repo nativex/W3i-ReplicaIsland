@@ -1,7 +1,5 @@
 package com.w3i.replica.replicaisland.achivements;
 
-import com.w3i.common.Log;
-
 public abstract class Achievement {
 	private Type type;
 	private boolean disabled = false;
@@ -31,9 +29,13 @@ public abstract class Achievement {
 		SHIELD("Shield"),
 		POSSESSION("Possession"),
 		KYLE_DEFEATED("KyleDefeated"),
-		KABOOCHA_DEFEATED("KaboochaDefeated"),
+		KABOCHA_DEFEATED("KabochaDefeated"),
 		RODOKOU_DEFEATED("RodokouDefeated"),
-		GAME_BEAT("GameBeat");
+		GAME_BEAT("GameBeat"),
+		STOMP("Stomp"),
+		BABY("BabyDiff"),
+		KIDS("KidsDiff"),
+		ADULT("AdultDiff");
 
 		private String preferencesString;
 
@@ -111,9 +113,9 @@ public abstract class Achievement {
 			boolean notify) {
 		boolean fireListener = notify && done && !this.done;
 
-		Log.i("Achievement (" + getName() + ") is done: " + done);
+		// Log.i("Achievement (" + getName() + ") is done: " + done);
 		this.done = done;
-		AchievementManager.storeAchievements();
+		// AchievementManager.storeAchievements();
 		if (fireListener) {
 			AchievementManager.notifyAchievementDone(this);
 		}
@@ -143,7 +145,7 @@ public abstract class Achievement {
 	 */
 	public void setLocked(
 			boolean locked) {
-		Log.d("Achievement " + getName() + " locked status changed: " + locked);
+		// Log.d("Achievement " + getName() + " locked status changed: " + locked);
 		boolean notify = (!locked) && (this.locked);
 		this.locked = locked;
 		if (notify) {

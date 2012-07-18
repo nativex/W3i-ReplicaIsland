@@ -97,4 +97,16 @@ public class AchievementConstants {
 	public static final String GAME_BEAT_NAME = "Game Beat";
 	public static final String GAME_BEAT_DESCRIPTION = "Beat the game.";
 
+	// Baby beat
+	public static final String BABY_BEAT_NAME = "Baby Beat";
+	public static final String BABY_BEAT_DESCRIPTION = "Beat the game on Baby difficulty.";
+
+	// Kids beat
+	public static final String KIDS_BEAT_NAME = "Kids Beat";
+	public static final String KIDS_BEAT_DESCRIPTION = "Beat the game on Kids difficulty.";
+
+	// Adults beat
+	public static final String ADULT_BEAT_NAME = "Adult beat";
+	public static final String ADULT_BEAT_DESCRIPTION = "Beat the game on Adults difficulty";
+
 }

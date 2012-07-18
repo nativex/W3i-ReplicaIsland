@@ -27,14 +27,30 @@ public class AchievementsActivity extends Activity {
 
 		@Override
 		public void achievementUnlocked(
-				Achievement achievement) {
-			ReplicaIslandToast.makeAchievementUnlockedToast(AchievementsActivity.this, achievement).show();
+				final Achievement achievement) {
+			final Activity context = AchievementsActivity.this;
+			context.runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					ReplicaIslandToast.makeAchievementUnlockedToast(context, achievement).show();
+
+				}
+			});
 		}
 
 		@Override
 		public void achievementDone(
-				Achievement achievement) {
-			ReplicaIslandToast.makeAchievementDoneToast(AchievementsActivity.this, achievement).show();
+				final Achievement achievement) {
+			final Activity context = AchievementsActivity.this;
+			context.runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					ReplicaIslandToast.makeAchievementDoneToast(context, achievement).show();
+
+				}
+			});
 
 		}
 	};

@@ -41,16 +41,22 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.w3i.replica.replicaisland.AdultsDifficultyConstants;
+import com.w3i.replica.replicaisland.BabyDifficultyConstants;
 import com.w3i.replica.replicaisland.DebugLog;
+import com.w3i.replica.replicaisland.DifficultyConstants;
 import com.w3i.replica.replicaisland.EventReporter;
 import com.w3i.replica.replicaisland.GLSurfaceView;
 import com.w3i.replica.replicaisland.Game;
 import com.w3i.replica.replicaisland.GameFlowEvent;
+import com.w3i.replica.replicaisland.KidsDifficultyConstants;
 import com.w3i.replica.replicaisland.LevelTree;
+import com.w3i.replica.replicaisland.PlayerComponent;
 import com.w3i.replica.replicaisland.PreferenceConstants;
 import com.w3i.replica.replicaisland.R;
 import com.w3i.replica.replicaisland.UIConstants;
 import com.w3i.replica.replicaisland.achivements.Achievement;
+import com.w3i.replica.replicaisland.achivements.Achievement.Type;
 import com.w3i.replica.replicaisland.achivements.AchievementListener;
 import com.w3i.replica.replicaisland.achivements.AchievementManager;
 import com.w3i.replica.replicaisland.store.FundsManager;
@@ -120,22 +126,35 @@ public class AndouKun extends Activity implements SensorEventListener {
 		}
 	};
 
-	private AchievementListener onAchievementDone = new AchievementListener() {
-
-		@Override
-		public void achievementDone(
-				Achievement achievement) {
-			if (achievement.isDone()) {
-				ReplicaIslandToast.makeAchievementDoneToast(AndouKun.this, achievement).show();
-			}
-		}
+	private AchievementListener achievementListener = new AchievementListener() {
 
 		@Override
 		public void achievementUnlocked(
-				Achievement achievement) {
-			if (!achievement.isLocked()) {
-				ReplicaIslandToast.makeAchievementUnlockedToast(AndouKun.this, achievement).show();
-			}
+				final Achievement achievement) {
+			final Activity context = AndouKun.this;
+			context.runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					ReplicaIslandToast.makeAchievementUnlockedToast(context, achievement).show();
+
+				}
+			});
+		}
+
+		@Override
+		public void achievementDone(
+				final Achievement achievement) {
+			final Activity context = AndouKun.this;
+			context.runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					ReplicaIslandToast.makeAchievementDoneToast(context, achievement).show();
+
+				}
+			});
+
 		}
 	};
 
@@ -282,7 +301,7 @@ public class AndouKun extends Activity implements SensorEventListener {
 		}
 
 		KillingSpreeDetector.setKillingSpreeListener(killingSpreeListener);
-		AchievementManager.registerAchievementListener(onAchievementDone);
+		AchievementManager.registerAchievementListener(achievementListener);
 	}
 
 	protected void onDestroy() {
@@ -319,8 +338,8 @@ public class AndouKun extends Activity implements SensorEventListener {
 		if (mSensorManager != null) {
 			mSensorManager.unregisterListener(this);
 		}
-		AchievementManager.endFlyTime();
-		AchievementManager.endJetpackTime();
+		AchievementManager.updateFlyTime(0, false);
+		AchievementManager.updateJetpackTime(0, false);
 		AchievementManager.storeAchievements();
 
 	}
@@ -685,6 +704,41 @@ public class AndouKun extends Activity implements SensorEventListener {
 			break;
 		case GameFlowEvent.EVENT_SHOW_ANIMATION:
 			i = new Intent(this, AnimationPlayerActivity.class);
+			boolean gameBeat = false;
+			switch (index) {
+			case AnimationPlayerActivity.KYLE_DEATH:
+				AchievementManager.setAchievementDone(Type.KYLE_DEFEATED, true);
+				break;
+			case AnimationPlayerActivity.ROKUDOU_ENDING:
+				AchievementManager.setAchievementDone(Type.KABOCHA_DEFEATED, true);
+				gameBeat = true;
+				break;
+
+			case AnimationPlayerActivity.KABOCHA_ENDING:
+				AchievementManager.setAchievementDone(Type.RODOKOU_DEFEATED, true);
+				gameBeat = true;
+				break;
+
+			case AnimationPlayerActivity.WANDA_ENDING:
+				AchievementManager.setAchievementDone(Type.GOOD_ENDING, true);
+				gameBeat = true;
+
+				break;
+
+			}
+			if (gameBeat) {
+				AchievementManager.setAchievementDone(Type.GAME_BEAT, true);
+				DifficultyConstants difficultyConstants = PlayerComponent.getDifficultyConstants();
+				if (difficultyConstants != null) {
+					if (difficultyConstants instanceof BabyDifficultyConstants) {
+						AchievementManager.setAchievementDone(Type.BABY, true);
+					} else if (difficultyConstants instanceof KidsDifficultyConstants) {
+						AchievementManager.setAchievementDone(Type.KIDS, true);
+					} else if (difficultyConstants instanceof AdultsDifficultyConstants) {
+						AchievementManager.setAchievementDone(Type.ADULT, true);
+					}
+				}
+			}
 			i.putExtra("animation", index);
 			startActivityForResult(i, ACTIVITY_ANIMATION_PLAYER);
 			if (UIConstants.mOverridePendingTransition != null) {
