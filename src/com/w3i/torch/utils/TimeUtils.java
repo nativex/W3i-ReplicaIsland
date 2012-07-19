@@ -59,7 +59,7 @@ public class TimeUtils {
 
 		String time = "";
 		if (hours > 0) {
-			time += Long.toString(hours) + (hours > 1 ? " hours" : " hour");
+			time += Long.toString(hours) + (hours == 1 ? " hour" : " hours");
 		}
 		if (minutes > 0) {
 			if (hours > 0) {
@@ -68,13 +68,13 @@ public class TimeUtils {
 					time += " and ";
 				}
 			}
-			time += Long.toString(minutes) + (minutes > 1 ? " minutes" : " minute");
+			time += Long.toString(minutes) + (minutes == 1 ? " minute" : " minutes");
 		}
 		if (seconds > 0) {
 			if ((hours > 0) || (minutes > 0)) {
 				time += " and ";
 			}
-			time += Long.toString(seconds) + (seconds > 1 ? " seconds" : " second");
+			time += Long.toString(seconds) + (seconds == 1 ? " second" : " seconds");
 		}
 
 		return time;
