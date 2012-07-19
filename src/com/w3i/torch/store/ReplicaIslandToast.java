@@ -98,4 +98,26 @@ public class ReplicaIslandToast {
 		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 10);
 		return toast;
 	}
+
+	public static Toast makeAchievementProgressUpdateToast(
+			Context context,
+			Achievement achievement,
+			int percentDone) {
+		Toast toast = Toast.makeText(context, "", Toast.LENGTH_LONG);
+
+		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View toastLayout = inflater.inflate(R.layout.toast_killing_spree, null);
+		toast.setView(toastLayout);
+		TextView killingSpreeTitle = (TextView) toastLayout.findViewById(R.id.killingSpreeTitle);
+		killingSpreeTitle.setText("Achievement progress");
+		TextView killingSpreeText = (TextView) toastLayout.findViewById(R.id.killingSpreeText);
+		String formattedKillingSpreeString = "<font color=#FFFF00> " + achievement.getName() + "</font> is " + percentDone + "% done.";
+		killingSpreeText.setText(Html.fromHtml(formattedKillingSpreeString));
+		ImageView killingSpreeIcon = (ImageView) toastLayout.findViewById(R.id.killingSpreeIcon);
+		killingSpreeIcon.setImageResource(R.drawable.achv_locked);
+
+		toast.setDuration(Toast.LENGTH_LONG);
+		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 10);
+		return toast;
+	}
 }

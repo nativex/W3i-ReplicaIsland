@@ -26,6 +26,8 @@ import com.w3i.torch.store.StoreActivity;
 public class ExtrasMenuActivity extends Activity {
 	private static final String DIALOG_STORE_NOT_READY_TITLE = "Warning";
 	private static final String DIALOG_STORE_NOT_READY_MESSAGE = "The store is not ready or is unavailable.\nPlease try again later.";
+	private View mAchievementsButton;
+	private View mStoreButton;
 	private View mLinearModeButton;
 	private View mLevelSelectButton;
 	private View mControlsButton;
@@ -45,29 +47,6 @@ public class ExtrasMenuActivity extends Activity {
 	private static final int START_LINEAR_MODE = 0;
 	private static final int START_LEVEL_SELECT = 1;
 	private static final int EXTRAS_STORE_NOT_READY_DIALOG = 1001;
-
-	private View.OnClickListener sAchievementsListener = new View.OnClickListener() {
-
-		@Override
-		public void onClick(
-				View v) {
-			Intent intent = new Intent(ExtrasMenuActivity.this, AchievementsActivity.class);
-			ExtrasMenuActivity.this.startActivity(intent);
-		}
-	};
-
-	private View.OnClickListener sStoreButtonListener = new View.OnClickListener() {
-
-		public void onClick(
-				View arg0) {
-			if (!GamesPlatformManager.isInitialized()) {
-				showDialog(EXTRAS_STORE_NOT_READY_DIALOG);
-				return;
-			}
-			Intent intent = new Intent(arg0.getContext(), StoreActivity.class);
-			arg0.getContext().startActivity(intent);
-		}
-	};
 
 	private View.OnClickListener sLinearModeButtonListener = new View.OnClickListener() {
 		public void onClick(
@@ -109,15 +88,41 @@ public class ExtrasMenuActivity extends Activity {
 	private View.OnClickListener sControlsButtonListener = new View.OnClickListener() {
 		public void onClick(
 				View v) {
+			Intent intent = null;
 
-			Intent i = new Intent(getBaseContext(), SetPreferencesActivity.class);
-			i.putExtra("controlConfig", true);
+			switch (v.getId()) {
+			case R.id.extrasAchievements:
+				intent = new Intent(ExtrasMenuActivity.this, AchievementsActivity.class);
+				mControlsButton.startAnimation(mAlternateFadeOutAnimation);
+				mStoreButton.startAnimation(mAlternateFadeOutAnimation);
+				break;
+
+			case R.id.storeButton:
+				if (!GamesPlatformManager.isInitialized()) {
+					showDialog(EXTRAS_STORE_NOT_READY_DIALOG);
+					return;
+				}
+				intent = new Intent(v.getContext(), StoreActivity.class);
+				mControlsButton.startAnimation(mAlternateFadeOutAnimation);
+				mAchievementsButton.startAnimation(mAlternateFadeOutAnimation);
+				break;
+
+			case R.id.controlsButton:
+				intent = new Intent(getBaseContext(), SetPreferencesActivity.class);
+				intent.putExtra("controlConfig", true);
+				mStoreButton.startAnimation(mAlternateFadeOutAnimation);
+				mAchievementsButton.startAnimation(mAlternateFadeOutAnimation);
+				break;
+			}
 
 			v.startAnimation(mButtonFlickerAnimation);
-			mFadeOutAnimation.setAnimationListener(new StartActivityAfterAnimation(i));
+			if (intent != null) {
+				mFadeOutAnimation.setAnimationListener(new StartActivityAfterAnimation(intent));
+			}
 			mBackground.startAnimation(mFadeOutAnimation);
 			mLinearModeButton.startAnimation(mAlternateFadeOutAnimation);
 			mLevelSelectButton.startAnimation(mAlternateFadeOutAnimation);
+
 		}
 	};
 
@@ -130,6 +135,8 @@ public class ExtrasMenuActivity extends Activity {
 		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
 		final boolean extrasUnlocked = prefs.getBoolean(PreferenceConstants.PREFERENCE_EXTRAS_UNLOCKED, false);
 
+		mAchievementsButton = findViewById(R.id.extrasAchievements);
+		mStoreButton = findViewById(R.id.storeButton);
 		mLinearModeButton = findViewById(R.id.linearModeButton);
 		mLevelSelectButton = findViewById(R.id.levelSelectButton);
 		mControlsButton = findViewById(R.id.controlsButton);
@@ -137,9 +144,9 @@ public class ExtrasMenuActivity extends Activity {
 		mLevelSelectLocked = findViewById(R.id.levelSelectLocked);
 
 		View store = findViewById(R.id.storeButton);
-		store.setOnClickListener(sStoreButtonListener);
+		store.setOnClickListener(sControlsButtonListener);
 		View achievements = findViewById(R.id.extrasAchievements);
-		achievements.setOnClickListener(sAchievementsListener);
+		achievements.setOnClickListener(sControlsButtonListener);
 
 		mBackground = findViewById(R.id.mainMenuBackground);
 

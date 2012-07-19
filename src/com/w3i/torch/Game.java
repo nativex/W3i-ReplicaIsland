@@ -23,6 +23,9 @@ import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.w3i.torch.achivements.Achievement.State;
+import com.w3i.torch.achivements.Achievement.Type;
+import com.w3i.torch.achivements.AchievementManager;
 import com.w3i.torch.activities.AndouKun;
 
 /**
@@ -327,6 +330,8 @@ public class Game extends AllocationGuard {
 			mGame.start();
 			mRunning = true;
 			AllocationGuard.sGuardActive = false;
+			AchievementManager.setAchievementState(Type.MERCIFUL, State.START);
+			AchievementManager.setAchievementState(Type.UNTOUCHABLE, State.START);
 		} else {
 			mGameThread.resumeGame();
 		}

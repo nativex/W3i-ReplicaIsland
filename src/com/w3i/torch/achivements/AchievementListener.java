@@ -7,4 +7,8 @@ public interface AchievementListener {
 
 	public void achievementUnlocked(
 			Achievement achievement);
+
+	public void achievementProgressUpdate(
+			Achievement achievement,
+			int percentDone);
 }

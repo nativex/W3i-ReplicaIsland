@@ -7,7 +7,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 public class SkinManager {
-	private static Skins selectedSkin = Skins.DEFAULT;
+	private static Skins selectedSkin = Skins.TORCH;
 	private static boolean skinChanged = false;
 	private static boolean mainScreenImageSet = false;
 

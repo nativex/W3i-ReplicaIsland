@@ -53,6 +53,21 @@ public class AchievementsActivity extends Activity {
 			});
 
 		}
+
+		@Override
+		public void achievementProgressUpdate(
+				final Achievement achievement,
+				final int percentDone) {
+			final Activity context = AchievementsActivity.this;
+			context.runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					ReplicaIslandToast.makeAchievementProgressUpdateToast(context, achievement, percentDone).show();
+
+				}
+			});
+		}
 	};
 
 	@Override

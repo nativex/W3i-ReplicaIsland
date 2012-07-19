@@ -246,6 +246,21 @@ public class AchievementManager {
 		}
 	}
 
+	public static void notifyAchievementProgressUpdated(
+			Achievement achievement,
+			int percentDone) {
+		checkInstance();
+		instance._notifyAchievementProgressUpdated(achievement, percentDone);
+	}
+
+	private void _notifyAchievementProgressUpdated(
+			Achievement achievement,
+			int percentDone) {
+		if (achievementListener != null) {
+			achievementListener.achievementProgressUpdate(achievement, percentDone);
+		}
+	}
+
 	public static void registerAchievementListener(
 			AchievementListener listener) {
 		checkInstance();
@@ -255,6 +270,17 @@ public class AchievementManager {
 	private void _registerAchievementListener(
 			AchievementListener listener) {
 		achievementListener = listener;
+	}
+
+	public static boolean hasAchievementListenerRegistered() {
+		if (instance == null) {
+			return false;
+		}
+		return instance._hasAchievementListenerRegistered();
+	}
+
+	private boolean _hasAchievementListenerRegistered() {
+		return achievementListener != null;
 	}
 
 	/**
@@ -283,6 +309,24 @@ public class AchievementManager {
 		}
 	}
 
+	public static void setAchievementState(
+			Achievement.Type type,
+			Achievement.State state) {
+		if (instance == null) {
+			return;
+		}
+		instance._setAchievementState(type, state);
+	}
+
+	private void _setAchievementState(
+			Achievement.Type type,
+			Achievement.State state) {
+		Achievement achievement = _getAchivement(type);
+		if (achievement != null) {
+			achievement.onState(state);
+		}
+	}
+
 	private void _initializeAchievements() {
 		achievements.clear();
 		achievements.add(new BonusCrystalsAchievement());
@@ -308,6 +352,8 @@ public class AchievementManager {
 		achievements.add(new BabyDifficultyAchievement());
 		achievements.add(new KidsDifficultyAchievement());
 		achievements.add(new AdultsDifficultyAchievement());
+		achievements.add(new UntouchableAchievement());
+		achievements.add(new MercifulAchievement());
 	}
 
 	private void _release() {

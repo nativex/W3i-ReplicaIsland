@@ -18,8 +18,10 @@ package com.w3i.torch;
 
 import com.w3i.torch.CollisionParameters.HitType;
 import com.w3i.torch.GameObject.ActionType;
+import com.w3i.torch.achivements.Achievement;
 import com.w3i.torch.achivements.Achievement.Type;
 import com.w3i.torch.achivements.AchievementManager;
+import com.w3i.torch.store.KillingSpreeDetector;
 
 public class PlayerComponent extends GameComponent {
 
@@ -218,6 +220,7 @@ public class PlayerComponent extends GameComponent {
 
 		TimeSystem time = sSystemRegistry.timeSystem;
 		GameObject parentObject = (GameObject) parent;
+		KillingSpreeDetector.update(timeDelta);
 
 		final float gameTime = time.getGameTime();
 		mTouchingGround = parentObject.touchingGround();
@@ -443,6 +446,7 @@ public class PlayerComponent extends GameComponent {
 			mState = State.HIT_REACT;
 			mTimer = time;
 		}
+		AchievementManager.setAchievementState(Type.UNTOUCHABLE, Achievement.State.FAIL);
 		AchievementManager.incrementAchievementProgress(Type.HIT, 1);
 	}
 
@@ -504,6 +508,8 @@ public class PlayerComponent extends GameComponent {
 		mTimer = timeSystem.getRealTime();
 		timeSystem.appyScale(0.1f, 8.0f, true);
 		AchievementManager.incrementAchievementProgress(Type.LEVELS, 1);
+		AchievementManager.setAchievementState(Achievement.Type.UNTOUCHABLE, Achievement.State.FINISH);
+		AchievementManager.setAchievementState(Achievement.Type.MERCIFUL, Achievement.State.FINISH);
 	}
 
 	protected void stateWin(

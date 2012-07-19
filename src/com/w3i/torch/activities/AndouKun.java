@@ -118,10 +118,18 @@ public class AndouKun extends Activity implements SensorEventListener {
 	private KillingSpreeDetector.OnKillingSpreeEnd killingSpreeListener = new KillingSpreeDetector.OnKillingSpreeEnd() {
 
 		public void killingSpreeEnded(
-				int kills,
-				int pearlsEarned) {
+				final int kills,
+				final int pearlsEarned) {
 			if (kills > 1) {
-				ReplicaIslandToast.makeKillingSpreeToast(AndouKun.this, kills, pearlsEarned).show();
+				AndouKun.this.runOnUiThread(new Runnable() {
+
+					@Override
+					public void run() {
+						ReplicaIslandToast.makeKillingSpreeToast(AndouKun.this, kills, pearlsEarned).show();
+
+					}
+				});
+
 			}
 		}
 	};
@@ -155,6 +163,21 @@ public class AndouKun extends Activity implements SensorEventListener {
 				}
 			});
 
+		}
+
+		@Override
+		public void achievementProgressUpdate(
+				final Achievement achievement,
+				final int percentDone) {
+			final Activity context = AndouKun.this;
+			context.runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					ReplicaIslandToast.makeAchievementProgressUpdateToast(context, achievement, percentDone).show();
+
+				}
+			});
 		}
 	};
 

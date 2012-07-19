@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.w3i.gamesplatformsdk.rest.entities.Currency;
 import com.w3i.gamesplatformsdk.rest.entities.Item;
+import com.w3i.torch.achivements.Achievement.State;
 import com.w3i.torch.achivements.Achievement.Type;
 import com.w3i.torch.achivements.AchievementManager;
 
@@ -127,5 +128,6 @@ public class FundsManager {
 			AchievementManager.incrementAchievementProgress(Type.BONUS_PEARLS, pearlsAwarded);
 		}
 		AchievementManager.incrementAchievementProgress(Type.KILLS, 1);
+		AchievementManager.setAchievementState(Type.MERCIFUL, State.FAIL);
 	}
 }

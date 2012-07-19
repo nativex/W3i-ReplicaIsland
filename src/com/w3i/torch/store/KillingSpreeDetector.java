@@ -1,20 +1,14 @@
 package com.w3i.torch.store;
 
-import android.os.Handler;
-import android.os.Message;
-
 import com.w3i.common.Log;
 import com.w3i.torch.achivements.Achievement.Type;
 import com.w3i.torch.achivements.AchievementConstants;
 import com.w3i.torch.achivements.AchievementManager;
 
 public class KillingSpreeDetector {
-	public static final long KILLING_SPREE_DURATION = 1000; // 1 sec
-
-	private static final int MSG_END_KILLING_SPREE = 3324;
+	public static final long KILLING_SPREE_DURATION = 1; // 1 sec
 
 	private static KillingSpreeDetector instance;
-
 	private static boolean isEnabled = false;
 
 	private boolean inSpree = false;
@@ -23,32 +17,13 @@ public class KillingSpreeDetector {
 	private int pearlsEarned = 0;
 	private int killsToCrystal = PowerupManager.getKillsForCrystal();
 	private OnKillingSpreeEnd killingSpreeListener;
+	private double spreeTime = 0;
 
 	public interface OnKillingSpreeEnd {
 		public void killingSpreeEnded(
 				int kills,
 				int pearlsEarned);
 	}
-
-	private Handler handler = new Handler() {
-
-		@Override
-		public void handleMessage(
-				Message msg) {
-			switch (msg.what) {
-			case MSG_END_KILLING_SPREE:
-				if (killingSpreeListener != null) {
-					killingSpreeListener.killingSpreeEnded(monstersKilled, pearlsEarned);
-				}
-				_handleKillingSpreeEndAchievements(monstersKilled);
-				killingSpreeMultiplier = 1f;
-				monstersKilled = 0;
-				inSpree = false;
-				removeMessages(MSG_END_KILLING_SPREE);
-			}
-		}
-
-	};
 
 	private void _handleKillingSpreeEndAchievements(
 			int monstersKilled) {
@@ -70,19 +45,41 @@ public class KillingSpreeDetector {
 		instance._recordKill();
 	}
 
+	public static void update(
+			double delta) {
+		checkInstance();
+		instance._update(delta);
+	}
+
+	private void _update(
+			double delta) {
+		if (inSpree) {
+			spreeTime += delta;
+			if (spreeTime >= KILLING_SPREE_DURATION) {
+				if (killingSpreeListener != null) {
+					killingSpreeListener.killingSpreeEnded(monstersKilled, pearlsEarned);
+				}
+				_handleKillingSpreeEndAchievements(monstersKilled);
+				killingSpreeMultiplier = 1f;
+				monstersKilled = 0;
+				inSpree = false;
+			}
+		}
+	}
+
 	private void _recordKill() {
 		if (inSpree) {
 			killingSpreeMultiplier += PowerupManager.getKillingSpreeBonus();
 			monstersKilled++;
 			pearlsEarned = (int) (PowerupManager.getPearlsPerKill() * killingSpreeMultiplier + 0.5f);
+			spreeTime = 0;
 		} else {
 			pearlsEarned = PowerupManager.getPearlsPerKill();
 			inSpree = true;
 			monstersKilled = 1;
+			spreeTime = 0;
 		}
 		Log.i("KillingSpreeDetector: Monster Killed");
-		handler.removeMessages(MSG_END_KILLING_SPREE);
-		handler.sendEmptyMessageDelayed(MSG_END_KILLING_SPREE, KILLING_SPREE_DURATION);
 		recordCrystals();
 	}
 

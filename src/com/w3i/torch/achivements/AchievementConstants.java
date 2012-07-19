@@ -109,4 +109,12 @@ public class AchievementConstants {
 	public static final String ADULT_BEAT_NAME = "Adult beat";
 	public static final String ADULT_BEAT_DESCRIPTION = "Beat the game on Adults difficulty";
 
+	// Untouchable
+	public static final String UNTOUCHABLE_NAME = "Untouchable";
+	public static final String UNTOUCHABLE_DESCRIPTION = "Beat a level without being hit.";
+
+	// Merciful
+	public static final String MERCIFUL_NAME = "Merciful";
+	public static final String MERCIFUL_DESCRIPTION = "Beat a level without destroying any enemies.";
+
 }

@@ -114,6 +114,21 @@ public class StoreActivity extends Activity {
 			});
 
 		}
+
+		@Override
+		public void achievementProgressUpdate(
+				final Achievement achievement,
+				final int percentDone) {
+			final Activity context = StoreActivity.this;
+			context.runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					ReplicaIslandToast.makeAchievementProgressUpdateToast(context, achievement, percentDone).show();
+
+				}
+			});
+		}
 	};
 
 	public static final int DEFAULT_CATEGORY_BACKGROUND_COLOR = Color.DKGRAY;

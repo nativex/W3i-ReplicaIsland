@@ -11,6 +11,12 @@ public abstract class Achievement {
 	private boolean locked = false;
 	private String preferencesName;
 
+	public static enum State {
+		START,
+		FINISH,
+		FAIL;
+	}
+
 	public enum Type {
 		CRYSTALS("Crystals"),
 		PEARLS("Pearls"),
@@ -35,7 +41,9 @@ public abstract class Achievement {
 		STOMP("Stomp"),
 		BABY("BabyDiff"),
 		KIDS("KidsDiff"),
-		ADULT("AdultDiff");
+		ADULT("AdultDiff"),
+		UNTOUCHABLE("Untouchable"),
+		MERCIFUL("Merciful");
 
 		private String preferencesString;
 
@@ -172,6 +180,11 @@ public abstract class Achievement {
 
 	public String getPreferencesLocked() {
 		return preferencesName + "Locked";
+	}
+
+	public void onState(
+			State state) {
+		// Override in achievements with states.
 	}
 
 }
