@@ -49,47 +49,47 @@ com.w3i.offerwall.ui.DeviceScreenSize$SCREEN_SIZE: com.w3i.offerwall.ui.DeviceSc
 com.w3i.offerwall.ui.HistoryActivity
 com.w3i.offerwall.ui.OfferDescriptionActivity
 com.w3i.offerwall.ui.OfferwallActivity
-com.w3i.replica.replicaisland.AnimationComponent$PlayerAnimations: com.w3i.replica.replicaisland.AnimationComponent$PlayerAnimations[] values()
-com.w3i.replica.replicaisland.AnimationComponent$PlayerAnimations: com.w3i.replica.replicaisland.AnimationComponent$PlayerAnimations valueOf(java.lang.String)
-com.w3i.replica.replicaisland.EnemyAnimationComponent$AnimationState: com.w3i.replica.replicaisland.EnemyAnimationComponent$AnimationState[] values()
-com.w3i.replica.replicaisland.EnemyAnimationComponent$AnimationState: com.w3i.replica.replicaisland.EnemyAnimationComponent$AnimationState valueOf(java.lang.String)
-com.w3i.replica.replicaisland.EnemyAnimationComponent$EnemyAnimations: com.w3i.replica.replicaisland.EnemyAnimationComponent$EnemyAnimations[] values()
-com.w3i.replica.replicaisland.EnemyAnimationComponent$EnemyAnimations: com.w3i.replica.replicaisland.EnemyAnimationComponent$EnemyAnimations valueOf(java.lang.String)
-com.w3i.replica.replicaisland.GLSurfaceView
-com.w3i.replica.replicaisland.GLSurfaceView: GLSurfaceView(android.content.Context,android.util.AttributeSet)
-com.w3i.replica.replicaisland.GameComponent$ComponentPhases: com.w3i.replica.replicaisland.GameComponent$ComponentPhases[] values()
-com.w3i.replica.replicaisland.GameComponent$ComponentPhases: com.w3i.replica.replicaisland.GameComponent$ComponentPhases valueOf(java.lang.String)
-com.w3i.replica.replicaisland.GameObject$ActionType: com.w3i.replica.replicaisland.GameObject$ActionType[] values()
-com.w3i.replica.replicaisland.GameObject$ActionType: com.w3i.replica.replicaisland.GameObject$ActionType valueOf(java.lang.String)
-com.w3i.replica.replicaisland.GameObject$Team: com.w3i.replica.replicaisland.GameObject$Team[] values()
-com.w3i.replica.replicaisland.GameObject$Team: com.w3i.replica.replicaisland.GameObject$Team valueOf(java.lang.String)
-com.w3i.replica.replicaisland.GameObjectFactory$GameObjectType: com.w3i.replica.replicaisland.GameObjectFactory$GameObjectType[] values()
-com.w3i.replica.replicaisland.GameObjectFactory$GameObjectType: com.w3i.replica.replicaisland.GameObjectFactory$GameObjectType valueOf(java.lang.String)
-com.w3i.replica.replicaisland.KeyboardConfigDialogPreference
-com.w3i.replica.replicaisland.KeyboardConfigDialogPreference: KeyboardConfigDialogPreference(android.content.Context,android.util.AttributeSet)
-com.w3i.replica.replicaisland.KeyboardConfigDialogPreference: KeyboardConfigDialogPreference(android.content.Context,android.util.AttributeSet,int)
-com.w3i.replica.replicaisland.PlayerComponent$State: com.w3i.replica.replicaisland.PlayerComponent$State[] values()
-com.w3i.replica.replicaisland.PlayerComponent$State: com.w3i.replica.replicaisland.PlayerComponent$State valueOf(java.lang.String)
-com.w3i.replica.replicaisland.SliderPreference
-com.w3i.replica.replicaisland.SliderPreference: SliderPreference(android.content.Context,android.util.AttributeSet)
-com.w3i.replica.replicaisland.SliderPreference: SliderPreference(android.content.Context,android.util.AttributeSet,int)
-com.w3i.replica.replicaisland.YesNoDialogPreference
-com.w3i.replica.replicaisland.YesNoDialogPreference: YesNoDialogPreference(android.content.Context,android.util.AttributeSet)
-com.w3i.replica.replicaisland.YesNoDialogPreference: YesNoDialogPreference(android.content.Context,android.util.AttributeSet,int)
-com.w3i.replica.replicaisland.activities.AndouKun
-com.w3i.replica.replicaisland.activities.AnimationPlayerActivity
-com.w3i.replica.replicaisland.activities.ConversationDialogActivity
-com.w3i.replica.replicaisland.activities.ConversationDialogActivity$TypewriterTextView
-com.w3i.replica.replicaisland.activities.ConversationDialogActivity$TypewriterTextView: ConversationDialogActivity$TypewriterTextView(android.content.Context,android.util.AttributeSet)
-com.w3i.replica.replicaisland.activities.ConversationDialogActivity$TypewriterTextView: ConversationDialogActivity$TypewriterTextView(android.content.Context,android.util.AttributeSet,int)
-com.w3i.replica.replicaisland.activities.DiaryActivity
-com.w3i.replica.replicaisland.activities.DifficultyMenuActivity
-com.w3i.replica.replicaisland.activities.ExtrasMenuActivity
-com.w3i.replica.replicaisland.activities.GameOverActivity
-com.w3i.replica.replicaisland.activities.GameOverActivity$IncrementingTextView
-com.w3i.replica.replicaisland.activities.GameOverActivity$IncrementingTextView: GameOverActivity$IncrementingTextView(android.content.Context,android.util.AttributeSet)
-com.w3i.replica.replicaisland.activities.GameOverActivity$IncrementingTextView: GameOverActivity$IncrementingTextView(android.content.Context,android.util.AttributeSet,int)
-com.w3i.replica.replicaisland.activities.LevelSelectActivity
-com.w3i.replica.replicaisland.activities.MainMenuActivity
-com.w3i.replica.replicaisland.activities.SetPreferencesActivity
+com.w3i.torch.AnimationComponent$PlayerAnimations: com.w3i.torch.AnimationComponent$PlayerAnimations[] values()
+com.w3i.torch.AnimationComponent$PlayerAnimations: com.w3i.torch.AnimationComponent$PlayerAnimations valueOf(java.lang.String)
+com.w3i.torch.EnemyAnimationComponent$AnimationState: com.w3i.torch.EnemyAnimationComponent$AnimationState[] values()
+com.w3i.torch.EnemyAnimationComponent$AnimationState: com.w3i.torch.EnemyAnimationComponent$AnimationState valueOf(java.lang.String)
+com.w3i.torch.EnemyAnimationComponent$EnemyAnimations: com.w3i.torch.EnemyAnimationComponent$EnemyAnimations[] values()
+com.w3i.torch.EnemyAnimationComponent$EnemyAnimations: com.w3i.torch.EnemyAnimationComponent$EnemyAnimations valueOf(java.lang.String)
+com.w3i.torch.GLSurfaceView
+com.w3i.torch.GLSurfaceView: GLSurfaceView(android.content.Context,android.util.AttributeSet)
+com.w3i.torch.GameComponent$ComponentPhases: com.w3i.torch.GameComponent$ComponentPhases[] values()
+com.w3i.torch.GameComponent$ComponentPhases: com.w3i.torch.GameComponent$ComponentPhases valueOf(java.lang.String)
+com.w3i.torch.GameObject$ActionType: com.w3i.torch.GameObject$ActionType[] values()
+com.w3i.torch.GameObject$ActionType: com.w3i.torch.GameObject$ActionType valueOf(java.lang.String)
+com.w3i.torch.GameObject$Team: com.w3i.torch.GameObject$Team[] values()
+com.w3i.torch.GameObject$Team: com.w3i.torch.GameObject$Team valueOf(java.lang.String)
+com.w3i.torch.GameObjectFactory$GameObjectType: com.w3i.torch.GameObjectFactory$GameObjectType[] values()
+com.w3i.torch.GameObjectFactory$GameObjectType: com.w3i.torch.GameObjectFactory$GameObjectType valueOf(java.lang.String)
+com.w3i.torch.KeyboardConfigDialogPreference
+com.w3i.torch.KeyboardConfigDialogPreference: KeyboardConfigDialogPreference(android.content.Context,android.util.AttributeSet)
+com.w3i.torch.KeyboardConfigDialogPreference: KeyboardConfigDialogPreference(android.content.Context,android.util.AttributeSet,int)
+com.w3i.torch.PlayerComponent$State: com.w3i.torch.PlayerComponent$State[] values()
+com.w3i.torch.PlayerComponent$State: com.w3i.torch.PlayerComponent$State valueOf(java.lang.String)
+com.w3i.torch.SliderPreference
+com.w3i.torch.SliderPreference: SliderPreference(android.content.Context,android.util.AttributeSet)
+com.w3i.torch.SliderPreference: SliderPreference(android.content.Context,android.util.AttributeSet,int)
+com.w3i.torch.YesNoDialogPreference
+com.w3i.torch.YesNoDialogPreference: YesNoDialogPreference(android.content.Context,android.util.AttributeSet)
+com.w3i.torch.YesNoDialogPreference: YesNoDialogPreference(android.content.Context,android.util.AttributeSet,int)
+com.w3i.torch.activities.AndouKun
+com.w3i.torch.activities.AnimationPlayerActivity
+com.w3i.torch.activities.ConversationDialogActivity
+com.w3i.torch.activities.ConversationDialogActivity$TypewriterTextView
+com.w3i.torch.activities.ConversationDialogActivity$TypewriterTextView: ConversationDialogActivity$TypewriterTextView(android.content.Context,android.util.AttributeSet)
+com.w3i.torch.activities.ConversationDialogActivity$TypewriterTextView: ConversationDialogActivity$TypewriterTextView(android.content.Context,android.util.AttributeSet,int)
+com.w3i.torch.activities.DiaryActivity
+com.w3i.torch.activities.DifficultyMenuActivity
+com.w3i.torch.activities.ExtrasMenuActivity
+com.w3i.torch.activities.GameOverActivity
+com.w3i.torch.activities.GameOverActivity$IncrementingTextView
+com.w3i.torch.activities.GameOverActivity$IncrementingTextView: GameOverActivity$IncrementingTextView(android.content.Context,android.util.AttributeSet)
+com.w3i.torch.activities.GameOverActivity$IncrementingTextView: GameOverActivity$IncrementingTextView(android.content.Context,android.util.AttributeSet,int)
+com.w3i.torch.activities.LevelSelectActivity
+com.w3i.torch.activities.MainMenuActivity
+com.w3i.torch.activities.SetPreferencesActivity
 org.OpenUDID.OpenUDID_service

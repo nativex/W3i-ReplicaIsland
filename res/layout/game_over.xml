@@ -9,6 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:adjustViewBounds="true"
+        android:contentDescription="@string/default_image_view_description"
         android:gravity="right"
         android:scaleType="fitXY"
         android:src="@drawable/title_background"
@@ -50,9 +51,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
-                class="com.w3i.replica.replicaisland.activities.GameOverActivity$IncrementingTextView"
+                class="com.w3i.torch.activities.GameOverActivity$IncrementingTextView"
                 android:gravity="right"
-                android:text="100%"
+                android:text="@string/game_over_pearl_percent"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -78,9 +79,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
-                class="com.w3i.replica.replicaisland.activities.GameOverActivity$IncrementingTextView"
+                class="com.w3i.torch.activities.GameOverActivity$IncrementingTextView"
                 android:gravity="right"
-                android:text="0"
+                android:text="@string/game_over_enemy_percent"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -100,19 +101,20 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:typeface="serif" />
-
+
             <view
                 android:id="@+id/total_play_time"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
-                class="com.w3i.replica.replicaisland.activities.GameOverActivity$IncrementingTextView"
+                class="com.w3i.torch.activities.GameOverActivity$IncrementingTextView"
                 android:gravity="right"
-                android:text="3:21:34"
+                android:text="@string/game_over_total_play_time"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:typeface="serif" />
+
         </LinearLayout>
 
         <LinearLayout

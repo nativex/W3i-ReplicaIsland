@@ -1,0 +1,851 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/7/trunk/src/com/torch
+END
+StandardSorter.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/4/trunk/src/com/torch/StandardSorter.java
+END
+ObjectPool.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/4/trunk/src/com/torch/ObjectPool.java
+END
+Utils.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/6/trunk/src/com/torch/Utils.java
+END
+BaseObject.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/4/trunk/src/com/torch/BaseObject.java
+END
+VibrationSystem.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/4/trunk/src/com/torch/VibrationSystem.java
+END
+Lerp.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/4/trunk/src/com/torch/Lerp.java
+END
+UIConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/7/trunk/src/com/torch/UIConstants.java
+END
+QuickSorter.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/4/trunk/src/com/torch/QuickSorter.java
+END
+MovementComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/4/trunk/src/com/torch/MovementComponent.java
+END
+DrawableBitmap.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/4/trunk/src/com/torch/DrawableBitmap.java
+END
+ScrollableBitmap.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/4/trunk/src/com/torch/ScrollableBitmap.java
+END
+LifetimeComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/7/trunk/src/com/torch/LifetimeComponent.java
+END
+SortConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/4/trunk/src/com/torch/SortConstants.java
+END
+PatrolComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/4/trunk/src/com/torch/PatrolComponent.java
+END
+Grid.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/4/trunk/src/com/torch/Grid.java
+END
+MainMenuActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/7/trunk/src/com/torch/MainMenuActivity.java
+END
+InputButton.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/6/trunk/src/com/torch/InputButton.java
+END
+VectorPool.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/4/trunk/src/com/torch/VectorPool.java
+END
+BabyDifficultyConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/7/trunk/src/com/torch/BabyDifficultyConstants.java
+END
+PlaySingleSoundComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/4/trunk/src/com/torch/PlaySingleSoundComponent.java
+END
+EventReporter.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/3/trunk/src/com/torch/EventReporter.java
+END
+PhysicsComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/4/trunk/src/com/torch/PhysicsComponent.java
+END
+GhostComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/6/trunk/src/com/torch/GhostComponent.java
+END
+FrameRateWatcherComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/6/trunk/src/com/torch/FrameRateWatcherComponent.java
+END
+GravityComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/4/trunk/src/com/torch/GravityComponent.java
+END
+DrawableFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/7/trunk/src/com/torch/DrawableFactory.java
+END
+TiledWorld.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/4/trunk/src/com/torch/TiledWorld.java
+END
+LaunchProjectileComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/7/trunk/src/com/torch/LaunchProjectileComponent.java
+END
+Sorter.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/4/trunk/src/com/torch/Sorter.java
+END
+PlayerComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/7/trunk/src/com/torch/PlayerComponent.java
+END
+Interpolator.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/4/trunk/src/com/torch/Interpolator.java
+END
+GameOverActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/7/trunk/src/com/torch/GameOverActivity.java
+END
+SelectDialogComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/4/trunk/src/com/torch/SelectDialogComponent.java
+END
+CollisionVolume.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/4/trunk/src/com/torch/CollisionVolume.java
+END
+PhasedObjectManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/6/trunk/src/com/torch/PhasedObjectManager.java
+END
+GameComponentPool.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/4/trunk/src/com/torch/GameComponentPool.java
+END
+AttackAtDistanceComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/4/trunk/src/com/torch/AttackAtDistanceComponent.java
+END
+ConversationUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/4/trunk/src/com/torch/ConversationUtils.java
+END
+GameComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/4/trunk/src/com/torch/GameComponent.java
+END
+Texture.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/4/trunk/src/com/torch/Texture.java
+END
+GameThread.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/6/trunk/src/com/torch/GameThread.java
+END
+TiledBackgroundVertexGrid.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/4/trunk/src/com/torch/TiledBackgroundVertexGrid.java
+END
+KeyboardConfigDialogPreference.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/4/trunk/src/com/torch/KeyboardConfigDialogPreference.java
+END
+ConversationDialogActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/4/trunk/src/com/torch/ConversationDialogActivity.java
+END
+ExtrasMenuActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/7/trunk/src/com/torch/ExtrasMenuActivity.java
+END
+ScrollerComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/4/trunk/src/com/torch/ScrollerComponent.java
+END
+PopOutComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/4/trunk/src/com/torch/PopOutComponent.java
+END
+PreferenceConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/7/trunk/src/com/torch/PreferenceConstants.java
+END
+LevelSystem.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/4/trunk/src/com/torch/LevelSystem.java
+END
+ChangeComponentsComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/4/trunk/src/com/torch/ChangeComponentsComponent.java
+END
+InputXY.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/6/trunk/src/com/torch/InputXY.java
+END
+SleeperComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/4/trunk/src/com/torch/SleeperComponent.java
+END
+DynamicCollisionComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/4/trunk/src/com/torch/DynamicCollisionComponent.java
+END
+RenderSystem.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/7/trunk/src/com/torch/RenderSystem.java
+END
+FadeDrawableComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/7/trunk/src/com/torch/FadeDrawableComponent.java
+END
+GameObjectManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/6/trunk/src/com/torch/GameObjectManager.java
+END
+DifficultyConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/7/trunk/src/com/torch/DifficultyConstants.java
+END
+MultiTouchFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/7/trunk/src/com/torch/MultiTouchFilter.java
+END
+ShellSorter.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/4/trunk/src/com/torch/ShellSorter.java
+END
+DrawableObject.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/4/trunk/src/com/torch/DrawableObject.java
+END
+InventoryComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/4/trunk/src/com/torch/InventoryComponent.java
+END
+AndouKun.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/7/trunk/src/com/torch/AndouKun.java
+END
+HudSystem.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/7/trunk/src/com/torch/HudSystem.java
+END
+TouchFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/7/trunk/src/com/torch/TouchFilter.java
+END
+SphereCollisionVolume.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/4/trunk/src/com/torch/SphereCollisionVolume.java
+END
+EnemyAnimationComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/4/trunk/src/com/torch/EnemyAnimationComponent.java
+END
+SpriteAnimation.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/4/trunk/src/com/torch/SpriteAnimation.java
+END
+ChannelSystem.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/4/trunk/src/com/torch/ChannelSystem.java
+END
+SimplePhysicsComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/4/trunk/src/com/torch/SimplePhysicsComponent.java
+END
+SliderPreference.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/6/trunk/src/com/torch/SliderPreference.java
+END
+FixedAnimationComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/4/trunk/src/com/torch/FixedAnimationComponent.java
+END
+LauncherComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/6/trunk/src/com/torch/LauncherComponent.java
+END
+DiaryActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/7/trunk/src/com/torch/DiaryActivity.java
+END
+GameObjectFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/7/trunk/src/com/torch/GameObjectFactory.java
+END
+CustomToastSystem.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/4/trunk/src/com/torch/CustomToastSystem.java
+END
+AABoxCollisionVolume.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/4/trunk/src/com/torch/AABoxCollisionVolume.java
+END
+GenericAnimationComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/4/trunk/src/com/torch/GenericAnimationComponent.java
+END
+GameRenderer.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/6/trunk/src/com/torch/GameRenderer.java
+END
+AnimationComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/6/trunk/src/com/torch/AnimationComponent.java
+END
+TiledVertexGrid.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/6/trunk/src/com/torch/TiledVertexGrid.java
+END
+SolidSurfaceComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/4/trunk/src/com/torch/SolidSurfaceComponent.java
+END
+AllocationGuard.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/4/trunk/src/com/torch/AllocationGuard.java
+END
+MotionBlurComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/4/trunk/src/com/torch/MotionBlurComponent.java
+END
+TheSourceComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/4/trunk/src/com/torch/TheSourceComponent.java
+END
+CrusherAndouComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/7/trunk/src/com/torch/CrusherAndouComponent.java
+END
+LevelTree.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/7/trunk/src/com/torch/LevelTree.java
+END
+DebugLog.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/4/trunk/src/com/torch/DebugLog.java
+END
+SimpleCollisionComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/4/trunk/src/com/torch/SimpleCollisionComponent.java
+END
+FixedSizeArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/4/trunk/src/com/torch/FixedSizeArray.java
+END
+SingleTouchFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/7/trunk/src/com/torch/SingleTouchFilter.java
+END
+CameraSystem.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/4/trunk/src/com/torch/CameraSystem.java
+END
+ButtonAnimationComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/4/trunk/src/com/torch/ButtonAnimationComponent.java
+END
+ObjectRegistry.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/6/trunk/src/com/torch/ObjectRegistry.java
+END
+GameObject.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/4/trunk/src/com/torch/GameObject.java
+END
+RenderComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/4/trunk/src/com/torch/RenderComponent.java
+END
+InputTouchScreen.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/7/trunk/src/com/torch/InputTouchScreen.java
+END
+GameFlowEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/4/trunk/src/com/torch/GameFlowEvent.java
+END
+InputSystem.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/7/trunk/src/com/torch/InputSystem.java
+END
+GLSurfaceView.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/7/trunk/src/com/torch/GLSurfaceView.java
+END
+EventRecorder.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/7/trunk/src/com/torch/EventRecorder.java
+END
+AnimationPlayerActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/7/trunk/src/com/torch/AnimationPlayerActivity.java
+END
+Game.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/7/trunk/src/com/torch/Game.java
+END
+KidsDifficultyConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/7/trunk/src/com/torch/KidsDifficultyConstants.java
+END
+OrbitalMagnetComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/4/trunk/src/com/torch/OrbitalMagnetComponent.java
+END
+YesNoDialogPreference.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/4/trunk/src/com/torch/YesNoDialogPreference.java
+END
+AdultsDifficultyConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/7/trunk/src/com/torch/AdultsDifficultyConstants.java
+END
+GLErrorLogger.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/4/trunk/src/com/torch/GLErrorLogger.java
+END
+CollisionParameters.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/4/trunk/src/com/torch/CollisionParameters.java
+END
+TObjectPool.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/4/trunk/src/com/torch/TObjectPool.java
+END
+DoorAnimationComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/4/trunk/src/com/torch/DoorAnimationComponent.java
+END
+SpriteComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/4/trunk/src/com/torch/SpriteComponent.java
+END
+AnimationFrame.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/4/trunk/src/com/torch/AnimationFrame.java
+END
+DebugSystem.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/4/trunk/src/com/torch/DebugSystem.java
+END
+SoundSystem.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/7/trunk/src/com/torch/SoundSystem.java
+END
+BufferLibrary.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/4/trunk/src/com/torch/BufferLibrary.java
+END
+CollisionSystem.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/6/trunk/src/com/torch/CollisionSystem.java
+END
+ObjectManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/4/trunk/src/com/torch/ObjectManager.java
+END
+TimeSystem.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/4/trunk/src/com/torch/TimeSystem.java
+END
+NPCComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/4/trunk/src/com/torch/NPCComponent.java
+END
+NPCAnimationComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/4/trunk/src/com/torch/NPCAnimationComponent.java
+END
+DifficultyMenuActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/7/trunk/src/com/torch/DifficultyMenuActivity.java
+END
+HotSpotSystem.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/4/trunk/src/com/torch/HotSpotSystem.java
+END
+ContextParameters.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/7/trunk/src/com/torch/ContextParameters.java
+END
+ButtonConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/7/trunk/src/com/torch/ButtonConstants.java
+END
+CameraBiasComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/4/trunk/src/com/torch/CameraBiasComponent.java
+END
+InputGameInterface.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/7/trunk/src/com/torch/InputGameInterface.java
+END
+BackgroundCollisionComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/4/trunk/src/com/torch/BackgroundCollisionComponent.java
+END
+LevelBuilder.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/4/trunk/src/com/torch/LevelBuilder.java
+END
+MainLoop.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/4/trunk/src/com/torch/MainLoop.java
+END
+InputKeyboard.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/6/trunk/src/com/torch/InputKeyboard.java
+END
+GameObjectCollisionSystem.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/6/trunk/src/com/torch/GameObjectCollisionSystem.java
+END
+HitPlayerComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/4/trunk/src/com/torch/HitPlayerComponent.java
+END
+LevelSelectActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/7/trunk/src/com/torch/LevelSelectActivity.java
+END
+Vector2.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/4/trunk/src/com/torch/Vector2.java
+END
+TextureLibrary.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/4/trunk/src/com/torch/TextureLibrary.java
+END
+HitPointPool.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/4/trunk/src/com/torch/HitPointPool.java
+END
+OpenGLSystem.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/4/trunk/src/com/torch/OpenGLSystem.java
+END
+SetPreferencesActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/7/trunk/src/com/torch/SetPreferencesActivity.java
+END
+PhasedObject.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/4/trunk/src/com/torch/PhasedObject.java
+END
+HitReactionComponent.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/4/trunk/src/com/torch/HitReactionComponent.java
+END
+HitPoint.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/4/trunk/src/com/torch/HitPoint.java
+END

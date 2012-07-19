@@ -11,14 +11,15 @@
         android:id="@+id/fundsPearlsIcon"
         android:layout_width="24dp"
         android:layout_height="24dp"
+        android:contentDescription="@string/default_image_view_description"
         android:src="@drawable/object_coin01" />
-
+
     <TextView
         android:id="@+id/fundsPearlsQuantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dip"
-        android:text="0"
+        android:text="@string/coin_layout_initial_pearls"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/white"
         android:textSize="18dp" />
@@ -28,6 +29,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginLeft="15dip"
+        android:contentDescription="@string/default_image_view_description"
         android:src="@drawable/object_ruby01" />
 
     <TextView
@@ -35,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dip"
-        android:text="0"
+        android:text="@string/coin_layout_initial_pearls"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffff0000"
         android:textSize="18dp" />

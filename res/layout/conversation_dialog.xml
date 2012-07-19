@@ -8,6 +8,7 @@
         <ImageView
             android:id="@+id/speaker"
             android:adjustViewBounds="true"
+            android:contentDescription="@string/default_image_view_description"
             android:gravity="center_vertical"
             android:src="@drawable/wanda_smile" />
 
@@ -19,38 +20,35 @@
                     android:id="@+id/speakername"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:text="Wanda"
+                    android:text="@string/conversation_dialog_speaker"
                     android:textSize="15sp"
                     android:textStyle="bold" />
             </TableRow>
 
             <TableRow>
-
+
                 <view
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/typewritertext"
                     android:layout_width="300dp"
                     android:layout_height="110dp"
-                    class="com.w3i.replica.replicaisland.activities.ConversationDialogActivity$TypewriterTextView"
-                    android:text="Blah blah blah blah blah"
+                    class="com.w3i.torch.activities.ConversationDialogActivity$TypewriterTextView"
+                    android:text="@string/conversation_dialog_blah_blah"
                     android:textSize="15sp" />
+
             </TableRow>
         </TableLayout>
     </TableRow>
 
     <TableRow>
 
-        <FrameLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_gravity="right"
-            android:layout_span="2" >
-
-            <ImageView
-                android:id="@+id/ok"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right" />
-        </FrameLayout>
+        <ImageView
+            android:id="@+id/ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="2"
+            android:contentDescription="@string/default_image_view_description"
+            android:gravity="right" />
     </TableRow>
 
 </TableLayout>

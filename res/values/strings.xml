@@ -270,7 +270,7 @@ I never should have come here.  Rokudou tricked me into this, and now I cannot e
 I met a group of three adventurers today.  I thought that I had the island all to myself, and I was so surprised to hear human voices (with Brooklyn accents, no less!) outside my shelter that I knocked over a bamboo support and almost brought the roof down.  The group is independent but they are after The Source, just like me.  They were nice but I sensed a little bit of competitive tension in the air.  They have been here for a month already and have barely penetrated the forest beyond the beach.  I am glad to have met them but they pose no immediate threat to my mission.  They are fine folks but my skills are far superior.\n</string>
     <string name="Diary5">Log Entry - Saturday - Rain\n
 
-Today marks three consecutive days of rain.  Last week was clear--the seas were calm and my carefully constructed shelter proved unnecessary.  I am sitting in a small alcove at the base of a hollow tree as the sky dumps golf ball-sized raindrops into the forest around me.  The beach is long behind me now and the sound of the ocean is just a memory.\n
+Today marks three consecutive days of rain.  Last week was clear—the seas were calm and my carefully constructed shelter proved unnecessary.  I am sitting in a small alcove at the base of a hollow tree as the sky dumps golf ball-sized raindrops into the forest around me.  The beach is long behind me now and the sound of the ocean is just a memory.\n
 
 \n
 
@@ -297,7 +297,7 @@ I may have found a path into the forest.  The grasslands stretch out ahead in wh
 
 \n
 
-The adventuring party I met a few days ago has been here a month and has not yet figured this out.  My intellect is truly superior--I can understand why Mr. Rokudou chose me for this mission.  Once I find The Source and show him how to use it, he will surely make me his second-in-command, a position from which I shall have incredible influence.  Just thinking about it makes me giddy.  But I must not to get ahead of myself; the forest looms.\n</string>
+The adventuring party I met a few days ago has been here a month and has not yet figured this out.  My intellect is truly superior—I can understand why Mr. Rokudou chose me for this mission.  Once I find The Source and show him how to use it, he will surely make me his second-in-command, a position from which I shall have incredible influence.  Just thinking about it makes me giddy.  But I must not to get ahead of myself; the forest looms.\n</string>
     <string name="Diary9">Skin skin skin skin skin skin skin skin skin skin skin.\n
 
 \n
@@ -309,7 +309,7 @@ My progress has been arrested by the insane creatures that inhabit this island. 
 
 \n
 
-But with a guiding hand, that power could be put to such great use!  With The Source in our hands mankind could shape the world as we see fit; it would mean a true end to war and poverty.  Rokudou wants that power--I want that power--so  the world can be freed from governments and other parasites that seek only to oppress and destroy.  Glory is almost within my grasp.\n</string>
+But with a guiding hand, that power could be put to such great use!  With The Source in our hands mankind could shape the world as we see fit; it would mean a true end to war and poverty.  Rokudou wants that power—I want that power—so  the world can be freed from governments and other parasites that seek only to oppress and destroy.  Glory is almost within my grasp.\n</string>
     <string name="Diary11">Log Entry - I’ve lost track of the date - Heavy Rain\n
 
 \n
@@ -358,11 +358,11 @@ There is something I must confide, even if only to this scrap of notebook paper.
 
 \n
 
-I killed those adventurers.  I killed them in their sleep and then hung them from the trees as if to convince myself that the island had somehow done away with them.  It was grisly business, but necessary.  I needed their supplies, especially the batteries and flashlights they brought.  More importantly, against all odds they discovered the entrance to the cave.  They must have blundered across it while awkwardly stumbling through the forest--their brains are too small to have calculated its location.  The Source is too important to leave to such simpletons, and I couldn’t risk the possibility, no matter how remote, that they might find it first.\n
+I killed those adventurers.  I killed them in their sleep and then hung them from the trees as if to convince myself that the island had somehow done away with them.  It was grisly business, but necessary.  I needed their supplies, especially the batteries and flashlights they brought.  More importantly, against all odds they discovered the entrance to the cave.  They must have blundered across it while awkwardly stumbling through the forest—their brains are too small to have calculated its location.  The Source is too important to leave to such simpletons, and I couldn’t risk the possibility, no matter how remote, that they might find it first.\n
 
 \n
 
-Am I a monster?  I do not think so.  I am Dr. Kabochanomizu, widely respected scientist and the world’s expert on the inverted Atlantis that is this island.  My actions are logical and justified--I am no monster.\n
+Am I a monster?  I do not think so.  I am Dr. Kabochanomizu, widely respected scientist and the world’s expert on the inverted Atlantis that is this island.  My actions are logical and justified—I am no monster.\n
 
 \n
 
@@ -384,5 +384,12 @@ If I am honest with myself, there is another reason the adventurers had to die. 
     <string name="info_dialog_description">Info Dialog Description</string>
     <string name="default_image_view_description">Default Image View Description</string>
     <string name="achievements">Achievements</string>
+    <string name="coin_layout_initial_pearls">0</string>
+    <string name="game_over_enemy_percent">0</string>
+    <string name="game_over_pearl_percent">100%</string>
+    <string name="game_over_total_play_time">3:21:34</string>
+    <string name="conversation_dialog_blah_blah">Blah blah blah blah blah</string>
+    <string name="conversation_dialog_speaker">Wanda</string>
+    <string name="toast_killing_spree_killing_spree">Killing Spree</string>
 
 </resources>

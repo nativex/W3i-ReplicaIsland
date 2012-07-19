@@ -8,6 +8,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:adjustViewBounds="true"
+        android:contentDescription="@string/default_image_view_description"
         android:gravity="center_vertical"
         android:scaleType="fitXY"
         android:src="@drawable/ui_main_menu_background" />
@@ -20,6 +21,7 @@
         android:layout_marginLeft="5dip"
         android:layout_marginTop="28dip"
         android:adjustViewBounds="true"
+        android:contentDescription="@string/default_image_view_description"
         android:src="@drawable/ui_main_menu_title" />
 
     <LinearLayout
@@ -35,6 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="23dip"
             android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/default_image_view_description"
             android:src="@drawable/ui_button_achievements" />
 
         <ImageView
@@ -42,6 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="27dip"
             android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/default_image_view_description"
             android:paddingTop="5dip"
             android:src="@drawable/ui_button_store" />
 
@@ -56,6 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="25dip"
                 android:clickable="true"
+                android:contentDescription="@string/default_image_view_description"
                 android:src="@drawable/ui_button_linear_mode" />
 
             <ImageView
@@ -63,6 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:contentDescription="@string/default_image_view_description"
                 android:src="@drawable/ui_locked" />
         </FrameLayout>
 
@@ -77,6 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="23dip"
                 android:clickable="true"
+                android:contentDescription="@string/default_image_view_description"
                 android:src="@drawable/ui_button_level_select" />
 
             <ImageView
@@ -84,6 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:contentDescription="@string/default_image_view_description"
                 android:src="@drawable/ui_locked" />
         </FrameLayout>
 
@@ -94,6 +102,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="50dip"
             android:clickable="true"
+            android:contentDescription="@string/default_image_view_description"
             android:paddingTop="5dip"
             android:src="@drawable/ui_button_controls" />
     </LinearLayout>

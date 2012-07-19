@@ -729,9 +729,9 @@ com.w3i.offerwall.util.Unbinder:
     10:10:public Unbinder()
     42:44:public static void unbindReferences(android.app.Activity,int)
 com.w3i.offerwall.util.Utilities
-com.w3i.replica.replicaisland.AABoxCollisionVolume:
-    110:125:public void growBy(com.w3i.replica.replicaisland.CollisionVolume)
-com.w3i.replica.replicaisland.AdultsDifficultyConstants:
+com.w3i.torch.AABoxCollisionVolume:
+    110:125:public void growBy(com.w3i.torch.CollisionVolume)
+com.w3i.torch.AdultsDifficultyConstants:
     private static final float FUEL_AIR_REFILL_SPEED
     private static final float FUEL_GROUND_REFILL_SPEED
     public static final int MAX_PLAYER_LIFE
@@ -743,14 +743,14 @@ com.w3i.replica.replicaisland.AdultsDifficultyConstants:
     private static final int DDA_STAGE_2_LIFE_BOOST
     private static final float DDA_STAGE_1_FUEL_AIR_REFILL_SPEED
     private static final float DDA_STAGE_2_FUEL_AIR_REFILL_SPEED
-com.w3i.replica.replicaisland.AnimationComponent:
+com.w3i.torch.AnimationComponent:
     private static final float MIN_ROCKET_TIME
     private static final float FLICKER_INTERVAL
     private static final float FLICKER_DURATION
     private static final float LAND_THUMP_DELAY
-com.w3i.replica.replicaisland.AttackAtDistanceComponent:
+com.w3i.torch.AttackAtDistanceComponent:
     private static final int DEFAULT_ATTACK_DISTANCE
-com.w3i.replica.replicaisland.BabyDifficultyConstants:
+com.w3i.torch.BabyDifficultyConstants:
     private static final float FUEL_AIR_REFILL_SPEED
     private static final float FUEL_GROUND_REFILL_SPEED
     public static final int MAX_PLAYER_LIFE
@@ -762,38 +762,38 @@ com.w3i.replica.replicaisland.BabyDifficultyConstants:
     private static final int DDA_STAGE_2_LIFE_BOOST
     private static final float DDA_STAGE_1_FUEL_AIR_REFILL_SPEED
     private static final float DDA_STAGE_2_FUEL_AIR_REFILL_SPEED
-com.w3i.replica.replicaisland.BackgroundCollisionComponent:
+com.w3i.torch.BackgroundCollisionComponent:
     57:78:public BackgroundCollisionComponent(int,int,int,int)
-com.w3i.replica.replicaisland.BackgroundCollisionComponent$HitPointDistanceComparator
-com.w3i.replica.replicaisland.BufferLibrary:
+com.w3i.torch.BackgroundCollisionComponent$HitPointDistanceComparator
+com.w3i.torch.BufferLibrary:
     private static final int GRID_LIST_SIZE
-com.w3i.replica.replicaisland.BuildConfig
-com.w3i.replica.replicaisland.ButtonAnimationComponent$Animation
-com.w3i.replica.replicaisland.ButtonConstants
-com.w3i.replica.replicaisland.CameraSystem:
+com.w3i.torch.BuildConfig
+com.w3i.torch.ButtonAnimationComponent$Animation
+com.w3i.torch.ButtonConstants
+com.w3i.torch.CameraSystem:
     private static final float X_FOLLOW_DISTANCE
     private static final float Y_UP_FOLLOW_DISTANCE
     private static final float Y_DOWN_FOLLOW_DISTANCE
     private static final float MAX_INTERPOLATE_TO_TARGET_DISTANCE
     private static final float INTERPOLATE_TO_TARGET_TIME
-com.w3i.replica.replicaisland.ChangeComponentsComponent:
+com.w3i.torch.ChangeComponentsComponent:
     private static final int MAX_COMPONENT_SWAPS
-com.w3i.replica.replicaisland.ChannelSystem:
+com.w3i.torch.ChannelSystem:
     private static final int CHANNEL_COUNT
-com.w3i.replica.replicaisland.CollisionParameters
-com.w3i.replica.replicaisland.CollisionParameters$HitType
-com.w3i.replica.replicaisland.CollisionSystem:
+com.w3i.torch.CollisionParameters
+com.w3i.torch.CollisionParameters$HitType
+com.w3i.torch.CollisionSystem:
     private static final int MAX_TEMPORARY_SEGMENTS
-    155:231:public boolean testBox(float,float,float,float,com.w3i.replica.replicaisland.Vector2,com.w3i.replica.replicaisland.FixedSizeArray,com.w3i.replica.replicaisland.GameObject,boolean)
-    479:518:protected static boolean testBoxAgainstList(com.w3i.replica.replicaisland.FixedSizeArray,float,float,float,float,com.w3i.replica.replicaisland.Vector2,com.w3i.replica.replicaisland.GameObject,com.w3i.replica.replicaisland.Vector2,com.w3i.replica.replicaisland.FixedSizeArray)
-com.w3i.replica.replicaisland.CollisionSystem$LineSegment:
-    732:800:public boolean calculateIntersectionBox(float,float,float,float,com.w3i.replica.replicaisland.Vector2)
-com.w3i.replica.replicaisland.CollisionSystem$LineSegmentPool:
-    809:811:public CollisionSystem$LineSegmentPool(com.w3i.replica.replicaisland.CollisionSystem)
-com.w3i.replica.replicaisland.ConversationUtils:
+    155:231:public boolean testBox(float,float,float,float,com.w3i.torch.Vector2,com.w3i.torch.FixedSizeArray,com.w3i.torch.GameObject,boolean)
+    479:518:protected static boolean testBoxAgainstList(com.w3i.torch.FixedSizeArray,float,float,float,float,com.w3i.torch.Vector2,com.w3i.torch.GameObject,com.w3i.torch.Vector2,com.w3i.torch.FixedSizeArray)
+com.w3i.torch.CollisionSystem$LineSegment:
+    732:800:public boolean calculateIntersectionBox(float,float,float,float,com.w3i.torch.Vector2)
+com.w3i.torch.CollisionSystem$LineSegmentPool:
+    809:811:public CollisionSystem$LineSegmentPool(com.w3i.torch.CollisionSystem)
+com.w3i.torch.ConversationUtils:
     private static final int MAX_CHARACTERS_PER_PAGE
     27:27:public ConversationUtils()
-com.w3i.replica.replicaisland.DebugLog:
+com.w3i.torch.DebugLog:
     24:26:private DebugLog()
     41:45:public static int v(java.lang.String,java.lang.String,java.lang.Throwable)
     57:61:public static int d(java.lang.String,java.lang.String,java.lang.Throwable)
@@ -801,47 +801,47 @@ com.w3i.replica.replicaisland.DebugLog:
     89:93:public static int w(java.lang.String,java.lang.String,java.lang.Throwable)
     97:101:public static int w(java.lang.String,java.lang.Throwable)
     113:117:public static int e(java.lang.String,java.lang.String,java.lang.Throwable)
-com.w3i.replica.replicaisland.DebugSystem:
+com.w3i.torch.DebugSystem:
     public static final int COLOR_RED
     public static final int COLOR_BLUE
     public static final int COLOR_OUTLINE
     public static final int SHAPE_BOX
     public static final int SHAPE_CIRCLE
-    37:49:public DebugSystem(com.w3i.replica.replicaisland.TextureLibrary)
-com.w3i.replica.replicaisland.DoorAnimationComponent:
+    37:49:public DebugSystem(com.w3i.torch.TextureLibrary)
+com.w3i.torch.DoorAnimationComponent:
     protected static final int STATE_CLOSED
     protected static final int STATE_OPEN
     protected static final int STATE_CLOSING
     protected static final int STATE_OPENING
     protected static final float DEFAULT_STAY_OPEN_TIME
     192:193:public void setStayOpenTime(float)
-com.w3i.replica.replicaisland.DoorAnimationComponent$Animation
-com.w3i.replica.replicaisland.DrawableFactory:
+com.w3i.torch.DoorAnimationComponent$Animation
+com.w3i.torch.DrawableFactory:
     private static final int BITMAP_POOL_SIZE
-com.w3i.replica.replicaisland.DrawableObject:
+com.w3i.torch.DrawableObject:
     36:37:public void setPriority(float)
-com.w3i.replica.replicaisland.EventRecorder:
+com.w3i.torch.EventRecorder:
     public static final int COUNTER_ROBOTS_DESTROYED
     public static final int COUNTER_PEARLS_COLLECTED
     public static final int COUNTER_PEARLS_TOTAL
-com.w3i.replica.replicaisland.EventReporter:
+com.w3i.torch.EventReporter:
     public static final int EVENT_DEATH
     public static final int EVENT_BEAT_LEVEL
     public static final int EVENT_BEAT_GAME
-com.w3i.replica.replicaisland.FadeDrawableComponent:
+com.w3i.torch.FadeDrawableComponent:
     public static final int LOOP_TYPE_NONE
     public static final int LOOP_TYPE_LOOP
     public static final int LOOP_TYPE_PING_PONG
     public static final int FADE_LINEAR
     public static final int FADE_EASE
-com.w3i.replica.replicaisland.FixedAnimationComponent:
+com.w3i.torch.FixedAnimationComponent:
     44:45:public void setAnimation(int)
-com.w3i.replica.replicaisland.FixedSizeArray:
+com.w3i.torch.FixedSizeArray:
     private static final int LINEAR_SEARCH_CUTOFF
-    275:276:public void setSorter(com.w3i.replica.replicaisland.Sorter)
-com.w3i.replica.replicaisland.GLErrorLogger
-com.w3i.replica.replicaisland.GLErrorLogger$ErrorLoggingGL
-com.w3i.replica.replicaisland.GLSurfaceView:
+    275:276:public void setSorter(com.w3i.torch.Sorter)
+com.w3i.torch.GLErrorLogger
+com.w3i.torch.GLErrorLogger$ErrorLoggingGL
+com.w3i.torch.GLSurfaceView:
     private static final boolean LOG_THREADS
     private static final boolean LOG_SURFACE
     private static final boolean LOG_RENDERER
@@ -851,28 +851,28 @@ com.w3i.replica.replicaisland.GLSurfaceView:
     public static final int DEBUG_CHECK_GL_ERROR
     public static final int DEBUG_LOG_GL_CALLS
     194:196:public GLSurfaceView(android.content.Context)
-    230:231:public void setGLWrapper(com.w3i.replica.replicaisland.GLSurfaceView$GLWrapper)
+    230:231:public void setGLWrapper(com.w3i.torch.GLSurfaceView$GLWrapper)
     243:244:public void setDebugFlags(int)
     251:251:public int getDebugFlags()
-    306:308:public void setEGLContextFactory(com.w3i.replica.replicaisland.GLSurfaceView$EGLContextFactory)
-    320:322:public void setEGLWindowSurfaceFactory(com.w3i.replica.replicaisland.GLSurfaceView$EGLWindowSurfaceFactory)
+    306:308:public void setEGLContextFactory(com.w3i.torch.GLSurfaceView$EGLContextFactory)
+    320:322:public void setEGLWindowSurfaceFactory(com.w3i.torch.GLSurfaceView$EGLWindowSurfaceFactory)
     373:375:public void setEGLConfigChooser(int,int,int,int,int,int)
     404:406:public void setEGLContextClientVersion(int)
     425:426:public void setRenderMode(int)
     436:436:public int getRenderMode()
     447:448:public void requestRender()
     523:524:public void queueEvent(java.lang.Runnable)
-com.w3i.replica.replicaisland.GLSurfaceView$GLThread:
+com.w3i.torch.GLSurfaceView$GLThread:
     1319:1326:public void setRenderMode(int)
     1329:1329:public int getRenderMode()
     1335:1339:public void requestRender()
     1500:1507:public void queueEvent(java.lang.Runnable)
-com.w3i.replica.replicaisland.GLSurfaceView$GLThreadManager:
+com.w3i.torch.GLSurfaceView$GLThreadManager:
     private int mGLContextCount
     private static final int kGLES_20
-com.w3i.replica.replicaisland.GameComponentPool:
+com.w3i.torch.GameComponentPool:
     23:26:public GameComponentPool(java.lang.Class)
-com.w3i.replica.replicaisland.GameFlowEvent:
+com.w3i.torch.GameFlowEvent:
     public static final int EVENT_INVALID
     public static final int EVENT_RESTART_LEVEL
     public static final int EVENT_END_GAME
@@ -881,52 +881,52 @@ com.w3i.replica.replicaisland.GameFlowEvent:
     public static final int EVENT_SHOW_DIALOG_CHARACTER1
     public static final int EVENT_SHOW_DIALOG_CHARACTER2
     public static final int EVENT_SHOW_ANIMATION
-com.w3i.replica.replicaisland.GameObject:
+com.w3i.torch.GameObject:
     private static final float COLLISION_SURFACE_DECAY_TIME
     private static final int DEFAULT_LIFE
     217:217:public final float getLastTouchedCeilingTime()
     225:225:public final float getLastTouchedLeftWallTime()
     233:233:public final float getLastTouchedRightWallTime()
-com.w3i.replica.replicaisland.GameObjectCollisionSystem:
+com.w3i.torch.GameObjectCollisionSystem:
     private static final int MAX_COLLIDING_OBJECTS
     private static final int COLLISION_RECORD_POOL_SIZE
     273:275:public void setDebugPrefs(boolean,boolean)
-com.w3i.replica.replicaisland.GameObjectFactory:
+com.w3i.torch.GameObjectFactory:
     private static final int MAX_GAME_OBJECTS
     private static final java.lang.String sRedButtonChannel
     private static final java.lang.String sBlueButtonChannel
     private static final java.lang.String sGreenButtonChannel
     private static final java.lang.String sSurprisedNPCChannel
-com.w3i.replica.replicaisland.GameObjectFactory$GameObjectPool:
-    6750:6752:public GameObjectFactory$GameObjectPool(com.w3i.replica.replicaisland.GameObjectFactory)
-com.w3i.replica.replicaisland.GameObjectFactory$GameObjectType:
+com.w3i.torch.GameObjectFactory$GameObjectPool:
+    6750:6752:public GameObjectFactory$GameObjectPool(com.w3i.torch.GameObjectFactory)
+com.w3i.torch.GameObjectFactory$GameObjectType:
     162:162:public int index()
-com.w3i.replica.replicaisland.GameObjectManager:
+com.w3i.torch.GameObjectManager:
     private static final int MAX_GAME_OBJECTS
-com.w3i.replica.replicaisland.GameRenderer:
+com.w3i.torch.GameRenderer:
     private static final int PROFILE_REPORT_DELAY
-com.w3i.replica.replicaisland.GameThread:
+com.w3i.torch.GameThread:
     private static final float PROFILE_REPORT_DELAY
-com.w3i.replica.replicaisland.GenericAnimationComponent$Animation
-com.w3i.replica.replicaisland.GravityComponent:
+com.w3i.torch.GenericAnimationComponent$Animation
+com.w3i.torch.GravityComponent:
     52:54:public void setGravityMultiplier(float)
-com.w3i.replica.replicaisland.Grid:
+com.w3i.torch.Grid:
     private static final int FLOAT_SIZE
     private static final int FIXED_SIZE
     private static final int CHAR_SIZE
     255:282:public void draw(javax.microedition.khronos.opengles.GL10,boolean)
     289:289:public boolean usingHardwareBuffers()
-com.w3i.replica.replicaisland.HitReactionComponent:
+com.w3i.torch.HitReactionComponent:
     private static final float ATTACK_PAUSE_DELAY
     private static final float DEFAULT_BOUNCE_MAGNITUDE
     private static final float EVENT_SEND_DELAY
     270:271:public void setPauseOnAttackTime(float)
     278:279:public void setBounceMagnitude(float)
-    331:333:public final void setDealHitSound(int,com.w3i.replica.replicaisland.SoundSystem$Sound)
-com.w3i.replica.replicaisland.HotSpotSystem:
+    331:333:public final void setDealHitSound(int,com.w3i.torch.SoundSystem$Sound)
+com.w3i.torch.HotSpotSystem:
     143:149:public final float getTileCenterWorldPositionX(int)
-com.w3i.replica.replicaisland.HotSpotSystem$HotSpotType
-com.w3i.replica.replicaisland.HudSystem:
+com.w3i.torch.HotSpotSystem$HotSpotType
+com.w3i.torch.HudSystem:
     private static final int FUEL_BAR_EDGE_PADDING
     private static final float FUEL_DECREASE_BAR_SPEED
     private static final float FUEL_INCREASE_BAR_SPEED
@@ -946,9 +946,9 @@ com.w3i.replica.replicaisland.HudSystem:
     private static final float MOVEMENT_SLIDER_WIDTH
     232:233:public void clearFade()
     255:256:public void setShowFPS(boolean)
-com.w3i.replica.replicaisland.InputButton:
+com.w3i.torch.InputButton:
     48:48:public final float getPressedDuration(float)
-com.w3i.replica.replicaisland.InputGameInterface:
+com.w3i.torch.InputGameInterface:
     private static final float ORIENTATION_DEAD_ZONE_MIN
     private static final float ORIENTATION_DEAD_ZONE_MAX
     private static final float ORIENTATION_DEAD_ZONE_SCALE
@@ -958,19 +958,19 @@ com.w3i.replica.replicaisland.InputGameInterface:
     private static final float ROLL_DECAY
     private static final float KEY_FILTER
     private static final float SLIDER_FILTER
-com.w3i.replica.replicaisland.InputTouchScreen:
+com.w3i.torch.InputTouchScreen:
     42:46:public boolean getTriggered(int,float)
     50:54:public boolean getPressed(int)
-    58:61:public final void setVector(int,com.w3i.replica.replicaisland.Vector2)
+    58:61:public final void setVector(int,com.w3i.torch.Vector2)
     64:68:public final float getX(int)
     72:76:public final float getY(int)
     80:84:public final float getLastPressedTime(int)
-com.w3i.replica.replicaisland.InputXY:
-    30:33:public InputXY(com.w3i.replica.replicaisland.InputButton,com.w3i.replica.replicaisland.InputButton)
-    54:56:public final void setVector(com.w3i.replica.replicaisland.Vector2)
-com.w3i.replica.replicaisland.KeyboardConfigDialogPreference:
+com.w3i.torch.InputXY:
+    30:33:public InputXY(com.w3i.torch.InputButton,com.w3i.torch.InputButton)
+    54:56:public final void setVector(com.w3i.torch.Vector2)
+com.w3i.torch.KeyboardConfigDialogPreference:
     88:89:public KeyboardConfigDialogPreference(android.content.Context)
-com.w3i.replica.replicaisland.KidsDifficultyConstants:
+com.w3i.torch.KidsDifficultyConstants:
     private static final float FUEL_AIR_REFILL_SPEED
     private static final float FUEL_GROUND_REFILL_SPEED
     public static final int MAX_PLAYER_LIFE
@@ -982,13 +982,13 @@ com.w3i.replica.replicaisland.KidsDifficultyConstants:
     private static final int DDA_STAGE_2_LIFE_BOOST
     private static final float DDA_STAGE_1_FUEL_AIR_REFILL_SPEED
     private static final float DDA_STAGE_2_FUEL_AIR_REFILL_SPEED
-com.w3i.replica.replicaisland.LauncherComponent:
+com.w3i.torch.LauncherComponent:
     private static final float DEFAULT_LAUNCH_DELAY
     private static final float DEFAULT_LAUNCH_MAGNITUDE
     private static final float DEFAULT_POST_LAUNCH_DELAY
-com.w3i.replica.replicaisland.Lerp:
+com.w3i.torch.Lerp:
     19:19:public Lerp()
-com.w3i.replica.replicaisland.LevelBuilder:
+com.w3i.torch.LevelBuilder:
     private static final int THEME_GRASS
     private static final int THEME_ISLAND
     private static final int THEME_SEWER
@@ -1003,16 +1003,16 @@ com.w3i.replica.replicaisland.LevelBuilder:
     private static final int BACKGROUND_FOREST
     private static final int BACKGROUND_ISLAND2
     private static final int BACKGROUND_LAB
-com.w3i.replica.replicaisland.LevelSystem:
+com.w3i.torch.LevelSystem:
     71:73:public void sendRestartEvent()
     76:78:public void sendNextLevelEvent()
-com.w3i.replica.replicaisland.LevelTree:
+com.w3i.torch.LevelTree:
     26:26:public LevelTree()
-com.w3i.replica.replicaisland.MotionBlurComponent:
+com.w3i.torch.MotionBlurComponent:
     private static final int STEP_COUNT
     private static final float STEP_DELAY
     private static final float OPACITY_STEP
-com.w3i.replica.replicaisland.NPCAnimationComponent:
+com.w3i.torch.NPCAnimationComponent:
     public static final int IDLE
     public static final int WALK
     public static final int RUN_START
@@ -1027,7 +1027,7 @@ com.w3i.replica.replicaisland.NPCAnimationComponent:
     protected static final float JUMP_SPEED_THRESHOLD
     protected static final float FALL_SPEED_THRESHOLD
     protected static final float FALL_TIME_THRESHOLD
-com.w3i.replica.replicaisland.NPCComponent:
+com.w3i.torch.NPCComponent:
     private static final float UP_IMPULSE
     private static final float DOWN_IMPULSE
     private static final float HORIZONTAL_IMPULSE
@@ -1042,20 +1042,20 @@ com.w3i.replica.replicaisland.NPCComponent:
     private static final float PAUSE_TIME_ATTACK
     private static final float PAUSE_TIME_HIT_REACT
     private static final int COMMAND_QUEUE_SIZE
-com.w3i.replica.replicaisland.ObjectManager:
+com.w3i.torch.ObjectManager:
     protected static final int DEFAULT_ARRAY_SIZE
-com.w3i.replica.replicaisland.ObjectPool:
+com.w3i.torch.ObjectPool:
     private static final int DEFAULT_SIZE
-com.w3i.replica.replicaisland.OrbitalMagnetComponent:
+com.w3i.torch.OrbitalMagnetComponent:
     private static final float DEFAULT_STRENGTH
-com.w3i.replica.replicaisland.PhysicsComponent:
+com.w3i.torch.PhysicsComponent:
     private static final float DEFAULT_MASS
     private static final float DEFAULT_BOUNCINESS
     private static final float DEFAULT_INERTIA
     private static final float DEFAULT_STATIC_FRICTION_COEFFECIENT
     private static final float DEFAULT_DYNAMIC_FRICTION_COEFFECIENT
-    172:223:protected void resolveCollision(com.w3i.replica.replicaisland.Vector2,com.w3i.replica.replicaisland.Vector2,com.w3i.replica.replicaisland.Vector2,float,com.w3i.replica.replicaisland.Vector2,com.w3i.replica.replicaisland.Vector2,float,com.w3i.replica.replicaisland.Vector2)
-com.w3i.replica.replicaisland.PlayerComponent:
+    172:223:protected void resolveCollision(com.w3i.torch.Vector2,com.w3i.torch.Vector2,com.w3i.torch.Vector2,float,com.w3i.torch.Vector2,com.w3i.torch.Vector2,float,com.w3i.torch.Vector2)
+com.w3i.torch.PlayerComponent:
     private static final float GROUND_IMPULSE_SPEED
     private static final float AIR_HORIZONTAL_IMPULSE_SPEED
     private static final float AIR_VERTICAL_IMPULSE_SPEED
@@ -1080,28 +1080,28 @@ com.w3i.replica.replicaisland.PlayerComponent:
     private static final float ONE_GEM_GHOST_TIME
     private static final float TWO_GEMS_GHOST_TIME
     535:535:public final boolean getGhostActive()
-com.w3i.replica.replicaisland.PopOutComponent:
+com.w3i.torch.PopOutComponent:
     private static final int DEFAULT_APPEAR_DISTANCE
     private static final int DEFAULT_HIDE_DISTANCE
     private static final int DEFAULT_ATTACK_DISTANCE
     private static final int STATE_HIDDEN
     private static final int STATE_VISIBLE
     private static final int STATE_ATTACKING
-com.w3i.replica.replicaisland.PreferenceConstants
-com.w3i.replica.replicaisland.QuickSorter
-com.w3i.replica.replicaisland.R:
+com.w3i.torch.PreferenceConstants
+com.w3i.torch.QuickSorter
+com.w3i.torch.R:
     10:10:public R()
-com.w3i.replica.replicaisland.R$anim
-com.w3i.replica.replicaisland.R$array
-com.w3i.replica.replicaisland.R$attr
-com.w3i.replica.replicaisland.R$color
-com.w3i.replica.replicaisland.R$drawable
-com.w3i.replica.replicaisland.R$id
-com.w3i.replica.replicaisland.R$layout
-com.w3i.replica.replicaisland.R$raw
-com.w3i.replica.replicaisland.R$string
-com.w3i.replica.replicaisland.R$style
-com.w3i.replica.replicaisland.R$styleable:
+com.w3i.torch.R$anim
+com.w3i.torch.R$array
+com.w3i.torch.R$attr
+com.w3i.torch.R$color
+com.w3i.torch.R$drawable
+com.w3i.torch.R$id
+com.w3i.torch.R$layout
+com.w3i.torch.R$raw
+com.w3i.torch.R$string
+com.w3i.torch.R$style
+com.w3i.torch.R$styleable:
     public static final int KeyConfigPreference_attackKey
     public static final int KeyConfigPreference_jumpKey
     public static final int KeyConfigPreference_leftKey
@@ -1109,49 +1109,49 @@ com.w3i.replica.replicaisland.R$styleable:
     public static final int SliderPreference_maxText
     public static final int SliderPreference_minText
     1106:1106:public R$styleable()
-com.w3i.replica.replicaisland.R$xml
-com.w3i.replica.replicaisland.RenderSystem:
+com.w3i.torch.R$xml
+com.w3i.torch.RenderSystem:
     private static final int TEXTURE_SORT_BUCKET_SIZE
     private static final int DRAW_QUEUE_COUNT
     private static final int MAX_RENDER_OBJECTS_PER_FRAME
     private static final int MAX_RENDER_OBJECTS
-com.w3i.replica.replicaisland.ScrollableBitmap:
+com.w3i.torch.ScrollableBitmap:
     46:47:public void setScrollOriginX(float)
     54:55:public void setScrollOriginY(float)
-com.w3i.replica.replicaisland.ShellSorter
-com.w3i.replica.replicaisland.SimplePhysicsComponent:
+com.w3i.torch.ShellSorter
+com.w3i.torch.SimplePhysicsComponent:
     private static final float DEFAULT_BOUNCINESS
-com.w3i.replica.replicaisland.SleeperComponent:
+com.w3i.torch.SleeperComponent:
     private static final int STATE_SLEEPING
     private static final int STATE_WAKING
     private static final int STATE_ATTACKING
     private static final int STATE_SLAM
     private static final float DEFAULT_WAKE_UP_DURATION
-com.w3i.replica.replicaisland.SliderPreference:
+com.w3i.torch.SliderPreference:
     private static final int MAX_SLIDER_VALUE
     private static final int INITIAL_VALUE
     38:41:public SliderPreference(android.content.Context)
-com.w3i.replica.replicaisland.SolidSurfaceComponent:
+com.w3i.torch.SolidSurfaceComponent:
     32:42:public SolidSurfaceComponent(int)
-com.w3i.replica.replicaisland.SortConstants
-com.w3i.replica.replicaisland.SoundSystem:
+com.w3i.torch.SortConstants
+com.w3i.torch.SoundSystem:
     private static final int MAX_STREAMS
     private static final int MAX_SOUNDS
     public static final int PRIORITY_LOW
     public static final int PRIORITY_NORMAL
     public static final int PRIORITY_HIGH
     public static final int PRIORITY_MUSIC
-com.w3i.replica.replicaisland.SpriteAnimation:
+com.w3i.torch.SpriteAnimation:
     private static final int LINEAR_SEARCH_CUTOFF
-com.w3i.replica.replicaisland.SpriteComponent:
+com.w3i.torch.SpriteComponent:
     39:46:public SpriteComponent(int,int)
     170:170:public final float getWidth()
     174:174:public final float getHeight()
-com.w3i.replica.replicaisland.TextureLibrary:
+com.w3i.torch.TextureLibrary:
     static final int DEFAULT_SIZE
-    83:85:public com.w3i.replica.replicaisland.Texture loadTexture(android.content.Context,javax.microedition.khronos.opengles.GL10,int)
+    83:85:public com.w3i.torch.Texture loadTexture(android.content.Context,javax.microedition.khronos.opengles.GL10,int)
     211:211:public boolean isTextureLoaded(int)
-com.w3i.replica.replicaisland.TheSourceComponent:
+com.w3i.torch.TheSourceComponent:
     public static final float SHAKE_TIME
     private static final float DIE_TIME
     private static final float EXPLOSION_TIME
@@ -1159,21 +1159,21 @@ com.w3i.replica.replicaisland.TheSourceComponent:
     private static final float SHAKE_SCALE
     private static final float CAMERA_HIT_SHAKE_MAGNITUDE
     private static final float SINK_SPEED
-com.w3i.replica.replicaisland.TiledVertexGrid:
+com.w3i.torch.TiledVertexGrid:
     private static final float GL_MAGIC_OFFSET
-com.w3i.replica.replicaisland.TiledWorld:
+com.w3i.torch.TiledWorld:
     37:51:public TiledWorld(int,int)
-com.w3i.replica.replicaisland.TimeSystem:
+com.w3i.torch.TimeSystem:
     private static final float EASE_DURATION
     109:109:public float getRealTimeFrameDelta()
-com.w3i.replica.replicaisland.UIConstants:
+com.w3i.torch.UIConstants:
     24:24:public UIConstants()
-com.w3i.replica.replicaisland.Utils:
+com.w3i.torch.Utils:
     private static final float EPSILON
     20:20:public Utils()
-com.w3i.replica.replicaisland.YesNoDialogPreference:
+com.w3i.torch.YesNoDialogPreference:
     42:43:public YesNoDialogPreference(android.content.Context)
-com.w3i.replica.replicaisland.activities.AndouKun:
+com.w3i.torch.activities.AndouKun:
     private static final int ACTIVITY_CHANGE_LEVELS
     private static final int ACTIVITY_CONVERSATION
     private static final int ACTIVITY_DIARY
@@ -1185,36 +1185,36 @@ com.w3i.replica.replicaisland.activities.AndouKun:
     private static final int ROLL_TO_FACE_BUTTON_DELAY
     public static final int QUIT_GAME_DIALOG
     public static final int VERSION
-com.w3i.replica.replicaisland.activities.AnimationPlayerActivity:
+com.w3i.torch.activities.AnimationPlayerActivity:
     public static final int KYLE_DEATH
     public static final int WANDA_ENDING
     public static final int KABOCHA_ENDING
     public static final int ROKUDOU_ENDING
-com.w3i.replica.replicaisland.activities.ConversationDialogActivity:
+com.w3i.torch.activities.ConversationDialogActivity:
     private static final float TEXT_CHARACTER_DELAY
     private static final int TEXT_CHARACTER_DELAY_MS
-com.w3i.replica.replicaisland.activities.ConversationDialogActivity$TypewriterTextView:
+com.w3i.torch.activities.ConversationDialogActivity$TypewriterTextView:
     229:230:public ConversationDialogActivity$TypewriterTextView(android.content.Context)
-com.w3i.replica.replicaisland.activities.ExtrasMenuActivity:
+com.w3i.torch.activities.ExtrasMenuActivity:
     public static final int NEW_GAME_DIALOG
     public static final int EXTRAS_LOCKED_DIALOG
     private static final int START_LINEAR_MODE
     private static final int START_LEVEL_SELECT
-com.w3i.replica.replicaisland.activities.GameOverActivity$IncrementingTextView:
+com.w3i.torch.activities.GameOverActivity$IncrementingTextView:
     private static final int INCREMENT_DELAY_MS
     private static final int MODE_NONE
     private static final int MODE_PERCENT
     private static final int MODE_TIME
     61:62:public GameOverActivity$IncrementingTextView(android.content.Context)
-com.w3i.replica.replicaisland.activities.LevelSelectActivity:
+com.w3i.torch.activities.LevelSelectActivity:
     private static final int UNLOCK_ALL_LEVELS_ID
     private static final int UNLOCK_NEXT_LEVEL_ID
-com.w3i.replica.replicaisland.activities.LevelSelectActivity$DisableItemArrayAdapter:
+com.w3i.torch.activities.LevelSelectActivity$DisableItemArrayAdapter:
     private static final int TYPE_ENABLED
     private static final int TYPE_DISABLED
     private static final int TYPE_COMPLETED
     private static final int TYPE_COUNT
-com.w3i.replica.replicaisland.activities.MainMenuActivity:
+com.w3i.torch.activities.MainMenuActivity:
     private static final int WHATS_NEW_DIALOG
     private static final int TILT_TO_SCREEN_CONTROLS_DIALOG
     private static final int CONTROL_SETUP_DIALOG

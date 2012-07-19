@@ -12,7 +12,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="5dip"
         android:layout_marginTop="5dip"
-        android:background="@drawable/ui_store_to_store" />
+        android:background="@drawable/ui_store_to_store"
+        android:contentDescription="@string/default_image_view_description" />
 
     <ImageView
         android:id="@+id/storeTitle"
@@ -22,7 +23,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="5dip"
         android:layout_marginTop="5dip"
-        android:background="@drawable/ui_store_title" />
+        android:background="@drawable/ui_store_title"
+        android:contentDescription="@string/default_image_view_description" />
 
     <LinearLayout
         android:id="@+id/storeCoinsHolder"

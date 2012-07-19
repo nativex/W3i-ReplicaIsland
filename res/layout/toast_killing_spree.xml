@@ -11,6 +11,7 @@
         android:layout_height="65dip"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
+        android:contentDescription="@string/default_image_view_description"
         android:src="@drawable/killing_spree" />
 
     <TextView
@@ -20,7 +21,7 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/killingSpreeIcon"
         android:gravity="center"
-        android:text="Killing Spree"
+        android:text="@string/toast_killing_spree_killing_spree"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffff0000" />
 

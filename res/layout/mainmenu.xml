@@ -9,6 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:adjustViewBounds="true"
+        android:contentDescription="@string/default_image_view_description"
         android:gravity="center_vertical"
         android:scaleType="fitXY"
         android:src="@drawable/ui_main_menu_background" />
@@ -16,24 +17,32 @@
     <ImageView
         android:id="@+id/mainMenuTitle"
         android:layout_width="275dip"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="5dip"
+        android:layout_marginTop="30dip"
         android:adjustViewBounds="true"
-        android:src="@drawable/ui_main_menu_title" android:layout_height="wrap_content" android:layout_marginTop="30dip" android:layout_marginLeft="5dip"/>
-
+        android:contentDescription="@string/default_image_view_description"
+        android:src="@drawable/ui_main_menu_title" />
+
     <ImageView
         android:id="@+id/mainMenuCharacter"
         android:layout_width="80dip"
         android:layout_height="135dip"
         android:layout_gravity="right|bottom"
-        android:src="@drawable/ui_main_menu_torch" android:layout_marginRight="38dip" android:layout_marginBottom="20dip"/>
+        android:layout_marginBottom="20dip"
+        android:layout_marginRight="38dip"
+        android:contentDescription="@string/default_image_view_description"
+        android:src="@drawable/ui_main_menu_torch" />
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/mainSectionMenu"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_gravity="bottom"
         android:gravity="bottom"
-        android:orientation="vertical" android:layout_gravity="bottom">
+        android:orientation="vertical" >
 
         <ImageView
             android:id="@+id/startButton"
@@ -41,6 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:clickable="true"
+            android:contentDescription="@string/default_image_view_description"
             android:src="@drawable/ui_button_continue" />
 
         <ImageView
@@ -49,6 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:clickable="true"
+            android:contentDescription="@string/default_image_view_description"
             android:paddingTop="10dp"
             android:src="@drawable/ui_button_extras" />
 
@@ -57,9 +68,11 @@
             android:layout_width="125dip"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="68dip"
             android:clickable="true"
+            android:contentDescription="@string/default_image_view_description"
             android:paddingTop="10dp"
-            android:src="@drawable/ui_button_options" android:layout_marginBottom="68dip"/>
+            android:src="@drawable/ui_button_options" />
 
         <TextView
             android:id="@+id/ticker"
@@ -85,6 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
+        android:contentDescription="@string/default_image_view_description"
         android:paddingLeft="280dp"
         android:paddingTop="160dp"
         android:src="@drawable/ui_new"

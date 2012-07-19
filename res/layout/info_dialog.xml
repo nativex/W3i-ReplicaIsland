@@ -72,6 +72,7 @@
         android:layout_below="@+id/infoDialogTitle"
         android:layout_marginBottom="5dip"
         android:layout_marginTop="5dip"
+        android:contentDescription="@string/default_image_view_description"
         android:src="@android:drawable/divider_horizontal_dim_dark" />
 
     <ImageView
@@ -80,6 +81,7 @@
         android:layout_height="40dip"
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/infoDialogItemLayout"
+        android:contentDescription="@string/default_image_view_description"
         android:paddingBottom="12dip"
         android:paddingLeft="12dip"
         android:src="@drawable/info_dialog_close" />
