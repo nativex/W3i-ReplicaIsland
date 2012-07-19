@@ -19,6 +19,9 @@ public class ProgressAchievement extends Achievement {
 			if (progress >= GOAL) {
 				setDone(true);
 			}
+			if (progress > 0) {
+				setLocked(false);
+			}
 		}
 	}
 

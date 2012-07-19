@@ -7,7 +7,7 @@ public class TimeUtils {
 		long seconds = secondsTotal % 60;
 		secondsTotal /= 60;
 		long minutes = secondsTotal % 60;
-		long hours = secondsTotal / 3600;
+		long hours = secondsTotal / 60;
 
 		String time = (hours <= 0) ? "" : Long.toString(hours) + ":";
 		time += (minutes < 10 ? "0" + minutes : Long.toString(minutes)) + ":";
