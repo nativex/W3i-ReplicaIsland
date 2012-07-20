@@ -235,6 +235,7 @@ public class SharedPreferenceManager {
 					if (achv instanceof ProgressAchievement) {
 						edit.putInt(achv.getPreferencesProgress(), ((ProgressAchievement) achv).getProgress());
 					}
+					achv.storeAdditionalSharedPreferencesData(edit);
 					edit.commit();
 				} catch (Exception e) {
 					Log.e("SharedPreferencesManager._storeAchievements(): Unexpected exception caught while storing " + achv.getName() + " achievement.", e);
@@ -263,6 +264,7 @@ public class SharedPreferenceManager {
 					if (achv instanceof ProgressAchievement) {
 						((ProgressAchievement) achv).setProgress(preferences.getInt(achv.getPreferencesProgress(), 0));
 					}
+					achv.loadAdditionalSharedPreferencesData(preferences);
 				} catch (Exception e) {
 					Log.e("SharedPreferencesManager._loadAchievements: Unexpected exception caught while loading " + achv.getName() + "achievement.", e);
 				}

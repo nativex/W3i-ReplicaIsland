@@ -117,4 +117,9 @@ public class AchievementConstants {
 	public static final String MERCIFUL_NAME = "Merciful";
 	public static final String MERCIFUL_DESCRIPTION = "Beat a level without destroying any enemies.";
 
+	// Diaries
+	public static final int DIARIES_GOAL = 15;
+	public static final String DIARIES_NAME = "Bookworm";
+	public static final String DIARIES_DESCRIPTION = "Find all diaries.";
+
 }

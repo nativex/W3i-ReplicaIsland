@@ -1,5 +1,7 @@
 package com.w3i.torch.achivements;
 
+import android.content.SharedPreferences;
+
 public abstract class Achievement {
 	private Type type;
 	private boolean disabled = false;
@@ -43,7 +45,12 @@ public abstract class Achievement {
 		KIDS("KidsDiff"),
 		ADULT("AdultDiff"),
 		UNTOUCHABLE("Untouchable"),
-		MERCIFUL("Merciful");
+		MERCIFUL("Merciful"),
+		DIARIES("Dieries"),
+		All_LEVELS("AllLevels"),
+		GODLIKE("Godlike"),
+		GADGETEER("Gadgeteer"),
+		WINDOW_SHOPPER("WindowShopper");
 
 		private String preferencesString;
 
@@ -166,6 +173,10 @@ public abstract class Achievement {
 		preferencesName = name;
 	}
 
+	protected String getPreferencesName() {
+		return preferencesName;
+	}
+
 	public String getPreferencesDisabled() {
 		return preferencesName;
 	}
@@ -185,6 +196,16 @@ public abstract class Achievement {
 	public void onState(
 			State state) {
 		// Override in achievements with states.
+	}
+
+	public void storeAdditionalSharedPreferencesData(
+			SharedPreferences.Editor editor) {
+		// Override in achievements with additional data.
+	}
+
+	public void loadAdditionalSharedPreferencesData(
+			SharedPreferences preferences) {
+		// Override in achievements with additional data.
 	}
 
 }

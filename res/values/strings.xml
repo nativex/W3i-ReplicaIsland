@@ -391,5 +391,6 @@ If I am honest with myself, there is another reason the adventurers had to die. 
     <string name="conversation_dialog_blah_blah">Blah blah blah blah blah</string>
     <string name="conversation_dialog_speaker">Wanda</string>
     <string name="toast_killing_spree_killing_spree">Killing Spree</string>
+    <string name="main_2_memory_001">Memory #001</string>
 
 </resources>

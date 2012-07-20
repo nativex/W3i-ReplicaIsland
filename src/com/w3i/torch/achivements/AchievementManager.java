@@ -354,6 +354,7 @@ public class AchievementManager {
 		achievements.add(new AdultsDifficultyAchievement());
 		achievements.add(new UntouchableAchievement());
 		achievements.add(new MercifulAchievement());
+		achievements.add(new DiariesAchievement());
 	}
 
 	private void _release() {

@@ -82,7 +82,6 @@ public class HudSystem extends BaseObject {
 	private DrawableBitmap mLifeDrawable;
 
 	private int mLifesAvailable;
-	private int mLifesTotal;
 
 	private int mCoinCount;
 	private int mRubyCount;
@@ -153,7 +152,6 @@ public class HudSystem extends BaseObject {
 		mLifetimeCoinDigits[1] = -1;
 		mLifetimeCoinDigitsChanged = true;
 
-		mLifesTotal = 0;
 		mLifesAvailable = 0;
 
 		mCoinCount = 0;
