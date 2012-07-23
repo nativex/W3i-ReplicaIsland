@@ -33,6 +33,10 @@ import com.w3i.torch.BaseObject;
 import com.w3i.torch.DebugLog;
 import com.w3i.torch.R;
 import com.w3i.torch.UIConstants;
+import com.w3i.torch.achivements.Achievement.State;
+import com.w3i.torch.achivements.Achievement.Type;
+import com.w3i.torch.achivements.AchievementData;
+import com.w3i.torch.achivements.AchievementManager;
 
 public class DiaryActivity extends Activity {
 
@@ -64,6 +68,7 @@ public class DiaryActivity extends Activity {
 		image.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade));
 		final Intent callingIntent = getIntent();
 		final int textResource = callingIntent.getIntExtra("text", -1);
+		AchievementManager.setAchievementState(Type.DIARIES, State.UPDATE, new AchievementData<Integer>(textResource));
 
 		if (textResource != -1) {
 			text.setText(textResource);
@@ -78,5 +83,4 @@ public class DiaryActivity extends Activity {
 		BaseObject.getSystemRegistry().customToastSystem.toast(getString(R.string.diary_found), Toast.LENGTH_SHORT);
 
 	}
-
 }

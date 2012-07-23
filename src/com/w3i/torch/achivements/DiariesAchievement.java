@@ -1,42 +1,42 @@
 package com.w3i.torch.achivements;
 
-import com.google.gson.Gson;
-import com.w3i.torch.R;
+import java.util.ArrayList;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.SparseBooleanArray;
 
+import com.google.gson.Gson;
+import com.w3i.torch.LevelTree;
+
 public class DiariesAchievement extends ProgressAchievement {
 	private SparseBooleanArray diariesCollected;
 
 	public DiariesAchievement() {
-		super(AchievementConstants.DIARIES_GOAL);
 		setName(AchievementConstants.DIARIES_NAME);
 		setDescription(AchievementConstants.DIARIES_DESCRIPTION);
 		setType(Type.DIARIES);
+		initializeDiaryData();
 	}
 
-	private void initializeDiaries() {
-		if (diariesCollected == null) {
-			diariesCollected = new SparseBooleanArray(15);
+	private void initializeDiaryData() {
+		diariesCollected = new SparseBooleanArray();
+		ArrayList<LevelTree.LevelGroup> groups = LevelTree.levels;
+		if ((groups != null) && (groups.size() > 0)) {
+			for (LevelTree.LevelGroup group : groups) {
+				ArrayList<LevelTree.Level> levels = group.levels;
+				if ((levels != null) && (levels.size() > 0)) {
+					for (LevelTree.Level level : levels) {
+						if (level.dialogResources != null) {
+							if (level.dialogResources.diaryEntry > 0) {
+								addDiaryEntry(level.dialogResources.diaryEntry);
+							}
+						}
+					}
+				}
+			}
 		}
-		diariesCollected.clear();
-		addDiaryEntry(R.string.Diary1);
-		addDiaryEntry(R.string.Diary2);
-		addDiaryEntry(R.string.Diary3);
-		addDiaryEntry(R.string.Diary4);
-		addDiaryEntry(R.string.Diary5);
-		addDiaryEntry(R.string.Diary6);
-		addDiaryEntry(R.string.Diary7);
-		addDiaryEntry(R.string.Diary8);
-		addDiaryEntry(R.string.Diary9);
-		addDiaryEntry(R.string.Diary10);
-		addDiaryEntry(R.string.Diary11);
-		addDiaryEntry(R.string.Diary12);
-		addDiaryEntry(R.string.Diary13);
-		addDiaryEntry(R.string.Diary14);
-		addDiaryEntry(R.string.Diary15);
+		setGoal(diariesCollected.size());
 	}
 
 	public void onDiaryCollected(
@@ -52,21 +52,20 @@ public class DiariesAchievement extends ProgressAchievement {
 	private void setDiaryCollected(
 			int diaryResourceIndex,
 			boolean collected) {
-		boolean alreadyCollected = diariesCollected.get(diaryResourceIndex);
 		diariesCollected.put(diaryResourceIndex, collected);
-		if ((collected) && (!alreadyCollected)) {
-			increaseProgress(1);
-			checkAchievementProgress();
-		}
+		setProgress(0);
 	}
 
-	private void checkAchievementProgress() {
+	@Override
+	public void setProgress(
+			int progress) {
+		progress = 0;
 		for (int i = 0; i < diariesCollected.size(); i++) {
-			if (!diariesCollected.valueAt(i)) {
-				return;
+			if (diariesCollected.valueAt(i)) {
+				progress++;
 			}
 		}
-		setDone(true);
+		super.setProgress(progress);
 	}
 
 	private String getPreferencesDiariesDataString() {
@@ -87,10 +86,37 @@ public class DiariesAchievement extends ProgressAchievement {
 		String diariesData = preferences.getString(getPreferencesDiariesDataString(), null);
 		try {
 			diariesCollected = new Gson().fromJson(diariesData, SparseBooleanArray.class);
+			setGoal(diariesCollected.size());
 		} catch (Exception e) {
 		}
-		if ((diariesCollected == null) || (diariesCollected.size() != 15)) {
-			initializeDiaries();
+		if ((diariesCollected == null) || (diariesCollected.size() == 0)) {
+			initializeDiaryData();
 		}
 	}
+
+	@Override
+	public <T> void onState(
+			State state,
+			AchievementData<T> data) {
+		T intData = data.getData();
+		if (intData instanceof Integer) {
+			switch (state) {
+			case UPDATE:
+				onDiaryCollected((Integer) intData);
+				break;
+
+			case INITIALIZE:
+				initializeDiaryData();
+				break;
+			}
+		}
+
+	}
+
+	@Override
+	public void reset() {
+		super.reset();
+		initializeDiaryData();
+	}
+
 }

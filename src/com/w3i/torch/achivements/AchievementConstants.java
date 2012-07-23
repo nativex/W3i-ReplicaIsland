@@ -122,4 +122,27 @@ public class AchievementConstants {
 	public static final String DIARIES_NAME = "Bookworm";
 	public static final String DIARIES_DESCRIPTION = "Find all diaries.";
 
+	// All Levels
+	public static final int ALL_LEVELS_GOAL = 32;
+	public static final String ALL_LEVELS_NAME = "All Levels";
+	public static final String ALL_LEVELS_DESCRIPTION = "Beat each level in the game.";
+
+	// Godlike
+	public static final String GODLIKE_NAME = "Godlike";
+	public static final String GODLIKE_DESCRIPTION = "Beat the game without dying.";
+
+	// Gadgeteer
+	public static final int GADGETEER_GOAL = 10;
+	public static final String GADGETEER_NAME = "Gadgeteer";
+	public static final String GADGETEER_DESCRIPTION = "Buy all items available in the store.";
+
+	// Window-Shopper
+	public static final String WINDOW_SHOPPER_NAME = "Window-Shopper";
+	public static final String WINDOW_SHOPPER_DECRIPTION = "Check out the store without buying anything.";
+
+	// Stomper
+	public static final int STOMPER_GOAL = 100;
+	public static final String STOMPER_NAME = "Stomper";
+	public static final String STOMPER_DESCRIPTION = "Perform " + STOMPER_GOAL + " stomps.";
+
 }

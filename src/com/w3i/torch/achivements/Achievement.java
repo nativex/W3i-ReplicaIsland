@@ -16,7 +16,9 @@ public abstract class Achievement {
 	public static enum State {
 		START,
 		FINISH,
-		FAIL;
+		FAIL,
+		UPDATE,
+		INITIALIZE;
 	}
 
 	public enum Type {
@@ -198,6 +200,12 @@ public abstract class Achievement {
 		// Override in achievements with states.
 	}
 
+	public <T> void onState(
+			State state,
+			AchievementData<T> data) {
+		// Override in achievements with states.
+	}
+
 	public void storeAdditionalSharedPreferencesData(
 			SharedPreferences.Editor editor) {
 		// Override in achievements with additional data.
@@ -208,4 +216,7 @@ public abstract class Achievement {
 		// Override in achievements with additional data.
 	}
 
+	public void reset() {
+		setDone(false);
+	}
 }

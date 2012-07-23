@@ -56,7 +56,9 @@ import com.w3i.torch.PreferenceConstants;
 import com.w3i.torch.R;
 import com.w3i.torch.UIConstants;
 import com.w3i.torch.achivements.Achievement;
+import com.w3i.torch.achivements.Achievement.State;
 import com.w3i.torch.achivements.Achievement.Type;
+import com.w3i.torch.achivements.AchievementData;
 import com.w3i.torch.achivements.AchievementListener;
 import com.w3i.torch.achivements.AchievementManager;
 import com.w3i.torch.store.FundsManager;
@@ -615,7 +617,9 @@ public class AndouKun extends Activity implements SensorEventListener {
 			}
 			// else, fall through and go to the next level.
 		case GameFlowEvent.EVENT_GO_TO_NEXT_LEVEL:
-			LevelTree.get(mLevelRow, mLevelIndex).completed = true;
+			final LevelTree.Level thisLevel = LevelTree.get(mLevelRow, mLevelIndex);
+			thisLevel.completed = true;
+			AchievementManager.setAchievementState(Type.All_LEVELS, State.UPDATE, new AchievementData<Integer>(thisLevel.resource));
 			final LevelTree.LevelGroup currentGroup = LevelTree.levels.get(mLevelRow);
 			final int count = currentGroup.levels.size();
 			boolean groupCompleted = true;

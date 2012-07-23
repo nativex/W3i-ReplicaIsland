@@ -290,7 +290,15 @@ public class AchievementManager {
 		if (instance == null) {
 			return;
 		}
-		instance._initializeAchievements();
+		instance._resetAchievements();
+	}
+
+	public void _resetAchievements() {
+		if (achievements != null) {
+			for (Achievement achv : achievements) {
+				achv.reset();
+			}
+		}
 	}
 
 	public static void setAchievementLocked(
@@ -315,15 +323,30 @@ public class AchievementManager {
 		if (instance == null) {
 			return;
 		}
-		instance._setAchievementState(type, state);
+		instance._setAchievementState(type, state, null);
 	}
 
-	private void _setAchievementState(
+	public static <T> void setAchievementState(
 			Achievement.Type type,
-			Achievement.State state) {
+			Achievement.State state,
+			AchievementData<T> data) {
+		if (instance == null) {
+			return;
+		}
+		instance._setAchievementState(type, state, data);
+	}
+
+	private <T> void _setAchievementState(
+			Achievement.Type type,
+			Achievement.State state,
+			AchievementData<T> data) {
 		Achievement achievement = _getAchivement(type);
 		if (achievement != null) {
-			achievement.onState(state);
+			if (data == null) {
+				achievement.onState(state);
+			} else {
+				achievement.onState(state, data);
+			}
 		}
 	}
 
@@ -355,6 +378,8 @@ public class AchievementManager {
 		achievements.add(new UntouchableAchievement());
 		achievements.add(new MercifulAchievement());
 		achievements.add(new DiariesAchievement());
+		achievements.add(new AllLevelsAchievement());
+		achievements.add(new GodlikeAchievement());
 	}
 
 	private void _release() {
