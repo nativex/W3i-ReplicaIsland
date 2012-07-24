@@ -240,6 +240,7 @@ public class AndouKun extends Activity implements SensorEventListener {
 			mPrefsEditor.remove(PreferenceConstants.PREFERENCE_ROBOTS_DESTROYED);
 			mPrefsEditor.remove(PreferenceConstants.PREFERENCE_DIFFICULTY);
 			mPrefsEditor.commit();
+			AchievementManager.setAchievementState(Type.GODLIKE, State.FAIL);
 		}
 
 		mLevelRow = prefs.getInt(PreferenceConstants.PREFERENCE_LEVEL_ROW, 0);
@@ -759,6 +760,7 @@ public class AndouKun extends Activity implements SensorEventListener {
 			}
 			if (gameBeat) {
 				AchievementManager.setAchievementDone(Type.GAME_BEAT, true);
+				AchievementManager.setAchievementState(Type.GODLIKE, State.FINISH);
 				DifficultyConstants difficultyConstants = PlayerComponent.getDifficultyConstants();
 				if (difficultyConstants != null) {
 					if (difficultyConstants instanceof BabyDifficultyConstants) {

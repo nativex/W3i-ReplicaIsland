@@ -313,6 +313,9 @@ public class Game extends AllocationGuard {
 		}
 
 		mLastLevel = level;
+		if (level.resource == R.raw.level_0_2_lab) {
+			AchievementManager.setAchievementState(Type.GODLIKE, State.START);
+		}
 
 		start();
 	}

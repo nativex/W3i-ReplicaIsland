@@ -427,6 +427,7 @@ public class PlayerComponent extends GameComponent {
 				manager.add(smoke1);
 				manager.add(smoke2);
 			}
+			AchievementManager.incrementAchievementProgress(Type.STOMP, 1);
 		}
 
 		if (mTimer2 > 0.0f && time - mTimer2 > STOMP_DELAY_TIME) {
