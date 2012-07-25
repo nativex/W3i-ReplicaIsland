@@ -1,6 +1,8 @@
 package com.w3i.torch.achivements;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.w3i.common.Log;
@@ -26,6 +28,7 @@ public class AchievementManager {
 		if (instances > 1) {
 			Log.e("AchivementManager: too many instances created");
 		}
+		_initializeAchievements();
 	}
 
 	private static synchronized void checkInstance() {
@@ -92,6 +95,22 @@ public class AchievementManager {
 		if ((achievement != null) && (achievement instanceof ProgressAchievement)) {
 			ProgressAchievement progressAchievement = (ProgressAchievement) achievement;
 			progressAchievement.setProgress(progress);
+		}
+	}
+
+	public static void setAchievementGoal(
+			Achievement.Type type,
+			int goal) {
+		checkInstance();
+		instance._setAchievementGoal(type, goal);
+	}
+
+	private void _setAchievementGoal(
+			Achievement.Type type,
+			int goal) {
+		Achievement achievement = _getAchivement(type);
+		if ((achievement != null) && (achievement instanceof ProgressAchievement)) {
+			((ProgressAchievement) achievement).setGoal(goal);
 		}
 	}
 
@@ -231,6 +250,44 @@ public class AchievementManager {
 		checkInstance();
 		instance._initializeAchievements();
 		SharedPreferenceManager.loadAchivements();
+	}
+
+	public static void loadAchievement(
+			Achievement.Type type) {
+		checkInstance();
+		instance._loadAchievement(instance._getAchivement(type));
+	}
+
+	public static void loadAchievement(
+			Achievement achievement) {
+		checkInstance();
+		instance._loadAchievement(achievement);
+	}
+
+	private void _loadAchievement(
+			Achievement achievement) {
+		if (achievement != null) {
+			SharedPreferenceManager.loadAchievement(achievement);
+		}
+	}
+
+	public static void storeAchievement(
+			Achievement.Type type) {
+		checkInstance();
+		instance._storeAchievement(instance._getAchivement(type));
+	}
+
+	public static void storeAchievement(
+			Achievement achievement) {
+		checkInstance();
+		instance._storeAchievement(achievement);
+	}
+
+	private void _storeAchievement(
+			Achievement achievement) {
+		if (achievement != null) {
+			SharedPreferenceManager.storeAchievement(achievement);
+		}
 	}
 
 	public static void notifyAchievementDone(
@@ -380,6 +437,22 @@ public class AchievementManager {
 		achievements.add(new DiariesAchievement());
 		achievements.add(new AllLevelsAchievement());
 		achievements.add(new GodlikeAchievement());
+		achievements.add(new GadgeteerAchievement());
+		achievements.add(new WindowShopper());
+		Collections.sort(achievements, new Comparator<Achievement>() {
+
+			@Override
+			public int compare(
+					Achievement object1,
+					Achievement object2) {
+				if (object1.getType().ordinal() > object2.getType().ordinal()) {
+					return 1;
+				} else if (object1.getType().ordinal() < object2.getType().ordinal()) {
+					return -1;
+				}
+				return 0;
+			}
+		});
 	}
 
 	private void _release() {

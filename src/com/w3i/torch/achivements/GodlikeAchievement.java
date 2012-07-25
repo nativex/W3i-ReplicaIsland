@@ -19,15 +19,17 @@ public class GodlikeAchievement extends Achievement {
 	}
 
 	@Override
-	public void storeAdditionalSharedPreferencesData(
+	public void storeSharedPreferencesData(
 			Editor editor) {
 		editor.putBoolean(getPreferencesFailedKey(), failed);
+		super.storeSharedPreferencesData(editor);
 	}
 
 	@Override
-	public void loadAdditionalSharedPreferencesData(
+	public void loadSharedPreferencesData(
 			SharedPreferences preferences) {
 		failed = preferences.getBoolean(getPreferencesFailedKey(), true);
+		super.loadSharedPreferencesData(preferences);
 	}
 
 	public void onState(

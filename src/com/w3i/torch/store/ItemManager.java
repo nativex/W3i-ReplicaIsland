@@ -15,6 +15,7 @@ import com.w3i.gamesplatformsdk.rest.entities.Currency;
 import com.w3i.gamesplatformsdk.rest.entities.Item;
 import com.w3i.torch.achivements.Achievement.Type;
 import com.w3i.torch.achivements.AchievementManager;
+import com.w3i.torch.achivements.GadgeteerAchievement;
 
 public class ItemManager {
 	private static final long GARBAGE_COLLECTOR_ID = 1049;
@@ -128,12 +129,14 @@ public class ItemManager {
 
 		itemsByIds = new HashMap<Long, Item>();
 		availableItems = new ArrayList<Item>();
+		int itemsCount = 0;
 
 		for (Category c : categories) {
 			List<Item> items = c.getItems();
 			sortArray(items);
 			if (items != null) {
 				for (Item i : items) {
+					itemsCount++;
 					ItemInfo itemInfo = new ItemInfo(i, false, c);
 					i.setTag(itemInfo);
 					itemsByIds.put(i.getId(), i);
@@ -142,6 +145,7 @@ public class ItemManager {
 			}
 
 		}
+		GadgeteerAchievement.setItemsCount(itemsCount);
 	}
 
 	private void sortArray(
@@ -193,6 +197,7 @@ public class ItemManager {
 				purchasedItems.add(item);
 			}
 		}
+		AchievementManager.incrementAchievementProgress(Type.GADGETEER, 1);
 
 		if ((availableItems != null)) {
 			availableItems.remove(item);
@@ -231,9 +236,12 @@ public class ItemManager {
 			purchasedItems = new ArrayList<Item>();
 		}
 
+		int purchasedItemsCount = 0;
+
 		for (Long id : purchasedItemsIds) {
 			Item i = itemsByIds.get(id);
 			if (i != null) {
+				purchasedItemsCount++;
 				if (availableItems != null) {
 					availableItems.remove(i);
 				}
@@ -247,6 +255,7 @@ public class ItemManager {
 
 			}
 		}
+		GadgeteerAchievement.setPurchasedItems(purchasedItemsCount);
 
 	}
 

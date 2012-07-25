@@ -29,6 +29,8 @@ import com.w3i.gamesplatformsdk.rest.entities.Item;
 import com.w3i.offerwall.custom.views.CustomImageView;
 import com.w3i.torch.R;
 import com.w3i.torch.achivements.Achievement;
+import com.w3i.torch.achivements.Achievement.State;
+import com.w3i.torch.achivements.Achievement.Type;
 import com.w3i.torch.achivements.AchievementListener;
 import com.w3i.torch.achivements.AchievementManager;
 import com.w3i.torch.store.ItemManager.Availability;
@@ -172,18 +174,13 @@ public class StoreActivity extends Activity {
 
 		loadItems();
 		setFunds();
+		AchievementManager.setAchievementState(Type.WINDOW_SHOPPER, State.START);
 	}
 
 	@Override
 	protected void onStart() {
 		super.onStart();
 		AchievementManager.registerAchievementListener(achievementListener);
-	}
-
-	@Override
-	protected void onStop() {
-		super.onStop();
-		AchievementManager.registerAchievementListener(null);
 	}
 
 	private void loadItems() {
@@ -244,6 +241,8 @@ public class StoreActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		release();
+		AchievementManager.setAchievementState(Type.WINDOW_SHOPPER, State.FINISH);
+		AchievementManager.registerAchievementListener(null);
 		super.onDestroy();
 	}
 
@@ -342,6 +341,7 @@ public class StoreActivity extends Activity {
 			ItemManager.addPurchasedItem(item);
 			CategoryBlock parent = storeItem.getParent();
 			SharedPreferenceManager.storePurchasedItems();
+			AchievementManager.setAchievementState(Type.WINDOW_SHOPPER, State.FAIL);
 			storeItem.removeItemFromCategory();
 			if (parent.getItemsCount() <= 0) {
 				storeList.removeView(parent.getCategoryBlock());

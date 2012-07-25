@@ -12,7 +12,6 @@ import com.google.gson.reflect.TypeToken;
 import com.w3i.common.Log;
 import com.w3i.torch.achivements.Achievement;
 import com.w3i.torch.achivements.AchievementManager;
-import com.w3i.torch.achivements.ProgressAchievement;
 
 public class SharedPreferenceManager {
 	private SharedPreferences preferences;
@@ -221,27 +220,30 @@ public class SharedPreferenceManager {
 
 	public static void storeAchivements() {
 		checkInstance();
-		instance._storeAchivements();
+		instance._storeAchivements(null);
 	}
 
-	private void _storeAchivements() {
+	public static void storeAchievement(
+			Achievement achv) {
+		checkInstance();
+		instance._storeAchivements(achv);
+	}
+
+	private void _storeAchivements(
+			Achievement achv) {
 		try {
 			Editor edit = preferences.edit();
-			for (Achievement achv : AchievementManager.getAchivements()) {
-				try {
-					edit.putBoolean(achv.getPreferencesDisabled(), achv.isDisabled());
-					edit.putBoolean(achv.getPreferencesDone(), achv.isDone());
-					edit.putBoolean(achv.getPreferencesLocked(), achv.isLocked());
-					if (achv instanceof ProgressAchievement) {
-						edit.putInt(achv.getPreferencesProgress(), ((ProgressAchievement) achv).getProgress());
+			if (achv != null) {
+				achv.storeSharedPreferencesData(edit);
+			} else {
+				for (Achievement achievement : AchievementManager.getAchivements()) {
+					try {
+						achievement.storeSharedPreferencesData(edit);
+					} catch (Exception e) {
+						Log.e("SharedPreferencesManager._storeAchievements(): Unexpected exception caught while storing " + achievement.getName() + " achievement.", e);
 					}
-					achv.storeAdditionalSharedPreferencesData(edit);
-					edit.commit();
-				} catch (Exception e) {
-					Log.e("SharedPreferencesManager._storeAchievements(): Unexpected exception caught while storing " + achv.getName() + " achievement.", e);
 				}
 			}
-
 		} catch (Exception e) {
 			Log.e("SharedPreferenceManager: Unexpected exception caught while storing achivements");
 		}
@@ -249,30 +251,34 @@ public class SharedPreferenceManager {
 
 	public static void loadAchivements() {
 		checkInstance();
-		instance._loadAchivements();
+		instance._loadAchivements(null);
 	}
 
-	private void _loadAchivements() {
+	private void _loadAchivements(
+			Achievement achv) {
 		try {
-			for (Achievement achv : AchievementManager.getAchivements()) {
-				try {
-					achv.setDisabled(preferences.getBoolean(achv.getPreferencesDisabled(), false));
-					achv.setDone(preferences.getBoolean(achv.getPreferencesDone(), false));
-					if (preferences.contains(achv.getPreferencesLocked())) {
-						achv.setLocked(preferences.getBoolean(achv.getPreferencesLocked(), false));
-					}
-					if (achv instanceof ProgressAchievement) {
-						((ProgressAchievement) achv).setProgress(preferences.getInt(achv.getPreferencesProgress(), 0));
-					}
-					achv.loadAdditionalSharedPreferencesData(preferences);
-				} catch (Exception e) {
-					Log.e("SharedPreferencesManager._loadAchievements: Unexpected exception caught while loading " + achv.getName() + "achievement.", e);
-				}
 
+			if (achv != null) {
+				achv.loadSharedPreferencesData(preferences);
+			} else {
+				for (Achievement achievement : AchievementManager.getAchivements()) {
+					try {
+						achievement.loadSharedPreferencesData(preferences);
+					} catch (Exception e) {
+						Log.e("SharedPreferencesManager._loadAchievements: Unexpected exception caught while loading " + achievement.getName() + "achievement.", e);
+					}
+
+				}
 			}
 		} catch (Exception e) {
 			Log.e("SharedPreferenceManager: Unexpected exception caught while loading achivements");
 		}
+	}
+
+	public static void loadAchievement(
+			Achievement achv) {
+		checkInstance();
+		instance._loadAchivements(achv);
 	}
 
 	public static void release() {

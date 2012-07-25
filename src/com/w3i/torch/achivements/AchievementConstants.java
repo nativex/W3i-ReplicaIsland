@@ -132,7 +132,6 @@ public class AchievementConstants {
 	public static final String GODLIKE_DESCRIPTION = "Beat the game without dying.";
 
 	// Gadgeteer
-	public static final int GADGETEER_GOAL = 10;
 	public static final String GADGETEER_NAME = "Gadgeteer";
 	public static final String GADGETEER_DESCRIPTION = "Buy all items available in the store.";
 

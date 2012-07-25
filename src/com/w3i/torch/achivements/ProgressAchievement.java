@@ -1,5 +1,8 @@
 package com.w3i.torch.achivements;
 
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+
 import com.w3i.common.Log;
 
 public class ProgressAchievement extends Achievement {
@@ -21,9 +24,6 @@ public class ProgressAchievement extends Achievement {
 	}
 
 	private void calculateNextUpdate() {
-		if (this instanceof AllLevelsAchievement) {
-			new String();
-		}
 		float updateIntervalFloat = ((achievementUpdateRate * goal) / 100f) + 0.5f;
 		int updateInterval = (int) updateIntervalFloat;
 		if (updateInterval > 1) {
@@ -35,6 +35,12 @@ public class ProgressAchievement extends Achievement {
 
 	public void setProgress(
 			int progress) {
+		setProgress(progress, true);
+	}
+
+	public void setProgress(
+			int progress,
+			boolean notify) {
 		if (!isDone()) {
 			Log.i("Achievement " + getName() + " (" + getDescription() + ") updated : " + progress + "/" + getGoal());
 			this.achievementProgress = progress;
@@ -43,13 +49,15 @@ public class ProgressAchievement extends Achievement {
 				if (progress < goal) {
 					if (progress >= nextUpdate) {
 						calculateNextUpdate();
-						int percentDone = (progress * 100) / goal;
-						AchievementManager.notifyAchievementProgressUpdated(this, percentDone);
+						if (notify) {
+							int percentDone = (progress * 100) / goal;
+							AchievementManager.notifyAchievementProgressUpdated(this, percentDone);
+						}
 					}
 				}
 			}
 			if (progress >= goal) {
-				setDone(true);
+				setDone(true, notify);
 			}
 		}
 	}
@@ -81,6 +89,20 @@ public class ProgressAchievement extends Achievement {
 			float newUpdateRate) {
 		achievementUpdateRate = newUpdateRate;
 		calculateNextUpdate();
+	}
+
+	@Override
+	public void loadSharedPreferencesData(
+			SharedPreferences preferences) {
+		setProgress(preferences.getInt(getPreferencesProgress(), 0));
+		super.loadSharedPreferencesData(preferences);
+	}
+
+	@Override
+	public void storeSharedPreferencesData(
+			Editor editor) {
+		editor.putInt(getPreferencesProgress(), achievementProgress);
+		super.storeSharedPreferencesData(editor);
 	}
 
 	protected String convertProgress(

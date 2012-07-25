@@ -19,8 +19,12 @@ import com.w3i.torch.DebugLog;
 import com.w3i.torch.PreferenceConstants;
 import com.w3i.torch.R;
 import com.w3i.torch.UIConstants;
+import com.w3i.torch.achivements.Achievement;
+import com.w3i.torch.achivements.AchievementListener;
+import com.w3i.torch.achivements.AchievementManager;
 import com.w3i.torch.store.GamesPlatformManager;
 import com.w3i.torch.store.ReplicaInfoDialog;
+import com.w3i.torch.store.ReplicaIslandToast;
 import com.w3i.torch.store.StoreActivity;
 
 public class ExtrasMenuActivity extends Activity {
@@ -47,6 +51,53 @@ public class ExtrasMenuActivity extends Activity {
 	private static final int START_LINEAR_MODE = 0;
 	private static final int START_LEVEL_SELECT = 1;
 	private static final int EXTRAS_STORE_NOT_READY_DIALOG = 1001;
+
+	private AchievementListener achievementListener = new AchievementListener() {
+
+		@Override
+		public void achievementUnlocked(
+				final Achievement achievement) {
+			final Activity context = ExtrasMenuActivity.this;
+			context.runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					ReplicaIslandToast.makeAchievementUnlockedToast(context, achievement).show();
+
+				}
+			});
+		}
+
+		@Override
+		public void achievementDone(
+				final Achievement achievement) {
+			final Activity context = ExtrasMenuActivity.this;
+			context.runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					ReplicaIslandToast.makeAchievementDoneToast(context, achievement).show();
+
+				}
+			});
+
+		}
+
+		@Override
+		public void achievementProgressUpdate(
+				final Achievement achievement,
+				final int percentDone) {
+			final Activity context = ExtrasMenuActivity.this;
+			context.runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					ReplicaIslandToast.makeAchievementProgressUpdateToast(context, achievement, percentDone).show();
+
+				}
+			});
+		}
+	};
 
 	private View.OnClickListener sLinearModeButtonListener = new View.OnClickListener() {
 		public void onClick(
@@ -171,6 +222,18 @@ public class ExtrasMenuActivity extends Activity {
 
 		// Keep the volume control type consistent across all activities.
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		AchievementManager.registerAchievementListener(achievementListener);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		AchievementManager.registerAchievementListener(null);
 	}
 
 	@Override

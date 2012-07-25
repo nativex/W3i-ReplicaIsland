@@ -71,7 +71,7 @@ public class ReplicaIslandToast {
 		String formattedKillingSpreeString = "You have earned <font color=#00FF00> " + achievement.getName() + "</font>.";
 		killingSpreeText.setText(Html.fromHtml(formattedKillingSpreeString));
 		ImageView killingSpreeIcon = (ImageView) toastLayout.findViewById(R.id.killingSpreeIcon);
-		killingSpreeIcon.setImageResource(R.drawable.achv_locked);
+		killingSpreeIcon.setImageResource(achievement.getImage());
 
 		toast.setDuration(Toast.LENGTH_LONG);
 		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 10);
@@ -92,7 +92,7 @@ public class ReplicaIslandToast {
 		String formattedKillingSpreeString = "You have unlocked <font color=#FFFF00> " + achievement.getName() + "</font>.";
 		killingSpreeText.setText(Html.fromHtml(formattedKillingSpreeString));
 		ImageView killingSpreeIcon = (ImageView) toastLayout.findViewById(R.id.killingSpreeIcon);
-		killingSpreeIcon.setImageResource(R.drawable.achv_locked);
+		killingSpreeIcon.setImageResource(achievement.getImage());
 
 		toast.setDuration(Toast.LENGTH_LONG);
 		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 10);
@@ -114,7 +114,7 @@ public class ReplicaIslandToast {
 		String formattedKillingSpreeString = "<font color=#FFFF00> " + achievement.getName() + "</font> is " + percentDone + "% done.";
 		killingSpreeText.setText(Html.fromHtml(formattedKillingSpreeString));
 		ImageView killingSpreeIcon = (ImageView) toastLayout.findViewById(R.id.killingSpreeIcon);
-		killingSpreeIcon.setImageResource(R.drawable.achv_locked);
+		killingSpreeIcon.setImageResource(achievement.getImage());
 
 		toast.setDuration(Toast.LENGTH_LONG);
 		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 10);

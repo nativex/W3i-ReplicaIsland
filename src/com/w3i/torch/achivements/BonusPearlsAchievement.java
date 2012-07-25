@@ -11,16 +11,4 @@ public class BonusPearlsAchievement extends ProgressAchievement {
 		setAchievementUpdateRate(12.5f);
 	}
 
-	private boolean test = true;
-
-	@Override
-	public void setProgress(
-			int progress) {
-		if (test) {
-			progress = 240;
-			test = false;
-		}
-		super.setProgress(progress);
-
-	}
 }

@@ -17,6 +17,7 @@ public class AllLevelsAchievement extends ProgressAchievement {
 		setName(AchievementConstants.ALL_LEVELS_NAME);
 		setDescription(AchievementConstants.ALL_LEVELS_DESCRIPTION);
 		setType(Type.All_LEVELS);
+		setInitialized(false);
 		initializeLevelsData();
 	}
 
@@ -34,6 +35,7 @@ public class AllLevelsAchievement extends ProgressAchievement {
 			}
 		}
 		setGoal(levelsData.size());
+		setInitialized(true);
 	}
 
 	private void addLevel(
@@ -75,8 +77,9 @@ public class AllLevelsAchievement extends ProgressAchievement {
 	}
 
 	@Override
-	public void loadAdditionalSharedPreferencesData(
+	public void loadSharedPreferencesData(
 			SharedPreferences preferences) {
+		super.loadSharedPreferencesData(preferences);
 		String json = preferences.getString(getPreferencesLevelsDataString(), null);
 		try {
 			levelsData = new Gson().fromJson(json, SparseBooleanArray.class);
@@ -89,14 +92,13 @@ public class AllLevelsAchievement extends ProgressAchievement {
 	}
 
 	@Override
-	public void storeAdditionalSharedPreferencesData(
+	public void storeSharedPreferencesData(
 			Editor editor) {
 		if (levelsData != null) {
 			String json = new Gson().toJson(levelsData);
 			editor.putString(getPreferencesLevelsDataString(), json);
-			editor.commit();
 		}
-
+		super.storeSharedPreferencesData(editor);
 	}
 
 	@Override

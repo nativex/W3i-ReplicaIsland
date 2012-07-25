@@ -16,6 +16,7 @@ public class DiariesAchievement extends ProgressAchievement {
 		setName(AchievementConstants.DIARIES_NAME);
 		setDescription(AchievementConstants.DIARIES_DESCRIPTION);
 		setType(Type.DIARIES);
+		setInitialized(false);
 		initializeDiaryData();
 	}
 
@@ -37,6 +38,7 @@ public class DiariesAchievement extends ProgressAchievement {
 			}
 		}
 		setGoal(diariesCollected.size());
+		setInitialized(true);
 	}
 
 	public void onDiaryCollected(
@@ -73,15 +75,15 @@ public class DiariesAchievement extends ProgressAchievement {
 	}
 
 	@Override
-	public void storeAdditionalSharedPreferencesData(
+	public void storeSharedPreferencesData(
 			Editor editor) {
-
 		String diariesData = new Gson().toJson(diariesCollected);
 		editor.putString(getPreferencesDiariesDataString(), diariesData);
+		super.storeSharedPreferencesData(editor);
 	}
 
 	@Override
-	public void loadAdditionalSharedPreferencesData(
+	public void loadSharedPreferencesData(
 			SharedPreferences preferences) {
 		String diariesData = preferences.getString(getPreferencesDiariesDataString(), null);
 		try {
@@ -92,6 +94,7 @@ public class DiariesAchievement extends ProgressAchievement {
 		if ((diariesCollected == null) || (diariesCollected.size() == 0)) {
 			initializeDiaryData();
 		}
+		super.loadSharedPreferencesData(preferences);
 	}
 
 	@Override

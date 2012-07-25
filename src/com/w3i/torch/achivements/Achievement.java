@@ -1,5 +1,7 @@
 package com.w3i.torch.achivements;
 
+import com.w3i.torch.R;
+
 import android.content.SharedPreferences;
 
 public abstract class Achievement {
@@ -9,47 +11,85 @@ public abstract class Achievement {
 	private boolean progress = false;
 	private String description = null;
 	private String name = null;
-	private int image = -1;
+	private int imageLocked = R.drawable.achv_locked;
+	private int imageNotDone = R.drawable.achv_locked;
+	private int imageDone = R.drawable.achv_unlocked;
 	private boolean locked = false;
 	private String preferencesName;
+	private boolean preferencesLoaded = false;
+	private boolean initialized = true;
+
+	/**
+	 * @return the preferencesLoaded
+	 */
+	public boolean isPreferencesLoaded() {
+		return preferencesLoaded;
+	}
+
+	/**
+	 * @param preferencesLoaded
+	 *            the preferencesLoaded to set
+	 */
+	public void setPreferencesLoaded(
+			boolean preferencesLoaded) {
+		this.preferencesLoaded = preferencesLoaded;
+	}
+
+	/**
+	 * @return the initialized
+	 */
+	public boolean isInitialized() {
+		return initialized;
+	}
+
+	/**
+	 * @param initialized
+	 *            the initialized to set
+	 */
+	public void setInitialized(
+			boolean initialized) {
+		this.initialized = initialized;
+	}
 
 	public static enum State {
 		START,
 		FINISH,
 		FAIL,
 		UPDATE,
-		INITIALIZE;
+		INITIALIZE,
+		SET_GOAL,
+		SET_PROGRESS;
 	}
 
 	public enum Type {
-		CRYSTALS("Crystals"),
 		PEARLS("Pearls"),
-		GOOD_ENDING("GoodEnding"),
+		CRYSTALS("Crystals"),
+		BONUS_PEARLS("BonusPearls"),
+		BONUS_CRYSTALS("BonusCrystals"),
 		FLY_TIME("FlyTime"),
 		JETPACK_TIME("JetpackTime"),
+		HEALTH("Health"),
 		KILLS("Kills"),
 		MEGA_KILL("MegaKill"),
 		MULTI_KILL("MultiKill"),
-		LEVELS("Levels"),
-		HEALTH("Health"),
-		BONUS_PEARLS("BonusPearls"),
-		BONUS_CRYSTALS("BonusCrystals"),
-		DEATH("Death"),
-		HIT("Hit"),
 		SHIELD("Shield"),
 		POSSESSION("Possession"),
-		KYLE_DEFEATED("KyleDefeated"),
-		KABOCHA_DEFEATED("KabochaDefeated"),
-		RODOKOU_DEFEATED("RodokouDefeated"),
-		GAME_BEAT("GameBeat"),
 		STOMP("Stomp"),
+		HIT("Hit"),
+		DEATH("Death"),
+		LEVELS("Levels"),
+		DIARIES("Dieries"),
+		All_LEVELS("AllLevels"),
+		GAME_BEAT("GameBeat"),
+		GOOD_ENDING("GoodEnding"),
 		BABY("BabyDiff"),
 		KIDS("KidsDiff"),
 		ADULT("AdultDiff"),
+		KYLE_DEFEATED("KyleDefeated"),
+		KABOCHA_DEFEATED("KabochaDefeated"),
+		RODOKOU_DEFEATED("RodokouDefeated"),
 		UNTOUCHABLE("Untouchable"),
 		MERCIFUL("Merciful"),
-		DIARIES("Dieries"),
-		All_LEVELS("AllLevels"),
 		GODLIKE("Godlike"),
 		GADGETEER("Gadgeteer"),
 		WINDOW_SHOPPER("WindowShopper");
@@ -101,7 +141,7 @@ public abstract class Achievement {
 
 	protected void setImage(
 			int resourceId) {
-		image = resourceId;
+		imageDone = resourceId;
 	}
 
 	public String getName() {
@@ -117,7 +157,13 @@ public abstract class Achievement {
 	}
 
 	public int getImage() {
-		return image;
+		if (isDone()) {
+			return imageDone;
+		} else if (isLocked()) {
+			return imageLocked;
+		} else {
+			return imageNotDone;
+		}
 	}
 
 	public void setDone(
@@ -128,16 +174,20 @@ public abstract class Achievement {
 	public void setDone(
 			boolean done,
 			boolean notify) {
+		if (!initialized) {
+			return;
+		}
 		boolean fireListener = notify && done && !this.done;
-
 		// Log.i("Achievement (" + getName() + ") is done: " + done);
 		this.done = done;
-		// AchievementManager.storeAchievements();
+		if (done) {
+			setLocked(false);
+		}
 		if (fireListener) {
 			AchievementManager.notifyAchievementDone(this);
 		}
-		if (locked) {
-			setLocked(false);
+		if (preferencesLoaded) {
+			AchievementManager.storeAchievement(this);
 		}
 	}
 
@@ -206,14 +256,22 @@ public abstract class Achievement {
 		// Override in achievements with states.
 	}
 
-	public void storeAdditionalSharedPreferencesData(
-			SharedPreferences.Editor editor) {
-		// Override in achievements with additional data.
+	public void loadSharedPreferencesData(
+			SharedPreferences preferences) {
+		setDisabled(preferences.getBoolean(getPreferencesDisabled(), false));
+		setDone(preferences.getBoolean(getPreferencesDone(), false));
+		if (preferences.contains(getPreferencesLocked())) {
+			setLocked(preferences.getBoolean(getPreferencesLocked(), false));
+		}
+		preferencesLoaded = true;
 	}
 
-	public void loadAdditionalSharedPreferencesData(
-			SharedPreferences preferences) {
-		// Override in achievements with additional data.
+	public void storeSharedPreferencesData(
+			SharedPreferences.Editor editor) {
+		editor.putBoolean(getPreferencesDisabled(), isDisabled());
+		editor.putBoolean(getPreferencesDone(), isDone());
+		editor.putBoolean(getPreferencesLocked(), isLocked());
+		editor.commit();
 	}
 
 	public void reset() {

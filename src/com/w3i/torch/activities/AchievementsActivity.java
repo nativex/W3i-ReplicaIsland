@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -158,12 +159,11 @@ public class AchievementsActivity extends Activity {
 			Achievement achievement) {
 		TextView achievementName = (TextView) achievementLayout.findViewById(R.id.uiAchvName);
 		TextView achievementDescription = (TextView) achievementLayout.findViewById(R.id.uiAchvDescription);
-		// ImageView achievementIcon = (ImageView) achievementLayout.findViewById(R.id.uiAchvIcon);
+		ImageView achievementIcon = (ImageView) achievementLayout.findViewById(R.id.uiAchvIcon);
 
 		achievementName.setText(achievement.getName());
 		achievementDescription.setText(achievement.getDescription());
-		// achievementIcon.setImageResource(achievement.getImage());
-		// achievementIcon.setVisibility(View.GONE);
+		achievementIcon.setImageResource(achievement.getImage());
 
 		achvContainer.addView(achievementLayout);
 	}
