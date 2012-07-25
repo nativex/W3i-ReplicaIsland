@@ -96,7 +96,7 @@ public class StoreActivity extends Activity {
 
 				@Override
 				public void run() {
-					ReplicaIslandToast.makeAchievementUnlockedToast(context, achievement).show();
+					ReplicaIslandToast.makeAchievementUnlockedToast(context, achievement);
 
 				}
 			});
@@ -110,7 +110,7 @@ public class StoreActivity extends Activity {
 
 				@Override
 				public void run() {
-					ReplicaIslandToast.makeAchievementDoneToast(context, achievement).show();
+					ReplicaIslandToast.makeAchievementDoneToast(context, achievement);
 
 				}
 			});
@@ -126,7 +126,7 @@ public class StoreActivity extends Activity {
 
 				@Override
 				public void run() {
-					ReplicaIslandToast.makeAchievementProgressUpdateToast(context, achievement, percentDone).show();
+					ReplicaIslandToast.makeAchievementProgressUpdateToast(context, achievement, percentDone);
 
 				}
 			});
@@ -335,7 +335,7 @@ public class StoreActivity extends Activity {
 		if (storeItem.canBePurchased()) {
 			Item item = storeItem.getItem();
 			FundsManager.buyItem(item);
-			ReplicaIslandToast.makeStoreToast(this, item).show();
+			ReplicaIslandToast.makeStoreToast(this, item);
 			PowerupManager.handleItem(item);
 			GamesPlatformManager.trackItemPurchase(item);
 			ItemManager.addPurchasedItem(item);

@@ -36,6 +36,7 @@ public class ReplicaIslandToast {
 		toast.setDuration(Toast.LENGTH_SHORT);
 		itemName.setText(item.getDisplayName());
 		itemIcon.setImageFromInternet(item.getStoreImageUrl());
+		toast.show();
 		return toast;
 	}
 
@@ -54,6 +55,7 @@ public class ReplicaIslandToast {
 
 		toast.setDuration(Toast.LENGTH_LONG);
 		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 10);
+		toast.show();
 		return toast;
 	}
 
@@ -75,6 +77,7 @@ public class ReplicaIslandToast {
 
 		toast.setDuration(Toast.LENGTH_LONG);
 		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 10);
+		toast.show();
 		return toast;
 	}
 
@@ -96,6 +99,7 @@ public class ReplicaIslandToast {
 
 		toast.setDuration(Toast.LENGTH_LONG);
 		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 10);
+		toast.show();
 		return toast;
 	}
 
@@ -118,6 +122,7 @@ public class ReplicaIslandToast {
 
 		toast.setDuration(Toast.LENGTH_LONG);
 		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 10);
+		toast.show();
 		return toast;
 	}
 }

@@ -34,7 +34,7 @@ public class AchievementsActivity extends Activity {
 
 				@Override
 				public void run() {
-					ReplicaIslandToast.makeAchievementUnlockedToast(context, achievement).show();
+					ReplicaIslandToast.makeAchievementUnlockedToast(context, achievement);
 
 				}
 			});
@@ -48,7 +48,7 @@ public class AchievementsActivity extends Activity {
 
 				@Override
 				public void run() {
-					ReplicaIslandToast.makeAchievementDoneToast(context, achievement).show();
+					ReplicaIslandToast.makeAchievementDoneToast(context, achievement);
 
 				}
 			});
@@ -64,7 +64,7 @@ public class AchievementsActivity extends Activity {
 
 				@Override
 				public void run() {
-					ReplicaIslandToast.makeAchievementProgressUpdateToast(context, achievement, percentDone).show();
+					ReplicaIslandToast.makeAchievementProgressUpdateToast(context, achievement, percentDone);
 
 				}
 			});

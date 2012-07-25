@@ -2,10 +2,10 @@ package com.w3i.torch.achivements;
 
 import com.w3i.common.Log;
 
-public class WindowShopper extends Achievement {
+public class WindowShopperAchievement extends Achievement {
 	private boolean failed = false;
 
-	public WindowShopper() {
+	public WindowShopperAchievement() {
 		setName(AchievementConstants.WINDOW_SHOPPER_NAME);
 		setDescription(AchievementConstants.WINDOW_SHOPPER_DECRIPTION);
 		setType(Type.WINDOW_SHOPPER);

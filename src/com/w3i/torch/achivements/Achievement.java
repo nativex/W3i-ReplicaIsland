@@ -1,8 +1,8 @@
 package com.w3i.torch.achivements;
 
-import com.w3i.torch.R;
-
 import android.content.SharedPreferences;
+
+import com.w3i.torch.R;
 
 public abstract class Achievement {
 	private Type type;

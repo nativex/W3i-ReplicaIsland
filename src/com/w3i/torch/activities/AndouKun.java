@@ -127,7 +127,7 @@ public class AndouKun extends Activity implements SensorEventListener {
 
 					@Override
 					public void run() {
-						ReplicaIslandToast.makeKillingSpreeToast(AndouKun.this, kills, pearlsEarned).show();
+						ReplicaIslandToast.makeKillingSpreeToast(AndouKun.this, kills, pearlsEarned);
 
 					}
 				});
@@ -146,7 +146,7 @@ public class AndouKun extends Activity implements SensorEventListener {
 
 				@Override
 				public void run() {
-					ReplicaIslandToast.makeAchievementUnlockedToast(context, achievement).show();
+					ReplicaIslandToast.makeAchievementUnlockedToast(context, achievement);
 
 				}
 			});
@@ -160,7 +160,7 @@ public class AndouKun extends Activity implements SensorEventListener {
 
 				@Override
 				public void run() {
-					ReplicaIslandToast.makeAchievementDoneToast(context, achievement).show();
+					ReplicaIslandToast.makeAchievementDoneToast(context, achievement);
 
 				}
 			});
@@ -176,7 +176,7 @@ public class AndouKun extends Activity implements SensorEventListener {
 
 				@Override
 				public void run() {
-					ReplicaIslandToast.makeAchievementProgressUpdateToast(context, achievement, percentDone).show();
+					ReplicaIslandToast.makeAchievementProgressUpdateToast(context, achievement, percentDone);
 
 				}
 			});

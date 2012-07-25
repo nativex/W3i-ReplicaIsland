@@ -438,7 +438,8 @@ public class AchievementManager {
 		achievements.add(new AllLevelsAchievement());
 		achievements.add(new GodlikeAchievement());
 		achievements.add(new GadgeteerAchievement());
-		achievements.add(new WindowShopper());
+		achievements.add(new WindowShopperAchievement());
+		achievements.add(new StomperAchievement());
 		Collections.sort(achievements, new Comparator<Achievement>() {
 
 			@Override
