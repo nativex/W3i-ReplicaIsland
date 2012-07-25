@@ -614,6 +614,7 @@ public class AndouKun extends Activity implements SensorEventListener {
 					mEventReporter.addEvent(EventReporter.EVENT_DEATH, mGame.getLastDeathPosition().x, mGame.getLastDeathPosition().y, mGame.getGameTime(), LevelTree.get(mLevelRow, mLevelIndex).name, VERSION, mSessionId);
 				}
 				mGame.restartLevel();
+				AchievementManager.setAchievementState(Type.GODLIKE, State.FAIL);
 				break;
 			}
 			// else, fall through and go to the next level.
