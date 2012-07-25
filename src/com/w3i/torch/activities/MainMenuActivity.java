@@ -273,8 +273,8 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		// android.os.Build.SERIAL);
 		Log.d("com.w3i.torch", "mac address: " + ((android.net.wifi.WifiManager) this.getApplicationContext().getSystemService(Context.WIFI_SERVICE)).getConnectionInfo().getMacAddress());
 		/* Initialization of W3iConnect class */
-		OfferwallManager.initialize(this, this);
 		OfferwallManager.enableLogging(true);
+		OfferwallManager.initialize(this, this);
 		OfferwallManager.appWasRun();
 		OfferwallManager.setCurrencyRedemptionListener(w3iCurrencyRedemptionCallback);
 		OfferwallManager.createSession();

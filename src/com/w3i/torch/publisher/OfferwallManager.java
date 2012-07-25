@@ -117,8 +117,7 @@ public class OfferwallManager {
 
 	public static void enableLogging(
 			boolean isEnabled) {
-		getInstance().publisher.enableLogging(isEnabled);
-
+		Log.enableLogging(true);
 	}
 
 	public static void redeemCurrency(
