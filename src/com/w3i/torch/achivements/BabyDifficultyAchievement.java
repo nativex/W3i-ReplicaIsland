@@ -6,5 +6,7 @@ public class BabyDifficultyAchievement extends Achievement {
 		setName(AchievementConstants.BABY_BEAT_NAME);
 		setDescription(AchievementConstants.BABY_BEAT_DESCRIPTION);
 		setType(Type.BABY);
+		setImageLocked(AchievementConstants.BABY_BEAT_IMAGE_LOCKED);
+		setImageDone(AchievementConstants.BABY_BEAT_IMAGE_EARNED);
 	}
 }

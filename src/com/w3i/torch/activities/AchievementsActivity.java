@@ -23,6 +23,7 @@ import com.w3i.torch.store.ReplicaIslandToast;
 
 public class AchievementsActivity extends Activity {
 	private LinearLayout achvContainer;
+	public static int DIVIDER_RESOURCE = R.drawable.ui_achievements_activity_list_divider;
 
 	private AchievementListener achievementListener = new AchievementListener() {
 
@@ -118,16 +119,31 @@ public class AchievementsActivity extends Activity {
 
 	private void addAchivements() {
 		List<Achievement> achivements = AchievementManager.getAchivements();
+		boolean notFirstInList = false;
 		for (Achievement a : achivements) {
 			if (a.isLocked()) {
 				continue;
+			}
+			if (notFirstInList) {
+				addDivider();
 			}
 			if (a instanceof ProgressAchievement) {
 				addProgressAchievement((ProgressAchievement) a);
 			} else {
 				addAchievement(a);
 			}
+			notFirstInList = true;
 		}
+	}
+
+	private void addDivider() {
+		ImageView divider = new ImageView(this);
+		divider.setBackgroundResource(DIVIDER_RESOURCE);
+
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+		params.setMargins(5, 5, 5, 5);
+		divider.setLayoutParams(params);
+		achvContainer.addView(divider);
 	}
 
 	private void addAchievement(

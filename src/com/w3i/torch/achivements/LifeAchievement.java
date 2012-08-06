@@ -6,5 +6,7 @@ public class LifeAchievement extends Achievement {
 		setName(AchievementConstants.HEALTH_NAME);
 		setDescription(AchievementConstants.HEALTH_DESCRIPTION);
 		setType(Type.HEALTH);
+		setImageDone(AchievementConstants.HEALTH_IMAGE_EARNED);
+		setImageLocked(AchievementConstants.HEALTH_IMAGE_LOCKED);
 	}
 }

@@ -7,6 +7,8 @@ public class LevelsAchievement extends ProgressAchievement {
 		setName(AchievementConstants.LEVELS_NAME);
 		setDescription(AchievementConstants.LEVELS_DESCRIPTION);
 		setType(Type.LEVELS);
+		setImageDone(AchievementConstants.LEVELS_IMAGE_EARNED);
+		setImageLocked(AchievementConstants.LEVELS_IMAGE_LOCKED);
 	}
 
 }

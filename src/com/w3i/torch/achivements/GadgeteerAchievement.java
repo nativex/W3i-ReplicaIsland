@@ -21,6 +21,8 @@ public class GadgeteerAchievement extends ProgressAchievement {
 		setName(AchievementConstants.GADGETEER_NAME);
 		setDescription(AchievementConstants.GADGETEER_DESCRIPTION);
 		setType(Type.GADGETEER);
+		setImageDone(AchievementConstants.GADGETEER_IMAGE_EARNED);
+		setImageLocked(AchievementConstants.GADGETEER_IMAGE_LOCKED);
 		if (itemsCount == 0) {
 			setInitialized(false);
 		}

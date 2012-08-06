@@ -11,7 +11,6 @@ public abstract class Achievement {
 	private boolean progress = false;
 	private String description = null;
 	private String name = null;
-	private int imageLocked = R.drawable.achv_locked;
 	private int imageNotDone = R.drawable.achv_locked;
 	private int imageDone = R.drawable.achv_unlocked;
 	private boolean locked = false;
@@ -139,9 +138,14 @@ public abstract class Achievement {
 		progress = hasProgress;
 	}
 
-	protected void setImage(
+	protected void setImageLocked(
 			int resourceId) {
-		imageDone = resourceId;
+		imageNotDone = resourceId;
+	}
+
+	protected void setImageDone(
+			int imageResource) {
+		imageDone = imageResource;
 	}
 
 	public String getName() {
@@ -159,8 +163,6 @@ public abstract class Achievement {
 	public int getImage() {
 		if (isDone()) {
 			return imageDone;
-		} else if (isLocked()) {
-			return imageLocked;
 		} else {
 			return imageNotDone;
 		}

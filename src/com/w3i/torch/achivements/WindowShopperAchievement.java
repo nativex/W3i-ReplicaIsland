@@ -10,6 +10,8 @@ public class WindowShopperAchievement extends Achievement {
 		setDescription(AchievementConstants.WINDOW_SHOPPER_DECRIPTION);
 		setType(Type.WINDOW_SHOPPER);
 		setLocked(true);
+		setImageDone(AchievementConstants.WINDOW_SHOPPER_IMAGE_EARNED);
+		setImageLocked(AchievementConstants.WINDOW_SHOPPER_IMAGE_LOCKED);
 	}
 
 	@Override

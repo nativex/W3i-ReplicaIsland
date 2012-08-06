@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="store_history_image_size_code" format="integer" type="integer">96</item>
+    <item name="store_history_image_size_layout" format="dimension" type="integer">@integer/store_history_image_size dip</item>
+
+</resources>

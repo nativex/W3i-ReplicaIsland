@@ -7,6 +7,8 @@ public class CrystalsAchievement extends ProgressAchievement {
 		setName(AchievementConstants.CRYSTALS_NAME);
 		setDescription(AchievementConstants.CRYSTALS_DESCRIPTION);
 		setType(Type.CRYSTALS);
+		setImageDone(AchievementConstants.CRYSTALS_IMAGE_EARNED);
+		setImageLocked(AchievementConstants.CRYSTALS_IMAGE_LOCKED);
 	}
 
 }

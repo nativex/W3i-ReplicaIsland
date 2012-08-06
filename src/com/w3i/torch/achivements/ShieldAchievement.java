@@ -7,6 +7,8 @@ public class ShieldAchievement extends ProgressAchievement {
 		setName(AchievementConstants.SHIELD_NAME);
 		setDescription(AchievementConstants.SHIELD_DESCRIPTION);
 		setType(Type.SHIELD);
+		setImageDone(AchievementConstants.SHIELD_IMAGE_EARNED);
+		setImageLocked(AchievementConstants.SHIELD_IMAGE_LOCKED);
 	}
 
 }

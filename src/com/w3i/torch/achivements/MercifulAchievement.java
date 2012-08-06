@@ -9,6 +9,8 @@ public class MercifulAchievement extends Achievement {
 		setName(AchievementConstants.MERCIFUL_NAME);
 		setDescription(AchievementConstants.MERCIFUL_DESCRIPTION);
 		setType(Type.MERCIFUL);
+		setImageDone(AchievementConstants.MERCIFUL_IMAGE_EARNED);
+		setImageLocked(AchievementConstants.MERCIFUL_IMAGE_LOCKED);
 	}
 
 	private void levelFinished() {

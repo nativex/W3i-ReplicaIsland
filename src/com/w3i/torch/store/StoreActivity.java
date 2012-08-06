@@ -43,6 +43,7 @@ public class StoreActivity extends Activity {
 	private List<HistoryItem> historyItems;
 	private Item selectedHistoryItem = null;
 	private ViewFlinger flinger;
+	private int historyImageSize;
 
 	private AdapterView.OnItemClickListener onHistoryItemClicked = new AdapterView.OnItemClickListener() {
 
@@ -149,6 +150,7 @@ public class StoreActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.store_layout);
 
+		historyImageSize = getResources().getInteger(R.integer.store_history_image_size);
 		fontItemName = Typeface.createFromAsset(getAssets(), "fonts/" + FONT_ITEM_NAME);
 		flinger = (ViewFlinger) findViewById(R.id.storeFlinger);
 		View toStore = findViewById(R.id.historyToStoreImage);
@@ -631,8 +633,10 @@ public class StoreActivity extends Activity {
 		}
 
 		private void init() {
+			ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(historyImageSize, historyImageSize);
 			setPadding(5, 5, 5, 5);
 			setTag(this);
+			setLayoutParams(params);
 		}
 
 		public void setItem(

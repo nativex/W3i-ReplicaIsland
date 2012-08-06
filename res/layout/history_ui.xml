@@ -34,8 +34,9 @@
         android:layout_below="@+id/historyTitle"
         android:layout_margin="5dip"
         android:background="@drawable/ui_store_overlay"
+        android:columnWidth="@integer/store_history_image_size_layout"
         android:listSelector="#00000000"
-        android:numColumns="4"
+        android:numColumns="auto_fit"
         android:padding="5dip"
         android:stretchMode="columnWidth" >
     </GridView>

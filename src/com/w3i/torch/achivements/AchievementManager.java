@@ -350,7 +350,23 @@ public class AchievementManager {
 		instance._resetAchievements();
 	}
 
-	public void _resetAchievements() {
+	/**
+	 * TEST METHOD
+	 */
+	public static void unlockAchievements() {
+		if (instance == null) {
+			return;
+		}
+		instance._unlockAchievements();
+	}
+
+	private void _unlockAchievements() {
+		for (Achievement a : achievements) {
+			a.setLocked(false);
+		}
+	}
+
+	private void _resetAchievements() {
 		if (achievements != null) {
 			for (Achievement achv : achievements) {
 				achv.reset();

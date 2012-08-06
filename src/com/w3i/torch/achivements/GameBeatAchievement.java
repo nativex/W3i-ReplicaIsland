@@ -6,5 +6,7 @@ public class GameBeatAchievement extends Achievement {
 		setName(AchievementConstants.GAME_BEAT_NAME);
 		setDescription(AchievementConstants.GAME_BEAT_DESCRIPTION);
 		setType(Type.GAME_BEAT);
+		setImageDone(AchievementConstants.GAME_BEAT_IMAGE_EARNED);
+		setImageLocked(AchievementConstants.GAME_BEAT_IMAGE_LOCKED);
 	}
 }

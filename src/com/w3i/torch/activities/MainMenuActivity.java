@@ -286,6 +286,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		FundsManager.loadFunds();
 		PowerupManager.loadPowerups();
 		AchievementManager.loadAchievements();
+		AchievementManager.unlockAchievements();
 
 		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
 		params.gravity = Gravity.BOTTOM;

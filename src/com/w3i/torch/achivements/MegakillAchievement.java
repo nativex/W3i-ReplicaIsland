@@ -7,5 +7,7 @@ public class MegakillAchievement extends Achievement {
 		setDescription(AchievementConstants.MEGA_KILL_DESCRIPTION);
 		setType(Type.MEGA_KILL);
 		setLocked(true);
+		setImageDone(AchievementConstants.MEGA_KILL_IMAGE_EARNED);
+		setImageLocked(AchievementConstants.MEGA_KILL_IMAGE_LOCKED);
 	}
 }

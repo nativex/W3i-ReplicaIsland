@@ -7,6 +7,8 @@ public class KillsAchievement extends ProgressAchievement {
 		setName(AchievementConstants.KILLS_ACHIEVEMENT_NAME);
 		setDescription(AchievementConstants.KILLS_ACHIEVEMENT_DESCRIPTION);
 		setType(Type.KILLS);
+		setImageDone(AchievementConstants.KILLS_IMAGE_EARNED);
+		setImageLocked(AchievementConstants.KILLS_IMAGE_LOCKED);
 	}
 
 }

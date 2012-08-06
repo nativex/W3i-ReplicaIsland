@@ -10,6 +10,8 @@ public class UntouchableAchievement extends Achievement {
 		setName(AchievementConstants.UNTOUCHABLE_NAME);
 		setDescription(AchievementConstants.UNTOUCHABLE_DESCRIPTION);
 		setType(Type.UNTOUCHABLE);
+		setImageDone(AchievementConstants.UNTOUCHABLE_IMAGE_EARNED);
+		setImageLocked(AchievementConstants.UNTOUCHABLE_IMAGE_LOCKED);
 	}
 
 	private void levelFinished() {

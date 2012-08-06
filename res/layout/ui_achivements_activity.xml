@@ -1,29 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:foo="http://schemas.android.com/apk/res/com.w3i.torch"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <TextView
+    <com.w3i.torch.views.CustomFontTextView
         android:id="@+id/achvMainTitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
-        android:gravity="center_horizontal"
-        android:text="@string/achievements" />
+        android:gravity="left"
+        android:text="@string/achievements"
+        android:textSize="25sp"
+        foo:setFont="BABYU__.TTF" />
 
     <ScrollView
         android:id="@+id/achvMainScroller"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/achvMainTitle"
-        android:layout_margin="5dip" >
+        android:layout_margin="5dip"
+        android:background="@drawable/ui_achievements_activity_list_background" >
 
         <LinearLayout
             android:id="@+id/achvMainList"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:padding="5dip" >
         </LinearLayout>
     </ScrollView>
 

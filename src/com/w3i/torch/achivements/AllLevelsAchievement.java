@@ -18,6 +18,8 @@ public class AllLevelsAchievement extends ProgressAchievement {
 		setDescription(AchievementConstants.ALL_LEVELS_DESCRIPTION);
 		setType(Type.All_LEVELS);
 		setInitialized(false);
+		setImageLocked(AchievementConstants.ALL_LEVELS_IMAGE_LOCKED);
+		setImageDone(AchievementConstants.ALL_LEVELS_IMAGE_EARNED);
 		initializeLevelsData();
 	}
 

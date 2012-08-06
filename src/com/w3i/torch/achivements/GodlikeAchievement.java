@@ -12,6 +12,8 @@ public class GodlikeAchievement extends Achievement {
 		setName(AchievementConstants.GODLIKE_NAME);
 		setDescription(AchievementConstants.GODLIKE_DESCRIPTION);
 		setType(Type.GODLIKE);
+		setImageDone(AchievementConstants.GODLIKE_IMAGE_EARNED);
+		setImageLocked(AchievementConstants.GODLIKE_IMAGE_LOCKED);
 	}
 
 	private String getPreferencesFailedKey() {

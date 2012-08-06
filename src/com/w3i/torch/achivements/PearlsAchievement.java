@@ -7,5 +7,7 @@ public class PearlsAchievement extends ProgressAchievement {
 		setName(AchievementConstants.PEARLS_NAME);
 		setDescription(AchievementConstants.PEARLS_DESCRIPTION);
 		setType(Type.PEARLS);
+		setImageDone(AchievementConstants.PEARLS_IMAGE_EARNED);
+		setImageLocked(AchievementConstants.PEARLS_IMAGE_LOCKED);
 	}
 }

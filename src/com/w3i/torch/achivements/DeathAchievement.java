@@ -7,5 +7,7 @@ public class DeathAchievement extends ProgressAchievement {
 		setName(AchievementConstants.DEATH_NAME);
 		setDescription(AchievementConstants.DEATH_DESCRIPTION);
 		setType(Type.DEATH);
+		setImageLocked(AchievementConstants.DEATH_IMAGE_LOCKED);
+		setImageDone(AchievementConstants.DEATH_IMAGE_EARNED);
 	}
 }

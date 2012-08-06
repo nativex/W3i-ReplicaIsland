@@ -17,6 +17,8 @@ public class DiariesAchievement extends ProgressAchievement {
 		setDescription(AchievementConstants.DIARIES_DESCRIPTION);
 		setType(Type.DIARIES);
 		setInitialized(false);
+		setImageLocked(AchievementConstants.DIARIES_IMAGE_LOCKED);
+		setImageDone(AchievementConstants.DIARIES_IMAGE_EARNED);
 		initializeDiaryData();
 	}
 

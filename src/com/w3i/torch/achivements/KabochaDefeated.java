@@ -7,5 +7,7 @@ public class KabochaDefeated extends Achievement {
 		setDescription(AchievementConstants.KABOOCHA_DESCRIPTION);
 		setType(Type.KABOCHA_DEFEATED);
 		setLocked(true);
+		setImageDone(AchievementConstants.KABOOCHA_IMAGE_EARNED);
+		setImageLocked(AchievementConstants.KABOOCHA_IMAGE_LOCKED);
 	}
 }

@@ -12,6 +12,8 @@ public class FlyTime extends ProgressAchievement {
 		setName(AchievementConstants.FLY_TIME_NAME);
 		setDescription(AchievementConstants.FLY_TIME_DESCRIPTION);
 		setType(Type.FLY_TIME);
+		setImageLocked(AchievementConstants.FLY_TIME_IMAGE_LOCKED);
+		setImageDone(AchievementConstants.FLY_TIME_IMAGE_EARNED);
 	}
 
 	public void startedFlaying() {

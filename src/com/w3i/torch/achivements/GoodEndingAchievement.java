@@ -7,5 +7,7 @@ public class GoodEndingAchievement extends Achievement {
 		setName(AchievementConstants.GOOD_BOY_NAME);
 		setDescription(AchievementConstants.GOOD_BOY_DESCRIPTION);
 		setLocked(true);
+		setImageDone(AchievementConstants.GOOD_BOY_IMAGE_EARNED);
+		setImageLocked(AchievementConstants.GOOD_BOY_IMAGE_LOCKED);
 	}
 }

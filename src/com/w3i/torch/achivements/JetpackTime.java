@@ -12,6 +12,8 @@ public class JetpackTime extends ProgressAchievement {
 		setName(AchievementConstants.JETPACK_TIME_NAME);
 		setDescription(AchievementConstants.JETPACK_TIME_DESCRIPTION);
 		setType(Type.JETPACK_TIME);
+		setImageDone(AchievementConstants.JETPACK_TIME_IMAGE_EARNED);
+		setImageLocked(AchievementConstants.JETPACK_TIME_IMAGE_LOCKED);
 	}
 
 	public void startedFlaying() {

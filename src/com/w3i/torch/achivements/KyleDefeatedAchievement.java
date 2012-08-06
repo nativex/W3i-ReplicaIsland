@@ -7,5 +7,7 @@ public class KyleDefeatedAchievement extends Achievement {
 		setDescription(AchievementConstants.KYLE_DESCRIPTION);
 		setType(Type.KYLE_DEFEATED);
 		setLocked(true);
+		setImageDone(AchievementConstants.KYLE_IMAGE_EARNED);
+		setImageLocked(AchievementConstants.KYLE_IMAGE_LOCKED);
 	}
 }

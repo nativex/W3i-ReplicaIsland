@@ -48,7 +48,8 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/storeTitle"
         android:layout_margin="5dip"
-        android:background="@drawable/ui_store_overlay" >
+        android:background="@drawable/ui_store_overlay"
+        android:padding="20dip" >
 
         <LinearLayout
             android:id="@+id/storeItemsList"

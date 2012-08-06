@@ -7,6 +7,8 @@ public class HitAchievement extends ProgressAchievement {
 		setName(AchievementConstants.HIT_NAME);
 		setDescription(AchievementConstants.HIT_DESCRIPTION);
 		setType(Type.HIT);
+		setImageLocked(AchievementConstants.HIT_IMAGE_LOCKED);
+		setImageDone(AchievementConstants.HIT_IMAGE_EARNED);
 	}
 
 }

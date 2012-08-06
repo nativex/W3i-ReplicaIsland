@@ -7,6 +7,8 @@ public class StomperAchievement extends ProgressAchievement {
 		setName(AchievementConstants.STOMPER_NAME);
 		setDescription(AchievementConstants.STOMPER_DESCRIPTION);
 		setType(Type.STOMP);
+		setImageDone(AchievementConstants.STOMPER_IMAGE_EARNED);
+		setImageLocked(AchievementConstants.STOMPER_IMAGE_LOCKED);
 	}
 
 }

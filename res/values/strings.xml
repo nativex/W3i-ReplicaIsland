@@ -383,7 +383,7 @@ If I am honest with myself, there is another reason the adventurers had to die. 
     <string name="info_dialog_error_message">[Error Message]</string>
     <string name="info_dialog_description">Info Dialog Description</string>
     <string name="default_image_view_description">Default Image View Description</string>
-    <string name="achievements">Achievements</string>
+    <string name="achievements">ACHIEVEMENTS</string>
     <string name="coin_layout_initial_pearls">0</string>
     <string name="game_over_enemy_percent">0</string>
     <string name="game_over_pearl_percent">100%</string>
