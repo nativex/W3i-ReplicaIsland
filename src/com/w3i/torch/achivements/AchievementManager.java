@@ -362,7 +362,7 @@ public class AchievementManager {
 
 	private void _unlockAchievements() {
 		for (Achievement a : achievements) {
-			a.setLocked(false);
+			a.setLocked(false, false);
 		}
 	}
 

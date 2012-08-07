@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
@@ -134,7 +135,7 @@ public class StoreActivity extends Activity {
 		}
 	};
 
-	public static final int DEFAULT_CATEGORY_BACKGROUND_COLOR = Color.DKGRAY;
+	public static final int DEFAULT_CATEGORY_BACKGROUND_COLOR = Color.BLACK;
 	public static final int DEFAULT_CATEGORY_TEXT_COLOR = Color.WHITE;
 	public static final int DEFAULT_PRICE_PEARLS_COLOR = Color.WHITE;
 	public static final int DEFAULT_PRICE_CRYSTALS_COLOR = Color.RED;
@@ -150,7 +151,7 @@ public class StoreActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.store_layout);
 
-		historyImageSize = getResources().getInteger(R.integer.store_history_image_size);
+		historyImageSize = getResources().getInteger(R.integer.store_history_image_size_code);
 		fontItemName = Typeface.createFromAsset(getAssets(), "fonts/" + FONT_ITEM_NAME);
 		flinger = (ViewFlinger) findViewById(R.id.storeFlinger);
 		View toStore = findViewById(R.id.historyToStoreImage);
@@ -633,7 +634,7 @@ public class StoreActivity extends Activity {
 		}
 
 		private void init() {
-			ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(historyImageSize, historyImageSize);
+			AbsListView.LayoutParams params = new AbsListView.LayoutParams(historyImageSize, historyImageSize);
 			setPadding(5, 5, 5, 5);
 			setTag(this);
 			setLayoutParams(params);

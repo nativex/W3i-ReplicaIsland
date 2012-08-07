@@ -3,6 +3,7 @@
     xmlns:foo="http://schemas.android.com/apk/res/com.w3i.torch"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@drawable/ui_achievements_activity_background"
     android:orientation="vertical" >
 
     <com.w3i.torch.views.CustomFontTextView
@@ -21,14 +22,14 @@
         android:layout_height="fill_parent"
         android:layout_below="@+id/achvMainTitle"
         android:layout_margin="5dip"
-        android:background="@drawable/ui_achievements_activity_list_background" >
+        android:background="@drawable/ui_achievements_activity_list_background"
+        android:padding="5dip" >
 
         <LinearLayout
             android:id="@+id/achvMainList"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="5dip" >
+            android:orientation="vertical" >
         </LinearLayout>
     </ScrollView>
 

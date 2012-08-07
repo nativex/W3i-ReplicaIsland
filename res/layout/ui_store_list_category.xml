@@ -12,9 +12,9 @@
         android:layout_marginLeft="7dip"
         android:layout_marginRight="7dip"
         android:layout_marginTop="3dip"
-        android:background="@color/gray"
+        android:background="@android:color/black"
         android:maxLines="1"
-        android:minHeight="40dip"
+        android:minHeight="30dip"
         android:padding="5dip" />
 
 </LinearLayout>

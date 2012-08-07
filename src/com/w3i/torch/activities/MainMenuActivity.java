@@ -249,6 +249,11 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		// MediaPlayer mp = MediaPlayer.create(this, R.raw.bwv_115);
 		// mp.start();
 
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
 		doW3iInitialization();
 	}
 
@@ -281,7 +286,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		// OfferwallManager.showFeaturedOffer(this);
 
 		SharedPreferenceManager.initialize(this);
-		com.w3i.common.Log.i("MainMenuActivity: Initialization of GamesPlatform begins");
+		// com.w3i.common.Log.i("MainMenuActivity: Initialization of GamesPlatform begins");
 		GamesPlatformManager.initialize(this);
 		FundsManager.loadFunds();
 		PowerupManager.loadPowerups();

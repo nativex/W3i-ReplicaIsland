@@ -208,16 +208,22 @@ public abstract class Achievement {
 		return locked;
 	}
 
+	public void setLocked(
+			boolean locked) {
+		setLocked(locked, true);
+	}
+
 	/**
 	 * @param locked
 	 *            the locked to set
 	 */
 	public void setLocked(
-			boolean locked) {
+			boolean locked,
+			boolean notify) {
 		// Log.d("Achievement " + getName() + " locked status changed: " + locked);
-		boolean notify = (!locked) && (this.locked);
+		boolean showToast = notify && (!locked) && (this.locked);
 		this.locked = locked;
-		if (notify) {
+		if (showToast) {
 			AchievementManager.notifyAchievementUnlocked(this);
 		}
 	}
@@ -263,7 +269,7 @@ public abstract class Achievement {
 		setDisabled(preferences.getBoolean(getPreferencesDisabled(), false));
 		setDone(preferences.getBoolean(getPreferencesDone(), false));
 		if (preferences.contains(getPreferencesLocked())) {
-			setLocked(preferences.getBoolean(getPreferencesLocked(), false));
+			setLocked(preferences.getBoolean(getPreferencesLocked(), false), false);
 		}
 		preferencesLoaded = true;
 	}

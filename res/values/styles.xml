@@ -10,9 +10,9 @@
         <item name="android:textColor">@color/gray</item>
         <item name="android:textSize">12sp</item>
     </style>
-
+
     <style name="AchivementsProgressTextStyle">
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">12sp</item>
     </style>
 
@@ -22,8 +22,7 @@
     </style>
 
     <style name="AchivementDescriptionStyle">
-        <item name="android:textColor">@color/gray</item>
-
+        <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">11sp</item>
     </style>
 

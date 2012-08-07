@@ -7,7 +7,7 @@
     <ImageView
         android:id="@+id/historyToStoreImage"
         android:layout_width="wrap_content"
-        android:layout_height="40dip"
+        android:layout_height="25dip"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="5dip"
@@ -17,8 +17,8 @@
 
     <ImageView
         android:id="@+id/historyTitle"
-        android:layout_width="265dip"
-        android:layout_height="30dip"
+        android:layout_width="200dip"
+        android:layout_height="25dip"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="5dip"
@@ -35,6 +35,7 @@
         android:layout_margin="5dip"
         android:background="@drawable/ui_store_overlay"
         android:columnWidth="@integer/store_history_image_size_layout"
+        android:gravity="center"
         android:listSelector="#00000000"
         android:numColumns="auto_fit"
         android:padding="5dip"

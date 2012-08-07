@@ -30,8 +30,8 @@ public class OfferwallManager {
 	private OfferwallManager(Activity activity, W3iAdvertiser listener) {
 		ApplicationInputs inputs = new ApplicationInputs();
 		inputs.setAppId(appId); // Application ID provided by W3i
-		inputs.setApplicationName("W3i's Replica Island"); // Sets the display
-															// name for your app
+		inputs.setApplicationName("Torch"); // Sets the display
+											// name for your app
 		inputs.setPackageName("com.w3i.torch"); // The package
 												// name for your
 												// app
@@ -41,7 +41,7 @@ public class OfferwallManager {
 
 	private static OfferwallManager getInstance() {
 		if (instance == null) {
-			throw new IllegalStateException("OfferwallManager not initialized. Call OfferwallManager.initialize(Activity) before calling any other method");
+			throw new IllegalStateException("OfferwallManager not initialized. Call OfferwallManager.initialize() before calling any other method");
 		}
 		return instance;
 	}
