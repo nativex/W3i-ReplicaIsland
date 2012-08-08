@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.w3i.torch"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ui_toast_achievement_background"
+    android:padding="10dip" >
+
+    <ImageView
+        android:id="@+id/toastAchievementIcon"
+        android:layout_width="65dip"
+        android:layout_height="65dip"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/default_image_view_description" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dip"
+        android:layout_toRightOf="@+id/toastAchievementIcon"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <com.w3i.torch.views.CustomFontTextView
+            android:id="@+id/toastAchievementTitle"
+            style="@style/ToastAchievementDoneTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dip"
+            android:gravity="center"
+            android:text="@string/toast_achievement_done_title" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <com.w3i.torch.views.CustomFontTextView
+                android:id="@+id/toastAchievementText"
+                style="@style/ToastAchievementText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/toast_achievement_done_text" />
+
+            <com.w3i.torch.views.CustomFontTextView
+                android:id="@+id/toastAchievementName"
+                style="@style/ToastAchievementDoneAchievementName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@integer/toast_achievement_name_text_distance"
+                android:text="@string/toast_achievement_name" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -192,12 +192,13 @@ public class ItemManager {
 		if (purchasedItems == null) {
 			purchasedItems = new ArrayList<Item>();
 			purchasedItems.add(item);
+			AchievementManager.incrementAchievementProgress(Type.GADGETEER, 1);
 		} else {
 			if (!purchasedItems.contains(item)) {
 				purchasedItems.add(item);
+				AchievementManager.incrementAchievementProgress(Type.GADGETEER, 1);
 			}
 		}
-		AchievementManager.incrementAchievementProgress(Type.GADGETEER, 1);
 
 		if ((availableItems != null)) {
 			availableItems.remove(item);

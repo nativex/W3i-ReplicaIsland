@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item name="store_history_image_size_code" format="integer" type="integer">96</item>
     <item name="store_history_image_size_layout" format="dimension" type="integer">96dip</item>
+    <item name="toast_achievement_name_text_distance" format="dimension" type="integer">3dip</item>
 
 </resources>

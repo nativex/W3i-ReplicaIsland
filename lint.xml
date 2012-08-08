@@ -1,3 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
+    <issue id="UnusedNamespace">
+        <ignore path="res\layout\toast_achievement_done.xml" />
+        <ignore path="res\layout\toast_achievement_unlocked.xml" />
+    </issue>
 </lint>

@@ -9,7 +9,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -143,8 +142,6 @@ public class StoreActivity extends Activity {
 
 	private static final int DIALOG_INFO_HISTORY = 233;
 
-	private Typeface fontItemName;
-
 	@Override
 	protected void onCreate(
 			Bundle savedInstanceState) {
@@ -152,7 +149,6 @@ public class StoreActivity extends Activity {
 		setContentView(R.layout.store_layout);
 
 		historyImageSize = getResources().getInteger(R.integer.store_history_image_size_code);
-		fontItemName = Typeface.createFromAsset(getAssets(), "fonts/" + FONT_ITEM_NAME);
 		flinger = (ViewFlinger) findViewById(R.id.storeFlinger);
 		View toStore = findViewById(R.id.historyToStoreImage);
 		toStore.setOnClickListener(onToStoreClicked);
@@ -560,7 +556,6 @@ public class StoreActivity extends Activity {
 				String text) {
 			TextView name = (TextView) itemLayout.findViewById(R.id.itemName);
 			if (name != null) {
-				name.setTypeface(fontItemName);
 				name.setText(text);
 			}
 		}

@@ -183,7 +183,7 @@ public abstract class Achievement {
 		// Log.i("Achievement (" + getName() + ") is done: " + done);
 		this.done = done;
 		if (done) {
-			setLocked(false);
+			setLocked(false, notify);
 		}
 		if (fireListener) {
 			AchievementManager.notifyAchievementDone(this);

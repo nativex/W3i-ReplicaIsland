@@ -6,14 +6,13 @@
 
     <TextView
         android:id="@+id/storeCategoryName"
+        style="@style/StoreItemCategory"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="3dip"
         android:layout_marginLeft="7dip"
         android:layout_marginRight="7dip"
         android:layout_marginTop="3dip"
-        android:background="@android:color/black"
-        android:maxLines="1"
         android:minHeight="30dip"
         android:padding="5dip" />
 

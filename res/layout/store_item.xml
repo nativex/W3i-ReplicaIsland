@@ -13,38 +13,38 @@
         android:layout_centerVertical="true"
         android:layout_margin="5dip" />
 
-    <TextView
+    <com.w3i.torch.views.CustomFontTextView
         android:id="@+id/itemName"
+        style="@style/StoreItemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_margin="5dip"
         android:layout_toRightOf="@+id/itemIcon"
-        android:text="@string/store_item_name"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:text="@string/store_item_name" />
 
-    <TextView
+    <com.w3i.torch.views.CustomFontTextView
         android:id="@+id/itemErrorMessage"
+        style="@style/StoreItemAlert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/itemName"
+        android:layout_marginBottom="2dip"
         android:layout_marginLeft="5dip"
         android:layout_marginRight="5dip"
         android:layout_toRightOf="@+id/itemIcon"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffff0000"
         android:visibility="gone" />
 
-    <TextView
+    <com.w3i.torch.views.CustomFontTextView
         android:id="@+id/itemDescription"
+        style="@style/StoreItemDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/itemErrorMessage"
         android:layout_marginLeft="5dip"
         android:layout_marginRight="5dip"
         android:layout_toRightOf="@+id/itemIcon"
-        android:text="@string/store_item_description"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:text="@string/store_item_description" />
 
     <com.w3i.offerwall.custom.views.AdvancedTextView
         android:id="@+id/itemPrice"

@@ -44,6 +44,7 @@
 
                 <TextView
                     android:id="@+id/infoDialogDescription"
+                    style="@style/StoreDialogDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dip"
@@ -55,6 +56,7 @@
 
     <com.w3i.offerwall.custom.views.ScrollingTextView
         android:id="@+id/infoDialogTitle"
+        style="@style/StoreDialogTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"

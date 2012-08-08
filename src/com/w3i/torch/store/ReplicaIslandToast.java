@@ -65,15 +65,18 @@ public class ReplicaIslandToast {
 		Toast toast = Toast.makeText(context, "", Toast.LENGTH_LONG);
 
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View toastLayout = inflater.inflate(R.layout.toast_killing_spree, null);
+		View toastLayout = inflater.inflate(R.layout.toast_achievement_done, null);
 		toast.setView(toastLayout);
-		TextView killingSpreeTitle = (TextView) toastLayout.findViewById(R.id.killingSpreeTitle);
-		killingSpreeTitle.setText("Achievement earned");
-		TextView killingSpreeText = (TextView) toastLayout.findViewById(R.id.killingSpreeText);
-		String formattedKillingSpreeString = "You have earned <font color=#00FF00> " + achievement.getName() + "</font>.";
-		killingSpreeText.setText(Html.fromHtml(formattedKillingSpreeString));
-		ImageView killingSpreeIcon = (ImageView) toastLayout.findViewById(R.id.killingSpreeIcon);
-		killingSpreeIcon.setImageResource(achievement.getImage());
+
+		ImageView icon = (ImageView) toastLayout.findViewById(R.id.toastAchievementIcon);
+		TextView title = (TextView) toastLayout.findViewById(R.id.toastAchievementTitle);
+		TextView text = (TextView) toastLayout.findViewById(R.id.toastAchievementText);
+		TextView name = (TextView) toastLayout.findViewById(R.id.toastAchievementName);
+
+		title.setText(context.getResources().getString(R.string.toast_achievement_done_title));
+		text.setText(context.getResources().getString(R.string.toast_achievement_done_text));
+		name.setText(achievement.getName());
+		icon.setImageResource(achievement.getImage());
 
 		toast.setDuration(Toast.LENGTH_LONG);
 		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 10);
@@ -87,15 +90,18 @@ public class ReplicaIslandToast {
 		Toast toast = Toast.makeText(context, "", Toast.LENGTH_LONG);
 
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View toastLayout = inflater.inflate(R.layout.toast_killing_spree, null);
+		View toastLayout = inflater.inflate(R.layout.toast_achievement_unlocked, null);
 		toast.setView(toastLayout);
-		TextView killingSpreeTitle = (TextView) toastLayout.findViewById(R.id.killingSpreeTitle);
-		killingSpreeTitle.setText("Achievement unlocked");
-		TextView killingSpreeText = (TextView) toastLayout.findViewById(R.id.killingSpreeText);
-		String formattedKillingSpreeString = "You have unlocked <font color=#FFFF00> " + achievement.getName() + "</font>.";
-		killingSpreeText.setText(Html.fromHtml(formattedKillingSpreeString));
-		ImageView killingSpreeIcon = (ImageView) toastLayout.findViewById(R.id.killingSpreeIcon);
-		killingSpreeIcon.setImageResource(achievement.getImage());
+
+		ImageView icon = (ImageView) toastLayout.findViewById(R.id.toastAchievementIcon);
+		TextView title = (TextView) toastLayout.findViewById(R.id.toastAchievementTitle);
+		TextView text = (TextView) toastLayout.findViewById(R.id.toastAchievementText);
+		TextView name = (TextView) toastLayout.findViewById(R.id.toastAchievementName);
+
+		title.setText(context.getResources().getString(R.string.toast_achievement_unlocked_title));
+		text.setText(context.getResources().getString(R.string.toast_achievement_unlocked_text));
+		name.setText(achievement.getName());
+		icon.setImageResource(achievement.getImage());
 
 		toast.setDuration(Toast.LENGTH_LONG);
 		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 10);
@@ -110,15 +116,18 @@ public class ReplicaIslandToast {
 		Toast toast = Toast.makeText(context, "", Toast.LENGTH_LONG);
 
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View toastLayout = inflater.inflate(R.layout.toast_killing_spree, null);
+		View toastLayout = inflater.inflate(R.layout.toast_achievement_progress, null);
 		toast.setView(toastLayout);
-		TextView killingSpreeTitle = (TextView) toastLayout.findViewById(R.id.killingSpreeTitle);
-		killingSpreeTitle.setText("Achievement progress");
-		TextView killingSpreeText = (TextView) toastLayout.findViewById(R.id.killingSpreeText);
-		String formattedKillingSpreeString = "<font color=#FFFF00> " + achievement.getName() + "</font> is " + percentDone + "% done.";
-		killingSpreeText.setText(Html.fromHtml(formattedKillingSpreeString));
-		ImageView killingSpreeIcon = (ImageView) toastLayout.findViewById(R.id.killingSpreeIcon);
-		killingSpreeIcon.setImageResource(achievement.getImage());
+
+		ImageView icon = (ImageView) toastLayout.findViewById(R.id.toastAchievementIcon);
+		TextView title = (TextView) toastLayout.findViewById(R.id.toastAchievementTitle);
+		TextView text = (TextView) toastLayout.findViewById(R.id.toastAchievementText);
+		TextView name = (TextView) toastLayout.findViewById(R.id.toastAchievementName);
+
+		title.setText(context.getResources().getString(R.string.toast_achievement_progress_title));
+		name.setText(achievement.getName());
+		text.setText("is " + percentDone + "% done");
+		icon.setImageResource(achievement.getImage());
 
 		toast.setDuration(Toast.LENGTH_LONG);
 		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 10);

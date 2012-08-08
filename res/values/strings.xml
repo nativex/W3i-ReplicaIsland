@@ -369,7 +369,7 @@ Am I a monster?  I do not think so.  I am Dr. Kabochanomizu, widely respected sc
 If I am honest with myself, there is another reason the adventurers had to die.  I wanted to do it.  And I enjoyed it.</string>
 
     <!-- Misc Dialog -->
-
+    <string name="main_2_memory_001">Memory #001</string>
     <string name="KyleDeadNote">It’s Kyle.  He’s not moving.</string>
     <string name="get_free_coins">Get Free Coins</string>
     <string name="store_title">Store</string>
@@ -391,6 +391,12 @@ If I am honest with myself, there is another reason the adventurers had to die. 
     <string name="conversation_dialog_blah_blah">Blah blah blah blah blah</string>
     <string name="conversation_dialog_speaker">Wanda</string>
     <string name="toast_killing_spree_killing_spree">Killing Spree</string>
-    <string name="main_2_memory_001">Memory #001</string>
+    <string name="toast_achievement_unlocked_title">Achievement unlocked</string>
+    <string name="toast_achievement_unlocked_text">"is unlocked"</string>
+    <string name="toast_achievement_name">Achievement Name</string>
+    <string name="toast_achievement_progress_title">Achievement progress</string>
+    <string name="toast_achievement_progress_text">is XX% done</string>
+    <string name="toast_achievement_done_title">Achievement earned</string>
+    <string name="toast_achievement_done_text">You have earned</string>
 
 </resources>
