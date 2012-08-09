@@ -84,10 +84,11 @@ public class KillingSpreeDetector {
 	}
 
 	private void recordCrystals() {
-		if (PowerupManager.getCrystalsPerKill() > 0) {
+		float crystalsPerKill = PowerupManager.getCrystalsPerKill();
+		if (crystalsPerKill > 0) {
 			killsToCrystal--;
 			if (killsToCrystal <= 0) {
-				FundsManager.addCrystals(PowerupManager.getCrystalsPerKill());
+				FundsManager.addCrystals((int) (crystalsPerKill + 0.5f));
 				killsToCrystal = PowerupManager.getKillsForCrystal();
 				AchievementManager.incrementAchievementProgress(Type.BONUS_CRYSTALS, PowerupManager.getCrystalsPerKill());
 			}

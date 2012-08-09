@@ -63,7 +63,7 @@ import com.w3i.torch.achivements.AchievementListener;
 import com.w3i.torch.achivements.AchievementManager;
 import com.w3i.torch.store.FundsManager;
 import com.w3i.torch.store.KillingSpreeDetector;
-import com.w3i.torch.store.ReplicaIslandToast;
+import com.w3i.torch.views.ReplicaIslandToast;
 
 /**
  * Core activity for the game. Sets up a surface view for OpenGL, bootstraps the game engine, and manages UI events. Also manages game progression, transitioning to other activites, save game, and

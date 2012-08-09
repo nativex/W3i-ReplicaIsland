@@ -51,7 +51,6 @@ import com.w3i.torch.R;
 import com.w3i.torch.SingleTouchFilter;
 import com.w3i.torch.TouchFilter;
 import com.w3i.torch.UIConstants;
-import com.w3i.torch.achivements.Achievement;
 import com.w3i.torch.achivements.AchievementManager;
 import com.w3i.torch.publisher.OfferwallManager;
 import com.w3i.torch.skins.SkinManager;
@@ -59,7 +58,6 @@ import com.w3i.torch.store.FundsManager;
 import com.w3i.torch.store.GamesPlatformManager;
 import com.w3i.torch.store.ItemManager;
 import com.w3i.torch.store.PowerupManager;
-import com.w3i.torch.store.ReplicaIslandToast;
 import com.w3i.torch.store.SharedPreferenceManager;
 
 public class MainMenuActivity extends Activity implements W3iAdvertiser {
@@ -250,13 +248,12 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 
 		// MediaPlayer mp = MediaPlayer.create(this, R.raw.bwv_115);
 		// mp.start();
-
+		doW3iInitialization();
 	}
 
 	@Override
 	protected void onStart() {
 		super.onStart();
-		doW3iInitialization();
 	}
 
 	@Override

@@ -192,11 +192,9 @@ public class ItemManager {
 		if (purchasedItems == null) {
 			purchasedItems = new ArrayList<Item>();
 			purchasedItems.add(item);
-			AchievementManager.incrementAchievementProgress(Type.GADGETEER, 1);
 		} else {
 			if (!purchasedItems.contains(item)) {
 				purchasedItems.add(item);
-				AchievementManager.incrementAchievementProgress(Type.GADGETEER, 1);
 			}
 		}
 
@@ -214,6 +212,7 @@ public class ItemManager {
 			AchievementManager.setAchievementDone(Type.HEALTH, true);
 		}
 
+		AchievementManager.setAchievementProgress(Type.GADGETEER, purchasedItems.size());
 		return true;
 	}
 

@@ -23,9 +23,9 @@ import com.w3i.torch.achivements.Achievement;
 import com.w3i.torch.achivements.AchievementListener;
 import com.w3i.torch.achivements.AchievementManager;
 import com.w3i.torch.store.GamesPlatformManager;
-import com.w3i.torch.store.ReplicaInfoDialog;
-import com.w3i.torch.store.ReplicaIslandToast;
 import com.w3i.torch.store.StoreActivity;
+import com.w3i.torch.views.ReplicaInfoDialog;
+import com.w3i.torch.views.ReplicaIslandToast;
 
 public class ExtrasMenuActivity extends Activity {
 	private static final String DIALOG_STORE_NOT_READY_TITLE = "Warning";

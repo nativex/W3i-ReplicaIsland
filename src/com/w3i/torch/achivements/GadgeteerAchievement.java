@@ -27,7 +27,7 @@ public class GadgeteerAchievement extends ProgressAchievement {
 			setInitialized(false);
 		}
 		if (purchasedItems > 0) {
-			setProgress(itemsCount);
+			setProgress(purchasedItems);
 		}
 	}
 

@@ -1,4 +1,4 @@
-package com.w3i.torch.store;
+package com.w3i.torch.views;
 
 import android.content.Context;
 import android.graphics.Color;

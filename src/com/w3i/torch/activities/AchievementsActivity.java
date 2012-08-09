@@ -19,7 +19,7 @@ import com.w3i.torch.achivements.Achievement;
 import com.w3i.torch.achivements.AchievementListener;
 import com.w3i.torch.achivements.AchievementManager;
 import com.w3i.torch.achivements.ProgressAchievement;
-import com.w3i.torch.store.ReplicaIslandToast;
+import com.w3i.torch.views.ReplicaIslandToast;
 
 public class AchievementsActivity extends Activity {
 	private LinearLayout achvContainer;

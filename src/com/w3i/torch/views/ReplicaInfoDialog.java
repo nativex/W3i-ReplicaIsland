@@ -1,4 +1,4 @@
-package com.w3i.torch.store;
+package com.w3i.torch.views;
 
 import android.app.Dialog;
 import android.content.Context;

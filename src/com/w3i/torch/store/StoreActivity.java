@@ -34,6 +34,8 @@ import com.w3i.torch.achivements.Achievement.Type;
 import com.w3i.torch.achivements.AchievementListener;
 import com.w3i.torch.achivements.AchievementManager;
 import com.w3i.torch.store.ItemManager.Availability;
+import com.w3i.torch.views.ReplicaInfoDialog;
+import com.w3i.torch.views.ReplicaIslandToast;
 
 public class StoreActivity extends Activity {
 	private LinearLayout storeList;
