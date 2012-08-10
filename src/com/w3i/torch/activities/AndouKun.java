@@ -61,6 +61,7 @@ import com.w3i.torch.achivements.Achievement.Type;
 import com.w3i.torch.achivements.AchievementData;
 import com.w3i.torch.achivements.AchievementListener;
 import com.w3i.torch.achivements.AchievementManager;
+import com.w3i.torch.gamesplatform.SharedPreferenceManager;
 import com.w3i.torch.store.FundsManager;
 import com.w3i.torch.store.KillingSpreeDetector;
 import com.w3i.torch.views.ReplicaIslandToast;
@@ -366,7 +367,8 @@ public class AndouKun extends Activity implements SensorEventListener {
 		}
 		AchievementManager.updateFlyTime(0, false);
 		AchievementManager.updateJetpackTime(0, false);
-		AchievementManager.storeAchievements();
+		SharedPreferenceManager.storeAchievement(Type.JETPACK_TIME);
+		SharedPreferenceManager.storeAchievement(Type.FLY_TIME);
 
 	}
 

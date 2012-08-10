@@ -3,6 +3,7 @@ package com.w3i.torch.achivements;
 import android.content.SharedPreferences;
 
 import com.w3i.torch.R;
+import com.w3i.torch.gamesplatform.SharedPreferenceManager;
 
 public abstract class Achievement {
 	private Type type;
@@ -189,7 +190,7 @@ public abstract class Achievement {
 			AchievementManager.notifyAchievementDone(this);
 		}
 		if (preferencesLoaded) {
-			AchievementManager.storeAchievement(this);
+			SharedPreferenceManager.storeAchievement(this);
 		}
 	}
 

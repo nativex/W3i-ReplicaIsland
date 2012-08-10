@@ -10,7 +10,6 @@ import android.content.SharedPreferences.Editor;
 import com.google.gson.Gson;
 import com.w3i.common.Log;
 import com.w3i.gamesplatformsdk.rest.entities.Category;
-import com.w3i.gamesplatformsdk.rest.entities.Currency;
 import com.w3i.gamesplatformsdk.rest.entities.Item;
 
 public class TorchItemManager {
@@ -31,17 +30,29 @@ public class TorchItemManager {
 	public static void readCategories(
 			List<Category> categories) {
 		checkInstance();
+		TorchItemCollection tempCollection = new TorchItemCollection();
 		for (Category category : categories) {
 			for (Item item : category.getItems()) {
-				instance.itemCollection.put(item.getId(), new TorchItem(category, item));
+				TorchItem torchItem = new TorchItem(category, item);
+				TorchItem oldTorchItem = instance.itemCollection.get(item.getId());
+				if (oldTorchItem != null) {
+					torchItem.setPurchased(oldTorchItem.isPurchased());
+				}
+				tempCollection.put(item.getId(), torchItem);
 			}
 		}
+		instance.itemCollection = tempCollection;
 	}
 
 	public static void purchaseItem(
 			TorchItem item) {
 		checkInstance();
 		item.setPurchased(true);
+	}
+
+	public static void reloadPurchasedItems() {
+		checkInstance();
+		instance.itemCollection.reloadItemPowerups();
 	}
 
 	public static List<String> isItemAvailable(
@@ -73,9 +84,9 @@ public class TorchItemManager {
 			return;
 		}
 		for (Entry<Long, TorchCurrency> entry : currencies.entrySet()) {
-			Currency currency = entry.getValue().getCurrency();
-			if (TorchCurrencyManager.getBalance(entry.getKey()) < item.getItemPrice(currency)) {
-				requirementsList.add("Insufficient " + currency.getDisplayName());
+			TorchCurrency torchCurrency = entry.getValue();
+			if (TorchCurrencyManager.getBalance(entry.getKey()) < item.getItemPrice(torchCurrency.getCurrency())) {
+				requirementsList.add("Insufficient " + torchCurrency.getDisplayName());
 			}
 		}
 	}

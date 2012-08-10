@@ -52,13 +52,13 @@ import com.w3i.torch.SingleTouchFilter;
 import com.w3i.torch.TouchFilter;
 import com.w3i.torch.UIConstants;
 import com.w3i.torch.achivements.AchievementManager;
+import com.w3i.torch.gamesplatform.SharedPreferenceManager;
 import com.w3i.torch.publisher.OfferwallManager;
 import com.w3i.torch.skins.SkinManager;
 import com.w3i.torch.store.FundsManager;
 import com.w3i.torch.store.GamesPlatformManager;
 import com.w3i.torch.store.ItemManager;
 import com.w3i.torch.store.PowerupManager;
-import com.w3i.torch.store.SharedPreferenceManager;
 
 public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	private boolean mPaused;
@@ -289,7 +289,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		GamesPlatformManager.initialize(this);
 		FundsManager.loadFunds();
 		PowerupManager.loadPowerups();
-		AchievementManager.loadAchievements();
+		SharedPreferenceManager.loadAchievementManager();
 		AchievementManager.unlockAchievements();
 
 		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
@@ -321,8 +321,9 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	protected void onPause() {
 		super.onPause();
 		mPaused = true;
-		PowerupManager.storePowerups();
-		AchievementManager.storeAchievements();
+		SharedPreferenceManager.storeTorchItemManager();
+		SharedPreferenceManager.storeTorchCurrencyManager();
+		SharedPreferenceManager.storeAchievementManager();
 	}
 
 	@Override

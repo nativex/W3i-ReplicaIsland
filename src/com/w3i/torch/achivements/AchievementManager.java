@@ -5,9 +5,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import android.content.SharedPreferences;
+
 import com.w3i.common.Log;
 import com.w3i.torch.achivements.Achievement.Type;
-import com.w3i.torch.store.SharedPreferenceManager;
 
 public class AchievementManager {
 	private static AchievementManager instance = null;
@@ -240,53 +241,65 @@ public class AchievementManager {
 		}
 	}
 
-	public static void storeAchievements() {
+	public static void storeAchievements(
+			SharedPreferences preferences) {
 		if (instance != null) {
-			SharedPreferenceManager.storeAchivements();
+			for (Achievement a : instance.achievements) {
+				a.storeSharedPreferencesData(preferences.edit());
+			}
 		}
 	}
 
-	public static void loadAchievements() {
+	public static void loadAchievements(
+			SharedPreferences preferences) {
 		checkInstance();
 		instance._initializeAchievements();
-		SharedPreferenceManager.loadAchivements();
+		for (Achievement a : instance.achievements) {
+			a.loadSharedPreferencesData(preferences);
+		}
 	}
 
 	public static void loadAchievement(
-			Achievement.Type type) {
+			Achievement.Type type,
+			SharedPreferences preferences) {
 		checkInstance();
-		instance._loadAchievement(instance._getAchivement(type));
+		instance._loadAchievement(instance._getAchivement(type), preferences);
 	}
 
 	public static void loadAchievement(
-			Achievement achievement) {
+			Achievement achievement,
+			SharedPreferences preferences) {
 		checkInstance();
-		instance._loadAchievement(achievement);
+		instance._loadAchievement(achievement, preferences);
 	}
 
 	private void _loadAchievement(
-			Achievement achievement) {
+			Achievement achievement,
+			SharedPreferences preferences) {
 		if (achievement != null) {
-			SharedPreferenceManager.loadAchievement(achievement);
+			achievement.loadSharedPreferencesData(preferences);
 		}
 	}
 
 	public static void storeAchievement(
-			Achievement.Type type) {
+			Achievement.Type type,
+			SharedPreferences preferences) {
 		checkInstance();
-		instance._storeAchievement(instance._getAchivement(type));
+		instance._storeAchievement(instance._getAchivement(type), preferences);
 	}
 
 	public static void storeAchievement(
-			Achievement achievement) {
+			Achievement achievement,
+			SharedPreferences preferences) {
 		checkInstance();
-		instance._storeAchievement(achievement);
+		instance._storeAchievement(achievement, preferences);
 	}
 
 	private void _storeAchievement(
-			Achievement achievement) {
+			Achievement achievement,
+			SharedPreferences preferences) {
 		if (achievement != null) {
-			SharedPreferenceManager.storeAchievement(achievement);
+			achievement.storeSharedPreferencesData(preferences.edit());
 		}
 	}
 
