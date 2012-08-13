@@ -62,7 +62,6 @@ import com.w3i.torch.achivements.AchievementData;
 import com.w3i.torch.achivements.AchievementListener;
 import com.w3i.torch.achivements.AchievementManager;
 import com.w3i.torch.gamesplatform.SharedPreferenceManager;
-import com.w3i.torch.store.FundsManager;
 import com.w3i.torch.store.KillingSpreeDetector;
 import com.w3i.torch.views.ReplicaIslandToast;
 
@@ -793,7 +792,7 @@ public class AndouKun extends Activity implements SensorEventListener {
 
 	protected void saveGame() {
 		if (mPrefsEditor != null) {
-			FundsManager.storeFunds();
+			SharedPreferenceManager.storeTorchCurrencyManager();
 			final int completed = LevelTree.packCompletedLevels(mLevelRow);
 			mPrefsEditor.putInt(PreferenceConstants.PREFERENCE_LEVEL_ROW, mLevelRow);
 			mPrefsEditor.putInt(PreferenceConstants.PREFERENCE_LEVEL_INDEX, mLevelIndex);

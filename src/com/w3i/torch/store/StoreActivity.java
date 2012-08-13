@@ -1,21 +1,22 @@
 package com.w3i.torch.store;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.AbsListView;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
@@ -23,8 +24,6 @@ import android.widget.TextView;
 
 import com.egoclean.android.widget.flinger.ViewFlinger;
 import com.w3i.gamesplatformsdk.Log;
-import com.w3i.gamesplatformsdk.rest.entities.Category;
-import com.w3i.gamesplatformsdk.rest.entities.Currency;
 import com.w3i.gamesplatformsdk.rest.entities.Item;
 import com.w3i.offerwall.custom.views.CustomImageView;
 import com.w3i.torch.R;
@@ -33,7 +32,10 @@ import com.w3i.torch.achivements.Achievement.State;
 import com.w3i.torch.achivements.Achievement.Type;
 import com.w3i.torch.achivements.AchievementListener;
 import com.w3i.torch.achivements.AchievementManager;
-import com.w3i.torch.store.ItemManager.Availability;
+import com.w3i.torch.gamesplatform.TorchCurrency;
+import com.w3i.torch.gamesplatform.TorchCurrencyManager;
+import com.w3i.torch.gamesplatform.TorchItem;
+import com.w3i.torch.gamesplatform.TorchItemManager;
 import com.w3i.torch.views.ReplicaInfoDialog;
 import com.w3i.torch.views.ReplicaIslandToast;
 
@@ -41,11 +43,12 @@ public class StoreActivity extends Activity {
 	private LinearLayout storeList;
 	private GridView historyList;
 	private HistoryListAdapter adapter;
-	private List<CategoryBlock> categoryBlocks;
-	private List<HistoryItem> historyItems;
 	private Item selectedHistoryItem = null;
 	private ViewFlinger flinger;
 	private int historyImageSize;
+	private Map<TorchItem.PurchaseState, List<TorchItem>> items;
+
+	private Map<Long, List<TorchItem>> categories;
 
 	private AdapterView.OnItemClickListener onHistoryItemClicked = new AdapterView.OnItemClickListener() {
 
@@ -55,10 +58,10 @@ public class StoreActivity extends Activity {
 				int arg2,
 				long arg3) {
 			Object tag = arg1.getTag();
-			if (tag instanceof HistoryItem) {
-				selectedHistoryItem = ((HistoryItem) tag).getItem();
-				showDialog(DIALOG_INFO_HISTORY);
-			}
+			// if (tag instanceof HistoryItem) {
+			// selectedHistoryItem = ((HistoryItem) tag).getItem();
+			// showDialog(DIALOG_INFO_HISTORY);
+			// }
 		};
 	};
 	private View.OnClickListener onHistoryCloseClicked = new View.OnClickListener() {
@@ -185,58 +188,128 @@ public class StoreActivity extends Activity {
 	}
 
 	private void loadItems() {
-		loadStoreItems();
-		loadHistoryItems();
-	}
+		items = TorchItemManager.getAllItems();
 
-	private void loadStoreItems() {
-		List<Category> categories = ItemManager.getCategories();
-		for (Category c : categories) {
-			List<Item> availableItems = getAvailableCategoryItems(c);
-			if ((availableItems != null) && (availableItems.size() > 0)) {
-				createCategory(availableItems, c);
-			}
+		if (items != null) {
+			loadStoreItems();
+			loadHistoryItems();
 		}
-	}
-
-	private void loadHistoryItems() {
-		List<Item> items = ItemManager.getPurchasedItems();
-		if (items == null) {
-			return;
-		}
-		for (Item itemInfo : items) {
-			createHistoryItem(itemInfo);
-		}
-	}
-
-	private void createHistoryItem(
-			Item item) {
-		HistoryItem historyItem = new HistoryItem(this);
-		historyItem.setItem(item);
-		if (historyItems == null) {
-			historyItems = new ArrayList<StoreActivity.HistoryItem>();
-		}
-		historyItems.add(historyItem);
-		adapter.add(historyItem);
 	}
 
 	private void createCategory(
-			List<Item> items,
-			Category category) {
-		if (categoryBlocks == null) {
-			categoryBlocks = new ArrayList<StoreActivity.CategoryBlock>();
-		}
-		CategoryBlock block = new CategoryBlock(this);
-		block.setCategory(category);
-		block.addItems(items);
-		categoryBlocks.add(block);
+			List<TorchItem> items) {
+		if ((items != null) && (items.size() > 0)) {
+			ViewGroup categoryGroup = (ViewGroup) getLayoutInflater().inflate(R.layout.ui_store_list_category, null);
+			TextView categoryName = (TextView) categoryGroup.findViewById(R.id.uiStoreCategoryName);
+			categoryName.setText(items.get(0).getCategoryName());
+			categoryName.setOnClickListener(onCategoryClicked);
+			categoryName.setTag(categoryGroup);
+			Collections.sort(items, new Comparator<TorchItem>() {
 
-		storeList.addView(block.getCategoryBlock());
+				@Override
+				public int compare(
+						TorchItem object1,
+						TorchItem object2) {
+					if (object1.getId() < object2.getId()) {
+						return -1;
+					} else if (object1.getId() > object2.getId()) {
+						return 1;
+					}
+					return 0;
+				}
+
+			});
+			for (TorchItem item : items) {
+				categoryGroup.addView(createStoreItem(item));
+			}
+			storeList.addView(categoryGroup);
+		}
 	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
+	private void loadStoreItems() {
+		List<TorchItem> availableItems = items.get(TorchItem.PurchaseState.AVAILABLE);
+		categories = new HashMap<Long, List<TorchItem>>();
+		if (availableItems != null) {
+			for (TorchItem item : availableItems) {
+				List<TorchItem> items = categories.get(item.getCategoryId());
+				if (items == null) {
+					items = new ArrayList<TorchItem>();
+				}
+				items.add(item);
+				categories.put(item.getCategoryId(), items);
+			}
+		}
+		for (Entry<Long, List<TorchItem>> entry : categories.entrySet()) {
+			createCategory(entry.getValue());
+		}
+	}
+
+	private View createStoreItem(
+			TorchItem item) {
+
+		ViewGroup itemRow = (ViewGroup) getLayoutInflater().inflate(R.layout.ui_store_item, null);
+		CustomImageView itemIcon = (CustomImageView) itemRow.findViewById(R.id.uiStoreItemIcon);
+		TextView itemName = (TextView) itemRow.findViewById(R.id.uiStoreItemName);
+		TextView itemDescription = (TextView) itemRow.findViewById(R.id.uiStoreItemDescription);
+		TextView itemErrorMessage = (TextView) itemRow.findViewById(R.id.uiStoreItemErrorMessage);
+		ViewGroup fundsLayout = (ViewGroup) itemRow.findViewById(R.id.uiStoreItemLayoutFunds);
+
+		itemName.setText(item.getDisplayName());
+		itemIcon.setImageFromInternet(item.getIcon());
+		itemDescription.setText(item.getDescription());
+		setItemErrorMessages(item, itemErrorMessage);
+		setItemPrice(item, fundsLayout);
+		itemRow.setOnClickListener(onStoreItemClickListener);
+		itemRow.setTag(item);
+		return itemRow;
+	}
+
+	private void setItemPrice(
+			TorchItem item,
+			ViewGroup view) {
+		for (Entry<Long, TorchCurrency> entry : TorchCurrencyManager.getCurrencies().entrySet()) {
+			TorchCurrency currency = entry.getValue();
+			Double itemPrice = item.getItemPrice(currency.getCurrency());
+			addCurrencyBlock(view, currency, itemPrice);
+		}
+	}
+
+	private void addCurrencyBlock(
+			ViewGroup view,
+			TorchCurrency currency,
+			Double price) {
+		if (price == null) {
+			return;
+		}
+		ViewGroup fundsLayout = (ViewGroup) getLayoutInflater().inflate(R.layout.ui_funds_item, null);
+		CustomImageView icon = (CustomImageView) fundsLayout.findViewById(R.id.uiFundsItemImage);
+		TextView amount = (TextView) fundsLayout.findViewById(R.id.uiFundsItemAmount);
+
+		icon.setImageFromInternet(currency.getIcon());
+		amount.setText(String.format("%1$,.0f", price));
+
+		view.addView(fundsLayout);
+	}
+
+	private void setItemErrorMessages(
+			TorchItem item,
+			TextView view) {
+		List<String> errorMessages = TorchItemManager.isItemAvailable(item);
+		if ((errorMessages == null) || (errorMessages.size() == 0)) {
+			view.setVisibility(View.GONE);
+			return;
+		}
+		StringBuilder messages = new StringBuilder();
+		for (int i = 0; i < errorMessages.size() - 1; i++) {
+			messages.append(errorMessages.get(i) + "\n");
+		}
+		messages.append(errorMessages.get(errorMessages.size() - 1));
+		view.setText(messages.toString());
+		view.setVisibility(View.VISIBLE);
+	}
+
+	private void loadHistoryItems() {
+
 	}
 
 	@Override
@@ -248,29 +321,13 @@ public class StoreActivity extends Activity {
 	}
 
 	private void release() {
-		if (categoryBlocks != null) {
-			for (CategoryBlock c : categoryBlocks) {
-				c.release();
-			}
-		}
-		if (historyItems != null) {
-			for (HistoryItem item : historyItems) {
-				item.release();
-			}
-			historyItems.clear();
-		}
 		historyList.setAdapter(null);
 		adapter.release();
 	}
 
 	private void setFunds() {
 		try {
-			View fundsLayout = findViewById(R.id.storeFunds);
-			TextView pearls = (TextView) fundsLayout.findViewById(R.id.storeFundsPearlsQuantity);
-			TextView crystals = (TextView) fundsLayout.findViewById(R.id.storeFundsCrystalsQuantity);
-
-			pearls.setText(FundsManager.getPearls().toString());
-			crystals.setText(FundsManager.getCrystals().toString());
+			// TODO
 		} catch (Exception e) {
 			android.util.Log.e("ReplicaIsland", "StoreActivity: Unexpected exception caught while writing the resources.", e);
 		}
@@ -297,27 +354,68 @@ public class StoreActivity extends Activity {
 		return dialog;
 	}
 
-	private List<Item> getAvailableCategoryItems(
-			Category category) {
-		List<Item> items = category.getItems();
-		if (items == null) {
-			return null;
+	private View.OnClickListener onCategoryClicked = new View.OnClickListener() {
+
+		@Override
+		public void onClick(
+				View v) {
+			onCategoryClicked(v);
 		}
+	};
 
-		List<Item> storeItems = ItemManager.getStoreItems();
-		if (storeItems == null) {
-			return null;
-		}
-
-		List<Item> availableItems = new ArrayList<Item>();
-
-		for (Item item : items) {
-			if (storeItems.contains(item)) {
-				availableItems.add(item);
+	private void onCategoryClicked(
+			View categoryName) {
+		Object tag = categoryName.getTag();
+		if (tag instanceof ViewGroup) {
+			ViewGroup category = (ViewGroup) tag;
+			for (int i = 0; i < category.getChildCount(); i++) {
+				View child = category.getChildAt(i);
+				if (child instanceof ViewGroup) {
+					if (child.getVisibility() == View.VISIBLE) {
+						setCategoryChildGone(child);
+					} else {
+						setCategoryChildVisible(child);
+					}
+				}
 			}
 		}
+	}
 
-		return availableItems;
+	private void setCategoryChildGone(
+			final View v) {
+		if (v == null) {
+			return;
+		}
+		Animation anim = AnimationUtils.loadAnimation(this, R.anim.ui_store_activity_child_visible_animation);
+		anim.setAnimationListener(new AnimationListener() {
+
+			@Override
+			public void onAnimationStart(
+					Animation animation) {
+			}
+
+			@Override
+			public void onAnimationRepeat(
+					Animation animation) {
+			}
+
+			@Override
+			public void onAnimationEnd(
+					Animation animation) {
+				v.setVisibility(View.GONE);
+			}
+		});
+		v.startAnimation(anim);
+	}
+
+	private void setCategoryChildVisible(
+			View v) {
+		if (v == null) {
+			return;
+		}
+		Animation anim = AnimationUtils.loadAnimation(this, R.anim.ui_store_activity_child_gone_animation);
+		v.setVisibility(View.VISIBLE);
+		v.startAnimation(anim);
 	}
 
 	private View.OnClickListener onStoreItemClickListener = new View.OnClickListener() {
@@ -325,333 +423,33 @@ public class StoreActivity extends Activity {
 		public void onClick(
 				View v) {
 			Object tag = v.getTag();
-			if (tag instanceof StoreItem) {
-				purchaseItem((StoreItem) tag);
+			if (tag instanceof TorchItem) {
+				// purchaseItem((TorchItem) tag);
 			}
 		}
 	};
 
-	private void purchaseItem(
-			StoreItem storeItem) {
-		if (storeItem.canBePurchased()) {
-			Item item = storeItem.getItem();
-			FundsManager.buyItem(item);
-			ReplicaIslandToast.makeStoreToast(this, item);
-			PowerupManager.handleItem(item);
-			GamesPlatformManager.trackItemPurchase(item);
-			ItemManager.addPurchasedItem(item);
-			CategoryBlock parent = storeItem.getParent();
-			SharedPreferenceManager.storePurchasedItems();
-			AchievementManager.setAchievementState(Type.WINDOW_SHOPPER, State.FAIL);
-			storeItem.removeItemFromCategory();
-			if (parent.getItemsCount() <= 0) {
-				storeList.removeView(parent.getCategoryBlock());
-				parent.release();
-				categoryBlocks.remove(parent);
-			}
-			resetItemAvailability();
-			setFunds();
-			createHistoryItem(item);
-		}
-	}
-
-	private void resetItemAvailability() {
-		for (CategoryBlock block : categoryBlocks) {
-			block.resetItemAvailability();
-		}
-	}
-
-	public class CategoryBlock {
-		private ArrayList<StoreItem> items;
-		private TextView categoryName;
-		private Category category;
-		private boolean collapsed = true;
-		private LinearLayout categoryBlock;
-
-		private View.OnClickListener onCategoryNameClick = new View.OnClickListener() {
-
-			public void onClick(
-					View v) {
-				if (collapsed) {
-					hideItems();
-				} else {
-					showItems();
-				}
-			}
-		};
-
-		public void resetItemAvailability() {
-			for (StoreItem item : items) {
-				item.setAvailability();
-			}
-		}
-
-		public CategoryBlock(Context context) {
-			init(context);
-		}
-
-		private void init(
-				Context context) {
-			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			categoryBlock = (LinearLayout) inflater.inflate(R.layout.ui_store_list_category, null);
-
-			categoryName = (TextView) categoryBlock.findViewById(R.id.storeCategoryName);
-			categoryName.setOnClickListener(onCategoryNameClick);
-
-			items = new ArrayList<StoreActivity.StoreItem>();
-		}
-
-		public LinearLayout getCategoryBlock() {
-			return categoryBlock;
-		}
-
-		public int getItemsCount() {
-			return items.size();
-		}
-
-		public void setCategory(
-				Category category) {
-			this.category = category;
-			categoryName.setText(this.category.getDisplayName());
-
-		}
-
-		public void addItems(
-				List<Item> items) {
-			for (Item itemInfo : items) {
-				createStoreItem(itemInfo);
-			}
-		}
-
-		private void removeItem(
-				StoreItem item) {
-			categoryBlock.removeView(item.getItemLayout());
-			item.release();
-			items.remove(item);
-		}
-
-		private void createStoreItem(
-				Item item) {
-			StoreItem storeItem = new StoreItem(item);
-			ViewGroup itemLayout = storeItem.getItemLayout();
-
-			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-			itemLayout.setLayoutParams(params);
-			itemLayout.setOnClickListener(onStoreItemClickListener);
-			storeItem.setParent(this);
-
-			categoryBlock.addView(itemLayout);
-			items.add(storeItem);
-		}
-
-		public void showItems() {
-			for (StoreItem item : items) {
-				item.setVisibility(View.VISIBLE);
-			}
-			collapsed = true;
-		}
-
-		public void hideItems() {
-			for (StoreItem item : items) {
-				item.setVisibility(View.GONE);
-			}
-			collapsed = false;
-		}
-
-		public void release() {
-			for (StoreItem item : items) {
-				item.release();
-			}
-			items.clear();
-			categoryBlock.removeAllViews();
-		}
-	}
-
-	public class StoreItem {
-		private ViewGroup itemLayout;
-		private Item item;
-		private CategoryBlock parent;
-
-		private StoreItem(Item item) {
-			this.item = item;
-			init();
-			addItem(item);
-		}
-
-		public boolean canBePurchased() {
-			Availability availability = ItemManager.isAvailable(item);
-			if ((availability.isAffordable()) && (availability.isAvailable())) {
-				return true;
-			}
-			return false;
-		}
-
-		private void init() {
-			LayoutInflater inflater = (LayoutInflater) StoreActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			itemLayout = (ViewGroup) inflater.inflate(R.layout.store_item, null);
-			itemLayout.setTag(this);
-		}
-
-		public void setParent(
-				CategoryBlock parent) {
-			this.parent = parent;
-		}
-
-		public void removeItemFromCategory() {
-			parent.removeItem(this);
-		}
-
-		public CategoryBlock getParent() {
-			return parent;
-		}
-
-		public void addItem(
-				Item item) {
-
-			if (item == null) {
-				return;
-			}
-
-			if (itemLayout == null) {
-				return;
-			}
-
-			setItemIcon(item.getStoreImageUrl());
-			setItemName(item.getDisplayName());
-			setItemDescription(item.getDescription());
-			setItemPrice(item.getItemPrice(GamesPlatformManager.getCurrencies()));
-			setAvailability();
-		}
-
-		public void setAvailability() {
-			Availability itemAvailability = ItemManager.isAvailable(item);
-			setItemErrorMessage(itemAvailability.getErrorMessage());
-		}
-
-		public void setVisibility(
-				int visibility) {
-			itemLayout.setVisibility(visibility);
-		}
-
-		public void setOnClickListener(
-				View.OnClickListener listener) {
-			itemLayout.setOnClickListener(listener);
-		}
-
-		public Item getItem() {
-			return item;
-		}
-
-		public ViewGroup getItemLayout() {
-			return itemLayout;
-		}
-
-		private void setItemIcon(
-				String url) {
-			CustomImageView icon = (CustomImageView) itemLayout.findViewById(R.id.itemIcon);
-			if (icon != null) {
-				icon.setImageFromInternet(url);
-			}
-		}
-
-		private void setItemName(
-				String text) {
-			TextView name = (TextView) itemLayout.findViewById(R.id.itemName);
-			if (name != null) {
-				name.setText(text);
-			}
-		}
-
-		private void setItemErrorMessage(
-				String text) {
-			TextView error = (TextView) itemLayout.findViewById(R.id.itemErrorMessage);
-			if (error != null) {
-				if (text != null) {
-					error.setVisibility(View.VISIBLE);
-					error.setText(text);
-				} else {
-					error.setVisibility(View.GONE);
-				}
-			}
-		}
-
-		private void setItemDescription(
-				String text) {
-			TextView description = (TextView) itemLayout.findViewById(R.id.itemDescription);
-			if (description != null) {
-				description.setText(text);
-			}
-		}
-
-		private void setItemPrice(
-				Map<Currency, Double> prices) {
-			TextView pearls = (TextView) itemLayout.findViewById(R.id.fundsPearlsQuantity);
-			TextView crystals = (TextView) itemLayout.findViewById(R.id.fundsCrystalQuantity);
-
-			for (Entry<Currency, Double> entry : prices.entrySet()) {
-				if (FundsManager.PEARLS.equals(entry.getKey().getDisplayName())) {
-					if (pearls != null) {
-						pearls.setText(Integer.toString((int) (entry.getValue() + 0.5)));
-						pearls.setTextColor(DEFAULT_PRICE_PEARLS_COLOR);
-					}
-				} else if (FundsManager.CRYSTALS.equals(entry.getKey().getDisplayName())) {
-					if (crystals != null) {
-						crystals.setText(Integer.toString((int) (entry.getValue() + 0.5)));
-						crystals.setTextColor(DEFAULT_PRICE_CRYSTALS_COLOR);
-					}
-				}
-			}
-		}
-
-		public void release() {
-			CustomImageView icon = (CustomImageView) itemLayout.findViewById(R.id.itemIcon);
-			if (icon != null) {
-				icon.setImageBitmap(null);
-			}
-			setOnClickListener(null);
-		}
-	}
-
-	public class HistoryItem extends CustomImageView {
-		private Item item;
-
-		public HistoryItem(Context context, AttributeSet attrs, int defStyle) {
-			super(context, attrs, defStyle);
-			init();
-		}
-
-		public HistoryItem(Context context, AttributeSet attrs) {
-			super(context, attrs);
-			init();
-		}
-
-		public HistoryItem(Context context) {
-			super(context);
-			init();
-		}
-
-		private void init() {
-			AbsListView.LayoutParams params = new AbsListView.LayoutParams(historyImageSize, historyImageSize);
-			setPadding(5, 5, 5, 5);
-			setTag(this);
-			setLayoutParams(params);
-		}
-
-		public void setItem(
-				Item item) {
-			this.item = item;
-			setImageFromInternet(item.getStoreImageUrl());
-		}
-
-		@Override
-		public void release() {
-			setImageBitmap(null);
-		}
-
-		public Item getItem() {
-			return item;
-		}
-
-	}
+	// private void purchaseItem(
+	// StoreItem storeItem) {
+	// if (storeItem.canBePurchased()) {
+	// Item item = storeItem.getItem();
+	// FundsManager.buyItem(item);
+	// ReplicaIslandToast.makeStoreToast(this, item);
+	// PowerupManager.handleItem(item);
+	// GamesPlatformManager.trackItemPurchase(item);
+	// ItemManager.addPurchasedItem(item);
+	// CategoryBlock parent = storeItem.getParent();
+	// SharedPreferenceManager.storePurchasedItems();
+	// AchievementManager.setAchievementState(Type.WINDOW_SHOPPER, State.FAIL);
+	// storeItem.removeItemFromCategory();
+	// if (parent.getItemsCount() <= 0) {
+	// storeList.removeView(parent.getCategoryBlock());
+	// parent.release();
+	// categoryBlocks.remove(parent);
+	// }
+	// resetItemAvailability();
+	// setFunds();
+	// }
+	// }
 
 }

@@ -19,7 +19,8 @@ package com.w3i.torch;
 import com.w3i.common.Log;
 import com.w3i.torch.achivements.Achievement.Type;
 import com.w3i.torch.achivements.AchievementManager;
-import com.w3i.torch.store.FundsManager;
+import com.w3i.torch.gamesplatform.TorchCurrencyManager;
+import com.w3i.torch.gamesplatform.TorchCurrencyManager.Currencies;
 
 public class EventRecorder extends BaseObject {
 	public final static int COUNTER_ROBOTS_DESTROYED = 0;
@@ -69,12 +70,12 @@ public class EventRecorder extends BaseObject {
 			int event) {
 		switch (event) {
 		case COUNTER_ROBOTS_DESTROYED:
-			FundsManager.recordKill();
+			// TODO FundsManager.recordKill();
 			mRobotsDestroyed++;
 			Log.i("EventRecorder: Robot Killed");
 			break;
 		case COUNTER_PEARLS_COLLECTED:
-			FundsManager.addPearls(1);
+			TorchCurrencyManager.addBalance(Currencies.PEARLS, 1);
 			AchievementManager.incrementAchievementProgress(Type.PEARLS, 1);
 			mPearlsCollected++;
 			break;
@@ -83,37 +84,30 @@ public class EventRecorder extends BaseObject {
 			break;
 
 		case COUNTER_SNAILS_DESTROYED:
-			FundsManager.recordKill();
-			Log.i("EventRecorder: Snail Killed");
-			break;
+			// Log.i("EventRecorder: Snail Killed");
+			// break;
 
 		case COUNTER_SNAIL_BOMBS_DESTROYED:
-			FundsManager.recordKill();
-			Log.i("EventRecorder: Snail Bombs Killed");
-			break;
+			// Log.i("EventRecorder: Snail Bombs Killed");
+			// break;
 		case COUNTER_BATS_DESTROYED:
-			FundsManager.recordKill();
-			Log.i("EventRecorder: Bat Killed");
-			break;
+			// Log.i("EventRecorder: Bat Killed");
+			// break;
 		case COUNTER_KARAGUINS_DESTROYED:
-			FundsManager.recordKill();
-			Log.i("EventRecorder: Karaguin Killed");
-			break;
+			// Log.i("EventRecorder: Karaguin Killed");
+			// break;
 		case COUNTER_ONIONS_DESTROYED:
-			FundsManager.recordKill();
-			Log.i("EventRecorder: Onion Killed");
-			break;
+			// Log.i("EventRecorder: Onion Killed");
+			// break;
 		case COUNTER_SKELETONS_DESTROYED:
-			FundsManager.recordKill();
-			Log.i("EventRecorder: Skeleton Killed");
-			break;
+			// Log.i("EventRecorder: Skeleton Killed");
+			// break;
 		case COUNTER_EVENT_STING_DESTROYED:
-			FundsManager.recordKill();
-			Log.i("EventRecorder: Sting Killed");
-			break;
+			// Log.i("EventRecorder: Sting Killed");
+			// break;
 		case COUNTER_TURRET_DESTROYED:
-			FundsManager.recordKill();
-			Log.i("EventRecorder: Turret Killed");
+			// TODO FundsManager.recordKill();
+			// Log.i("EventRecorder: Turret Killed");
 			break;
 		}
 	}

@@ -21,7 +21,8 @@ import com.w3i.torch.GameObject.ActionType;
 import com.w3i.torch.SoundSystem.Sound;
 import com.w3i.torch.achivements.Achievement.Type;
 import com.w3i.torch.achivements.AchievementManager;
-import com.w3i.torch.store.FundsManager;
+import com.w3i.torch.gamesplatform.TorchCurrencyManager;
+import com.w3i.torch.gamesplatform.TorchCurrencyManager.Currencies;
 
 /**
  * Player Animation game object component. Responsible for selecting an animation to describe the player's current state. Requires the object to contain a SpriteComponent to play animations.
@@ -183,17 +184,17 @@ public class AnimationComponent extends GameComponent {
 					switch (rubyCount) {
 					case 1:
 						sound.play(mRubySound1, false, SoundSystem.PRIORITY_NORMAL);
-						FundsManager.addCrystals(1, true);
+						TorchCurrencyManager.addBalance(Currencies.CRYSTALS, 1);
 						AchievementManager.incrementAchievementProgress(Type.CRYSTALS, 1);
 						break;
 					case 2:
 						sound.play(mRubySound2, false, SoundSystem.PRIORITY_NORMAL);
-						FundsManager.addCrystals(1, true);
+						TorchCurrencyManager.addBalance(Currencies.CRYSTALS, 1);
 						AchievementManager.incrementAchievementProgress(Type.CRYSTALS, 1);
 						break;
 					case 3:
 						sound.play(mRubySound3, false, SoundSystem.PRIORITY_NORMAL);
-						FundsManager.addCrystals(1, true);
+						TorchCurrencyManager.addBalance(Currencies.CRYSTALS, 1);
 						AchievementManager.incrementAchievementProgress(Type.CRYSTALS, 1);
 						break;
 					}

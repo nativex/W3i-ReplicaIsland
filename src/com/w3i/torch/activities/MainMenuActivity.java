@@ -18,6 +18,7 @@ package com.w3i.torch.activities;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.Map.Entry;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -33,7 +34,7 @@ import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
@@ -43,6 +44,7 @@ import android.widget.TextView;
 import com.w3i.advertiser.W3iAdvertiser;
 import com.w3i.offerwall.W3iCurrencyListener;
 import com.w3i.offerwall.business.Balance;
+import com.w3i.offerwall.custom.views.CustomImageView;
 import com.w3i.torch.DebugLog;
 import com.w3i.torch.LevelTree;
 import com.w3i.torch.MultiTouchFilter;
@@ -51,14 +53,17 @@ import com.w3i.torch.R;
 import com.w3i.torch.SingleTouchFilter;
 import com.w3i.torch.TouchFilter;
 import com.w3i.torch.UIConstants;
+import com.w3i.torch.achivements.Achievement.State;
+import com.w3i.torch.achivements.Achievement.Type;
 import com.w3i.torch.achivements.AchievementManager;
+import com.w3i.torch.gamesplatform.GamesPlatformManager;
 import com.w3i.torch.gamesplatform.SharedPreferenceManager;
+import com.w3i.torch.gamesplatform.TorchCurrency;
+import com.w3i.torch.gamesplatform.TorchCurrencyCollection;
+import com.w3i.torch.gamesplatform.TorchCurrencyManager;
+import com.w3i.torch.gamesplatform.TorchItemManager;
 import com.w3i.torch.publisher.OfferwallManager;
 import com.w3i.torch.skins.SkinManager;
-import com.w3i.torch.store.FundsManager;
-import com.w3i.torch.store.GamesPlatformManager;
-import com.w3i.torch.store.ItemManager;
-import com.w3i.torch.store.PowerupManager;
 
 public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	private boolean mPaused;
@@ -166,13 +171,12 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 			if (balances != null && balances.size() > 0) {
 				for (Balance b : balances) {
 					try {
-						if (b.getDisplayName().equals(FundsManager.PEARLS)) {
-							FundsManager.addPearls(Integer.parseInt(b.getAmount()), true);
-						} else if (b.getDisplayName().equals(FundsManager.CRYSTALS)) {
-							FundsManager.addCrystals(Integer.parseInt(b.getAmount()), true);
+						TorchCurrency currency = TorchCurrencyManager.findCurrency(b.getDisplayName());
+						if (currency != null) {
+							TorchCurrencyManager.addBalance(currency, (int) (Double.parseDouble(b.getAmount()) + 0.5));
 						}
 					} catch (Exception e) {
-						com.w3i.common.Log.e("MainMenuActivity: Unable to read balances", e);
+						com.w3i.common.Log.e("MainMenuActivity: Unable to read balances. " + b.getDisplayName(), e);
 					}
 				}
 				setFunds();
@@ -182,14 +186,42 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 
 	private void setFunds() {
 		try {
-			TextView pearls = (TextView) findViewById(R.id.fundsPearlsQuantity);
-			TextView crystals = (TextView) findViewById(R.id.fundsCrystalQuantity);
+			TorchCurrencyCollection collection = TorchCurrencyManager.getCurrencies();
+			ViewGroup fundsLayout = (ViewGroup) findViewById(R.id.uiFundsList);
+			if (fundsLayout == null) {
+				FrameLayout mainLayout = (FrameLayout) findViewById(R.id.mainMenuLayout);
+				fundsLayout = createFundsLayout();
+				mainLayout.addView(fundsLayout);
+			}
 
-			pearls.setText(FundsManager.getPearls().toString());
-			crystals.setText(FundsManager.getCrystals().toString());
+			for (Entry<Long, TorchCurrency> entry : collection.entrySet()) {
+				int itemId = entry.getKey().intValue() * 1000;
+				View fundsItem = fundsLayout.findViewById(itemId);
+				if (fundsItem == null) {
+					fundsItem = getLayoutInflater().inflate(R.layout.ui_funds_item, null);
+					fundsItem.setId(itemId);
+					fundsLayout.addView(fundsItem);
+				}
+				CustomImageView icon = (CustomImageView) fundsItem.findViewById(R.id.uiFundsItemImage);
+				TextView amount = (TextView) fundsItem.findViewById(R.id.uiFundsItemAmount);
+				TorchCurrency currency = entry.getValue();
+				amount.setText(Integer.toString(currency.getBalance()));
+				icon.setImageFromInternet(currency.getIcon());
+			}
 		} catch (Exception e) {
 			Log.e("ReplicaIsland", "MainMenuActivity: Unexpected exception caught while writing the resources.", e);
 		}
+	}
+
+	private ViewGroup createFundsLayout() {
+		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+		params.gravity = Gravity.RIGHT;
+		params.setMargins(5, 5, 5, 5);
+
+		ViewGroup fundsLayout = (ViewGroup) getLayoutInflater().inflate(R.layout.ui_funds_list, null);
+		fundsLayout.setLayoutParams(params);
+		fundsLayout.setOnClickListener(sCoinsClicked);
+		return fundsLayout;
 	}
 
 	@Override
@@ -202,9 +234,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		mStartButton = findViewById(R.id.startButton);
 		mOptionsButton = findViewById(R.id.optionButton);
 		mBackground = findViewById(R.id.mainMenuBackground);
-		View fundsLayout = findViewById(R.id.fundsLayout);
-		fundsLayout.setOnClickListener(sCoinsClicked);
-		fundsLayout.setBackgroundResource(R.drawable.coins_frame);
 
 		if (mOptionsButton != null) {
 			mOptionsButton.setOnClickListener(sOptionButtonListener);
@@ -261,8 +290,8 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		super.onDestroy();
 		OfferwallManager.release();
 		GamesPlatformManager.release();
-		FundsManager.release();
-		ItemManager.release();
+		TorchCurrencyManager.release();
+		TorchItemManager.release();
 
 	}
 
@@ -279,30 +308,27 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		/* Initialization of W3iConnect class */
 		OfferwallManager.enableLogging(true);
 		OfferwallManager.initialize(this, this);
+		OfferwallManager.enableLogging(true);
 		OfferwallManager.appWasRun();
 		OfferwallManager.setCurrencyRedemptionListener(w3iCurrencyRedemptionCallback);
 		OfferwallManager.createSession();
-		// OfferwallManager.showFeaturedOffer(this);
+		OfferwallManager.showFeaturedOffer(this);
 
 		SharedPreferenceManager.initialize(this);
-		// com.w3i.common.Log.i("MainMenuActivity: Initialization of GamesPlatform begins");
-		GamesPlatformManager.initialize(this);
-		FundsManager.loadFunds();
-		PowerupManager.loadPowerups();
-		SharedPreferenceManager.loadAchievementManager();
-		AchievementManager.unlockAchievements();
+		GamesPlatformManager.initializeManager(this);
+		SharedPreferenceManager.loadAll();
 
-		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-		params.gravity = Gravity.BOTTOM;
-		// FrameLayout mainLayout = (FrameLayout) findViewById(R.id.mainMenuLayout);
+		if (TorchItemManager.hasItems()) {
+			AchievementManager.setAchievementState(Type.GADGETEER, State.SET_PROGRESS);
+		}
+		// AchievementManager.unlockAchievements();
+
+		// FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+		// params.gravity = Gravity.BOTTOM;
+
 		// OfferwallManager.showFeaturedOfferBanner(mainLayout, params);
 
-		// OfferwallManager.showFeaturedOffer(this);
-
 		Log.d("com.w3i.torch", "end");
-
-		FundsManager.setCrystals(30);
-		FundsManager.setPearls(10000);
 
 		View v = findViewById(R.id.mainMenuCharacter);
 		v.setOnClickListener(sPirateClicked);
@@ -321,9 +347,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	protected void onPause() {
 		super.onPause();
 		mPaused = true;
-		SharedPreferenceManager.storeTorchItemManager();
-		SharedPreferenceManager.storeTorchCurrencyManager();
-		SharedPreferenceManager.storeAchievementManager();
+		SharedPreferenceManager.storeAll();
 	}
 
 	@Override
@@ -486,21 +510,10 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		}
 
 		setFunds();
-		com.w3i.common.Log.i("PowerupManager: Life upgrade - " + PowerupManager.getLifeUpgrade());
-		com.w3i.common.Log.i("PowerupManager: Pearls per kill upgrade - " + PowerupManager.getMonsterValue());
-		com.w3i.common.Log.i("PowerupManager: Jetpack duration upgrade - " + PowerupManager.getJetpackDuration());
-		com.w3i.common.Log.i("PowerupManager: Jetpack air upgrade - " + PowerupManager.getJetpackAirRefill());
-		com.w3i.common.Log.i("PowerupManager: Jetpack ground upgrade - " + PowerupManager.getJetpackGroundRefill());
-		com.w3i.common.Log.i("PowerupManager: Shield duration upgrade - " + PowerupManager.getShieldDuration());
-		com.w3i.common.Log.i("PowerupManager: Shield energy upgrade - " + PowerupManager.getShiledPearls());
-		com.w3i.common.Log.i("PowerupManager: Garbage collector upgrade - " + PowerupManager.hasGarbageCollector());
-		com.w3i.common.Log.i("PowerupManager: Killing spree upgrade - " + PowerupManager.isKillingSpreeEnabled());
 
 		ImageView character = (ImageView) findViewById(R.id.mainMenuCharacter);
 		SkinManager.changeTitleScreenImage(character);
-		// ReplicaIslandToast.makeAchievementUnlockedToast(this, AchievementManager.getAchivement(Achievement.Type.WINDOW_SHOPPER));
-		// ReplicaIslandToast.makeAchievementProgressUpdateToast(this, AchievementManager.getAchivement(Achievement.Type.WINDOW_SHOPPER), 75);
-		// ReplicaIslandToast.makeAchievementDoneToast(this, AchievementManager.getAchivement(Achievement.Type.WINDOW_SHOPPER));
+		setFunds();
 	}
 
 	@Override
@@ -564,13 +577,11 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 
 		public void onAnimationRepeat(
 				Animation animation) {
-			// TODO Auto-generated method stub
 
 		}
 
 		public void onAnimationStart(
 				Animation animation) {
-			// TODO Auto-generated method stub
 
 		}
 

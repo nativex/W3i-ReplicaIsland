@@ -2,7 +2,6 @@ package com.w3i.torch.publisher;
 
 import android.app.Activity;
 import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
@@ -16,7 +15,8 @@ import com.w3i.offerwall.W3iClickListener;
 import com.w3i.offerwall.W3iListener;
 import com.w3i.offerwall.W3iPublisher;
 import com.w3i.offerwall.business.OfferBasic;
-import com.w3i.offerwall.manager.BannerManager;
+
+//import com.w3i.offerwall.manager.BannerManager;
 
 public class OfferwallManager {
 	private static OfferwallManager instance;
@@ -137,7 +137,7 @@ public class OfferwallManager {
 
 	public static void release() {
 		OfferwallManager manager = getInstance();
-		BannerManager.release();
+		// BannerManager.release();
 		manager.publisher.release();
 		manager.currencyListener = null;
 		manager.advertiser = null;
@@ -148,12 +148,12 @@ public class OfferwallManager {
 			ViewGroup parent,
 			LayoutParams params) {
 		OfferwallManager manager = getInstance();
-		manager.publisher.showFeaturedOfferBanner(parent, params, -1);
+		// manager.publisher.showFeaturedOfferBanner(parent, params, -1);
 	}
 
 	public static void dismissFeaturedOfferBaner() {
 		OfferwallManager manager = getInstance();
-		manager.publisher.dismissFeaturedOfferBanner();
+		// manager.publisher.dismissFeaturedOfferBanner();
 	}
 
 	public static void testBanner(
@@ -166,9 +166,9 @@ public class OfferwallManager {
 		offer.setShortConversionActionMessage("Very long convertion action message: asdasdasdasda sd asd sdas das das das das da dasdasdsadas das dasdasdasda das dasda sd asd as");
 		offer.setSmallIconUrl("http://thecustomizewindows.com/wp-content/uploads/2011/11/angry-birds-games.png");
 
-		BannerManager.createBanner(parent, params);
-		BannerManager.setBannerOffer(offer);
-		BannerManager.setBannerVisibility(View.VISIBLE);
+		// BannerManager.createBanner(parent, params);
+		// BannerManager.setBannerOffer(offer);
+		// BannerManager.setBannerVisibility(View.VISIBLE);
 
 	}
 }

@@ -4,6 +4,9 @@ import com.w3i.common.Log;
 import com.w3i.torch.achivements.Achievement.Type;
 import com.w3i.torch.achivements.AchievementConstants;
 import com.w3i.torch.achivements.AchievementManager;
+import com.w3i.torch.gamesplatform.TorchCurrencyManager;
+import com.w3i.torch.gamesplatform.TorchCurrencyManager.Currencies;
+import com.w3i.torch.powerups.PowerupTypes;
 
 public class KillingSpreeDetector {
 	public static final long KILLING_SPREE_DURATION = 1; // 1 sec
@@ -15,7 +18,7 @@ public class KillingSpreeDetector {
 	private float killingSpreeMultiplier = 1f;
 	private int monstersKilled = 0;
 	private int pearlsEarned = 0;
-	private int killsToCrystal = PowerupManager.getKillsForCrystal();
+	private int killsToCrystal = PowerupTypes.BONUS_CRYSTALS_REQUIREMENT.getValueInt();
 	private OnKillingSpreeEnd killingSpreeListener;
 	private double spreeTime = 0;
 
@@ -69,12 +72,12 @@ public class KillingSpreeDetector {
 
 	private void _recordKill() {
 		if (inSpree) {
-			killingSpreeMultiplier += PowerupManager.getKillingSpreeBonus();
+			killingSpreeMultiplier += PowerupTypes.KILLING_SPREE_MULTIPLIER.getValueFloat();
 			monstersKilled++;
-			pearlsEarned = (int) (PowerupManager.getPearlsPerKill() * killingSpreeMultiplier + 0.5f);
+			pearlsEarned = (int) (PowerupTypes.BONUS_PEARLS.getValueFloat() * killingSpreeMultiplier + 0.5f);
 			spreeTime = 0;
 		} else {
-			pearlsEarned = PowerupManager.getPearlsPerKill();
+			pearlsEarned = PowerupTypes.BONUS_PEARLS.getValueInt();
 			inSpree = true;
 			monstersKilled = 1;
 			spreeTime = 0;
@@ -84,13 +87,13 @@ public class KillingSpreeDetector {
 	}
 
 	private void recordCrystals() {
-		float crystalsPerKill = PowerupManager.getCrystalsPerKill();
+		float crystalsPerKill = PowerupTypes.BONUS_CRYSTALS.getValueFloat();
 		if (crystalsPerKill > 0) {
 			killsToCrystal--;
 			if (killsToCrystal <= 0) {
-				FundsManager.addCrystals((int) (crystalsPerKill + 0.5f));
-				killsToCrystal = PowerupManager.getKillsForCrystal();
-				AchievementManager.incrementAchievementProgress(Type.BONUS_CRYSTALS, PowerupManager.getCrystalsPerKill());
+				TorchCurrencyManager.setBalance(Currencies.CRYSTALS, PowerupTypes.BONUS_CRYSTALS.getValueInt());
+				killsToCrystal = PowerupTypes.BONUS_CRYSTALS_REQUIREMENT.getValueInt();
+				AchievementManager.incrementAchievementProgress(Type.BONUS_CRYSTALS, PowerupTypes.BONUS_CRYSTALS.getValueInt());
 			}
 		}
 	}

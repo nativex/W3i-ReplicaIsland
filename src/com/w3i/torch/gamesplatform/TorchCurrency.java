@@ -23,6 +23,13 @@ public class TorchCurrency {
 		return balance;
 	}
 
+	public Double getBalanceDouble() {
+		if (balance <= 0) {
+			return null;
+		}
+		return Double.valueOf(balance);
+	}
+
 	public void addBalance(
 			int balance) {
 		this.balance += balance;

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="top"
+    android:padding="5dip" >
+
+    <com.w3i.offerwall.custom.views.CustomImageView
+        android:id="@+id/uiStoreItemIcon"
+        android:layout_width="80dip"
+        android:layout_height="80dip"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="5dip" />
+
+    <com.w3i.torch.views.CustomFontTextView
+        android:id="@+id/uiStoreItemName"
+        style="@style/StoreItemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dip"
+        android:layout_toRightOf="@+id/uiStoreItemIcon"
+        android:text="@string/store_item_name" />
+
+    <com.w3i.torch.views.CustomFontTextView
+        android:id="@+id/uiStoreItemErrorMessage"
+        style="@style/StoreItemAlert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/uiStoreItemName"
+        android:layout_marginBottom="2dip"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
+        android:layout_toRightOf="@+id/uiStoreItemIcon"
+        android:visibility="gone" />
+
+    <com.w3i.torch.views.CustomFontTextView
+        android:id="@+id/uiStoreItemDescription"
+        style="@style/StoreItemDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/uiStoreItemErrorMessage"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
+        android:layout_toRightOf="@+id/uiStoreItemIcon"
+        android:text="@string/store_item_description" />
+
+    <com.w3i.offerwall.custom.views.AdvancedTextView
+        android:id="@+id/uiStoreItemPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/uiStoreItemDescription"
+        android:layout_marginBottom="5dip"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
+        android:text="@string/store_item_price_label"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <include
+        android:id="@+id/uiStoreItemLayoutFunds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/uiStoreItemDescription"
+        layout="@layout/ui_funds_list"
+        android:orientation="horizontal" />
+
+</RelativeLayout>

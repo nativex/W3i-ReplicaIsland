@@ -22,7 +22,8 @@ import com.w3i.torch.UIConstants;
 import com.w3i.torch.achivements.Achievement;
 import com.w3i.torch.achivements.AchievementListener;
 import com.w3i.torch.achivements.AchievementManager;
-import com.w3i.torch.store.GamesPlatformManager;
+import com.w3i.torch.gamesplatform.GamesPlatformManager;
+import com.w3i.torch.gamesplatform.TorchItemManager;
 import com.w3i.torch.store.StoreActivity;
 import com.w3i.torch.views.ReplicaInfoDialog;
 import com.w3i.torch.views.ReplicaIslandToast;
@@ -149,7 +150,8 @@ public class ExtrasMenuActivity extends Activity {
 				break;
 
 			case R.id.storeButton:
-				if (!GamesPlatformManager.isInitialized()) {
+				if (!TorchItemManager.hasItems()) {
+					GamesPlatformManager.downloadStoreTree();
 					showDialog(EXTRAS_STORE_NOT_READY_DIALOG);
 					return;
 				}

@@ -82,7 +82,7 @@ public class PlayerComponent extends GameComponent {
 	private DifficultyConstants mDifficultyConstants;
 	private final static DifficultyConstants sDifficultyArray[] = { new BabyDifficultyConstants(), new KidsDifficultyConstants(), new AdultsDifficultyConstants() };
 	private FadeDrawableComponent mInvincibleFader; // HACK!
-	private float mFuelAmout;
+	private float mFuelAmount;
 
 	// Variables recorded for animation decisions.
 	private boolean mRocketsOn;
@@ -113,7 +113,7 @@ public class PlayerComponent extends GameComponent {
 		mDifficultyConstants = getDifficultyConstants();
 		mFuelAirRefillSpeed = mDifficultyConstants.getFuelAirRefillSpeed();
 		mInvincibleFader = null;
-		mFuelAmout = FUEL_AMOUNT * mDifficultyConstants.getAdditionalFuelAmount();
+		mFuelAmount = FUEL_AMOUNT * mDifficultyConstants.getAdditionalFuelAmount();
 	}
 
 	protected void move(
@@ -125,7 +125,7 @@ public class PlayerComponent extends GameComponent {
 
 		if (pool != null && input != null) {
 
-			if (mFuel < mFuelAmout) {
+			if (mFuel < mFuelAmount) {
 				if (mTouchingGround) {
 					mFuel += mDifficultyConstants.getFuelGroundRefillSpeed() * timeDelta;
 					// Log.i("Ground refill portion " + mDifficultyConstants.getFuelGroundRefillSpeed() * timeDelta);
@@ -134,8 +134,8 @@ public class PlayerComponent extends GameComponent {
 					// Log.i("Air refill portion " + mDifficultyConstants.getFuelAirRefillSpeed() * timeDelta);
 				}
 
-				if (mFuel > mFuelAmout) {
-					mFuel = mFuelAmout;
+				if (mFuel > mFuelAmount) {
+					mFuel = mFuelAmount;
 				}
 			}
 
@@ -323,7 +323,7 @@ public class PlayerComponent extends GameComponent {
 		}
 
 		if (hud != null) {
-			hud.setFuelPercent(mFuel / mFuelAmout);
+			hud.setFuelPercent(mFuel / mFuelAmount);
 		}
 
 	}

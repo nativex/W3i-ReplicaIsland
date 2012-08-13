@@ -1,6 +1,9 @@
 package com.w3i.torch.gamesplatform;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import android.content.Context;
 
@@ -9,6 +12,9 @@ import com.w3i.gamesplatformsdk.GamesPlatformSDK;
 import com.w3i.gamesplatformsdk.rest.entities.Category;
 import com.w3i.gamesplatformsdk.rest.entities.Currency;
 import com.w3i.gamesplatformsdk.rest.entities.enums.RootCategoryType;
+import com.w3i.torch.achivements.Achievement.State;
+import com.w3i.torch.achivements.AchievementManager;
+import com.w3i.torch.achivements.Achievement.Type;
 
 public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 	public static final String REST_URL = "gp.api.w3i.com/PublicServices/GamesPlatformApiRestV1.svc";
@@ -50,26 +56,25 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 		}
 	}
 
-	// public static void trackItemPurchase(
-	// Item item) {
-	// checkInstance();
-	// if (isInitialized()) {
-	// Map<Currency, Double> userBalance = new HashMap<Currency, Double>();
-	// if (getCurrencies() != null) {
-	// List<Currency> currencies = getCurrencies();
-	// for (Currency c : currencies) {
-	// if (FundsManager.PEARLS.equals(c.getDisplayName())) {
-	// userBalance.put(c, (double) FundsManager.getPearls());
-	//
-	// } else if (FundsManager.CRYSTALS.equals(c.getDisplayName())) {
-	// userBalance.put(c, (double) FundsManager.getCrystals());
-	// }
-	// }
-	//
-	// }
-	// GamesPlatformSDK.getInstance().trackItemPurchase(item.getId(), 1L, item.getItemPrice(instance.currencies), userBalance, instance);
-	// }
-	// }
+	public static void trackItemPurchase(
+			TorchItem item) {
+		checkInstance();
+		if (isInitialized()) {
+			Map<Currency, Double> userBalance = new HashMap<Currency, Double>();
+			Map<Currency, Double> itemPrice = new HashMap<Currency, Double>();
+			TorchCurrencyCollection collection = TorchCurrencyManager.getCurrencies();
+			if (collection != null) {
+				for (Entry<Long, TorchCurrency> currencies : collection.entrySet()) {
+					TorchCurrency currency = currencies.getValue();
+					userBalance.put(currency.getCurrency(), currency.getBalanceDouble());
+					itemPrice.put(currency.getCurrency(), item.getItemPrice(currency.getCurrency()));
+				}
+
+			}
+			item.setTracked(true);
+			GamesPlatformSDK.getInstance().trackItemPurchase(item.getId(), 1L, itemPrice, userBalance, instance);
+		}
+	}
 
 	private static void checkInstance() throws IllegalStateException {
 		if (instance == null) {
@@ -83,11 +88,14 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 			Throwable exception,
 			List<Category> store) {
 		if ((success) && (store.size() > 0)) {
-			onStoreTreeCompleted();
+			onStoreTreeCompleted(store);
+			AchievementManager.setAchievementState(Type.GADGETEER, State.SET_PROGRESS);
 		}
 	}
 
-	private void onStoreTreeCompleted() {
+	private void onStoreTreeCompleted(
+			List<Category> categories) {
+		TorchItemManager.readCategories(categories);
 		itemsReceived = true;
 	}
 
@@ -98,5 +106,13 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 	public static boolean areRequestsCompleted() {
 		checkInstance();
 		return instance.itemsReceived && instance.currenciesReceived;
+	}
+
+	public static void release() {
+		if (instance == null) {
+			return;
+		}
+		GamesPlatformSDK.destroyInstance();
+		instance = null;
 	}
 }

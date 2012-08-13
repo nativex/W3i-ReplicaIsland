@@ -2,6 +2,7 @@ package com.w3i.torch.gamesplatform;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import android.content.SharedPreferences;
@@ -27,6 +28,21 @@ public class TorchItemManager {
 		}
 	}
 
+	public static List<TorchItem> getItems(
+			TorchItem.PurchaseState state) {
+		if (instance == null) {
+			return null;
+		}
+		return instance.itemCollection.getItems(state);
+	}
+
+	public static Map<TorchItem.PurchaseState, List<TorchItem>> getAllItems() {
+		if (instance == null) {
+			return null;
+		}
+		return instance.itemCollection.getAllItems();
+	}
+
 	public static void readCategories(
 			List<Category> categories) {
 		checkInstance();
@@ -48,6 +64,7 @@ public class TorchItemManager {
 			TorchItem item) {
 		checkInstance();
 		item.setPurchased(true);
+		instance.itemCollection.reloadItemPowerups();
 	}
 
 	public static void reloadPurchasedItems() {
@@ -85,7 +102,8 @@ public class TorchItemManager {
 		}
 		for (Entry<Long, TorchCurrency> entry : currencies.entrySet()) {
 			TorchCurrency torchCurrency = entry.getValue();
-			if (TorchCurrencyManager.getBalance(entry.getKey()) < item.getItemPrice(torchCurrency.getCurrency())) {
+			Double itemPrice = item.getItemPrice(torchCurrency.getCurrency());
+			if ((itemPrice != null) && (TorchCurrencyManager.getBalance(entry.getKey()) < itemPrice)) {
 				requirementsList.add("Insufficient " + torchCurrency.getDisplayName());
 			}
 		}
@@ -133,6 +151,9 @@ public class TorchItemManager {
 		} catch (Exception e) {
 			Log.e("TorchItemManager: Exception caught while loading items from preferences", e);
 		}
+		if (instance.itemCollection == null) {
+			instance.itemCollection = new TorchItemCollection();
+		}
 	}
 
 	public static String getItemIconUrl(
@@ -143,6 +164,22 @@ public class TorchItemManager {
 			return item.getIcon();
 		}
 		return null;
+	}
+
+	public static boolean hasItems() {
+		checkInstance();
+		if ((instance.itemCollection != null) && (instance.itemCollection.size() > 0)) {
+			return true;
+		}
+		return false;
+	}
+
+	public static void release() {
+		if (instance == null) {
+			return;
+		}
+		instance.itemCollection.clear();
+		instance = null;
 	}
 
 }

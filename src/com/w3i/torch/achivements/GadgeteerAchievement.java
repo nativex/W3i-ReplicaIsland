@@ -1,34 +1,22 @@
 package com.w3i.torch.achivements;
 
+import java.util.List;
+import java.util.Map;
+
+import com.w3i.torch.gamesplatform.TorchItem;
+import com.w3i.torch.gamesplatform.TorchItemManager;
+import com.w3i.torch.gamesplatform.TorchItem.PurchaseState;
+
 public class GadgeteerAchievement extends ProgressAchievement {
-	private static int itemsCount = 0;
-	private static int purchasedItems = 0;
-
-	public static void setItemsCount(
-			int itemsCount) {
-		GadgeteerAchievement.itemsCount = itemsCount;
-		AchievementManager.setAchievementState(Type.GADGETEER, State.SET_GOAL, new AchievementData<Integer>(itemsCount));
-	}
-
-	public static void setPurchasedItems(
-			int itemsCount) {
-		purchasedItems = itemsCount;
-		AchievementManager.setAchievementState(Type.GADGETEER, State.SET_PROGRESS, new AchievementData<Integer>(itemsCount));
-	}
 
 	public GadgeteerAchievement() {
-		super(itemsCount);
+		super(0);
 		setName(AchievementConstants.GADGETEER_NAME);
 		setDescription(AchievementConstants.GADGETEER_DESCRIPTION);
 		setType(Type.GADGETEER);
 		setImageDone(AchievementConstants.GADGETEER_IMAGE_EARNED);
 		setImageLocked(AchievementConstants.GADGETEER_IMAGE_LOCKED);
-		if (itemsCount == 0) {
-			setInitialized(false);
-		}
-		if (purchasedItems > 0) {
-			setProgress(purchasedItems);
-		}
+		setInitialized(false);
 	}
 
 	@Override
@@ -43,29 +31,15 @@ public class GadgeteerAchievement extends ProgressAchievement {
 	@Override
 	public void onState(
 			State state) {
-		switch (state) {
-		case INITIALIZE:
-			setInitialized(true);
-			break;
-		}
-	}
-
-	@Override
-	public <T> void onState(
-			State state,
-			AchievementData<T> data) {
+		Map<TorchItem.PurchaseState, List<TorchItem>> allItems = TorchItemManager.getAllItems();
+		List<TorchItem> purchased = allItems.get(PurchaseState.PURCHASED);
+		List<TorchItem> available = allItems.get(PurchaseState.AVAILABLE);
 
 		switch (state) {
 		case SET_PROGRESS:
-			if (data.getData() instanceof Integer) {
-				setProgress((Integer) data.getData());
-			}
-			break;
-
+			setProgress(purchased.size());
 		case SET_GOAL:
-			if (data.getData() instanceof Integer) {
-				setGoal((Integer) data.getData());
-			}
+			setGoal(purchased.size() + available.size());
 		}
 	}
 }

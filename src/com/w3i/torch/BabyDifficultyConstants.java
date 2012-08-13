@@ -16,7 +16,7 @@
 
 package com.w3i.torch;
 
-import com.w3i.torch.store.PowerupManager;
+import com.w3i.torch.powerups.PowerupTypes;
 
 public class BabyDifficultyConstants extends DifficultyConstants {
 
@@ -37,27 +37,27 @@ public class BabyDifficultyConstants extends DifficultyConstants {
 
 	@Override
 	public float getFuelAirRefillSpeed() {
-		return FUEL_AIR_REFILL_SPEED * (1 + PowerupManager.getJetpackAirRefill());
+		return FUEL_AIR_REFILL_SPEED * (1 + PowerupTypes.JETPACK_RECHARGE_AIR.getValueFloat());
 	}
 
 	@Override
 	public float getFuelGroundRefillSpeed() {
-		return FUEL_GROUND_REFILL_SPEED * (1 + PowerupManager.getJetpackGroundRefill());
+		return FUEL_GROUND_REFILL_SPEED * (1 + PowerupTypes.JETPACK_RECHARGE_GROUND.getValueFloat());
 	}
 
 	@Override
 	public int getMaxPlayerLife() {
-		return MAX_PLAYER_LIFE + PowerupManager.getLifeUpgrade();
+		return MAX_PLAYER_LIFE + PowerupTypes.LIFE_POINTS.getValueInt();
 	}
 
 	@Override
 	public int getCoinsPerPowerup() {
-		return COINS_PER_POWERUP - PowerupManager.getShiledPearls();
+		return Math.max(0, COINS_PER_POWERUP - PowerupTypes.SHIELD_REQUIREMENT_REDUCTION.getValueInt());
 	}
 
 	@Override
 	public float getGlowDuration() {
-		return GLOW_DURATION + PowerupManager.getShieldDuration();
+		return GLOW_DURATION + PowerupTypes.SHIELD_DURATION.getValueFloat();
 	}
 
 	@Override
@@ -82,17 +82,17 @@ public class BabyDifficultyConstants extends DifficultyConstants {
 
 	@Override
 	public float getDDAStage1FuelAirRefillSpeed() {
-		return DDA_STAGE_1_FUEL_AIR_REFILL_SPEED * (1 + PowerupManager.getJetpackAirRefill());
+		return DDA_STAGE_1_FUEL_AIR_REFILL_SPEED * (1 + PowerupTypes.JETPACK_RECHARGE_AIR.getValueFloat());
 	}
 
 	@Override
 	public float getDDAStage2FuelAirRefillSpeed() {
-		return DDA_STAGE_2_FUEL_AIR_REFILL_SPEED * (1 + PowerupManager.getJetpackAirRefill());
+		return DDA_STAGE_2_FUEL_AIR_REFILL_SPEED * (1 + PowerupTypes.JETPACK_RECHARGE_AIR.getValueFloat());
 	}
 
 	@Override
 	public float getAdditionalFuelAmount() {
-		return (1 + PowerupManager.getJetpackDuration());
+		return (1 + PowerupTypes.JETPACK_AIR_TIME.getValueFloat());
 	}
 
 }

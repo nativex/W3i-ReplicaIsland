@@ -91,6 +91,12 @@ public class TorchCurrencyManager {
 		torchCurrency.addBalance(balance);
 	}
 
+	public static void addBalance(
+			TorchCurrency currency,
+			int balance) {
+		currency.addBalance(balance);
+	}
+
 	public static void removeBalance(
 			Currencies currency,
 			int balance) {
@@ -184,6 +190,17 @@ public class TorchCurrencyManager {
 		} catch (Exception e) {
 			Log.e("TorchCurrencyManager: Exception caught while loading currencies from SharedPreferences", e);
 		}
+		if (instance.currencies == null) {
+			instance.currencies = new TorchCurrencyCollection();
+		}
+	}
+
+	public static TorchCurrency findCurrency(
+			String currencyName) {
+		if (instance == null) {
+			return null;
+		}
+		return instance.currencies.findCurrency(currencyName);
 	}
 
 	public static void release() {

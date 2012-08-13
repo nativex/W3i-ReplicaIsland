@@ -13,7 +13,7 @@ public class SharedPreferenceManager {
 	public static final String PREF_NAME = "TorchPreferences";
 
 	private SharedPreferenceManager(Context context) {
-		context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+		preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
 	}
 
 	public static void initialize(

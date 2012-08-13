@@ -104,11 +104,4 @@
         android:src="@drawable/ui_new"
         android:visibility="gone" />
 
-    <include
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_margin="5dp"
-        layout="@layout/coin_layout" />
-
 </FrameLayout>

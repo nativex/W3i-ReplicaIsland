@@ -17,6 +17,13 @@ public class TorchItem {
 	private boolean purchased = false;
 	private List<Long> requirements;
 	private boolean requirementsRead = false;
+	private boolean tracked = false;
+
+	public enum PurchaseState {
+		PURCHASED,
+		AVAILABLE,
+		ANY;
+	}
 
 	public TorchItem(Category itemCatrgory, Item item) {
 		gamesPlatformItem = item;
@@ -72,7 +79,7 @@ public class TorchItem {
 
 	public void readRequirements() {
 		for (Attribute attribute : gamesPlatformItem.getAttributes()) {
-			if (attribute.getDisplayName().equals(PowerupTypes.POWERUP_REQUIREMENT.getDisplayName())) {
+			if (PowerupTypes.POWERUP_REQUIREMENT.getDisplayName().equals(attribute.getName())) {
 				try {
 					long requirementId = Long.parseLong(attribute.getValue());
 					if (requirements == null) {
@@ -97,15 +104,18 @@ public class TorchItem {
 	public void updatePowerups() {
 		if (purchased) {
 			for (Attribute attribute : gamesPlatformItem.getAttributes()) {
-				String attributeName = attribute.getDisplayName();
-				if (attributeName.equals(PowerupTypes.POWERUP_REQUIREMENT.getDisplayName())) {
+				String attributeName = attribute.getName();
+				if (PowerupTypes.POWERUP_REQUIREMENT.getDisplayName().equals(attributeName)) {
 					continue;
 				}
 				for (PowerupTypes powerup : PowerupTypes.values()) {
 					if (attributeName.equals(powerup.getDisplayName())) {
 						try {
 							float attributeValue = Float.parseFloat(attribute.getValue());
-							powerup.addValue(attributeValue);
+							if (attributeValue > 0) {
+								powerup.addValue(attributeValue);
+								powerup.setEnabled(true);
+							}
 						} catch (Exception e) {
 							Log.e("TorchItem: Failed to parse attribute value. " + getDisplayName() + "->" + attributeName + "->" + attribute.getValue(), e);
 						}
@@ -113,6 +123,15 @@ public class TorchItem {
 				}
 			}
 		}
+	}
+
+	public boolean isTracked() {
+		return tracked;
+	}
+
+	public void setTracked(
+			boolean isTracked) {
+		this.tracked = isTracked;
 	}
 
 	public String getIcon() {
