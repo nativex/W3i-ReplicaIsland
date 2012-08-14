@@ -35,6 +35,13 @@
         android:contentDescription="@string/default_image_view_description"
         android:src="@drawable/ui_main_menu_torch" />
 
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_margin="5dip"
+        layout="@layout/ui_funds_list" />
+
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/mainSectionMenu"

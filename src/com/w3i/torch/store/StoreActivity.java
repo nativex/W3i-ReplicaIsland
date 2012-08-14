@@ -23,8 +23,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.egoclean.android.widget.flinger.ViewFlinger;
+import com.w3i.advertiser.NetworkConnectionManager;
 import com.w3i.gamesplatformsdk.Log;
-import com.w3i.gamesplatformsdk.rest.entities.Item;
 import com.w3i.offerwall.custom.views.CustomImageView;
 import com.w3i.torch.R;
 import com.w3i.torch.achivements.Achievement;
@@ -32,10 +32,15 @@ import com.w3i.torch.achivements.Achievement.State;
 import com.w3i.torch.achivements.Achievement.Type;
 import com.w3i.torch.achivements.AchievementListener;
 import com.w3i.torch.achivements.AchievementManager;
+import com.w3i.torch.gamesplatform.GamesPlatformManager;
+import com.w3i.torch.gamesplatform.SharedPreferenceManager;
 import com.w3i.torch.gamesplatform.TorchCurrency;
 import com.w3i.torch.gamesplatform.TorchCurrencyManager;
+import com.w3i.torch.gamesplatform.TorchCurrencyManager.Currencies;
 import com.w3i.torch.gamesplatform.TorchItem;
 import com.w3i.torch.gamesplatform.TorchItemManager;
+import com.w3i.torch.powerups.PowerupTypes;
+import com.w3i.torch.views.FundsView;
 import com.w3i.torch.views.ReplicaInfoDialog;
 import com.w3i.torch.views.ReplicaIslandToast;
 
@@ -43,9 +48,8 @@ public class StoreActivity extends Activity {
 	private LinearLayout storeList;
 	private GridView historyList;
 	private HistoryListAdapter adapter;
-	private Item selectedHistoryItem = null;
+	private TorchItem selectedHistoryItem = null;
 	private ViewFlinger flinger;
-	private int historyImageSize;
 	private Map<TorchItem.PurchaseState, List<TorchItem>> items;
 
 	private Map<Long, List<TorchItem>> categories;
@@ -54,14 +58,14 @@ public class StoreActivity extends Activity {
 
 		public void onItemClick(
 				android.widget.AdapterView<?> arg0,
-				View arg1,
+				View historyItem,
 				int arg2,
 				long arg3) {
-			Object tag = arg1.getTag();
-			// if (tag instanceof HistoryItem) {
-			// selectedHistoryItem = ((HistoryItem) tag).getItem();
-			// showDialog(DIALOG_INFO_HISTORY);
-			// }
+			Object tag = historyItem.getTag();
+			if (tag instanceof TorchItem) {
+				selectedHistoryItem = ((TorchItem) tag);
+				showDialog(DIALOG_INFO_HISTORY);
+			}
 		};
 	};
 	private View.OnClickListener onHistoryCloseClicked = new View.OnClickListener() {
@@ -153,7 +157,6 @@ public class StoreActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.store_layout);
 
-		historyImageSize = getResources().getInteger(R.integer.store_history_image_size_code);
 		flinger = (ViewFlinger) findViewById(R.id.storeFlinger);
 		View toStore = findViewById(R.id.historyToStoreImage);
 		toStore.setOnClickListener(onToStoreClicked);
@@ -171,13 +174,9 @@ public class StoreActivity extends Activity {
 		historyList.setAdapter(adapter);
 		historyList.setOnItemClickListener(onHistoryItemClicked);
 
-		TextView pearls = (TextView) findViewById(R.id.storeFundsPearlsQuantity);
-		TextView crystals = (TextView) findViewById(R.id.storeFundsCrystalsQuantity);
-		pearls.setTextColor(Color.WHITE);
-		crystals.setTextColor(Color.RED);
-
+		TorchCurrencyManager.setBalance(Currencies.PEARLS, 20000);
+		TorchCurrencyManager.setBalance(Currencies.CRYSTALS, 100);
 		loadItems();
-		setFunds();
 		AchievementManager.setAchievementState(Type.WINDOW_SHOPPER, State.START);
 	}
 
@@ -185,6 +184,13 @@ public class StoreActivity extends Activity {
 	protected void onStart() {
 		super.onStart();
 		AchievementManager.registerAchievementListener(achievementListener);
+		setFunds();
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		FundsView.releaseFunds();
 	}
 
 	private void loadItems() {
@@ -285,7 +291,11 @@ public class StoreActivity extends Activity {
 		CustomImageView icon = (CustomImageView) fundsLayout.findViewById(R.id.uiFundsItemImage);
 		TextView amount = (TextView) fundsLayout.findViewById(R.id.uiFundsItemAmount);
 
-		icon.setImageFromInternet(currency.getIcon());
+		if ((NetworkConnectionManager.getInstance(this).isConnected()) && (currency.getIcon() != null)) {
+			icon.setImageFromInternet(currency.getIcon());
+		} else {
+			icon.setImageResource(currency.getDrawableResource());
+		}
 		amount.setText(String.format("%1$,.0f", price));
 
 		view.addView(fundsLayout);
@@ -294,6 +304,12 @@ public class StoreActivity extends Activity {
 	private void setItemErrorMessages(
 			TorchItem item,
 			TextView view) {
+		if (view == null) {
+			return;
+		}
+		if (item == null) {
+			view.setVisibility(View.GONE);
+		}
 		List<String> errorMessages = TorchItemManager.isItemAvailable(item);
 		if ((errorMessages == null) || (errorMessages.size() == 0)) {
 			view.setVisibility(View.GONE);
@@ -322,12 +338,12 @@ public class StoreActivity extends Activity {
 
 	private void release() {
 		historyList.setAdapter(null);
-		adapter.release();
 	}
 
 	private void setFunds() {
 		try {
-			// TODO
+			ViewGroup fundsView = (ViewGroup) findViewById(R.id.uiFundsList);
+			FundsView.setFunds(this, fundsView);
 		} catch (Exception e) {
 			android.util.Log.e("ReplicaIsland", "StoreActivity: Unexpected exception caught while writing the resources.", e);
 		}
@@ -344,7 +360,7 @@ public class StoreActivity extends Activity {
 			}
 			ReplicaInfoDialog infoDialog = new ReplicaInfoDialog(this);
 			infoDialog.setTitle(selectedHistoryItem.getDisplayName());
-			infoDialog.setIcon(selectedHistoryItem.getStoreImageUrl());
+			infoDialog.setIcon(selectedHistoryItem.getIcon());
 			infoDialog.setDescripton(selectedHistoryItem.getDescription());
 			infoDialog.setButtonListener(onHistoryCloseClicked);
 			infoDialog.setCloseListener(onHistoryCloseClicked);
@@ -424,32 +440,69 @@ public class StoreActivity extends Activity {
 				View v) {
 			Object tag = v.getTag();
 			if (tag instanceof TorchItem) {
-				// purchaseItem((TorchItem) tag);
+				purchaseItem(v, (TorchItem) tag);
+				storeList.removeView(v);
 			}
 		}
 	};
 
-	// private void purchaseItem(
-	// StoreItem storeItem) {
-	// if (storeItem.canBePurchased()) {
-	// Item item = storeItem.getItem();
-	// FundsManager.buyItem(item);
-	// ReplicaIslandToast.makeStoreToast(this, item);
-	// PowerupManager.handleItem(item);
-	// GamesPlatformManager.trackItemPurchase(item);
-	// ItemManager.addPurchasedItem(item);
-	// CategoryBlock parent = storeItem.getParent();
-	// SharedPreferenceManager.storePurchasedItems();
-	// AchievementManager.setAchievementState(Type.WINDOW_SHOPPER, State.FAIL);
-	// storeItem.removeItemFromCategory();
-	// if (parent.getItemsCount() <= 0) {
-	// storeList.removeView(parent.getCategoryBlock());
-	// parent.release();
-	// categoryBlocks.remove(parent);
-	// }
-	// resetItemAvailability();
-	// setFunds();
-	// }
-	// }
+	private void purchaseItem(
+			View item,
+			TorchItem storeItem) {
+		if (TorchItemManager.canBePurchased(storeItem)) {
+			TorchItemManager.purchaseItem(storeItem);
+			TorchCurrencyManager.buyItem(storeItem);
+			ReplicaIslandToast.makeStoreToast(this, storeItem);
+			GamesPlatformManager.trackItemPurchase(storeItem);
+			SharedPreferenceManager.storeTorchItemManager();
+			SharedPreferenceManager.storeTorchCurrencyManager();
+			updateAcheivementsOnPurchase(storeItem);
+			resetItemAvailability(item);
+			adapter.notifyDataSetChanged();
+		}
+	}
+
+	private void updateAcheivementsOnPurchase(
+			TorchItem item) {
+		if ((PowerupTypes.LIFE_POINTS.isEnabled()) && (item.hasAttribute(PowerupTypes.LIFE_POINTS))) {
+			AchievementManager.setAchievementState(Type.HEALTH, State.UPDATE);
+		}
+		AchievementManager.setAchievementState(Type.GADGETEER, State.UPDATE);
+		AchievementManager.setAchievementState(Type.WINDOW_SHOPPER, State.FAIL);
+	}
+
+	private void resetItemAvailability(
+			View item) {
+		if (storeList != null) {
+			for (int i = 0; i < storeList.getChildCount(); i++) {
+				View child = storeList.getChildAt(i);
+				resetItemAvailabilityInCategory(item, child);
+			}
+		}
+	}
+
+	private void resetItemAvailabilityInCategory(
+			View item,
+			View category) {
+		if (category instanceof ViewGroup) {
+			ViewGroup categoryGroup = (ViewGroup) category;
+			for (int i = 0; i < categoryGroup.getChildCount(); i++) {
+				View child = categoryGroup.getChildAt(i);
+				if (child instanceof ViewGroup) {
+					if (child == item) {
+						categoryGroup.removeView(item);
+					} else {
+						TextView errorTextView = (TextView) child.findViewById(R.id.uiStoreItemErrorMessage);
+						if (errorTextView != null) {
+							setItemErrorMessages((TorchItem) child.getTag(), errorTextView);
+						}
+					}
+				}
+			}
+			if (categoryGroup.getChildCount() < 2) {
+				storeList.removeView(categoryGroup);
+			}
+		}
+	}
 
 }

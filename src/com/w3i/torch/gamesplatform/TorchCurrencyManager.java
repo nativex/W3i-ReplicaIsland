@@ -1,6 +1,7 @@
 package com.w3i.torch.gamesplatform;
 
 import java.util.List;
+import java.util.Map.Entry;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -8,25 +9,64 @@ import android.content.SharedPreferences.Editor;
 import com.google.gson.Gson;
 import com.w3i.common.Log;
 import com.w3i.gamesplatformsdk.rest.entities.Currency;
+import com.w3i.torch.R;
 
 public class TorchCurrencyManager {
 	private static TorchCurrencyManager instance;
 	public static final String PREF_KEY = "CurrencyCollection";
 
 	private TorchCurrencyCollection currencies;
+	private OnCurrencyChanged currencyChangedListener;
+
+	/**
+	 * @param currencyChangedListener
+	 *            the currencyChangedListener to set
+	 */
+	public static void setCurrencyChangedListener(
+			OnCurrencyChanged currencyChangedListener) {
+		if (instance != null) {
+			instance.currencyChangedListener = currencyChangedListener;
+		}
+	}
 
 	public enum Currencies {
-		PEARLS(25),
-		CRYSTALS(26);
+		PEARLS(25, "Pearls", R.drawable.ui_funds_pearls),
+		CRYSTALS(26, "Crystals", R.drawable.ui_funds_crystal);
 
 		private int currencyId;
+		private int iconId;
+		private String displayName;
 
-		private Currencies(int id) {
+		private Currencies(int id, String displayName, int iconId) {
 			currencyId = id;
+			this.iconId = iconId;
+			this.displayName = displayName;
 		}
 
 		public int getId() {
 			return currencyId;
+		}
+
+		public Long getIdLong() {
+			return Long.valueOf(currencyId);
+		}
+
+		public String getDisplayName() {
+			return displayName;
+		}
+
+		public int getIconId() {
+			return iconId;
+		}
+
+		public static Currencies getById(
+				int id) {
+			for (Currencies currency : values()) {
+				if (currency.getId() == id) {
+					return currency;
+				}
+			}
+			return null;
 		}
 	}
 
@@ -43,20 +83,49 @@ public class TorchCurrencyManager {
 	public static void addCurrency(
 			Currency currency) {
 		checkInstance();
-		instance._addCurrency(currency);
+		instance._addCurrency(currency, true);
 	}
 
 	private void _addCurrency(
-			Currency currency) {
-		currencies.put(currency.getId(), new TorchCurrency(currency));
+			Currency currency,
+			boolean fireListener) {
+		_addCurrency(currency, instance.currencies, fireListener);
+	}
+
+	private void _addCurrency(
+			Currency currency,
+			TorchCurrencyCollection collection,
+			boolean fireListener) {
+		TorchCurrency torchCurrency = currencies.get(currency.getId());
+		if (torchCurrency == null) {
+			torchCurrency = new TorchCurrency(currency);
+		} else {
+			torchCurrency.setCurrency(currency);
+		}
+		_setCurrencyOfflineIcon(torchCurrency);
+		collection.put(currency.getId(), torchCurrency);
+		if (fireListener) {
+			fireListener(torchCurrency);
+		}
+	}
+
+	private void _setCurrencyOfflineIcon(
+			TorchCurrency currency) {
+		Currencies currencyType = Currencies.getById(currency.getId());
+		if (currencyType != null) {
+			currency.setDrawableResource(currencyType.getIconId());
+		}
 	}
 
 	public static void setCurrencies(
 			List<Currency> currencies) {
 		checkInstance();
+		TorchCurrencyCollection collection = new TorchCurrencyCollection();
 		for (Currency currency : currencies) {
-			instance._addCurrency(currency);
+			instance._addCurrency(currency, collection, false);
 		}
+		instance.currencies = collection;
+		fireListener(null);
 	}
 
 	public static TorchCurrencyCollection getCurrencies() {
@@ -71,7 +140,7 @@ public class TorchCurrencyManager {
 	public static Currency getCurrency(
 			Currencies currencyType) {
 		checkInstance();
-		return instance.currencies.get(currencyType.getId()).getCurrency();
+		return instance.currencies.get(currencyType.getIdLong()).getCurrency();
 	}
 
 	public static Currency getCurrency(
@@ -84,45 +153,64 @@ public class TorchCurrencyManager {
 			Currencies currency,
 			int balance) {
 		checkInstance();
-		TorchCurrency torchCurrency = instance.currencies.get(currency.getId());
+		TorchCurrency torchCurrency = instance.currencies.get(currency.getIdLong());
 		if (torchCurrency == null) {
 			return;
 		}
 		torchCurrency.addBalance(balance);
+		fireListener(torchCurrency);
+	}
+
+	private static void fireListener(
+			TorchCurrency currency) {
+		if (instance.currencyChangedListener != null) {
+			instance.currencyChangedListener.currencyChanged(currency);
+		}
 	}
 
 	public static void addBalance(
 			TorchCurrency currency,
 			int balance) {
 		currency.addBalance(balance);
+		fireListener(currency);
 	}
 
 	public static void removeBalance(
 			Currencies currency,
 			int balance) {
 		checkInstance();
-		TorchCurrency torchCurrency = instance.currencies.get(currency.getId());
+		TorchCurrency torchCurrency = instance.currencies.get(currency.getIdLong());
 		if (torchCurrency == null) {
 			return;
 		}
 		torchCurrency.removeBalance(balance);
+		fireListener(torchCurrency);
+	}
+
+	public static void removeBalance(
+			TorchCurrency currency,
+			int balance) {
+		checkInstance();
+		currency.removeBalance(balance);
+		fireListener(currency);
 	}
 
 	public static void setBalance(
 			Currencies currency,
 			int balance) {
 		checkInstance();
-		TorchCurrency torchCurrency = instance.currencies.get(currency.getId());
+		TorchCurrency torchCurrency = instance.currencies.get(currency.getIdLong());
 		if (torchCurrency == null) {
 			return;
 		}
 		torchCurrency.setBalance(balance);
+		fireListener(torchCurrency);
 	}
 
 	public static int getBalance(
 			Currencies currency) {
 		checkInstance();
-		TorchCurrency torchCurrency = instance.currencies.get(currency.getId());
+		TorchCurrency torchCurrency = instance.currencies.get(currency.getIdLong());
 		if (torchCurrency == null) {
 			return 0;
 		}
@@ -138,6 +226,7 @@ public class TorchCurrencyManager {
 			return;
 		}
 		torchCurrency.addBalance(balance);
+		fireListener(torchCurrency);
 	}
 
 	public static void removeBalance(
@@ -149,6 +238,7 @@ public class TorchCurrencyManager {
 			return;
 		}
 		torchCurrency.removeBalance(balance);
+		fireListener(torchCurrency);
 	}
 
 	public static void setBalance(
@@ -160,6 +250,7 @@ public class TorchCurrencyManager {
 			return;
 		}
 		torchCurrency.setBalance(balance);
+		fireListener(torchCurrency);
 	}
 
 	public static int getBalance(
@@ -191,8 +282,28 @@ public class TorchCurrencyManager {
 			Log.e("TorchCurrencyManager: Exception caught while loading currencies from SharedPreferences", e);
 		}
 		if (instance.currencies == null) {
-			instance.currencies = new TorchCurrencyCollection();
+			instance.loadDefaultCurrencies();
 		}
+	}
+
+	private void loadDefaultCurrencies() {
+		currencies = new TorchCurrencyCollection();
+		for (Currencies currencyType : Currencies.values()) {
+			currencies.put(currencyType.getIdLong(), new TorchCurrency(currencyType.getDisplayName(), currencyType.getId(), currencyType.getIconId(), 0));
+		}
+	}
+
+	public static void buyItem(
+			TorchItem item) {
+		checkInstance();
+		for (Entry<Long, TorchCurrency> entry : instance.currencies.entrySet()) {
+			TorchCurrency currency = entry.getValue();
+			Double price = item.getItemPrice(currency.getCurrency());
+			if ((price != null) && (price > 0)) {
+				currency.removeBalance((int) (price + 0.5));
+			}
+		}
+		fireListener(null);
 	}
 
 	public static TorchCurrency findCurrency(
@@ -208,6 +319,12 @@ public class TorchCurrencyManager {
 			instance.currencies.clear();
 			instance = null;
 		}
+	}
+
+	public interface OnCurrencyChanged {
+
+		public void currencyChanged(
+				TorchCurrency currency);
 	}
 
 }

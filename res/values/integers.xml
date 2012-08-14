@@ -2,8 +2,9 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item name="store_history_image_size_code" format="integer" type="integer">96</item>
-    <item name="store_history_image_size_layout" format="dimension" type="integer">96dip</item>
+    <item name="store_history_image_size_layout" format="dimension" type="integer">100dip</item>
     <item name="toast_achievement_name_text_distance" format="dimension" type="integer">3dip</item>
     <item name="store_category_child_animation_length" format="integer" type="integer">300</item>
+    <item name="ui_funds_item_icon_size" format="dimension" type="integer">20dip</item>
 
 </resources>

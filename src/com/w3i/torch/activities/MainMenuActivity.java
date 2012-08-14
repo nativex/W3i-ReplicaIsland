@@ -18,7 +18,6 @@ package com.w3i.torch.activities;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import java.util.Map.Entry;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -39,12 +38,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.w3i.advertiser.W3iAdvertiser;
 import com.w3i.offerwall.W3iCurrencyListener;
 import com.w3i.offerwall.business.Balance;
-import com.w3i.offerwall.custom.views.CustomImageView;
 import com.w3i.torch.DebugLog;
 import com.w3i.torch.LevelTree;
 import com.w3i.torch.MultiTouchFilter;
@@ -59,11 +56,11 @@ import com.w3i.torch.achivements.AchievementManager;
 import com.w3i.torch.gamesplatform.GamesPlatformManager;
 import com.w3i.torch.gamesplatform.SharedPreferenceManager;
 import com.w3i.torch.gamesplatform.TorchCurrency;
-import com.w3i.torch.gamesplatform.TorchCurrencyCollection;
 import com.w3i.torch.gamesplatform.TorchCurrencyManager;
 import com.w3i.torch.gamesplatform.TorchItemManager;
 import com.w3i.torch.publisher.OfferwallManager;
 import com.w3i.torch.skins.SkinManager;
+import com.w3i.torch.views.FundsView;
 
 public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	private boolean mPaused;
@@ -179,49 +176,28 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 						com.w3i.common.Log.e("MainMenuActivity: Unable to read balances. " + b.getDisplayName(), e);
 					}
 				}
-				setFunds();
 			}
 		}
 	};
 
 	private void setFunds() {
-		try {
-			TorchCurrencyCollection collection = TorchCurrencyManager.getCurrencies();
-			ViewGroup fundsLayout = (ViewGroup) findViewById(R.id.uiFundsList);
-			if (fundsLayout == null) {
-				FrameLayout mainLayout = (FrameLayout) findViewById(R.id.mainMenuLayout);
-				fundsLayout = createFundsLayout();
-				mainLayout.addView(fundsLayout);
-			}
-
-			for (Entry<Long, TorchCurrency> entry : collection.entrySet()) {
-				int itemId = entry.getKey().intValue() * 1000;
-				View fundsItem = fundsLayout.findViewById(itemId);
-				if (fundsItem == null) {
-					fundsItem = getLayoutInflater().inflate(R.layout.ui_funds_item, null);
-					fundsItem.setId(itemId);
-					fundsLayout.addView(fundsItem);
-				}
-				CustomImageView icon = (CustomImageView) fundsItem.findViewById(R.id.uiFundsItemImage);
-				TextView amount = (TextView) fundsItem.findViewById(R.id.uiFundsItemAmount);
-				TorchCurrency currency = entry.getValue();
-				amount.setText(Integer.toString(currency.getBalance()));
-				icon.setImageFromInternet(currency.getIcon());
-			}
-		} catch (Exception e) {
-			Log.e("ReplicaIsland", "MainMenuActivity: Unexpected exception caught while writing the resources.", e);
+		ViewGroup fundsView = (ViewGroup) findViewById(R.id.uiFundsList);
+		if (fundsView == null) {
+			ViewGroup mainContainer = (ViewGroup) findViewById(R.id.mainMenuLayout);
+			createFundsView(mainContainer);
+		} else {
+			FundsView.setFunds(this, fundsView);
 		}
+		fundsView.setOnClickListener(sCoinsClicked);
 	}
 
-	private ViewGroup createFundsLayout() {
+	private void createFundsView(
+			ViewGroup mainContainer) {
 		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-		params.gravity = Gravity.RIGHT;
 		params.setMargins(5, 5, 5, 5);
-
-		ViewGroup fundsLayout = (ViewGroup) getLayoutInflater().inflate(R.layout.ui_funds_list, null);
-		fundsLayout.setLayoutParams(params);
-		fundsLayout.setOnClickListener(sCoinsClicked);
-		return fundsLayout;
+		params.gravity = Gravity.RIGHT;
+		ViewGroup fundsView = FundsView.setFunds(this, null);
+		mainContainer.addView(fundsView, params);
 	}
 
 	@Override
@@ -283,6 +259,16 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	@Override
 	protected void onStart() {
 		super.onStart();
+		setFunds();
+		if ((!GamesPlatformManager.areRequestsCompleted()) && (!GamesPlatformManager.areRequestExecuting())) {
+			GamesPlatformManager.downloadStoreTree();
+		}
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		FundsView.releaseFunds();
 	}
 
 	@Override
@@ -509,11 +495,8 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 			mExtrasButton.clearAnimation();
 		}
 
-		setFunds();
-
 		ImageView character = (ImageView) findViewById(R.id.mainMenuCharacter);
 		SkinManager.changeTitleScreenImage(character);
-		setFunds();
 	}
 
 	@Override

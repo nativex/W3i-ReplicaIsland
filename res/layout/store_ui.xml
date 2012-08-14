@@ -26,21 +26,14 @@
         android:background="@drawable/ui_store_title"
         android:contentDescription="@string/default_image_view_description" />
 
-    <LinearLayout
-        android:id="@+id/storeCoinsHolder"
+    <include
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="5dip"
         android:layout_toLeftOf="@+id/storeToHistoryImage"
         android:layout_toRightOf="@+id/storeTitle"
-        android:gravity="center" >
-
-        <include
-            android:id="@+id/storeFunds"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            layout="@layout/store_funds" />
-    </LinearLayout>
+        layout="@layout/ui_funds_list"
+        android:gravity="center" />
 
     <ScrollView
         android:layout_width="fill_parent"

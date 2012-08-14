@@ -1,6 +1,7 @@
 package com.w3i.torch.store;
 
 import com.w3i.common.Log;
+import com.w3i.torch.achivements.Achievement.State;
 import com.w3i.torch.achivements.Achievement.Type;
 import com.w3i.torch.achivements.AchievementConstants;
 import com.w3i.torch.achivements.AchievementManager;
@@ -45,7 +46,20 @@ public class KillingSpreeDetector {
 
 	public static void recordKill() {
 		checkInstance();
+		if (PowerupTypes.BONUS_PEARLS.isEnabled()) {
+			int pearlsAwarded = 0;
+			if (PowerupTypes.KILLING_SPREE_MULTIPLIER.isEnabled()) {
+				KillingSpreeDetector.recordKill();
+				pearlsAwarded = (int) (PowerupTypes.BONUS_PEARLS.getValueFloat() * KillingSpreeDetector.getMultiplier() + 0.5f);
+			} else {
+				pearlsAwarded = PowerupTypes.BONUS_PEARLS.getValueInt();
+			}
+			TorchCurrencyManager.addBalance(Currencies.PEARLS, pearlsAwarded);
+			AchievementManager.incrementAchievementProgress(Type.BONUS_PEARLS, pearlsAwarded);
+		}
 		instance._recordKill();
+		AchievementManager.incrementAchievementProgress(Type.KILLS, 1);
+		AchievementManager.setAchievementState(Type.MERCIFUL, State.FAIL);
 	}
 
 	public static void update(
@@ -127,4 +141,5 @@ public class KillingSpreeDetector {
 			boolean isEnabled) {
 		KillingSpreeDetector.isEnabled = isEnabled;
 	}
+
 }

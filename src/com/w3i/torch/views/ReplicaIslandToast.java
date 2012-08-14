@@ -10,10 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.w3i.gamesplatformsdk.rest.entities.Item;
 import com.w3i.offerwall.custom.views.CustomImageView;
 import com.w3i.torch.R;
 import com.w3i.torch.achivements.Achievement;
+import com.w3i.torch.gamesplatform.TorchItem;
 
 public class ReplicaIslandToast {
 
@@ -24,7 +24,7 @@ public class ReplicaIslandToast {
 
 	public static Toast makeStoreToast(
 			Context context,
-			Item item) {
+			TorchItem item) {
 		Toast toast = Toast.makeText(context, "", Toast.LENGTH_LONG);
 
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -35,7 +35,7 @@ public class ReplicaIslandToast {
 
 		toast.setDuration(Toast.LENGTH_SHORT);
 		itemName.setText(item.getDisplayName());
-		itemIcon.setImageFromInternet(item.getStoreImageUrl());
+		itemIcon.setImageFromInternet(item.getIcon());
 		toast.show();
 		return toast;
 	}

@@ -36,10 +36,10 @@ public class TorchItemCollection extends HashMap<Long, TorchItem> {
 			items = getItems();
 			break;
 		case AVAILABLE:
-			items = getItems(true);
+			items = getItems(false);
 			break;
 		case PURCHASED:
-			items = getItems(false);
+			items = getItems(true);
 			break;
 
 		}
@@ -81,5 +81,17 @@ public class TorchItemCollection extends HashMap<Long, TorchItem> {
 		allItems.put(PurchaseState.AVAILABLE, availableItems);
 		allItems.put(PurchaseState.PURCHASED, purchasedItems);
 		return allItems;
+	}
+
+	public List<TorchItem> getItemsWithAttribute(
+			PowerupTypes powerup) {
+		List<TorchItem> items = new ArrayList<TorchItem>();
+		for (Entry<Long, TorchItem> entry : entrySet()) {
+			TorchItem item = entry.getValue();
+			if (item.hasAttribute(powerup)) {
+				items.add(item);
+			}
+		}
+		return items;
 	}
 }

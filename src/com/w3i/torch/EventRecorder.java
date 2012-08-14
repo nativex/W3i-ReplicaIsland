@@ -21,6 +21,7 @@ import com.w3i.torch.achivements.Achievement.Type;
 import com.w3i.torch.achivements.AchievementManager;
 import com.w3i.torch.gamesplatform.TorchCurrencyManager;
 import com.w3i.torch.gamesplatform.TorchCurrencyManager.Currencies;
+import com.w3i.torch.store.KillingSpreeDetector;
 
 public class EventRecorder extends BaseObject {
 	public final static int COUNTER_ROBOTS_DESTROYED = 0;
@@ -70,7 +71,7 @@ public class EventRecorder extends BaseObject {
 			int event) {
 		switch (event) {
 		case COUNTER_ROBOTS_DESTROYED:
-			// TODO FundsManager.recordKill();
+			KillingSpreeDetector.recordKill();
 			mRobotsDestroyed++;
 			Log.i("EventRecorder: Robot Killed");
 			break;
@@ -106,7 +107,7 @@ public class EventRecorder extends BaseObject {
 			// Log.i("EventRecorder: Sting Killed");
 			// break;
 		case COUNTER_TURRET_DESTROYED:
-			// TODO FundsManager.recordKill();
+			KillingSpreeDetector.recordKill();
 			// Log.i("EventRecorder: Turret Killed");
 			break;
 		}

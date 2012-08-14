@@ -8,8 +8,9 @@
 
     <com.w3i.offerwall.custom.views.CustomImageView
         android:id="@+id/uiFundsItemImage"
-        android:layout_width="24dip"
-        android:layout_height="24dip" />
+        android:layout_width="@integer/ui_funds_item_icon_size"
+        android:layout_height="@integer/ui_funds_item_icon_size"
+        android:layout_marginRight="4dip" />
 
     <TextView
         android:id="@+id/uiFundsItemAmount"

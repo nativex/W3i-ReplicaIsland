@@ -27,7 +27,9 @@ public class WindowShopperAchievement extends Achievement {
 			break;
 
 		case FINISH:
-			setDone(!failed);
+			if (!isDone()) {
+				setDone(!failed);
+			}
 			break;
 
 		}

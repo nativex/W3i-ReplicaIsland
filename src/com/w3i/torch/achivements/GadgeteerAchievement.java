@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.w3i.torch.gamesplatform.TorchItem;
-import com.w3i.torch.gamesplatform.TorchItemManager;
 import com.w3i.torch.gamesplatform.TorchItem.PurchaseState;
+import com.w3i.torch.gamesplatform.TorchItemManager;
 
 public class GadgeteerAchievement extends ProgressAchievement {
 
@@ -32,14 +32,9 @@ public class GadgeteerAchievement extends ProgressAchievement {
 	public void onState(
 			State state) {
 		Map<TorchItem.PurchaseState, List<TorchItem>> allItems = TorchItemManager.getAllItems();
-		List<TorchItem> purchased = allItems.get(PurchaseState.PURCHASED);
-		List<TorchItem> available = allItems.get(PurchaseState.AVAILABLE);
-
-		switch (state) {
-		case SET_PROGRESS:
-			setProgress(purchased.size());
-		case SET_GOAL:
-			setGoal(purchased.size() + available.size());
-		}
+		int purchased = allItems.get(PurchaseState.PURCHASED).size();
+		int available = allItems.get(PurchaseState.AVAILABLE).size();
+		setProgress(purchased);
+		setGoal(purchased + available);
 	}
 }

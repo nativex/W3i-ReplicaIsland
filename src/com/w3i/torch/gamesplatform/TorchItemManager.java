@@ -12,6 +12,10 @@ import com.google.gson.Gson;
 import com.w3i.common.Log;
 import com.w3i.gamesplatformsdk.rest.entities.Category;
 import com.w3i.gamesplatformsdk.rest.entities.Item;
+import com.w3i.torch.achivements.Achievement.State;
+import com.w3i.torch.achivements.Achievement.Type;
+import com.w3i.torch.achivements.AchievementManager;
+import com.w3i.torch.powerups.PowerupTypes;
 
 public class TorchItemManager {
 	private static TorchItemManager instance;
@@ -56,6 +60,9 @@ public class TorchItemManager {
 				}
 				tempCollection.put(item.getId(), torchItem);
 			}
+		}
+		if (PowerupTypes.LIFE_POINTS.isEnabled()) {
+			AchievementManager.setAchievementState(Type.HEALTH, State.UPDATE);
 		}
 		instance.itemCollection = tempCollection;
 	}
@@ -129,6 +136,7 @@ public class TorchItemManager {
 		checkInstance();
 		TorchItem item = instance.itemCollection.get(id);
 		item.setPurchased(true);
+		instance.itemCollection.reloadItemPowerups();
 	}
 
 	public static void storeToPreferences(
@@ -153,6 +161,8 @@ public class TorchItemManager {
 		}
 		if (instance.itemCollection == null) {
 			instance.itemCollection = new TorchItemCollection();
+		} else if (PowerupTypes.LIFE_POINTS.isEnabled()) {
+			AchievementManager.setAchievementState(Type.HEALTH, State.UPDATE);
 		}
 	}
 
@@ -172,6 +182,22 @@ public class TorchItemManager {
 			return true;
 		}
 		return false;
+	}
+
+	public static boolean canBePurchased(
+			TorchItem item) {
+		checkInstance();
+		List<String> errors = isItemAvailable(item);
+		if ((errors == null) || (errors.size() == 0)) {
+			return true;
+		}
+		return false;
+	}
+
+	public static List<TorchItem> getItemsWithAttribute(
+			PowerupTypes powerupType) {
+		checkInstance();
+		return instance.itemCollection.getItemsWithAttribute(powerupType);
 	}
 
 	public static void release() {

@@ -22,4 +22,5 @@ public class TorchCurrencyCollection extends HashMap<Long, TorchCurrency> {
 		}
 		return null;
 	}
+
 }

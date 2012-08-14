@@ -13,8 +13,8 @@ import com.w3i.gamesplatformsdk.rest.entities.Category;
 import com.w3i.gamesplatformsdk.rest.entities.Currency;
 import com.w3i.gamesplatformsdk.rest.entities.enums.RootCategoryType;
 import com.w3i.torch.achivements.Achievement.State;
-import com.w3i.torch.achivements.AchievementManager;
 import com.w3i.torch.achivements.Achievement.Type;
+import com.w3i.torch.achivements.AchievementManager;
 
 public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 	public static final String REST_URL = "gp.api.w3i.com/PublicServices/GamesPlatformApiRestV1.svc";
@@ -25,6 +25,7 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 	private static GamesPlatformManager instance = null;
 	private boolean currenciesReceived = false;
 	private boolean itemsReceived = false;
+	private boolean requestsStarted = false;
 
 	private GamesPlatformManager() {
 	}
@@ -38,6 +39,7 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 
 	public static void downloadStoreTree() {
 		checkInstance();
+		instance.requestsStarted = true;
 		GamesPlatformSDK.getInstance().createSession(instance);
 		GamesPlatformSDK.getInstance().getCurrencies(instance);
 		GamesPlatformSDK.getInstance().getStore(STORE_ID, instance);
@@ -51,6 +53,7 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 		if (success) {
 			if (currencies.size() > 0) {
 				TorchCurrencyManager.setCurrencies(currencies);
+				SharedPreferenceManager.storeTorchCurrencyManager();
 			}
 			currenciesReceived = true;
 		}
@@ -66,8 +69,10 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 			if (collection != null) {
 				for (Entry<Long, TorchCurrency> currencies : collection.entrySet()) {
 					TorchCurrency currency = currencies.getValue();
-					userBalance.put(currency.getCurrency(), currency.getBalanceDouble());
-					itemPrice.put(currency.getCurrency(), item.getItemPrice(currency.getCurrency()));
+					if (currency.getCurrency() != null) {
+						userBalance.put(currency.getCurrency(), currency.getBalanceDouble());
+						itemPrice.put(currency.getCurrency(), item.getItemPrice(currency.getCurrency()));
+					}
 				}
 
 			}
@@ -91,6 +96,7 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 			onStoreTreeCompleted(store);
 			AchievementManager.setAchievementState(Type.GADGETEER, State.SET_PROGRESS);
 		}
+		requestsStarted = false;
 	}
 
 	private void onStoreTreeCompleted(
@@ -106,6 +112,11 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 	public static boolean areRequestsCompleted() {
 		checkInstance();
 		return instance.itemsReceived && instance.currenciesReceived;
+	}
+
+	public static boolean areRequestExecuting() {
+		checkInstance();
+		return instance.requestsStarted;
 	}
 
 	public static void release() {

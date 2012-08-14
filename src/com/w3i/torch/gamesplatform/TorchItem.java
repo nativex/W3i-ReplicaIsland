@@ -53,7 +53,10 @@ public class TorchItem {
 
 	public Double getItemPrice(
 			Currency currency) {
-		return gamesPlatformItem.getItemPriceForCurrency(currency);
+		if (gamesPlatformItem != null) {
+			return gamesPlatformItem.getItemPriceForCurrency(currency);
+		}
+		return null;
 	}
 
 	public Item getItem() {
@@ -132,6 +135,19 @@ public class TorchItem {
 	public void setTracked(
 			boolean isTracked) {
 		this.tracked = isTracked;
+	}
+
+	public boolean hasAttribute(
+			PowerupTypes powerup) {
+		if (gamesPlatformItem == null) {
+			return false;
+		}
+		for (Attribute attribute : gamesPlatformItem.getAttributes()) {
+			if (powerup.getDisplayName().equals(attribute.getDisplayName())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public String getIcon() {
