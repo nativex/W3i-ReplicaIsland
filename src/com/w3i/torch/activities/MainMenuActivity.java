@@ -168,7 +168,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 			if (balances != null && balances.size() > 0) {
 				for (Balance b : balances) {
 					try {
-						TorchCurrency currency = TorchCurrencyManager.findCurrency(b.getDisplayName());
+						TorchCurrency currency = TorchCurrencyManager.findCurrency(b.getExternalCurrencyId());
 						if (currency != null) {
 							TorchCurrencyManager.addBalance(currency, (int) (Double.parseDouble(b.getAmount()) + 0.5));
 						}
@@ -254,15 +254,24 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		// MediaPlayer mp = MediaPlayer.create(this, R.raw.bwv_115);
 		// mp.start();
 		doW3iInitialization();
+		doTorchInitialization();
+	}
+
+	private void doTorchInitialization() {
+		SharedPreferenceManager.initialize(this);
+		SharedPreferenceManager.loadAll();
+		GamesPlatformManager.initializeManager(this);
+
+		if (TorchItemManager.hasItems()) {
+			AchievementManager.setAchievementState(Type.GADGETEER, State.SET_PROGRESS);
+		}
 	}
 
 	@Override
 	protected void onStart() {
 		super.onStart();
 		setFunds();
-		if ((!GamesPlatformManager.areRequestsCompleted()) && (!GamesPlatformManager.areRequestExecuting())) {
-			GamesPlatformManager.downloadStoreTree();
-		}
+		GamesPlatformManager.onResume();
 	}
 
 	@Override
@@ -278,7 +287,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		GamesPlatformManager.release();
 		TorchCurrencyManager.release();
 		TorchItemManager.release();
-
+		SharedPreferenceManager.release();
 	}
 
 	/**
@@ -300,13 +309,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		OfferwallManager.createSession();
 		OfferwallManager.showFeaturedOffer(this);
 
-		SharedPreferenceManager.initialize(this);
-		GamesPlatformManager.initializeManager(this);
-		SharedPreferenceManager.loadAll();
-
-		if (TorchItemManager.hasItems()) {
-			AchievementManager.setAchievementState(Type.GADGETEER, State.SET_PROGRESS);
-		}
 		// AchievementManager.unlockAchievements();
 
 		// FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);

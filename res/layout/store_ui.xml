@@ -33,7 +33,7 @@
         android:layout_toLeftOf="@+id/storeToHistoryImage"
         android:layout_toRightOf="@+id/storeTitle"
         layout="@layout/ui_funds_list"
-        android:gravity="center" />
+        android:orientation="vertical" />
 
     <ScrollView
         android:layout_width="fill_parent"

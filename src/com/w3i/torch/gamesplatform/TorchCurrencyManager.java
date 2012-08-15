@@ -30,17 +30,19 @@ public class TorchCurrencyManager {
 	}
 
 	public enum Currencies {
-		PEARLS(25, "Pearls", R.drawable.ui_funds_pearls),
-		CRYSTALS(26, "Crystals", R.drawable.ui_funds_crystal);
+		PEARLS(25, "Pearls", "pearls", R.drawable.ui_funds_pearls),
+		CRYSTALS(26, "Crystals", "crystals", R.drawable.ui_funds_crystal);
 
 		private int currencyId;
 		private int iconId;
 		private String displayName;
+		private String alternateId;
 
-		private Currencies(int id, String displayName, int iconId) {
+		private Currencies(int id, String alternateId, String displayName, int iconId) {
 			currencyId = id;
 			this.iconId = iconId;
 			this.displayName = displayName;
+			this.alternateId = alternateId;
 		}
 
 		public int getId() {
@@ -57,6 +59,10 @@ public class TorchCurrencyManager {
 
 		public int getIconId() {
 			return iconId;
+		}
+
+		public String getAlternateId() {
+			return alternateId;
 		}
 
 		public static Currencies getById(
@@ -289,7 +295,7 @@ public class TorchCurrencyManager {
 	private void loadDefaultCurrencies() {
 		currencies = new TorchCurrencyCollection();
 		for (Currencies currencyType : Currencies.values()) {
-			currencies.put(currencyType.getIdLong(), new TorchCurrency(currencyType.getDisplayName(), currencyType.getId(), currencyType.getIconId(), 0));
+			currencies.put(currencyType.getIdLong(), new TorchCurrency(currencyType.getDisplayName(), currencyType.getId(), currencyType.getAlternateId(), currencyType.getIconId(), 0));
 		}
 	}
 

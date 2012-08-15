@@ -161,7 +161,10 @@ public class TorchItemManager {
 		}
 		if (instance.itemCollection == null) {
 			instance.itemCollection = new TorchItemCollection();
-		} else if (PowerupTypes.LIFE_POINTS.isEnabled()) {
+		} else {
+			instance.itemCollection.reloadItemPowerups();
+		}
+		if (PowerupTypes.LIFE_POINTS.isEnabled()) {
 			AchievementManager.setAchievementState(Type.HEALTH, State.UPDATE);
 		}
 	}

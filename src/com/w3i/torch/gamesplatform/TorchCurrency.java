@@ -9,6 +9,7 @@ public class TorchCurrency {
 	private int drawableResource = R.drawable.ui_funds_unknown;
 	private int id;
 	private String displayName;
+	private String alternateId;
 
 	/**
 	 * @return the drawableResource
@@ -28,6 +29,9 @@ public class TorchCurrency {
 
 	public TorchCurrency(Currency currency) {
 		setCurrency(currency);
+		this.displayName = currency.getDisplayName();
+		this.id = currency.getId().intValue();
+		this.alternateId = currency.getAlternateId();
 	}
 
 	public TorchCurrency(TorchCurrency torchCurrency, Currency currency) {
@@ -38,11 +42,12 @@ public class TorchCurrency {
 		}
 	}
 
-	public TorchCurrency(String displayName, int id, int icon, int balance) {
+	public TorchCurrency(String displayName, int id, String alternativeId, int icon, int balance) {
 		this.displayName = displayName;
 		this.id = id;
 		this.drawableResource = icon;
 		this.balance = balance;
+		this.alternateId = alternativeId;
 	}
 
 	public void setCurrency(
@@ -89,6 +94,13 @@ public class TorchCurrency {
 			return gamesPlatformCurrency.getDisplayName();
 		}
 		return displayName;
+	}
+
+	public String getAlternateId() {
+		if (gamesPlatformCurrency != null) {
+			return gamesPlatformCurrency.getAlternateId();
+		}
+		return alternateId;
 	}
 
 	public void removeBalance(

@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.egoclean.android.widget.flinger.ViewFlinger xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/storeFlinger"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:layout_gravity="center" >
 
-    <include
+    <com.egoclean.android.widget.flinger.ViewFlinger
+        android:id="@+id/storeFlinger"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        layout="@layout/store_ui" />
+        android="" >
 
-    <include
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        layout="@layout/history_ui" />
+        <include
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            layout="@layout/store_ui" />
 
-</com.egoclean.android.widget.flinger.ViewFlinger>
+        <include
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            layout="@layout/history_ui" />
+    </com.egoclean.android.widget.flinger.ViewFlinger>
+
+</LinearLayout>

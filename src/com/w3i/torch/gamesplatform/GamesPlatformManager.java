@@ -25,7 +25,7 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 	private static GamesPlatformManager instance = null;
 	private boolean currenciesReceived = false;
 	private boolean itemsReceived = false;
-	private boolean requestsStarted = false;
+	private boolean requestsRunning = false;
 
 	private GamesPlatformManager() {
 	}
@@ -39,10 +39,19 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 
 	public static void downloadStoreTree() {
 		checkInstance();
-		instance.requestsStarted = true;
+		instance.requestsRunning = true;
 		GamesPlatformSDK.getInstance().createSession(instance);
 		GamesPlatformSDK.getInstance().getCurrencies(instance);
 		GamesPlatformSDK.getInstance().getStore(STORE_ID, instance);
+	}
+
+	public static void onResume() {
+		checkInstance();
+		if ((!instance.currenciesReceived) || (!instance.itemsReceived)) {
+			if (!instance.requestsRunning) {
+				downloadStoreTree();
+			}
+		}
 	}
 
 	@Override
@@ -96,7 +105,7 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 			onStoreTreeCompleted(store);
 			AchievementManager.setAchievementState(Type.GADGETEER, State.SET_PROGRESS);
 		}
-		requestsStarted = false;
+		requestsRunning = false;
 	}
 
 	private void onStoreTreeCompleted(
@@ -116,7 +125,7 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 
 	public static boolean areRequestExecuting() {
 		checkInstance();
-		return instance.requestsStarted;
+		return instance.requestsRunning;
 	}
 
 	public static void release() {

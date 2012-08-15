@@ -95,4 +95,9 @@ public class SharedPreferenceManager {
 		AchievementManager.storeAchievements(instance.preferences);
 	}
 
+	public static void release() {
+		instance.preferences = null;
+		instance = null;
+	}
+
 }

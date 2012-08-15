@@ -230,6 +230,7 @@ public class ExtrasMenuActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		AchievementManager.registerAchievementListener(achievementListener);
+		GamesPlatformManager.onResume();
 	}
 
 	@Override

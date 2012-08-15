@@ -16,7 +16,7 @@ public class TorchCurrencyCollection extends HashMap<Long, TorchCurrency> {
 		}
 		for (Entry<Long, TorchCurrency> entry : entrySet()) {
 			TorchCurrency currency = entry.getValue();
-			if (name.equals(currency.getDisplayName())) {
+			if (name.equals(currency.getAlternateId())) {
 				return currency;
 			}
 		}

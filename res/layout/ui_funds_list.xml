@@ -3,7 +3,6 @@
     android:id="@+id/uiFundsList"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:minWidth="100dip"
-    android:orientation="vertical" >
+    android:minWidth="100dip" >
 
 </LinearLayout>
