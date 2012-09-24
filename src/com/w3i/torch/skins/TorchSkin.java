@@ -40,6 +40,8 @@ public class TorchSkin extends Skin {
 		deathAnimationFrames[15] = R.drawable.skin_player_torch_explode_12;
 
 		setAnimationFrames(PlayerAnimations.DEATH, deathAnimationFrames);
+
+		setAnimationFrames(PlayerAnimations.DEAD, R.drawable.skin_player_torch_explode_12);
 	}
 
 	private void setMovementAnimations() {
@@ -65,7 +67,7 @@ public class TorchSkin extends Skin {
 		setAnimationFrames(PlayerAnimations.MOVE_AIR, R.drawable.skin_player_torch_move_01, R.drawable.skin_player_torch_move_01);
 
 		// FALL
-		setAnimationFrames(PlayerAnimations.FALL, R.drawable.skin_player_torch_air_fall_01, R.drawable.skin_player_torch_air_fall_02);
+		setAnimationFrames(PlayerAnimations.FALL, R.drawable.skin_player_torch_fly_move_01, R.drawable.skin_player_torch_fly_move_01);
 	}
 
 	private void setActionAnimations() {

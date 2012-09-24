@@ -304,6 +304,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		// android.os.Build.SERIAL);
 		Log.d("com.w3i.torch", "mac address: " + ((android.net.wifi.WifiManager) this.getApplicationContext().getSystemService(Context.WIFI_SERVICE)).getConnectionInfo().getMacAddress());
 		/* Initialization of W3iConnect class */
+
 		PublisherManager.enableLogging(true);
 		AdvertiserManager.initialize(this);
 		AdvertiserManager.appWasRun(PublisherConstants.appId);
@@ -312,6 +313,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		PublisherManager.setCurrencyListener(w3iCurrencyRedemptionCallback);
 		PublisherManager.createSession();
 		PublisherManager.showFeaturedOfferDialog(this);
+		com.w3i.common.Log.d("Publisher initialization done");
 
 		// AchievementManager.unlockAchievements();
 

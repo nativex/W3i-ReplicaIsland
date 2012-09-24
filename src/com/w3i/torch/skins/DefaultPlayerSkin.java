@@ -76,6 +76,9 @@ public class DefaultPlayerSkin extends Skin {
 		// frozen
 		setAnimationFrames(PlayerAnimations.FROZEN, new int[0]);
 
+		// dead
+		setAnimationFrames(PlayerAnimations.DEAD, R.drawable.andou_explode12);
+
 		setTitleImage(R.drawable.andou_stand);
 		setSkinType(SkinType.PLAYER);
 		setImage(R.drawable.andou_stand);

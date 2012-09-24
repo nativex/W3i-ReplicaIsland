@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="4dip"
     android:gravity="center_vertical"
     android:orientation="horizontal" >
 
@@ -10,7 +9,7 @@
         android:id="@+id/uiFundsItemImage"
         android:layout_width="@integer/ui_funds_item_icon_size"
         android:layout_height="@integer/ui_funds_item_icon_size"
-        android:layout_marginRight="4dip" />
+        android:layout_marginRight="1dip" />
 
     <TextView
         android:id="@+id/uiFundsItemAmount"

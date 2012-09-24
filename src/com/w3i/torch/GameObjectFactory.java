@@ -2668,12 +2668,16 @@ public class GameObjectFactory extends BaseObject {
 			final int staticObjectCount = 1;
 			staticData = new FixedSizeArray<BaseObject>(staticObjectCount);
 
-			SpriteAnimation idle = new SpriteAnimation(0, 1);
-			AnimationFrame frame1 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_explode12), Utils.framesToTime(24, 1), null, null);
+			// SpriteAnimation idle = new SpriteAnimation(0, 1);
+			// AnimationFrame frame1 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_explode12), Utils.framesToTime(24, 1), null, null);
 
-			idle.addFrame(frame1);
+			// idle.addFrame(frame1);
 
-			idle.setLoop(true);
+			// idle.setLoop(true);
+			Skin selectedSkin = SkinManager.getSelectedSkin();
+			selectedSkin.setTextureLibrary(textureLibrary);
+
+			SpriteAnimation idle = selectedSkin.getSpriteAnimation(PlayerAnimations.DEAD, Utils.framesToTime(24, 1), null, null, true);
 
 			staticData.add(idle);
 

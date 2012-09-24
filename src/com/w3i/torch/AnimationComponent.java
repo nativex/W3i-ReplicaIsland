@@ -30,6 +30,7 @@ import com.w3i.torch.gamesplatform.TorchCurrencyManager.Currencies;
 public class AnimationComponent extends GameComponent {
 
 	public enum PlayerAnimations {
+		DEAD,
 		IDLE,
 		MOVE,
 		MOVE_FAST,

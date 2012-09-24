@@ -5,11 +5,15 @@ import java.util.Map.Entry;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.w3i.advertiser.NetworkConnectionManager;
+import com.w3i.offerwall.PublisherManager;
 import com.w3i.offerwall.custom.views.CustomImageView;
 import com.w3i.torch.R;
 import com.w3i.torch.gamesplatform.TorchCurrency;
@@ -42,6 +46,14 @@ public class FundsView {
 			}
 			TorchCurrencyManager.setCurrencyChangedListener(listener);
 			FundsView.fundsView = fundsView;
+			FundsView.fundsView.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(
+						View v) {
+					PublisherManager.showWebOfferwall();
+				}
+			});
 			setFunds();
 		} catch (Exception e) {
 			Log.e("ReplicaIsland", "FundsView: Unexpected exception caught while displaying the resources.", e);
@@ -86,6 +98,10 @@ public class FundsView {
 			int itemId) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		ViewGroup fundsItem = (ViewGroup) inflater.inflate(R.layout.ui_funds_item, null);
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+		params.setMargins(4, 4, 10, 4);
+		params.gravity = Gravity.CENTER_VERTICAL;
+		fundsItem.setLayoutParams(params);
 		fundsItem.setId(itemId);
 		return fundsItem;
 	}
