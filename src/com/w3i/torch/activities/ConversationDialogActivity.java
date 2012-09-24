@@ -34,6 +34,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.w3i.offerwall.PublisherManager;
 import com.w3i.torch.ConversationUtils;
 import com.w3i.torch.ConversationUtils.Conversation;
 import com.w3i.torch.ConversationUtils.ConversationPage;
@@ -301,6 +302,18 @@ public class ConversationDialogActivity extends Activity {
 			}
 			super.onDraw(canvas);
 		}
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		PublisherManager.createSession();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		PublisherManager.endSession();
 	}
 
 }

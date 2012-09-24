@@ -29,6 +29,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.w3i.offerwall.PublisherManager;
 import com.w3i.torch.DebugLog;
 import com.w3i.torch.PreferenceConstants;
 import com.w3i.torch.R;
@@ -180,4 +181,15 @@ public class GameOverActivity extends Activity {
 
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		PublisherManager.createSession();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		PublisherManager.endSession();
+	}
 }

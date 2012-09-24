@@ -23,6 +23,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.widget.Toast;
 
+import com.w3i.offerwall.PublisherManager;
 import com.w3i.torch.KeyboardConfigDialogPreference;
 import com.w3i.torch.PreferenceConstants;
 import com.w3i.torch.R;
@@ -79,5 +80,17 @@ public class SetPreferencesActivity extends PreferenceActivity implements YesNoD
 			editor.commit();
 			Toast.makeText(this, R.string.saved_game_erased_notification, Toast.LENGTH_SHORT).show();
 		}
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		PublisherManager.createSession();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		PublisherManager.endSession();
 	}
 }

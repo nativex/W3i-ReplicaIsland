@@ -121,6 +121,7 @@
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
+        <activity android:name="com.w3i.offerwall.ui.WebOfferwallActivity"></activity>
     </application>
 
 </manifest>

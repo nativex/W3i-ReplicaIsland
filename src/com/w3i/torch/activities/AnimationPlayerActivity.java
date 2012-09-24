@@ -32,6 +32,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
+import com.w3i.offerwall.PublisherManager;
 import com.w3i.torch.DebugLog;
 import com.w3i.torch.R;
 import com.w3i.torch.UIConstants;
@@ -153,6 +154,18 @@ public class AnimationPlayerActivity extends Activity {
 		// Pass the calling intent back so that we can figure out which animation just played.
 		setResult(RESULT_OK, callingIntent);
 
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		PublisherManager.createSession();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		PublisherManager.endSession();
 	}
 
 	@Override

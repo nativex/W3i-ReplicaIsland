@@ -39,7 +39,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.w3i.advertiser.AdvertiserManager;
 import com.w3i.advertiser.W3iAdvertiser;
+import com.w3i.offerwall.PublisherManager;
 import com.w3i.offerwall.W3iCurrencyListener;
 import com.w3i.offerwall.business.Balance;
 import com.w3i.torch.DebugLog;
@@ -58,7 +60,7 @@ import com.w3i.torch.gamesplatform.SharedPreferenceManager;
 import com.w3i.torch.gamesplatform.TorchCurrency;
 import com.w3i.torch.gamesplatform.TorchCurrencyManager;
 import com.w3i.torch.gamesplatform.TorchItemManager;
-import com.w3i.torch.publisher.OfferwallManager;
+import com.w3i.torch.publisher.PublisherConstants;
 import com.w3i.torch.skins.SkinManager;
 import com.w3i.torch.views.FundsView;
 
@@ -111,7 +113,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 
 		public void onClick(
 				View v) {
-			OfferwallManager.showOfferwall();
+			PublisherManager.showWebOfferwall();
 		}
 	};
 
@@ -283,7 +285,8 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		OfferwallManager.release();
+		AdvertiserManager.release();
+		PublisherManager.release();
 		GamesPlatformManager.release();
 		TorchCurrencyManager.release();
 		TorchItemManager.release();
@@ -301,13 +304,14 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		// android.os.Build.SERIAL);
 		Log.d("com.w3i.torch", "mac address: " + ((android.net.wifi.WifiManager) this.getApplicationContext().getSystemService(Context.WIFI_SERVICE)).getConnectionInfo().getMacAddress());
 		/* Initialization of W3iConnect class */
-		OfferwallManager.enableLogging(true);
-		OfferwallManager.initialize(this, this);
-		OfferwallManager.enableLogging(true);
-		OfferwallManager.appWasRun();
-		OfferwallManager.setCurrencyRedemptionListener(w3iCurrencyRedemptionCallback);
-		OfferwallManager.createSession();
-		OfferwallManager.showFeaturedOffer(this);
+		PublisherManager.enableLogging(true);
+		AdvertiserManager.initialize(this);
+		AdvertiserManager.appWasRun(PublisherConstants.appId);
+
+		PublisherManager.initialize(this, PublisherConstants.applicationName, PublisherConstants.appId, PublisherConstants.publisherUserId, PublisherConstants.packageName);
+		PublisherManager.setCurrencyListener(w3iCurrencyRedemptionCallback);
+		PublisherManager.createSession();
+		PublisherManager.showFeaturedOfferDialog(this);
 
 		// AchievementManager.unlockAchievements();
 
@@ -335,6 +339,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	protected void onPause() {
 		super.onPause();
 		mPaused = true;
+		PublisherManager.endSession();
 		SharedPreferenceManager.storeAll();
 	}
 
@@ -343,7 +348,8 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		super.onResume();
 		mPaused = false;
 		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
-		OfferwallManager.redeemCurrency(this);
+		PublisherManager.createSession();
+		PublisherManager.redeemCurrency(this);
 
 		mButtonFlickerAnimation.setAnimationListener(null);
 
@@ -505,9 +511,11 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	protected Dialog onCreateDialog(
 			int id) {
 		Dialog dialog;
-		if (id == WHATS_NEW_DIALOG) {
-			dialog = new AlertDialog.Builder(this).setTitle(R.string.whats_new_dialog_title).setPositiveButton(R.string.whats_new_dialog_ok, null).setMessage(R.string.whats_new_dialog_message).create();
-		} else if (id == TILT_TO_SCREEN_CONTROLS_DIALOG) {
+		// if (id == WHATS_NEW_DIALOG) {
+		// dialog = new AlertDialog.Builder(this).setTitle(R.string.whats_new_dialog_title).setPositiveButton(R.string.whats_new_dialog_ok,
+		// null).setMessage(R.string.whats_new_dialog_message).create();
+		// } else
+		if (id == TILT_TO_SCREEN_CONTROLS_DIALOG) {
 			dialog = new AlertDialog.Builder(this).setTitle(R.string.onscreen_tilt_dialog_title).setPositiveButton(R.string.onscreen_tilt_dialog_ok, new DialogInterface.OnClickListener() {
 				public void onClick(
 						DialogInterface dialog,

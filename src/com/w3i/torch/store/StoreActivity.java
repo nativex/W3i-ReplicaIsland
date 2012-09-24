@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.egoclean.android.widget.flinger.ViewFlinger;
 import com.w3i.advertiser.NetworkConnectionManager;
 import com.w3i.gamesplatformsdk.Log;
+import com.w3i.offerwall.PublisherManager;
 import com.w3i.offerwall.custom.views.CustomImageView;
 import com.w3i.torch.R;
 import com.w3i.torch.achivements.Achievement;
@@ -36,7 +37,6 @@ import com.w3i.torch.gamesplatform.GamesPlatformManager;
 import com.w3i.torch.gamesplatform.SharedPreferenceManager;
 import com.w3i.torch.gamesplatform.TorchCurrency;
 import com.w3i.torch.gamesplatform.TorchCurrencyManager;
-import com.w3i.torch.gamesplatform.TorchCurrencyManager.Currencies;
 import com.w3i.torch.gamesplatform.TorchItem;
 import com.w3i.torch.gamesplatform.TorchItemManager;
 import com.w3i.torch.powerups.PowerupTypes;
@@ -150,6 +150,7 @@ public class StoreActivity extends Activity {
 	public static final String FONT_ITEM_NAME = "BEATSVIL.TTF";
 
 	private static final int DIALOG_INFO_HISTORY = 233;
+	private static final int DIALOG_INSUFFICIEN_CURRENCY = 4324;
 
 	@Override
 	protected void onCreate(
@@ -174,8 +175,8 @@ public class StoreActivity extends Activity {
 		historyList.setAdapter(adapter);
 		historyList.setOnItemClickListener(onHistoryItemClicked);
 
-		TorchCurrencyManager.setBalance(Currencies.PEARLS, 20000);
-		TorchCurrencyManager.setBalance(Currencies.CRYSTALS, 100);
+		// TorchCurrencyManager.setBalance(Currencies.PEARLS, 20000);
+		// TorchCurrencyManager.setBalance(Currencies.CRYSTALS, 100);
 		loadItems();
 		AchievementManager.setAchievementState(Type.WINDOW_SHOPPER, State.START);
 	}
@@ -185,6 +186,18 @@ public class StoreActivity extends Activity {
 		super.onStart();
 		AchievementManager.registerAchievementListener(achievementListener);
 		setFunds();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		PublisherManager.createSession();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		PublisherManager.endSession();
 	}
 
 	@Override
@@ -366,6 +379,33 @@ public class StoreActivity extends Activity {
 			infoDialog.setCloseListener(onHistoryCloseClicked);
 			dialog = infoDialog;
 			break;
+
+		case DIALOG_INSUFFICIEN_CURRENCY:
+			ReplicaInfoDialog insufficientCurrencyDialog = new ReplicaInfoDialog(this);
+			insufficientCurrencyDialog.setTitle("Insufficient Currency");
+			insufficientCurrencyDialog.setDescripton("Not enough currency. Please visit the offerwall for free currency");
+			insufficientCurrencyDialog.setButtonText("Get Free Currency", 12f);
+			insufficientCurrencyDialog.hideIcon();
+			insufficientCurrencyDialog.setButtonListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(
+						View v) {
+					PublisherManager.showWebOfferwall();
+					dismissDialog(DIALOG_INSUFFICIEN_CURRENCY);
+				}
+			});
+			insufficientCurrencyDialog.setCloseListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(
+						View v) {
+					dismissDialog(DIALOG_INSUFFICIEN_CURRENCY);
+				}
+			});
+			dialog = insufficientCurrencyDialog;
+			break;
+
 		}
 		return dialog;
 	}
@@ -459,6 +499,8 @@ public class StoreActivity extends Activity {
 			updateAcheivementsOnPurchase(storeItem);
 			resetItemAvailability(item);
 			adapter.notifyDataSetChanged();
+		} else {
+			showDialog(DIALOG_INSUFFICIEN_CURRENCY);
 		}
 	}
 

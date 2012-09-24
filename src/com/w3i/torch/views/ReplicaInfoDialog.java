@@ -42,9 +42,12 @@ public class ReplicaInfoDialog extends Dialog {
 		setContentView(R.layout.info_dialog);
 		View close = findViewById(R.id.infoDialogCloseButton);
 		close.setOnClickListener(onCloseClicked);
-		View button = findViewById(R.id.infoDialogButton);
+		Button button = (Button) findViewById(R.id.infoDialogButton);
 		button.setOnClickListener(onCloseClicked);
 		getWindow().setBackgroundDrawableResource(R.drawable.info_dialog_background);
+		button.setText("OK");
+		button.setTextSize(20);
+
 	}
 
 	@Override
@@ -97,15 +100,29 @@ public class ReplicaInfoDialog extends Dialog {
 	}
 
 	public void setButtonText(
-			String text) {
+			String text,
+			float textSize) {
 		Button button = (Button) findViewById(R.id.infoDialogButton);
 		button.setText(text);
+		if (textSize > 0) {
+			button.setTextSize(textSize);
+		}
+	}
+
+	public void setButtonText(
+			String text) {
+		setButtonText(text, 0);
 	}
 
 	public void setButtonListener(
 			View.OnClickListener listener) {
 		View button = findViewById(R.id.infoDialogButton);
 		button.setOnClickListener(listener);
+	}
+
+	public void hideIcon() {
+		View icon = findViewById(R.id.infoDialogIcon);
+		icon.setVisibility(View.GONE);
 	}
 
 	public void setCloseListener(

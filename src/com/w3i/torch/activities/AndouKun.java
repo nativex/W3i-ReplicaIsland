@@ -41,6 +41,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.w3i.offerwall.PublisherManager;
 import com.w3i.torch.AdultsDifficultyConstants;
 import com.w3i.torch.BabyDifficultyConstants;
 import com.w3i.torch.DebugLog;
@@ -368,11 +369,12 @@ public class AndouKun extends Activity implements SensorEventListener {
 		AchievementManager.updateJetpackTime(0, false);
 		SharedPreferenceManager.storeAchievement(Type.JETPACK_TIME);
 		SharedPreferenceManager.storeAchievement(Type.FLY_TIME);
-
+		PublisherManager.endSession();
 	}
 
 	protected void onResume() {
 		super.onResume();
+		PublisherManager.createSession();
 
 		// Preferences may have changed while we were paused.
 		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
