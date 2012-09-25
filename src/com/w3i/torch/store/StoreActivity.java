@@ -39,6 +39,7 @@ import com.w3i.torch.gamesplatform.GamesPlatformManager;
 import com.w3i.torch.gamesplatform.SharedPreferenceManager;
 import com.w3i.torch.gamesplatform.TorchCurrency;
 import com.w3i.torch.gamesplatform.TorchCurrencyManager;
+import com.w3i.torch.gamesplatform.TorchCurrencyManager.OnCurrencyChanged;
 import com.w3i.torch.gamesplatform.TorchItem;
 import com.w3i.torch.gamesplatform.TorchItemManager;
 import com.w3i.torch.powerups.PowerupTypes;
@@ -53,6 +54,7 @@ public class StoreActivity extends Activity {
 	private TorchItem selectedHistoryItem = null;
 	private ViewFlinger flinger;
 	private Map<TorchItem.PurchaseState, List<TorchItem>> items;
+	private boolean itemsLoaded = false;
 
 	private Map<Long, List<TorchItem>> categories;
 
@@ -214,6 +216,16 @@ public class StoreActivity extends Activity {
 		super.onResume();
 		AchievementManager.registerAchievementListener(achievementListener);
 		setFunds();
+		FundsView.setOnCurrencyChangedListener(new OnCurrencyChanged() {
+
+			@Override
+			public void currencyChanged(
+					TorchCurrency currency) {
+				if (itemsLoaded) {
+					resetItemAvailability(null);
+				}
+			}
+		});
 		PublisherManager.createSession();
 	}
 
@@ -231,6 +243,7 @@ public class StoreActivity extends Activity {
 			loadStoreItems();
 			loadHistoryItems();
 		}
+		itemsLoaded = true;
 	}
 
 	private void createCategory(
@@ -499,13 +512,14 @@ public class StoreActivity extends Activity {
 				View v) {
 			Object tag = v.getTag();
 			if (tag instanceof TorchItem) {
-				purchaseItem(v, (TorchItem) tag);
-				storeList.removeView(v);
+				if (purchaseItem(v, (TorchItem) tag)) {
+					storeList.removeView(v);
+				}
 			}
 		}
 	};
 
-	private void purchaseItem(
+	private boolean purchaseItem(
 			View item,
 			TorchItem storeItem) {
 		if (TorchItemManager.canBePurchased(storeItem)) {
@@ -518,8 +532,10 @@ public class StoreActivity extends Activity {
 			updateAcheivementsOnPurchase(storeItem);
 			resetItemAvailability(item);
 			adapter.notifyDataSetChanged();
+			return true;
 		} else {
 			showDialog(DIALOG_INSUFFICIEN_CURRENCY);
+			return false;
 		}
 	}
 

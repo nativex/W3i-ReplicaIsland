@@ -26,7 +26,8 @@ public class FundsView {
 	public static ViewGroup fundsView;
 	public static final int ID_PLUS_BUTTON = 800;
 
-	private static OnCurrencyChanged listener = new OnCurrencyChanged() {
+	private static OnCurrencyChanged listener = null;
+	private static OnCurrencyChanged internalListener = new OnCurrencyChanged() {
 
 		@Override
 		public void currencyChanged(
@@ -48,7 +49,7 @@ public class FundsView {
 			if (fundsView == null) {
 				fundsView = createFundsView(activity);
 			}
-			TorchCurrencyManager.setCurrencyChangedListener(listener);
+			TorchCurrencyManager.setCurrencyChangedListener(internalListener);
 			FundsView.fundsView = fundsView;
 			FundsView.fundsView.setOnClickListener(new View.OnClickListener() {
 
@@ -77,6 +78,9 @@ public class FundsView {
 				fundsList.addView(fundsItem);
 			}
 			setFunds(fundsItem, currency);
+		}
+		if (listener != null) {
+			listener.currencyChanged(currency);
 		}
 	}
 
@@ -156,7 +160,7 @@ public class FundsView {
 		}
 		CustomImageView icon = (CustomImageView) fundsItem.findViewById(R.id.uiFundsItemImage);
 		TextView amount = (TextView) fundsItem.findViewById(R.id.uiFundsItemAmount);
-		amount.setText(Integer.toString(currency.getBalance()));
+		amount.setText(String.format("%1$,d", currency.getBalance()));
 		if ((NetworkConnectionManager.getInstance(fundsItem.getContext()).isConnected()) && (currency.getIcon() != null)) {
 			icon.setImageFromInternet(currency.getIcon());
 		} else if (currency.getDrawableResource() > 0) {
@@ -164,9 +168,15 @@ public class FundsView {
 		}
 	}
 
+	public static void setOnCurrencyChangedListener(
+			OnCurrencyChanged listener) {
+		FundsView.listener = listener;
+	}
+
 	public static void releaseFunds() {
 		TorchCurrencyManager.setCurrencyChangedListener(null);
 		fundsView = null;
+		listener = null;
 	}
 
 }
