@@ -57,19 +57,10 @@
             android:layout_width="140dip"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="15dip"
             android:clickable="true"
             android:contentDescription="@string/default_image_view_description"
             android:src="@drawable/ui_button_continue" />
-
-        <ImageView
-            android:id="@+id/extrasButton"
-            android:layout_width="120dip"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:clickable="true"
-            android:contentDescription="@string/default_image_view_description"
-            android:paddingTop="10dp"
-            android:src="@drawable/ui_button_extras" />
 
         <ImageView
             android:id="@+id/optionButton"

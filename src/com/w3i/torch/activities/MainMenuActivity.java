@@ -68,7 +68,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	private boolean mPaused;
 	private View mStartButton;
 	private View mOptionsButton;
-	private View mExtrasButton;
 	private View mBackground;
 	private View mTicker;
 	private Animation mButtonFlickerAnimation;
@@ -102,7 +101,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 				mFadeOutAnimation.setAnimationListener(new StartActivityAfterAnimation(i));
 				mBackground.startAnimation(mFadeOutAnimation);
 				mOptionsButton.startAnimation(mAlternateFadeOutAnimation);
-				mExtrasButton.startAnimation(mAlternateFadeOutAnimation);
 				mTicker.startAnimation(mAlternateFadeOutAnimation);
 				mPaused = true;
 			}
@@ -112,31 +110,26 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	private View.OnClickListener sOptionButtonListener = new View.OnClickListener() {
 		public void onClick(
 				View v) {
-			if (!mPaused) {
-				Intent i = new Intent(getBaseContext(), SetPreferencesActivity.class);
 
-				v.startAnimation(mButtonFlickerAnimation);
-				mFadeOutAnimation.setAnimationListener(new StartActivityAfterAnimation(i));
-				mBackground.startAnimation(mFadeOutAnimation);
-				mStartButton.startAnimation(mAlternateFadeOutAnimation);
-				mExtrasButton.startAnimation(mAlternateFadeOutAnimation);
-				mTicker.startAnimation(mAlternateFadeOutAnimation);
-				mPaused = true;
-			}
-		}
-	};
-
-	private View.OnClickListener sExtrasButtonListener = new View.OnClickListener() {
-		public void onClick(
-				View v) {
 			if (!mPaused) {
-				Intent i = new Intent(getBaseContext(), ExtrasMenuActivity.class);
+				Intent i = new Intent(getBaseContext(), OptionsMenu.class);
 
 				v.startAnimation(mButtonFlickerAnimation);
 				mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(i));
 				mPaused = true;
 
 			}
+
+			// if (!mPaused) {
+			// Intent i = new Intent(getBaseContext(), SetPreferencesActivity.class);
+			//
+			// v.startAnimation(mButtonFlickerAnimation);
+			// mFadeOutAnimation.setAnimationListener(new StartActivityAfterAnimation(i));
+			// mBackground.startAnimation(mFadeOutAnimation);
+			// mStartButton.startAnimation(mAlternateFadeOutAnimation);
+			// mTicker.startAnimation(mAlternateFadeOutAnimation);
+			// mPaused = true;
+			// }
 		}
 	};
 
@@ -198,6 +191,14 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mainmenu);
+
+		torchOnCreate();
+
+		doW3iInitialization();
+		doTorchInitialization();
+	}
+
+	private void torchOnCreate() {
 		mPaused = true;
 
 		mStartButton = findViewById(R.id.startButton);
@@ -207,9 +208,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		if (mOptionsButton != null) {
 			mOptionsButton.setOnClickListener(sOptionButtonListener);
 		}
-
-		mExtrasButton = findViewById(R.id.extrasButton);
-		mExtrasButton.setOnClickListener(sExtrasButtonListener);
 
 		mButtonFlickerAnimation = AnimationUtils.loadAnimation(this, R.anim.button_flicker);
 		mFadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
@@ -246,8 +244,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 
 		// MediaPlayer mp = MediaPlayer.create(this, R.raw.bwv_115);
 		// mp.start();
-		doW3iInitialization();
-		doTorchInitialization();
 	}
 
 	private void doTorchInitialization() {
@@ -333,10 +329,20 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		mPaused = false;
-		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
+
 		PublisherManager.createSession();
 		PublisherManager.redeemCurrency(this);
+		torchOnResume();
+
+		setFunds();
+		ImageView character = (ImageView) findViewById(R.id.mainMenuCharacter);
+		SkinManager.changeTitleScreenImage(character);
+
+	}
+
+	private void torchOnResume() {
+		mPaused = false;
+		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
 
 		mButtonFlickerAnimation.setAnimationListener(null);
 
@@ -471,15 +477,10 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 			if (mStartButton != null) {
 				mStartButton.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_slide));
 			}
-			if (mExtrasButton != null) {
-				Animation anim = AnimationUtils.loadAnimation(this, R.anim.button_slide);
-				anim.setStartOffset(500L);
-				mExtrasButton.startAnimation(anim);
-			}
 
 			if (mOptionsButton != null) {
 				Animation anim = AnimationUtils.loadAnimation(this, R.anim.button_slide);
-				anim.setStartOffset(1000L);
+				anim.setStartOffset(500L);
 				mOptionsButton.startAnimation(anim);
 			}
 			mJustCreated = false;
@@ -487,12 +488,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		} else {
 			mStartButton.clearAnimation();
 			mOptionsButton.clearAnimation();
-			mExtrasButton.clearAnimation();
 		}
-
-		setFunds();
-		ImageView character = (ImageView) findViewById(R.id.mainMenuCharacter);
-		SkinManager.changeTitleScreenImage(character);
 
 	}
 

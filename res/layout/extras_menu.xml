@@ -33,70 +33,38 @@
         android:orientation="vertical" >
 
         <ImageView
-            android:id="@+id/extrasAchievements"
+            android:id="@+id/ui_option_sound"
             android:layout_width="wrap_content"
-            android:layout_height="23dip"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:contentDescription="@string/default_image_view_description"
-            android:src="@drawable/ui_button_achievements" />
+            android:paddingTop="15dip"
+            android:src="@drawable/ui_button_store" />
 
         <ImageView
-            android:id="@+id/storeButton"
+            android:id="@+id/ui_option_controls"
             android:layout_width="wrap_content"
             android:layout_height="27dip"
             android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="50dip"
+            android:clickable="true"
             android:contentDescription="@string/default_image_view_description"
             android:paddingTop="5dip"
-            android:src="@drawable/ui_button_store" />
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:paddingTop="5dip" >
-
-            <ImageView
-                android:id="@+id/linearModeButton"
-                android:layout_width="wrap_content"
-                android:layout_height="25dip"
-                android:clickable="true"
-                android:contentDescription="@string/default_image_view_description"
-                android:src="@drawable/ui_button_linear_mode" />
-
-            <ImageView
-                android:id="@+id/linearModeLocked"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:contentDescription="@string/default_image_view_description"
-                android:src="@drawable/ui_locked" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:paddingTop="5dip" >
-
-            <ImageView
-                android:id="@+id/levelSelectButton"
-                android:layout_width="wrap_content"
-                android:layout_height="23dip"
-                android:clickable="true"
-                android:contentDescription="@string/default_image_view_description"
-                android:src="@drawable/ui_button_level_select" />
-
-            <ImageView
-                android:id="@+id/levelSelectLocked"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:contentDescription="@string/default_image_view_description"
-                android:src="@drawable/ui_locked" />
-        </FrameLayout>
+            android:src="@drawable/ui_button_controls" />
 
         <ImageView
-            android:id="@+id/controlsButton"
+            android:id="@+id/ui_option_safe_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="27dip"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="50dip"
+            android:clickable="true"
+            android:contentDescription="@string/default_image_view_description"
+            android:paddingTop="5dip"
+            android:src="@drawable/ui_button_controls" />
+
+        <ImageView
+            android:id="@+id/ui_option_credits"
             android:layout_width="wrap_content"
             android:layout_height="27dip"
             android:layout_gravity="center_horizontal"

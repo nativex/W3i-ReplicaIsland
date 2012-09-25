@@ -75,7 +75,7 @@
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".activities.ExtrasMenuActivity"
+            android:name=".activities.OptionsMenu"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="landscape" />
         <activity
