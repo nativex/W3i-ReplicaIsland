@@ -259,6 +259,17 @@ public class TorchCurrencyManager {
 		fireListener(torchCurrency);
 	}
 
+	public static void setBalance(
+			TorchCurrency currency,
+			int balance) {
+		checkInstance();
+		if (currency != null) {
+			currency.setBalance(balance);
+			fireListener(currency);
+		}
+
+	}
+
 	public static int getBalance(
 			long currencyId) {
 		checkInstance();

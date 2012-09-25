@@ -12,6 +12,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -137,11 +139,37 @@ public class StoreActivity extends Activity {
 				@Override
 				public void run() {
 					ReplicaIslandToast.makeAchievementProgressUpdateToast(context, achievement, percentDone);
-
 				}
 			});
 		}
 	};
+
+	public boolean onCreateOptionsMenu(
+			android.view.Menu menu) {
+		MenuInflater menuInflater = getMenuInflater();
+		menuInflater.inflate(R.menu.test_store_menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(
+			MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.testMenuStoreAddBalance:
+			for (Entry<Long, TorchCurrency> entry : TorchCurrencyManager.getCurrencies().entrySet()) {
+				TorchCurrencyManager.addBalance(entry.getValue(), 1000);
+			}
+			return true;
+
+		case R.id.testMenuStoreResetBalance:
+			for (Entry<Long, TorchCurrency> entry : TorchCurrencyManager.getCurrencies().entrySet()) {
+				TorchCurrencyManager.setBalance(entry.getValue(), 0);
+			}
+
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
 
 	public static final int DEFAULT_CATEGORY_BACKGROUND_COLOR = Color.BLACK;
 	public static final int DEFAULT_CATEGORY_TEXT_COLOR = Color.WHITE;
@@ -182,28 +210,18 @@ public class StoreActivity extends Activity {
 	}
 
 	@Override
-	protected void onStart() {
-		super.onStart();
-		AchievementManager.registerAchievementListener(achievementListener);
-		setFunds();
-	}
-
-	@Override
 	protected void onResume() {
 		super.onResume();
+		AchievementManager.registerAchievementListener(achievementListener);
+		setFunds();
 		PublisherManager.createSession();
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		PublisherManager.endSession();
-	}
-
-	@Override
-	protected void onStop() {
-		super.onStop();
 		FundsView.releaseFunds();
+		PublisherManager.endSession();
 	}
 
 	private void loadItems() {
@@ -286,10 +304,11 @@ public class StoreActivity extends Activity {
 	private void setItemPrice(
 			TorchItem item,
 			ViewGroup view) {
+		ViewGroup priceList = (ViewGroup) view.findViewById(R.id.uiFundsList);
 		for (Entry<Long, TorchCurrency> entry : TorchCurrencyManager.getCurrencies().entrySet()) {
 			TorchCurrency currency = entry.getValue();
 			Double itemPrice = item.getItemPrice(currency.getCurrency());
-			addCurrencyBlock(view, currency, itemPrice);
+			addCurrencyBlock(priceList, currency, itemPrice);
 		}
 	}
 
@@ -355,7 +374,7 @@ public class StoreActivity extends Activity {
 
 	private void setFunds() {
 		try {
-			ViewGroup fundsView = (ViewGroup) findViewById(R.id.uiFundsList);
+			ViewGroup fundsView = (ViewGroup) findViewById(R.id.ui_funds_view);
 			FundsView.setFunds(this, fundsView);
 		} catch (Exception e) {
 			android.util.Log.e("ReplicaIsland", "StoreActivity: Unexpected exception caught while writing the resources.", e);

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.w3i.advertiser.NetworkConnectionManager;
@@ -23,16 +24,19 @@ import com.w3i.torch.gamesplatform.TorchCurrencyManager.OnCurrencyChanged;
 
 public class FundsView {
 	public static ViewGroup fundsView;
+	public static final int ID_PLUS_BUTTON = 800;
 
 	private static OnCurrencyChanged listener = new OnCurrencyChanged() {
 
 		@Override
 		public void currencyChanged(
 				TorchCurrency currency) {
-			if (currency != null) {
-				setFunds(currency);
-			} else {
-				setFunds();
+			if (fundsView != null) {
+				if (currency != null) {
+					setFunds(currency, getFundsListView());
+				} else {
+					setFunds();
+				}
 			}
 		}
 	};
@@ -51,6 +55,7 @@ public class FundsView {
 				@Override
 				public void onClick(
 						View v) {
+					com.w3i.common.Log.d("FundsView: Funds view clicked");
 					PublisherManager.showWebOfferwall();
 				}
 			});
@@ -62,13 +67,14 @@ public class FundsView {
 	}
 
 	public static void setFunds(
-			TorchCurrency currency) {
+			TorchCurrency currency,
+			ViewGroup fundsList) {
 		if (fundsView != null) {
-			int itemId = currency.getId() * 1000;
-			ViewGroup fundsItem = (ViewGroup) fundsView.findViewById(itemId);
+			int itemId = currency.getId() + 10000;
+			ViewGroup fundsItem = (ViewGroup) fundsList.findViewById(itemId);
 			if (fundsItem == null) {
 				fundsItem = createFundsItem(fundsView.getContext(), currency, itemId);
-				fundsView.addView(fundsItem);
+				fundsList.addView(fundsItem);
 			}
 			setFunds(fundsItem, currency);
 		}
@@ -77,10 +83,46 @@ public class FundsView {
 	public static void setFunds() {
 		if (fundsView != null) {
 			TorchCurrencyCollection collection = TorchCurrencyManager.getCurrencies();
+
 			for (Entry<Long, TorchCurrency> entry : collection.entrySet()) {
 				TorchCurrency currency = entry.getValue();
-				setFunds(currency);
+				setFunds(currency, getFundsListView());
 			}
+			createPlusButton();
+		}
+	}
+
+	private static ViewGroup getFundsListView() {
+		if (fundsView != null) {
+			ViewGroup fundsList = (ViewGroup) fundsView.findViewById(R.id.uiFundsList);
+			fundsList.setBackgroundResource(R.drawable.ui_funds_list_box_with_plus_bg);
+			fundsList.setPadding(2, 2, 0, 2);
+
+			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+			params.setMargins(0, 0, 0, 0);
+			fundsList.setLayoutParams(params);
+			return fundsList;
+		}
+		return null;
+	}
+
+	private static void createPlusButton() {
+		CustomImageView plusImage = (CustomImageView) fundsView.findViewById(ID_PLUS_BUTTON);
+
+		if (plusImage == null) {
+			plusImage = new CustomImageView(fundsView.getContext());
+			plusImage.setImageResource(R.drawable.ui_funds_plus);
+			plusImage.setBackgroundResource(R.drawable.ui_funds_below_plus_bg);
+			plusImage.setPadding(0, 0, 0, 0);
+
+			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+			params.addRule(RelativeLayout.RIGHT_OF, R.id.uiFundsList);
+			params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+			params.addRule(RelativeLayout.ALIGN_BOTTOM, R.id.uiFundsList);
+			params.setMargins(0, 0, 0, 0);
+			plusImage.setLayoutParams(params);
+			plusImage.setId(ID_PLUS_BUTTON);
+			fundsView.addView(plusImage);
 		}
 	}
 
@@ -123,6 +165,7 @@ public class FundsView {
 	}
 
 	public static void releaseFunds() {
+		TorchCurrencyManager.setCurrencyChangedListener(null);
 		fundsView = null;
 	}
 

@@ -109,14 +109,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		}
 	};
 
-	private View.OnClickListener sCoinsClicked = new View.OnClickListener() {
-
-		public void onClick(
-				View v) {
-			PublisherManager.showWebOfferwall();
-		}
-	};
-
 	private View.OnClickListener sOptionButtonListener = new View.OnClickListener() {
 		public void onClick(
 				View v) {
@@ -183,14 +175,13 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	};
 
 	private void setFunds() {
-		ViewGroup fundsView = (ViewGroup) findViewById(R.id.uiFundsList);
+		ViewGroup fundsView = (ViewGroup) findViewById(R.id.ui_funds_view);
 		if (fundsView == null) {
 			ViewGroup mainContainer = (ViewGroup) findViewById(R.id.mainMenuLayout);
 			createFundsView(mainContainer);
 		} else {
 			FundsView.setFunds(this, fundsView);
 		}
-		fundsView.setOnClickListener(sCoinsClicked);
 	}
 
 	private void createFundsView(
@@ -272,14 +263,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		setFunds();
 		GamesPlatformManager.onResume();
-	}
-
-	@Override
-	protected void onStop() {
-		super.onStop();
-		FundsView.releaseFunds();
 	}
 
 	@Override
@@ -343,6 +327,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		mPaused = true;
 		PublisherManager.endSession();
 		SharedPreferenceManager.storeAll();
+		FundsView.releaseFunds();
 	}
 
 	@Override
@@ -505,8 +490,10 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 			mExtrasButton.clearAnimation();
 		}
 
+		setFunds();
 		ImageView character = (ImageView) findViewById(R.id.mainMenuCharacter);
 		SkinManager.changeTitleScreenImage(character);
+
 	}
 
 	@Override

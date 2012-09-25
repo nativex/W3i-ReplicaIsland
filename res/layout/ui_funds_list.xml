@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/uiFundsList"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ui_funds_view"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:minWidth="100dip" >
+    android:minWidth="80dip" >
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/uiFundsList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/ui_funds_list_box_bg"
+        android:gravity="center_vertical" >
+    </LinearLayout>
+
+</RelativeLayout>
