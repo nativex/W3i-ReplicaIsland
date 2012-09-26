@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.w3i.torch"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
@@ -13,66 +14,43 @@
         android:scaleType="fitXY"
         android:src="@drawable/ui_main_menu_background" />
 
-    <ImageView
-        android:id="@+id/mainMenuTitle"
-        android:layout_width="275dip"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="5dip"
-        android:layout_marginTop="28dip"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/default_image_view_description"
-        android:src="@drawable/ui_main_menu_title" />
-
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="60dip"
         android:gravity="bottom"
         android:orientation="vertical" >
 
-        <ImageView
+        <com.w3i.torch.views.CustomFontTextView
             android:id="@+id/ui_option_sound"
+            style="@style/ui_start_game_button_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+
+        <com.w3i.torch.views.CustomFontTextView
+            android:id="@+id/ui_option_controls"
+            style="@style/ui_start_game_button_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:contentDescription="@string/default_image_view_description"
-            android:paddingTop="15dip"
-            android:src="@drawable/ui_button_store" />
+            android:text="@string/options_menu_controls_button_text" />
 
-        <ImageView
-            android:id="@+id/ui_option_controls"
-            android:layout_width="wrap_content"
-            android:layout_height="27dip"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="50dip"
-            android:clickable="true"
-            android:contentDescription="@string/default_image_view_description"
-            android:paddingTop="5dip"
-            android:src="@drawable/ui_button_controls" />
-
-        <ImageView
+        <com.w3i.torch.views.CustomFontTextView
             android:id="@+id/ui_option_safe_mode"
+            style="@style/ui_start_game_button_style"
             android:layout_width="wrap_content"
-            android:layout_height="27dip"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="50dip"
-            android:clickable="true"
-            android:contentDescription="@string/default_image_view_description"
-            android:paddingTop="5dip"
-            android:src="@drawable/ui_button_controls" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
 
-        <ImageView
+        <com.w3i.torch.views.CustomFontTextView
             android:id="@+id/ui_option_credits"
+            style="@style/ui_start_game_button_style"
             android:layout_width="wrap_content"
-            android:layout_height="27dip"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="50dip"
-            android:clickable="true"
-            android:contentDescription="@string/default_image_view_description"
-            android:paddingTop="5dip"
-            android:src="@drawable/ui_button_controls" />
+            android:text="@string/options_menu_credits_button_text" />
     </LinearLayout>
 
 </FrameLayout>

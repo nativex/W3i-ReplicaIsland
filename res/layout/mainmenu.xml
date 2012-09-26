@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.w3i.torch"
     android:id="@+id/mainMenuLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
@@ -47,50 +48,46 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/mainSectionMenu"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_marginBottom="60dip"
         android:gravity="bottom"
         android:orientation="vertical" >
 
-        <ImageView
+        <com.w3i.torch.views.CustomFontTextView
             android:id="@+id/ui_main_start_game"
-            android:layout_width="140dip"
+            style="@style/ui_start_game_button_style"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="15dip"
-            android:clickable="true"
-            android:contentDescription="@string/default_image_view_description"
-            android:src="@drawable/ui_button_continue" />
+            android:text="@string/main_menu_start_game_button_text" />
 
-        <ImageView
+        <com.w3i.torch.views.CustomFontTextView
             android:id="@+id/ui_main_options"
-            android:layout_width="125dip"
+            style="@style/ui_start_game_button_style"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="68dip"
-            android:clickable="true"
-            android:contentDescription="@string/default_image_view_description"
-            android:paddingTop="10dp"
-            android:src="@drawable/ui_button_options" />
-
-        <TextView
-            android:id="@+id/ticker"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|left"
-            android:background="#99000000"
-            android:ellipsize="marquee"
-            android:fadingEdge="horizontal"
-            android:fadingEdgeLength="5dp"
-            android:focusable="false"
-            android:lines="1"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:singleLine="true"
-            android:text="@string/whats_new_ticker"
-            android:textColor="#FFFFFF"
-            android:textColorHighlight="#FFFFFF"
-            android:textSize="14sp" />
+            android:text="@string/main_menu_options_button_text" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/ticker"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:background="#99000000"
+        android:ellipsize="marquee"
+        android:fadingEdge="horizontal"
+        android:fadingEdgeLength="5dp"
+        android:focusable="false"
+        android:lines="1"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:text="@string/whats_new_ticker"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#FFFFFF"
+        android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/extrasNew"

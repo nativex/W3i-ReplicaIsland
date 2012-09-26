@@ -94,7 +94,7 @@ public class StartGameActivity extends Activity {
 			continueButton.setOnClickListener(onButtonClickListener);
 			continueButton.setVisibility(View.VISIBLE);
 		} else {
-			continueButton.setVisibility(View.GONE);
+			continueButton.setVisibility(View.INVISIBLE);
 		}
 
 		newGameButton.setOnClickListener(onButtonClickListener);
@@ -105,6 +105,17 @@ public class StartGameActivity extends Activity {
 		mFadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 		mAlternateFadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		storeButton.clearAnimation();
+		achievementsButton.clearAnimation();
+		newGameButton.clearAnimation();
+		continueButton.clearAnimation();
+		background.clearAnimation();
+		mButtonFlickerAnimation.setAnimationListener(null);
 	}
 
 	protected class StartActivityAfterAnimation implements Animation.AnimationListener {

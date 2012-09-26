@@ -13,6 +13,7 @@
     </declare-styleable>
     <declare-styleable name="CustomFontTextView">
         <attr name="setFont" format="string" />
+        <attr name="addSpacing" format="boolean" />
     </declare-styleable>
 
 </resources>
