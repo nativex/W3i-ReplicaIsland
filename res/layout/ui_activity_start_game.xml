@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.w3i.torch"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ImageView
+        android:id="@+id/ui_start_game_background"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:contentDescription="@string/default_image_view_description"
+        android:scaleType="fitXY"
+        android:src="@drawable/ui_main_menu_background" />
+
+    <LinearLayout
+        android:id="@+id/ui_start_game_button_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dip"
+        android:gravity="center_vertical" >
+
+        <com.w3i.torch.views.CustomFontTextView
+            android:id="@+id/ui_start_game_continue"
+            style="@style/ui_start_game_button_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dip"
+            android:gravity="center"
+            android:text="@string/ui_start_game_continue_button_text" />
+
+        <com.w3i.torch.views.CustomFontTextView
+            android:id="@+id/ui_start_game_new"
+            style="@style/ui_start_game_button_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dip"
+            android:gravity="center"
+            android:text="@string/ui_start_game_new_game_button_text" />
+
+        <com.w3i.torch.views.CustomFontTextView
+            android:id="@+id/ui_start_game_store"
+            style="@style/ui_start_game_button_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dip"
+            android:gravity="center"
+            android:text="@string/ui_start_game_store_button_text" />
+
+        <com.w3i.torch.views.CustomFontTextView
+            android:id="@+id/ui_start_game_achievements"
+            style="@style/ui_start_game_button_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dip"
+            android:gravity="center"
+            android:text="@string/ui_start_game_achievements_button_text" />
+    </LinearLayout>
+
+</FrameLayout>

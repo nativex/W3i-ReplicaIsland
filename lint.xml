@@ -3,5 +3,6 @@
     <issue id="UnusedNamespace">
         <ignore path="res\layout\toast_achievement_done.xml" />
         <ignore path="res\layout\toast_achievement_unlocked.xml" />
+        <ignore path="res\layout\ui_activity_start_game.xml" />
     </issue>
 </lint>

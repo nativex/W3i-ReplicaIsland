@@ -398,5 +398,9 @@ If I am honest with myself, there is another reason the adventurers had to die. 
     <string name="toast_achievement_progress_text">is XX% done</string>
     <string name="toast_achievement_done_title">Achievement earned</string>
     <string name="toast_achievement_done_text">You have earned</string>
+    <string name="ui_start_game_continue_button_text">Continue</string>
+    <string name="ui_start_game_new_game_button_text">New Game</string>
+    <string name="ui_start_game_store_button_text">Store</string>
+    <string name="ui_start_game_achievements_button_text">Achievements</string>
 
 </resources>

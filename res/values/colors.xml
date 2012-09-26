@@ -17,5 +17,6 @@
     <color name="StoreItemCategoryBackground">#FF000000</color>
     <color name="StoreDialogTitle">#FFFFFFFF</color>
     <color name="StoreDialogDescription">#FFFFFFFF</color>
+    <color name="ui_start_game_button_color">#FFFFFFFF</color>
 
 </resources>

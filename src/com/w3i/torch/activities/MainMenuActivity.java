@@ -71,8 +71,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	private View mBackground;
 	private View mTicker;
 	private Animation mButtonFlickerAnimation;
-	private Animation mFadeOutAnimation;
-	private Animation mAlternateFadeOutAnimation;
 	private Animation mFadeInAnimation;
 	private boolean mJustCreated;
 	private String mSelectedControlsString;
@@ -92,16 +90,13 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	};
 
 	// Create an anonymous implementation of OnClickListener
-	private View.OnClickListener sContinueButtonListener = new View.OnClickListener() {
+	private View.OnClickListener sStartGameListener = new View.OnClickListener() {
 		public void onClick(
 				View v) {
 			if (!mPaused) {
-				Intent i = new Intent(getBaseContext(), AndouKun.class);
+				Intent i = new Intent(getBaseContext(), StartGameActivity.class);
 				v.startAnimation(mButtonFlickerAnimation);
-				mFadeOutAnimation.setAnimationListener(new StartActivityAfterAnimation(i));
-				mBackground.startAnimation(mFadeOutAnimation);
-				mOptionsButton.startAnimation(mAlternateFadeOutAnimation);
-				mTicker.startAnimation(mAlternateFadeOutAnimation);
+				mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(i));
 				mPaused = true;
 			}
 		}
@@ -130,21 +125,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 			// mTicker.startAnimation(mAlternateFadeOutAnimation);
 			// mPaused = true;
 			// }
-		}
-	};
-
-	private View.OnClickListener sStartButtonListener = new View.OnClickListener() {
-		public void onClick(
-				View v) {
-			if (!mPaused) {
-				Intent i = new Intent(getBaseContext(), DifficultyMenuActivity.class);
-				i.putExtra("newGame", true);
-				v.startAnimation(mButtonFlickerAnimation);
-				mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(i));
-
-				mPaused = true;
-
-			}
 		}
 	};
 
@@ -201,17 +181,19 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	private void torchOnCreate() {
 		mPaused = true;
 
-		mStartButton = findViewById(R.id.startButton);
-		mOptionsButton = findViewById(R.id.optionButton);
+		mStartButton = findViewById(R.id.ui_main_start_game);
+		mOptionsButton = findViewById(R.id.ui_main_options);
 		mBackground = findViewById(R.id.mainMenuBackground);
+
+		if (mStartButton != null) {
+			mStartButton.setOnClickListener(sStartGameListener);
+		}
 
 		if (mOptionsButton != null) {
 			mOptionsButton.setOnClickListener(sOptionButtonListener);
 		}
 
 		mButtonFlickerAnimation = AnimationUtils.loadAnimation(this, R.anim.button_flicker);
-		mFadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
-		mAlternateFadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 		mFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
 
 		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
@@ -347,18 +329,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		mButtonFlickerAnimation.setAnimationListener(null);
 
 		if (mStartButton != null) {
-
-			// Change "start" to "continue" if there's a saved game.
-			prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
-			final int row = prefs.getInt(PreferenceConstants.PREFERENCE_LEVEL_ROW, 0);
-			final int index = prefs.getInt(PreferenceConstants.PREFERENCE_LEVEL_INDEX, 0);
-			if (row != 0 || index != 0) {
-				((ImageView) mStartButton).setImageDrawable(getResources().getDrawable(R.drawable.ui_button_continue));
-				mStartButton.setOnClickListener(sContinueButtonListener);
-			} else {
-				((ImageView) mStartButton).setImageDrawable(getResources().getDrawable(R.drawable.ui_button_start));
-				mStartButton.setOnClickListener(sStartButtonListener);
-			}
 
 			TouchFilter touch;
 			final int sdkVersion = Integer.parseInt(Build.VERSION.SDK);

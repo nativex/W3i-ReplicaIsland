@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.w3i.torch"
+<manifest package="com.w3i.torch"
     android:versionCode="14"
-    android:versionName="1.4" >
+    android:versionName="1.4" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -17,7 +16,7 @@
         android:targetSdkVersion="8" />
     <!--
     Actually, this game works fine on small screens, but the only one out 
-	right now has no 3D acceleration, so it's slow and unplayable.
+	right now has no 3D acceleration, so it's slow and unplayable.
     -->
 
     <supports-screens
@@ -121,7 +120,10 @@
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
-        <activity android:name="com.w3i.offerwall.ui.WebOfferwallActivity"></activity>
+        <activity android:name="com.w3i.offerwall.ui.WebOfferwallActivity" >
+        </activity>
+        <activity android:name=".activities.StartGameActivity" >
+        </activity>
     </application>
 
 </manifest>

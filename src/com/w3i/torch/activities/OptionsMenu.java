@@ -30,7 +30,6 @@ public class OptionsMenu extends Activity {
 	private static final String DIALOG_STORE_NOT_READY_MESSAGE = "The store is not ready or is unavailable.\nPlease try again later.";
 	private View mAchievementsButton;
 	private View mStoreButton;
-
 	private View mControlsButton;
 	private View mBackground;
 	private Animation mButtonFlickerAnimation;
@@ -131,7 +130,9 @@ public class OptionsMenu extends Activity {
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.extras_menu);
-
+		if (true) {
+			return;
+		}
 		mAchievementsButton = findViewById(R.id.extrasAchievements);
 		mStoreButton = findViewById(R.id.storeButton);
 
@@ -229,17 +230,16 @@ public class OptionsMenu extends Activity {
 					DebugLog.d("Activity Transition", "Illegal Access Exception");
 				}
 			}
+			mIntent = null;
 		}
 
 		public void onAnimationRepeat(
 				Animation animation) {
-			// TODO Auto-generated method stub
 
 		}
 
 		public void onAnimationStart(
 				Animation animation) {
-			// TODO Auto-generated method stub
 
 		}
 

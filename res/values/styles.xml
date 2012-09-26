@@ -113,4 +113,11 @@
         <item name="android:textColor">@color/StoreDialogDescription</item>
     </style>
 
+    <style name="ui_start_game_button_style">
+        <item name="setFont">BABYU__.TTF</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/ui_start_game_button_color</item>
+        <item name="android:lines">1</item>
+    </style>
+
 </resources>
