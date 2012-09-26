@@ -3,9 +3,11 @@ package com.w3i.torch.activities;
 import java.lang.reflect.InvocationTargetException;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -14,9 +16,15 @@ import com.w3i.torch.DebugLog;
 import com.w3i.torch.PreferenceConstants;
 import com.w3i.torch.R;
 import com.w3i.torch.UIConstants;
+import com.w3i.torch.gamesplatform.GamesPlatformManager;
+import com.w3i.torch.gamesplatform.TorchItemManager;
 import com.w3i.torch.store.StoreActivity;
+import com.w3i.torch.views.ReplicaInfoDialog;
 
 public class StartGameActivity extends Activity {
+	private static final String DIALOG_STORE_NOT_READY_TITLE = "Warning";
+	private static final String DIALOG_STORE_NOT_READY_MESSAGE = "The store is not ready or is unavailable.\nPlease try again later.";
+	private static final int EXTRAS_STORE_NOT_READY_DIALOG = 1001;
 
 	private View continueButton;
 	private View newGameButton;
@@ -48,20 +56,31 @@ public class StartGameActivity extends Activity {
 
 				storeButton.startAnimation(mAlternateFadeOutAnimation);
 				achievementsButton.startAnimation(mAlternateFadeOutAnimation);
-				continueButton.startAnimation(mAlternateFadeOutAnimation);
+				if (continueButton.getVisibility() == View.VISIBLE) {
+					continueButton.startAnimation(mAlternateFadeOutAnimation);
+				}
 				break;
 
 			case R.id.ui_start_game_store:
-				intent = new Intent(StartGameActivity.this, StoreActivity.class);
-				continueButton.startAnimation(mAlternateFadeOutAnimation);
-				achievementsButton.startAnimation(mAlternateFadeOutAnimation);
-				newGameButton.startAnimation(mAlternateFadeOutAnimation);
+				if (!TorchItemManager.hasItems()) {
+					GamesPlatformManager.downloadStoreTree();
+					showDialog(EXTRAS_STORE_NOT_READY_DIALOG);
+				} else {
+					intent = new Intent(StartGameActivity.this, StoreActivity.class);
+					if (continueButton.getVisibility() == View.VISIBLE) {
+						continueButton.startAnimation(mAlternateFadeOutAnimation);
+					}
+					achievementsButton.startAnimation(mAlternateFadeOutAnimation);
+					newGameButton.startAnimation(mAlternateFadeOutAnimation);
+				}
 				break;
 
 			case R.id.ui_start_game_achievements:
 				intent = new Intent(StartGameActivity.this, AchievementsActivity.class);
 				storeButton.startAnimation(mAlternateFadeOutAnimation);
-				continueButton.startAnimation(mAlternateFadeOutAnimation);
+				if (continueButton.getVisibility() == View.VISIBLE) {
+					continueButton.startAnimation(mAlternateFadeOutAnimation);
+				}
 				newGameButton.startAnimation(mAlternateFadeOutAnimation);
 				break;
 
@@ -69,8 +88,8 @@ public class StartGameActivity extends Activity {
 			v.startAnimation(mButtonFlickerAnimation);
 			if (intent != null) {
 				mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(intent));
+				background.startAnimation(mFadeOutAnimation);
 			}
-			background.startAnimation(mFadeOutAnimation);
 		}
 	};
 
@@ -113,9 +132,34 @@ public class StartGameActivity extends Activity {
 		storeButton.clearAnimation();
 		achievementsButton.clearAnimation();
 		newGameButton.clearAnimation();
-		continueButton.clearAnimation();
+		if (continueButton.getVisibility() == View.VISIBLE) {
+			continueButton.startAnimation(mAlternateFadeOutAnimation);
+		}
 		background.clearAnimation();
 		mButtonFlickerAnimation.setAnimationListener(null);
+	}
+
+	@Override
+	public boolean onKeyDown(
+			int keyCode,
+			KeyEvent event) {
+		boolean result = true;
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			finish();
+
+			if (UIConstants.mOverridePendingTransition != null) {
+				try {
+					UIConstants.mOverridePendingTransition.invoke(StartGameActivity.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
+				} catch (InvocationTargetException ite) {
+					DebugLog.d("Activity Transition", "Invocation Target Exception");
+				} catch (IllegalAccessException ie) {
+					DebugLog.d("Activity Transition", "Illegal Access Exception");
+				}
+			}
+		} else {
+			result = super.onKeyDown(keyCode, event);
+		}
+		return result;
 	}
 
 	protected class StartActivityAfterAnimation implements Animation.AnimationListener {
@@ -152,5 +196,20 @@ public class StartGameActivity extends Activity {
 
 		}
 
+	}
+
+	@Override
+	protected Dialog onCreateDialog(
+			int id) {
+
+		Dialog dialog = null;
+		if (id == EXTRAS_STORE_NOT_READY_DIALOG) {
+			ReplicaInfoDialog infoDialog = new ReplicaInfoDialog(this);
+			infoDialog.setTitle(DIALOG_STORE_NOT_READY_TITLE);
+			infoDialog.setDescripton(DIALOG_STORE_NOT_READY_MESSAGE);
+			infoDialog.setIcon(android.R.drawable.ic_dialog_alert);
+			dialog = infoDialog;
+		}
+		return dialog;
 	}
 }

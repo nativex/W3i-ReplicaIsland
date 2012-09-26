@@ -3,7 +3,6 @@ package com.w3i.torch.activities;
 import java.lang.reflect.InvocationTargetException;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,13 +24,10 @@ import com.w3i.torch.achivements.Achievement;
 import com.w3i.torch.achivements.AchievementListener;
 import com.w3i.torch.achivements.AchievementManager;
 import com.w3i.torch.gamesplatform.GamesPlatformManager;
-import com.w3i.torch.gamesplatform.TorchItemManager;
-import com.w3i.torch.views.ReplicaInfoDialog;
 import com.w3i.torch.views.ReplicaIslandToast;
 
 public class OptionsMenu extends Activity {
-	private static final String DIALOG_STORE_NOT_READY_TITLE = "Warning";
-	private static final String DIALOG_STORE_NOT_READY_MESSAGE = "The store is not ready or is unavailable.\nPlease try again later.";
+
 	private View soundButton;
 	private View controlsButton;
 	private View safeModeButton;
@@ -43,8 +39,6 @@ public class OptionsMenu extends Activity {
 
 	public static final int NEW_GAME_DIALOG = 0;
 	public static final int EXTRAS_LOCKED_DIALOG = 1;
-
-	private static final int EXTRAS_STORE_NOT_READY_DIALOG = 1001;
 
 	private AchievementListener achievementListener = new AchievementListener() {
 
@@ -114,11 +108,6 @@ public class OptionsMenu extends Activity {
 				break;
 
 			case R.id.ui_option_safe_mode:
-				if (!TorchItemManager.hasItems()) {
-					GamesPlatformManager.downloadStoreTree();
-					showDialog(EXTRAS_STORE_NOT_READY_DIALOG);
-					return;
-				}
 				prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, Context.MODE_PRIVATE);
 				safeModeEnabled = !prefs.getBoolean(PreferenceConstants.PREFERENCE_SAFE_MODE, false);
 				edit = prefs.edit();
@@ -251,21 +240,6 @@ public class OptionsMenu extends Activity {
 			result = super.onKeyDown(keyCode, event);
 		}
 		return result;
-	}
-
-	@Override
-	protected Dialog onCreateDialog(
-			int id) {
-
-		Dialog dialog = null;
-		if (id == EXTRAS_STORE_NOT_READY_DIALOG) {
-			ReplicaInfoDialog infoDialog = new ReplicaInfoDialog(this);
-			infoDialog.setTitle(DIALOG_STORE_NOT_READY_TITLE);
-			infoDialog.setDescripton(DIALOG_STORE_NOT_READY_MESSAGE);
-			infoDialog.setIcon(android.R.drawable.ic_dialog_alert);
-			dialog = infoDialog;
-		}
-		return dialog;
 	}
 
 	protected class StartActivityAfterAnimation implements Animation.AnimationListener {
