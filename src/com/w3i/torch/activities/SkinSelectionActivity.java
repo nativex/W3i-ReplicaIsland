@@ -2,6 +2,7 @@ package com.w3i.torch.activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.AudioManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,9 @@ public class SkinSelectionActivity extends Activity {
 		for (Skins s : Skins.values()) {
 			addSkin(s);
 		}
+
+		// Keep the volume control type consistent across all activities.
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 	}
 
 	private void addSkin(

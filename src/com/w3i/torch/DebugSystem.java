@@ -16,7 +16,6 @@
 
 package com.w3i.torch;
 
-
 public final class DebugSystem extends BaseObject {
 	public static final int COLOR_RED = 0;
 	public static final int COLOR_BLUE = 1;

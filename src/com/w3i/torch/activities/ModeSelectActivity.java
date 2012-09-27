@@ -6,12 +6,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import com.w3i.offerwall.PublisherManager;
 import com.w3i.torch.DebugLog;
 import com.w3i.torch.R;
 import com.w3i.torch.UIConstants;
@@ -107,6 +109,9 @@ public class ModeSelectActivity extends Activity {
 			mLevelSelectLocked.startAnimation(mLockedAnimation);
 		}
 		mStoryModeButton.setOnClickListener(sStoryModeButtonListener);
+
+		// Keep the volume control type consistent across all activities.
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 	}
 
 	@Override
@@ -209,5 +214,17 @@ public class ModeSelectActivity extends Activity {
 			result = super.onKeyDown(keyCode, event);
 		}
 		return result;
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		PublisherManager.createSession();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		PublisherManager.endSession();
 	}
 }

@@ -6,12 +6,14 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import com.w3i.offerwall.PublisherManager;
 import com.w3i.torch.DebugLog;
 import com.w3i.torch.PreferenceConstants;
 import com.w3i.torch.R;
@@ -109,11 +111,14 @@ public class StartGameActivity extends Activity {
 		mFadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 		mAlternateFadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 
+		// Keep the volume control type consistent across all activities.
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
+		PublisherManager.createSession();
 		// check if the player has made progress in the game and enable continue
 		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
 		final int row = prefs.getInt(PreferenceConstants.PREFERENCE_LEVEL_ROW, 0);
@@ -131,6 +136,12 @@ public class StartGameActivity extends Activity {
 		newGameButton.clearAnimation();
 		background.clearAnimation();
 		mButtonFlickerAnimation.setAnimationListener(null);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		PublisherManager.endSession();
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -111,6 +112,8 @@ public class AchievementsActivity extends Activity {
 		achvContainer = (LinearLayout) findViewById(R.id.achvMainList);
 		addAchivements();
 
+		// Keep the volume control type consistent across all activities.
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 	}
 
 	@Override

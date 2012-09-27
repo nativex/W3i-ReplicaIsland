@@ -16,7 +16,6 @@
 
 package com.w3i.torch;
 
-
 public class LevelBuilder extends BaseObject {
 	private final static int THEME_GRASS = 0;
 	private final static int THEME_ISLAND = 1;

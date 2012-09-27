@@ -14,8 +14,7 @@ public class TorchStoreManager {
 	public static void purchaseItem(
 			long itemId) {
 		TorchItemManager.purchaseItem(itemId);
-		
+
 	}
-	
-	
+
 }
