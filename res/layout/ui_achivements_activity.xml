@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:foo="http://schemas.android.com/apk/res/com.w3i.torch"
+    android:id="@+id/ui_achievements_activity_container"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/ui_achievements_activity_background"

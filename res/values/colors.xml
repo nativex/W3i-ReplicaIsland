@@ -18,6 +18,7 @@
     <color name="StoreDialogTitle">#FFFFFFFF</color>
     <color name="StoreDialogDescription">#FFFFFFFF</color>
     <color name="ui_start_game_button_color">#FFFFFFFF</color>
+    <color name="ui_game_mode_locked_color">#FFFF0000</color>
     <color name="ui_start_game_button_shadow">#FF000000</color>
 
 </resources>

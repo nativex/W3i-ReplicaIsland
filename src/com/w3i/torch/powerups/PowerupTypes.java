@@ -40,6 +40,9 @@ public enum PowerupTypes {
 
 	public void setEnabled(
 			boolean isEnabled) {
+		if (this == KILLING_SPREE_MULTIPLIER) {
+			"dd".toString();
+		}
 		enabled = isEnabled;
 	}
 

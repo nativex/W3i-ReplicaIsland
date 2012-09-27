@@ -20,7 +20,7 @@
         android:layout_marginBottom="60dip"
         android:gravity="center_horizontal"
         android:orientation="vertical" >
-
+
         <com.w3i.torch.views.CustomFontTextView
             android:id="@+id/ui_start_game_continue"
             style="@style/ui_start_game_button_style"

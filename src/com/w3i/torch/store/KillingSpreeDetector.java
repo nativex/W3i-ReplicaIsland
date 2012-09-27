@@ -49,15 +49,17 @@ public class KillingSpreeDetector {
 		if (PowerupTypes.BONUS_PEARLS.isEnabled()) {
 			int pearlsAwarded = 0;
 			if (PowerupTypes.KILLING_SPREE_MULTIPLIER.isEnabled()) {
-				KillingSpreeDetector.recordKill();
 				pearlsAwarded = (int) (PowerupTypes.BONUS_PEARLS.getValueFloat() * KillingSpreeDetector.getMultiplier() + 0.5f);
+				instance._recordKill();
 			} else {
 				pearlsAwarded = PowerupTypes.BONUS_PEARLS.getValueInt();
 			}
 			TorchCurrencyManager.addBalance(Currencies.PEARLS, pearlsAwarded);
 			AchievementManager.incrementAchievementProgress(Type.BONUS_PEARLS, pearlsAwarded);
+			if (PowerupTypes.BONUS_CRYSTALS.isEnabled()) {
+				instance.recordCrystals();
+			}
 		}
-		instance._recordKill();
 		AchievementManager.incrementAchievementProgress(Type.KILLS, 1);
 		AchievementManager.setAchievementState(Type.MERCIFUL, State.FAIL);
 	}
@@ -92,12 +94,11 @@ public class KillingSpreeDetector {
 			spreeTime = 0;
 		} else {
 			pearlsEarned = PowerupTypes.BONUS_PEARLS.getValueInt();
-			inSpree = true;
 			monstersKilled = 1;
 			spreeTime = 0;
+			inSpree = true;
 		}
 		Log.i("KillingSpreeDetector: Monster Killed");
-		recordCrystals();
 	}
 
 	private void recordCrystals() {

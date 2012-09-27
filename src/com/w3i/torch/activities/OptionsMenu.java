@@ -100,11 +100,14 @@ public class OptionsMenu extends Activity {
 				edit = prefs.edit();
 				edit.putBoolean(PreferenceConstants.PREFERENCE_SOUND_ENABLED, soundEnabled);
 				edit.commit();
+				final int soundText;
 				if (soundEnabled) {
-					((TextView) soundButton).setText(R.string.options_menu_sound_on_button_text);
+					soundText = R.string.options_menu_sound_on_button_text;
 				} else {
-					((TextView) soundButton).setText(R.string.options_menu_sound_off_button_text);
+					soundText = R.string.options_menu_sound_off_button_text;
 				}
+				setSwitchAnimation(soundButton, soundText);
+
 				break;
 
 			case R.id.ui_option_safe_mode:
@@ -113,11 +116,13 @@ public class OptionsMenu extends Activity {
 				edit = prefs.edit();
 				edit.putBoolean(PreferenceConstants.PREFERENCE_SAFE_MODE, safeModeEnabled);
 				edit.commit();
+				final int safeModeText;
 				if (safeModeEnabled) {
-					((TextView) safeModeButton).setText(R.string.options_menu_safe_mode_on_button_text);
+					safeModeText = R.string.options_menu_safe_mode_on_button_text;
 				} else {
-					((TextView) safeModeButton).setText(R.string.options_menu_safe_mode_off_button_text);
+					safeModeText = R.string.options_menu_safe_mode_off_button_text;
 				}
+				setSwitchAnimation(safeModeButton, safeModeText);
 				break;
 
 			case R.id.ui_option_controls:
@@ -148,6 +153,36 @@ public class OptionsMenu extends Activity {
 
 		}
 	};
+
+	private void setSwitchAnimation(
+			final View switchButton,
+			final int text) {
+		final Animation switchFadeInOut = AnimationUtils.loadAnimation(this, R.anim.fade_in_out);
+		switchFadeInOut.setRepeatCount(1);
+		switchFadeInOut.setDuration(100);
+		switchButton.startAnimation(switchFadeInOut);
+		switchFadeInOut.setAnimationListener(new Animation.AnimationListener() {
+
+			@Override
+			public void onAnimationStart(
+					Animation animation) {
+
+			}
+
+			@Override
+			public void onAnimationRepeat(
+					Animation animation) {
+				if (switchButton instanceof TextView) {
+					((TextView) switchButton).setText(text);
+				}
+			}
+
+			@Override
+			public void onAnimationEnd(
+					Animation animation) {
+			}
+		});
+	}
 
 	@Override
 	public void onCreate(
@@ -271,7 +306,6 @@ public class OptionsMenu extends Activity {
 
 		public void onAnimationStart(
 				Animation animation) {
-
 		}
 
 	}

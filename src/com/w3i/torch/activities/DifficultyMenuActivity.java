@@ -121,7 +121,7 @@ public class DifficultyMenuActivity extends Activity {
 		boolean result = true;
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			finish();
-
+			startActivity(new Intent(this, ModeSelectActivity.class));
 			if (UIConstants.mOverridePendingTransition != null) {
 				try {
 					UIConstants.mOverridePendingTransition.invoke(DifficultyMenuActivity.this, R.anim.activity_fade_in, R.anim.activity_fade_out);

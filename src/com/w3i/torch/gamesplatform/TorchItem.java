@@ -118,6 +118,8 @@ public class TorchItem {
 							if (attributeValue > 0) {
 								powerup.addValue(attributeValue);
 								powerup.setEnabled(true);
+							} else {
+								powerup.setEnabled(false);
 							}
 						} catch (Exception e) {
 							Log.e("TorchItem: Failed to parse attribute value. " + getDisplayName() + "->" + attributeName + "->" + attribute.getValue(), e);

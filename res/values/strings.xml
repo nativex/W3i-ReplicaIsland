@@ -410,5 +410,10 @@ If I am honest with myself, there is another reason the adventurers had to die. 
     <string name="options_menu_sound_off_button_text">SOUND OFF</string>
     <string name="options_menu_safe_mode_on_button_text">SAFE MODE ON</string>
     <string name="options_menu_safe_mode_off_button_text">SAFE MODE OFF</string>
+    <string name="ui_game_mode_level_select_button_text">LEVEL SELECT</string>
+    <string name="linear_mode">LINEAR MODE</string>
+    <string name="ui_game_mode_linear_locked">LOCKED</string>
+    <string name="ui_game_mode_level_select_locked_text">LOCKED</string>
+    <string name="ui_game_mode_story_mode_button_text">STORY MODE</string>
 
 </resources>

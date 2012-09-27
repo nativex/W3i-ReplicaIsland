@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.w3i.torch"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/ui_game_mode_background"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:contentDescription="@string/default_image_view_description"
+        android:scaleType="fitXY"
+        android:src="@drawable/ui_main_menu_background" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="60dip"
+        android:gravity="center_horizontal|bottom"
+        android:orientation="vertical" >
+
+        <com.w3i.torch.views.CustomFontTextView
+            android:id="@+id/ui_game_mode_story"
+            style="@style/ui_start_game_button_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_game_mode_story_mode_button_text" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <com.w3i.torch.views.CustomFontTextView
+                android:id="@+id/ui_game_mode_linear"
+                style="@style/ui_start_game_button_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/linear_mode" />
+
+            <com.w3i.torch.views.CustomFontTextView
+                android:id="@+id/ui_game_mode_linear_locked"
+                style="@style/ui_game_mode_locked_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/ui_game_mode_linear_locked" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <com.w3i.torch.views.CustomFontTextView
+                android:id="@+id/ui_game_mode_select"
+                style="@style/ui_start_game_button_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/ui_game_mode_level_select_button_text" />
+
+            <com.w3i.torch.views.CustomFontTextView
+                android:id="@+id/ui_game_mode_select_locked"
+                style="@style/ui_game_mode_locked_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/default_image_view_description"
+                android:text="@string/ui_game_mode_level_select_locked_text" />
+        </FrameLayout>
+    </LinearLayout>
+
+</FrameLayout>

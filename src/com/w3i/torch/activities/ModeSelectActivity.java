@@ -6,14 +6,13 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.w3i.torch.DebugLog;
-import com.w3i.torch.PreferenceConstants;
 import com.w3i.torch.R;
 import com.w3i.torch.UIConstants;
 
@@ -40,14 +39,9 @@ public class ModeSelectActivity extends Activity {
 		@Override
 		public void onClick(
 				View v) {
-			SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
-			final int row = prefs.getInt(PreferenceConstants.PREFERENCE_LEVEL_ROW, 0);
-			final int index = prefs.getInt(PreferenceConstants.PREFERENCE_LEVEL_INDEX, 0);
-			if (row != 0 || index != 0) {
-				startGame(START_STORY_MODE);
-				mLinearModeButton.startAnimation(mAlternateFadeOutAnimation);
-				mLevelSelectButton.startAnimation(mAlternateFadeOutAnimation);
-			}
+			startGame(START_STORY_MODE);
+			mLinearModeButton.startAnimation(mAlternateFadeOutAnimation);
+			mLevelSelectButton.startAnimation(mAlternateFadeOutAnimation);
 
 		}
 	};
@@ -55,14 +49,9 @@ public class ModeSelectActivity extends Activity {
 	private View.OnClickListener sLinearModeButtonListener = new View.OnClickListener() {
 		public void onClick(
 				View v) {
-			SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
-			final int row = prefs.getInt(PreferenceConstants.PREFERENCE_LEVEL_ROW, 0);
-			final int index = prefs.getInt(PreferenceConstants.PREFERENCE_LEVEL_INDEX, 0);
-			if (row != 0 || index != 0) {
-				startGame(START_LINEAR_MODE);
-				mStoryModeButton.startAnimation(mAlternateFadeOutAnimation);
-				mLevelSelectButton.startAnimation(mAlternateFadeOutAnimation);
-			}
+			startGame(START_LINEAR_MODE);
+			mStoryModeButton.startAnimation(mAlternateFadeOutAnimation);
+			mLevelSelectButton.startAnimation(mAlternateFadeOutAnimation);
 
 		}
 	};
@@ -70,14 +59,9 @@ public class ModeSelectActivity extends Activity {
 	private View.OnClickListener sLevelSelectButtonListener = new View.OnClickListener() {
 		public void onClick(
 				View v) {
-			SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
-			final int row = prefs.getInt(PreferenceConstants.PREFERENCE_LEVEL_ROW, 0);
-			final int index = prefs.getInt(PreferenceConstants.PREFERENCE_LEVEL_INDEX, 0);
-			if (row != 0 || index != 0) {
-				startGame(START_LEVEL_SELECT);
-				mLinearModeButton.startAnimation(mAlternateFadeOutAnimation);
-				mStoryModeButton.startAnimation(mAlternateFadeOutAnimation);
-			}
+			startGame(START_LEVEL_SELECT);
+			mLinearModeButton.startAnimation(mAlternateFadeOutAnimation);
+			mStoryModeButton.startAnimation(mAlternateFadeOutAnimation);
 
 		}
 	};
@@ -93,16 +77,18 @@ public class ModeSelectActivity extends Activity {
 	protected void onCreate(
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.ui_activity_level_mode_select);
 
-		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
-		final boolean extrasUnlocked = prefs.getBoolean(PreferenceConstants.PREFERENCE_EXTRAS_UNLOCKED, false);
+		// SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
+		// final boolean extrasUnlocked = prefs.getBoolean(PreferenceConstants.PREFERENCE_EXTRAS_UNLOCKED, false);
+		final boolean extrasUnlocked = true;
 
-		mLinearModeButton = findViewById(R.id.linearModeButton);
-		mLevelSelectButton = findViewById(R.id.levelSelectButton);
-		mLinearModeLocked = findViewById(R.id.linearModeLocked);
-		mLevelSelectLocked = findViewById(R.id.levelSelectLocked);
-		// TODO Create the background in Mode Select Activity.
-		// mBackground = findViewById(R.id.mode_select_background);
+		mStoryModeButton = findViewById(R.id.ui_game_mode_story);
+		mLinearModeButton = findViewById(R.id.ui_game_mode_linear);
+		mLevelSelectButton = findViewById(R.id.ui_game_mode_select);
+		mLinearModeLocked = findViewById(R.id.ui_game_mode_linear_locked);
+		mLevelSelectLocked = findViewById(R.id.ui_game_mode_select_locked);
+		mBackground = findViewById(R.id.ui_game_mode_background);
 
 		mButtonFlickerAnimation = AnimationUtils.loadAnimation(this, R.anim.button_flicker);
 		mFadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
@@ -200,5 +186,28 @@ public class ModeSelectActivity extends Activity {
 
 		}
 
+	}
+
+	@Override
+	public boolean onKeyDown(
+			int keyCode,
+			KeyEvent event) {
+		boolean result = true;
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			finish();
+			startActivity(new Intent(this, StartGameActivity.class));
+			if (UIConstants.mOverridePendingTransition != null) {
+				try {
+					UIConstants.mOverridePendingTransition.invoke(ModeSelectActivity.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
+				} catch (InvocationTargetException ite) {
+					DebugLog.d("Activity Transition", "Invocation Target Exception");
+				} catch (IllegalAccessException ie) {
+					DebugLog.d("Activity Transition", "Illegal Access Exception");
+				}
+			}
+		} else {
+			result = super.onKeyDown(keyCode, event);
+		}
+		return result;
 	}
 }

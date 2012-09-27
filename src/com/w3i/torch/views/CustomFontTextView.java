@@ -30,11 +30,11 @@ public class CustomFontTextView extends TextView {
 	@Override
 	protected void onDraw(
 			Canvas canvas) {
-		CharSequence text = getText();
+
 		if (addSpacing) {
+			CharSequence text = getText();
 			if ((text.length() > 1) && (text.charAt(1) != '\u00A0')) {
 				setText(setSpacing(text));
-				return;
 			}
 		}
 		super.onDraw(canvas);

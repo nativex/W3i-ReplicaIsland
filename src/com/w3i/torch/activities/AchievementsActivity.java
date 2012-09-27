@@ -1,21 +1,28 @@
 package com.w3i.torch.activities;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.w3i.offerwall.PublisherManager;
+import com.w3i.torch.DebugLog;
 import com.w3i.torch.R;
+import com.w3i.torch.UIConstants;
 import com.w3i.torch.achivements.Achievement;
 import com.w3i.torch.achivements.AchievementListener;
 import com.w3i.torch.achivements.AchievementManager;
@@ -185,6 +192,60 @@ public class AchievementsActivity extends Activity {
 		achievementIcon.setImageResource(achievement.getImage());
 
 		achvContainer.addView(achievementLayout);
+	}
+
+	@Override
+	public boolean onKeyDown(
+			int keyCode,
+			KeyEvent event) {
+		boolean result = true;
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			View achievementsActivity = findViewById(R.id.ui_achievements_activity_container);
+			Animation mFadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+			mFadeOutAnimation.setDuration(500);
+			achievementsActivity.startAnimation(mFadeOutAnimation);
+			mFadeOutAnimation.setAnimationListener(new StartActivityAfterAnimation(new Intent(this, StartGameActivity.class)));
+		} else {
+			result = super.onKeyDown(keyCode, event);
+		}
+		return result;
+	}
+
+	protected class StartActivityAfterAnimation implements Animation.AnimationListener {
+		private Intent mIntent;
+
+		StartActivityAfterAnimation(Intent intent) {
+			mIntent = intent;
+		}
+
+		public void onAnimationEnd(
+				Animation animation) {
+
+			startActivity(mIntent);
+			finish();
+
+			if (UIConstants.mOverridePendingTransition != null) {
+				try {
+					UIConstants.mOverridePendingTransition.invoke(AchievementsActivity.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
+				} catch (InvocationTargetException ite) {
+					DebugLog.d("Activity Transition", "Invocation Target Exception");
+				} catch (IllegalAccessException ie) {
+					DebugLog.d("Activity Transition", "Illegal Access Exception");
+				}
+			}
+			mIntent = null;
+		}
+
+		public void onAnimationRepeat(
+				Animation animation) {
+
+		}
+
+		public void onAnimationStart(
+				Animation animation) {
+
+		}
+
 	}
 
 }

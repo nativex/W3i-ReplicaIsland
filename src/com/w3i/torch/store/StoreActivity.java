@@ -1,5 +1,6 @@
 package com.w3i.torch.store;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -10,8 +11,10 @@ import java.util.Map.Entry;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,12 +32,15 @@ import com.w3i.advertiser.NetworkConnectionManager;
 import com.w3i.gamesplatformsdk.Log;
 import com.w3i.offerwall.PublisherManager;
 import com.w3i.offerwall.custom.views.CustomImageView;
+import com.w3i.torch.DebugLog;
 import com.w3i.torch.R;
+import com.w3i.torch.UIConstants;
 import com.w3i.torch.achivements.Achievement;
 import com.w3i.torch.achivements.Achievement.State;
 import com.w3i.torch.achivements.Achievement.Type;
 import com.w3i.torch.achivements.AchievementListener;
 import com.w3i.torch.achivements.AchievementManager;
+import com.w3i.torch.activities.StartGameActivity;
 import com.w3i.torch.gamesplatform.GamesPlatformManager;
 import com.w3i.torch.gamesplatform.SharedPreferenceManager;
 import com.w3i.torch.gamesplatform.TorchCurrency;
@@ -580,6 +586,60 @@ public class StoreActivity extends Activity {
 				storeList.removeView(categoryGroup);
 			}
 		}
+	}
+
+	@Override
+	public boolean onKeyDown(
+			int keyCode,
+			KeyEvent event) {
+		boolean result = true;
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			View storeActivity = findViewById(R.id.ui_store_activity_container);
+			Animation mFadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+			mFadeOutAnimation.setDuration(500);
+			storeActivity.startAnimation(mFadeOutAnimation);
+			mFadeOutAnimation.setAnimationListener(new StartActivityAfterAnimation(new Intent(this, StartGameActivity.class)));
+		} else {
+			result = super.onKeyDown(keyCode, event);
+		}
+		return result;
+	}
+
+	protected class StartActivityAfterAnimation implements Animation.AnimationListener {
+		private Intent mIntent;
+
+		StartActivityAfterAnimation(Intent intent) {
+			mIntent = intent;
+		}
+
+		public void onAnimationEnd(
+				Animation animation) {
+
+			startActivity(mIntent);
+			finish();
+
+			if (UIConstants.mOverridePendingTransition != null) {
+				try {
+					UIConstants.mOverridePendingTransition.invoke(StoreActivity.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
+				} catch (InvocationTargetException ite) {
+					DebugLog.d("Activity Transition", "Invocation Target Exception");
+				} catch (IllegalAccessException ie) {
+					DebugLog.d("Activity Transition", "Illegal Access Exception");
+				}
+			}
+			mIntent = null;
+		}
+
+		public void onAnimationRepeat(
+				Animation animation) {
+
+		}
+
+		public void onAnimationStart(
+				Animation animation) {
+
+		}
+
 	}
 
 }

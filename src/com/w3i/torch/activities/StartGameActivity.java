@@ -48,17 +48,12 @@ public class StartGameActivity extends Activity {
 				storeButton.startAnimation(mAlternateFadeOutAnimation);
 				achievementsButton.startAnimation(mAlternateFadeOutAnimation);
 				newGameButton.startAnimation(mAlternateFadeOutAnimation);
+				background.startAnimation(mFadeOutAnimation);
 				break;
 
 			case R.id.ui_start_game_new:
-				intent = new Intent(StartGameActivity.this, DifficultyMenuActivity.class);
+				intent = new Intent(StartGameActivity.this, ModeSelectActivity.class);
 				intent.putExtra("newGame", true);
-
-				storeButton.startAnimation(mAlternateFadeOutAnimation);
-				achievementsButton.startAnimation(mAlternateFadeOutAnimation);
-				if (continueButton.getVisibility() == View.VISIBLE) {
-					continueButton.startAnimation(mAlternateFadeOutAnimation);
-				}
 				break;
 
 			case R.id.ui_start_game_store:
@@ -72,6 +67,7 @@ public class StartGameActivity extends Activity {
 					}
 					achievementsButton.startAnimation(mAlternateFadeOutAnimation);
 					newGameButton.startAnimation(mAlternateFadeOutAnimation);
+					background.startAnimation(mFadeOutAnimation);
 				}
 				break;
 
@@ -82,13 +78,13 @@ public class StartGameActivity extends Activity {
 					continueButton.startAnimation(mAlternateFadeOutAnimation);
 				}
 				newGameButton.startAnimation(mAlternateFadeOutAnimation);
+				background.startAnimation(mFadeOutAnimation);
 				break;
 
 			}
 			v.startAnimation(mButtonFlickerAnimation);
 			if (intent != null) {
 				mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(intent));
-				background.startAnimation(mFadeOutAnimation);
 			}
 		}
 	};
@@ -105,17 +101,6 @@ public class StartGameActivity extends Activity {
 		achievementsButton = findViewById(R.id.ui_start_game_achievements);
 		background = findViewById(R.id.ui_start_game_background);
 
-		// check if the player has made progress in the game and enable continue
-		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
-		final int row = prefs.getInt(PreferenceConstants.PREFERENCE_LEVEL_ROW, 0);
-		final int index = prefs.getInt(PreferenceConstants.PREFERENCE_LEVEL_INDEX, 0);
-		if (row != 0 || index != 0) {
-			continueButton.setOnClickListener(onButtonClickListener);
-			continueButton.setVisibility(View.VISIBLE);
-		} else {
-			continueButton.setVisibility(View.INVISIBLE);
-		}
-
 		newGameButton.setOnClickListener(onButtonClickListener);
 		storeButton.setOnClickListener(onButtonClickListener);
 		achievementsButton.setOnClickListener(onButtonClickListener);
@@ -129,12 +114,21 @@ public class StartGameActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		// check if the player has made progress in the game and enable continue
+		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
+		final int row = prefs.getInt(PreferenceConstants.PREFERENCE_LEVEL_ROW, 0);
+		final int index = prefs.getInt(PreferenceConstants.PREFERENCE_LEVEL_INDEX, 0);
+		continueButton.clearAnimation();
+		if (row != 0 || index != 0) {
+			continueButton.setOnClickListener(onButtonClickListener);
+			continueButton.setVisibility(View.VISIBLE);
+		} else {
+			continueButton.setVisibility(View.INVISIBLE);
+		}
+
 		storeButton.clearAnimation();
 		achievementsButton.clearAnimation();
 		newGameButton.clearAnimation();
-		if (continueButton.getVisibility() == View.VISIBLE) {
-			continueButton.startAnimation(mAlternateFadeOutAnimation);
-		}
 		background.clearAnimation();
 		mButtonFlickerAnimation.setAnimationListener(null);
 	}
@@ -173,6 +167,7 @@ public class StartGameActivity extends Activity {
 				Animation animation) {
 
 			startActivity(mIntent);
+			finish();
 
 			if (UIConstants.mOverridePendingTransition != null) {
 				try {
