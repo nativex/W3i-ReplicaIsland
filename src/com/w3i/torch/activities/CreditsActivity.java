@@ -1,9 +1,10 @@
 package com.w3i.torch.activities;
 
-import com.w3i.offerwall.PublisherManager;
-
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.w3i.offerwall.PublisherManager;
+import com.w3i.torch.R;
 
 public class CreditsActivity extends Activity {
 
@@ -11,6 +12,7 @@ public class CreditsActivity extends Activity {
 	protected void onCreate(
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.ui_activity_credits);
 	}
 
 	@Override
