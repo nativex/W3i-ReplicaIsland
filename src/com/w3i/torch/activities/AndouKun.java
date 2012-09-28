@@ -19,9 +19,7 @@ package com.w3i.torch.activities;
 import java.lang.reflect.InvocationTargetException;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
@@ -65,6 +63,7 @@ import com.w3i.torch.achivements.AchievementManager;
 import com.w3i.torch.gamesplatform.SharedPreferenceManager;
 import com.w3i.torch.store.KillingSpreeDetector;
 import com.w3i.torch.views.ReplicaIslandToast;
+import com.w3i.torch.views.ReplicaYesNoDialog;
 
 /**
  * Core activity for the game. Sets up a surface view for OpenGL, bootstraps the game engine, and manages UI events. Also manages game progression, transitioning to other activites, save game, and
@@ -870,11 +869,16 @@ public class AndouKun extends Activity implements SensorEventListener {
 			int id) {
 		Dialog dialog = null;
 		if (id == QUIT_GAME_DIALOG) {
+			ReplicaYesNoDialog quitDialog = new ReplicaYesNoDialog(this);
+			quitDialog.setTitle(R.string.quit_game_dialog_title);
+			quitDialog.setPositiveButtonText(R.string.quit_game_dialog_ok, 17);
+			quitDialog.setNegativeButtonText(R.string.quit_game_dialog_cancel, 17);
+			quitDialog.setMessage(R.string.quit_game_dialog_message);
+			quitDialog.setPositiveButtonListener(new View.OnClickListener() {
 
-			dialog = new AlertDialog.Builder(this).setTitle(R.string.quit_game_dialog_title).setPositiveButton(R.string.quit_game_dialog_ok, new DialogInterface.OnClickListener() {
+				@Override
 				public void onClick(
-						DialogInterface dialog,
-						int whichButton) {
+						View v) {
 					finish();
 					if (UIConstants.mOverridePendingTransition != null) {
 						try {
@@ -885,8 +889,26 @@ public class AndouKun extends Activity implements SensorEventListener {
 							DebugLog.d("Activity Transition", "Illegal Access Exception");
 						}
 					}
+
 				}
-			}).setNegativeButton(R.string.quit_game_dialog_cancel, null).setMessage(R.string.quit_game_dialog_message).create();
+			});
+			dialog = quitDialog;
+			// dialog = new AlertDialog.Builder(this).setTitle(R.string.quit_game_dialog_title).setPositiveButton(R.string.quit_game_dialog_ok, new DialogInterface.OnClickListener() {
+			// public void onClick(
+			// DialogInterface dialog,
+			// int whichButton) {
+			// finish();
+			// if (UIConstants.mOverridePendingTransition != null) {
+			// try {
+			// UIConstants.mOverridePendingTransition.invoke(AndouKun.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
+			// } catch (InvocationTargetException ite) {
+			// DebugLog.d("Activity Transition", "Invocation Target Exception");
+			// } catch (IllegalAccessException ie) {
+			// DebugLog.d("Activity Transition", "Illegal Access Exception");
+			// }
+			// }
+			// }
+			// }).setNegativeButton(R.string.quit_game_dialog_cancel, null).setMessage(R.string.quit_game_dialog_message).create();
 		}
 		return dialog;
 	}
