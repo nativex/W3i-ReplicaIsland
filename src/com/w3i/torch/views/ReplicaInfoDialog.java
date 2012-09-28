@@ -98,6 +98,11 @@ public class ReplicaInfoDialog extends Dialog {
 		description.setText(text);
 	}
 
+	public void setDescripton(
+			int resId) {
+		setDescripton(getContext().getResources().getString(resId));
+	}
+
 	public void setButtonText(
 			String text,
 			float textSize) {
@@ -106,6 +111,17 @@ public class ReplicaInfoDialog extends Dialog {
 		if (textSize > 0) {
 			button.setTextSize(textSize);
 		}
+	}
+
+	public void setButtonText(
+			int resId) {
+		setButtonText(getContext().getResources().getString(resId));
+	}
+
+	public void setButtonText(
+			int resId,
+			float size) {
+		setButtonText(getContext().getResources().getString(resId), size);
 	}
 
 	public void setButtonText(

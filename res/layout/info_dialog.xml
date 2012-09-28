@@ -96,6 +96,7 @@
         android:layout_below="@+id/infoDialogItemLayout"
         android:layout_margin="10dip"
         android:background="@drawable/info_dialog_button"
+        android:gravity="center"
         android:minHeight="40dip"
         android:minWidth="70dip"
         android:textColor="@android:color/white"

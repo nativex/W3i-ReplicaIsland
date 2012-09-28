@@ -3,9 +3,9 @@ package com.w3i.torch.activities;
 import java.lang.reflect.InvocationTargetException;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -15,8 +15,10 @@ import android.view.animation.AnimationUtils;
 
 import com.w3i.offerwall.PublisherManager;
 import com.w3i.torch.DebugLog;
+import com.w3i.torch.PreferenceConstants;
 import com.w3i.torch.R;
 import com.w3i.torch.UIConstants;
+import com.w3i.torch.views.ReplicaInfoDialog;
 
 public class ModeSelectActivity extends Activity {
 	private View mStoryModeButton;
@@ -81,9 +83,9 @@ public class ModeSelectActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ui_activity_level_mode_select);
 
-		// SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
-		// final boolean extrasUnlocked = prefs.getBoolean(PreferenceConstants.PREFERENCE_EXTRAS_UNLOCKED, false);
-		final boolean extrasUnlocked = true;
+		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
+		final boolean extrasUnlocked = prefs.getBoolean(PreferenceConstants.PREFERENCE_EXTRAS_UNLOCKED, false);
+		// final boolean extrasUnlocked = true;
 
 		mStoryModeButton = findViewById(R.id.ui_game_mode_story);
 		mLinearModeButton = findViewById(R.id.ui_game_mode_linear);
@@ -119,7 +121,12 @@ public class ModeSelectActivity extends Activity {
 			int id) {
 		Dialog dialog = null;
 		if (id == EXTRAS_LOCKED_DIALOG) {
-			dialog = new AlertDialog.Builder(this).setTitle(R.string.extras_locked_dialog_title).setPositiveButton(R.string.extras_locked_dialog_ok, null).setMessage(R.string.extras_locked_dialog_message).create();
+			ReplicaInfoDialog extrasLockedDialog = new ReplicaInfoDialog(this);
+			extrasLockedDialog.setTitle(R.string.extras_locked_dialog_title);
+			extrasLockedDialog.setDescripton(R.string.extras_locked_dialog_message);
+			extrasLockedDialog.setButtonText(R.string.extras_locked_dialog_ok);
+			extrasLockedDialog.hideIcon();
+			dialog = extrasLockedDialog;
 		}
 		return dialog;
 	}
