@@ -83,9 +83,9 @@ public class ModeSelectActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ui_activity_level_mode_select);
 
-		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
-		final boolean extrasUnlocked = prefs.getBoolean(PreferenceConstants.PREFERENCE_EXTRAS_UNLOCKED, false);
-		// final boolean extrasUnlocked = true;
+		// SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
+		// final boolean extrasUnlocked = prefs.getBoolean(PreferenceConstants.PREFERENCE_EXTRAS_UNLOCKED, false);
+		final boolean extrasUnlocked = true;
 
 		mStoryModeButton = findViewById(R.id.ui_game_mode_story);
 		mLinearModeButton = findViewById(R.id.ui_game_mode_linear);
