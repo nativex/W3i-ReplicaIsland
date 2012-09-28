@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.w3i.torch"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
@@ -30,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
-                <TextView
+                <com.w3i.torch.views.CustomFontTextView
                     android:id="@+id/infoDialogError"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -42,14 +43,13 @@
                     android:textColor="#ffff0000"
                     android:visibility="gone" />
 
-                <TextView
+                <com.w3i.torch.views.CustomFontTextView
                     android:id="@+id/infoDialogDescription"
                     style="@style/StoreDialogDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dip"
-                    android:text="@string/info_dialog_description" >
-                </TextView>
+                    android:text="@string/info_dialog_description" />
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>
@@ -88,14 +88,17 @@
         android:paddingLeft="12dip"
         android:src="@drawable/info_dialog_close" />
 
-    <Button
+    <com.w3i.torch.views.CustomFontTextView
         android:id="@+id/infoDialogButton"
-        android:layout_width="110dip"
-        android:layout_height="40dip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignRight="@+id/infoDialogCloseButton"
         android:layout_below="@+id/infoDialogItemLayout"
         android:layout_margin="10dip"
         android:background="@drawable/info_dialog_button"
-        android:textColor="@android:color/white" />
+        android:minHeight="40dip"
+        android:minWidth="70dip"
+        android:textColor="@android:color/white"
+        app:setFont="BABYU__.TTF" />
 
 </RelativeLayout>

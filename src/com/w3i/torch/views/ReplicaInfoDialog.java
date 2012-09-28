@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.w3i.offerwall.custom.views.CustomImageView;
@@ -42,7 +41,7 @@ public class ReplicaInfoDialog extends Dialog {
 		setContentView(R.layout.info_dialog);
 		View close = findViewById(R.id.infoDialogCloseButton);
 		close.setOnClickListener(onCloseClicked);
-		Button button = (Button) findViewById(R.id.infoDialogButton);
+		TextView button = (TextView) findViewById(R.id.infoDialogButton);
 		button.setOnClickListener(onCloseClicked);
 		getWindow().setBackgroundDrawableResource(R.drawable.info_dialog_background);
 		button.setText("OK");
@@ -102,7 +101,7 @@ public class ReplicaInfoDialog extends Dialog {
 	public void setButtonText(
 			String text,
 			float textSize) {
-		Button button = (Button) findViewById(R.id.infoDialogButton);
+		TextView button = (TextView) findViewById(R.id.infoDialogButton);
 		button.setText(text);
 		if (textSize > 0) {
 			button.setTextSize(textSize);
