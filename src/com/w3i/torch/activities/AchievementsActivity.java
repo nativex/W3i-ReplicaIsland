@@ -107,7 +107,7 @@ public class AchievementsActivity extends Activity {
 	protected void onCreate(
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.ui_achivements_activity);
+		setContentView(R.layout.ui_achievements_activity);
 
 		achvContainer = (LinearLayout) findViewById(R.id.achvMainList);
 		addAchivements();
@@ -162,7 +162,7 @@ public class AchievementsActivity extends Activity {
 	private void addAchievement(
 			Achievement achievement) {
 		LayoutInflater inflater = getLayoutInflater();
-		View achievementLayout = inflater.inflate(R.layout.ui_achivement, null);
+		View achievementLayout = inflater.inflate(R.layout.ui_achievement, null);
 
 		setAchievementParams(achievementLayout, achievement);
 	}
@@ -170,7 +170,7 @@ public class AchievementsActivity extends Activity {
 	private void addProgressAchievement(
 			ProgressAchievement achievement) {
 		LayoutInflater inflater = getLayoutInflater();
-		View achievementLayout = inflater.inflate(R.layout.ui_achivement_progress, null);
+		View achievementLayout = inflater.inflate(R.layout.ui_achievement_progress, null);
 
 		setAchievementParams(achievementLayout, achievement);
 

@@ -24,7 +24,10 @@
         android:layout_below="@+id/achvMainTitle"
         android:layout_margin="5dip"
         android:background="@drawable/ui_achievements_activity_list_background"
-        android:padding="5dip" >
+        android:paddingBottom="15dip"
+        android:paddingLeft="5dip"
+        android:paddingRight="5dip"
+        android:paddingTop="15dip" >
 
         <LinearLayout
             android:id="@+id/achvMainList"
