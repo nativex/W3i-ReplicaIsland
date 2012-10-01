@@ -34,6 +34,10 @@ public class AchievementManager {
 		_initializeAchievements();
 	}
 
+	private AchievementManager(Context context) {
+		applicationContext = context;
+	}
+
 	private static synchronized void checkInstance() {
 		if (instance == null) {
 			instance = new AchievementManager();
@@ -511,8 +515,11 @@ public class AchievementManager {
 
 	public static void setApplicationContext(
 			Context context) {
-		checkInstance();
-		instance.applicationContext = context;
+		if (instance == null) {
+			instance = new AchievementManager(context);
+		} else {
+			instance.applicationContext = context;
+		}
 	}
 
 	public static Context getApplicationContext() {
