@@ -1,6 +1,9 @@
 package com.w3i.torch.achivements;
 
+import android.content.Context;
+
 import com.w3i.common.Log;
+import com.w3i.torch.R;
 import com.w3i.torch.utils.TimeUtils;
 
 public class JetpackTime extends ProgressAchievement {
@@ -8,12 +11,12 @@ public class JetpackTime extends ProgressAchievement {
 	private boolean flying = false;
 
 	public JetpackTime() {
-		super(AchievementConstants.JETPACK_TIME_GOAL);
-		setName(AchievementConstants.JETPACK_TIME_NAME);
-		setDescription(AchievementConstants.JETPACK_TIME_DESCRIPTION);
+		super(R.integer.achievement_jetpack_time_goal);
+		setName(R.string.achievement_jetpack_time_name);
+		setDescription(R.string.achievement_jetpack_time_description);
 		setType(Type.JETPACK_TIME);
-		setImageDone(AchievementConstants.JETPACK_TIME_IMAGE_EARNED);
-		setImageLocked(AchievementConstants.JETPACK_TIME_IMAGE_LOCKED);
+		setImageDone(R.drawable.ui_achievement_jetpack_ace);
+		setImageLocked(R.drawable.ui_achievement_jetpack_ace_locked);
 	}
 
 	public void startedFlaying() {
@@ -43,4 +46,12 @@ public class JetpackTime extends ProgressAchievement {
 
 	}
 
+	@Override
+	public String formatText(
+			Context context,
+			int text) {
+		String unformattedText = context.getResources().getString(text);
+		String formattedText = unformattedText.replace("#", TimeUtils.getTimeAchievementStringFromSeconds(getGoal()));
+		return formattedText;
+	}
 }

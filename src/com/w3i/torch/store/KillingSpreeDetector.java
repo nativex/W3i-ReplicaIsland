@@ -3,8 +3,8 @@ package com.w3i.torch.store;
 import com.w3i.common.Log;
 import com.w3i.torch.achivements.Achievement.State;
 import com.w3i.torch.achivements.Achievement.Type;
-import com.w3i.torch.achivements.AchievementConstants;
 import com.w3i.torch.achivements.AchievementManager;
+import com.w3i.torch.achivements.MegakillAchievement;
 import com.w3i.torch.gamesplatform.TorchCurrencyManager;
 import com.w3i.torch.gamesplatform.TorchCurrencyManager.Currencies;
 import com.w3i.torch.powerups.PowerupTypes;
@@ -34,7 +34,7 @@ public class KillingSpreeDetector {
 		if (monstersKilled > 1) {
 			AchievementManager.incrementAchievementProgress(Type.MULTI_KILL, 1);
 		}
-		if (monstersKilled >= AchievementConstants.MEGA_KILL_GOAL) {
+		if (monstersKilled >= MegakillAchievement.MONSTERS_TO_KILL) {
 			AchievementManager.setAchievementDone(Type.MEGA_KILL, true);
 		}
 
@@ -49,8 +49,8 @@ public class KillingSpreeDetector {
 		if (PowerupTypes.BONUS_PEARLS.isEnabled()) {
 			int pearlsAwarded = 0;
 			if (PowerupTypes.KILLING_SPREE_MULTIPLIER.isEnabled()) {
-				pearlsAwarded = (int) (PowerupTypes.BONUS_PEARLS.getValueFloat() * KillingSpreeDetector.getMultiplier() + 0.5f);
 				instance._recordKill();
+				pearlsAwarded = (int) (PowerupTypes.BONUS_PEARLS.getValueFloat() * KillingSpreeDetector.getMultiplier() + 0.5f);
 			} else {
 				pearlsAwarded = PowerupTypes.BONUS_PEARLS.getValueInt();
 			}
@@ -106,7 +106,7 @@ public class KillingSpreeDetector {
 		if (crystalsPerKill > 0) {
 			killsToCrystal--;
 			if (killsToCrystal <= 0) {
-				TorchCurrencyManager.setBalance(Currencies.CRYSTALS, PowerupTypes.BONUS_CRYSTALS.getValueInt());
+				TorchCurrencyManager.addBalance(Currencies.CRYSTALS, PowerupTypes.BONUS_CRYSTALS.getValueInt());
 				killsToCrystal = PowerupTypes.BONUS_CRYSTALS_REQUIREMENT.getValueInt();
 				AchievementManager.incrementAchievementProgress(Type.BONUS_CRYSTALS, PowerupTypes.BONUS_CRYSTALS.getValueInt());
 			}

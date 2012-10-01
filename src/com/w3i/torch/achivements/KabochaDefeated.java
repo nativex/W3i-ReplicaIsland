@@ -1,13 +1,15 @@
 package com.w3i.torch.achivements;
 
+import com.w3i.torch.R;
+
 public class KabochaDefeated extends Achievement {
 
 	public KabochaDefeated() {
-		setName(AchievementConstants.KABOOCHA_NAME);
-		setDescription(AchievementConstants.KABOOCHA_DESCRIPTION);
+		setName(R.string.achievement_kaboocha_name);
+		setDescription(R.string.achievement_kaboocha_description);
 		setType(Type.KABOCHA_DEFEATED);
 		setLocked(true);
-		setImageDone(AchievementConstants.KABOOCHA_IMAGE_EARNED);
-		setImageLocked(AchievementConstants.KABOOCHA_IMAGE_LOCKED);
+		setImageDone(R.drawable.achv_unlocked);
+		setImageLocked(R.drawable.achv_locked);
 	}
 }

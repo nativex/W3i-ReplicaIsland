@@ -190,8 +190,8 @@ public class AchievementsActivity extends Activity {
 		TextView achievementDescription = (TextView) achievementLayout.findViewById(R.id.uiAchvDescription);
 		ImageView achievementIcon = (ImageView) achievementLayout.findViewById(R.id.uiAchvIcon);
 
-		achievementName.setText(achievement.getName());
-		achievementDescription.setText(achievement.getDescription());
+		achievementName.setText(achievement.formatText(this, achievement.getNameResource()));
+		achievementDescription.setText(achievement.formatText(this, achievement.getDescription()));
 		achievementIcon.setImageResource(achievement.getImage());
 
 		achvContainer.addView(achievementLayout);

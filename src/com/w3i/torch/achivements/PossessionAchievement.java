@@ -1,14 +1,16 @@
 package com.w3i.torch.achivements;
 
+import com.w3i.torch.R;
+
 public class PossessionAchievement extends ProgressAchievement {
 
 	public PossessionAchievement() {
-		super(AchievementConstants.POSSESSION_GOAL);
-		setName(AchievementConstants.POSSESSION_NAME);
-		setDescription(AchievementConstants.POSSESSION_DESCRIPTION);
+		super(R.integer.achievement_possession_goal);
+		setName(R.string.achievement_possession_name);
+		setDescription(R.string.achievement_possession_description);
 		setType(Type.POSSESSION);
-		setImageDone(AchievementConstants.POSSESSION_IMAGE_EARNED);
-		setImageLocked(AchievementConstants.POSSESSION_IMAGE_LOCKED);
+		setImageDone(R.drawable.ui_achievement_possession);
+		setImageLocked(R.drawable.ui_achievement_possession_locked);
 	}
 
 }

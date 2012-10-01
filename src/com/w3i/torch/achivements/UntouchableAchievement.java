@@ -1,17 +1,18 @@
 package com.w3i.torch.achivements;
 
 import com.w3i.common.Log;
+import com.w3i.torch.R;
 
 public class UntouchableAchievement extends Achievement {
 
 	private boolean achievementFailed = false;
 
 	public UntouchableAchievement() {
-		setName(AchievementConstants.UNTOUCHABLE_NAME);
-		setDescription(AchievementConstants.UNTOUCHABLE_DESCRIPTION);
+		setName(R.string.achievement_untouchable_name);
+		setDescription(R.string.achievement_untouchable_description);
 		setType(Type.UNTOUCHABLE);
-		setImageDone(AchievementConstants.UNTOUCHABLE_IMAGE_EARNED);
-		setImageLocked(AchievementConstants.UNTOUCHABLE_IMAGE_LOCKED);
+		setImageDone(R.drawable.ui_achievement_untouchable);
+		setImageLocked(R.drawable.ui_achievement_untouchable_locked);
 	}
 
 	private void levelFinished() {

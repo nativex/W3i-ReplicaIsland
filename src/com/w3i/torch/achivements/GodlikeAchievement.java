@@ -4,16 +4,17 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 import com.w3i.common.Log;
+import com.w3i.torch.R;
 
 public class GodlikeAchievement extends Achievement {
 	private boolean failed = false;
 
 	public GodlikeAchievement() {
-		setName(AchievementConstants.GODLIKE_NAME);
-		setDescription(AchievementConstants.GODLIKE_DESCRIPTION);
+		setName(R.string.achievement_godlike_name);
+		setDescription(R.string.achievement_godlike_description);
 		setType(Type.GODLIKE);
-		setImageDone(AchievementConstants.GODLIKE_IMAGE_EARNED);
-		setImageLocked(AchievementConstants.GODLIKE_IMAGE_LOCKED);
+		setImageDone(R.drawable.ui_achievement_godlike);
+		setImageLocked(R.drawable.ui_achievement_godlike_locked);
 	}
 
 	private String getPreferencesFailedKey() {

@@ -47,6 +47,7 @@ import com.w3i.torch.gamesplatform.TorchCurrency;
 import com.w3i.torch.gamesplatform.TorchCurrencyManager;
 import com.w3i.torch.gamesplatform.TorchCurrencyManager.OnCurrencyChanged;
 import com.w3i.torch.gamesplatform.TorchItem;
+import com.w3i.torch.gamesplatform.TorchItem.PurchaseState;
 import com.w3i.torch.gamesplatform.TorchItemManager;
 import com.w3i.torch.powerups.PowerupTypes;
 import com.w3i.torch.views.FundsView;
@@ -161,8 +162,8 @@ public class StoreActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(
-			MenuItem item) {
-		switch (item.getItemId()) {
+			MenuItem menuItem) {
+		switch (menuItem.getItemId()) {
 		case R.id.testMenuStoreAddBalance:
 			for (Entry<Long, TorchCurrency> entry : TorchCurrencyManager.getCurrencies().entrySet()) {
 				TorchCurrencyManager.addBalance(entry.getValue(), 1000);
@@ -174,8 +175,18 @@ public class StoreActivity extends Activity {
 				TorchCurrencyManager.setBalance(entry.getValue(), 0);
 			}
 
+		case R.id.testMenuStoreResetItems:
+			for (Entry<PurchaseState, List<TorchItem>> entry : TorchItemManager.getAllItems().entrySet()) {
+				for (TorchItem item : entry.getValue()) {
+					item.setPurchased(false);
+				}
+			}
+			TorchItemManager.reloadPurchasedItems();
+			storeList.removeAllViews();
+			adapter.clear();
+			loadItems();
 		default:
-			return super.onOptionsItemSelected(item);
+			return super.onOptionsItemSelected(menuItem);
 		}
 	}
 

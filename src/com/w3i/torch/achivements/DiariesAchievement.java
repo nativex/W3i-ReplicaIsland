@@ -8,17 +8,18 @@ import android.util.SparseBooleanArray;
 
 import com.google.gson.Gson;
 import com.w3i.torch.LevelTree;
+import com.w3i.torch.R;
 
 public class DiariesAchievement extends ProgressAchievement {
 	private SparseBooleanArray diariesCollected;
 
 	public DiariesAchievement() {
-		setName(AchievementConstants.DIARIES_NAME);
-		setDescription(AchievementConstants.DIARIES_DESCRIPTION);
+		setName(R.string.achievement_diaries_name);
+		setDescription(R.string.achievement_diaries_description);
 		setType(Type.DIARIES);
 		setInitialized(false);
-		setImageLocked(AchievementConstants.DIARIES_IMAGE_LOCKED);
-		setImageDone(AchievementConstants.DIARIES_IMAGE_EARNED);
+		setImageLocked(R.drawable.ui_achievement_bookworm_locked);
+		setImageDone(R.drawable.ui_achievement_bookwork);
 		initializeDiaryData();
 	}
 

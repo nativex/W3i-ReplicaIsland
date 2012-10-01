@@ -1,16 +1,17 @@
 package com.w3i.torch.achivements;
 
 import com.w3i.common.Log;
+import com.w3i.torch.R;
 
 public class MercifulAchievement extends Achievement {
 	private boolean achievementFailed = false;
 
 	public MercifulAchievement() {
-		setName(AchievementConstants.MERCIFUL_NAME);
-		setDescription(AchievementConstants.MERCIFUL_DESCRIPTION);
+		setName(R.string.achievement_merciful_name);
+		setDescription(R.string.achievement_merciful_description);
 		setType(Type.MERCIFUL);
-		setImageDone(AchievementConstants.MERCIFUL_IMAGE_EARNED);
-		setImageLocked(AchievementConstants.MERCIFUL_IMAGE_LOCKED);
+		setImageDone(R.drawable.ui_achievement_merciful);
+		setImageLocked(R.drawable.ui_achievement_merciful_locked);
 	}
 
 	private void levelFinished() {

@@ -1,5 +1,6 @@
 package com.w3i.torch.achivements;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.w3i.torch.R;
@@ -10,7 +11,7 @@ public abstract class Achievement {
 	private boolean disabled = false;
 	private boolean done = false;
 	private boolean progress = false;
-	private String description = null;
+	private int description;
 	private String name = null;
 	private int imageNotDone = R.drawable.achv_locked;
 	private int imageDone = R.drawable.achv_unlocked;
@@ -18,6 +19,7 @@ public abstract class Achievement {
 	private String preferencesName;
 	private boolean preferencesLoaded = false;
 	private boolean initialized = true;
+	private int nameResource;
 
 	/**
 	 * @return the preferencesLoaded
@@ -120,7 +122,7 @@ public abstract class Achievement {
 	}
 
 	protected void setDescription(
-			String description) {
+			int description) {
 		this.description = description;
 	}
 
@@ -129,9 +131,20 @@ public abstract class Achievement {
 		this.name = name;
 	}
 
+	protected void setName(
+			int name) {
+		nameResource = name;
+	}
+
 	public void setDisabled(
 			boolean disabled) {
 		this.disabled = disabled;
+	}
+
+	public String formatText(
+			Context context,
+			int text) {
+		return null;
 	}
 
 	protected void setProgressAchievement(
@@ -153,7 +166,11 @@ public abstract class Achievement {
 		return name;
 	}
 
-	public String getDescription() {
+	public int getNameResource() {
+		return nameResource;
+	}
+
+	public int getDescription() {
 		return description;
 	}
 

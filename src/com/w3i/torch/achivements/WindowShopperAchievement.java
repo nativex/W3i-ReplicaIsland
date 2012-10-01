@@ -1,17 +1,18 @@
 package com.w3i.torch.achivements;
 
 import com.w3i.common.Log;
+import com.w3i.torch.R;
 
 public class WindowShopperAchievement extends Achievement {
 	private boolean failed = false;
 
 	public WindowShopperAchievement() {
-		setName(AchievementConstants.WINDOW_SHOPPER_NAME);
-		setDescription(AchievementConstants.WINDOW_SHOPPER_DECRIPTION);
+		setName(R.string.achievement_window_shopper_name);
+		setDescription(R.string.achievement_window_shopper_decription);
 		setType(Type.WINDOW_SHOPPER);
 		setLocked(true);
-		setImageDone(AchievementConstants.WINDOW_SHOPPER_IMAGE_EARNED);
-		setImageLocked(AchievementConstants.WINDOW_SHOPPER_IMAGE_LOCKED);
+		setImageDone(R.drawable.ui_achievement_window_shopper);
+		setImageLocked(R.drawable.ui_achievement_window_shopper_locked);
 	}
 
 	@Override

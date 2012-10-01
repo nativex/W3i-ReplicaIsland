@@ -1,13 +1,15 @@
 package com.w3i.torch.achivements;
 
+import com.w3i.torch.R;
+
 public class PearlsAchievement extends ProgressAchievement {
 
 	public PearlsAchievement() {
-		super(AchievementConstants.PEARLS_GOAL);
-		setName(AchievementConstants.PEARLS_NAME);
-		setDescription(AchievementConstants.PEARLS_DESCRIPTION);
+		super(R.integer.achievement_pearls_goal);
+		setName(R.string.achievement_pearls_name);
+		setDescription(R.string.achievement_pearls_description);
 		setType(Type.PEARLS);
-		setImageDone(AchievementConstants.PEARLS_IMAGE_EARNED);
-		setImageLocked(AchievementConstants.PEARLS_IMAGE_LOCKED);
+		setImageDone(R.drawable.ui_achievement_pearl_collector);
+		setImageLocked(R.drawable.ui_achievement_pearl_collector_locked);
 	}
 }

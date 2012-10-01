@@ -30,13 +30,16 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Debug;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.w3i.offerwall.PublisherManager;
@@ -62,6 +65,7 @@ import com.w3i.torch.achivements.AchievementListener;
 import com.w3i.torch.achivements.AchievementManager;
 import com.w3i.torch.gamesplatform.SharedPreferenceManager;
 import com.w3i.torch.store.KillingSpreeDetector;
+import com.w3i.torch.views.FundsView;
 import com.w3i.torch.views.ReplicaIslandToast;
 import com.w3i.torch.views.ReplicaYesNoDialog;
 
@@ -206,6 +210,8 @@ public class AndouKun extends Activity implements SensorEventListener {
 		mLevelNameBox = findViewById(R.id.levelNameBox);
 		mLevelName = (TextView) findViewById(R.id.levelName);
 		mWaitFadeAnimation = AnimationUtils.loadAnimation(this, R.anim.wait_message_fade);
+		
+		onCreateTestBlock();
 
 		// mGLSurfaceView.setGLWrapper(new GLErrorLogger());
 		mGLSurfaceView.setEGLConfigChooser(false); // 16 bit, no z-buffer
@@ -330,8 +336,24 @@ public class AndouKun extends Activity implements SensorEventListener {
 		AchievementManager.registerAchievementListener(achievementListener);
 	}
 
+	private ViewGroup fundsView;
+
+	private void onCreateTestBlock() {
+		ViewGroup main = (ViewGroup) findViewById(R.id.ui_game_container);
+		boolean addInMain = fundsView == null;
+		fundsView = FundsView.setFunds(this, fundsView);
+		if (addInMain) {
+			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+			params.gravity = Gravity.BOTTOM;
+			fundsView.setLayoutParams(params);
+
+			main.addView(fundsView);
+		}
+	}
+
 	protected void onDestroy() {
 		DebugLog.d("AndouKun", "onDestroy()");
+		FundsView.releaseFunds();
 		mGame.stop();
 		if (mEventReporterThread != null) {
 			mEventReporter.stop();

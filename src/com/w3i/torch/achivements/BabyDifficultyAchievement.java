@@ -1,12 +1,14 @@
 package com.w3i.torch.achivements;
 
+import com.w3i.torch.R;
+
 public class BabyDifficultyAchievement extends Achievement {
 
 	public BabyDifficultyAchievement() {
-		setName(AchievementConstants.BABY_BEAT_NAME);
-		setDescription(AchievementConstants.BABY_BEAT_DESCRIPTION);
+		setName(R.string.achievement_baby_beat_name);
+		setDescription(R.string.achievement_baby_beat_description);
 		setType(Type.BABY);
-		setImageLocked(AchievementConstants.BABY_BEAT_IMAGE_LOCKED);
-		setImageDone(AchievementConstants.BABY_BEAT_IMAGE_EARNED);
+		setImageLocked(R.drawable.ui_achievement_baby_beat_locked);
+		setImageDone(R.drawable.ui_achievement_baby_beat);
 	}
 }

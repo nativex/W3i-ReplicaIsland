@@ -1,13 +1,15 @@
 package com.w3i.torch.achivements;
 
+import com.w3i.torch.R;
+
 public class RodokouDefeated extends Achievement {
 
 	public RodokouDefeated() {
-		setName(AchievementConstants.RODOKUO_NAME);
-		setDescription(AchievementConstants.RODOKUO_DESCRIPTION);
+		setName(R.string.achievement_rodokuo_name);
+		setDescription(R.string.achievement_rodokuo_description);
 		setType(Type.RODOKOU_DEFEATED);
 		setLocked(true);
-		setImageDone(AchievementConstants.RODOKUO_IMAGE_EARNED);
-		setImageLocked(AchievementConstants.RODOKUO_IMAGE_LOCKED);
+		setImageDone(R.drawable.achv_unlocked);
+		setImageLocked(R.drawable.achv_locked);
 	}
 }

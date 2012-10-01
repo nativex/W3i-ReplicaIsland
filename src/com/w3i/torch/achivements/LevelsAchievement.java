@@ -1,14 +1,16 @@
 package com.w3i.torch.achivements;
 
+import com.w3i.torch.R;
+
 public class LevelsAchievement extends ProgressAchievement {
 
 	public LevelsAchievement() {
-		super(AchievementConstants.LEVELS_GOAL);
-		setName(AchievementConstants.LEVELS_NAME);
-		setDescription(AchievementConstants.LEVELS_DESCRIPTION);
+		super(R.integer.achievement_levels_goal);
+		setName(R.string.achievement_levels_name);
+		setDescription(R.string.achievement_levels_description);
 		setType(Type.LEVELS);
-		setImageDone(AchievementConstants.LEVELS_IMAGE_EARNED);
-		setImageLocked(AchievementConstants.LEVELS_IMAGE_LOCKED);
+		setImageDone(R.drawable.ui_achievement_good_job);
+		setImageLocked(R.drawable.ui_achievement_good_job_locked);
 	}
 
 }

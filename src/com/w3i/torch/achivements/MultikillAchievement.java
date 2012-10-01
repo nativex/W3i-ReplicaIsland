@@ -1,15 +1,17 @@
 package com.w3i.torch.achivements;
 
+import com.w3i.torch.R;
+
 public class MultikillAchievement extends ProgressAchievement {
 
 	public MultikillAchievement() {
-		super(AchievementConstants.MULTI_KILL_GOAL);
-		setName(AchievementConstants.MULTI_KILL_NAME);
-		setDescription(AchievementConstants.MULTI_KILL_DESCRIPTION);
+		super(R.integer.achievement_multi_kill_goal);
+		setName(R.string.achievement_multi_kill_name);
+		setDescription(R.string.achievement_multi_kill_description);
 		setType(Type.MULTI_KILL);
 		setLocked(true);
-		setImageDone(AchievementConstants.MULTI_KILL_IMAGE_EARNED);
-		setImageLocked(AchievementConstants.MULTI_KILL_IMAGE_LOCKED);
+		setImageDone(R.drawable.achv_unlocked);
+		setImageLocked(R.drawable.achv_locked);
 	}
 
 }

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item name="achievement_crystals_goal" type="integer">150</item>
+
+    <string name="achievement_crystals_name">Crystal Collector</string>
+    <string name="achievement_crystals_description">Collect # crystals.</string>
+
+    <item name="achievement_pearls_goal" type="integer">1000</item>
+
+    <string name="achievement_pearls_name">Pearl Collector</string>
+    <string name="achievement_pearls_description">Collect # pearls.</string>
+
+    <item name="achievement_fly_time_goal" type="integer">3600</item>
+
+    <string name="achievement_fly_time_name">Flier</string>
+    <string name="achievement_fly_time_description">Spend # in the air.</string>
+
+    <item name="achievement_jetpack_time_goal" type="integer">1200</item>
+
+    <string name="achievement_jetpack_time_name">Jetpack Ace</string>
+    <string name="achievement_jetpack_time_description">Spend # using the jetpack.</string>
+    <string name="achievement_good_boy_name">Good Boy!</string>
+    <string name="achievement_good_boy_description">Beat the game with a good ending.</string>
+
+    <item name="achievement_kills_achievement_goal" type="integer">250</item>
+
+    <string name="achievement_kills_achievement_name">Destroyer</string>
+    <string name="achievement_kills_achievement_description">Destroy # monsters.</string>
+
+    <item name="achievement_multi_kill_goal" type="integer">100</item>
+
+    <string name="achievement_multi_kill_name">Multikill</string>
+    <string name="achievement_multi_kill_description">Do # killing sprees.</string>
+
+    <item name="achievement_mega_kill_goal" type="integer">4</item>
+
+    <string name="achievement_mega_kill_name">Megakill</string>
+    <string name="achievement_mega_kill_description">Destroy # enemies in a killing spree.</string>
+
+    <item name="achievement_levels_goal" type="integer">50</item>
+
+    <string name="achievement_levels_name">Good job</string>
+    <string name="achievement_levels_description">Finish # levels.</string>
+    <string name="achievement_health_name">Max Life</string>
+    <string name="achievement_health_description">Max your life</string>
+
+    <item name="achievement_bonus_pearls_goal" type="integer">2000</item>
+
+    <string name="achievement_bonus_pearls_name">Bonus Pearls</string>
+    <string name="achievement_bonus_pearls_description">Generate # pearls with the Garbage Collector</string>
+
+    <item name="achievement_bonus_crystals_goal" type="integer">250</item>
+
+    <string name="achievement_bonus_crystals_name">Bonus Crystals</string>
+    <string name="achievement_bonus_crystals_description">Generate # crystals with the Garbage Collector.</string>
+
+    <item name="achievement_death_goal" type="integer">25</item>
+
+    <string name="achievement_death_name">Death</string>
+    <string name="achievement_death_description">Die # times.</string>
+
+    <item name="achievement_hit_goal" type="integer">150</item>
+
+    <string name="achievement_hit_name">HIT</string>
+    <string name="achievement_hit_description">Get hit # times.</string>
+
+    <item name="achievement_shield_goal" type="integer">100</item>
+
+    <string name="achievement_shield_name">Shield</string>
+    <string name="achievement_shield_description">Activate shield # times.</string>
+
+    <item name="achievement_possession_goal" type="integer">100</item>
+
+    <string name="achievement_possession_name">Possession</string>
+    <string name="achievement_possession_description">Gain control over # robots.</string>
+    <string name="achievement_kyle_name">Kyle</string>
+    <string name="achievement_kyle_description">Defeat Kyle.</string>
+    <string name="achievement_rodokuo_name">Rodokuo</string>
+    <string name="achievement_rodokuo_description">Defeat Rodokuo.</string>
+    <string name="achievement_kaboocha_name">Kaboocha</string>
+    <string name="achievement_kaboocha_description">Defeat Kaboocha</string>
+    <string name="achievement_game_beat_name">Game Beat</string>
+    <string name="achievement_game_beat_description">Beat the game.</string>
+    <string name="achievement_baby_beat_name">Baby Beat</string>
+    <string name="achievement_baby_beat_description">Beat the game on Baby difficulty.</string>
+    <string name="achievement_kids_beat_name">Kids Beat</string>
+    <string name="achievement_kids_beat_description">Beat the game on Kids difficulty.</string>
+    <string name="achievement_adult_beat_name">Adult beat</string>
+    <string name="achievement_adult_beat_description">Beat the game on Adults difficulty</string>
+    <string name="achievement_untouchable_name">Untouchable</string>
+    <string name="achievement_untouchable_description">Beat a level without being hit.</string>
+    <string name="achievement_merciful_name">Merciful</string>
+    <string name="achievement_merciful_description">Beat a level without destroying any enemies.</string>
+
+    <item name="achievement_diaries_goal" type="integer">15</item>
+
+    <string name="achievement_diaries_name">Bookworm</string>
+    <string name="achievement_diaries_description">Find all diaries.</string>
+
+    <item name="achievement_all_levels_goal" type="integer">32</item>
+
+    <string name="achievement_all_levels_name">All Levels</string>
+    <string name="achievement_all_levels_description">Beat each level in the game.</string>
+    <string name="achievement_godlike_name">Godlike</string>
+    <string name="achievement_godlike_description">Beat the game without dying.</string>
+    <string name="achievement_gadgeteer_name">Gadgeteer</string>
+    <string name="achievement_gadgeteer_description">Buy all items available in the store.</string>
+    <string name="achievement_window_shopper_name">Window-Shopper</string>
+    <string name="achievement_window_shopper_decription">Check out the store without buying anything.</string>
+
+    <item name="achievement_stomper_goal" type="integer">100</item>
+
+    <string name="achievement_stomper_name">Stomper</string>
+    <string name="achievement_stomper_description">Perform # stomps.</string>
+
+</resources>

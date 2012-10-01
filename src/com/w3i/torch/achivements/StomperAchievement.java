@@ -1,14 +1,16 @@
 package com.w3i.torch.achivements;
 
+import com.w3i.torch.R;
+
 public class StomperAchievement extends ProgressAchievement {
 
 	public StomperAchievement() {
-		super(AchievementConstants.STOMPER_GOAL);
-		setName(AchievementConstants.STOMPER_NAME);
-		setDescription(AchievementConstants.STOMPER_DESCRIPTION);
+		super(R.integer.achievement_stomper_goal);
+		setName(R.string.achievement_stomper_name);
+		setDescription(R.string.achievement_stomper_description);
 		setType(Type.STOMP);
-		setImageDone(AchievementConstants.STOMPER_IMAGE_EARNED);
-		setImageLocked(AchievementConstants.STOMPER_IMAGE_LOCKED);
+		setImageDone(R.drawable.ui_achievement_stomper);
+		setImageLocked(R.drawable.ui_achievement_stomper_locked);
 	}
 
 }

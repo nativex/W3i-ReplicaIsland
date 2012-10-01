@@ -1,14 +1,16 @@
 package com.w3i.torch.achivements;
 
+import com.w3i.torch.R;
+
 public class CrystalsAchievement extends ProgressAchievement {
 
 	public CrystalsAchievement() {
-		super(AchievementConstants.CRYSTALS_GOAL);
-		setName(AchievementConstants.CRYSTALS_NAME);
-		setDescription(AchievementConstants.CRYSTALS_DESCRIPTION);
+		super(R.integer.achievement_crystals_goal);
+		setName(R.string.achievement_crystals_name);
+		setDescription(R.string.achievement_crystals_description);
 		setType(Type.CRYSTALS);
-		setImageDone(AchievementConstants.CRYSTALS_IMAGE_EARNED);
-		setImageLocked(AchievementConstants.CRYSTALS_IMAGE_LOCKED);
+		setImageDone(R.drawable.ui_achievement_crystal_collector);
+		setImageLocked(R.drawable.ui_achievement_crystal_collector_locked);
 	}
 
 }

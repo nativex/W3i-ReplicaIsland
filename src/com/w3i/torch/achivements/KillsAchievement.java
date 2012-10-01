@@ -1,14 +1,16 @@
 package com.w3i.torch.achivements;
 
+import com.w3i.torch.R;
+
 public class KillsAchievement extends ProgressAchievement {
 
 	public KillsAchievement() {
-		super(AchievementConstants.KILLS_ACHIEVEMENT_GOAL);
-		setName(AchievementConstants.KILLS_ACHIEVEMENT_NAME);
-		setDescription(AchievementConstants.KILLS_ACHIEVEMENT_DESCRIPTION);
+		super(R.integer.achievement_kills_achievement_goal);
+		setName(R.string.achievement_kills_achievement_name);
+		setDescription(R.string.achievement_kills_achievement_description);
 		setType(Type.KILLS);
-		setImageDone(AchievementConstants.KILLS_IMAGE_EARNED);
-		setImageLocked(AchievementConstants.KILLS_IMAGE_LOCKED);
+		setImageDone(R.drawable.ui_achievement_destroyer);
+		setImageLocked(R.drawable.ui_achievement_destroyer_locked);
 	}
 
 }

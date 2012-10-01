@@ -1,14 +1,16 @@
 package com.w3i.torch.achivements;
 
+import com.w3i.torch.R;
+
 public class HitAchievement extends ProgressAchievement {
 
 	public HitAchievement() {
-		super(AchievementConstants.HIT_GOAL);
-		setName(AchievementConstants.HIT_NAME);
-		setDescription(AchievementConstants.HIT_DESCRIPTION);
+		super(R.integer.achievement_hit_goal);
+		setName(R.string.achievement_hit_name);
+		setDescription(R.string.achievement_hit_description);
 		setType(Type.HIT);
-		setImageLocked(AchievementConstants.HIT_IMAGE_LOCKED);
-		setImageDone(AchievementConstants.HIT_IMAGE_EARNED);
+		setImageLocked(R.drawable.ui_achievement_hit_locked);
+		setImageDone(R.drawable.ui_achievement_hit);
 	}
 
 }

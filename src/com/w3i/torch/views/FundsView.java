@@ -98,13 +98,21 @@ public class FundsView {
 
 	private static ViewGroup getFundsListView() {
 		if (fundsView != null) {
-			ViewGroup fundsList = (ViewGroup) fundsView.findViewById(R.id.uiFundsList);
-			fundsList.setBackgroundResource(R.drawable.ui_funds_list_box_with_plus_bg);
-			fundsList.setPadding(2, 2, 0, 2);
+			final ViewGroup fundsList = (ViewGroup) fundsView.findViewById(R.id.uiFundsList);
 
-			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-			params.setMargins(0, 0, 0, 0);
-			fundsList.setLayoutParams(params);
+			fundsList.post(new Runnable() {
+
+				@Override
+				public void run() {
+					fundsList.setBackgroundResource(R.drawable.ui_funds_list_box_with_plus_bg);
+					fundsList.setPadding(2, 2, 0, 2);
+
+					RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+					params.setMargins(0, 0, 0, 0);
+
+					fundsList.setLayoutParams(params);
+				}
+			});
 			return fundsList;
 		}
 		return null;
@@ -153,19 +161,25 @@ public class FundsView {
 	}
 
 	private static void setFunds(
-			ViewGroup fundsItem,
-			TorchCurrency currency) {
-		if (fundsItem == null) {
-			return;
-		}
-		CustomImageView icon = (CustomImageView) fundsItem.findViewById(R.id.uiFundsItemImage);
-		TextView amount = (TextView) fundsItem.findViewById(R.id.uiFundsItemAmount);
-		amount.setText(String.format("%1$,d", currency.getBalance()));
-		if ((NetworkConnectionManager.getInstance(fundsItem.getContext()).isConnected()) && (currency.getIcon() != null)) {
-			icon.setImageFromInternet(currency.getIcon());
-		} else if (currency.getDrawableResource() > 0) {
-			icon.setImageResource(currency.getDrawableResource());
-		}
+			final ViewGroup fundsItem,
+			final TorchCurrency currency) {
+		fundsView.post(new Runnable() {
+
+			@Override
+			public void run() {
+				if (fundsItem == null) {
+					return;
+				}
+				CustomImageView icon = (CustomImageView) fundsItem.findViewById(R.id.uiFundsItemImage);
+				TextView amount = (TextView) fundsItem.findViewById(R.id.uiFundsItemAmount);
+				amount.setText(String.format("%1$,d", currency.getBalance()));
+				if ((NetworkConnectionManager.getInstance(fundsItem.getContext()).isConnected()) && (currency.getIcon() != null)) {
+					icon.setImageFromInternet(currency.getIcon());
+				} else if (currency.getDrawableResource() > 0) {
+					icon.setImageResource(currency.getDrawableResource());
+				}
+			}
+		});
 	}
 
 	public static void setOnCurrencyChangedListener(

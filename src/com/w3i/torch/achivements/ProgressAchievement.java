@@ -1,9 +1,8 @@
 package com.w3i.torch.achivements;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-
-import com.w3i.common.Log;
 
 public class ProgressAchievement extends Achievement {
 	private int achievementProgress;
@@ -42,7 +41,6 @@ public class ProgressAchievement extends Achievement {
 			int progress,
 			boolean notify) {
 		if (!isDone()) {
-			Log.i("Achievement " + getName() + " (" + getDescription() + ") updated : " + progress + "/" + getGoal());
 			this.achievementProgress = progress;
 			if (progress > 0) {
 				setLocked(false);
@@ -111,8 +109,18 @@ public class ProgressAchievement extends Achievement {
 	}
 
 	@Override
+	public String formatText(
+			Context context,
+			int text) {
+		String unformattedText = context.getResources().getString(text);
+		String formattedText = unformattedText.replace("#", Integer.toString(getGoal()));
+		return formattedText;
+	}
+
+	@Override
 	public void reset() {
 		super.reset();
 		setProgress(0);
 	}
+
 }

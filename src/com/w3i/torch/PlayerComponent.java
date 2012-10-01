@@ -16,7 +16,6 @@
 
 package com.w3i.torch;
 
-import com.w3i.common.Log;
 import com.w3i.torch.CollisionParameters.HitType;
 import com.w3i.torch.GameObject.ActionType;
 import com.w3i.torch.achivements.Achievement;

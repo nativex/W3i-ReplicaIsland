@@ -11,5 +11,9 @@
         android:icon="@drawable/ui_funds_list_box_bg"
         android:title="Reset Balance">
     </item>
+    <item
+        android:id="@+id/testMenuStoreResetItems"
+        android:icon="@drawable/achv_locked"
+        android:title="Reset Items"/>
 
 </menu>

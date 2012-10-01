@@ -1,14 +1,16 @@
 package com.w3i.torch.achivements;
 
+import com.w3i.torch.R;
+
 public class ShieldAchievement extends ProgressAchievement {
 
 	public ShieldAchievement() {
-		super(AchievementConstants.SHIELD_GOAL);
-		setName(AchievementConstants.SHIELD_NAME);
-		setDescription(AchievementConstants.SHIELD_DESCRIPTION);
+		super(R.integer.achievement_shield_goal);
+		setName(R.string.achievement_shield_name);
+		setDescription(R.string.achievement_shield_description);
 		setType(Type.SHIELD);
-		setImageDone(AchievementConstants.SHIELD_IMAGE_EARNED);
-		setImageLocked(AchievementConstants.SHIELD_IMAGE_LOCKED);
+		setImageDone(R.drawable.ui_achievement_shield);
+		setImageLocked(R.drawable.ui_achievement_shield_locked);
 	}
 
 }

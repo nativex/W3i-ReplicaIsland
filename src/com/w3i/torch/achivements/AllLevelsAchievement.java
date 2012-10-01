@@ -8,18 +8,19 @@ import android.util.SparseBooleanArray;
 
 import com.google.gson.Gson;
 import com.w3i.torch.LevelTree;
+import com.w3i.torch.R;
 
 public class AllLevelsAchievement extends ProgressAchievement {
 	private SparseBooleanArray levelsData;
 
 	public AllLevelsAchievement() {
 		super();
-		setName(AchievementConstants.ALL_LEVELS_NAME);
-		setDescription(AchievementConstants.ALL_LEVELS_DESCRIPTION);
+		setName(R.string.achievement_all_levels_name);
+		setDescription(R.string.achievement_all_levels_description);
 		setType(Type.All_LEVELS);
 		setInitialized(false);
-		setImageLocked(AchievementConstants.ALL_LEVELS_IMAGE_LOCKED);
-		setImageDone(AchievementConstants.ALL_LEVELS_IMAGE_EARNED);
+		setImageLocked(R.drawable.ui_achievement_all_levels_locked);
+		setImageDone(R.drawable.ui_achievement_all_levels);
 		initializeLevelsData();
 	}
 

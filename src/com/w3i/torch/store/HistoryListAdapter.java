@@ -47,7 +47,11 @@ public class HistoryListAdapter extends BaseAdapter {
 			int arg0) {
 		return arg0;
 	}
-
+	
+	public void clear() {
+		items.clear();
+		notifyDataSetChanged();
+	}
 	public View getView(
 			int arg0,
 			View arg1,
@@ -68,5 +72,4 @@ public class HistoryListAdapter extends BaseAdapter {
 		}
 		return item;
 	}
-
 }

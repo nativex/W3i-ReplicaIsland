@@ -1,12 +1,14 @@
 package com.w3i.torch.achivements;
 
+import com.w3i.torch.R;
+
 public class GameBeatAchievement extends Achievement {
 
 	public GameBeatAchievement() {
-		setName(AchievementConstants.GAME_BEAT_NAME);
-		setDescription(AchievementConstants.GAME_BEAT_DESCRIPTION);
+		setName(R.string.achievement_game_beat_name);
+		setDescription(R.string.achievement_game_beat_description);
 		setType(Type.GAME_BEAT);
-		setImageDone(AchievementConstants.GAME_BEAT_IMAGE_EARNED);
-		setImageLocked(AchievementConstants.GAME_BEAT_IMAGE_LOCKED);
+		setImageDone(R.drawable.ui_achievement_game_beat);
+		setImageLocked(R.drawable.ui_achievement_game_beat_locked);
 	}
 }

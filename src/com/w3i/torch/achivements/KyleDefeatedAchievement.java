@@ -1,13 +1,15 @@
 package com.w3i.torch.achivements;
 
+import com.w3i.torch.R;
+
 public class KyleDefeatedAchievement extends Achievement {
 
 	public KyleDefeatedAchievement() {
-		setName(AchievementConstants.KYLE_NAME);
-		setDescription(AchievementConstants.KYLE_DESCRIPTION);
+		setName(R.string.achievement_kyle_name);
+		setDescription(R.string.achievement_kyle_description);
 		setType(Type.KYLE_DEFEATED);
 		setLocked(true);
-		setImageDone(AchievementConstants.KYLE_IMAGE_EARNED);
-		setImageLocked(AchievementConstants.KYLE_IMAGE_LOCKED);
+		setImageDone(R.drawable.achv_unlocked);
+		setImageLocked(R.drawable.achv_locked);
 	}
 }

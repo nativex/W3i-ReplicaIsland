@@ -3,6 +3,7 @@ package com.w3i.torch.achivements;
 import java.util.List;
 import java.util.Map;
 
+import com.w3i.torch.R;
 import com.w3i.torch.gamesplatform.TorchItem;
 import com.w3i.torch.gamesplatform.TorchItem.PurchaseState;
 import com.w3i.torch.gamesplatform.TorchItemManager;
@@ -11,11 +12,11 @@ public class GadgeteerAchievement extends ProgressAchievement {
 
 	public GadgeteerAchievement() {
 		super(0);
-		setName(AchievementConstants.GADGETEER_NAME);
-		setDescription(AchievementConstants.GADGETEER_DESCRIPTION);
+		setName(R.string.achievement_gadgeteer_name);
+		setDescription(R.string.achievement_gadgeteer_description);
 		setType(Type.GADGETEER);
-		setImageDone(AchievementConstants.GADGETEER_IMAGE_EARNED);
-		setImageLocked(AchievementConstants.GADGETEER_IMAGE_LOCKED);
+		setImageDone(R.drawable.ui_achievement_gadgeteer_locked);
+		setImageLocked(R.drawable.ui_achievement_gadgeteer);
 		setInitialized(false);
 	}
 
