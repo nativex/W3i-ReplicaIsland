@@ -18,7 +18,11 @@ public class ProgressAchievement extends Achievement {
 
 	protected ProgressAchievement(int goal) {
 		this();
-		this.goal = goal;
+		if (goal > 1000000) {
+			this.goal = AchievementManager.getApplicationContext().getResources().getInteger(goal);
+		} else {
+			this.goal = goal;
+		}
 		calculateNextUpdate();
 	}
 

@@ -5,12 +5,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.w3i.common.Log;
 import com.w3i.torch.achivements.Achievement.Type;
 
 public class AchievementManager {
+	private Context applicationContext = null;
 	private static AchievementManager instance = null;
 	private ArrayList<Achievement> achievements = null;
 	private static int instances = 0;
@@ -507,4 +509,16 @@ public class AchievementManager {
 		}
 	}
 
+	public static void setApplicationContext(
+			Context context) {
+		checkInstance();
+		instance.applicationContext = context;
+	}
+
+	public static Context getApplicationContext() {
+		if (instance == null) {
+			return null;
+		}
+		return instance.applicationContext;
+	}
 }

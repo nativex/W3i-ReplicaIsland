@@ -229,6 +229,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	}
 
 	private void doTorchInitialization() {
+		AchievementManager.setApplicationContext(getApplicationContext());
 		SharedPreferenceManager.initialize(this);
 		SharedPreferenceManager.loadAll();
 		GamesPlatformManager.initializeManager(this);
