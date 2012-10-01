@@ -16,6 +16,7 @@
 
 package com.w3i.torch;
 
+import com.w3i.common.Log;
 import com.w3i.torch.CollisionParameters.HitType;
 import com.w3i.torch.GameObject.ActionType;
 import com.w3i.torch.achivements.Achievement;
@@ -128,15 +129,14 @@ public class PlayerComponent extends GameComponent {
 			if (mFuel < mFuelAmount) {
 				if (mTouchingGround) {
 					mFuel += mDifficultyConstants.getFuelGroundRefillSpeed() * timeDelta;
-					// Log.i("Ground refill portion " + mDifficultyConstants.getFuelGroundRefillSpeed() * timeDelta);
 				} else {
 					mFuel += mFuelAirRefillSpeed * timeDelta;
-					// Log.i("Air refill portion " + mDifficultyConstants.getFuelAirRefillSpeed() * timeDelta);
 				}
 
-				if (mFuel > mFuelAmount) {
+				if (mFuel >= mFuelAmount) {
 					mFuel = mFuelAmount;
 				}
+
 			}
 
 			final InputXY dpad = input.getDirectionalPad();
