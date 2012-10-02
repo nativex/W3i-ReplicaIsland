@@ -1,6 +1,5 @@
 package com.w3i.torch.achivements;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
@@ -75,7 +74,35 @@ public class ProgressAchievement extends Achievement {
 	public void setGoal(
 			int goal) {
 		this.goal = goal;
+		replaceDescription();
 		calculateNextUpdate();
+	}
+
+	protected void replaceDescription() {
+		String description = getDescription();
+		if ((description != null) && (goal > 0)) {
+			description = makeDescriptionReplacement(description);
+			super.setDescription(description);
+		}
+	}
+
+	protected String makeDescriptionReplacement(
+			String description) {
+		return description.replace("#", Integer.toString(getGoal()));
+	}
+
+	@Override
+	protected void setDescription(
+			int description) {
+		super.setDescription(description);
+		replaceDescription();
+	}
+
+	@Override
+	public void setDescription(
+			String description) {
+		super.setDescription(description);
+		replaceDescription();
 	}
 
 	public int getGoal() {
@@ -110,15 +137,6 @@ public class ProgressAchievement extends Achievement {
 	protected String convertProgress(
 			int i) {
 		return Integer.toString(i);
-	}
-
-	@Override
-	public String formatText(
-			Context context,
-			int text) {
-		String unformattedText = context.getResources().getString(text);
-		String formattedText = unformattedText.replace("#", Integer.toString(getGoal()));
-		return formattedText;
 	}
 
 	@Override

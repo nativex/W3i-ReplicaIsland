@@ -25,22 +25,29 @@ public class AchievementManager {
 	private JetpackTime jetpackTimeAchievement;
 	private AchievementListener achievementListener;
 
-	private AchievementManager() {
+	private AchievementManager(Context context) {
+		if (context == null) {
+			throw new NullPointerException("Context must not be null");
+		}
+		applicationContext = context;
 		achievements = new ArrayList<Achievement>();
 		instances++;
 		if (instances > 1) {
 			Log.e("AchivementManager: too many instances created");
 		}
-		_initializeAchievements();
 	}
 
-	private AchievementManager(Context context) {
-		applicationContext = context;
+	public static synchronized void initialize(
+			Context context) {
+		if (instance == null) {
+			instance = new AchievementManager(context);
+			instance._initializeAchievements();
+		}
 	}
 
 	private static synchronized void checkInstance() {
 		if (instance == null) {
-			instance = new AchievementManager();
+			throw new IllegalStateException("AchievementManager not initialized");
 		}
 	}
 
@@ -144,7 +151,7 @@ public class AchievementManager {
 		}
 	}
 
-	public synchronized void release() {
+	public synchronized static void release() {
 		if (instance == null) {
 			return;
 		}
@@ -494,6 +501,7 @@ public class AchievementManager {
 	private void _release() {
 		instance.achievements.clear();
 		instance.achievements = null;
+		applicationContext = null;
 		instance = null;
 		instances--;
 	}

@@ -75,7 +75,7 @@ public class ReplicaIslandToast {
 
 		title.setText(context.getResources().getString(R.string.toast_achievement_done_title));
 		text.setText(context.getResources().getString(R.string.toast_achievement_done_text));
-		name.setText(achievement.formatText(context, achievement.getNameResource()));
+		name.setText(achievement.getName());
 		icon.setImageResource(achievement.getImage());
 
 		toast.setDuration(Toast.LENGTH_LONG);
@@ -100,7 +100,7 @@ public class ReplicaIslandToast {
 
 		title.setText(context.getResources().getString(R.string.toast_achievement_unlocked_title));
 		text.setText(context.getResources().getString(R.string.toast_achievement_unlocked_text));
-		name.setText(achievement.formatText(context, achievement.getNameResource()));
+		name.setText(achievement.getName());
 		icon.setImageResource(achievement.getImage());
 
 		toast.setDuration(Toast.LENGTH_LONG);
@@ -125,7 +125,7 @@ public class ReplicaIslandToast {
 		TextView name = (TextView) toastLayout.findViewById(R.id.toastAchievementName);
 
 		title.setText(context.getResources().getString(R.string.toast_achievement_progress_title));
-		name.setText(achievement.formatText(context, achievement.getNameResource()));
+		name.setText(achievement.getName());
 		text.setText("is " + percentDone + "% done");
 		icon.setImageResource(achievement.getImage());
 

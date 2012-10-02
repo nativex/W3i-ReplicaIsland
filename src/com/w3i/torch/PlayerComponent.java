@@ -232,7 +232,8 @@ public class PlayerComponent extends GameComponent {
 
 		if (mInventory != null && mState != State.WIN) {
 			InventoryComponent.UpdateRecord inventory = mInventory.getRecord();
-			if (inventory.coinCount >= mDifficultyConstants.getCoinsPerPowerup()) {
+			// if (inventory.coinCount >= mDifficultyConstants.getCoinsPerPowerup()) {
+			if (inventory.coinCount >= 0) {
 				AchievementManager.incrementAchievementProgress(Type.SHIELD, 1);
 				inventory.coinCount = 0;
 				mInventory.setChanged();

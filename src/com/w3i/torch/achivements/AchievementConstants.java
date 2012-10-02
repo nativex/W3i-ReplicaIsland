@@ -33,7 +33,6 @@ public class AchievementConstants {
 	public static final int JETPACK_TIME_IMAGE_EARNED = R.drawable.ui_achievement_jetpack_ace;
 
 	// Good Boy
-	// TODO
 	public static final String GOOD_BOY_NAME = "Good Boy!";
 	public static final String GOOD_BOY_DESCRIPTION = "Beat the game with a good ending.";
 	public static final int GOOD_BOY_IMAGE_LOCKED = R.drawable.achv_locked;

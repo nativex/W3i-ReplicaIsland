@@ -213,7 +213,7 @@ public class StartGameActivity extends Activity {
 			ReplicaInfoDialog infoDialog = new ReplicaInfoDialog(this);
 			infoDialog.setTitle(DIALOG_STORE_NOT_READY_TITLE);
 			infoDialog.setDescripton(DIALOG_STORE_NOT_READY_MESSAGE);
-			infoDialog.setIcon(android.R.drawable.ic_dialog_alert);
+			infoDialog.setIcon(R.drawable.ui_icon_warning);
 			dialog = infoDialog;
 		}
 		return dialog;

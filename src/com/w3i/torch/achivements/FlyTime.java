@@ -1,7 +1,5 @@
 package com.w3i.torch.achivements;
 
-import android.content.Context;
-
 import com.w3i.common.Log;
 import com.w3i.torch.R;
 import com.w3i.torch.utils.TimeUtils;
@@ -47,11 +45,8 @@ public class FlyTime extends ProgressAchievement {
 	}
 
 	@Override
-	public String formatText(
-			Context context,
-			int text) {
-		String unformattedText = context.getResources().getString(text);
-		String formattedText = unformattedText.replace("#", TimeUtils.getTimeAchievementStringFromSeconds(getGoal()));
-		return formattedText;
+	protected String makeDescriptionReplacement(
+			String description) {
+		return description.replace("#", TimeUtils.getTimeAchievementStringFromSeconds(getGoal()));
 	}
 }

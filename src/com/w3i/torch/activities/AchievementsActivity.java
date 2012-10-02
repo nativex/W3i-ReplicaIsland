@@ -177,8 +177,13 @@ public class AchievementsActivity extends Activity {
 		ProgressBar achievementProgressBar = (ProgressBar) achievementLayout.findViewById(R.id.achvProgress);
 		TextView achievementProgressBarText = (TextView) achievementLayout.findViewById(R.id.achvProgressText);
 
-		achievementProgressBar.setMax(achievement.getGoal());
-		achievementProgressBar.setProgress(achievement.getProgress());
+		if (achievement.isDone()) {
+			achievementProgressBar.setMax(100);
+			achievementProgressBar.setProgress(100);
+		} else {
+			achievementProgressBar.setMax(achievement.getGoal());
+			achievementProgressBar.setProgress(achievement.getProgress());
+		}
 		achievementProgressBarText.setText(achievement.getProgressString());
 
 	}
@@ -190,8 +195,8 @@ public class AchievementsActivity extends Activity {
 		TextView achievementDescription = (TextView) achievementLayout.findViewById(R.id.uiAchvDescription);
 		ImageView achievementIcon = (ImageView) achievementLayout.findViewById(R.id.uiAchvIcon);
 
-		achievementName.setText(achievement.formatText(this, achievement.getNameResource()));
-		achievementDescription.setText(achievement.formatText(this, achievement.getDescription()));
+		achievementName.setText(achievement.getName());
+		achievementDescription.setText(achievement.getDescription());
 		achievementIcon.setImageResource(achievement.getImage());
 
 		achvContainer.addView(achievementLayout);

@@ -229,7 +229,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	}
 
 	private void doTorchInitialization() {
-		AchievementManager.setApplicationContext(getApplicationContext());
+		AchievementManager.initialize(getApplicationContext());
 		SharedPreferenceManager.initialize(this);
 		SharedPreferenceManager.loadAll();
 		GamesPlatformManager.initializeManager(this);
@@ -254,6 +254,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		TorchCurrencyManager.release();
 		TorchItemManager.release();
 		SharedPreferenceManager.release();
+		AchievementManager.release();
 	}
 
 	/**

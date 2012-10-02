@@ -11,6 +11,7 @@ public class BonusPearlsAchievement extends ProgressAchievement {
 		setType(Type.BONUS_PEARLS);
 		setLocked(true);
 		setAchievementUpdateRate(12.5f);
+		
 	}
 
 }

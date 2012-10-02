@@ -1,6 +1,5 @@
 package com.w3i.torch.achivements;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.w3i.torch.R;
@@ -11,7 +10,7 @@ public abstract class Achievement {
 	private boolean disabled = false;
 	private boolean done = false;
 	private boolean progress = false;
-	private int description;
+	private String description;
 	private String name = null;
 	private int imageNotDone = R.drawable.achv_locked;
 	private int imageDone = R.drawable.achv_unlocked;
@@ -19,7 +18,6 @@ public abstract class Achievement {
 	private String preferencesName;
 	private boolean preferencesLoaded = false;
 	private boolean initialized = true;
-	private int nameResource;
 
 	/**
 	 * @return the preferencesLoaded
@@ -123,7 +121,7 @@ public abstract class Achievement {
 
 	protected void setDescription(
 			int description) {
-		this.description = description;
+		this.description = AchievementManager.getApplicationContext().getResources().getString(description);
 	}
 
 	protected void setName(
@@ -133,18 +131,12 @@ public abstract class Achievement {
 
 	protected void setName(
 			int name) {
-		nameResource = name;
+		this.name = AchievementManager.getApplicationContext().getResources().getString(name);
 	}
 
 	public void setDisabled(
 			boolean disabled) {
 		this.disabled = disabled;
-	}
-
-	public String formatText(
-			Context context,
-			int text) {
-		return null;
 	}
 
 	protected void setProgressAchievement(
@@ -166,12 +158,13 @@ public abstract class Achievement {
 		return name;
 	}
 
-	public int getNameResource() {
-		return nameResource;
+	public String getDescription() {
+		return description;
 	}
 
-	public int getDescription() {
-		return description;
+	public void setDescription(
+			String description) {
+		this.description = description;
 	}
 
 	public boolean isDisabled() {
@@ -201,7 +194,7 @@ public abstract class Achievement {
 		// Log.i("Achievement (" + getName() + ") is done: " + done);
 		this.done = done;
 		if (done) {
-			setLocked(false, notify);
+			setLocked(false, false);
 		}
 		if (fireListener) {
 			AchievementManager.notifyAchievementDone(this);
