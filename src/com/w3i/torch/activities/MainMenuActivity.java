@@ -112,7 +112,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 				v.startAnimation(mButtonFlickerAnimation);
 				mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(i));
 				mPaused = true;
-
 			}
 
 			// if (!mPaused) {

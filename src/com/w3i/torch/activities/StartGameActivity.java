@@ -36,12 +36,16 @@ public class StartGameActivity extends Activity {
 	private Animation mButtonFlickerAnimation;
 	private Animation mFadeOutAnimation;
 	private Animation mAlternateFadeOutAnimation;
+	private boolean lockButtons = false;
 
 	private View.OnClickListener onButtonClickListener = new View.OnClickListener() {
 
 		@Override
 		public void onClick(
 				View v) {
+			if (lockButtons) {
+				return;
+			}
 			Intent intent = null;
 			switch (v.getId()) {
 			case R.id.ui_start_game_continue:
@@ -50,11 +54,13 @@ public class StartGameActivity extends Activity {
 				achievementsButton.startAnimation(mAlternateFadeOutAnimation);
 				newGameButton.startAnimation(mAlternateFadeOutAnimation);
 				background.startAnimation(mFadeOutAnimation);
+				lockButtons = true;
 				break;
 
 			case R.id.ui_start_game_new:
-				intent = new Intent(StartGameActivity.this, ModeSelectActivity.class);
+				intent = new Intent(StartGameActivity.this, GameModeSelectActivity.class);
 				intent.putExtra("newGame", true);
+				lockButtons = true;
 				break;
 
 			case R.id.ui_start_game_store:
@@ -62,6 +68,7 @@ public class StartGameActivity extends Activity {
 					GamesPlatformManager.downloadStoreTree();
 					showDialog(EXTRAS_STORE_NOT_READY_DIALOG);
 				} else {
+					lockButtons = true;
 					intent = new Intent(StartGameActivity.this, StoreActivity.class);
 					if (continueButton.getVisibility() == View.VISIBLE) {
 						continueButton.startAnimation(mAlternateFadeOutAnimation);
@@ -80,6 +87,7 @@ public class StartGameActivity extends Activity {
 				}
 				newGameButton.startAnimation(mAlternateFadeOutAnimation);
 				background.startAnimation(mFadeOutAnimation);
+				lockButtons = true;
 				break;
 
 			}
@@ -128,7 +136,7 @@ public class StartGameActivity extends Activity {
 		} else {
 			continueButton.setVisibility(View.INVISIBLE);
 		}
-
+		lockButtons = false;
 		storeButton.clearAnimation();
 		achievementsButton.clearAnimation();
 		newGameButton.clearAnimation();

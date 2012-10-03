@@ -35,6 +35,7 @@ public class OptionsMenu extends Activity {
 	private Animation mButtonFlickerAnimation;
 	private Animation mFadeOutAnimation;
 	private Animation mAlternateFadeOutAnimation;
+	private boolean lockButtons = false;
 
 	public static final int NEW_GAME_DIALOG = 0;
 	public static final int EXTRAS_LOCKED_DIALOG = 1;
@@ -86,6 +87,9 @@ public class OptionsMenu extends Activity {
 	private View.OnClickListener sButtonListener = new View.OnClickListener() {
 		public void onClick(
 				View v) {
+			if (lockButtons) {
+				return;
+			}
 			Intent intent = null;
 			SharedPreferences prefs;
 			boolean soundEnabled;
@@ -134,6 +138,7 @@ public class OptionsMenu extends Activity {
 				if (intent != null) {
 					mFadeOutAnimation.setAnimationListener(new StartActivityAfterAnimation(intent));
 				}
+				lockButtons = true;
 				mBackground.startAnimation(mFadeOutAnimation);
 				break;
 
@@ -146,6 +151,7 @@ public class OptionsMenu extends Activity {
 				if (intent != null) {
 					mFadeOutAnimation.setAnimationListener(new StartActivityAfterAnimation(intent));
 				}
+				lockButtons = true;
 				mBackground.startAnimation(mFadeOutAnimation);
 				break;
 			}
@@ -212,6 +218,7 @@ public class OptionsMenu extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		lockButtons = false;
 		AchievementManager.registerAchievementListener(achievementListener);
 		GamesPlatformManager.onResume();
 		setSwitchButtonsText();

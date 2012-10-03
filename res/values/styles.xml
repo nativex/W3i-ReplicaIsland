@@ -127,6 +127,34 @@
         <item name="android:layout_margin">7dip</item>
     </style>
 
+    <style name="ui_select_mode_button_style">
+        <item name="setFont">BABYU__.TTF</item>
+        <item name="addSpacing">true</item>
+        <item name="android:textScaleX">0.9</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/ui_start_game_button_color</item>
+        <item name="android:lines">1</item>
+        <item name="android:shadowColor">@color/ui_start_game_button_shadow</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">2</item>
+    </style>
+
+    <style name="ui_select_mode_description_style">
+        <item name="setFont">BABYU__.TTF</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/ui_game_mode_description_color</item>
+        <item name="android:lines">1</item>
+        <item name="android:shadowColor">@color/ui_start_game_button_shadow</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">2</item>
+    </style>
+
+    <style name="ui_select_mode_button_layout_style">
+        <item name="android:layout_margin">7dip</item>
+    </style>
+
     <style name="ui_game_mode_locked_style">
         <item name="setFont">BABYU__.TTF</item>
         <item name="android:textScaleX">1</item>

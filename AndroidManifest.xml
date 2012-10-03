@@ -131,7 +131,7 @@
             android:name=".activities.CreditsActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".activities.ModeSelectActivity"
+            android:name=".activities.GameModeSelectActivity"
             android:screenOrientation="landscape" />
     </application>
 

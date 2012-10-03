@@ -76,7 +76,7 @@
 		</dialog>
 	</level>
 	
-	<!-- <level resource="@raw/level_1_4_island" title = "@string/level_1_4_island" past="true" time = "@string/level_1_4_time"/>  -->
+<!-- 	<level resource="@raw/level_1_4_island" title = "@string/level_1_4_island" past="true" time = "@string/level_1_4_time"/>  -->
 </group>
 
 <group>
@@ -294,8 +294,7 @@
 </group>
 
 <group>
-	<level resource="
-" title = "@string/level_4_9_underground" time = "@string/level_4_9_time">
+	<level resource="@raw/level_4_9_underground" title = "@string/level_4_9_underground" time = "@string/level_4_9_time">
 	<dialog>
 		<character1 resource ="@xml/level_4_9_dialog_wanda"/>
 	</dialog>

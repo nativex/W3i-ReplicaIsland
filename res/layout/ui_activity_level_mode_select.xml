@@ -21,23 +21,42 @@
         android:gravity="center_horizontal|bottom"
         android:orientation="vertical" >
 
-        <com.w3i.torch.views.CustomFontTextView
-            android:id="@+id/ui_game_mode_story"
-            style="@style/ui_start_game_button_style"
+        <RelativeLayout
+            style="@style/ui_select_mode_button_layout_style"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ui_game_mode_story_mode_button_text" />
+            android:layout_height="wrap_content" >
 
-        <FrameLayout
+            <com.w3i.torch.views.CustomFontTextView
+                android:id="@+id/ui_game_mode_story"
+                style="@style/ui_select_mode_button_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="@string/ui_game_mode_story_mode_button_text" />
+
+            <com.w3i.torch.views.CustomFontTextView
+                android:id="@+id/ui_game_mode_story_descriptioon"
+                style="@style/ui_select_mode_description_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ui_game_mode_story"
+                android:layout_centerHorizontal="true"
+                android:text="Level sequence follows the story." />
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/ui_select_mode_button_layout_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
             <com.w3i.torch.views.CustomFontTextView
                 android:id="@+id/ui_game_mode_linear"
-                style="@style/ui_start_game_button_style"
+                style="@style/ui_select_mode_button_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
                 android:text="@string/linear_mode" />
 
             <com.w3i.torch.views.CustomFontTextView
@@ -45,20 +64,33 @@
                 style="@style/ui_game_mode_locked_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_alignBottom="@+id/ui_game_mode_linear"
+                android:layout_alignTop="@+id/ui_game_mode_linear"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:text="@string/ui_game_mode_linear_locked" />
-        </FrameLayout>
 
-        <FrameLayout
+            <com.w3i.torch.views.CustomFontTextView
+                android:id="@+id/ui_game_mode_linear_descriptioon"
+                style="@style/ui_select_mode_description_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ui_game_mode_linear"
+                android:text="Experience the story linearly in time" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/ui_select_mode_button_layout_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
             <com.w3i.torch.views.CustomFontTextView
                 android:id="@+id/ui_game_mode_select"
-                style="@style/ui_start_game_button_style"
+                style="@style/ui_select_mode_button_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
                 android:text="@string/ui_game_mode_level_select_button_text" />
 
             <com.w3i.torch.views.CustomFontTextView
@@ -66,10 +98,21 @@
                 style="@style/ui_game_mode_locked_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_alignBottom="@+id/ui_game_mode_select"
+                android:layout_alignTop="@+id/ui_game_mode_select"
+                android:layout_centerHorizontal="true"
                 android:contentDescription="@string/default_image_view_description"
+                android:gravity="center"
                 android:text="@string/ui_game_mode_level_select_locked_text" />
-        </FrameLayout>
+
+            <com.w3i.torch.views.CustomFontTextView
+                android:id="@+id/ui_game_mode_select_descriptioon"
+                style="@style/ui_select_mode_description_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ui_game_mode_select"
+                android:text="Choose which level to start at." />
+        </RelativeLayout>
     </LinearLayout>
 
 </FrameLayout>
