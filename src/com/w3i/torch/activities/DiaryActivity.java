@@ -29,7 +29,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.w3i.offerwall.PublisherManager;
 import com.w3i.torch.BaseObject;
 import com.w3i.torch.DebugLog;
 import com.w3i.torch.R;
@@ -85,15 +84,4 @@ public class DiaryActivity extends Activity {
 
 	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		PublisherManager.createSession();
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		PublisherManager.endSession();
-	}
 }

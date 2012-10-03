@@ -248,6 +248,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		PublisherManager.endSession();
 		AdvertiserManager.release();
 		PublisherManager.release();
 		GamesPlatformManager.release();
@@ -305,7 +306,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	protected void onPause() {
 		super.onPause();
 		mPaused = true;
-		PublisherManager.endSession();
 		SharedPreferenceManager.storeAll();
 		FundsView.releaseFunds();
 	}
@@ -314,7 +314,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	protected void onResume() {
 		super.onResume();
 
-		PublisherManager.createSession();
 		PublisherManager.redeemCurrency(this);
 		torchOnResume();
 

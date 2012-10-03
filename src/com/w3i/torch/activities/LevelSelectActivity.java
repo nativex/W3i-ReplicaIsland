@@ -38,7 +38,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.w3i.offerwall.PublisherManager;
 import com.w3i.torch.DebugLog;
 import com.w3i.torch.LevelTree;
 import com.w3i.torch.R;
@@ -199,17 +198,6 @@ public class LevelSelectActivity extends ListActivity {
 
 		// Keep the volume control type consistent across all activities.
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
-	}
-
-	protected void onResume() {
-		super.onResume();
-		PublisherManager.createSession();
-	};
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		PublisherManager.endSession();
 	}
 
 	protected void generateLevelList(

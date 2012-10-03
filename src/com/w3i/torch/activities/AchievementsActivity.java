@@ -20,7 +20,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.w3i.offerwall.PublisherManager;
 import com.w3i.torch.DebugLog;
 import com.w3i.torch.R;
 import com.w3i.torch.UIConstants;
@@ -120,14 +119,12 @@ public class AchievementsActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		AchievementManager.registerAchievementListener(achievementListener);
-		PublisherManager.createSession();
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
 		AchievementManager.registerAchievementListener(null);
-		PublisherManager.endSession();
 	}
 
 	private void addAchivements() {

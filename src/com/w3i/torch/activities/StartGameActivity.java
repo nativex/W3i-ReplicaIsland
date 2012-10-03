@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
-import com.w3i.offerwall.PublisherManager;
 import com.w3i.torch.DebugLog;
 import com.w3i.torch.PreferenceConstants;
 import com.w3i.torch.R;
@@ -118,7 +117,6 @@ public class StartGameActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		PublisherManager.createSession();
 		// check if the player has made progress in the game and enable continue
 		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
 		final int row = prefs.getInt(PreferenceConstants.PREFERENCE_LEVEL_ROW, 0);
@@ -136,12 +134,6 @@ public class StartGameActivity extends Activity {
 		newGameButton.clearAnimation();
 		background.clearAnimation();
 		mButtonFlickerAnimation.setAnimationListener(null);
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		PublisherManager.endSession();
 	}
 
 	@Override

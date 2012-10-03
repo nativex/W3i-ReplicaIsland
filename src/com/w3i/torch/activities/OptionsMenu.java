@@ -15,7 +15,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import com.w3i.offerwall.PublisherManager;
 import com.w3i.torch.DebugLog;
 import com.w3i.torch.PreferenceConstants;
 import com.w3i.torch.R;
@@ -215,7 +214,6 @@ public class OptionsMenu extends Activity {
 		super.onResume();
 		AchievementManager.registerAchievementListener(achievementListener);
 		GamesPlatformManager.onResume();
-		PublisherManager.createSession();
 		setSwitchButtonsText();
 		clearViewAnimations();
 	}
@@ -251,7 +249,6 @@ public class OptionsMenu extends Activity {
 	protected void onPause() {
 		super.onPause();
 		AchievementManager.registerAchievementListener(null);
-		PublisherManager.endSession();
 	}
 
 	@Override

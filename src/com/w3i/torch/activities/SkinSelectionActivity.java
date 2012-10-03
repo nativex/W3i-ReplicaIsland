@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.w3i.offerwall.PublisherManager;
 import com.w3i.torch.R;
 import com.w3i.torch.skins.Skin;
 import com.w3i.torch.skins.SkinManager;
@@ -64,15 +63,4 @@ public class SkinSelectionActivity extends Activity {
 		skinList.addView(skinItem);
 	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		PublisherManager.createSession();
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		PublisherManager.endSession();
-	}
 }

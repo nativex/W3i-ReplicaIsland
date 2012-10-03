@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry exported="true" kind="lib" path="lib/GamesPlatform.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/gson-2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/PublisherSDK_3.0.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/PublisherSDK_v3.0.0.jar"/>
 	<classpathentry excluding="com/w3i/torch/store/VerticalTextView.java|com/w3i/torch/store/SharedPreferenceManager.java|com/w3i/torch/store/PowerupManager.java|com/w3i/torch/store/ItemManager.java|com/w3i/torch/store/GamesPlatformManager.java|com/w3i/torch/store/FundsManager.java|com/w3i/torch/store/StorePurchasedItems.java|com/w3i/torch/publisher/OfferwallManager.java|com/w3i/torch/achivements/AchievementConstants.java" kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
