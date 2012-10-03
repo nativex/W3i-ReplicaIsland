@@ -415,5 +415,8 @@ If I am honest with myself, there is another reason the adventurers had to die. 
     <string name="ui_game_mode_linear_locked">LOCKED</string>
     <string name="ui_game_mode_level_select_locked_text">LOCKED</string>
     <string name="ui_game_mode_story_mode_button_text">STORY MODE</string>
+    <string name="game_diff_adilt_text">Adult</string>
+    <string name="game_diff_kid_text">Kid</string>
+    <string name="game_diff_baby_text">Baby</string>
 
 </resources>

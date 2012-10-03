@@ -49,14 +49,14 @@ public class GameModeSelectActivity extends Activity {
 				return;
 			}
 			startGame(START_STORY_MODE);
-			mLinearModeButton.startAnimation(mAlternateFadeOutAnimation);
-			mLevelSelectButton.startAnimation(mAlternateFadeOutAnimation);
-			linearModeDescription.startAnimation(mAlternateFadeOutAnimation);
-			selectModeDescription.startAnimation(mAlternateFadeOutAnimation);
-			if (!allModesUnlocked) {
-				mLinearModeLocked.startAnimation(mAlternateFadeOutAnimation);
-				mLevelSelectLocked.startAnimation(mAlternateFadeOutAnimation);
-			}
+			// mLinearModeButton.startAnimation(mAlternateFadeOutAnimation);
+			// mLevelSelectButton.startAnimation(mAlternateFadeOutAnimation);
+			// linearModeDescription.startAnimation(mAlternateFadeOutAnimation);
+			// selectModeDescription.startAnimation(mAlternateFadeOutAnimation);
+			// if (!allModesUnlocked) {
+			// mLinearModeLocked.startAnimation(mAlternateFadeOutAnimation);
+			// mLevelSelectLocked.startAnimation(mAlternateFadeOutAnimation);
+			// }
 
 			lockButtons = true;
 		}
@@ -69,10 +69,10 @@ public class GameModeSelectActivity extends Activity {
 				return;
 			}
 			startGame(START_LINEAR_MODE);
-			mStoryModeButton.startAnimation(mAlternateFadeOutAnimation);
-			mLevelSelectButton.startAnimation(mAlternateFadeOutAnimation);
-			selectModeDescription.startAnimation(mAlternateFadeOutAnimation);
-			storyModeDescription.startAnimation(mAlternateFadeOutAnimation);
+			// mStoryModeButton.startAnimation(mAlternateFadeOutAnimation);
+			// mLevelSelectButton.startAnimation(mAlternateFadeOutAnimation);
+			// selectModeDescription.startAnimation(mAlternateFadeOutAnimation);
+			// storyModeDescription.startAnimation(mAlternateFadeOutAnimation);
 			lockButtons = true;
 
 		}
@@ -85,10 +85,10 @@ public class GameModeSelectActivity extends Activity {
 				return;
 			}
 			startGame(START_LEVEL_SELECT);
-			mLinearModeButton.startAnimation(mAlternateFadeOutAnimation);
-			mStoryModeButton.startAnimation(mAlternateFadeOutAnimation);
-			linearModeDescription.startAnimation(mAlternateFadeOutAnimation);
-			storyModeDescription.startAnimation(mAlternateFadeOutAnimation);
+			// mLinearModeButton.startAnimation(mAlternateFadeOutAnimation);
+			// mStoryModeButton.startAnimation(mAlternateFadeOutAnimation);
+			// linearModeDescription.startAnimation(mAlternateFadeOutAnimation);
+			// storyModeDescription.startAnimation(mAlternateFadeOutAnimation);
 			lockButtons = true;
 
 		}
@@ -167,7 +167,7 @@ public class GameModeSelectActivity extends Activity {
 			i.putExtra("newGame", true);
 			mLinearModeButton.startAnimation(mButtonFlickerAnimation);
 			mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(i));
-			mBackground.startAnimation(mFadeOutAnimation);
+			// mBackground.startAnimation(mFadeOutAnimation);
 
 		} else if (type == START_LEVEL_SELECT) {
 			Intent i = new Intent(getBaseContext(), DifficultyMenuActivity.class);
@@ -175,13 +175,13 @@ public class GameModeSelectActivity extends Activity {
 			i.putExtra("newGame", true);
 			mLevelSelectButton.startAnimation(mButtonFlickerAnimation);
 			mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(i));
-			mBackground.startAnimation(mFadeOutAnimation);
+			// mBackground.startAnimation(mFadeOutAnimation);
 		} else if (type == START_STORY_MODE) {
 			Intent i = new Intent(getBaseContext(), DifficultyMenuActivity.class);
 			i.putExtra("newGame", true);
 			mStoryModeButton.startAnimation(mButtonFlickerAnimation);
 			mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(i));
-			mBackground.startAnimation(mFadeOutAnimation);
+			// mBackground.startAnimation(mFadeOutAnimation);
 		}
 	}
 
@@ -194,12 +194,18 @@ public class GameModeSelectActivity extends Activity {
 
 		public void onAnimationEnd(
 				Animation animation) {
-			mLinearModeButton.setVisibility(View.INVISIBLE);
-			mLinearModeButton.clearAnimation();
-			mLevelSelectButton.setVisibility(View.INVISIBLE);
-			mLevelSelectButton.clearAnimation();
-			mStoryModeButton.setVisibility(View.INVISIBLE);
-			mStoryModeButton.clearAnimation();
+			// mLinearModeButton.setVisibility(View.INVISIBLE);
+			// mLinearModeButton.clearAnimation();
+			// mLevelSelectButton.setVisibility(View.INVISIBLE);
+			// mLevelSelectButton.clearAnimation();
+			// mStoryModeButton.setVisibility(View.INVISIBLE);
+			// mStoryModeButton.clearAnimation();
+			// linearModeDescription.setVisibility(View.INVISIBLE);
+			// linearModeDescription.clearAnimation();
+			// storyModeDescription.setVisibility(View.INVISIBLE);
+			// storyModeDescription.clearAnimation();
+			// selectModeDescription.setVisibility(View.INVISIBLE);
+			// selectModeDescription.clearAnimation();
 
 			startActivity(mIntent);
 			finish();
