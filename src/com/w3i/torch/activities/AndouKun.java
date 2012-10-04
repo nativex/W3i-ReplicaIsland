@@ -30,7 +30,6 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Debug;
 import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,7 +38,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.w3i.torch.AdultsDifficultyConstants;
@@ -338,16 +336,16 @@ public class AndouKun extends Activity implements SensorEventListener {
 	private ViewGroup fundsView;
 
 	private void onCreateTestBlock() {
-		ViewGroup main = (ViewGroup) findViewById(R.id.ui_game_container);
-		boolean addInMain = fundsView == null;
-		fundsView = FundsView.setFunds(this, fundsView);
-		if (addInMain) {
-			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-			params.gravity = Gravity.BOTTOM;
-			fundsView.setLayoutParams(params);
-
-			main.addView(fundsView);
-		}
+		// ViewGroup main = (ViewGroup) findViewById(R.id.ui_game_container);
+		// boolean addInMain = fundsView == null;
+		// fundsView = FundsView.setFunds(this, fundsView);
+		// if (addInMain) {
+		// FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+		// params.gravity = Gravity.BOTTOM;
+		// fundsView.setLayoutParams(params);
+		//
+		// main.addView(fundsView);
+		// }
 	}
 
 	protected void onDestroy() {

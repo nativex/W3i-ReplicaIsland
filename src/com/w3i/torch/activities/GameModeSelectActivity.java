@@ -239,7 +239,13 @@ public class GameModeSelectActivity extends Activity {
 			int keyCode,
 			KeyEvent event) {
 		boolean result = true;
+
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+			if (lockButtons) {
+				return result;
+			}
+			lockButtons = true;
 			finish();
 			startActivity(new Intent(this, StartGameActivity.class));
 			if (UIConstants.mOverridePendingTransition != null) {

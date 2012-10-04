@@ -408,6 +408,45 @@ public class HudSystem extends BaseObject {
 				pool.release(location);
 			}
 
+			if (mCoinDrawable != null) {
+				if (mCoinDrawable.getWidth() == 0) {
+					// first time init
+					Texture tex = mCoinDrawable.getTexture();
+					mCoinDrawable.resize(tex.width, tex.height);
+					mCoinLocation.x = (params.gameWidth / 2.0f) - tex.width / 2.0f;
+					mCoinLocation.y = params.gameHeight - tex.height - COLLECTABLE_EDGE_PADDING;
+				}
+
+				render.scheduleForDraw(mCoinDrawable, mCoinLocation, SortConstants.HUD, false);
+				if (mCoinDigitsChanged) {
+					intToDigitArray(mCoinCount, mCoinDigits);
+					mCoinDigitsChanged = false;
+				}
+				final float offset = mCoinDrawable.getWidth() * 0.75f;
+				mCoinLocation.x += offset;
+				drawNumber(mCoinLocation, mCoinDigits, true);
+				mCoinLocation.x -= offset;
+			}
+
+			if (mRubyDrawable != null) {
+				if (mRubyDrawable.getWidth() == 0) {
+					// first time init
+					Texture tex = mRubyDrawable.getTexture();
+					mRubyDrawable.resize(tex.width, tex.height);
+					mRubyLocation.x = (params.gameWidth / 2.0f) + 100.0f;
+					mRubyLocation.y = params.gameHeight - tex.height - COLLECTABLE_EDGE_PADDING;
+				}
+				render.scheduleForDraw(mRubyDrawable, mRubyLocation, SortConstants.HUD, false);
+				if (mRubyDigitsChanged) {
+					intToDigitArray(mRubyCount, mRubyDigits);
+					mRubyDigitsChanged = false;
+				}
+				final float offset = mRubyDrawable.getWidth() * 0.75f;
+				mRubyLocation.x += offset;
+				drawNumber(mRubyLocation, mRubyDigits, true);
+				mRubyLocation.x -= offset;
+			}
+
 			if (mFlyButtonDisabledDrawable != null && mFlyButtonEnabledDrawable != null && mFlyButtonDepressedDrawable != null) {
 
 				DrawableBitmap bitmap = mFlyButtonEnabledDrawable;
@@ -473,67 +512,6 @@ public class HudSystem extends BaseObject {
 				render.scheduleForDraw(mMovementSliderBaseDrawable, mMovementSliderBaseLocation, SortConstants.HUD, false);
 				render.scheduleForDraw(bitmap, mMovementSliderButtonLocation, SortConstants.HUD + 1, false);
 
-			}
-
-			if (mCoinDrawable != null) {
-				if (mCoinDrawable.getWidth() == 0) {
-					// first time init
-					Texture tex = mCoinDrawable.getTexture();
-					mCoinDrawable.resize(tex.width, tex.height);
-					mCoinLocation.x = (params.gameWidth / 2.0f) - tex.width / 2.0f;
-					mCoinLocation.y = params.gameHeight - tex.height - COLLECTABLE_EDGE_PADDING;
-				}
-
-				render.scheduleForDraw(mCoinDrawable, mCoinLocation, SortConstants.HUD, false);
-				if (mCoinDigitsChanged) {
-					intToDigitArray(mCoinCount, mCoinDigits);
-					mCoinDigitsChanged = false;
-				}
-				final float offset = mCoinDrawable.getWidth() * 0.75f;
-				mCoinLocation.x += offset;
-				drawNumber(mCoinLocation, mCoinDigits, true);
-				mCoinLocation.x -= offset;
-			}
-
-			// TODO: Derek - bring this back when needed and fix.
-
-			// if (mLifetimeCoinDrawable != null) {
-			// if (mLifetimeCoinDrawable.getWidth() == 0) {
-			// // first time init
-			// Texture tex = mLifetimeCoinDrawable.getTexture();
-			// mLifetimeCoinDrawable.resize(tex.width, tex.height);
-			// mLifetimeCoinLocation.x = (params.gameWidth / 2.0f) - tex.width / 2.0f;
-			// mLifetimeCoinLocation.y = params.gameHeight - tex.height - COLLECTABLE_EDGE_PADDING;
-			// }
-			//
-			// render.scheduleForDraw(mLifetimeCoinDrawable, mLifetimeCoinLocation, SortConstants.HUD, false);
-			// if (mLifetimeCoinDigitsChanged) {
-			// intToDigitArray(mLifetimeCoinCount, mLifetimeCoinDigits);
-			// mLifetimeCoinDigitsChanged = false;
-			// }
-			// final float offset = mLifetimeCoinDrawable.getWidth() * 0.75f;
-			// mLifetimeCoinLocation.x += offset;
-			// drawNumber(mLifetimeCoinLocation, mLifetimeCoinDigits, true);
-			// mLifetimeCoinLocation.x -= offset;
-			// }
-
-			if (mRubyDrawable != null) {
-				if (mRubyDrawable.getWidth() == 0) {
-					// first time init
-					Texture tex = mRubyDrawable.getTexture();
-					mRubyDrawable.resize(tex.width, tex.height);
-					mRubyLocation.x = (params.gameWidth / 2.0f) + 100.0f;
-					mRubyLocation.y = params.gameHeight - tex.height - COLLECTABLE_EDGE_PADDING;
-				}
-				render.scheduleForDraw(mRubyDrawable, mRubyLocation, SortConstants.HUD, false);
-				if (mRubyDigitsChanged) {
-					intToDigitArray(mRubyCount, mRubyDigits);
-					mRubyDigitsChanged = false;
-				}
-				final float offset = mRubyDrawable.getWidth() * 0.75f;
-				mRubyLocation.x += offset;
-				drawNumber(mRubyLocation, mRubyDigits, true);
-				mRubyLocation.x -= offset;
 			}
 		}
 

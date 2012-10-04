@@ -263,7 +263,12 @@ public class OptionsMenu extends Activity {
 			int keyCode,
 			KeyEvent event) {
 		boolean result = true;
+
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if (lockButtons) {
+				return result;
+			}
+			lockButtons = true;
 			finish();
 
 			if (UIConstants.mOverridePendingTransition != null) {

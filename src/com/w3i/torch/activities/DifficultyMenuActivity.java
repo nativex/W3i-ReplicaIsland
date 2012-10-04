@@ -26,11 +26,15 @@ public class DifficultyMenuActivity extends Activity {
 	private Animation mButtonFlickerAnimation;
 	private Animation mFadeOutAnimation;
 	private Animation mAlternateFadeOutAnimation;
+	private boolean lockButtons = false;
 
 	private View.OnClickListener sBabyButtonListener = new View.OnClickListener() {
 		public void onClick(
 				View v) {
-
+			if (lockButtons) {
+				return;
+			}
+			lockButtons = true;
 			Intent i = new Intent(getBaseContext(), AndouKun.class);
 			i.putExtras(getIntent());
 			i.putExtra("difficulty", 0);
@@ -50,7 +54,10 @@ public class DifficultyMenuActivity extends Activity {
 	private View.OnClickListener sKidsButtonListener = new View.OnClickListener() {
 		public void onClick(
 				View v) {
-
+			if (lockButtons) {
+				return;
+			}
+			lockButtons = true;
 			Intent i = new Intent(getBaseContext(), AndouKun.class);
 			i.putExtras(getIntent());
 			i.putExtra("difficulty", 1);
@@ -70,7 +77,10 @@ public class DifficultyMenuActivity extends Activity {
 	private View.OnClickListener sAdultsButtonListener = new View.OnClickListener() {
 		public void onClick(
 				View v) {
-
+			if (lockButtons) {
+				return;
+			}
+			lockButtons = true;
 			Intent i = new Intent(getBaseContext(), AndouKun.class);
 			i.putExtras(getIntent());
 			i.putExtra("difficulty", 2);
@@ -119,6 +129,11 @@ public class DifficultyMenuActivity extends Activity {
 			KeyEvent event) {
 		boolean result = true;
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+			if (lockButtons) {
+				return result;
+			}
+			lockButtons = true;
 			finish();
 			startActivity(new Intent(this, GameModeSelectActivity.class));
 			if (UIConstants.mOverridePendingTransition != null) {
@@ -177,6 +192,12 @@ public class DifficultyMenuActivity extends Activity {
 
 		}
 
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		lockButtons = false;
 	}
 
 }

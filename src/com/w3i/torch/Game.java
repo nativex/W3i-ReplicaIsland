@@ -178,7 +178,7 @@ public class Game extends AllocationGuard {
 			DrawableBitmap xDrawable = new DrawableBitmap(longTermTextureLibrary.allocateTexture(R.drawable.ui_x), 0, 0);
 
 			hud.setDigitDrawables(digits, xDrawable);
-			hud.setCollectableDrawables(new DrawableBitmap(longTermTextureLibrary.allocateTexture(R.drawable.ui_funds_pearls), 0, 0), new DrawableBitmap(longTermTextureLibrary.allocateTexture(R.drawable.ui_funds_pearls), 0, 0), new DrawableBitmap(longTermTextureLibrary.allocateTexture(R.drawable.ui_gem), 0, 0));
+			hud.setCollectableDrawables(new DrawableBitmap(longTermTextureLibrary.allocateTexture(R.drawable.ui_pearl), 0, 0), new DrawableBitmap(longTermTextureLibrary.allocateTexture(R.drawable.ui_pearl), 0, 0), new DrawableBitmap(longTermTextureLibrary.allocateTexture(R.drawable.ui_gem), 0, 0));
 
 			BaseObject.sSystemRegistry.hudSystem = hud;
 			if (AndouKun.VERSION < 0) {
