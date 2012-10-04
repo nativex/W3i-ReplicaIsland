@@ -62,6 +62,7 @@ public class StoreActivity extends Activity {
 	private ViewFlinger flinger;
 	private Map<TorchItem.PurchaseState, List<TorchItem>> items;
 	private boolean itemsLoaded = false;
+	private boolean buttonsLocked = false;
 
 	private Map<Long, List<TorchItem>> categories;
 
@@ -243,14 +244,13 @@ public class StoreActivity extends Activity {
 				}
 			}
 		});
-		PublisherManager.createSession();
+		buttonsLocked = false;
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
 		FundsView.releaseFunds();
-		PublisherManager.endSession();
 	}
 
 	private void loadItems() {
@@ -605,6 +605,9 @@ public class StoreActivity extends Activity {
 			KeyEvent event) {
 		boolean result = true;
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if (buttonsLocked) {
+				return result;
+			}
 			View storeActivity = findViewById(R.id.ui_store_activity_container);
 			Animation mFadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 			mFadeOutAnimation.setDuration(500);

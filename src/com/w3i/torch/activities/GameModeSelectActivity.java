@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -13,6 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.w3i.torch.DebugLog;
+import com.w3i.torch.PreferenceConstants;
 import com.w3i.torch.R;
 import com.w3i.torch.UIConstants;
 import com.w3i.torch.views.ReplicaInfoDialog;
@@ -107,9 +109,8 @@ public class GameModeSelectActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ui_activity_level_mode_select);
 
-		// SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
-		// final boolean extrasUnlocked = prefs.getBoolean(PreferenceConstants.PREFERENCE_EXTRAS_UNLOCKED, false);
-		final boolean extrasUnlocked = false;
+		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
+		final boolean extrasUnlocked = prefs.getBoolean(PreferenceConstants.PREFERENCE_EXTRAS_UNLOCKED, false);
 
 		mStoryModeButton = findViewById(R.id.ui_game_mode_story);
 		mLinearModeButton = findViewById(R.id.ui_game_mode_linear);

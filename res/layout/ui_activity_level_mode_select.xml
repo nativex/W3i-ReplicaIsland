@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ui_game_mode_story"
                 android:layout_centerHorizontal="true"
-                android:text="ui_game_mode_story_description" />
+                android:text="@string/ui_game_mode_story_description" />
         </RelativeLayout>
 
         <RelativeLayout

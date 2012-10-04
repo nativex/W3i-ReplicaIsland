@@ -6,12 +6,12 @@ public class BonusPearlsAchievement extends ProgressAchievement {
 
 	public BonusPearlsAchievement() {
 		super(R.integer.achievement_bonus_pearls_goal);
-		setName(R.string.achievement_bonus_crystals_name);
-		setDescription(R.string.achievement_bonus_crystals_description);
+		setName(R.string.achievement_bonus_pearls_name);
+		setDescription(R.string.achievement_bonus_pearls_description);
 		setType(Type.BONUS_PEARLS);
 		setLocked(true);
 		setAchievementUpdateRate(12.5f);
-		
+
 	}
 
 }

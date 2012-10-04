@@ -79,6 +79,7 @@ public class AchievementsActivity extends Activity {
 			});
 		}
 	};
+	private boolean lockButtons = false;
 
 	@Override
 	public boolean onCreateOptionsMenu(
@@ -119,6 +120,7 @@ public class AchievementsActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		AchievementManager.registerAchievementListener(achievementListener);
+		lockButtons = false;
 	}
 
 	@Override
@@ -205,6 +207,9 @@ public class AchievementsActivity extends Activity {
 			KeyEvent event) {
 		boolean result = true;
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if (lockButtons) {
+				return result;
+			}
 			View achievementsActivity = findViewById(R.id.ui_achievements_activity_container);
 			Animation mFadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 			mFadeOutAnimation.setDuration(500);
