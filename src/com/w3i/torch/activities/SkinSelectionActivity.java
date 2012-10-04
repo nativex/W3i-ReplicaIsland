@@ -34,7 +34,7 @@ public class SkinSelectionActivity extends Activity {
 	protected void onCreate(
 			android.os.Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.skin_activity);
+		setContentView(R.layout.ui_activity_skin);
 
 		skinList = (LinearLayout) findViewById(R.id.skinActivityList);
 

@@ -203,7 +203,7 @@ public class StoreActivity extends Activity {
 	protected void onCreate(
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.store_layout);
+		setContentView(R.layout.ui_activity_store);
 
 		flinger = (ViewFlinger) findViewById(R.id.storeFlinger);
 		View toStore = findViewById(R.id.historyToStoreImage);

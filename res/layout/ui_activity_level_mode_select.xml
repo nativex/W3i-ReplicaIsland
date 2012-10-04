@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ui_game_mode_story"
                 android:layout_centerHorizontal="true"
-                android:text="Level sequence follows the story." />
+                android:text="ui_game_mode_story_description" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ui_game_mode_linear"
-                android:text="Experience the story linearly in time" />
+                android:text="@string/ui_game_mode_linear_description" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -111,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ui_game_mode_select"
-                android:text="Choose which level to start at." />
+                android:text="@string/ui_game_mode_select_description" />
         </RelativeLayout>
     </LinearLayout>
 

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ui_store_activity_container"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="center" >
+
+    <com.egoclean.android.widget.flinger.ViewFlinger
+        android:id="@+id/storeFlinger"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android="" >
+
+        <include
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            layout="@layout/store_ui" />
+
+        <include
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            layout="@layout/history_ui" />
+    </com.egoclean.android.widget.flinger.ViewFlinger>
+
+</LinearLayout>

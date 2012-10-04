@@ -202,7 +202,7 @@ public class AndouKun extends Activity implements SensorEventListener {
 
 		DebugLog.d("AndouKun", "onCreate");
 
-		setContentView(R.layout.main_2);
+		setContentView(R.layout.ui_activity_game);
 		mGLSurfaceView = (GLSurfaceView) findViewById(R.id.glsurfaceview);
 		mPauseMessage = findViewById(R.id.pausedMessage);
 		mWaitMessage = findViewById(R.id.pleaseWaitMessage);

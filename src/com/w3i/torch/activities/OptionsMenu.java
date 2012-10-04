@@ -193,7 +193,7 @@ public class OptionsMenu extends Activity {
 	public void onCreate(
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.extras_menu);
+		setContentView(R.layout.ui_activity_options);
 
 		soundButton = findViewById(R.id.ui_option_sound);
 		controlsButton = findViewById(R.id.ui_option_controls);

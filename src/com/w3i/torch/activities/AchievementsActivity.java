@@ -106,7 +106,7 @@ public class AchievementsActivity extends Activity {
 	protected void onCreate(
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.ui_achievements_activity);
+		setContentView(R.layout.ui_activity_achievements);
 
 		achvContainer = (LinearLayout) findViewById(R.id.achvMainList);
 		addAchivements();

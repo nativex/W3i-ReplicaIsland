@@ -174,7 +174,7 @@ public class LevelSelectActivity extends ListActivity {
 	public void onCreate(
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.level_select);
+		setContentView(R.layout.ui_activity_level_select);
 		mLevelData = new ArrayList<LevelMetaData>();
 
 		if (getIntent().getBooleanExtra("unlockAll", false)) {

@@ -60,7 +60,7 @@ public class DiaryActivity extends Activity {
 	public void onCreate(
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.diary);
+		setContentView(R.layout.ui_activity_diary);
 
 		TextView text = (TextView) findViewById(R.id.diarytext);
 

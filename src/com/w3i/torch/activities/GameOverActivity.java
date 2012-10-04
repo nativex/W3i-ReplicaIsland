@@ -141,7 +141,7 @@ public class GameOverActivity extends Activity {
 	public void onCreate(
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.game_over);
+		setContentView(R.layout.ui_activity_game_over);
 
 		mPearlView = (IncrementingTextView) findViewById(R.id.pearl_percent);
 		mEnemiesDestroyedView = (IncrementingTextView) findViewById(R.id.enemy_percent);

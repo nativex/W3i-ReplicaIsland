@@ -91,7 +91,7 @@ public class DifficultyMenuActivity extends Activity {
 	public void onCreate(
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.difficulty_menu);
+		setContentView(R.layout.ui_activity_difficulty);
 
 		mBabyButton = findViewById(R.id.babyButton);
 		mKidsButton = findViewById(R.id.kidsButton);

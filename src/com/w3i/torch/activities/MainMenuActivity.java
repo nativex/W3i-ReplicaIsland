@@ -169,7 +169,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	public void onCreate(
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.mainmenu);
+		setContentView(R.layout.ui_activity_main_menu);
 
 		torchOnCreate();
 
