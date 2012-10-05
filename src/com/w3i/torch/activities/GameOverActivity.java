@@ -26,6 +26,8 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -39,6 +41,7 @@ public class GameOverActivity extends Activity {
 	private float mEnemiesDestroyedPercent = 100.0f;
 	private float mPlayTime = 0.0f;
 	private int mEnding = AnimationPlayerActivity.KABOCHA_ENDING;
+	private View tapToContinue;
 
 	private IncrementingTextView mPearlView;
 	private IncrementingTextView mEnemiesDestroyedView;
@@ -143,10 +146,16 @@ public class GameOverActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ui_activity_game_over);
 
+		tapToContinue = findViewById(R.id.ui_game_over_tap_to_continue);
 		mPearlView = (IncrementingTextView) findViewById(R.id.pearl_percent);
 		mEnemiesDestroyedView = (IncrementingTextView) findViewById(R.id.enemy_percent);
 		mPlayTimeView = (IncrementingTextView) findViewById(R.id.total_play_time);
 		mEndingView = (TextView) findViewById(R.id.ending);
+
+		Animation anim = AnimationUtils.loadAnimation(this, R.anim.fade_in_out);
+		anim.setDuration(500);
+		tapToContinue.startAnimation(anim);
+		tapToContinue.setOnClickListener(sOKClickListener);
 
 		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
 		final float playTime = prefs.getFloat(PreferenceConstants.PREFERENCE_TOTAL_GAME_TIME, 0.0f);
@@ -174,9 +183,6 @@ public class GameOverActivity extends Activity {
 		} else {
 			mEndingView.setText(R.string.game_results_wanda_ending);
 		}
-
-		Button okButton = (Button) findViewById(R.id.ok);
-		okButton.setOnClickListener(sOKClickListener);
 
 	}
 

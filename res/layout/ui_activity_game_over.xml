@@ -12,8 +12,8 @@
         android:contentDescription="@string/default_image_view_description"
         android:gravity="right"
         android:scaleType="fitXY"
-        android:src="@drawable/title_background"
-        android:tint="#88FFFFFF" />
+        android:src="@drawable/ui_main_menu_background"
+        android:tint="#30FFFFFF" />
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/game_results_title"
-            android:textColor="#000000"
+            android:textColor="#AAFFFFFF"
             android:textSize="40sp"
             android:textStyle="bold"
             android:typeface="serif" />
@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/game_results_pearls_collected"
-                android:textColor="#000000"
+                android:textColor="#FFFFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:typeface="serif" />
@@ -54,7 +54,7 @@
                 class="com.w3i.torch.activities.GameOverActivity$IncrementingTextView"
                 android:gravity="right"
                 android:text="@string/game_over_pearl_percent"
-                android:textColor="#000000"
+                android:textColor="#AAFFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:typeface="serif" />
@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/game_results_robots_destroyed"
-                android:textColor="#000000"
+                android:textColor="#FFFFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:typeface="serif" />
@@ -82,7 +82,7 @@
                 class="com.w3i.torch.activities.GameOverActivity$IncrementingTextView"
                 android:gravity="right"
                 android:text="@string/game_over_enemy_percent"
-                android:textColor="#000000"
+                android:textColor="#AAFFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:typeface="serif" />
@@ -97,11 +97,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/game_results_total_play_time"
-                android:textColor="#000000"
+                android:textColor="#FFFFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:typeface="serif" />
-
+
             <view
                 android:id="@+id/total_play_time"
                 android:layout_width="fill_parent"
@@ -110,11 +110,10 @@
                 class="com.w3i.torch.activities.GameOverActivity$IncrementingTextView"
                 android:gravity="right"
                 android:text="@string/game_over_total_play_time"
-                android:textColor="#000000"
+                android:textColor="#AAFFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:typeface="serif" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -126,7 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/game_results_ending"
-                android:textColor="#000000"
+                android:textColor="#FFFFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:typeface="serif" />
@@ -138,7 +137,7 @@
                 android:layout_gravity="right|center_vertical"
                 android:gravity="right"
                 android:text="@string/game_results_kabocha_ending"
-                android:textColor="#000000"
+                android:textColor="#AAFFFFFF"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:typeface="serif" />
@@ -151,17 +150,20 @@
             android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
             android:text="@string/game_results_unlocks_message"
-            android:textColor="#000000"
+            android:textColor="#FFFFFFFF"
             android:textSize="16sp"
             android:textStyle="bold"
             android:typeface="serif" />
-
-        <Button
-            android:id="@+id/ok"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:text="@string/game_results_ok_button" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/ui_game_over_tap_to_continue"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:minHeight="70dip"
+        android:text="@string/tap_here_to_continue"
+        android:textSize="22sp" />
 
 </FrameLayout>

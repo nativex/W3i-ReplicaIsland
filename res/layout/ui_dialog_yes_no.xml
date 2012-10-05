@@ -87,9 +87,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dip"
             android:layout_weight="1"
+            android:background="@drawable/ui_dialog_buton"
             android:gravity="center"
             android:minHeight="40dip"
-            android:minWidth="70dip"
+            android:minWidth="100dip"
             android:textColor="@android:color/white"
             android:textSize="14dip"
             app:setFont="BABYU__.TTF" />
@@ -100,9 +101,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dip"
             android:layout_weight="1"
+            android:background="@drawable/ui_dialog_buton"
             android:gravity="center"
             android:minHeight="40dip"
-            android:minWidth="70dip"
+            android:minWidth="100dip"
             android:textColor="@android:color/white"
             android:textSize="14dip"
             app:setFont="BABYU__.TTF" />

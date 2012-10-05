@@ -94,10 +94,13 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/infoDialogCloseButton"
         android:layout_below="@+id/infoDialogItemLayout"
-        android:layout_margin="10dip"
+        android:layout_marginBottom="10dip"
+        android:layout_marginTop="10dip"
+        android:background="@drawable/ui_dialog_buton"
         android:gravity="center"
         android:minHeight="40dip"
-        android:minWidth="70dip"
+        android:minWidth="100dip"
+        android:paddingTop="7dip"
         android:textColor="@android:color/white"
         app:setFont="BABYU__.TTF" />
 
