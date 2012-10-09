@@ -15,5 +15,21 @@
         <attr name="setFont" format="string" />
         <attr name="addSpacing" format="boolean" />
     </declare-styleable>
+    <declare-styleable name="Options">
+        <attr name="set_title" format="string" />
+    </declare-styleable>
+    <declare-styleable name="Options.Checkbox">
+        <attr name="set_on_text" format="string" />
+        <attr name="set_off_text" format="string" />
+        <attr name="set_mid_text" format="string" />
+        <attr name="set_tristate" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="Options.OptionsSlider">
+        <attr name="set_description" format="string" />
+        <attr name="set_max" format="integer" />
+        <attr name="set_pos" format="integer" />
+        <attr name="set_min_text" format="string" />
+        <attr name="set_max_text" format="string" />
+    </declare-styleable>
 
 </resources>

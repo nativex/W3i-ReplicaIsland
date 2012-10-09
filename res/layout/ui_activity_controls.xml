@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.w3i.torch" >
+
+    <com.w3i.torch.views.CustomFontTextView
+        android:id="@+id/ui_controls_title"
+        style="@style/ui_controls_title_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+    <ScrollView
+        android:id="@+id/ui_controls_scroller"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:id="@+id/ui_controls_scroll_container"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <com.w3i.torch.views.OptionsCheckbox
+                android:id="@+id/ui_controls_click_attack"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                app:set_off_text="@string/preference_enable_click_attack_summary"
+                app:set_on_text="@string/preference_enable_click_attack_summary"
+                app:set_title="@string/preference_enable_click_attack"
+                app:set_tristate="true" />
+
+            <com.w3i.torch.views.OptionsSlider
+                android:id="@+id/ui_controls_test_slider"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                app:set_description="some description"
+                app:set_max_text="Fast"
+                app:set_min_text="Slow"
+                app:set_title="title" >
+            </com.w3i.torch.views.OptionsSlider>
+        </LinearLayout>
+    </ScrollView>
+
+</merge>

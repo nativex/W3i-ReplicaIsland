@@ -127,6 +127,7 @@
         <activity
             android:name=".activities.GameModeSelectActivity"
             android:screenOrientation="landscape" />
+        <activity android:name=".activities.ControlsSetupActivity"></activity>
     </application>
 
 </manifest>

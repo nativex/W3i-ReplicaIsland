@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.w3i.torch"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <com.w3i.torch.views.CustomFontTextView
+        android:id="@+id/ui_checkbox_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/ui_checkbox_check"
+        android:textSize="22sp"
+        app:addSpacing="true"
+        app:setFont="BABYU__.TTF" />
+
+    <com.w3i.torch.views.TorchCheckbox
+        android:id="@+id/ui_checkbox_check"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="7dip"
+        android:layout_marginLeft="4dip"
+        android:layout_marginRight="7dip"
+        android:layout_marginTop="7dip" />
+
+    <com.w3i.torch.views.CustomFontTextView
+        android:id="@+id/ui_checkbox_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ui_checkbox_title"
+        android:layout_toLeftOf="@+id/ui_checkbox_check"
+        android:textSize="16sp"
+        app:setFont="BANDLESS.TTF" />
+
+</RelativeLayout>

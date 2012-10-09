@@ -129,7 +129,7 @@ public class OptionsMenu extends Activity {
 				break;
 
 			case R.id.ui_option_controls:
-				intent = new Intent(getBaseContext(), SetPreferencesActivity.class);
+				intent = new Intent(getBaseContext(), ControlsSetupActivity.class);
 				intent.putExtra("controlConfig", true);
 				soundButton.startAnimation(mAlternateFadeOutAnimation);
 				safeModeButton.startAnimation(mAlternateFadeOutAnimation);
