@@ -181,4 +181,10 @@
         <item name="android:shadowRadius">2</item>
     </style>
 
+    <style name="ui_options_slider_label">
+        <item name="setFont">BANDLESS.TTF</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:lines">1</item>
+    </style>
+
 </resources>

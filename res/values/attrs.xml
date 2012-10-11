@@ -17,15 +17,20 @@
     </declare-styleable>
     <declare-styleable name="Options">
         <attr name="set_title" format="string" />
+        <attr name="set_title_color" format="color" />
+        <attr name="set_description" format="string" />
+        <attr name="set_description_color" format="color" />
     </declare-styleable>
-    <declare-styleable name="Options.Checkbox">
+    <declare-styleable name="OptionsCheckbox">
         <attr name="set_on_text" format="string" />
         <attr name="set_off_text" format="string" />
         <attr name="set_mid_text" format="string" />
         <attr name="set_tristate" format="boolean" />
+        <attr name="set_on_text_color" format="color" />
+        <attr name="set_off_text_color" format="color" />
+        <attr name="set_mid_text_color" format="color" />
     </declare-styleable>
-    <declare-styleable name="Options.OptionsSlider">
-        <attr name="set_description" format="string" />
+    <declare-styleable name="OptionsSlider">
         <attr name="set_max" format="integer" />
         <attr name="set_pos" format="integer" />
         <attr name="set_min_text" format="string" />

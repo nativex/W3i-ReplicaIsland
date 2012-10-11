@@ -17,7 +17,7 @@
         android:targetSdkVersion="8" />
     <!--
     Actually, this game works fine on small screens, but the only one out 
-	right now has no 3D acceleration, so it's slow and unplayable.
+	right now has no 3D acceleration, so it's slow and unplayable.
     -->
 
     <supports-screens
@@ -127,7 +127,10 @@
         <activity
             android:name=".activities.GameModeSelectActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".activities.ControlsSetupActivity"></activity>
+        <activity
+            android:name=".activities.ControlsSetupActivity"
+            android:screenOrientation="landscape" >
+        </activity>
     </application>
 
 </manifest>

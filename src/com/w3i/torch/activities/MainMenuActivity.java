@@ -247,14 +247,14 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		PublisherManager.endSession();
-		AdvertiserManager.release();
-		PublisherManager.release();
-		GamesPlatformManager.release();
-		TorchCurrencyManager.release();
-		TorchItemManager.release();
-		SharedPreferenceManager.release();
-		AchievementManager.release();
+		// PublisherManager.endSession();
+		// AdvertiserManager.release();
+		// PublisherManager.release();
+		// GamesPlatformManager.release();
+		// TorchCurrencyManager.release();
+		// TorchItemManager.release();
+		// SharedPreferenceManager.release();
+		// AchievementManager.release();
 	}
 
 	/**
@@ -319,7 +319,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		setFunds();
 		ImageView character = (ImageView) findViewById(R.id.mainMenuCharacter);
 		SkinManager.changeTitleScreenImage(character);
-
 	}
 
 	private void torchOnResume() {
@@ -489,8 +488,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 				public void onClick(
 						DialogInterface dialog,
 						int whichButton) {
-					Intent i = new Intent(getBaseContext(), SetPreferencesActivity.class);
-					i.putExtra("controlConfig", true);
+					Intent i = new Intent(getBaseContext(), ControlsSetupActivity.class);
 					startActivity(i);
 				}
 			}).setMessage(sytledMessage).create();

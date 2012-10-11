@@ -22,6 +22,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/achvMainTitle"
+        android:layout_centerHorizontal="true"
         android:layout_margin="5dip"
         android:background="@drawable/ui_achievements_activity_list_background"
         android:paddingBottom="15dip"

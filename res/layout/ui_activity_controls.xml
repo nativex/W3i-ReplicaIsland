@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/com.w3i.torch" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.w3i.torch"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ImageView
+        android:id="@+id/ui_activity_controls_background"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:contentDescription="@string/default_image_view_description"
+        android:scaleType="fitXY"
+        android:src="@drawable/ui_store_background" />
 
     <com.w3i.torch.views.CustomFontTextView
         android:id="@+id/ui_controls_title"
@@ -8,38 +18,90 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dip"
+        android:text="Controls Setup" />
 
     <ScrollView
         android:id="@+id/ui_controls_scroller"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ui_controls_title"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="30dip"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="10dip"
+        android:background="@drawable/ui_controls_overlay" >
 
         <LinearLayout
             android:id="@+id/ui_controls_scroll_container"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
             <com.w3i.torch.views.OptionsCheckbox
                 android:id="@+id/ui_controls_click_attack"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dip"
                 app:set_off_text="@string/preference_enable_click_attack_summary"
                 app:set_on_text="@string/preference_enable_click_attack_summary"
-                app:set_title="@string/preference_enable_click_attack"
-                app:set_tristate="true" />
+                app:set_title="@string/preference_enable_click_attack" />
+
+            <com.w3i.torch.views.Option
+                android:id="@+id/ui_controls_key_config"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dip"
+                app:set_description="@string/preference_key_config_summary"
+                app:set_title="@string/preference_key_config" />
 
             <com.w3i.torch.views.OptionsSlider
-                android:id="@+id/ui_controls_test_slider"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                app:set_description="some description"
-                app:set_max_text="Fast"
-                app:set_min_text="Slow"
-                app:set_title="title" >
+                android:id="@+id/ui_controls_movement_sensitivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dip"
+                app:set_description="@string/preference_movement_sensitivity_summary"
+                app:set_max="100"
+                app:set_max_text="@string/preference_movement_max"
+                app:set_min_text="@string/preference_movement_min"
+                app:set_pos="50"
+                app:set_title="@string/preference_movement_sensitivity" >
             </com.w3i.torch.views.OptionsSlider>
+
+            <com.w3i.torch.views.OptionsCheckbox
+                android:id="@+id/ui_controls_enable_screen_controls"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dip"
+                app:set_off_text="@string/preference_enable_screen_controls_summary"
+                app:set_on_text="@string/preference_enable_screen_controls_summary"
+                app:set_title="@string/preference_enable_screen_controls" />
+
+            <com.w3i.torch.views.OptionsCheckbox
+                android:id="@+id/ui_controls_enable_tilt_controls"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dip"
+                app:set_off_text="@string/preference_enable_tilt_controls_summary"
+                app:set_off_text_color="#99ffffff"
+                app:set_on_text="@string/preference_enable_tilt_controls_summary"
+                app:set_on_text_color="#ff808000"
+                app:set_title="@string/preference_enable_tilt_controls" />
+
+            <com.w3i.torch.views.OptionsSlider
+                android:id="@+id/ui_controls_tilt_sensitivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dip"
+                app:set_description="@string/preference_tilt_sensitivity_summary"
+                app:set_max="100"
+                app:set_max_text="@string/preference_tilt_max"
+                app:set_min_text="@string/preference_tilt_min"
+                app:set_pos="50"
+                app:set_title="@string/preference_tilt_sensitivity" />
         </LinearLayout>
     </ScrollView>
 
-</merge>
+</RelativeLayout>

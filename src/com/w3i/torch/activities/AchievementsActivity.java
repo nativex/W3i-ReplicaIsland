@@ -7,12 +7,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -27,6 +29,7 @@ import com.w3i.torch.achivements.Achievement;
 import com.w3i.torch.achivements.AchievementListener;
 import com.w3i.torch.achivements.AchievementManager;
 import com.w3i.torch.achivements.ProgressAchievement;
+import com.w3i.torch.utils.MetrixUtils;
 import com.w3i.torch.views.ReplicaIslandToast;
 
 public class AchievementsActivity extends Activity {
@@ -108,6 +111,12 @@ public class AchievementsActivity extends Activity {
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ui_activity_achievements);
+
+		if (MetrixUtils.getDeviceScreenDiagInches(this) > 6) {
+			View scroller = findViewById(R.id.achvMainScroller);
+			ViewGroup.LayoutParams params = scroller.getLayoutParams();
+			params.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 600f, getResources().getDisplayMetrics());
+		}
 
 		achvContainer = (LinearLayout) findViewById(R.id.achvMainList);
 		addAchivements();

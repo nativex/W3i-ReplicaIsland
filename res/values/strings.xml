@@ -422,5 +422,7 @@ If I am honest with myself, there is another reason the adventurers had to die. 
     <string name="ui_game_mode_linear_description">Experience the story linearly in time</string>
     <string name="ui_game_mode_select_description">Choose which level to start at.</string>
     <string name="tap_here_to_continue">Tap here to continue</string>
+    <string name="ui_sliderbox_default_min_text">Min</string>
+    <string name="ui_sliderbox_default_max_text">Max</string>
 
 </resources>

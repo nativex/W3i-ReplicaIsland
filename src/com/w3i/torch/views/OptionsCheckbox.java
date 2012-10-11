@@ -2,21 +2,24 @@ package com.w3i.torch.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.w3i.torch.R;
 import com.w3i.torch.views.TorchCheckbox.State;
 
-public class OptionsCheckbox extends RelativeLayout {
+public class OptionsCheckbox extends Option {
 	private String onText;
 	private String offText;
 	private String midText;
 	private TorchCheckbox checkbox;
-	private TextView description;
+	private Integer onTextColor = null;
+	private Integer offTextColor = null;
+	private Integer midTextColor = null;
 
 	private TorchCheckbox.OnCheckboxStateChanged checkboxListener;
 
@@ -29,20 +32,23 @@ public class OptionsCheckbox extends RelativeLayout {
 			case CHECKED:
 				if (checkbox.isTristate()) {
 					checkbox.setState(State.INDETERMINATE);
-					description.setText(midText);
+					setDescription(midText);
+					setDescriptionTextColor(midTextColor);
 				} else {
 					checkbox.setState(State.UNCHECKED);
-					description.setText(offText);
+					setDescription(offText);
+					setDescriptionTextColor(offTextColor);
 				}
-
 				break;
 			case INDETERMINATE:
 				checkbox.setState(State.UNCHECKED);
-				description.setText(offText);
+				setDescription(offText);
+				setDescriptionTextColor(offTextColor);
 				break;
 			case UNCHECKED:
 				checkbox.setState(State.CHECKED);
-				description.setText(onText);
+				setDescription(onText);
+				setDescriptionTextColor(onTextColor);
 				break;
 			}
 
@@ -73,28 +79,43 @@ public class OptionsCheckbox extends RelativeLayout {
 		LayoutInflater inflater = LayoutInflater.from(getContext());
 		inflater.inflate(R.layout.ui_layout_checkbox, this);
 		checkbox = (TorchCheckbox) findViewById(R.id.ui_checkbox_check);
-		description = (TextView) findViewById(R.id.ui_checkbox_description);
-		checkbox.setOnClickListener(null);
+
+		int size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48f, getResources().getDisplayMetrics());
+		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(size, size);
+		params.addRule(CENTER_VERTICAL);
+		params.addRule(ALIGN_PARENT_RIGHT);
+		checkbox.setLayoutParams(params);
+		checkbox.setOnClickListener(onClick);
 		setOnClickListener(onClick);
+
+		View titleView = findViewById(R.id.ui_option_title);
+		View descriptionView = findViewById(R.id.ui_option_description);
+		params = (LayoutParams) titleView.getLayoutParams();
+		params.addRule(LEFT_OF, R.id.ui_checkbox_check);
+		params = (LayoutParams) descriptionView.getLayoutParams();
+		params.addRule(LEFT_OF, R.id.ui_checkbox_check);
 	}
 
 	private void setAttributes(
 			Context context,
 			AttributeSet attrs) {
-		TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.Options_Checkbox);
-		String title = attributes.getString(R.styleable.Options_set_title);
-		onText = attributes.getString(R.styleable.Options_Checkbox_set_on_text);
-		offText = attributes.getString(R.styleable.Options_Checkbox_set_off_text);
-		midText = attributes.getString(R.styleable.Options_Checkbox_set_mid_text);
-		checkbox.setTristate(attributes.getBoolean(R.styleable.Options_Checkbox_set_tristate, false));
-		if (title != null) {
-			TextView titleView = (TextView) findViewById(R.id.ui_checkbox_title);
-			titleView.setText(title);
+		TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.OptionsCheckbox);
+		onText = attributes.getString(R.styleable.OptionsCheckbox_set_on_text);
+		offText = attributes.getString(R.styleable.OptionsCheckbox_set_off_text);
+		midText = attributes.getString(R.styleable.OptionsCheckbox_set_mid_text);
+		if (attributes.hasValue(R.styleable.OptionsCheckbox_set_on_text_color)) {
+			onTextColor = attributes.getInteger(R.styleable.OptionsCheckbox_set_on_text_color, Color.WHITE);
 		}
-
-		if (offText != null) {
-			description.setText(offText);
+		if (attributes.hasValue(R.styleable.OptionsCheckbox_set_off_text_color)) {
+			offTextColor = attributes.getInteger(R.styleable.OptionsCheckbox_set_off_text_color, Color.WHITE);
+			setDescriptionTextColor(offTextColor);
 		}
+		if (attributes.hasValue(R.styleable.OptionsCheckbox_set_mid_text_color)) {
+			midTextColor = attributes.getInteger(R.styleable.OptionsCheckbox_set_mid_text_color, Color.WHITE);
+		}
+		checkbox.setTristate(attributes.getBoolean(R.styleable.OptionsCheckbox_set_tristate, false));
+		checkbox.setState(State.UNCHECKED);
+		setDescription(offText);
 	}
 
 	public TorchCheckbox getCheckbox() {

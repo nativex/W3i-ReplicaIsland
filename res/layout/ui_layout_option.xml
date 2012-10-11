@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.w3i.torch" >
+
+    <com.w3i.torch.views.CustomFontTextView
+        android:id="@+id/ui_option_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:textColor="@android:color/white"
+        android:textSize="22sp"
+        app:addSpacing="true"
+        app:setFont="BABYU__.TTF" />
+
+    <com.w3i.torch.views.CustomFontTextView
+        android:id="@+id/ui_option_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ui_option_title"
+        android:textColor="#99FFFFFF"
+        android:textSize="16sp"
+        app:setFont="BANDLESS.TTF" />
+
+</merge>

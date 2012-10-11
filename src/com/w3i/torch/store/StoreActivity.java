@@ -14,6 +14,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -50,6 +51,7 @@ import com.w3i.torch.gamesplatform.TorchItem;
 import com.w3i.torch.gamesplatform.TorchItem.PurchaseState;
 import com.w3i.torch.gamesplatform.TorchItemManager;
 import com.w3i.torch.powerups.PowerupTypes;
+import com.w3i.torch.utils.MetrixUtils;
 import com.w3i.torch.views.FundsView;
 import com.w3i.torch.views.ReplicaInfoDialog;
 import com.w3i.torch.views.ReplicaIslandToast;
@@ -205,6 +207,12 @@ public class StoreActivity extends Activity {
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ui_activity_store);
+
+		if (MetrixUtils.getDeviceScreenDiagInches(this) > 6) {
+			View scroller = findViewById(R.id.storeFlinger);
+			ViewGroup.LayoutParams params = scroller.getLayoutParams();
+			params.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 600f, getResources().getDisplayMetrics());
+		}
 
 		flinger = (ViewFlinger) findViewById(R.id.storeFlinger);
 		View toStore = findViewById(R.id.historyToStoreImage);

@@ -19,11 +19,7 @@ import com.w3i.torch.DebugLog;
 import com.w3i.torch.PreferenceConstants;
 import com.w3i.torch.R;
 import com.w3i.torch.UIConstants;
-import com.w3i.torch.achivements.Achievement;
-import com.w3i.torch.achivements.AchievementListener;
-import com.w3i.torch.achivements.AchievementManager;
 import com.w3i.torch.gamesplatform.GamesPlatformManager;
-import com.w3i.torch.views.ReplicaIslandToast;
 
 public class OptionsMenu extends Activity {
 
@@ -39,50 +35,6 @@ public class OptionsMenu extends Activity {
 
 	public static final int NEW_GAME_DIALOG = 0;
 	public static final int EXTRAS_LOCKED_DIALOG = 1;
-
-	private AchievementListener achievementListener = new AchievementListener() {
-
-		@Override
-		public void achievementUnlocked(
-				final Achievement achievement) {
-			final Activity context = OptionsMenu.this;
-			context.runOnUiThread(new Runnable() {
-
-				@Override
-				public void run() {
-					ReplicaIslandToast.makeAchievementUnlockedToast(context, achievement);
-
-				}
-			});
-		}
-
-		@Override
-		public void achievementDone(
-				final Achievement achievement) {
-			final Activity context = OptionsMenu.this;
-			context.runOnUiThread(new Runnable() {
-
-				@Override
-				public void run() {
-					ReplicaIslandToast.makeAchievementDoneToast(context, achievement);
-				}
-			});
-		}
-
-		@Override
-		public void achievementProgressUpdate(
-				final Achievement achievement,
-				final int percentDone) {
-			final Activity context = OptionsMenu.this;
-			context.runOnUiThread(new Runnable() {
-
-				@Override
-				public void run() {
-					ReplicaIslandToast.makeAchievementProgressUpdateToast(context, achievement, percentDone);
-				}
-			});
-		}
-	};
 
 	private View.OnClickListener sButtonListener = new View.OnClickListener() {
 		public void onClick(
@@ -219,7 +171,6 @@ public class OptionsMenu extends Activity {
 	protected void onResume() {
 		super.onResume();
 		lockButtons = false;
-		AchievementManager.registerAchievementListener(achievementListener);
 		GamesPlatformManager.onResume();
 		setSwitchButtonsText();
 		clearViewAnimations();
@@ -250,12 +201,6 @@ public class OptionsMenu extends Activity {
 		} else {
 			((TextView) safeModeButton).setText(R.string.options_menu_safe_mode_off_button_text);
 		}
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		AchievementManager.registerAchievementListener(null);
 	}
 
 	@Override
