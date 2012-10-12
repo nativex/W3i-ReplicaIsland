@@ -1,6 +1,7 @@
 package com.w3i.torch.activities;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -9,12 +10,11 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import com.w3i.torch.PreferenceConstants;
 import com.w3i.torch.R;
 import com.w3i.torch.utils.MetrixUtils;
+import com.w3i.torch.views.KeyConfigDialog;
 import com.w3i.torch.views.Option;
 import com.w3i.torch.views.OptionsCheckbox;
 import com.w3i.torch.views.OptionsSlider;
@@ -29,6 +29,7 @@ public class ControlsSetupActivity extends Activity {
 	private OptionsCheckbox enableTiltControls;
 	private OptionsSlider tiltControlsSensitivity;
 	private SharedPreferences preferences;
+	public static final int DIALOG_KEY_CONFIG = 3424;
 
 	private OptionsSlider.OnSeekbarPositionChange onSeekbarChange = new OptionsSlider.OnSeekbarPositionChange() {
 
@@ -47,6 +48,7 @@ public class ControlsSetupActivity extends Activity {
 			}
 		}
 	};
+
 	private TorchCheckbox.OnCheckboxStateChanged onCheckboxStateListener = new TorchCheckbox.OnCheckboxStateChanged() {
 
 		@Override
@@ -96,7 +98,7 @@ public class ControlsSetupActivity extends Activity {
 		@Override
 		public void onClick(
 				View v) {
-			// TODO controls setup dialog.
+			showDialog(DIALOG_KEY_CONFIG);
 		}
 	};
 
@@ -155,5 +157,17 @@ public class ControlsSetupActivity extends Activity {
 		if (!titlControlsEnabled) {
 			tiltControlsSensitivity.disable();
 		}
+	}
+
+	@Override
+	protected Dialog onCreateDialog(
+			int id) {
+		Dialog dialog = null;
+		switch (id) {
+		case DIALOG_KEY_CONFIG:
+			dialog = new KeyConfigDialog(this);
+			dialog.show();
+		}
+		return dialog;
 	}
 }

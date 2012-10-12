@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.w3i.torch"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:padding="5dip" >
+
+    <com.w3i.offerwall.custom.views.ScrollingTextView
+        android:id="@+id/ui_dialog_yn_title"
+        style="@style/StoreDialogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/ui_dialog_yn_close"
+        android:textSize="20dip"
+        android:typeface="sans" />
+
+    <ImageView
+        android:id="@+id/ui_dialog_yn_separator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/ui_dialog_controls_keys_layout"
+        android:layout_below="@+id/ui_dialog_yn_title"
+        android:layout_marginBottom="5dip"
+        android:layout_marginTop="5dip"
+        android:contentDescription="@string/default_image_view_description"
+        android:src="@android:drawable/divider_horizontal_dim_dark" />
+
+    <ImageView
+        android:id="@+id/ui_dialog_yn_close"
+        android:layout_width="40dip"
+        android:layout_height="40dip"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/ui_dialog_controls_keys_layout"
+        android:contentDescription="@string/default_image_view_description"
+        android:paddingBottom="12dip"
+        android:paddingLeft="12dip"
+        android:src="@drawable/info_dialog_close" />
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ui_dialog_controls_keys_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ui_dialog_yn_separator"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="20dp" >
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp" >
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/preference_key_config_left" />
+
+                <LinearLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/left_border"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/key_config_border"
+                    android:gravity="center" >
+
+                    <TextView
+                        android:id="@+id/key_left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="A" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp" >
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/preference_key_config_right" />
+
+                <LinearLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/right_border"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/key_config_border"
+                    android:gravity="center" >
+
+                    <TextView
+                        android:id="@+id/key_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="A" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="20dp" >
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp" >
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="50dp"
+                    android:text="@string/preference_key_config_jump" />
+
+                <LinearLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/jump_border"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/key_config_border"
+                    android:gravity="center" >
+
+                    <TextView
+                        android:id="@+id/key_jump"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="A" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp" >
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="50dp"
+                    android:text="@string/preference_key_config_attack" />
+
+                <LinearLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/attack_border"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/key_config_border"
+                    android:gravity="center" >
+
+                    <TextView
+                        android:id="@+id/key_attack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="A" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ui_dialog_controls_keys_layout"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:weightSum="1" >
+
+        <com.w3i.torch.views.CustomFontTextView
+            android:id="@+id/ui_dialog_yn_negative"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dip"
+            android:layout_weight="1"
+            android:background="@drawable/ui_dialog_buton"
+            android:gravity="center"
+            android:minHeight="40dip"
+            android:minWidth="100dip"
+            android:textColor="@android:color/white"
+            android:textSize="14dip"
+            app:setFont="BABYU__.TTF" />
+
+        <com.w3i.torch.views.CustomFontTextView
+            android:id="@+id/ui_dialog_yn_positive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dip"
+            android:layout_weight="1"
+            android:background="@drawable/ui_dialog_buton"
+            android:gravity="center"
+            android:minHeight="40dip"
+            android:minWidth="100dip"
+            android:textColor="@android:color/white"
+            android:textSize="14dip"
+            app:setFont="BABYU__.TTF" />
+    </LinearLayout>
+
+</RelativeLayout>
