@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res/com.w3i.torch"
-    android:layout_width="wrap_content"
+    android:layout_width="350dip"
     android:layout_height="fill_parent"
     android:padding="5dip" >
 
@@ -39,167 +39,114 @@
         android:paddingLeft="12dip"
         android:src="@drawable/info_dialog_close" />
 
-    <LinearLayout
+    <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/ui_dialog_controls_keys_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/ui_dialog_yn_separator"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:padding="10dip" >
 
         <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/ui_dialog_key_config_left_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="20dp" >
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="10dip"
+            android:gravity="center_vertical" >
 
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="45dip"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:paddingBottom="10dp" >
+                android:text="@string/preference_key_config_left" />
 
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/preference_key_config_left" />
-
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/left_border"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:background="@drawable/key_config_border"
-                    android:gravity="center" >
-
-                    <TextView
-                        android:id="@+id/key_left"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="A" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:paddingBottom="10dp" >
-
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/preference_key_config_right" />
-
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/right_border"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:background="@drawable/key_config_border"
-                    android:gravity="center" >
-
-                    <TextView
-                        android:id="@+id/key_right"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="A" />
-                </LinearLayout>
-            </LinearLayout>
+            <TextView
+                android:id="@+id/key_left"
+                android:layout_width="100dip"
+                android:layout_height="30dip"
+                android:background="@drawable/key_config_border"
+                android:gravity="center"
+                android:text="A" />
         </LinearLayout>
 
         <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/ui_dialog_key_config_right_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="20dp" >
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/ui_dialog_key_config_left_container"
+            android:gravity="center_vertical" >
 
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="45dip"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:paddingBottom="10dp" >
+                android:text="@string/preference_key_config_right" />
 
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="50dp"
-                    android:text="@string/preference_key_config_jump" />
-
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/jump_border"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:background="@drawable/key_config_border"
-                    android:gravity="center" >
-
-                    <TextView
-                        android:id="@+id/key_jump"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="A" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:paddingBottom="10dp" >
-
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="50dp"
-                    android:text="@string/preference_key_config_attack" />
-
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/attack_border"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:background="@drawable/key_config_border"
-                    android:gravity="center" >
-
-                    <TextView
-                        android:id="@+id/key_attack"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="A" />
-                </LinearLayout>
-            </LinearLayout>
+            <TextView
+                android:id="@+id/key_right"
+                android:layout_width="100dip"
+                android:layout_height="30dip"
+                android:background="@drawable/key_config_border"
+                android:gravity="center"
+                android:text="A" />
         </LinearLayout>
-    </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ui_dialog_key_config_jump_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="10dip"
+            android:layout_toRightOf="@+id/ui_dialog_key_config_left_container"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:layout_width="45dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="@string/preference_key_config_jump" />
+
+            <TextView
+                android:id="@+id/key_jump"
+                android:layout_width="100dip"
+                android:layout_height="30dip"
+                android:background="@drawable/key_config_border"
+                android:gravity="center"
+                android:text="A" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ui_dialog_key_config_attack_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ui_dialog_key_config_jump_container"
+            android:layout_toRightOf="@+id/ui_dialog_key_config_left_container"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:layout_width="45dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="@string/preference_key_config_attack" />
+
+            <TextView
+                android:id="@+id/key_attack"
+                android:layout_width="100dip"
+                android:layout_height="30dip"
+                android:background="@drawable/key_config_border"
+                android:gravity="center"
+                android:text="A" />
+        </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ui_dialog_controls_keys_layout"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dip"
         android:gravity="center"
         android:weightSum="1" >
 

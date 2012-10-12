@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -20,10 +21,10 @@ public class KeyConfigDialog extends Dialog {
 	private String mAttackPrefKey;
 	private String[] mKeyLabels;
 	private int mListeningId = 0;
-	private View mLeftBorder;
-	private View mRightBorder;
-	private View mJumpBorder;
-	private View mAttackBorder;
+	// private View mLeftBorder;
+	// private View mRightBorder;
+	// private View mJumpBorder;
+	// private View mAttackBorder;
 	private Drawable mUnselectedBorder;
 	private Drawable mSelectedBorder;
 	private int mLeftKeyCode;
@@ -69,7 +70,13 @@ public class KeyConfigDialog extends Dialog {
 
 	private void init() {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.ui_dialog_controls_setup);
+		int screenWidth = getContext().getResources().getDisplayMetrics().widthPixels;
+		int dip400 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 400f, getContext().getResources().getDisplayMetrics());
+		if (screenWidth >= dip400) {
+			setContentView(R.layout.ui_dialog_controls_setup);
+		} else {
+			setContentView(R.layout.ui_dialog_controls_setup_small);
+		}
 		getWindow().setBackgroundDrawableResource(R.drawable.info_dialog_background);
 
 		mSharedPrefs = getContext().getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, Context.MODE_PRIVATE);
@@ -80,25 +87,19 @@ public class KeyConfigDialog extends Dialog {
 
 		mLeftText = (TextView) findViewById(R.id.key_left);
 		mLeftText.setText(getKeyLabel(mLeftKeyCode));
+		mLeftText.setOnClickListener(new ConfigClickListener(R.id.key_left));
 
 		mRightText = (TextView) findViewById(R.id.key_right);
 		mRightText.setText(getKeyLabel(mRightKeyCode));
+		mRightText.setOnClickListener(new ConfigClickListener(R.id.key_right));
 
 		mJumpText = (TextView) findViewById(R.id.key_jump);
 		mJumpText.setText(getKeyLabel(mJumpKeyCode));
+		mJumpText.setOnClickListener(new ConfigClickListener(R.id.key_jump));
 
 		mAttackText = (TextView) findViewById(R.id.key_attack);
 		mAttackText.setText(getKeyLabel(mAttackKeyCode));
-
-		mLeftBorder = findViewById(R.id.left_border);
-		mRightBorder = findViewById(R.id.right_border);
-		mJumpBorder = findViewById(R.id.jump_border);
-		mAttackBorder = findViewById(R.id.attack_border);
-
-		mLeftBorder.setOnClickListener(new ConfigClickListener(R.id.key_left));
-		mRightBorder.setOnClickListener(new ConfigClickListener(R.id.key_right));
-		mJumpBorder.setOnClickListener(new ConfigClickListener(R.id.key_jump));
-		mAttackBorder.setOnClickListener(new ConfigClickListener(R.id.key_attack));
+		mAttackText.setOnClickListener(new ConfigClickListener(R.id.key_attack));
 
 		mUnselectedBorder = getContext().getResources().getDrawable(R.drawable.key_config_border);
 		mSelectedBorder = getContext().getResources().getDrawable(R.drawable.key_config_border_active);
@@ -142,18 +143,21 @@ public class KeyConfigDialog extends Dialog {
 		TextView positiveButton = (TextView) findViewById(R.id.ui_dialog_yn_positive);
 		TextView negativeButton = (TextView) findViewById(R.id.ui_dialog_yn_negative);
 		TextView title = (TextView) findViewById(R.id.ui_dialog_yn_title);
+		View closeButton = findViewById(R.id.ui_dialog_yn_close);
 
 		positiveButton.setText(R.string.preference_key_config_dialog_ok);
 		negativeButton.setText(R.string.preference_key_config_dialog_cancel);
 		title.setText(R.string.preference_key_config_dialog_title);
-		negativeButton.setOnClickListener(new View.OnClickListener() {
+		View.OnClickListener closeListener = new View.OnClickListener() {
 
 			@Override
 			public void onClick(
 					View v) {
 				dismiss();
 			}
-		});
+		};
+		closeButton.setOnClickListener(closeListener);
+		negativeButton.setOnClickListener(closeListener);
 
 		positiveButton.setOnClickListener(new View.OnClickListener() {
 
@@ -208,16 +212,16 @@ public class KeyConfigDialog extends Dialog {
 		View config = null;
 		switch (id) {
 		case R.id.key_left:
-			config = mLeftBorder;
+			config = mLeftText;
 			break;
 		case R.id.key_right:
-			config = mRightBorder;
+			config = mRightText;
 			break;
 		case R.id.key_jump:
-			config = mJumpBorder;
+			config = mJumpText;
 			break;
 		case R.id.key_attack:
-			config = mAttackBorder;
+			config = mAttackText;
 			break;
 		}
 

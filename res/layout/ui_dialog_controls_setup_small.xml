@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.w3i.torch"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="5dip" >
+
+    <com.w3i.offerwall.custom.views.ScrollingTextView
+        android:id="@+id/ui_dialog_yn_title"
+        style="@style/StoreDialogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/ui_dialog_yn_close"
+        android:textSize="20dip"
+        android:typeface="sans" />
+
+    <ImageView
+        android:id="@+id/ui_dialog_yn_separator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/ui_dialog_controls_keys_layout"
+        android:layout_below="@+id/ui_dialog_yn_title"
+        android:layout_marginBottom="5dip"
+        android:layout_marginTop="5dip"
+        android:contentDescription="@string/default_image_view_description"
+        android:src="@android:drawable/divider_horizontal_dim_dark" />
+
+    <ImageView
+        android:id="@+id/ui_dialog_yn_close"
+        android:layout_width="40dip"
+        android:layout_height="40dip"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/ui_dialog_controls_keys_scroller"
+        android:contentDescription="@string/default_image_view_description"
+        android:paddingBottom="12dip"
+        android:paddingLeft="12dip"
+        android:src="@drawable/info_dialog_close" />
+
+    <ScrollView
+        android:id="@+id/ui_dialog_controls_keys_scroller"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ui_dialog_yn_separator" >
+
+        <LinearLayout
+            android:id="@+id/ui_dialog_controls_keys_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dip" >
+
+            <LinearLayout
+                android:id="@+id/ui_dialog_key_config_left_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="45dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/preference_key_config_left" />
+
+                <TextView
+                    android:id="@+id/key_left"
+                    android:layout_width="100dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/key_config_border"
+                    android:gravity="center"
+                    android:text="A" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ui_dialog_key_config_right_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="45dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/preference_key_config_right" />
+
+                <TextView
+                    android:id="@+id/key_right"
+                    android:layout_width="100dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/key_config_border"
+                    android:gravity="center"
+                    android:text="A" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ui_dialog_key_config_jump_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="45dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/preference_key_config_jump" />
+
+                <TextView
+                    android:id="@+id/key_jump"
+                    android:layout_width="100dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/key_config_border"
+                    android:gravity="center"
+                    android:text="A" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ui_dialog_key_config_attack_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="45dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/preference_key_config_attack" />
+
+                <TextView
+                    android:id="@+id/key_attack"
+                    android:layout_width="100dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/key_config_border"
+                    android:gravity="center"
+                    android:text="A" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ui_dialog_controls_keys_scroller"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dip"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:weightSum="1" >
+
+        <com.w3i.torch.views.CustomFontTextView
+            android:id="@+id/ui_dialog_yn_negative"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dip"
+            android:layout_weight="1"
+            android:background="@drawable/ui_dialog_buton"
+            android:gravity="center"
+            android:minHeight="40dip"
+            android:minWidth="100dip"
+            android:textColor="@android:color/white"
+            android:textSize="14dip"
+            android:visibility="gone"
+            app:setFont="BABYU__.TTF" />
+
+        <com.w3i.torch.views.CustomFontTextView
+            android:id="@+id/ui_dialog_yn_positive"
+            android:layout_width="wrap_content"
+            android:layout_height="30dip"
+            android:layout_margin="10dip"
+            android:layout_weight="1"
+            android:background="@drawable/ui_dialog_buton"
+            android:gravity="center"
+            android:minWidth="100dip"
+            android:textColor="@android:color/white"
+            android:textSize="14dip"
+            app:setFont="BABYU__.TTF" />
+    </LinearLayout>
+
+</RelativeLayout>

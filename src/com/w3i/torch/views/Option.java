@@ -40,20 +40,6 @@ public class Option extends RelativeLayout {
 		LayoutInflater.from(getContext()).inflate(R.layout.ui_layout_option, this);
 		titleView = (TextView) findViewById(R.id.ui_option_title);
 		descriptionView = (TextView) findViewById(R.id.ui_option_description);
-		// // RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 400f, getResources().getDisplayMetrics()),
-		// // RelativeLayout.LayoutParams.WRAP_CONTENT);
-		// RelativeLayout.LayoutParams params = (LayoutParams) titleView.getLayoutParams();
-		// params.addRule(ALIGN_PARENT_TOP);
-		// params.addRule(ALIGN_PARENT_LEFT);
-		// titleView.setLayoutParams(params);
-		//
-		// // params = new RelativeLayout.LayoutParams((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 400f, getResources().getDisplayMetrics()),
-		// RelativeLayout.LayoutParams.WRAP_CONTENT);
-		// params = (LayoutParams) descriptionView.getLayoutParams();
-		// params.addRule(BELOW, R.id.ui_option_title);
-		// params.addRule(ALIGN_PARENT_LEFT);
-		// descriptionView.setLayoutParams(params);
-
 	}
 
 	private void setAttributes(

@@ -46,7 +46,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dip"
                 app:set_off_text="@string/preference_enable_click_attack_summary"
+                app:set_off_text_color="#99ffffff"
                 app:set_on_text="@string/preference_enable_click_attack_summary"
+                app:set_on_text_color="#99ffffff"
                 app:set_title="@string/preference_enable_click_attack" />
 
             <com.w3i.torch.views.Option
@@ -55,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dip"
                 app:set_description="@string/preference_key_config_summary"
+                app:set_description_color="#99ffffff"
                 app:set_title="@string/preference_key_config" />
 
             <com.w3i.torch.views.OptionsSlider
@@ -63,6 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dip"
                 app:set_description="@string/preference_movement_sensitivity_summary"
+                app:set_description_color="#99ffffff"
                 app:set_max="100"
                 app:set_max_text="@string/preference_movement_max"
                 app:set_min_text="@string/preference_movement_min"
@@ -76,7 +80,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dip"
                 app:set_off_text="@string/preference_enable_screen_controls_summary"
+                app:set_off_text_color="#99ffffff"
                 app:set_on_text="@string/preference_enable_screen_controls_summary"
+                app:set_on_text_color="#99ffffff"
                 app:set_title="@string/preference_enable_screen_controls" />
 
             <com.w3i.torch.views.OptionsCheckbox
@@ -96,6 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dip"
                 app:set_description="@string/preference_tilt_sensitivity_summary"
+                app:set_description_color="#99ffffff"
                 app:set_max="100"
                 app:set_max_text="@string/preference_tilt_max"
                 app:set_min_text="@string/preference_tilt_min"
