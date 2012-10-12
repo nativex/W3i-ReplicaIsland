@@ -53,7 +53,7 @@ public class OptionsCheckbox extends Option {
 			}
 
 			if (checkboxListener != null) {
-				checkboxListener.checkboxStateChanged(checkbox.getCheckState());
+				checkboxListener.checkboxStateChanged(OptionsCheckbox.this, checkbox.getCheckState());
 			}
 		}
 	};
@@ -120,6 +120,25 @@ public class OptionsCheckbox extends Option {
 
 	public TorchCheckbox getCheckbox() {
 		return checkbox;
+	}
+
+	public void disable() {
+		super.disable();
+		checkbox.setOnClickListener(null);
+		setOnClickListener(null);
+		checkbox.disable();
+	}
+
+	public void enable() {
+		super.enable();
+		checkbox.setOnClickListener(onClick);
+		setOnClickListener(onClick);
+		checkbox.enable();
+	}
+
+	public void setOnCheckboxStateListener(
+			TorchCheckbox.OnCheckboxStateChanged listener) {
+		checkboxListener = listener;
 	}
 
 }

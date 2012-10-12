@@ -10,10 +10,12 @@ import com.w3i.torch.R;
 public class TorchCheckbox extends ImageView {
 	private State state;
 	private boolean tristate;
+	private boolean enabled = true;
 
 	private int bgChecked = R.drawable.ui_checkbox_checked;
 	private int bgUnchecked = R.drawable.ui_checkbox_unchecked;
 	private int bgIndeterminate = R.drawable.ui_checkbox_indeterminate;
+	private int bgDisabled = R.drawable.ui_checkbox_disabled;
 	private OnCheckboxStateChanged onStateChange;
 
 	private View.OnClickListener onCheckboxClick = new View.OnClickListener() {
@@ -21,27 +23,30 @@ public class TorchCheckbox extends ImageView {
 		@Override
 		public void onClick(
 				View v) {
+			if (!enabled) {
+				return;
+			}
 			switch (state) {
 			case CHECKED:
 				if (isTristate()) {
 					state = State.INDETERMINATE;
-					setBackgroundResource(bgIndeterminate);
+					setCheckboxBackground(bgIndeterminate);
 				} else {
 					state = State.UNCHECKED;
-					setBackgroundResource(bgUnchecked);
+					setCheckboxBackground(bgUnchecked);
 				}
 				break;
 			case INDETERMINATE:
 				state = State.UNCHECKED;
-				setBackgroundResource(bgUnchecked);
+				setCheckboxBackground(bgUnchecked);
 				break;
 			case UNCHECKED:
 				state = State.CHECKED;
-				setBackgroundResource(bgChecked);
+				setCheckboxBackground(bgChecked);
 				break;
 			}
 			if (onStateChange != null) {
-				onStateChange.checkboxStateChanged(state);
+				onStateChange.checkboxStateChanged(v, state);
 			}
 		}
 	};
@@ -71,7 +76,7 @@ public class TorchCheckbox extends ImageView {
 		setTristate(false);
 		state = State.UNCHECKED;
 		setOnClickListener(onCheckboxClick);
-		setBackgroundResource(bgUnchecked);
+		setCheckboxBackground(bgUnchecked);
 	}
 
 	public void setOnStateChange(
@@ -98,6 +103,7 @@ public class TorchCheckbox extends ImageView {
 
 	public interface OnCheckboxStateChanged {
 		public void checkboxStateChanged(
+				View checkbox,
 				State state);
 	}
 
@@ -105,16 +111,35 @@ public class TorchCheckbox extends ImageView {
 			State state) {
 		switch (state) {
 		case CHECKED:
-			setBackgroundResource(bgChecked);
+			setCheckboxBackground(bgChecked);
 			break;
 		case INDETERMINATE:
-			setBackgroundResource(bgIndeterminate);
+			setCheckboxBackground(bgIndeterminate);
 			break;
 		case UNCHECKED:
-			setBackgroundResource(bgUnchecked);
+			setCheckboxBackground(bgUnchecked);
 			break;
 
 		}
 		this.state = state;
+	}
+
+	private void setCheckboxBackground(
+			int background) {
+		if (enabled) {
+			setBackgroundResource(background);
+		} else {
+			setBackgroundResource(bgDisabled);
+		}
+	}
+
+	public void disable() {
+		setCheckboxBackground(bgDisabled);
+		enabled = false;
+	}
+
+	public void enable() {
+		enabled = true;
+		setState(state);
 	}
 }

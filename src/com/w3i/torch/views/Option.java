@@ -17,17 +17,19 @@ public class Option extends RelativeLayout {
 	private TextView descriptionView;
 	private Integer titleColor = null;
 	private Integer descriptionColor = null;
+	private boolean enabled = true;
+	public static final int DISABLE_TEXT_COLOR = Color.argb(100, 255, 255, 255);
 
 	public Option(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		setAttributes(context, attrs);
 		init();
+		setAttributes(context, attrs);
 	}
 
 	public Option(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		setAttributes(context, attrs);
 		init();
+		setAttributes(context, attrs);
 	}
 
 	public Option(Context context) {
@@ -38,7 +40,6 @@ public class Option extends RelativeLayout {
 		LayoutInflater.from(getContext()).inflate(R.layout.ui_layout_option, this);
 		titleView = (TextView) findViewById(R.id.ui_option_title);
 		descriptionView = (TextView) findViewById(R.id.ui_option_description);
-
 		// // RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 400f, getResources().getDisplayMetrics()),
 		// // RelativeLayout.LayoutParams.WRAP_CONTENT);
 		// RelativeLayout.LayoutParams params = (LayoutParams) titleView.getLayoutParams();
@@ -53,9 +54,6 @@ public class Option extends RelativeLayout {
 		// params.addRule(ALIGN_PARENT_LEFT);
 		// descriptionView.setLayoutParams(params);
 
-		titleView.setText(title);
-		descriptionView.setText(description);
-
 	}
 
 	private void setAttributes(
@@ -64,13 +62,21 @@ public class Option extends RelativeLayout {
 		TypedArray a = context.obtainStyledAttributes(attr, R.styleable.Options);
 		title = a.getString(R.styleable.Options_set_title);
 		description = a.getString(R.styleable.Options_set_description);
+
+		titleView.setText(title);
+		descriptionView.setText(description);
+
 		if (a.hasValue(R.styleable.Options_set_description_color)) {
 			descriptionColor = a.getInteger(R.styleable.Options_set_description_color, Color.WHITE);
 			descriptionView.setTextColor(descriptionColor);
+		} else {
+			descriptionColor = descriptionView.getCurrentTextColor();
 		}
 		if (a.hasValue(R.styleable.Options_set_title_color)) {
 			titleColor = a.getInteger(R.styleable.Options_set_title_color, Color.WHITE);
 			titleView.setTextColor(titleColor);
+		} else {
+			titleColor = titleView.getCurrentTextColor();
 		}
 	}
 
@@ -98,7 +104,9 @@ public class Option extends RelativeLayout {
 			Integer color) {
 		if (color != null) {
 			descriptionColor = color;
-			descriptionView.setTextColor(color);
+			if (enabled) {
+				descriptionView.setTextColor(color);
+			}
 		}
 	}
 
@@ -106,8 +114,22 @@ public class Option extends RelativeLayout {
 			Integer color) {
 		if (color != null) {
 			titleColor = color;
-			titleView.setTextColor(color);
+			if (enabled) {
+				titleView.setTextColor(color);
+			}
 		}
+	}
+
+	public void disable() {
+		descriptionView.setTextColor(DISABLE_TEXT_COLOR);
+		titleView.setTextColor(DISABLE_TEXT_COLOR);
+		enabled = false;
+	}
+
+	public void enable() {
+		descriptionView.setTextColor(descriptionColor);
+		titleView.setTextColor(titleColor);
+		enabled = true;
 	}
 
 }

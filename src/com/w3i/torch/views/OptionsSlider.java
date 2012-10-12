@@ -9,12 +9,39 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 import com.w3i.torch.R;
 
 public class OptionsSlider extends Option {
 	private SeekBar seeker;
+	private OnSeekbarPositionChange onSeekerListener;
+
+	private OnSeekBarChangeListener onSeekbarChange = new OnSeekBarChangeListener() {
+
+		@Override
+		public void onStopTrackingTouch(
+				SeekBar seekBar) {
+
+		}
+
+		@Override
+		public void onStartTrackingTouch(
+				SeekBar seekBar) {
+
+		}
+
+		@Override
+		public void onProgressChanged(
+				SeekBar seekBar,
+				int progress,
+				boolean fromUser) {
+			if (onSeekerListener != null) {
+				onSeekerListener.onPositionChange(OptionsSlider.this, progress);
+			}
+		}
+	};
 
 	public OptionsSlider(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -70,4 +97,45 @@ public class OptionsSlider extends Option {
 		seeker.setProgress(pos);
 	}
 
+	public void setOnSeekBarChanged(
+			OnSeekbarPositionChange listener) {
+		onSeekerListener = listener;
+		seeker.setOnSeekBarChangeListener(onSeekbarChange);
+	}
+
+	public int getSeekbarId() {
+		return seeker.getId();
+	}
+
+	public void setSeekbarMax(
+			int max) {
+		seeker.setMax(max);
+	}
+
+	public void setSeekbarPos(
+			int pos) {
+		seeker.setProgress(pos);
+	}
+
+	@Override
+	public void disable() {
+		super.disable();
+		// Animation animation = new AlphaAnimation(1.0f, 0.6f);
+		// // animation.setDuration(100);
+		// seeker.setAnimation(animation);
+		// seeker.setOnSeekBarChangeListener(null);
+		seeker.setEnabled(false);
+	}
+
+	@Override
+	public void enable() {
+		super.enable();
+		seeker.setEnabled(true);
+	}
+
+	public interface OnSeekbarPositionChange {
+		public void onPositionChange(
+				OptionsSlider slider,
+				int position);
+	}
 }
