@@ -10,8 +10,8 @@ public class MultikillAchievement extends ProgressAchievement {
 		setDescription(R.string.achievement_multi_kill_description);
 		setType(Type.MULTI_KILL);
 		setLocked(true);
-		setImageDone(R.drawable.achv_unlocked);
-		setImageLocked(R.drawable.achv_locked);
+		setImageDone(R.drawable.ui_achievement_multikill);
+		setImageLocked(R.drawable.ui_achievement_multikill_locked);
 	}
 
 }

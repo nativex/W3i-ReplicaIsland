@@ -9,7 +9,7 @@ public class GoodEndingAchievement extends Achievement {
 		setName(R.string.achievement_good_boy_name);
 		setDescription(R.string.achievement_good_boy_description);
 		setLocked(true);
-		setImageDone(R.drawable.achv_unlocked);
-		setImageLocked(R.drawable.achv_locked);
+		setImageDone(R.drawable.ui_achievement_good_boy);
+		setImageLocked(R.drawable.ui_achievement_good_boy_locked);
 	}
 }

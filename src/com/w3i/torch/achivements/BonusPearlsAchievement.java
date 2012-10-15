@@ -11,7 +11,8 @@ public class BonusPearlsAchievement extends ProgressAchievement {
 		setType(Type.BONUS_PEARLS);
 		setLocked(true);
 		setAchievementUpdateRate(12.5f);
-
+		setImageDone(R.drawable.ui_achievement_bonus_pearls);
+		setImageLocked(R.drawable.ui_achievement_bonus_pearls_locked);
 	}
 
 }

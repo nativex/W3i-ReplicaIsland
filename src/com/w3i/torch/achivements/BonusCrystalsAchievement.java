@@ -10,7 +10,7 @@ public class BonusCrystalsAchievement extends ProgressAchievement {
 		setDescription(R.string.achievement_bonus_crystals_description);
 		setType(Type.BONUS_CRYSTALS);
 		setLocked(true);
-		setImageLocked(R.drawable.ui_achievement_crystal_collector_locked);
-		setImageDone(R.drawable.ui_achievement_crystal_collector);
+		setImageLocked(R.drawable.ui_achievement_bonus_crystals_locked);
+		setImageDone(R.drawable.ui_achievement_bonus_crystals);
 	}
 }

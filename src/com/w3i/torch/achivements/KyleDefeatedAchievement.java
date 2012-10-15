@@ -9,7 +9,7 @@ public class KyleDefeatedAchievement extends Achievement {
 		setDescription(R.string.achievement_kyle_description);
 		setType(Type.KYLE_DEFEATED);
 		setLocked(true);
-		setImageDone(R.drawable.achv_unlocked);
-		setImageLocked(R.drawable.achv_locked);
+		setImageDone(R.drawable.ui_achievement_kyle);
+		setImageLocked(R.drawable.ui_achievement_kyle_locked);
 	}
 }

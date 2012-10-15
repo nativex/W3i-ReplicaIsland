@@ -9,7 +9,7 @@ public class KabochaDefeated extends Achievement {
 		setDescription(R.string.achievement_kaboocha_description);
 		setType(Type.KABOCHA_DEFEATED);
 		setLocked(true);
-		setImageDone(R.drawable.achv_unlocked);
-		setImageLocked(R.drawable.achv_locked);
+		setImageDone(R.drawable.ui_achievement_kaboocha);
+		setImageLocked(R.drawable.ui_achievement_kaboocha_locked);
 	}
 }

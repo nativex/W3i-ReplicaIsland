@@ -10,7 +10,7 @@ public class MegakillAchievement extends Achievement {
 		setDescription(R.string.achievement_mega_kill_description);
 		setType(Type.MEGA_KILL);
 		setLocked(true);
-		setImageDone(R.drawable.achv_unlocked);
-		setImageLocked(R.drawable.achv_locked);
+		setImageDone(R.drawable.ui_achievement_mega_kill);
+		setImageLocked(R.drawable.ui_achievement_mega_kill_locked);
 	}
 }

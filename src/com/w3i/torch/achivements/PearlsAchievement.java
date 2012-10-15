@@ -9,7 +9,7 @@ public class PearlsAchievement extends ProgressAchievement {
 		setName(R.string.achievement_pearls_name);
 		setDescription(R.string.achievement_pearls_description);
 		setType(Type.PEARLS);
-		setImageDone(R.drawable.ui_achievement_pearl_collector);
-		setImageLocked(R.drawable.ui_achievement_pearl_collector_locked);
+		setImageDone(R.drawable.ui_achievement_pearls);
+		setImageLocked(R.drawable.ui_achievement_pearls_locked);
 	}
 }

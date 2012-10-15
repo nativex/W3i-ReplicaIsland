@@ -18,7 +18,7 @@ public class DiariesAchievement extends ProgressAchievement {
 		setDescription(R.string.achievement_diaries_description);
 		setType(Type.DIARIES);
 		setInitialized(false);
-		setImageLocked(R.drawable.ui_achievement_bookworm_locked);
+		setImageLocked(R.drawable.ui_achievement_bookwork_locked);
 		setImageDone(R.drawable.ui_achievement_bookwork);
 		initializeDiaryData();
 	}
