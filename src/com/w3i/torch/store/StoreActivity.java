@@ -559,16 +559,16 @@ public class StoreActivity extends Activity {
 			adapter.notifyDataSetChanged();
 			return true;
 		} else {
-			showDialog(DIALOG_INSUFFICIEN_CURRENCY);
+			if (!TorchItemManager.isAffordable(storeItem)) {
+				showDialog(DIALOG_INSUFFICIEN_CURRENCY);
+			}
 			return false;
 		}
 	}
 
 	private void updateAcheivementsOnPurchase(
 			TorchItem item) {
-		if ((PowerupTypes.LIFE_POINTS.isEnabled()) && (item.hasAttribute(PowerupTypes.LIFE_POINTS))) {
-			AchievementManager.setAchievementState(Type.HEALTH, State.UPDATE);
-		}
+		AchievementManager.setAchievementState(Type.HEALTH, State.UPDATE);
 		AchievementManager.setAchievementState(Type.GADGETEER, State.UPDATE);
 		AchievementManager.setAchievementState(Type.WINDOW_SHOPPER, State.FAIL);
 	}

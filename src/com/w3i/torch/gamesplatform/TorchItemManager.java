@@ -100,6 +100,13 @@ public class TorchItemManager {
 		return requirementsList.size() == 0 ? null : requirementsList;
 	}
 
+	private List<String> _isItemAffordable(
+			TorchItem item) {
+		List<String> requirementsList = new ArrayList<String>();
+		checkItemPrice(item, requirementsList);
+		return requirementsList.size() == 0 ? null : requirementsList;
+	}
+
 	private void checkItemPrice(
 			TorchItem item,
 			List<String> requirementsList) {
@@ -192,6 +199,16 @@ public class TorchItemManager {
 		checkInstance();
 		List<String> errors = isItemAvailable(item);
 		if ((errors == null) || (errors.size() == 0)) {
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean isAffordable(
+			TorchItem item) {
+		checkInstance();
+		Object errors = instance._isItemAffordable(item);
+		if (errors == null) {
 			return true;
 		}
 		return false;

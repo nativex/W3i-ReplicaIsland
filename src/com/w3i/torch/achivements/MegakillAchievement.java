@@ -12,5 +12,11 @@ public class MegakillAchievement extends Achievement {
 		setLocked(true);
 		setImageDone(R.drawable.ui_achievement_mega_kill);
 		setImageLocked(R.drawable.ui_achievement_mega_kill_locked);
+		makeDescriptionReplacement(getDescription());
+	}
+
+	protected String makeDescriptionReplacement(
+			String description) {
+		return description.replace("#", Integer.toString(MONSTERS_TO_KILL));
 	}
 }

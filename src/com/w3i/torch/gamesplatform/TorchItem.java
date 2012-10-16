@@ -145,7 +145,7 @@ public class TorchItem {
 			return false;
 		}
 		for (Attribute attribute : gamesPlatformItem.getAttributes()) {
-			if (powerup.getDisplayName().equals(attribute.getDisplayName())) {
+			if (powerup.getDisplayName().equals(attribute.getName())) {
 				return true;
 			}
 		}

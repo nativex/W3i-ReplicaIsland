@@ -15,8 +15,8 @@ public class GadgeteerAchievement extends ProgressAchievement {
 		setName(R.string.achievement_gadgeteer_name);
 		setDescription(R.string.achievement_gadgeteer_description);
 		setType(Type.GADGETEER);
-		setImageDone(R.drawable.ui_achievement_gadgeteer_locked);
-		setImageLocked(R.drawable.ui_achievement_gadgeteer);
+		setImageDone(R.drawable.ui_achievement_gadgeteer);
+		setImageLocked(R.drawable.ui_achievement_gadgeteer_locked);
 		setInitialized(false);
 	}
 

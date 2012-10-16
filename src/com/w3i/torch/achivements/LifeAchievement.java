@@ -20,15 +20,18 @@ public class LifeAchievement extends Achievement {
 	@Override
 	public void onState(
 			State state) {
-		boolean done = true;
+		if (isDone()) {
+			return;
+		}
 		List<TorchItem> lifeUpgrades = TorchItemManager.getItemsWithAttribute(PowerupTypes.LIFE_POINTS);
-		if (lifeUpgrades != null) {
+		if ((lifeUpgrades != null) && (lifeUpgrades.size() > 0)) {
 			for (TorchItem item : lifeUpgrades) {
 				if (!item.isPurchased()) {
-					done = false;
+					setDone(false);
+					return;
 				}
 			}
-			setDone(done);
+			setDone(true);
 		}
 	}
 }
