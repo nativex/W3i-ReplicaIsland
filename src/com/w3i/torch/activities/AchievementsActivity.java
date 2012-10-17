@@ -216,6 +216,7 @@ public class AchievementsActivity extends Activity {
 			if (lockButtons) {
 				return result;
 			}
+			lockButtons = true;
 			View achievementsActivity = findViewById(R.id.ui_achievements_activity_container);
 			Animation mFadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 			mFadeOutAnimation.setDuration(500);

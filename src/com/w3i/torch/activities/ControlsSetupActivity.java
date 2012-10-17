@@ -34,6 +34,7 @@ public class ControlsSetupActivity extends Activity {
 	private OptionsSlider tiltControlsSensitivity;
 	private SharedPreferences preferences;
 	public static final int DIALOG_KEY_CONFIG = 3424;
+	private boolean backPressed = false;
 
 	private OptionsSlider.OnSeekbarPositionChange onSeekbarChange = new OptionsSlider.OnSeekbarPositionChange() {
 
@@ -168,8 +169,9 @@ public class ControlsSetupActivity extends Activity {
 			int keyCode,
 			KeyEvent event) {
 		boolean result = true;
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			View storeActivity = findViewById(R.id.ui_store_activity_container);
+		if ((keyCode == KeyEvent.KEYCODE_BACK) && (!backPressed)) {
+			backPressed = true;
+			View storeActivity = findViewById(R.id.ui_activity_controls_main);
 			Animation mFadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 			mFadeOutAnimation.setDuration(500);
 			storeActivity.startAnimation(mFadeOutAnimation);
