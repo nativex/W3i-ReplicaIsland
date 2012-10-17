@@ -31,7 +31,6 @@ import com.w3i.torch.views.ReplicaIslandToast;
 
 public class AchievementsActivity extends Activity {
 	private LinearLayout achvContainer;
-	public static int DIVIDER_RESOURCE = R.drawable.ui_achievements_activity_list_divider;
 
 	private AchievementListener achievementListener = new AchievementListener() {
 
@@ -44,7 +43,6 @@ public class AchievementsActivity extends Activity {
 				@Override
 				public void run() {
 					ReplicaIslandToast.makeAchievementUnlockedToast(context, achievement);
-
 				}
 			});
 		}
@@ -156,7 +154,7 @@ public class AchievementsActivity extends Activity {
 
 	private void addDivider() {
 		ImageView divider = new ImageView(this);
-		divider.setBackgroundResource(DIVIDER_RESOURCE);
+		divider.setBackgroundResource(R.drawable.ui_achievements_activity_list_divider);
 
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 		params.setMargins(5, 5, 5, 5);
