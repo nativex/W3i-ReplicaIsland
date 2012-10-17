@@ -1,7 +1,5 @@
 package com.w3i.torch.activities;
 
-import java.lang.reflect.InvocationTargetException;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -13,10 +11,8 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
-import com.w3i.torch.DebugLog;
 import com.w3i.torch.PreferenceConstants;
 import com.w3i.torch.R;
-import com.w3i.torch.UIConstants;
 import com.w3i.torch.views.ReplicaInfoDialog;
 
 public class GameModeSelectActivity extends Activity {
@@ -25,16 +21,9 @@ public class GameModeSelectActivity extends Activity {
 	private View mLevelSelectButton;
 	private View mLevelSelectLocked;
 	private View mLinearModeLocked;
-	private View mBackground;
-	private View linearModeDescription;
-	private View selectModeDescription;
-	private View storyModeDescription;
 	private Animation mLockedAnimation;
 	private Animation mButtonFlickerAnimation;
-	private Animation mFadeOutAnimation;
-	private Animation mAlternateFadeOutAnimation;
 	private boolean lockButtons = false;
-	private boolean allModesUnlocked = false;
 
 	public static final int EXTRAS_LOCKED_DIALOG = 4342;
 
@@ -51,15 +40,6 @@ public class GameModeSelectActivity extends Activity {
 				return;
 			}
 			startGame(START_STORY_MODE);
-			// mLinearModeButton.startAnimation(mAlternateFadeOutAnimation);
-			// mLevelSelectButton.startAnimation(mAlternateFadeOutAnimation);
-			// linearModeDescription.startAnimation(mAlternateFadeOutAnimation);
-			// selectModeDescription.startAnimation(mAlternateFadeOutAnimation);
-			// if (!allModesUnlocked) {
-			// mLinearModeLocked.startAnimation(mAlternateFadeOutAnimation);
-			// mLevelSelectLocked.startAnimation(mAlternateFadeOutAnimation);
-			// }
-
 			lockButtons = true;
 		}
 	};
@@ -71,10 +51,6 @@ public class GameModeSelectActivity extends Activity {
 				return;
 			}
 			startGame(START_LINEAR_MODE);
-			// mStoryModeButton.startAnimation(mAlternateFadeOutAnimation);
-			// mLevelSelectButton.startAnimation(mAlternateFadeOutAnimation);
-			// selectModeDescription.startAnimation(mAlternateFadeOutAnimation);
-			// storyModeDescription.startAnimation(mAlternateFadeOutAnimation);
 			lockButtons = true;
 
 		}
@@ -87,10 +63,6 @@ public class GameModeSelectActivity extends Activity {
 				return;
 			}
 			startGame(START_LEVEL_SELECT);
-			// mLinearModeButton.startAnimation(mAlternateFadeOutAnimation);
-			// mStoryModeButton.startAnimation(mAlternateFadeOutAnimation);
-			// linearModeDescription.startAnimation(mAlternateFadeOutAnimation);
-			// storyModeDescription.startAnimation(mAlternateFadeOutAnimation);
 			lockButtons = true;
 
 		}
@@ -117,21 +89,14 @@ public class GameModeSelectActivity extends Activity {
 		mLevelSelectButton = findViewById(R.id.ui_game_mode_select);
 		mLinearModeLocked = findViewById(R.id.ui_game_mode_linear_locked);
 		mLevelSelectLocked = findViewById(R.id.ui_game_mode_select_locked);
-		mBackground = findViewById(R.id.ui_game_mode_background);
-		storyModeDescription = findViewById(R.id.ui_game_mode_story_descriptioon);
-		linearModeDescription = findViewById(R.id.ui_game_mode_linear_descriptioon);
-		selectModeDescription = findViewById(R.id.ui_game_mode_select_descriptioon);
 
 		mButtonFlickerAnimation = AnimationUtils.loadAnimation(this, R.anim.button_flicker);
-		mFadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
-		mAlternateFadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 
 		if (extrasUnlocked) {
 			mLinearModeButton.setOnClickListener(sLinearModeButtonListener);
 			mLevelSelectButton.setOnClickListener(sLevelSelectButtonListener);
 			mLinearModeLocked.setVisibility(View.GONE);
 			mLevelSelectLocked.setVisibility(View.GONE);
-			allModesUnlocked = extrasUnlocked;
 		} else {
 			mLockedAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in_out);
 			mLinearModeButton.setOnClickListener(sLockedSelectButtonListener);
@@ -195,41 +160,19 @@ public class GameModeSelectActivity extends Activity {
 
 		public void onAnimationEnd(
 				Animation animation) {
-			// mLinearModeButton.setVisibility(View.INVISIBLE);
-			// mLinearModeButton.clearAnimation();
-			// mLevelSelectButton.setVisibility(View.INVISIBLE);
-			// mLevelSelectButton.clearAnimation();
-			// mStoryModeButton.setVisibility(View.INVISIBLE);
-			// mStoryModeButton.clearAnimation();
-			// linearModeDescription.setVisibility(View.INVISIBLE);
-			// linearModeDescription.clearAnimation();
-			// storyModeDescription.setVisibility(View.INVISIBLE);
-			// storyModeDescription.clearAnimation();
-			// selectModeDescription.setVisibility(View.INVISIBLE);
-			// selectModeDescription.clearAnimation();
-
 			startActivity(mIntent);
 			finish();
-			if (UIConstants.mOverridePendingTransition != null) {
-				try {
-					UIConstants.mOverridePendingTransition.invoke(GameModeSelectActivity.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
-				} catch (InvocationTargetException ite) {
-					DebugLog.d("Activity Transition", "Invocation Target Exception");
-				} catch (IllegalAccessException ie) {
-					DebugLog.d("Activity Transition", "Illegal Access Exception");
-				}
-			}
+			overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
+			mIntent = null;
 		}
 
 		public void onAnimationRepeat(
 				Animation animation) {
-			// TODO Auto-generated method stub
 
 		}
 
 		public void onAnimationStart(
 				Animation animation) {
-			// TODO Auto-generated method stub
 
 		}
 
@@ -249,22 +192,13 @@ public class GameModeSelectActivity extends Activity {
 			lockButtons = true;
 			finish();
 			startActivity(new Intent(this, StartGameActivity.class));
-			if (UIConstants.mOverridePendingTransition != null) {
-				try {
-					UIConstants.mOverridePendingTransition.invoke(GameModeSelectActivity.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
-				} catch (InvocationTargetException ite) {
-					DebugLog.d("Activity Transition", "Invocation Target Exception");
-				} catch (IllegalAccessException ie) {
-					DebugLog.d("Activity Transition", "Illegal Access Exception");
-				}
-			}
+			overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
 		} else {
 			result = super.onKeyDown(keyCode, event);
 		}
 		return result;
 	}
 
-	@Override
 	protected void onResume() {
 		super.onResume();
 		lockButtons = false;

@@ -16,7 +16,7 @@
 
 package com.w3i.torch.activities;
 
-import java.lang.reflect.InvocationTargetException;
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import android.app.Activity;
@@ -44,14 +44,12 @@ import com.w3i.advertiser.W3iAdvertiser;
 import com.w3i.offerwall.PublisherManager;
 import com.w3i.offerwall.W3iCurrencyListener;
 import com.w3i.offerwall.business.Balance;
-import com.w3i.torch.DebugLog;
 import com.w3i.torch.LevelTree;
 import com.w3i.torch.MultiTouchFilter;
 import com.w3i.torch.PreferenceConstants;
 import com.w3i.torch.R;
 import com.w3i.torch.SingleTouchFilter;
 import com.w3i.torch.TouchFilter;
-import com.w3i.torch.UIConstants;
 import com.w3i.torch.achivements.Achievement.State;
 import com.w3i.torch.achivements.Achievement.Type;
 import com.w3i.torch.achivements.AchievementManager;
@@ -79,51 +77,33 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	private final static int TILT_TO_SCREEN_CONTROLS_DIALOG = 1;
 	private final static int CONTROL_SETUP_DIALOG = 2;
 
-	private View.OnClickListener sPirateClicked = new View.OnClickListener() {
+	private View.OnClickListener onButtonClick = new View.OnClickListener() {
 
 		@Override
 		public void onClick(
 				View v) {
-			Intent intent = new Intent(v.getContext(), SkinSelectionActivity.class);
-			v.getContext().startActivity(intent);
-		}
-	};
-
-	// Create an anonymous implementation of OnClickListener
-	private View.OnClickListener sStartGameListener = new View.OnClickListener() {
-		public void onClick(
-				View v) {
 			if (!mPaused) {
-				Intent i = new Intent(getBaseContext(), StartGameActivity.class);
-				v.startAnimation(mButtonFlickerAnimation);
-				mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(i));
 				mPaused = true;
+				Intent intent = null;
+				switch (v.getId()) {
+				case R.id.ui_main_options:
+					intent = new Intent(getBaseContext(), OptionsMenu.class);
+					v.startAnimation(mButtonFlickerAnimation);
+					mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(intent));
+					break;
+				case R.id.ui_main_start_game:
+					intent = new Intent(getBaseContext(), StartGameActivity.class);
+					v.startAnimation(mButtonFlickerAnimation);
+					mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(intent));
+					break;
+				case R.id.mainMenuCharacter:
+					intent = new Intent(v.getContext(), SkinSelectionActivity.class);
+					v.getContext().startActivity(intent);
+					break;
+				default:
+					mPaused = false;
+				}
 			}
-		}
-	};
-
-	private View.OnClickListener sOptionButtonListener = new View.OnClickListener() {
-		public void onClick(
-				View v) {
-
-			if (!mPaused) {
-				Intent i = new Intent(getBaseContext(), OptionsMenu.class);
-
-				v.startAnimation(mButtonFlickerAnimation);
-				mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(i));
-				mPaused = true;
-			}
-
-			// if (!mPaused) {
-			// Intent i = new Intent(getBaseContext(), SetPreferencesActivity.class);
-			//
-			// v.startAnimation(mButtonFlickerAnimation);
-			// mFadeOutAnimation.setAnimationListener(new StartActivityAfterAnimation(i));
-			// mBackground.startAnimation(mFadeOutAnimation);
-			// mStartButton.startAnimation(mAlternateFadeOutAnimation);
-			// mTicker.startAnimation(mAlternateFadeOutAnimation);
-			// mPaused = true;
-			// }
 		}
 	};
 
@@ -185,11 +165,11 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		mBackground = findViewById(R.id.mainMenuBackground);
 
 		if (mStartButton != null) {
-			mStartButton.setOnClickListener(sStartGameListener);
+			mStartButton.setOnClickListener(onButtonClick);
 		}
 
 		if (mOptionsButton != null) {
-			mOptionsButton.setOnClickListener(sOptionButtonListener);
+			mOptionsButton.setOnClickListener(onButtonClick);
 		}
 
 		mButtonFlickerAnimation = AnimationUtils.loadAnimation(this, R.anim.button_flicker);
@@ -289,7 +269,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		Log.d("com.w3i.torch", "end");
 
 		View v = findViewById(R.id.mainMenuCharacter);
-		v.setOnClickListener(sPirateClicked);
+		v.setOnClickListener(onButtonClick);
 
 	}
 
@@ -500,6 +480,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 
 	protected class StartActivityAfterAnimation implements Animation.AnimationListener {
 		private Intent mIntent;
+		private WeakReference<Context> mContext;
 
 		StartActivityAfterAnimation(Intent intent) {
 			mIntent = intent;
@@ -507,18 +488,8 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 
 		public void onAnimationEnd(
 				Animation animation) {
-
 			startActivity(mIntent);
-
-			if (UIConstants.mOverridePendingTransition != null) {
-				try {
-					UIConstants.mOverridePendingTransition.invoke(MainMenuActivity.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
-				} catch (InvocationTargetException ite) {
-					DebugLog.d("Activity Transition", "Invocation Target Exception");
-				} catch (IllegalAccessException ie) {
-					DebugLog.d("Activity Transition", "Illegal Access Exception");
-				}
-			}
+			overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
 		}
 
 		public void onAnimationRepeat(

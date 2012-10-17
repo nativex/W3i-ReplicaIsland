@@ -16,8 +16,6 @@
 
 package com.w3i.torch.activities;
 
-import java.lang.reflect.InvocationTargetException;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
@@ -30,9 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.w3i.torch.BaseObject;
-import com.w3i.torch.DebugLog;
 import com.w3i.torch.R;
-import com.w3i.torch.UIConstants;
 import com.w3i.torch.achivements.Achievement.State;
 import com.w3i.torch.achivements.Achievement.Type;
 import com.w3i.torch.achivements.AchievementData;
@@ -44,15 +40,7 @@ public class DiaryActivity extends Activity {
 		public void onClick(
 				View arg0) {
 			finish();
-			if (UIConstants.mOverridePendingTransition != null) {
-				try {
-					UIConstants.mOverridePendingTransition.invoke(DiaryActivity.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
-				} catch (InvocationTargetException ite) {
-					DebugLog.d("Activity Transition", "Invocation Target Exception");
-				} catch (IllegalAccessException ie) {
-					DebugLog.d("Activity Transition", "Illegal Access Exception");
-				}
-			}
+			overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
 		}
 	};
 

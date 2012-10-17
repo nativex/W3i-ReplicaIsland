@@ -16,8 +16,6 @@
 
 package com.w3i.torch.activities;
 
-import java.lang.reflect.InvocationTargetException;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -30,10 +28,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import com.w3i.torch.DebugLog;
 import com.w3i.torch.PreferenceConstants;
 import com.w3i.torch.R;
-import com.w3i.torch.UIConstants;
 
 public class GameOverActivity extends Activity {
 	private float mPearlPercent = 100.0f;
@@ -127,15 +123,7 @@ public class GameOverActivity extends Activity {
 		public void onClick(
 				View v) {
 			finish();
-			if (UIConstants.mOverridePendingTransition != null) {
-				try {
-					UIConstants.mOverridePendingTransition.invoke(GameOverActivity.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
-				} catch (InvocationTargetException ite) {
-					DebugLog.d("Activity Transition", "Invocation Target Exception");
-				} catch (IllegalAccessException ie) {
-					DebugLog.d("Activity Transition", "Illegal Access Exception");
-				}
-			}
+			overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
 		}
 	};
 

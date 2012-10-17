@@ -1,7 +1,5 @@
 package com.w3i.torch.activities;
 
-import java.lang.reflect.InvocationTargetException;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -13,10 +11,8 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
-import com.w3i.torch.DebugLog;
 import com.w3i.torch.PreferenceConstants;
 import com.w3i.torch.R;
-import com.w3i.torch.UIConstants;
 import com.w3i.torch.gamesplatform.GamesPlatformManager;
 import com.w3i.torch.gamesplatform.TorchItemManager;
 import com.w3i.torch.store.StoreActivity;
@@ -156,15 +152,7 @@ public class StartGameActivity extends Activity {
 			lockButtons = true;
 			finish();
 
-			if (UIConstants.mOverridePendingTransition != null) {
-				try {
-					UIConstants.mOverridePendingTransition.invoke(StartGameActivity.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
-				} catch (InvocationTargetException ite) {
-					DebugLog.d("Activity Transition", "Invocation Target Exception");
-				} catch (IllegalAccessException ie) {
-					DebugLog.d("Activity Transition", "Illegal Access Exception");
-				}
-			}
+			overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
 		} else {
 			result = super.onKeyDown(keyCode, event);
 		}
@@ -183,16 +171,8 @@ public class StartGameActivity extends Activity {
 
 			startActivity(mIntent);
 			finish();
+			overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
 
-			if (UIConstants.mOverridePendingTransition != null) {
-				try {
-					UIConstants.mOverridePendingTransition.invoke(StartGameActivity.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
-				} catch (InvocationTargetException ite) {
-					DebugLog.d("Activity Transition", "Invocation Target Exception");
-				} catch (IllegalAccessException ie) {
-					DebugLog.d("Activity Transition", "Illegal Access Exception");
-				}
-			}
 			mIntent = null;
 		}
 

@@ -3,11 +3,15 @@ package com.w3i.torch.activities;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
@@ -160,6 +164,23 @@ public class ControlsSetupActivity extends Activity {
 	}
 
 	@Override
+	public boolean onKeyDown(
+			int keyCode,
+			KeyEvent event) {
+		boolean result = true;
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			View storeActivity = findViewById(R.id.ui_store_activity_container);
+			Animation mFadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+			mFadeOutAnimation.setDuration(500);
+			storeActivity.startAnimation(mFadeOutAnimation);
+			mFadeOutAnimation.setAnimationListener(new StartActivityAfterAnimation(new Intent(this, OptionsMenu.class)));
+		} else {
+			result = super.onKeyDown(keyCode, event);
+		}
+		return result;
+	}
+
+	@Override
 	protected Dialog onCreateDialog(
 			int id) {
 		Dialog dialog = null;
@@ -169,5 +190,34 @@ public class ControlsSetupActivity extends Activity {
 			dialog.show();
 		}
 		return dialog;
+	}
+
+	protected class StartActivityAfterAnimation implements Animation.AnimationListener {
+		private Intent mIntent;
+
+		StartActivityAfterAnimation(Intent intent) {
+			mIntent = intent;
+		}
+
+		public void onAnimationEnd(
+				Animation animation) {
+
+			startActivity(mIntent);
+			finish();
+
+			overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
+			mIntent = null;
+		}
+
+		public void onAnimationRepeat(
+				Animation animation) {
+
+		}
+
+		public void onAnimationStart(
+				Animation animation) {
+
+		}
+
 	}
 }

@@ -1,7 +1,5 @@
 package com.w3i.torch.activities;
 
-import java.lang.reflect.InvocationTargetException;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -11,9 +9,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
-import com.w3i.torch.DebugLog;
 import com.w3i.torch.R;
-import com.w3i.torch.UIConstants;
 
 public class DifficultyMenuActivity extends Activity {
 	private View mBabyButton;
@@ -136,15 +132,7 @@ public class DifficultyMenuActivity extends Activity {
 			lockButtons = true;
 			finish();
 			startActivity(new Intent(this, GameModeSelectActivity.class));
-			if (UIConstants.mOverridePendingTransition != null) {
-				try {
-					UIConstants.mOverridePendingTransition.invoke(DifficultyMenuActivity.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
-				} catch (InvocationTargetException ite) {
-					DebugLog.d("Activity Transition", "Invocation Target Exception");
-				} catch (IllegalAccessException ie) {
-					DebugLog.d("Activity Transition", "Illegal Access Exception");
-				}
-			}
+			overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
 		} else {
 			result = super.onKeyDown(keyCode, event);
 		}
@@ -169,15 +157,7 @@ public class DifficultyMenuActivity extends Activity {
 			startActivity(mIntent);
 			finish(); // This activity dies when it spawns a new intent.
 
-			if (UIConstants.mOverridePendingTransition != null) {
-				try {
-					UIConstants.mOverridePendingTransition.invoke(DifficultyMenuActivity.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
-				} catch (InvocationTargetException ite) {
-					DebugLog.d("Activity Transition", "Invocation Target Exception");
-				} catch (IllegalAccessException ie) {
-					DebugLog.d("Activity Transition", "Illegal Access Exception");
-				}
-			}
+			overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
 		}
 
 		public void onAnimationRepeat(

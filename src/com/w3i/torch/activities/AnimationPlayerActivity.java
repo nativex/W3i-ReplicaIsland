@@ -16,8 +16,6 @@
 
 package com.w3i.torch.activities;
 
-import java.lang.reflect.InvocationTargetException;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
@@ -32,9 +30,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
-import com.w3i.torch.DebugLog;
 import com.w3i.torch.R;
-import com.w3i.torch.UIConstants;
 
 public class AnimationPlayerActivity extends Activity {
 	public static final int KYLE_DEATH = 0;
@@ -54,15 +50,7 @@ public class AnimationPlayerActivity extends Activity {
 		public void handleMessage(
 				Message msg) {
 			AnimationPlayerActivity.this.finish();
-			if (UIConstants.mOverridePendingTransition != null) {
-				try {
-					UIConstants.mOverridePendingTransition.invoke(AnimationPlayerActivity.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
-				} catch (InvocationTargetException ite) {
-					DebugLog.d("Activity Transition", "Invocation Target Exception");
-				} catch (IllegalAccessException ie) {
-					DebugLog.d("Activity Transition", "Illegal Access Exception");
-				}
-			}
+			overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
 		}
 
 		public void sleep(

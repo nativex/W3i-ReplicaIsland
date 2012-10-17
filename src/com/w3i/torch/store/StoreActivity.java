@@ -1,6 +1,5 @@
 package com.w3i.torch.store;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -33,9 +32,7 @@ import com.w3i.advertiser.NetworkConnectionManager;
 import com.w3i.gamesplatformsdk.Log;
 import com.w3i.offerwall.PublisherManager;
 import com.w3i.offerwall.custom.views.CustomImageView;
-import com.w3i.torch.DebugLog;
 import com.w3i.torch.R;
-import com.w3i.torch.UIConstants;
 import com.w3i.torch.achivements.Achievement;
 import com.w3i.torch.achivements.Achievement.State;
 import com.w3i.torch.achivements.Achievement.Type;
@@ -50,7 +47,6 @@ import com.w3i.torch.gamesplatform.TorchCurrencyManager.OnCurrencyChanged;
 import com.w3i.torch.gamesplatform.TorchItem;
 import com.w3i.torch.gamesplatform.TorchItem.PurchaseState;
 import com.w3i.torch.gamesplatform.TorchItemManager;
-import com.w3i.torch.powerups.PowerupTypes;
 import com.w3i.torch.utils.MetrixUtils;
 import com.w3i.torch.views.FundsView;
 import com.w3i.torch.views.ReplicaInfoDialog;
@@ -640,15 +636,7 @@ public class StoreActivity extends Activity {
 			startActivity(mIntent);
 			finish();
 
-			if (UIConstants.mOverridePendingTransition != null) {
-				try {
-					UIConstants.mOverridePendingTransition.invoke(StoreActivity.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
-				} catch (InvocationTargetException ite) {
-					DebugLog.d("Activity Transition", "Invocation Target Exception");
-				} catch (IllegalAccessException ie) {
-					DebugLog.d("Activity Transition", "Illegal Access Exception");
-				}
-			}
+			overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
 			mIntent = null;
 		}
 

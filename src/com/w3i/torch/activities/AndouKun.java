@@ -16,8 +16,6 @@
 
 package com.w3i.torch.activities;
 
-import java.lang.reflect.InvocationTargetException;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -53,7 +51,6 @@ import com.w3i.torch.LevelTree;
 import com.w3i.torch.PlayerComponent;
 import com.w3i.torch.PreferenceConstants;
 import com.w3i.torch.R;
-import com.w3i.torch.UIConstants;
 import com.w3i.torch.achivements.Achievement;
 import com.w3i.torch.achivements.Achievement.State;
 import com.w3i.torch.achivements.Achievement.Type;
@@ -672,15 +669,7 @@ public class AndouKun extends Activity implements SensorEventListener {
 					// go to the level select.
 					Intent i = new Intent(this, LevelSelectActivity.class);
 					startActivityForResult(i, ACTIVITY_CHANGE_LEVELS);
-					if (UIConstants.mOverridePendingTransition != null) {
-						try {
-							UIConstants.mOverridePendingTransition.invoke(AndouKun.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
-						} catch (InvocationTargetException ite) {
-							DebugLog.d("Activity Transition", "Invocation Target Exception");
-						} catch (IllegalAccessException ie) {
-							DebugLog.d("Activity Transition", "Illegal Access Exception");
-						}
-					}
+					overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
 				} else {
 					// go directly to the next level
 					mGame.setPendingLevel(currentLevel);
@@ -706,15 +695,7 @@ public class AndouKun extends Activity implements SensorEventListener {
 				mGame.stop();
 				Intent i = new Intent(this, GameOverActivity.class);
 				startActivity(i);
-				if (UIConstants.mOverridePendingTransition != null) {
-					try {
-						UIConstants.mOverridePendingTransition.invoke(AndouKun.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
-					} catch (InvocationTargetException ite) {
-						DebugLog.d("Activity Transition", "Invocation Target Exception");
-					} catch (IllegalAccessException ie) {
-						DebugLog.d("Activity Transition", "Illegal Access Exception");
-					}
-				}
+				overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
 				finish();
 
 			}
@@ -726,15 +707,7 @@ public class AndouKun extends Activity implements SensorEventListener {
 			level.diaryCollected = true;
 			i.putExtra("text", level.dialogResources.diaryEntry);
 			startActivity(i);
-			if (UIConstants.mOverridePendingTransition != null) {
-				try {
-					UIConstants.mOverridePendingTransition.invoke(AndouKun.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
-				} catch (InvocationTargetException ite) {
-					DebugLog.d("Activity Transition", "Invocation Target Exception");
-				} catch (IllegalAccessException ie) {
-					DebugLog.d("Activity Transition", "Illegal Access Exception");
-				}
-			}
+			overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
 			break;
 
 		case GameFlowEvent.EVENT_SHOW_DIALOG_CHARACTER1:
@@ -794,15 +767,7 @@ public class AndouKun extends Activity implements SensorEventListener {
 			}
 			i.putExtra("animation", index);
 			startActivityForResult(i, ACTIVITY_ANIMATION_PLAYER);
-			if (UIConstants.mOverridePendingTransition != null) {
-				try {
-					UIConstants.mOverridePendingTransition.invoke(AndouKun.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
-				} catch (InvocationTargetException ite) {
-					DebugLog.d("Activity Transition", "Invocation Target Exception");
-				} catch (IllegalAccessException ie) {
-					DebugLog.d("Activity Transition", "Illegal Access Exception");
-				}
-			}
+			overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
 			break;
 
 		}
@@ -897,15 +862,7 @@ public class AndouKun extends Activity implements SensorEventListener {
 				public void onClick(
 						View v) {
 					finish();
-					if (UIConstants.mOverridePendingTransition != null) {
-						try {
-							UIConstants.mOverridePendingTransition.invoke(AndouKun.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
-						} catch (InvocationTargetException ite) {
-							DebugLog.d("Activity Transition", "Invocation Target Exception");
-						} catch (IllegalAccessException ie) {
-							DebugLog.d("Activity Transition", "Illegal Access Exception");
-						}
-					}
+					overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
 
 				}
 			});

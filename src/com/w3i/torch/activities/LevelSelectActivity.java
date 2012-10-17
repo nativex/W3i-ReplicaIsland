@@ -16,7 +16,6 @@
 
 package com.w3i.torch.activities;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -38,10 +37,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.w3i.torch.DebugLog;
 import com.w3i.torch.LevelTree;
 import com.w3i.torch.R;
-import com.w3i.torch.UIConstants;
 
 public class LevelSelectActivity extends ListActivity {
 	private final static int UNLOCK_ALL_LEVELS_ID = 0;
@@ -262,15 +259,7 @@ public class LevelSelectActivity extends ListActivity {
 				} else {
 					setResult(RESULT_OK, intent);
 					finish();
-					if (UIConstants.mOverridePendingTransition != null) {
-						try {
-							UIConstants.mOverridePendingTransition.invoke(LevelSelectActivity.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
-						} catch (InvocationTargetException ite) {
-							DebugLog.d("Activity Transition", "Invocation Target Exception");
-						} catch (IllegalAccessException ie) {
-							DebugLog.d("Activity Transition", "Illegal Access Exception");
-						}
-					}
+					overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
 				}
 			}
 		}

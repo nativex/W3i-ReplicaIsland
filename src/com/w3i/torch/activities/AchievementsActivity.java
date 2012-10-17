@@ -1,6 +1,5 @@
 package com.w3i.torch.activities;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import android.app.Activity;
@@ -22,9 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.w3i.torch.DebugLog;
 import com.w3i.torch.R;
-import com.w3i.torch.UIConstants;
 import com.w3i.torch.achivements.Achievement;
 import com.w3i.torch.achivements.AchievementListener;
 import com.w3i.torch.achivements.AchievementManager;
@@ -243,15 +240,7 @@ public class AchievementsActivity extends Activity {
 			startActivity(mIntent);
 			finish();
 
-			if (UIConstants.mOverridePendingTransition != null) {
-				try {
-					UIConstants.mOverridePendingTransition.invoke(AchievementsActivity.this, R.anim.activity_fade_in, R.anim.activity_fade_out);
-				} catch (InvocationTargetException ite) {
-					DebugLog.d("Activity Transition", "Invocation Target Exception");
-				} catch (IllegalAccessException ie) {
-					DebugLog.d("Activity Transition", "Illegal Access Exception");
-				}
-			}
+			overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
 			mIntent = null;
 		}
 
