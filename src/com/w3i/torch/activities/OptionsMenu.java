@@ -229,6 +229,7 @@ public class OptionsMenu extends Activity {
 				Animation animation) {
 			startActivity(mIntent);
 			overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
+			finish();
 			mIntent = null;
 		}
 
