@@ -17,7 +17,7 @@
         android:targetSdkVersion="8" />
     <!--
     Actually, this game works fine on small screens, but the only one out 
-	right now has no 3D acceleration, so it's slow and unplayable.
+	right now has no 3D acceleration, so it's slow and unplayable.
     -->
 
     <supports-screens
@@ -82,16 +82,16 @@
             android:screenOrientation="landscape" />
         <activity
             android:name="com.w3i.offerwall.ui.OfferwallActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name="com.w3i.offerwall.ui.HistoryActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name="com.w3i.offerwall.ui.OfferDescriptionActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name="com.w3i.offerwall.ui.ComplexVideoOfferActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 
         <receiver android:name="com.w3i.advertiser.ReferralReceiver" >
             <intent-filter>
