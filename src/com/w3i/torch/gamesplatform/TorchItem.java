@@ -20,9 +20,7 @@ public class TorchItem {
 	private boolean tracked = false;
 
 	public enum PurchaseState {
-		PURCHASED,
-		AVAILABLE,
-		ANY;
+		PURCHASED, AVAILABLE, ANY;
 	}
 
 	public TorchItem(Category itemCatrgory, Item item) {

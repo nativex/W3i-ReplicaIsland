@@ -12,9 +12,7 @@ public class SkinManager {
 	private static boolean mainScreenImageSet = false;
 
 	public enum Skins {
-		DEFAULT,
-		PIRATE_CAPTAIN,
-		TORCH;
+		DEFAULT, PIRATE_CAPTAIN, TORCH;
 	}
 
 	private SkinManager() {

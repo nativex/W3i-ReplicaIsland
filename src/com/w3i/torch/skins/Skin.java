@@ -21,11 +21,7 @@ public class Skin {
 	private SkinType skinType = SkinType.UNDEFINED;
 
 	protected enum SkinType {
-		PLAYER,
-		ENEMY,
-		NPC,
-		PROJECTILE,
-		UNDEFINED
+		PLAYER, ENEMY, NPC, PROJECTILE, UNDEFINED
 	}
 
 	protected Skin() {

@@ -30,21 +30,7 @@ import com.w3i.torch.gamesplatform.TorchCurrencyManager.Currencies;
 public class AnimationComponent extends GameComponent {
 
 	public enum PlayerAnimations {
-		DEAD,
-		IDLE,
-		MOVE,
-		MOVE_FAST,
-		BOOST_UP,
-		BOOST_MOVE,
-		BOOST_MOVE_FAST,
-		STOMP,
-		HIT_REACT,
-		DEATH,
-		FROZEN,
-		MOVE_AIR,
-		JET,
-		SHIELD,
-		FALL
+		DEAD, IDLE, MOVE, MOVE_FAST, BOOST_UP, BOOST_MOVE, BOOST_MOVE_FAST, STOMP, HIT_REACT, DEATH, FROZEN, MOVE_AIR, JET, SHIELD, FALL
 	}
 
 	private static final float MIN_ROCKET_TIME = 0.0f;

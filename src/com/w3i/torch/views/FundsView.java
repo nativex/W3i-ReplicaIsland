@@ -57,7 +57,7 @@ public class FundsView {
 				public void onClick(
 						View v) {
 					com.w3i.common.Log.d("FundsView: Funds view clicked");
-					PublisherManager.showWebOfferwall();
+					PublisherManager.showIncentOfferWall();
 				}
 			});
 			setFunds();

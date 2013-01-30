@@ -444,7 +444,7 @@ public class StoreActivity extends Activity {
 				@Override
 				public void onClick(
 						View v) {
-					PublisherManager.showWebOfferwall();
+					PublisherManager.showIncentOfferWall();
 					dismissDialog(DIALOG_INSUFFICIEN_CURRENCY);
 				}
 			});

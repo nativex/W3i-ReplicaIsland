@@ -30,8 +30,7 @@ public class TorchCurrencyManager {
 	}
 
 	public enum Currencies {
-		PEARLS(25, "Pearls", "pearls", R.drawable.ui_funds_pearls),
-		CRYSTALS(26, "Crystals", "crystals", R.drawable.ui_funds_crystal);
+		PEARLS(25, "Pearls", "pearls", R.drawable.ui_funds_pearls), CRYSTALS(26, "Crystals", "crystals", R.drawable.ui_funds_crystal);
 
 		private int currencyId;
 		private int iconId;

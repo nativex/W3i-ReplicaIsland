@@ -52,47 +52,11 @@ public abstract class Achievement {
 	}
 
 	public static enum State {
-		START,
-		FINISH,
-		FAIL,
-		UPDATE,
-		INITIALIZE,
-		SET_GOAL,
-		SET_PROGRESS;
+		START, FINISH, FAIL, UPDATE, INITIALIZE, SET_GOAL, SET_PROGRESS;
 	}
 
 	public enum Type {
-		PEARLS("Pearls"),
-		CRYSTALS("Crystals"),
-		BONUS_PEARLS("BonusPearls"),
-		BONUS_CRYSTALS("BonusCrystals"),
-		FLY_TIME("FlyTime"),
-		JETPACK_TIME("JetpackTime"),
-		HEALTH("Health"),
-		KILLS("Kills"),
-		MEGA_KILL("MegaKill"),
-		MULTI_KILL("MultiKill"),
-		SHIELD("Shield"),
-		POSSESSION("Possession"),
-		STOMP("Stomp"),
-		HIT("Hit"),
-		DEATH("Death"),
-		LEVELS("Levels"),
-		DIARIES("Dieries"),
-		All_LEVELS("AllLevels"),
-		GAME_BEAT("GameBeat"),
-		GOOD_ENDING("GoodEnding"),
-		BABY("BabyDiff"),
-		KIDS("KidsDiff"),
-		ADULT("AdultDiff"),
-		KYLE_DEFEATED("KyleDefeated"),
-		KABOCHA_DEFEATED("KabochaDefeated"),
-		RODOKOU_DEFEATED("RodokouDefeated"),
-		UNTOUCHABLE("Untouchable"),
-		MERCIFUL("Merciful"),
-		GODLIKE("Godlike"),
-		GADGETEER("Gadgeteer"),
-		WINDOW_SHOPPER("WindowShopper");
+		PEARLS("Pearls"), CRYSTALS("Crystals"), BONUS_PEARLS("BonusPearls"), BONUS_CRYSTALS("BonusCrystals"), FLY_TIME("FlyTime"), JETPACK_TIME("JetpackTime"), HEALTH("Health"), KILLS("Kills"), MEGA_KILL("MegaKill"), MULTI_KILL("MultiKill"), SHIELD("Shield"), POSSESSION("Possession"), STOMP("Stomp"), HIT("Hit"), DEATH("Death"), LEVELS("Levels"), DIARIES("Dieries"), All_LEVELS("AllLevels"), GAME_BEAT("GameBeat"), GOOD_ENDING("GoodEnding"), BABY("BabyDiff"), KIDS("KidsDiff"), ADULT("AdultDiff"), KYLE_DEFEATED("KyleDefeated"), KABOCHA_DEFEATED("KabochaDefeated"), RODOKOU_DEFEATED("RodokouDefeated"), UNTOUCHABLE("Untouchable"), MERCIFUL("Merciful"), GODLIKE("Godlike"), GADGETEER("Gadgeteer"), WINDOW_SHOPPER("WindowShopper");
 
 		private String preferencesString;
 

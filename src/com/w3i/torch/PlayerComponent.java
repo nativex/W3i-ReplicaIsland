@@ -55,13 +55,7 @@ public class PlayerComponent extends GameComponent {
 	private static final float TWO_GEMS_GHOST_TIME = 0.0f; // no limit.
 
 	public enum State {
-		MOVE,
-		STOMP,
-		HIT_REACT,
-		DEAD,
-		WIN,
-		FROZEN,
-		POST_GHOST_DELAY
+		MOVE, STOMP, HIT_REACT, DEAD, WIN, FROZEN, POST_GHOST_DELAY
 	}
 
 	private boolean mTouchingGround;

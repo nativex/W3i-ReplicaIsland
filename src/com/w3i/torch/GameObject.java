@@ -54,22 +54,13 @@ public class GameObject extends PhasedObjectManager {
 	private static final int DEFAULT_LIFE = 1;
 
 	public enum ActionType {
-		INVALID,
-		IDLE,
-		MOVE,
-		ATTACK,
-		HIT_REACT,
-		DEATH,
-		HIDE,
-		FROZEN
+		INVALID, IDLE, MOVE, ATTACK, HIT_REACT, DEATH, HIDE, FROZEN
 	}
 
 	private ActionType mCurrentAction;
 
 	public enum Team {
-		NONE,
-		PLAYER,
-		ENEMY
+		NONE, PLAYER, ENEMY
 	}
 
 	public Team team;

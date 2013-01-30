@@ -52,9 +52,7 @@ public class TorchCheckbox extends ImageView {
 	};
 
 	public enum State {
-		CHECKED,
-		UNCHECKED,
-		INDETERMINATE;
+		CHECKED, UNCHECKED, INDETERMINATE;
 	}
 
 	public TorchCheckbox(Context context, AttributeSet attrs, int defStyle) {
