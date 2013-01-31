@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/com.w3i.torch"
+    xmlns:app="http://schemas.android.com/apk/res/com.recharge.torch"
     android:id="@+id/ui_activity_controls_main"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
@@ -13,7 +13,7 @@
         android:scaleType="fitXY"
         android:src="@drawable/ui_store_background" />
 
-    <com.w3i.torch.views.CustomFontTextView
+    <com.recharge.torch.views.CustomFontTextView
         android:id="@+id/ui_controls_title"
         style="@style/ui_controls_title_style"
         android:layout_width="wrap_content"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <com.w3i.torch.views.OptionsCheckbox
+            <com.recharge.torch.views.OptionsCheckbox
                 android:id="@+id/ui_controls_click_attack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                 app:set_on_text_color="#99ffffff"
                 app:set_title="@string/preference_enable_click_attack" />
 
-            <com.w3i.torch.views.Option
+            <com.recharge.torch.views.Option
                 android:id="@+id/ui_controls_key_config"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                 app:set_description_color="#99ffffff"
                 app:set_title="@string/preference_key_config" />
 
-            <com.w3i.torch.views.OptionsSlider
+            <com.recharge.torch.views.OptionsSlider
                 android:id="@+id/ui_controls_movement_sensitivity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,9 +73,9 @@
                 app:set_min_text="@string/preference_movement_min"
                 app:set_pos="50"
                 app:set_title="@string/preference_movement_sensitivity" >
-            </com.w3i.torch.views.OptionsSlider>
+            </com.recharge.torch.views.OptionsSlider>
 
-            <com.w3i.torch.views.OptionsCheckbox
+            <com.recharge.torch.views.OptionsCheckbox
                 android:id="@+id/ui_controls_enable_screen_controls"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
                 app:set_on_text_color="#99ffffff"
                 app:set_title="@string/preference_enable_screen_controls" />
 
-            <com.w3i.torch.views.OptionsCheckbox
+            <com.recharge.torch.views.OptionsCheckbox
                 android:id="@+id/ui_controls_enable_tilt_controls"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
                 app:set_on_text_color="#ff808000"
                 app:set_title="@string/preference_enable_tilt_controls" />
 
-            <com.w3i.torch.views.OptionsSlider
+            <com.recharge.torch.views.OptionsSlider
                 android:id="@+id/ui_controls_tilt_sensitivity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

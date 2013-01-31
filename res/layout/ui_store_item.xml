@@ -13,7 +13,7 @@
         android:layout_centerVertical="true"
         android:layout_margin="5dip" />
 
-    <com.w3i.torch.views.CustomFontTextView
+    <com.recharge.torch.views.CustomFontTextView
         android:id="@+id/uiStoreItemName"
         style="@style/StoreItemName"
         android:layout_width="wrap_content"
@@ -23,7 +23,7 @@
         android:layout_toRightOf="@+id/uiStoreItemIcon"
         android:text="@string/store_item_name" />
 
-    <com.w3i.torch.views.CustomFontTextView
+    <com.recharge.torch.views.CustomFontTextView
         android:id="@+id/uiStoreItemErrorMessage"
         style="@style/StoreItemAlert"
         android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
         android:layout_toRightOf="@+id/uiStoreItemIcon"
         android:visibility="gone" />
 
-    <com.w3i.torch.views.CustomFontTextView
+    <com.recharge.torch.views.CustomFontTextView
         android:id="@+id/uiStoreItemDescription"
         style="@style/StoreItemDescription"
         android:layout_width="wrap_content"

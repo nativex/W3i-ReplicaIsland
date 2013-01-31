@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.w3i.torch.views.TorchCheckbox xmlns:android="http://schemas.android.com/apk/res/android"
+<com.recharge.torch.views.TorchCheckbox xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ui_checkbox_check"
     android:layout_width="48dp"
     android:layout_height="48dp"

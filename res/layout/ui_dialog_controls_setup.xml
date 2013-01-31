@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/com.w3i.torch"
+    xmlns:app="http://schemas.android.com/apk/res/com.recharge.torch"
     android:layout_width="350dip"
     android:layout_height="fill_parent"
     android:padding="5dip" >
@@ -150,7 +150,7 @@
         android:gravity="center"
         android:weightSum="1" >
 
-        <com.w3i.torch.views.CustomFontTextView
+        <com.recharge.torch.views.CustomFontTextView
             android:id="@+id/ui_dialog_yn_negative"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -164,7 +164,7 @@
             android:textSize="14dip"
             app:setFont="BABYU__.TTF" />
 
-        <com.w3i.torch.views.CustomFontTextView
+        <com.recharge.torch.views.CustomFontTextView
             android:id="@+id/ui_dialog_yn_positive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

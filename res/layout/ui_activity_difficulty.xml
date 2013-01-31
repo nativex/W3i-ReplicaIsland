@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
-            <com.w3i.torch.views.CustomFontTextView
+            <com.recharge.torch.views.CustomFontTextView
                 android:id="@+id/babyButton"
                 style="@style/ui_select_mode_button_style"
                 android:layout_width="wrap_content"
@@ -34,7 +34,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="@string/game_diff_baby_text" />
 
-            <com.w3i.torch.views.CustomFontTextView
+            <com.recharge.torch.views.CustomFontTextView
                 android:id="@+id/babyText"
                 style="@style/ui_select_mode_description_style"
                 android:layout_width="wrap_content"
@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
-            <com.w3i.torch.views.CustomFontTextView
+            <com.recharge.torch.views.CustomFontTextView
                 android:id="@+id/kidsButton"
                 style="@style/ui_select_mode_button_style"
                 android:layout_width="wrap_content"
@@ -58,7 +58,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="@string/game_diff_kid_text" />
 
-            <com.w3i.torch.views.CustomFontTextView
+            <com.recharge.torch.views.CustomFontTextView
                 android:id="@+id/kidsText"
                 style="@style/ui_select_mode_description_style"
                 android:layout_width="wrap_content"
@@ -72,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
-            <com.w3i.torch.views.CustomFontTextView
+            <com.recharge.torch.views.CustomFontTextView
                 android:id="@+id/adultsButton"
                 style="@style/ui_select_mode_button_style"
                 android:layout_width="wrap_content"
@@ -81,7 +81,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="@string/game_diff_adilt_text" />
 
-            <com.w3i.torch.views.CustomFontTextView
+            <com.recharge.torch.views.CustomFontTextView
                 android:id="@+id/adultsText"
                 style="@style/ui_select_mode_description_style"
                 android:layout_width="wrap_content"

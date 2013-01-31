@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/com.w3i.torch"
+    xmlns:app="http://schemas.android.com/apk/res/com.recharge.torch"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/ui_toast_achievement_background"
@@ -23,7 +23,7 @@
         android:gravity="center"
         android:orientation="vertical" >
 
-        <com.w3i.torch.views.CustomFontTextView
+        <com.recharge.torch.views.CustomFontTextView
             android:id="@+id/toastAchievementTitle"
             style="@style/ToastAchievementUnlockedTitle"
             android:layout_width="wrap_content"
@@ -38,14 +38,14 @@
             android:gravity="center"
             android:orientation="horizontal" >
 
-            <com.w3i.torch.views.CustomFontTextView
+            <com.recharge.torch.views.CustomFontTextView
                 android:id="@+id/toastAchievementName"
                 style="@style/ToastAchievementUnlockedAchievementName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/toast_achievement_name" />
 
-            <com.w3i.torch.views.CustomFontTextView
+            <com.recharge.torch.views.CustomFontTextView
                 android:id="@+id/toastAchievementText"
                 style="@style/ToastAchievementText"
                 android:layout_width="wrap_content"

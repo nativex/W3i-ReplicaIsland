@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/com.w3i.torch"
+    xmlns:app="http://schemas.android.com/apk/res/com.recharge.torch"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
-            <com.w3i.torch.views.CustomFontTextView
+            <com.recharge.torch.views.CustomFontTextView
                 android:id="@+id/ui_game_mode_story"
                 style="@style/ui_select_mode_button_style"
                 android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="@string/ui_game_mode_story_mode_button_text" />
 
-            <com.w3i.torch.views.CustomFontTextView
+            <com.recharge.torch.views.CustomFontTextView
                 android:id="@+id/ui_game_mode_story_descriptioon"
                 style="@style/ui_select_mode_description_style"
                 android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
-            <com.w3i.torch.views.CustomFontTextView
+            <com.recharge.torch.views.CustomFontTextView
                 android:id="@+id/ui_game_mode_linear"
                 style="@style/ui_select_mode_button_style"
                 android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="@string/linear_mode" />
 
-            <com.w3i.torch.views.CustomFontTextView
+            <com.recharge.torch.views.CustomFontTextView
                 android:id="@+id/ui_game_mode_linear_locked"
                 style="@style/ui_game_mode_locked_style"
                 android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
                 android:gravity="center"
                 android:text="@string/ui_game_mode_linear_locked" />
 
-            <com.w3i.torch.views.CustomFontTextView
+            <com.recharge.torch.views.CustomFontTextView
                 android:id="@+id/ui_game_mode_linear_descriptioon"
                 style="@style/ui_select_mode_description_style"
                 android:layout_width="wrap_content"
@@ -84,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
-            <com.w3i.torch.views.CustomFontTextView
+            <com.recharge.torch.views.CustomFontTextView
                 android:id="@+id/ui_game_mode_select"
                 style="@style/ui_select_mode_button_style"
                 android:layout_width="wrap_content"
@@ -93,7 +93,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="@string/ui_game_mode_level_select_button_text" />
 
-            <com.w3i.torch.views.CustomFontTextView
+            <com.recharge.torch.views.CustomFontTextView
                 android:id="@+id/ui_game_mode_select_locked"
                 style="@style/ui_game_mode_locked_style"
                 android:layout_width="wrap_content"
@@ -105,7 +105,7 @@
                 android:gravity="center"
                 android:text="@string/ui_game_mode_level_select_locked_text" />
 
-            <com.w3i.torch.views.CustomFontTextView
+            <com.recharge.torch.views.CustomFontTextView
                 android:id="@+id/ui_game_mode_select_descriptioon"
                 style="@style/ui_select_mode_description_style"
                 android:layout_width="wrap_content"

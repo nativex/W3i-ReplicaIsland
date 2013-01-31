@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/com.w3i.torch"
+    xmlns:app="http://schemas.android.com/apk/res/com.recharge.torch"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
@@ -22,14 +22,14 @@
         android:gravity="bottom"
         android:orientation="vertical" >
 
-        <com.w3i.torch.views.CustomFontTextView
+        <com.recharge.torch.views.CustomFontTextView
             android:id="@+id/ui_option_sound"
             style="@style/ui_start_game_button_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal" />
 
-        <com.w3i.torch.views.CustomFontTextView
+        <com.recharge.torch.views.CustomFontTextView
             android:id="@+id/ui_option_controls"
             style="@style/ui_start_game_button_style"
             android:layout_width="wrap_content"
@@ -37,14 +37,14 @@
             android:layout_gravity="center_horizontal"
             android:text="@string/options_menu_controls_button_text" />
 
-        <com.w3i.torch.views.CustomFontTextView
+        <com.recharge.torch.views.CustomFontTextView
             android:id="@+id/ui_option_safe_mode"
             style="@style/ui_start_game_button_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal" />
 
-        <com.w3i.torch.views.CustomFontTextView
+        <com.recharge.torch.views.CustomFontTextView
             android:id="@+id/ui_option_credits"
             style="@style/ui_start_game_button_style"
             android:layout_width="wrap_content"
