@@ -173,7 +173,6 @@ public class LevelSelectActivity extends ListActivity {
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ui_activity_level_select);
-		//PublisherManager.showFeaturedOfferDialog(this);
 		PublisherManager.showCachedFeaturedOffer(this);
 		PublisherManager.getAndCacheFeaturedOffer(this,null);
 		mLevelData = new ArrayList<LevelMetaData>();

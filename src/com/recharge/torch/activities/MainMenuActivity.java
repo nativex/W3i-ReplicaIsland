@@ -257,7 +257,6 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		PublisherManager.setCurrencyListener(w3iCurrencyRedemptionCallback);
 		PublisherManager.createSession();
 		PublisherManager.showFeaturedOfferDialog(this);
-		//PublisherManager.getAndCacheFeaturedOffer(this,null);
 		com.w3i.common.Log.d("Publisher initialization done");
 
 		// AchievementManager.unlockAchievements();
