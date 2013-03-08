@@ -134,6 +134,7 @@
             android:name=".activities.ControlsSetupActivity"
             android:screenOrientation="landscape" >
         </activity>
+        <activity android:name=".activities.EULAActivity"></activity>
     </application>
 
 </manifest>

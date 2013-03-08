@@ -45,13 +45,12 @@
             android:layout_gravity="center_horizontal" />
 
         <com.recharge.torch.views.CustomFontTextView
-            android:id="@+id/ui_option_credits"
+            android:id="@+id/ui_option_eula"
             style="@style/ui_start_game_button_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/options_menu_credits_button_text"
-            android:visibility="gone" />
+            android:text="@string/options_menu_eula_button_text"/>
     </LinearLayout>
 
 </FrameLayout>

@@ -90,8 +90,8 @@ public class OptionsMenu extends Activity {
 				mBackground.startAnimation(mFadeOutAnimation);
 				break;
 
-			case R.id.ui_option_credits:
-				intent = new Intent(getBaseContext(), CreditsActivity.class);
+			case R.id.ui_option_eula:
+				intent = new Intent(getBaseContext(), EULAActivity.class);
 				soundButton.startAnimation(mAlternateFadeOutAnimation);
 				safeModeButton.startAnimation(mAlternateFadeOutAnimation);
 				controlsButton.startAnimation(mAlternateFadeOutAnimation);
@@ -146,7 +146,7 @@ public class OptionsMenu extends Activity {
 		soundButton = findViewById(R.id.ui_option_sound);
 		controlsButton = findViewById(R.id.ui_option_controls);
 		safeModeButton = findViewById(R.id.ui_option_safe_mode);
-		creditsButton = findViewById(R.id.ui_option_credits);
+		creditsButton = findViewById(R.id.ui_option_eula);
 
 		soundButton.setOnClickListener(sButtonListener);
 		controlsButton.setOnClickListener(sButtonListener);
