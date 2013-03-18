@@ -405,7 +405,7 @@ If I am honest with myself, there is another reason the adventurers had to die. 
     <string name="main_menu_start_game_button_text">START GAME</string>
     <string name="main_menu_options_button_text">OPTIONS</string>
     <string name="options_menu_controls_button_text">CONTROLS</string>
-    <string name="options_menu_eula_button_text">END USER LICENSE AGREEMENT</string>
+    <string name="options_menu_eula_button_text">LEGAL INFORMATION</string>
     <string name="options_menu_sound_on_button_text">SOUND ON</string>
     <string name="options_menu_sound_off_button_text">SOUND OFF</string>
     <string name="options_menu_safe_mode_on_button_text">SAFE MODE ON</string>
