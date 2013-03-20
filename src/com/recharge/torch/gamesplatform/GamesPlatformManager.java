@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.recharge.torch.achivements.Achievement.State;
 import com.recharge.torch.achivements.Achievement.Type;
 import com.recharge.torch.achivements.AchievementManager;
+import com.w3i.common.Log;
 import com.w3i.gamesplatformsdk.GamesPLatformListenerAdapter;
 import com.w3i.gamesplatformsdk.GamesPlatformSDK;
 import com.w3i.gamesplatformsdk.rest.entities.Category;
@@ -147,17 +148,25 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 	public static void trackInAppPurchase(
 			final Activity activity,
 			final Item item) {
+		if (activity == null) {
+			return;
+		}
 		GamesPlatformSDK.getInstance().buyItemFromMarket(activity, item.getId(), 1L, new GamesPLatformListenerAdapter() {
 			@Override
 			public void purchaseFromMarketCompleted(
 					boolean success,
 					Throwable exception) {
-				if (success) {
-					Toast.makeText(activity, "Transaction successful", Toast.LENGTH_SHORT).show();
-					TorchInAppPurchaseManager.itemPurchased(item);
-				} else {
-					Toast.makeText(activity, "Transaction failed" + (exception != null ? ": " + exception.getMessage() : "."), Toast.LENGTH_SHORT).show();
+				try {
+					if (success) {
+						Toast.makeText(activity, "Transaction successful", Toast.LENGTH_SHORT).show();
+						TorchInAppPurchaseManager.itemPurchased(item);
+					} else {
+						Toast.makeText(activity, "Transaction failed" + (exception != null ? ": " + exception.getMessage() : "."), Toast.LENGTH_SHORT).show();
+					}
+				} catch (Exception e) {
+					Log.e("GamesPlatformManager: Exception caught in trackInAppPurchase() listener", e);
 				}
+
 			}
 		});
 	}

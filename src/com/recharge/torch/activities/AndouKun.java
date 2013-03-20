@@ -187,8 +187,8 @@ public class AndouKun extends Activity implements SensorEventListener {
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		PublisherManager.getAndCacheFeaturedOffer(this,null);
-		
+		PublisherManager.getAndCacheFeaturedOffer(this, null);
+
 		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
 		final boolean debugLogs = prefs.getBoolean(PreferenceConstants.PREFERENCE_ENABLE_DEBUG, false);
 
@@ -675,9 +675,9 @@ public class AndouKun extends Activity implements SensorEventListener {
 					overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
 				} else {
 					// go directly to the next level
-					//PublisherManager.showFeaturedOfferDialog(this);
+					// PublisherManager.showFeaturedOfferDialog(this);
 					PublisherManager.showCachedFeaturedOffer(this);
-					PublisherManager.getAndCacheFeaturedOffer(this,null);
+					PublisherManager.getAndCacheFeaturedOffer(this, null);
 					mGame.setPendingLevel(currentLevel);
 					if (currentLevel.showWaitMessage) {
 						showWaitMessage();

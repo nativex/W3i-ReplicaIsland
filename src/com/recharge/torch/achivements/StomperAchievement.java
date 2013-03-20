@@ -2,7 +2,6 @@ package com.recharge.torch.achivements;
 
 import com.recharge.torch.R;
 
-
 public class StomperAchievement extends ProgressAchievement {
 
 	public StomperAchievement() {

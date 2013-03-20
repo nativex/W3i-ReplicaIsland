@@ -2,7 +2,6 @@ package com.recharge.torch.achivements;
 
 import com.recharge.torch.R;
 
-
 public class MegakillAchievement extends Achievement {
 	public static final int MONSTERS_TO_KILL = 4;
 

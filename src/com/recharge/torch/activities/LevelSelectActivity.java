@@ -174,7 +174,7 @@ public class LevelSelectActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ui_activity_level_select);
 		PublisherManager.showCachedFeaturedOffer(this);
-		PublisherManager.getAndCacheFeaturedOffer(this,null);
+		PublisherManager.getAndCacheFeaturedOffer(this, null);
 		mLevelData = new ArrayList<LevelMetaData>();
 
 		if (getIntent().getBooleanExtra("unlockAll", false)) {

@@ -9,7 +9,7 @@ public class InAppPurchaseActivity extends Activity {
 	protected void onCreate(
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 	}
 
 	private class Category {
