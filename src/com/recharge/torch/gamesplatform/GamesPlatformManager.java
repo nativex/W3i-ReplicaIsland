@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import android.app.Activity;
 import android.content.Context;
+import android.widget.Toast;
 
 import com.recharge.torch.achivements.Achievement.State;
 import com.recharge.torch.achivements.Achievement.Type;
@@ -14,13 +16,13 @@ import com.w3i.gamesplatformsdk.GamesPLatformListenerAdapter;
 import com.w3i.gamesplatformsdk.GamesPlatformSDK;
 import com.w3i.gamesplatformsdk.rest.entities.Category;
 import com.w3i.gamesplatformsdk.rest.entities.Currency;
+import com.w3i.gamesplatformsdk.rest.entities.Item;
 import com.w3i.gamesplatformsdk.rest.entities.enums.RootCategoryType;
 
 public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 	public static final String REST_URL = "gp.api.w3i.com/PublicServices/GamesPlatformApiRestV1.svc";
 	public static final int APP_ID = 24;
 	public static final int PUBLISHER_ID = 8;
-	public static final int STORE_ID = RootCategoryType.MAIN.getValue();
 
 	private static GamesPlatformManager instance = null;
 	private boolean currenciesReceived = false;
@@ -42,7 +44,8 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 		instance.requestsRunning = true;
 		GamesPlatformSDK.getInstance().createSession(instance);
 		GamesPlatformSDK.getInstance().getCurrencies(instance);
-		GamesPlatformSDK.getInstance().getStore(STORE_ID, instance);
+		GamesPlatformSDK.getInstance().getStore(RootCategoryType.MAIN.getValue(), instance);
+		GamesPlatformSDK.getInstance().getStore(RootCategoryType.IN_APP_PURCHASE.getValue(), instance);
 	}
 
 	public static void onResume() {
@@ -102,8 +105,13 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 			Throwable exception,
 			List<Category> store) {
 		if ((success) && (store.size() > 0)) {
-			onStoreTreeCompleted(store);
-			AchievementManager.setAchievementState(Type.GADGETEER, State.SET_PROGRESS);
+			Category category = store.get(0);
+			if (category.getRootType() == RootCategoryType.MAIN.getValue()) {
+				onStoreTreeCompleted(store);
+				AchievementManager.setAchievementState(Type.GADGETEER, State.SET_PROGRESS);
+			} else if (category.getRootType() == RootCategoryType.IN_APP_PURCHASE.getValue()) {
+				TorchInAppPurchaseManager.initialize(store);
+			}
 		}
 		requestsRunning = false;
 	}
@@ -134,5 +142,23 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 		}
 		GamesPlatformSDK.destroyInstance();
 		instance = null;
+	}
+
+	public static void trackInAppPurchase(
+			final Activity activity,
+			final Item item) {
+		GamesPlatformSDK.getInstance().buyItemFromMarket(activity, item.getId(), 1L, new GamesPLatformListenerAdapter() {
+			@Override
+			public void purchaseFromMarketCompleted(
+					boolean success,
+					Throwable exception) {
+				if (success) {
+					Toast.makeText(activity, "Transaction successful", Toast.LENGTH_SHORT).show();
+					TorchInAppPurchaseManager.itemPurchased(item);
+				} else {
+					Toast.makeText(activity, "Transaction failed" + (exception != null ? ": " + exception.getMessage() : "."), Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
 	}
 }
