@@ -46,7 +46,7 @@
         android:layout_toRightOf="@+id/uiStoreItemIcon"
         android:text="@string/store_item_description" />
 
-    <com.w3i.offerwall.custom.views.AdvancedTextView
+    <com.recharge.torch.views.AdvancedTextView
         android:id="@+id/uiStoreItemPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -34,6 +34,7 @@ import com.recharge.torch.achivements.Achievement.State;
 import com.recharge.torch.achivements.Achievement.Type;
 import com.recharge.torch.achivements.AchievementListener;
 import com.recharge.torch.achivements.AchievementManager;
+import com.recharge.torch.activities.InAppPurchaseActivity;
 import com.recharge.torch.activities.StartGameActivity;
 import com.recharge.torch.gamesplatform.GamesPlatformManager;
 import com.recharge.torch.gamesplatform.SharedPreferenceManager;
@@ -49,7 +50,6 @@ import com.recharge.torch.views.ReplicaInfoDialog;
 import com.recharge.torch.views.ReplicaIslandToast;
 import com.w3i.advertiser.NetworkConnectionManager;
 import com.w3i.gamesplatformsdk.Log;
-import com.w3i.offerwall.PublisherManager;
 import com.w3i.offerwall.custom.views.CustomImageView;
 
 public class StoreActivity extends Activity {
@@ -444,7 +444,9 @@ public class StoreActivity extends Activity {
 				@Override
 				public void onClick(
 						View v) {
-					PublisherManager.showIncentOfferWall();
+					// PublisherManager.showIncentOfferWall();
+					Intent intent = new Intent(v.getContext(), InAppPurchaseActivity.class);
+					v.getContext().startActivity(intent);
 					dismissDialog(DIALOG_INSUFFICIEN_CURRENCY);
 				}
 			});
