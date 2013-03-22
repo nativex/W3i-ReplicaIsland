@@ -91,16 +91,10 @@ public class OptionsMenu extends Activity {
 				break;
 
 			case R.id.ui_option_eula:
-				intent = new Intent(getBaseContext(), EULAActivity.class);
-				soundButton.startAnimation(mAlternateFadeOutAnimation);
-				safeModeButton.startAnimation(mAlternateFadeOutAnimation);
-				controlsButton.startAnimation(mAlternateFadeOutAnimation);
+				intent = new Intent(getBaseContext(), LegalInformationActivity.class);
+				mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(intent));
 				v.startAnimation(mButtonFlickerAnimation);
-				if (intent != null) {
-					mFadeOutAnimation.setAnimationListener(new StartActivityAfterAnimation(intent));
-				}
 				lockButtons = true;
-				mBackground.startAnimation(mFadeOutAnimation);
 				break;
 			}
 

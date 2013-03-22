@@ -24,6 +24,7 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 	public static final String REST_URL = "gp.api.w3i.com/PublicServices/GamesPlatformApiRestV1.svc";
 	public static final int APP_ID = 24;
 	public static final int PUBLISHER_ID = 8;
+	private static final String KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiQRXx7Rixcc5uzs2Ik/fxt3ik2KW9mA8pQEplwRkV5Iu3PqqeTKTGVjySXtXfhYJiy+POJfT7aI8M5m9nNlDFV2PRC7PRlC7DyVOX2UWWJgvbhr0L+ViDzkdelOhvBqcU94YN/02/4PmORxUVdRdRRYp7TpT5Czk/WjyhfRTnbIGohyO9s0gIlUQeDy/8OKXRIDePmXqF4qpcxulvCMJHWTtTlq9BDkwzvfHYvbB+5qKc2NId5LIccdSwzZTPA9aEdZ0bGBjRAwixd37vlcYmc5whse+7aM+HLgbtIOtUJb/lM35ZjjfjEXHxBbTG2bTtX1TfLt+su53zQYwV1NI9QIDAQAB";
 
 	private static GamesPlatformManager instance = null;
 	private boolean currenciesReceived = false;
@@ -36,7 +37,7 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 	public static void initializeManager(
 			Context context) {
 		instance = new GamesPlatformManager();
-		GamesPlatformSDK.createInstance(PUBLISHER_ID, APP_ID, REST_URL, null, context);
+		GamesPlatformSDK.createInstance(PUBLISHER_ID, APP_ID, REST_URL, KEY, context);
 		downloadStoreTree();
 	}
 
