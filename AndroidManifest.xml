@@ -140,6 +140,15 @@
         <activity
             android:name=".activities.InAppPurchaseActivity"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+        <service android:name="com.w3i.gamesplatformsdk.market.BillingService" />
+
+        <receiver android:name="com.w3i.gamesplatformsdk.market.BillingReceiver" >
+            <intent-filter>
+                <action android:name="com.android.vending.billing.IN_APP_NOTIFY" />
+                <action android:name="com.android.vending.billing.RESPONSE_CODE" />
+                <action android:name="com.android.vending.billing.PURCHASE_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

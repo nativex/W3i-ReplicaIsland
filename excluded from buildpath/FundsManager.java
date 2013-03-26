@@ -2,6 +2,7 @@ package com.w3i.torch.store;
 
 import java.util.Map;
 
+import com.recharge.torch.views.FundsView;
 import com.w3i.gamesplatformsdk.rest.entities.Currency;
 import com.w3i.gamesplatformsdk.rest.entities.Item;
 import com.w3i.torch.achivements.Achievement.State;
@@ -70,6 +71,7 @@ public class FundsManager {
 			int crystals) {
 		checkInstance();
 		instance.crystals = crystals;
+		FundsView.setFunds();
 		SharedPreferenceManager.storeFunds();
 	}
 
@@ -83,6 +85,7 @@ public class FundsManager {
 			boolean storeToSharedPreferences) {
 		checkInstance();
 		instance.crystals += crystals;
+		FundsView.setFunds();
 		if (storeToSharedPreferences) {
 			SharedPreferenceManager.storeFunds();
 		}
@@ -92,6 +95,7 @@ public class FundsManager {
 			int pearls) {
 		checkInstance();
 		instance.pearls = pearls;
+		FundsView.setFunds();
 		SharedPreferenceManager.storeFunds();
 	}
 
@@ -105,6 +109,7 @@ public class FundsManager {
 			boolean storeToSharedPreferences) {
 		checkInstance();
 		instance.pearls += pearls;
+		FundsView.setFunds();
 		if (storeToSharedPreferences) {
 			SharedPreferenceManager.storeFunds();
 		}

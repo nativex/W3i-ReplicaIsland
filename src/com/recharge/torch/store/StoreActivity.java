@@ -248,6 +248,7 @@ public class StoreActivity extends Activity {
 				}
 			}
 		});
+		resetItemAvailability(null);
 		buttonsLocked = false;
 	}
 
@@ -571,7 +572,7 @@ public class StoreActivity extends Activity {
 		AchievementManager.setAchievementState(Type.WINDOW_SHOPPER, State.FAIL);
 	}
 
-	private void resetItemAvailability(
+	private synchronized void resetItemAvailability(
 			View item) {
 		if (storeList != null) {
 			for (int i = 0; i < storeList.getChildCount(); i++) {
@@ -581,7 +582,7 @@ public class StoreActivity extends Activity {
 		}
 	}
 
-	private void resetItemAvailabilityInCategory(
+	private synchronized void resetItemAvailabilityInCategory(
 			View item,
 			View category) {
 		if (category instanceof ViewGroup) {

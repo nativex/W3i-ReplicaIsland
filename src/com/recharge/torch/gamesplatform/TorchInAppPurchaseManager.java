@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.Activity;
 
+import com.w3i.common.Log;
 import com.w3i.gamesplatformsdk.rest.entities.Attribute;
 import com.w3i.gamesplatformsdk.rest.entities.AttributeCurrency;
 import com.w3i.gamesplatformsdk.rest.entities.Category;
@@ -12,11 +13,25 @@ import com.w3i.gamesplatformsdk.rest.entities.Item;
 public class TorchInAppPurchaseManager {
 	private static TorchInAppPurchaseManager instance;
 	private List<Category> items;
+	private boolean enabled = false;
 
 	private static void checkInstance() {
 		if (instance == null) {
 			instance = new TorchInAppPurchaseManager();
 		}
+	}
+
+	public static void setEnabled(
+			boolean isEnabled) {
+		checkInstance();
+		instance.enabled = isEnabled;
+	}
+
+	public static boolean isEnabled() {
+		if (instance == null) {
+			return false;
+		}
+		return ((instance.enabled) && (instance.items != null));
 	}
 
 	public static void initialize(
@@ -33,7 +48,12 @@ public class TorchInAppPurchaseManager {
 	public static void buyItem(
 			Activity activity,
 			Item item) {
-		GamesPlatformManager.trackInAppPurchase(activity, item);
+		checkInstance();
+		if (instance.enabled) {
+			GamesPlatformManager.trackInAppPurchase(activity, item);
+		} else {
+			Log.e("TorchInAppPurchaseManager: InAppPurchase disabled");
+		}
 	}
 
 	public static void itemPurchased(

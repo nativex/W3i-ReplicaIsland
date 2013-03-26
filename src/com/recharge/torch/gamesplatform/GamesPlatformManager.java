@@ -15,6 +15,8 @@ import com.recharge.torch.achivements.AchievementManager;
 import com.w3i.common.Log;
 import com.w3i.gamesplatformsdk.GamesPLatformListenerAdapter;
 import com.w3i.gamesplatformsdk.GamesPlatformSDK;
+import com.w3i.gamesplatformsdk.MarketManager;
+import com.w3i.gamesplatformsdk.rest.entities.Attribute;
 import com.w3i.gamesplatformsdk.rest.entities.Category;
 import com.w3i.gamesplatformsdk.rest.entities.Currency;
 import com.w3i.gamesplatformsdk.rest.entities.Item;
@@ -24,7 +26,6 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 	public static final String REST_URL = "gp.api.w3i.com/PublicServices/GamesPlatformApiRestV1.svc";
 	public static final int APP_ID = 24;
 	public static final int PUBLISHER_ID = 8;
-	private static final String KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiQRXx7Rixcc5uzs2Ik/fxt3ik2KW9mA8pQEplwRkV5Iu3PqqeTKTGVjySXtXfhYJiy+POJfT7aI8M5m9nNlDFV2PRC7PRlC7DyVOX2UWWJgvbhr0L+ViDzkdelOhvBqcU94YN/02/4PmORxUVdRdRRYp7TpT5Czk/WjyhfRTnbIGohyO9s0gIlUQeDy/8OKXRIDePmXqF4qpcxulvCMJHWTtTlq9BDkwzvfHYvbB+5qKc2NId5LIccdSwzZTPA9aEdZ0bGBjRAwixd37vlcYmc5whse+7aM+HLgbtIOtUJb/lM35ZjjfjEXHxBbTG2bTtX1TfLt+su53zQYwV1NI9QIDAQAB";
 
 	private static GamesPlatformManager instance = null;
 	private boolean currenciesReceived = false;
@@ -37,7 +38,7 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 	public static void initializeManager(
 			Context context) {
 		instance = new GamesPlatformManager();
-		GamesPlatformSDK.createInstance(PUBLISHER_ID, APP_ID, REST_URL, KEY, context);
+		GamesPlatformSDK.createInstance(PUBLISHER_ID, APP_ID, REST_URL, null, context);
 		downloadStoreTree();
 	}
 
@@ -46,6 +47,7 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 		instance.requestsRunning = true;
 		GamesPlatformSDK.getInstance().createSession(instance);
 		GamesPlatformSDK.getInstance().getCurrencies(instance);
+		GamesPlatformSDK.getInstance().getStore(RootCategoryType.CUSTOM.getValue(), instance);
 		GamesPlatformSDK.getInstance().getStore(RootCategoryType.MAIN.getValue(), instance);
 		GamesPlatformSDK.getInstance().getStore(RootCategoryType.IN_APP_PURCHASE.getValue(), instance);
 	}
@@ -91,7 +93,7 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 
 			}
 			item.setTracked(true);
-			GamesPlatformSDK.getInstance().trackItemPurchase(item.getId(), 1L, itemPrice, userBalance, instance);
+			GamesPlatformSDK.getInstance().trackItemPurchase(item.getId(), 1L, instance);
 		}
 	}
 
@@ -111,6 +113,28 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 			if (category.getRootType() == RootCategoryType.MAIN.getValue()) {
 				onStoreTreeCompleted(store);
 				AchievementManager.setAchievementState(Type.GADGETEER, State.SET_PROGRESS);
+			} else if (category.getRootType() == RootCategoryType.CUSTOM.getValue()) {
+				try {
+					for (Item i : category.getItems()) {
+						if (i.getDisplayName().equals("Settings")) {
+							for (Attribute att : i.getCustomAttributes()) {
+								if (att.getName().equals("Key")) {
+									String key = att.getValue();
+									if ((key != null) && (!key.trim().equals(""))) {
+										MarketManager.destroyInstance();
+										MarketManager.createInstance(key, "com.recharge.torch");
+										TorchInAppPurchaseManager.setEnabled(true);
+									}
+									break;
+								}
+							}
+							break;
+						}
+					}
+				} catch (Exception e) {
+					TorchInAppPurchaseManager.setEnabled(false);
+					Log.e("GamesPlatformManager: Exception caught while reading Torch settings", e);
+				}
 			} else if (category.getRootType() == RootCategoryType.IN_APP_PURCHASE.getValue()) {
 				TorchInAppPurchaseManager.initialize(store);
 			}
@@ -155,18 +179,26 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 		GamesPlatformSDK.getInstance().buyItemFromMarket(activity, item.getId(), 1L, new GamesPLatformListenerAdapter() {
 			@Override
 			public void purchaseFromMarketCompleted(
-					boolean success,
-					Throwable exception) {
-				try {
-					if (success) {
-						Toast.makeText(activity, "Transaction successful", Toast.LENGTH_SHORT).show();
-						TorchInAppPurchaseManager.itemPurchased(item);
-					} else {
-						Toast.makeText(activity, "Transaction failed" + (exception != null ? ": " + exception.getMessage() : "."), Toast.LENGTH_SHORT).show();
+					final boolean success,
+					final Throwable exception) {
+				activity.runOnUiThread(new Runnable() {
+
+					@Override
+					public void run() {
+						try {
+							Toast.makeText(activity, "Listener Fired", Toast.LENGTH_LONG).show();
+							if (success) {
+								Toast.makeText(activity, "Transaction successful", Toast.LENGTH_SHORT).show();
+								TorchInAppPurchaseManager.itemPurchased(item);
+							} else {
+								Toast.makeText(activity, "Transaction failed" + (exception != null ? ": " + exception.getMessage() : "."), Toast.LENGTH_SHORT).show();
+							}
+						} catch (Exception e) {
+							Log.e("GamesPlatformManager: Exception caught in trackInAppPurchase() listener", e);
+						}
+
 					}
-				} catch (Exception e) {
-					Log.e("GamesPlatformManager: Exception caught in trackInAppPurchase() listener", e);
-				}
+				});
 
 			}
 		});

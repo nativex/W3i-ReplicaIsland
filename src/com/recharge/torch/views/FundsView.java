@@ -83,6 +83,28 @@ public class FundsView {
 			listener.currencyChanged(currency);
 		}
 	}
+	
+	private static void setFunds(
+			final ViewGroup fundsItem,
+			final TorchCurrency currency) {
+		fundsView.post(new Runnable() {
+
+			@Override
+			public void run() {
+				if (fundsItem == null) {
+					return;
+				}
+				CustomImageView icon = (CustomImageView) fundsItem.findViewById(R.id.uiFundsItemImage);
+				TextView amount = (TextView) fundsItem.findViewById(R.id.uiFundsItemAmount);
+				amount.setText(String.format("%1$,d", currency.getBalance()));
+				if ((NetworkConnectionManager.getInstance(fundsItem.getContext()).isConnected()) && (currency.getIcon() != null)) {
+					icon.setImageFromInternet(currency.getIcon());
+				} else if (currency.getDrawableResource() > 0) {
+					icon.setImageResource(currency.getDrawableResource());
+				}
+			}
+		});
+	}
 
 	public static void setFunds() {
 		if (fundsView != null) {
@@ -158,28 +180,6 @@ public class FundsView {
 		fundsItem.setLayoutParams(params);
 		fundsItem.setId(itemId);
 		return fundsItem;
-	}
-
-	private static void setFunds(
-			final ViewGroup fundsItem,
-			final TorchCurrency currency) {
-		fundsView.post(new Runnable() {
-
-			@Override
-			public void run() {
-				if (fundsItem == null) {
-					return;
-				}
-				CustomImageView icon = (CustomImageView) fundsItem.findViewById(R.id.uiFundsItemImage);
-				TextView amount = (TextView) fundsItem.findViewById(R.id.uiFundsItemAmount);
-				amount.setText(String.format("%1$,d", currency.getBalance()));
-				if ((NetworkConnectionManager.getInstance(fundsItem.getContext()).isConnected()) && (currency.getIcon() != null)) {
-					icon.setImageFromInternet(currency.getIcon());
-				} else if (currency.getDrawableResource() > 0) {
-					icon.setImageResource(currency.getDrawableResource());
-				}
-			}
-		});
 	}
 
 	public static void setOnCurrencyChangedListener(
