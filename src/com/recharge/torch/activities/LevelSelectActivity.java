@@ -37,9 +37,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.nativex.monetization.MonetizationManager;
 import com.recharge.torch.LevelTree;
 import com.recharge.torch.R;
-import com.w3i.offerwall.PublisherManager;
 
 public class LevelSelectActivity extends ListActivity {
 	private final static int UNLOCK_ALL_LEVELS_ID = 0;
@@ -173,8 +173,11 @@ public class LevelSelectActivity extends ListActivity {
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ui_activity_level_select);
-		PublisherManager.showCachedFeaturedOffer(this);
-		PublisherManager.getAndCacheFeaturedOffer(this, null);
+
+		// PublisherManager.showCachedFeaturedOffer(this);
+		// PublisherManager.getAndCacheFeaturedOffer(this, null);
+		MonetizationManager.showPendingInterstitial(this);
+		MonetizationManager.showInterstitial(this, null, false);
 		mLevelData = new ArrayList<LevelMetaData>();
 
 		if (getIntent().getBooleanExtra("unlockAll", false)) {

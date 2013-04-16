@@ -1,5 +1,6 @@
 package com.recharge.torch.store;
 
+import com.nativex.common.Log;
 import com.recharge.torch.achivements.Achievement.State;
 import com.recharge.torch.achivements.Achievement.Type;
 import com.recharge.torch.achivements.AchievementManager;
@@ -7,7 +8,6 @@ import com.recharge.torch.achivements.MegakillAchievement;
 import com.recharge.torch.gamesplatform.TorchCurrencyManager;
 import com.recharge.torch.gamesplatform.TorchCurrencyManager.Currencies;
 import com.recharge.torch.powerups.PowerupTypes;
-import com.w3i.common.Log;
 
 public class KillingSpreeDetector {
 	public static final long KILLING_SPREE_DURATION = 1; // 1 sec

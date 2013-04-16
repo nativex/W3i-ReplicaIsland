@@ -38,6 +38,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.nativex.common.Log;
+import com.nativex.monetization.MonetizationManager;
 import com.recharge.torch.AdultsDifficultyConstants;
 import com.recharge.torch.BabyDifficultyConstants;
 import com.recharge.torch.DebugLog;
@@ -62,7 +64,6 @@ import com.recharge.torch.store.KillingSpreeDetector;
 import com.recharge.torch.views.FundsView;
 import com.recharge.torch.views.ReplicaIslandToast;
 import com.recharge.torch.views.ReplicaYesNoDialog;
-import com.w3i.offerwall.PublisherManager;
 
 /**
  * Core activity for the game. Sets up a surface view for OpenGL, bootstraps the game engine, and manages UI events. Also manages game progression, transitioning to other activites, save game, and
@@ -187,7 +188,8 @@ public class AndouKun extends Activity implements SensorEventListener {
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		PublisherManager.getAndCacheFeaturedOffer(this, null);
+		// PublisherManager.getAndCacheFeaturedOffer(this, null);
+		MonetizationManager.showInterstitial(this, null, false);
 
 		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
 		final boolean debugLogs = prefs.getBoolean(PreferenceConstants.PREFERENCE_ENABLE_DEBUG, false);
@@ -676,8 +678,10 @@ public class AndouKun extends Activity implements SensorEventListener {
 				} else {
 					// go directly to the next level
 					// PublisherManager.showFeaturedOfferDialog(this);
-					PublisherManager.showCachedFeaturedOffer(this);
-					PublisherManager.getAndCacheFeaturedOffer(this, null);
+					// PublisherManager.showCachedFeaturedOffer(this);
+					// PublisherManager.getAndCacheFeaturedOffer(this, null);
+					MonetizationManager.showPendingInterstitial(this);
+					MonetizationManager.showInterstitial(this, null, false);
 					mGame.setPendingLevel(currentLevel);
 					if (currentLevel.showWaitMessage) {
 						showWaitMessage();
@@ -709,7 +713,7 @@ public class AndouKun extends Activity implements SensorEventListener {
 		case GameFlowEvent.EVENT_SHOW_DIARY:
 			Intent i = new Intent(this, DiaryActivity.class);
 			LevelTree.Level level = LevelTree.get(mLevelRow, mLevelIndex);
-			com.w3i.common.Log.v("Diary found: Level name - " + level.name);
+			Log.v("Diary found: Level name - " + level.name);
 			level.diaryCollected = true;
 			i.putExtra("text", level.dialogResources.diaryEntry);
 			startActivity(i);

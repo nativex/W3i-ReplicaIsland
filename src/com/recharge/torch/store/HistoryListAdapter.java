@@ -8,12 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.nativex.common.Log;
+import com.nativex.monetization.custom.views.CustomImageView;
 import com.recharge.torch.R;
 import com.recharge.torch.gamesplatform.TorchItem;
 import com.recharge.torch.gamesplatform.TorchItem.PurchaseState;
 import com.recharge.torch.gamesplatform.TorchItemManager;
-import com.w3i.common.Log;
-import com.w3i.offerwall.custom.views.CustomImageView;
 
 public class HistoryListAdapter extends BaseAdapter {
 	private List<TorchItem> items;

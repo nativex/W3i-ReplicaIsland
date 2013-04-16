@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:padding="5dip" >
 
-    <com.w3i.offerwall.custom.views.ScrollingTextView
+    <com.nativex.monetization.custom.views.ScrollingTextView
         android:id="@+id/ui_dialog_yn_title"
         style="@style/StoreDialogTitle"
         android:layout_width="wrap_content"

@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:padding="5dip" >
 
-    <com.w3i.offerwall.custom.views.ScrollingTextView
+    <com.nativex.monetization.custom.views.ScrollingTextView
         android:id="@+id/ui_dialog_yn_title"
         style="@style/StoreDialogTitle"
         android:layout_width="wrap_content"
@@ -40,7 +40,6 @@
         android:src="@drawable/info_dialog_close" />
 
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/ui_dialog_controls_keys_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

@@ -7,8 +7,8 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 import com.google.gson.Gson;
+import com.nativex.common.Log;
 import com.recharge.torch.R;
-import com.w3i.common.Log;
 import com.w3i.gamesplatformsdk.rest.entities.Currency;
 
 public class TorchCurrencyManager {

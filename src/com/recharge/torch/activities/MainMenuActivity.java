@@ -39,6 +39,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.nativex.advertiser.AdvertiserListener;
+import com.nativex.advertiser.AdvertiserManager;
+import com.nativex.monetization.MonetizationManager;
+import com.nativex.monetization.business.Balance;
+import com.nativex.monetization.listeners.CurrencyListenerBase;
+import com.nativex.monetization.listeners.CurrencyListenerV1;
 import com.recharge.torch.LevelTree;
 import com.recharge.torch.MultiTouchFilter;
 import com.recharge.torch.PreferenceConstants;
@@ -52,17 +58,13 @@ import com.recharge.torch.gamesplatform.GamesPlatformManager;
 import com.recharge.torch.gamesplatform.SharedPreferenceManager;
 import com.recharge.torch.gamesplatform.TorchCurrency;
 import com.recharge.torch.gamesplatform.TorchCurrencyManager;
+import com.recharge.torch.gamesplatform.TorchInAppPurchaseManager;
 import com.recharge.torch.gamesplatform.TorchItemManager;
 import com.recharge.torch.publisher.PublisherConstants;
 import com.recharge.torch.skins.SkinManager;
 import com.recharge.torch.views.FundsView;
-import com.w3i.advertiser.AdvertiserManager;
-import com.w3i.advertiser.W3iAdvertiser;
-import com.w3i.offerwall.PublisherManager;
-import com.w3i.offerwall.W3iCurrencyListener;
-import com.w3i.offerwall.business.Balance;
 
-public class MainMenuActivity extends Activity implements W3iAdvertiser {
+public class MainMenuActivity extends Activity implements AdvertiserListener {
 	private boolean mPaused;
 	private View mStartButton;
 	private View mOptionsButton;
@@ -107,7 +109,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		}
 	};
 
-	private W3iCurrencyListener w3iCurrencyRedemptionCallback = new W3iCurrencyListener() {
+	private CurrencyListenerBase w3iCurrencyRedemptionCallback = new CurrencyListenerV1() {
 		public void onRedeem(
 				List<Balance> balances) {
 			Log.d("com.recharge.torch", "currency redemption success");
@@ -119,7 +121,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 							TorchCurrencyManager.addBalance(currency, (int) (Double.parseDouble(b.getAmount()) + 0.5));
 						}
 					} catch (Exception e) {
-						com.w3i.common.Log.e("MainMenuActivity: Unable to read balances. " + b.getDisplayName(), e);
+						com.nativex.common.Log.e("MainMenuActivity: Unable to read balances. " + b.getDisplayName(), e);
 					}
 				}
 			}
@@ -151,6 +153,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ui_activity_main_menu);
 
+		TorchInAppPurchaseManager.context = getApplicationContext();
 		torchOnCreate();
 
 		doW3iInitialization();
@@ -227,20 +230,20 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		// PublisherManager.endSession();
-		// AdvertiserManager.release();
-		// PublisherManager.release();
-		// GamesPlatformManager.release();
-		// TorchCurrencyManager.release();
-		// TorchItemManager.release();
-		// SharedPreferenceManager.release();
-		// AchievementManager.release();
+		AdvertiserManager.release();
+		MonetizationManager.release();
+		GamesPlatformManager.release();
+		TorchCurrencyManager.release();
+		TorchItemManager.release();
+		SharedPreferenceManager.release();
+		AchievementManager.release();
 	}
 
 	/**
 	 * 
 	 */
 	private void doW3iInitialization() {
+		MonetizationManager.enableLogging(true);
 		Log.d("com.recharge.torch", "start");
 		Log.d("com.recharge.torch", "deviceid: " + ((android.telephony.TelephonyManager) this.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId());
 		Log.d("com.recharge.torch", "androidid: " + android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID));
@@ -249,15 +252,14 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 		Log.d("com.recharge.torch", "mac address: " + ((android.net.wifi.WifiManager) this.getApplicationContext().getSystemService(Context.WIFI_SERVICE)).getConnectionInfo().getMacAddress());
 		/* Initialization of W3iConnect class */
 
-		PublisherManager.enableLogging(true);
 		AdvertiserManager.initialize(this);
 		AdvertiserManager.appWasRun(PublisherConstants.appId);
 
-		PublisherManager.initialize(this, PublisherConstants.applicationName, PublisherConstants.appId, PublisherConstants.publisherUserId, PublisherConstants.packageName);
-		PublisherManager.setCurrencyListener(w3iCurrencyRedemptionCallback);
-		PublisherManager.createSession();
-		PublisherManager.showFeaturedOfferDialog(this);
-		com.w3i.common.Log.d("Publisher initialization done");
+		MonetizationManager.initialize(this, PublisherConstants.applicationName, PublisherConstants.appId, PublisherConstants.publisherUserId, PublisherConstants.packageName);
+		MonetizationManager.setCurrencyListener(w3iCurrencyRedemptionCallback);
+		MonetizationManager.createSession();
+		// PublisherManager.showFeaturedOfferDialog(this);
+		com.nativex.common.Log.d("Publisher initialization done");
 
 		// AchievementManager.unlockAchievements();
 
@@ -293,7 +295,7 @@ public class MainMenuActivity extends Activity implements W3iAdvertiser {
 	protected void onResume() {
 		super.onResume();
 
-		PublisherManager.redeemCurrency(this);
+		MonetizationManager.redeemCurrency(this);
 		torchOnResume();
 
 		setFunds();

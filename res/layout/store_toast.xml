@@ -5,7 +5,7 @@
     android:background="@drawable/store_toast_background"
     android:orientation="vertical" >
 
-    <com.w3i.offerwall.custom.views.CustomImageView
+    <com.nativex.monetization.custom.views.CustomImageView
         android:id="@+id/storeToastIcon"
         android:layout_width="60dip"
         android:layout_height="60dip"

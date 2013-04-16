@@ -9,10 +9,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.nativex.common.Log;
 import com.recharge.torch.achivements.Achievement.State;
 import com.recharge.torch.achivements.Achievement.Type;
 import com.recharge.torch.achivements.AchievementManager;
-import com.w3i.common.Log;
 import com.w3i.gamesplatformsdk.GamesPLatformListenerAdapter;
 import com.w3i.gamesplatformsdk.GamesPlatformSDK;
 import com.w3i.gamesplatformsdk.MarketManager;

@@ -1,7 +1,7 @@
 package com.recharge.torch.achivements;
 
+import com.nativex.common.Log;
 import com.recharge.torch.R;
-import com.w3i.common.Log;
 
 public class UntouchableAchievement extends Achievement {
 

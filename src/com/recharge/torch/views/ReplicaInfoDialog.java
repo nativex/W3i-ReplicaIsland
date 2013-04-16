@@ -7,9 +7,9 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
+import com.nativex.monetization.custom.views.CustomImageView;
+import com.nativex.monetization.custom.views.ScrollingTextView;
 import com.recharge.torch.R;
-import com.w3i.offerwall.custom.views.CustomImageView;
-import com.w3i.offerwall.custom.views.ScrollingTextView;
 
 public class ReplicaInfoDialog extends Dialog {
 

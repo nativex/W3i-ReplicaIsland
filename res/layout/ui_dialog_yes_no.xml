@@ -13,7 +13,7 @@
         android:layout_below="@+id/ui_dialog_yn_separator"
         android:minWidth="250dip" >
 
-        <com.w3i.offerwall.custom.views.CustomImageView
+        <com.nativex.monetization.custom.views.CustomImageView
             android:id="@+id/ui_dialog_yn_icon"
             android:layout_width="80dip"
             android:layout_height="80dip"
@@ -38,7 +38,7 @@
         </ScrollView>
     </RelativeLayout>
 
-    <com.w3i.offerwall.custom.views.ScrollingTextView
+    <com.nativex.monetization.custom.views.ScrollingTextView
         android:id="@+id/ui_dialog_yn_title"
         style="@style/StoreDialogTitle"
         android:layout_width="wrap_content"

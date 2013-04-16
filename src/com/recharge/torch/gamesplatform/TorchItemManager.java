@@ -9,11 +9,11 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 import com.google.gson.Gson;
+import com.nativex.common.Log;
 import com.recharge.torch.achivements.Achievement.State;
 import com.recharge.torch.achivements.Achievement.Type;
 import com.recharge.torch.achivements.AchievementManager;
 import com.recharge.torch.powerups.PowerupTypes;
-import com.w3i.common.Log;
 import com.w3i.gamesplatformsdk.rest.entities.Category;
 import com.w3i.gamesplatformsdk.rest.entities.Item;
 

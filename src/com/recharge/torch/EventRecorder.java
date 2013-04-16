@@ -16,12 +16,12 @@
 
 package com.recharge.torch;
 
+import com.nativex.common.Log;
 import com.recharge.torch.achivements.Achievement.Type;
 import com.recharge.torch.achivements.AchievementManager;
 import com.recharge.torch.gamesplatform.TorchCurrencyManager;
 import com.recharge.torch.gamesplatform.TorchCurrencyManager.Currencies;
 import com.recharge.torch.store.KillingSpreeDetector;
-import com.w3i.common.Log;
 
 public class EventRecorder extends BaseObject {
 	public final static int COUNTER_ROBOTS_DESTROYED = 0;

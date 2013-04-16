@@ -8,8 +8,8 @@ import java.util.List;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.nativex.common.Log;
 import com.recharge.torch.achivements.Achievement.Type;
-import com.w3i.common.Log;
 
 public class AchievementManager {
 	private Context applicationContext = null;

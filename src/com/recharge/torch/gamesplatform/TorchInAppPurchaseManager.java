@@ -3,8 +3,11 @@ package com.recharge.torch.gamesplatform;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 
-import com.w3i.common.Log;
+import com.nativex.common.Log;
+import com.recharge.torch.activities.InAppPurchaseActivity;
 import com.w3i.gamesplatformsdk.rest.entities.Attribute;
 import com.w3i.gamesplatformsdk.rest.entities.AttributeCurrency;
 import com.w3i.gamesplatformsdk.rest.entities.Category;
@@ -14,6 +17,7 @@ public class TorchInAppPurchaseManager {
 	private static TorchInAppPurchaseManager instance;
 	private List<Category> items;
 	private boolean enabled = false;
+	public static Context context;
 
 	private static void checkInstance() {
 		if (instance == null) {
@@ -38,6 +42,9 @@ public class TorchInAppPurchaseManager {
 			List<Category> items) {
 		checkInstance();
 		instance.items = items;
+		Intent intent = new Intent(context, InAppPurchaseActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		context.startActivity(intent);
 	}
 
 	public static List<Category> getCategories() {

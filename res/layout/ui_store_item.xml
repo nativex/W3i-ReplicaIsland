@@ -5,7 +5,7 @@
     android:gravity="top"
     android:padding="5dip" >
 
-    <com.w3i.offerwall.custom.views.CustomImageView
+    <com.nativex.monetization.custom.views.CustomImageView
         android:id="@+id/uiStoreItemIcon"
         android:layout_width="80dip"
         android:layout_height="80dip"

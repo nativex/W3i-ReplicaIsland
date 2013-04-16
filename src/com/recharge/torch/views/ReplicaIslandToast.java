@@ -10,10 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nativex.monetization.custom.views.CustomImageView;
 import com.recharge.torch.R;
 import com.recharge.torch.achivements.Achievement;
 import com.recharge.torch.gamesplatform.TorchItem;
-import com.w3i.offerwall.custom.views.CustomImageView;
 
 public class ReplicaIslandToast {
 

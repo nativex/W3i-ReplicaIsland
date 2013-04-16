@@ -3,8 +3,8 @@ package com.recharge.torch.achivements;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import com.nativex.common.Log;
 import com.recharge.torch.R;
-import com.w3i.common.Log;
 
 public class GodlikeAchievement extends Achievement {
 	private boolean failed = false;

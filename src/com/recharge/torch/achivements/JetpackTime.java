@@ -1,8 +1,8 @@
 package com.recharge.torch.achivements;
 
+import com.nativex.common.Log;
 import com.recharge.torch.R;
 import com.recharge.torch.utils.TimeUtils;
-import com.w3i.common.Log;
 
 public class JetpackTime extends ProgressAchievement {
 	private double flyTime = 0;

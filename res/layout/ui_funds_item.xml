@@ -5,7 +5,7 @@
     android:gravity="center_vertical"
     android:orientation="horizontal" >
 
-    <com.w3i.offerwall.custom.views.CustomImageView
+    <com.nativex.monetization.custom.views.CustomImageView
         android:id="@+id/uiFundsItemImage"
         android:layout_width="@integer/ui_funds_item_icon_size"
         android:layout_height="@integer/ui_funds_item_icon_size"

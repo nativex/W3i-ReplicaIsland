@@ -28,6 +28,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.egoclean.android.widget.flinger.ViewFlinger;
+import com.nativex.advertiser.NetworkConnectionManager;
+import com.nativex.monetization.custom.views.CustomImageView;
 import com.recharge.torch.R;
 import com.recharge.torch.achivements.Achievement;
 import com.recharge.torch.achivements.Achievement.State;
@@ -48,9 +50,7 @@ import com.recharge.torch.utils.MetrixUtils;
 import com.recharge.torch.views.FundsView;
 import com.recharge.torch.views.ReplicaInfoDialog;
 import com.recharge.torch.views.ReplicaIslandToast;
-import com.w3i.advertiser.NetworkConnectionManager;
 import com.w3i.gamesplatformsdk.Log;
-import com.w3i.offerwall.custom.views.CustomImageView;
 
 public class StoreActivity extends Activity {
 	private LinearLayout storeList;

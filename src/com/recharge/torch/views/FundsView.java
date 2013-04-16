@@ -13,14 +13,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.nativex.advertiser.NetworkConnectionManager;
+import com.nativex.monetization.MonetizationManager;
+import com.nativex.monetization.custom.views.CustomImageView;
 import com.recharge.torch.R;
 import com.recharge.torch.gamesplatform.TorchCurrency;
 import com.recharge.torch.gamesplatform.TorchCurrencyCollection;
 import com.recharge.torch.gamesplatform.TorchCurrencyManager;
 import com.recharge.torch.gamesplatform.TorchCurrencyManager.OnCurrencyChanged;
-import com.w3i.advertiser.NetworkConnectionManager;
-import com.w3i.offerwall.PublisherManager;
-import com.w3i.offerwall.custom.views.CustomImageView;
 
 public class FundsView {
 	public static ViewGroup fundsView;
@@ -56,8 +56,8 @@ public class FundsView {
 				@Override
 				public void onClick(
 						View v) {
-					com.w3i.common.Log.d("FundsView: Funds view clicked");
-					PublisherManager.showIncentOfferWall();
+					com.nativex.common.Log.d("FundsView: Funds view clicked");
+					MonetizationManager.showWebOfferWall();
 				}
 			});
 			setFunds();
@@ -83,7 +83,7 @@ public class FundsView {
 			listener.currencyChanged(currency);
 		}
 	}
-	
+
 	private static void setFunds(
 			final ViewGroup fundsItem,
 			final TorchCurrency currency) {

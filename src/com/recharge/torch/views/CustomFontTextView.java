@@ -7,8 +7,8 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import com.nativex.common.Log;
 import com.recharge.torch.R;
-import com.w3i.common.Log;
 
 public class CustomFontTextView extends TextView {
 	private boolean addSpacing = false;
