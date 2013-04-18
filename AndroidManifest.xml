@@ -66,8 +66,11 @@
 			android:name="com.nativex.monetization.activities.OfferDescriptionActivity"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 		<activity
-			android:name="com.nativex.monetization.activities.ComplexVideoOfferActivity"
+			android:name="com.nativex.monetization.activities.ComplexVideoPlayerActivity"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+		<activity android:name="com.nativex.monetization.activities.InterstitialActivity"
+			android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+			android:hardwareAccelerated="true" />
 
 		<receiver android:name="com.nativex.advertiser.ReferralReceiver">
 			<intent-filter>
@@ -89,7 +92,7 @@
 			android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
 		</activity>
 		<activity android:name="com.nativex.monetization.activities.WebOfferwallActivity"
-			android:screenOrientation="landscape"
+			android:screenOrientation="landscape" android:hardwareAccelerated="true"
 			android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
 		</activity>
 		<activity android:name=".activities.StartGameActivity"

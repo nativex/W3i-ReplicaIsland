@@ -111,6 +111,9 @@ public class AndouKun extends Activity implements SensorEventListener {
 	private View mLevelNameBox = null;
 	private TextView mLevelName = null;
 	private Animation mWaitFadeAnimation = null;
+	private boolean interstitialShown = false;
+	private boolean interstitialOpened = false;
+	private LevelTree.Level levelToLoad = null;
 
 	private EventReporter mEventReporter;
 	private Thread mEventReporterThread;
@@ -187,9 +190,6 @@ public class AndouKun extends Activity implements SensorEventListener {
 	protected void onCreate(
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		// PublisherManager.getAndCacheFeaturedOffer(this, null);
-		MonetizationManager.showInterstitial(this, null, false);
 
 		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
 		final boolean debugLogs = prefs.getBoolean(PreferenceConstants.PREFERENCE_ENABLE_DEBUG, false);
@@ -393,7 +393,6 @@ public class AndouKun extends Activity implements SensorEventListener {
 
 	protected void onResume() {
 		super.onResume();
-
 		// Preferences may have changed while we were paused.
 		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
 		final boolean debugLogs = prefs.getBoolean(PreferenceConstants.PREFERENCE_ENABLE_DEBUG, false);
@@ -431,6 +430,16 @@ public class AndouKun extends Activity implements SensorEventListener {
 			if (orientation != null) {
 				mSensorManager.registerListener(this, orientation, SensorManager.SENSOR_DELAY_GAME, null);
 			}
+		}
+		if (levelToLoad != null) {
+			mGame.setPendingLevel(levelToLoad);
+			if (levelToLoad.showWaitMessage) {
+				showWaitMessage();
+			} else {
+				hideWaitMessage();
+			}
+			levelToLoad = null;
+			mGame.requestNewLevel();
 		}
 	}
 
@@ -680,15 +689,20 @@ public class AndouKun extends Activity implements SensorEventListener {
 					// PublisherManager.showFeaturedOfferDialog(this);
 					// PublisherManager.showCachedFeaturedOffer(this);
 					// PublisherManager.getAndCacheFeaturedOffer(this, null);
-					MonetizationManager.showPendingInterstitial(this);
-					MonetizationManager.showInterstitial(this, null, false);
-					mGame.setPendingLevel(currentLevel);
-					if (currentLevel.showWaitMessage) {
-						showWaitMessage();
+
+					if (MonetizationManager.showPendingInterstitial(this)) {
+						levelToLoad = currentLevel;
 					} else {
-						hideWaitMessage();
+						mGame.setPendingLevel(currentLevel);
+						if (currentLevel.showWaitMessage) {
+							showWaitMessage();
+						} else {
+							hideWaitMessage();
+						}
+						mGame.requestNewLevel();
 					}
-					mGame.requestNewLevel();
+					MonetizationManager.showInterstitial(this, null, false);
+
 				}
 				saveGame();
 

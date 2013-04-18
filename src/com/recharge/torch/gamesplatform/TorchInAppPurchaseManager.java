@@ -42,9 +42,9 @@ public class TorchInAppPurchaseManager {
 			List<Category> items) {
 		checkInstance();
 		instance.items = items;
-		Intent intent = new Intent(context, InAppPurchaseActivity.class);
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		context.startActivity(intent);
+//		Intent intent = new Intent(context, InAppPurchaseActivity.class);
+//		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//		context.startActivity(intent);
 	}
 
 	public static List<Category> getCategories() {
