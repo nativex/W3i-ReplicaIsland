@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Scroller;
 
+import com.recharge.torch.R;
+
 public class InAppPurchaseCategoryScroller extends ViewGroup {
 	private Scroller scroller;
 	private int mTouchSlop;
@@ -139,6 +141,13 @@ public class InAppPurchaseCategoryScroller extends ViewGroup {
 		canvas.drawLine(0, y, getWidth(), y, paint);
 	}
 
+	public void scrollToCategory(
+			int direction) {
+		if (changeCategory(activeChildIndex + direction)) {
+			snapToActiveCategory();
+		}
+	}
+
 	private void checkForCategoryChange() {
 		if (container.getChildCount() == 0) {
 			return;
@@ -182,24 +191,30 @@ public class InAppPurchaseCategoryScroller extends ViewGroup {
 		}
 	}
 
-	private void changeCategory(
+	private boolean changeCategory(
 			int index) {
-		changeCategory(index, false);
+		return changeCategory(index, false);
 	}
 
-	private void changeCategory(
+	private boolean changeCategory(
 			int index,
 			boolean forceChange) {
 		if ((container.getChildCount() == 0) || (index < 0) || (index >= container.getChildCount())) {
-			return;
+			return false;
 		}
 		if ((!forceChange) && ((index == activeChildIndex))) {
-			return;
+			return false;
 		}
-		container.getChildAt(activeChildIndex).setBackgroundColor(Color.RED);
-		container.getChildAt(index).setBackgroundColor(Color.YELLOW);
+		int oldIndex = activeChildIndex;
+		if (oldIndex != index) {
+			container.getChildAt(oldIndex).setBackgroundResource(R.drawable.ui_iap_activity_item_container);
+		}
+		container.getChildAt(index).setBackgroundResource(R.drawable.ui_iap_activity_item_container_selected);
 		activeChildIndex = index;
-		onCategoryChangedListener.onChanged(activeChildIndex);
+		if (onCategoryChangedListener != null) {
+			onCategoryChangedListener.onChanged(index, oldIndex);
+		}
+		return true;
 	}
 
 	private void snapToActiveCategory() {
@@ -207,13 +222,14 @@ public class InAppPurchaseCategoryScroller extends ViewGroup {
 			return;
 		}
 		View child = container.getChildAt(activeChildIndex);
-		smoothScrollTo(child.getTop() + (child.getMeasuredHeight() / 2) - activeChildPosition);
+		smoothScrollTo(child.getTop() + (child.getHeight() / 2) - activeChildPosition);
 	}
 
 	private void smoothScrollTo(
 			int y) {
 		final int dy = y - getScrollY();
-		scroller.startScroll(0, getScrollY(), 0, dy, Math.max(100, dy));
+		scroller.abortAnimation();
+		scroller.startScroll(0, getScrollY(), 0, dy, Math.max(750, Math.abs(dy)));
 		postInvalidate();
 	}
 
@@ -241,12 +257,13 @@ public class InAppPurchaseCategoryScroller extends ViewGroup {
 	protected void onMeasure(
 			int widthMeasureSpec,
 			int heightMeasureSpec) {
-		int width = 0, height = 0;
+		int width = 0, height = MeasureSpec.getSize(heightMeasureSpec);
 		if (getChildCount() > 0) {
 			View child = getChildAt(0);
 			measureChild(child, widthMeasureSpec, MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE, MeasureSpec.AT_MOST));
-			width = child.getMeasuredWidth();
-			height = child.getMeasuredHeight();
+			if (child.getMeasuredWidth() > width) {
+				width = child.getMeasuredWidth();
+			}
 		}
 		setMeasuredDimension(width, height);
 	}
@@ -261,7 +278,7 @@ public class InAppPurchaseCategoryScroller extends ViewGroup {
 		if (getChildCount() > 0) {
 			View child = getChildAt(0);
 			child.layout(0, 0, child.getMeasuredWidth(), child.getMeasuredHeight());
-			activeChildPosition = getMeasuredHeight() / 2;
+			activeChildPosition = (b - t) / 2;
 			if (firstLayout) {
 				snapToActiveCategory();
 				firstLayout = false;
@@ -276,7 +293,8 @@ public class InAppPurchaseCategoryScroller extends ViewGroup {
 
 	public interface OnCategoryChanged {
 		public void onChanged(
-				int index);
+				int newIndex,
+				int oldIndex);
 	}
 
 }

@@ -7,11 +7,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import com.recharge.torch.R;
 import com.w3i.gamesplatformsdk.rest.entities.Category;
 import com.w3i.gamesplatformsdk.rest.entities.Item;
 
 public class InAppPurchaseItemsList extends ScrollView {
 	private LinearLayout container;
+	private View.OnClickListener onItemClickListener = null;
 
 	public InAppPurchaseItemsList(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -26,21 +28,44 @@ public class InAppPurchaseItemsList extends ScrollView {
 	private void init() {
 		container = new LinearLayout(getContext());
 		container.setOrientation(LinearLayout.VERTICAL);
+		setBackgroundResource(R.drawable.ui_iap_categories_container_background);
 
 		addView(container, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
 	}
 
 	public void addItem(
 			View item) {
+		item.setOnClickListener(onItemClickListener);
 		container.addView(item);
 	}
 
 	public void loadCategory(
 			Category category) {
-		for (Item item : category.getItems()) {
-			InAppPurchaseItem view = new InAppPurchaseItem(getContext());
+		if (container.getChildCount() > category.getItems().size()) {
+			for (int i = category.getItems().size(); i < container.getChildCount(); i++) {
+				container.getChildAt(i).setVisibility(View.GONE);
+			}
+		} else if (container.getChildCount() < category.getItems().size()) {
+			for (int i = container.getChildCount(); i < category.getItems().size(); i++) {
+				container.addView(new InAppPurchaseItem(getContext()));
+			}
+		}
+		for (int i = 0; i < category.getItems().size(); i++) {
+			Item item = category.getItems().get(i);
+			InAppPurchaseItem view = (InAppPurchaseItem) container.getChildAt(i);
+			view.setVisibility(View.VISIBLE);
 			view.setItem(item);
-			container.addView(view);
+			view.setOnClickListener(onItemClickListener);
+		}
+	}
+
+	public void setOnItemClickListener(
+			View.OnClickListener listener) {
+		onItemClickListener = listener;
+		if (container.getChildCount() > 0) {
+			for (int i = 0; i < container.getChildCount(); i++) {
+				getChildAt(i).setOnClickListener(listener);
+			}
 		}
 	}
 

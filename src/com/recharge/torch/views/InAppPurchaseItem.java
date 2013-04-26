@@ -29,6 +29,7 @@ public class InAppPurchaseItem extends RelativeLayout {
 	private TextView description;
 	private TextView price;
 	private Button getItButton;
+	private Item item;
 
 	public InAppPurchaseItem(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -43,6 +44,10 @@ public class InAppPurchaseItem extends RelativeLayout {
 	public InAppPurchaseItem(Context context) {
 		super(context);
 		init();
+	}
+
+	public Item getGamesPlatformItem() {
+		return item;
 	}
 
 	private void init() {
@@ -120,10 +125,27 @@ public class InAppPurchaseItem extends RelativeLayout {
 
 	public void setItem(
 			Item item) {
-		icon.setImageFromInternet(item.getStoreImageUrl());
-		title.setText(item.getDisplayName());
-		description.setText(item.getDescription());
-		price.setText(item.getPurchasePrice() + "");
+		this.item = item;
+		icon.setImageBitmap(null);
+		if ((item.getStoreImageUrl() != null) && (item.getStoreImageUrl().trim().length() > 0)) {
+			icon.setImageFromInternet(item.getStoreImageUrl());
+		}
+		if ((item.getDisplayName() == null) || (item.getDisplayName().trim().length() == 0)) {
+			title.setText("");
+		} else {
+			title.setText(item.getDisplayName());
+		}
+		if ((item.getDescription() == null) || (item.getDescription().trim().length() == 0)) {
+			description.setText("");
+		} else {
+			description.setText(item.getDescription());
+		}
+		if ((item.getPurchasePrice() != null) && (item.getPurchasePrice() > 0)) {
+			price.setText("$" + item.getPurchasePrice());
+		} else {
+			price.setText("FREE");
+		}
+		price.setText("ADAKkjhlhghklghklghkgkgk;gk;gjk;gg;kgkgkkgk;gk;;kg;k;g;g;g;g;kg;gkhDSKL");
 	}
 
 }

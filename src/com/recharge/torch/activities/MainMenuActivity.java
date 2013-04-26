@@ -397,7 +397,7 @@ public class MainMenuActivity extends Activity implements AdvertiserListener {
 				editor.putInt(PreferenceConstants.PREFERENCE_LAST_VERSION, AndouKun.VERSION);
 				editor.commit();
 
-				showDialog(WHATS_NEW_DIALOG);
+				// showDialog(WHATS_NEW_DIALOG);
 
 				// screen controls were added in version 14
 				if (lastVersion > 0 && lastVersion < 14 && prefs.getBoolean(PreferenceConstants.PREFERENCE_TILT_CONTROLS, false)) {
