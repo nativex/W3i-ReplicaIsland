@@ -1,5 +1,6 @@
 package com.recharge.torch.gamesplatform;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -52,12 +53,23 @@ public class TorchInAppPurchaseManager {
 		return instance.items;
 	}
 
+	public static List<Item> getItems() {
+		checkInstance();
+		List<Item> items = new ArrayList<Item>();
+		if (instance.items != null) {
+			for (Category c : instance.items) {
+				items.addAll(c.getItems());
+			}
+		}
+		return items;
+	}
+
 	public static void buyItem(
 			Activity activity,
 			Item item) {
 		checkInstance();
 		if (instance.enabled) {
-			GamesPlatformManager.trackInAppPurchase(activity, item);
+			GamesPlatformManager.trackInAppPurchase(item);
 		} else {
 			Log.e("TorchInAppPurchaseManager: InAppPurchase disabled");
 		}

@@ -6,6 +6,7 @@
 	<classpathentry excluding="com/w3i/torch/store/VerticalTextView.java|com/w3i/torch/store/SharedPreferenceManager.java|com/w3i/torch/store/PowerupManager.java|com/w3i/torch/store/ItemManager.java|com/w3i/torch/store/GamesPlatformManager.java|com/w3i/torch/store/FundsManager.java|com/w3i/torch/store/StorePurchasedItems.java|com/w3i/torch/publisher/OfferwallManager.java|com/w3i/torch/achivements/AchievementConstants.java|com/w3i/torch/UIConstants.java" kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

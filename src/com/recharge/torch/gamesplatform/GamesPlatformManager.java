@@ -13,9 +13,12 @@ import com.nativex.common.Log;
 import com.recharge.torch.achivements.Achievement.State;
 import com.recharge.torch.achivements.Achievement.Type;
 import com.recharge.torch.achivements.AchievementManager;
+import com.recharge.torch.activities.MainMenuActivity;
+import com.recharge.torch.gamesplatform.TorchItem.PurchaseState;
 import com.w3i.gamesplatformsdk.GamesPLatformListenerAdapter;
 import com.w3i.gamesplatformsdk.GamesPlatformSDK;
-import com.w3i.gamesplatformsdk.MarketManager;
+import com.w3i.gamesplatformsdk.marketv3.BillingListener;
+import com.w3i.gamesplatformsdk.marketv3.Purchase;
 import com.w3i.gamesplatformsdk.rest.entities.Attribute;
 import com.w3i.gamesplatformsdk.rest.entities.Category;
 import com.w3i.gamesplatformsdk.rest.entities.Currency;
@@ -32,13 +35,88 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 	private boolean itemsReceived = false;
 	private boolean requestsRunning = false;
 
+	private BillingListener billingListener = new BillingListener() {
+
+		@Override
+		public void onServiceInitialized(
+				boolean arg0,
+				boolean arg1,
+				boolean arg2) {
+			if (billingItemsDonwloaded) {
+				List<Item> items = TorchInAppPurchaseManager.getItems();
+				if (items.size() > 0) {
+					GamesPlatformSDK.getInstance().consumeItemsFromMarket(items);
+				}
+			} else {
+				billingServiceInitialized = true;
+			}
+
+		}
+
+		@Override
+		public void onServiceDisconnected() {
+
+		}
+
+		@Override
+		public void onServiceConnected(
+				boolean arg0) {
+
+		}
+
+		@Override
+		public void onItemsConsumed(
+				List<Purchase> arg0) {
+			showMessage("Items consumed");
+		}
+
+		@Override
+		public void onItemPurchased(
+				boolean success,
+				BillingResult result) {
+			try {
+				showMessage("Listener Fired");
+				if (success) {
+					showMessage("Transaction successful");
+					TorchInAppPurchaseManager.itemPurchased(itemPurchased);
+				} else {
+					if (result.getResultCode() == 7) {
+						GamesPlatformSDK.getInstance().consumeItemsFromMarket(TorchInAppPurchaseManager.getItems());
+					}
+					showMessage("Transaction failed " + result.getResult());
+				}
+			} catch (Exception e) {
+				Log.e("GamesPlatformManager: Exception caught in trackInAppPurchase() listener", e);
+			}
+
+		}
+
+		private void showMessage(
+				String msg) {
+			Log.d("BillingListener: " + msg);
+			Toast.makeText(MainMenuActivity.getInstance(), msg, Toast.LENGTH_LONG).show();
+		}
+
+		@Override
+		public void onGetSkuDetailsCompleted(
+				BillingResult arg0) {
+
+		}
+
+		@Override
+		public void onGetPurchasesCompleted(
+				BillingResult arg0) {
+
+		}
+	};
+
 	private GamesPlatformManager() {
 	}
 
 	public static void initializeManager(
 			Context context) {
 		instance = new GamesPlatformManager();
-		GamesPlatformSDK.createInstance(PUBLISHER_ID, APP_ID, REST_URL, null, context);
+		GamesPlatformSDK.createInstance(PUBLISHER_ID, APP_ID, REST_URL, context);
 		downloadStoreTree();
 	}
 
@@ -103,6 +181,9 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 		}
 	}
 
+	boolean billingServiceInitialized = false;
+	boolean billingItemsDonwloaded = false;
+
 	@Override
 	public void getStoreTreeCompleted(
 			boolean success,
@@ -121,8 +202,8 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 								if (att.getName().equals("Key")) {
 									String key = att.getValue();
 									if ((key != null) && (!key.trim().equals(""))) {
-										MarketManager.destroyInstance();
-										MarketManager.createInstance(key, "com.recharge.torch");
+										GamesPlatformSDK.getInstance().initializeMarketManager(MainMenuActivity.getInstance(), key);
+										GamesPlatformSDK.getInstance().setBillingListener(billingListener);
 										TorchInAppPurchaseManager.setEnabled(true);
 									}
 									break;
@@ -137,6 +218,11 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 				}
 			} else if (category.getRootType() == RootCategoryType.IN_APP_PURCHASE.getValue()) {
 				TorchInAppPurchaseManager.initialize(store);
+				if (billingServiceInitialized) {
+					GamesPlatformSDK.getInstance().consumeItemsFromMarket(category.getItems());
+				} else {
+					billingItemsDonwloaded = true;
+				}
 			}
 		}
 		requestsRunning = false;
@@ -170,37 +256,11 @@ public class GamesPlatformManager extends GamesPLatformListenerAdapter {
 		instance = null;
 	}
 
+	private static Item itemPurchased;
+
 	public static void trackInAppPurchase(
-			final Activity activity,
 			final Item item) {
-		if (activity == null) {
-			return;
-		}
-		GamesPlatformSDK.getInstance().buyItemFromMarket(activity, item.getId(), 1L, new GamesPLatformListenerAdapter() {
-			@Override
-			public void purchaseFromMarketCompleted(
-					final boolean success,
-					final Throwable exception) {
-				activity.runOnUiThread(new Runnable() {
-
-					@Override
-					public void run() {
-						try {
-							Toast.makeText(activity, "Listener Fired", Toast.LENGTH_LONG).show();
-							if (success) {
-								Toast.makeText(activity, "Transaction successful", Toast.LENGTH_SHORT).show();
-								TorchInAppPurchaseManager.itemPurchased(item);
-							} else {
-								Toast.makeText(activity, "Transaction failed" + (exception != null ? ": " + exception.getMessage() : "."), Toast.LENGTH_SHORT).show();
-							}
-						} catch (Exception e) {
-							Log.e("GamesPlatformManager: Exception caught in trackInAppPurchase() listener", e);
-						}
-
-					}
-				});
-
-			}
-		});
+		itemPurchased = item;
+		GamesPlatformSDK.getInstance().buyConsumableItemFromMarket(item, "", true);
 	}
 }

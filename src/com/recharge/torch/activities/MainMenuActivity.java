@@ -74,6 +74,11 @@ public class MainMenuActivity extends Activity implements AdvertiserListener {
 	private Animation mFadeInAnimation;
 	private boolean mJustCreated;
 	private String mSelectedControlsString;
+	private static Activity INSTANCE;
+
+	public static Activity getInstance() {
+		return INSTANCE;
+	}
 
 	private final static int WHATS_NEW_DIALOG = 0;
 	private final static int TILT_TO_SCREEN_CONTROLS_DIALOG = 1;
@@ -88,22 +93,22 @@ public class MainMenuActivity extends Activity implements AdvertiserListener {
 				mPaused = true;
 				Intent intent = null;
 				switch (v.getId()) {
-				case R.id.ui_main_options:
-					intent = new Intent(getBaseContext(), OptionsMenu.class);
-					v.startAnimation(mButtonFlickerAnimation);
-					mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(intent));
-					break;
-				case R.id.ui_main_start_game:
-					intent = new Intent(getBaseContext(), StartGameActivity.class);
-					v.startAnimation(mButtonFlickerAnimation);
-					mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(intent));
-					break;
-				case R.id.mainMenuCharacter:
-					intent = new Intent(v.getContext(), SkinSelectionActivity.class);
-					v.getContext().startActivity(intent);
-					break;
-				default:
-					mPaused = false;
+					case R.id.ui_main_options:
+						intent = new Intent(getBaseContext(), OptionsMenu.class);
+						v.startAnimation(mButtonFlickerAnimation);
+						mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(intent));
+						break;
+					case R.id.ui_main_start_game:
+						intent = new Intent(getBaseContext(), StartGameActivity.class);
+						v.startAnimation(mButtonFlickerAnimation);
+						mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(intent));
+						break;
+					case R.id.mainMenuCharacter:
+						intent = new Intent(v.getContext(), SkinSelectionActivity.class);
+						v.getContext().startActivity(intent);
+						break;
+					default:
+						mPaused = false;
 				}
 			}
 		}
@@ -152,7 +157,7 @@ public class MainMenuActivity extends Activity implements AdvertiserListener {
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ui_activity_main_menu);
-
+		INSTANCE = this;
 		TorchInAppPurchaseManager.context = getApplicationContext();
 		torchOnCreate();
 
@@ -229,6 +234,7 @@ public class MainMenuActivity extends Activity implements AdvertiserListener {
 
 	@Override
 	protected void onDestroy() {
+		INSTANCE = null;
 		super.onDestroy();
 		AdvertiserManager.release();
 		MonetizationManager.release();
