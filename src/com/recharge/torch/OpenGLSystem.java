@@ -20,6 +20,7 @@ import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.opengles.GL11;
 import javax.microedition.khronos.opengles.GL11Ext;
 
+
 /**
  * An object wrapper for a pointer to the OpenGL context. Note that the context is only valid in certain threads at certain times (namely, in the Rendering thread during draw time), and at other times
  * getGL() will return null.

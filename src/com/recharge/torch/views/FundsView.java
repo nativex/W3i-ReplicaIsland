@@ -1,7 +1,5 @@
 package com.recharge.torch.views;
 
-import java.util.Map.Entry;
-
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
@@ -13,25 +11,22 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.nativex.advertiser.NetworkConnectionManager;
 import com.nativex.monetization.MonetizationManager;
 import com.nativex.monetization.custom.views.CustomImageView;
 import com.recharge.torch.R;
-import com.recharge.torch.gamesplatform.TorchCurrency;
-import com.recharge.torch.gamesplatform.TorchCurrencyCollection;
-import com.recharge.torch.gamesplatform.TorchCurrencyManager;
-import com.recharge.torch.gamesplatform.TorchCurrencyManager.OnCurrencyChanged;
+import com.recharge.torch.funds.Funds;
+import com.recharge.torch.general.Currency;
+import com.recharge.torch.general.OnCurrencyChanged;
 
 public class FundsView {
 	public static ViewGroup fundsView;
 	public static final int ID_PLUS_BUTTON = 800;
 
-	private static OnCurrencyChanged listener = null;
 	private static OnCurrencyChanged internalListener = new OnCurrencyChanged() {
 
 		@Override
 		public void currencyChanged(
-				TorchCurrency currency) {
+				Funds currency) {
 			if (fundsView != null) {
 				if (currency != null) {
 					setFunds(currency, getFundsListView());
@@ -42,6 +37,10 @@ public class FundsView {
 		}
 	};
 
+	static {
+		Funds.registerListener(internalListener);
+	}
+
 	public static ViewGroup setFunds(
 			Activity activity,
 			ViewGroup fundsView) {
@@ -49,7 +48,6 @@ public class FundsView {
 			if (fundsView == null) {
 				fundsView = createFundsView(activity);
 			}
-			TorchCurrencyManager.setCurrencyChangedListener(internalListener);
 			FundsView.fundsView = fundsView;
 			FundsView.fundsView.setOnClickListener(new View.OnClickListener() {
 
@@ -68,25 +66,22 @@ public class FundsView {
 	}
 
 	public static void setFunds(
-			TorchCurrency currency,
+			Funds currency,
 			ViewGroup fundsList) {
 		if (fundsView != null) {
-			int itemId = currency.getId() + 10000;
+			int itemId = currency.ordinal() + 10000;
 			ViewGroup fundsItem = (ViewGroup) fundsList.findViewById(itemId);
 			if (fundsItem == null) {
-				fundsItem = createFundsItem(fundsView.getContext(), currency, itemId);
+				fundsItem = createFundsItem(fundsView.getContext(), itemId);
 				fundsList.addView(fundsItem);
 			}
 			setFunds(fundsItem, currency);
-		}
-		if (listener != null) {
-			listener.currencyChanged(currency);
 		}
 	}
 
 	private static void setFunds(
 			final ViewGroup fundsItem,
-			final TorchCurrency currency) {
+			final Funds currency) {
 		fundsView.post(new Runnable() {
 
 			@Override
@@ -96,11 +91,10 @@ public class FundsView {
 				}
 				CustomImageView icon = (CustomImageView) fundsItem.findViewById(R.id.uiFundsItemImage);
 				TextView amount = (TextView) fundsItem.findViewById(R.id.uiFundsItemAmount);
-				amount.setText(String.format("%1$,d", currency.getBalance()));
-				if ((NetworkConnectionManager.getInstance(fundsItem.getContext()).isConnected()) && (currency.getIcon() != null)) {
-					icon.setImageFromInternet(currency.getIcon());
-				} else if (currency.getDrawableResource() > 0) {
-					icon.setImageResource(currency.getDrawableResource());
+				amount.setText(String.format("%1$,d", currency.getAmount()));
+				Currency curr = currency.createPrice(0);
+				if (curr.getIcon() > 0) {
+					icon.setImageResource(curr.getIcon());
 				}
 			}
 		});
@@ -108,10 +102,8 @@ public class FundsView {
 
 	public static void setFunds() {
 		if (fundsView != null) {
-			TorchCurrencyCollection collection = TorchCurrencyManager.getCurrencies();
 
-			for (Entry<Long, TorchCurrency> entry : collection.entrySet()) {
-				TorchCurrency currency = entry.getValue();
+			for (Funds currency : Funds.values()) {
 				setFunds(currency, getFundsListView());
 			}
 			createPlusButton();
@@ -170,7 +162,6 @@ public class FundsView {
 
 	private static ViewGroup createFundsItem(
 			Context context,
-			TorchCurrency currency,
 			int itemId) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		ViewGroup fundsItem = (ViewGroup) inflater.inflate(R.layout.ui_funds_item, null);
@@ -182,15 +173,8 @@ public class FundsView {
 		return fundsItem;
 	}
 
-	public static void setOnCurrencyChangedListener(
-			OnCurrencyChanged listener) {
-		FundsView.listener = listener;
-	}
-
 	public static void releaseFunds() {
-		TorchCurrencyManager.setCurrencyChangedListener(null);
 		fundsView = null;
-		listener = null;
 	}
 
 }

@@ -19,8 +19,7 @@ package com.recharge.torch;
 import com.nativex.common.Log;
 import com.recharge.torch.achivements.Achievement.Type;
 import com.recharge.torch.achivements.AchievementManager;
-import com.recharge.torch.gamesplatform.TorchCurrencyManager;
-import com.recharge.torch.gamesplatform.TorchCurrencyManager.Currencies;
+import com.recharge.torch.funds.Funds;
 import com.recharge.torch.store.KillingSpreeDetector;
 
 public class EventRecorder extends BaseObject {
@@ -70,46 +69,46 @@ public class EventRecorder extends BaseObject {
 	synchronized void incrementEventCounter(
 			int event) {
 		switch (event) {
-		case COUNTER_ROBOTS_DESTROYED:
-			KillingSpreeDetector.recordKill();
-			mRobotsDestroyed++;
-			Log.i("EventRecorder: Robot Killed");
-			break;
-		case COUNTER_PEARLS_COLLECTED:
-			TorchCurrencyManager.addBalance(Currencies.PEARLS, 1);
-			AchievementManager.incrementAchievementProgress(Type.PEARLS, 1);
-			mPearlsCollected++;
-			break;
-		case COUNTER_PEARLS_TOTAL:
-			mPearlsTotal++;
-			break;
+			case COUNTER_ROBOTS_DESTROYED:
+				KillingSpreeDetector.recordKill();
+				mRobotsDestroyed++;
+				Log.i("EventRecorder: Robot Killed");
+				break;
+			case COUNTER_PEARLS_COLLECTED:
+				Funds.PEARLS.addAmount(1);
+				AchievementManager.incrementAchievementProgress(Type.PEARLS, 1);
+				mPearlsCollected++;
+				break;
+			case COUNTER_PEARLS_TOTAL:
+				mPearlsTotal++;
+				break;
 
-		case COUNTER_SNAILS_DESTROYED:
-			// Log.i("EventRecorder: Snail Killed");
-			// break;
+			case COUNTER_SNAILS_DESTROYED:
+				// Log.i("EventRecorder: Snail Killed");
+				// break;
 
-		case COUNTER_SNAIL_BOMBS_DESTROYED:
-			// Log.i("EventRecorder: Snail Bombs Killed");
-			// break;
-		case COUNTER_BATS_DESTROYED:
-			// Log.i("EventRecorder: Bat Killed");
-			// break;
-		case COUNTER_KARAGUINS_DESTROYED:
-			// Log.i("EventRecorder: Karaguin Killed");
-			// break;
-		case COUNTER_ONIONS_DESTROYED:
-			// Log.i("EventRecorder: Onion Killed");
-			// break;
-		case COUNTER_SKELETONS_DESTROYED:
-			// Log.i("EventRecorder: Skeleton Killed");
-			// break;
-		case COUNTER_EVENT_STING_DESTROYED:
-			// Log.i("EventRecorder: Sting Killed");
-			// break;
-		case COUNTER_TURRET_DESTROYED:
-			KillingSpreeDetector.recordKill();
-			// Log.i("EventRecorder: Turret Killed");
-			break;
+			case COUNTER_SNAIL_BOMBS_DESTROYED:
+				// Log.i("EventRecorder: Snail Bombs Killed");
+				// break;
+			case COUNTER_BATS_DESTROYED:
+				// Log.i("EventRecorder: Bat Killed");
+				// break;
+			case COUNTER_KARAGUINS_DESTROYED:
+				// Log.i("EventRecorder: Karaguin Killed");
+				// break;
+			case COUNTER_ONIONS_DESTROYED:
+				// Log.i("EventRecorder: Onion Killed");
+				// break;
+			case COUNTER_SKELETONS_DESTROYED:
+				// Log.i("EventRecorder: Skeleton Killed");
+				// break;
+			case COUNTER_EVENT_STING_DESTROYED:
+				// Log.i("EventRecorder: Sting Killed");
+				// break;
+			case COUNTER_TURRET_DESTROYED:
+				KillingSpreeDetector.recordKill();
+				// Log.i("EventRecorder: Turret Killed");
+				break;
 		}
 	}
 

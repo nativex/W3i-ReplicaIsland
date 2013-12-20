@@ -18,6 +18,7 @@ package com.recharge.torch;
 
 import java.util.Comparator;
 
+
 public class QuickSorter<Type> extends Sorter<Type> {
 	@Override
 	public void sort(

@@ -116,22 +116,22 @@ public class KeyConfigDialog extends Dialog {
 				if (mListeningId != 0) {
 					eatKey = true;
 					switch (mListeningId) {
-					case R.id.key_left:
-						mLeftText.setText(getKeyLabel(keyCode));
-						mLeftKeyCode = keyCode;
-						break;
-					case R.id.key_right:
-						mRightText.setText(getKeyLabel(keyCode));
-						mRightKeyCode = keyCode;
-						break;
-					case R.id.key_jump:
-						mJumpText.setText(getKeyLabel(keyCode));
-						mJumpKeyCode = keyCode;
-						break;
-					case R.id.key_attack:
-						mAttackText.setText(getKeyLabel(keyCode));
-						mAttackKeyCode = keyCode;
-						break;
+						case R.id.key_left:
+							mLeftText.setText(getKeyLabel(keyCode));
+							mLeftKeyCode = keyCode;
+							break;
+						case R.id.key_right:
+							mRightText.setText(getKeyLabel(keyCode));
+							mRightKeyCode = keyCode;
+							break;
+						case R.id.key_jump:
+							mJumpText.setText(getKeyLabel(keyCode));
+							mJumpKeyCode = keyCode;
+							break;
+						case R.id.key_attack:
+							mAttackText.setText(getKeyLabel(keyCode));
+							mAttackKeyCode = keyCode;
+							break;
 					}
 
 					selectId(0); // deselect the current config box;
@@ -211,18 +211,18 @@ public class KeyConfigDialog extends Dialog {
 			int id) {
 		View config = null;
 		switch (id) {
-		case R.id.key_left:
-			config = mLeftText;
-			break;
-		case R.id.key_right:
-			config = mRightText;
-			break;
-		case R.id.key_jump:
-			config = mJumpText;
-			break;
-		case R.id.key_attack:
-			config = mAttackText;
-			break;
+			case R.id.key_left:
+				config = mLeftText;
+				break;
+			case R.id.key_right:
+				config = mRightText;
+				break;
+			case R.id.key_jump:
+				config = mJumpText;
+				break;
+			case R.id.key_attack:
+				config = mAttackText;
+				break;
 		}
 
 		return config;

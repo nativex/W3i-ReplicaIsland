@@ -18,6 +18,7 @@ package com.recharge.torch;
 
 import java.util.Comparator;
 
+
 /**
  * A derivation of ObjectManager that sorts its children if they are of type PhasedObject. Sorting is performed on add.
  */

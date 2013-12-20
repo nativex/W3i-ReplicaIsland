@@ -18,6 +18,7 @@ package com.recharge.torch;
 
 import javax.microedition.khronos.opengles.GL10;
 
+
 public class BufferLibrary extends BaseObject {
 	private static final int GRID_LIST_SIZE = 256;
 	private FixedSizeArray<Grid> mGridList;

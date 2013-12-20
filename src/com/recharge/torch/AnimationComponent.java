@@ -21,8 +21,7 @@ import com.recharge.torch.GameObject.ActionType;
 import com.recharge.torch.SoundSystem.Sound;
 import com.recharge.torch.achivements.Achievement.Type;
 import com.recharge.torch.achivements.AchievementManager;
-import com.recharge.torch.gamesplatform.TorchCurrencyManager;
-import com.recharge.torch.gamesplatform.TorchCurrencyManager.Currencies;
+import com.recharge.torch.funds.Funds;
 
 /**
  * Player Animation game object component. Responsible for selecting an animation to describe the player's current state. Requires the object to contain a SpriteComponent to play animations.
@@ -30,7 +29,21 @@ import com.recharge.torch.gamesplatform.TorchCurrencyManager.Currencies;
 public class AnimationComponent extends GameComponent {
 
 	public enum PlayerAnimations {
-		DEAD, IDLE, MOVE, MOVE_FAST, BOOST_UP, BOOST_MOVE, BOOST_MOVE_FAST, STOMP, HIT_REACT, DEATH, FROZEN, MOVE_AIR, JET, SHIELD, FALL
+		DEAD,
+		IDLE,
+		MOVE,
+		MOVE_FAST,
+		BOOST_UP,
+		BOOST_MOVE,
+		BOOST_MOVE_FAST,
+		STOMP,
+		HIT_REACT,
+		DEATH,
+		FROZEN,
+		MOVE_AIR,
+		JET,
+		SHIELD,
+		FALL
 	}
 
 	private static final float MIN_ROCKET_TIME = 0.0f;
@@ -169,21 +182,21 @@ public class AnimationComponent extends GameComponent {
 				if (rubyCount != mLastRubyCount) {
 					mLastRubyCount = rubyCount;
 					switch (rubyCount) {
-					case 1:
-						sound.play(mRubySound1, false, SoundSystem.PRIORITY_NORMAL);
-						TorchCurrencyManager.addBalance(Currencies.CRYSTALS, 1);
-						AchievementManager.incrementAchievementProgress(Type.CRYSTALS, 1);
-						break;
-					case 2:
-						sound.play(mRubySound2, false, SoundSystem.PRIORITY_NORMAL);
-						TorchCurrencyManager.addBalance(Currencies.CRYSTALS, 1);
-						AchievementManager.incrementAchievementProgress(Type.CRYSTALS, 1);
-						break;
-					case 3:
-						sound.play(mRubySound3, false, SoundSystem.PRIORITY_NORMAL);
-						TorchCurrencyManager.addBalance(Currencies.CRYSTALS, 1);
-						AchievementManager.incrementAchievementProgress(Type.CRYSTALS, 1);
-						break;
+						case 1:
+							sound.play(mRubySound1, false, SoundSystem.PRIORITY_NORMAL);
+							Funds.CRYSTALS.addAmount(1);
+							AchievementManager.incrementAchievementProgress(Type.CRYSTALS, 1);
+							break;
+						case 2:
+							sound.play(mRubySound2, false, SoundSystem.PRIORITY_NORMAL);
+							Funds.CRYSTALS.addAmount(1);
+							AchievementManager.incrementAchievementProgress(Type.CRYSTALS, 1);
+							break;
+						case 3:
+							sound.play(mRubySound3, false, SoundSystem.PRIORITY_NORMAL);
+							AchievementManager.incrementAchievementProgress(Type.CRYSTALS, 1);
+							Funds.CRYSTALS.addAmount(1);
+							break;
 					}
 
 				}

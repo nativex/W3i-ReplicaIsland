@@ -1,10 +1,11 @@
 package com.recharge.torch.skins;
 
-import android.R;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+
+import com.recharge.torch.R;
 
 public class SkinManager {
 	private static Skins selectedSkin = Skins.TORCH;

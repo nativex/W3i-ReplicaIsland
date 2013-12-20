@@ -18,6 +18,7 @@ package com.recharge.torch;
 
 import java.util.Arrays;
 
+
 /**
  * Describes a single animation for a sprite.
  */

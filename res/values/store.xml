@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Currency strings -->
+    <string name="currency_pearl_name">Pearls</string>
+    <string name="currency_pearl_description">Pearls are collected throughout the game. You can use them in the store to buy items.</string>
+    <string name="currency_crystal_name">Crystals</string>
+    <string name="currency_crystal_description">Pearls are collected throughout the game. You can use them in the store to buy items.</string>
+    <string name="currency_default_name">Currency</string>
+    <string name="currency_default_description">Currency is used to buy items from the store.</string>
+
+    <!-- Powerups -->
+    <string name="powerup_life_small_name">Aluminium Plating</string>
+    <string name="powerup_life_small_description">The plastic shielding is replaced by aluminium, thus reducing the damage taken. The robot can sustain 1 additional hit before breaking down.</string>
+    <string name="powerup_life_medium_name">Titanium Plating</string>
+    <string name="powerup_life_medium_description">A thin titanium plating is still lightweight but provides more damage resistance than the aluminum. The robot can sustain 1 additional hit before breaking down.</string>
+    <string name="powerup_life_large_name">Carbon Plating</string>
+    <string name="powerup_life_large_description">The thicker carbon plating requires a bit more powerful jetpack boosters, but provides more damage resistance. The robot can sustain 2 additional hits before breaking down.</string>
+    <string name="powerup_life_ultimate_name">Nanobots Plating</string>
+    <string name="powerup_life_ultimate_description">The nanobots reposition themselves at the point of impact to provide the best damage resistance. The nanobots require a nuclear energy to function. The robot can sustain 2 additional hits before breaking down.</string>
+    <string name="powerup_jetpack_twin_batteries_name">Twin Batteries</string>
+    <string name="powerup_jetpack_twin_batteries_description">Adds an additional battery to the jetpack system which increases the air time by 50%.</string>
+    <string name="powerup_jetpack_nuclear_batteries_name">Nuclear Batteries</string>
+    <string name="powerup_jetpack_nuclear_batteries_description">Replaces the standard batteries with nuclear, which doubles the refill of the jetpack system. Requires a nuclear power cell to sustain the higher power output.</string>
+    <string name="powerup_misc_garbage_collector_name">Garbage Collector</string>
+    <string name="powerup_misc_garbage_collector_description">Installs a Garbage Collector which generates pearls from the remains of destroyed enemies. Each enemy destroyed grants 3 pears.</string>
+    <string name="powerup_misc_killing_spree_name">Killing Spree</string>
+    <string name="powerup_misc_killing_spree_description">By destroying enemies quickly in a row the Garbage Collector is able to produce even more pearls from multiple remains. For each kill in a row the pearl collection is increased by 50%.</string>
+    <string name="powerup_misc_crystal_extractor_name">Crystal Extractor</string>
+    <string name="powerup_misc_crystal_extractor_description">Upgrades the Garbage Collector system with a Crystal Extractor. When enemies are destroyed quickly in a row the crystal extractor has a chance of generating enough materials for producing crystals. The process requires immense amount of power which could only be sustained by a nuclear power cell. Each monster destroyed in a spree has 25% chance of yielding a crystal.</string>
+    <string name="powerup_shield_nuclear_power_cell_name">Nuclear Power Cell</string>
+    <string name="powerup_shield_nuclear_power_cell_description">The nuclear power cell is able to generate energy quicker than the standard one. The amount of pearls needed to generate enough energy for the shield is reduced by 5.</string>
+    <string name="powerup_shield_energy_stabilizer_name">Energy Stabilizer</string>
+    <string name="powerup_shield_energy_stabilizer_description">The energy stabilizer reduces the amount of energy the shield consumes, which allows the shield to last 5 seconds longer.</string>
+
+    <!-- Store Categories -->
+    <string name="category_life_name">Life Upgrades</string>
+    <string name="category_jetpack_name">Jetpack Upgrades</string>
+    <string name="category_shield_name">Shield Upgrades</string>
+    <string name="category_misc_name">Misc</string>
+
+    <!-- In App Purchase -->
+    <string name="iap_pearls_1000_name">Pearls</string>
+    <string name="iap_pearls_1000_description">Gives you 1000 pearls to use in the Torch Store for buying Upgrades.</string>
+    <string name="iap_pearls_3000_name">Pearls</string>
+    <string name="iap_pearls_3000_description">Gives you 3000 pearls to use in the Torch Store for buying Upgrades.</string>
+    <string name="iap_crystals_50_name">Crystals</string>
+    <string name="iap_crystals_50_description">Gives you 50 crystals to use in the Torch Store for buying Upgrades.</string>
+    <string name="iap_crystals_150_name">Crystals</string>
+    <string name="iap_crystals_150_description">Gives you 150 crystals to use in the Torch Store for buying Upgrades.</string>
+    <string name="iap_free_discovery_wall_name">Discovery Wall</string>
+    <string name="iap_free_discovery_wall_description">Complete offers on the Discovery Wall to earn free pearls and crystals.</string>
+    <string name="iap_pack_small_name">Small Pack</string>
+    <string name="iap_pack_small_description">Gives you 750 pearls and 30 crystals to use in the Torch Store for buying Upgrades.</string>
+    <string name="iap_pack_medium_name">Medium Pack</string>
+    <string name="iap_pack_medium_description">Gives you 1500 pearls and 75 crystals to use in the Torch Store for buying Upgrades.</string>
+
+    <!-- Market Categories -->
+    <string name="category_market_pearls">Pearls</string>
+    <string name="category_market_crystals">Crystals</string>
+    <string name="category_market_free">FREE</string>
+    <string name="category_market_packs">Packs</string>
+    <string name="category_market_misc">Other</string>
+
+</resources>

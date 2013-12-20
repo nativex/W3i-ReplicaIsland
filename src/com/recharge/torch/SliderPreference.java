@@ -25,6 +25,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
+
 public class SliderPreference extends Preference implements OnSeekBarChangeListener {
 	private final static int MAX_SLIDER_VALUE = 100;
 	private final static int INITIAL_VALUE = 50;

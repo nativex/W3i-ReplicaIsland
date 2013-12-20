@@ -1,12 +1,9 @@
 package com.recharge.torch.store;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -28,7 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.egoclean.android.widget.flinger.ViewFlinger;
-import com.nativex.advertiser.NetworkConnectionManager;
+import com.nativex.common.Log;
 import com.nativex.monetization.custom.views.CustomImageView;
 import com.recharge.torch.R;
 import com.recharge.torch.achivements.Achievement;
@@ -38,31 +35,26 @@ import com.recharge.torch.achivements.AchievementListener;
 import com.recharge.torch.achivements.AchievementManager;
 import com.recharge.torch.activities.InAppPurchaseActivity;
 import com.recharge.torch.activities.StartGameActivity;
-import com.recharge.torch.gamesplatform.GamesPlatformManager;
-import com.recharge.torch.gamesplatform.SharedPreferenceManager;
-import com.recharge.torch.gamesplatform.TorchCurrency;
-import com.recharge.torch.gamesplatform.TorchCurrencyManager;
-import com.recharge.torch.gamesplatform.TorchCurrencyManager.OnCurrencyChanged;
-import com.recharge.torch.gamesplatform.TorchItem;
-import com.recharge.torch.gamesplatform.TorchItem.PurchaseState;
-import com.recharge.torch.gamesplatform.TorchItemManager;
+import com.recharge.torch.funds.Funds;
+import com.recharge.torch.general.Currency;
+import com.recharge.torch.general.StoreCategory;
+import com.recharge.torch.general.OnCurrencyChanged;
+import com.recharge.torch.general.Upgrade;
+import com.recharge.torch.store.upgrades.TwinBatteriesUpgrade;
+import com.recharge.torch.store.upgrades.Upgrades;
 import com.recharge.torch.utils.MetrixUtils;
 import com.recharge.torch.views.FundsView;
 import com.recharge.torch.views.ReplicaInfoDialog;
 import com.recharge.torch.views.ReplicaIslandToast;
-import com.w3i.gamesplatformsdk.Log;
 
 public class StoreActivity extends Activity {
 	private LinearLayout storeList;
 	private GridView historyList;
 	private HistoryListAdapter adapter;
-	private TorchItem selectedHistoryItem = null;
+	private Upgrade selectedHistoryItem = null;
 	private ViewFlinger flinger;
-	private Map<TorchItem.PurchaseState, List<TorchItem>> items;
-	private boolean itemsLoaded = false;
 	private boolean buttonsLocked = false;
-
-	private Map<Long, List<TorchItem>> categories;
+	private Map<StoreCategory, ViewGroup> categories = new HashMap<StoreCategory, ViewGroup>();
 
 	private AdapterView.OnItemClickListener onHistoryItemClicked = new AdapterView.OnItemClickListener() {
 
@@ -72,8 +64,8 @@ public class StoreActivity extends Activity {
 				int arg2,
 				long arg3) {
 			Object tag = historyItem.getTag();
-			if (tag instanceof TorchItem) {
-				selectedHistoryItem = ((TorchItem) tag);
+			if (tag instanceof Upgrade) {
+				selectedHistoryItem = ((Upgrade) tag);
 				showDialog(DIALOG_INFO_HISTORY);
 			}
 		};
@@ -163,29 +155,31 @@ public class StoreActivity extends Activity {
 	public boolean onOptionsItemSelected(
 			MenuItem menuItem) {
 		switch (menuItem.getItemId()) {
-		case R.id.testMenuStoreAddBalance:
-			for (Entry<Long, TorchCurrency> entry : TorchCurrencyManager.getCurrencies().entrySet()) {
-				TorchCurrencyManager.addBalance(entry.getValue(), 1000);
-			}
-			return true;
-
-		case R.id.testMenuStoreResetBalance:
-			for (Entry<Long, TorchCurrency> entry : TorchCurrencyManager.getCurrencies().entrySet()) {
-				TorchCurrencyManager.setBalance(entry.getValue(), 0);
-			}
-
-		case R.id.testMenuStoreResetItems:
-			for (Entry<PurchaseState, List<TorchItem>> entry : TorchItemManager.getAllItems().entrySet()) {
-				for (TorchItem item : entry.getValue()) {
-					item.setPurchased(false);
+			case R.id.testMenuStoreAddBalance:
+				for (Funds currency : Funds.values()) {
+					currency.addAmount(1000);
 				}
-			}
-			TorchItemManager.reloadPurchasedItems();
-			storeList.removeAllViews();
-			adapter.clear();
-			loadItems();
-		default:
-			return super.onOptionsItemSelected(menuItem);
+				return true;
+
+			case R.id.testMenuStoreResetBalance:
+				for (Funds currency : Funds.values()) {
+					currency.setAmount(0);
+				}
+				return true;
+
+			case R.id.testMenuStoreResetItems:
+				for (Upgrades u : Upgrades.values()) {
+					u.setOwned(false);
+				}
+				Upgrades.store();
+				categories.clear();
+				storeList.removeAllViews();
+				adapter.clear();
+				loadItems();
+				return true;
+
+			default:
+				return super.onOptionsItemSelected(menuItem);
 		}
 	}
 
@@ -204,13 +198,13 @@ public class StoreActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ui_activity_store);
 
+		flinger = (ViewFlinger) findViewById(R.id.storeFlinger);
+
 		if (MetrixUtils.getDeviceScreenDiagInches(this) > 6) {
-			View scroller = findViewById(R.id.storeFlinger);
-			ViewGroup.LayoutParams params = scroller.getLayoutParams();
+			ViewGroup.LayoutParams params = flinger.getLayoutParams();
 			params.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 600f, getResources().getDisplayMetrics());
 		}
 
-		flinger = (ViewFlinger) findViewById(R.id.storeFlinger);
 		View toStore = findViewById(R.id.historyToStoreImage);
 		toStore.setOnClickListener(onToStoreClicked);
 		View toHistory = findViewById(R.id.storeToHistoryImage);
@@ -233,21 +227,22 @@ public class StoreActivity extends Activity {
 		AchievementManager.setAchievementState(Type.WINDOW_SHOPPER, State.START);
 	}
 
+	OnCurrencyChanged onCurrencyChangedLister = new OnCurrencyChanged() {
+
+		@Override
+		public void currencyChanged(
+				Funds currency) {
+			resetItemAvailability(null);
+			Log.d("Funds changed " + currency.name());
+		}
+	};
+
 	@Override
 	protected void onResume() {
 		super.onResume();
 		AchievementManager.registerAchievementListener(achievementListener);
 		setFunds();
-		FundsView.setOnCurrencyChangedListener(new OnCurrencyChanged() {
-
-			@Override
-			public void currencyChanged(
-					TorchCurrency currency) {
-				if (itemsLoaded) {
-					resetItemAvailability(null);
-				}
-			}
-		});
+		Funds.registerListener(onCurrencyChangedLister);
 		resetItemAvailability(null);
 		buttonsLocked = false;
 	}
@@ -256,128 +251,89 @@ public class StoreActivity extends Activity {
 	protected void onPause() {
 		super.onPause();
 		FundsView.releaseFunds();
+		Funds.removeListener(onCurrencyChangedLister);
 	}
 
 	private void loadItems() {
-		items = TorchItemManager.getAllItems();
-
-		if (items != null) {
-			loadStoreItems();
-			loadHistoryItems();
-		}
-		itemsLoaded = true;
+		loadStoreItems();
+		loadHistoryItems();
 	}
 
-	private void createCategory(
-			List<TorchItem> items) {
-		if ((items != null) && (items.size() > 0)) {
-			ViewGroup categoryGroup = (ViewGroup) getLayoutInflater().inflate(R.layout.ui_store_list_category, null);
+	private void addInCategory(
+			Upgrades upgrade) {
+		Upgrade item = upgrade.getUpgrade();
+		ViewGroup categoryGroup = categories.get(item.getCategory());
+		if (categoryGroup == null) {
+			categoryGroup = (ViewGroup) getLayoutInflater().inflate(R.layout.ui_store_list_category, null);
 			TextView categoryName = (TextView) categoryGroup.findViewById(R.id.uiStoreCategoryName);
-			categoryName.setText(items.get(0).getCategoryName());
+			categoryName.setText(item.getCategory().getName());
 			categoryName.setOnClickListener(onCategoryClicked);
 			categoryName.setTag(categoryGroup);
-			Collections.sort(items, new Comparator<TorchItem>() {
-
-				@Override
-				public int compare(
-						TorchItem object1,
-						TorchItem object2) {
-					if (object1.getId() < object2.getId()) {
-						return -1;
-					} else if (object1.getId() > object2.getId()) {
-						return 1;
-					}
-					return 0;
-				}
-
-			});
-			for (TorchItem item : items) {
-				categoryGroup.addView(createStoreItem(item));
-			}
 			storeList.addView(categoryGroup);
+			categories.put(item.getCategory(), categoryGroup);
 		}
+		categoryGroup.addView(createStoreItem(upgrade));
 	}
 
 	private void loadStoreItems() {
-		List<TorchItem> availableItems = items.get(TorchItem.PurchaseState.AVAILABLE);
-		categories = new HashMap<Long, List<TorchItem>>();
-		if (availableItems != null) {
-			for (TorchItem item : availableItems) {
-				List<TorchItem> items = categories.get(item.getCategoryId());
-				if (items == null) {
-					items = new ArrayList<TorchItem>();
-				}
-				items.add(item);
-				categories.put(item.getCategoryId(), items);
+		for (Upgrades upgrade : Upgrades.values()) {
+			if (!upgrade.isOwned()) {
+				addInCategory(upgrade);
 			}
-		}
-		for (Entry<Long, List<TorchItem>> entry : categories.entrySet()) {
-			createCategory(entry.getValue());
 		}
 	}
 
 	private View createStoreItem(
-			TorchItem item) {
-
+			Upgrades upgrade) {
 		ViewGroup itemRow = (ViewGroup) getLayoutInflater().inflate(R.layout.ui_store_item, null);
 		CustomImageView itemIcon = (CustomImageView) itemRow.findViewById(R.id.uiStoreItemIcon);
 		TextView itemName = (TextView) itemRow.findViewById(R.id.uiStoreItemName);
 		TextView itemDescription = (TextView) itemRow.findViewById(R.id.uiStoreItemDescription);
 		TextView itemErrorMessage = (TextView) itemRow.findViewById(R.id.uiStoreItemErrorMessage);
 		ViewGroup fundsLayout = (ViewGroup) itemRow.findViewById(R.id.uiStoreItemLayoutFunds);
-
-		itemName.setText(item.getDisplayName());
-		itemIcon.setImageFromInternet(item.getIcon());
+		Upgrade item = upgrade.getUpgrade();
+		itemName.setText(item.getName());
+		itemIcon.setImageResource(item.getIcon());
 		itemDescription.setText(item.getDescription());
-		setItemErrorMessages(item, itemErrorMessage);
+		setItemErrorMessages(upgrade, itemErrorMessage);
 		setItemPrice(item, fundsLayout);
 		itemRow.setOnClickListener(onStoreItemClickListener);
-		itemRow.setTag(item);
+		itemRow.setTag(upgrade);
 		return itemRow;
 	}
 
 	private void setItemPrice(
-			TorchItem item,
+			Upgrade item,
 			ViewGroup view) {
 		ViewGroup priceList = (ViewGroup) view.findViewById(R.id.uiFundsList);
-		for (Entry<Long, TorchCurrency> entry : TorchCurrencyManager.getCurrencies().entrySet()) {
-			TorchCurrency currency = entry.getValue();
-			Double itemPrice = item.getItemPrice(currency.getCurrency());
-			addCurrencyBlock(priceList, currency, itemPrice);
+		for (Currency currency : item.getPrice()) {
+			addCurrencyBlock(priceList, currency);
 		}
 	}
 
 	private void addCurrencyBlock(
 			ViewGroup view,
-			TorchCurrency currency,
-			Double price) {
-		if (price == null) {
+			Currency currency) {
+		if (currency == null) {
 			return;
 		}
 		ViewGroup fundsLayout = (ViewGroup) getLayoutInflater().inflate(R.layout.ui_funds_item, null);
 		CustomImageView icon = (CustomImageView) fundsLayout.findViewById(R.id.uiFundsItemImage);
 		TextView amount = (TextView) fundsLayout.findViewById(R.id.uiFundsItemAmount);
-
-		if ((NetworkConnectionManager.getInstance(this).isConnected()) && (currency.getIcon() != null)) {
-			icon.setImageFromInternet(currency.getIcon());
-		} else {
-			icon.setImageResource(currency.getDrawableResource());
+		if (currency.getIcon() > 0) {
+			icon.setImageResource(currency.getIcon());
 		}
-		amount.setText(String.format("%1$,.0f", price));
-
+		amount.setText(Long.toString(currency.getAmount()));
 		view.addView(fundsLayout);
 	}
 
 	private void setItemErrorMessages(
-			TorchItem item,
+			Upgrades item,
 			TextView view) {
 		if (view == null) {
 			return;
 		}
-		if (item == null) {
-			view.setVisibility(View.GONE);
-		}
-		List<String> errorMessages = TorchItemManager.isItemAvailable(item);
+		List<String> errorMessages = checkItemErrorMessages(item.getUpgrade());
 		if ((errorMessages == null) || (errorMessages.size() == 0)) {
 			view.setVisibility(View.GONE);
 			return;
@@ -389,6 +345,78 @@ public class StoreActivity extends Activity {
 		messages.append(errorMessages.get(errorMessages.size() - 1));
 		view.setText(messages.toString());
 		view.setVisibility(View.VISIBLE);
+	}
+
+	private List<String> checkItemErrorMessages(
+			Upgrade item) {
+		List<String> errorMessages = new ArrayList<String>();
+		String requirements = checkItemRequirements(item);
+		if (requirements != null) {
+			errorMessages.add(requirements);
+		}
+		String insufficientFunds = checkItemPrice(item);
+		if (insufficientFunds != null) {
+			errorMessages.add(insufficientFunds);
+		}
+		return errorMessages;
+	}
+
+	private String checkItemRequirements(
+			Upgrade item) {
+		List<String> requirements = new ArrayList<String>();
+		for (Upgrades requirement : item.getRequirements()) {
+			if (!requirement.isOwned()) {
+				requirements.add(getResources().getString(requirement.getUpgrade().getName()));
+			}
+		}
+		if (requirements.size() > 1) {
+			String requirementString = null;
+			for (int i = 0; i < requirements.size() - 1; i++) {
+				if (i == 0) {
+					requirementString = "Requires " + requirements.get(i);
+				} else {
+					requirementString += ", " + requirements.get(i);
+				}
+			}
+			requirementString += " and " + requirements.get(requirements.size() - 1);
+			return requirementString;
+		} else if (requirements.size() == 1) {
+			return "Requires " + requirements.get(0) + ".";
+		}
+		return null;
+	}
+
+	private List<Currency> insufficientFunds = new ArrayList<Currency>();
+
+	private String checkItemPrice(
+			Upgrade item) {
+		if (item instanceof TwinBatteriesUpgrade) {
+			toString();
+		}
+		insufficientFunds.clear();
+		for (Currency c : item.getPrice()) {
+			if (c.getAmount() > c.getId().getAmount()) {
+				insufficientFunds.add(c);
+			}
+		}
+		if (insufficientFunds.size() > 1) {
+			String requires = null;
+			for (int i = 0; i < insufficientFunds.size() - 1; i++) {
+				Currency currency = insufficientFunds.get(i);
+				if (i == 0) {
+					requires = "Insufficient " + (currency.getAmount() - currency.getId().getAmount()) + " " + getResources().getString(currency.getName());
+				} else {
+					requires += ", " + (currency.getAmount() - currency.getId().getAmount()) + " " + getResources().getString(currency.getName());
+				}
+			}
+			Currency currency = insufficientFunds.get(insufficientFunds.size() - 1);
+			requires += " and " + (currency.getAmount() - currency.getId().getAmount()) + " " + getResources().getString(currency.getName()) + ".";
+			return requires;
+		} else if (insufficientFunds.size() == 1) {
+			Currency currency = insufficientFunds.get(0);
+			return "Insufficient " + (currency.getAmount() - currency.getId().getAmount()) + " " + getResources().getString(currency.getName()) + ".";
+		}
+		return null;
 	}
 
 	private void loadHistoryItems() {
@@ -421,46 +449,46 @@ public class StoreActivity extends Activity {
 			int id) {
 		Dialog dialog = null;
 		switch (id) {
-		case DIALOG_INFO_HISTORY:
-			if (selectedHistoryItem == null) {
+			case DIALOG_INFO_HISTORY:
+				if (selectedHistoryItem == null) {
+					break;
+				}
+				ReplicaInfoDialog infoDialog = new ReplicaInfoDialog(this);
+				infoDialog.setTitle(selectedHistoryItem.getName());
+				infoDialog.setIcon(selectedHistoryItem.getIcon());
+				infoDialog.setDescripton(selectedHistoryItem.getDescription());
+				infoDialog.setButtonListener(onHistoryCloseClicked);
+				infoDialog.setCloseListener(onHistoryCloseClicked);
+				dialog = infoDialog;
 				break;
-			}
-			ReplicaInfoDialog infoDialog = new ReplicaInfoDialog(this);
-			infoDialog.setTitle(selectedHistoryItem.getDisplayName());
-			infoDialog.setIcon(selectedHistoryItem.getIcon());
-			infoDialog.setDescripton(selectedHistoryItem.getDescription());
-			infoDialog.setButtonListener(onHistoryCloseClicked);
-			infoDialog.setCloseListener(onHistoryCloseClicked);
-			dialog = infoDialog;
-			break;
 
-		case DIALOG_INSUFFICIEN_CURRENCY:
-			ReplicaInfoDialog insufficientCurrencyDialog = new ReplicaInfoDialog(this);
-			insufficientCurrencyDialog.setTitle("Insufficient Currency");
-			insufficientCurrencyDialog.setDescripton("Not enough currency. Please visit the offerwall for free currency");
-			insufficientCurrencyDialog.setButtonText("Get Free Currency", 12f);
-			insufficientCurrencyDialog.hideIcon();
-			insufficientCurrencyDialog.setButtonListener(new View.OnClickListener() {
+			case DIALOG_INSUFFICIEN_CURRENCY:
+				ReplicaInfoDialog insufficientCurrencyDialog = new ReplicaInfoDialog(this);
+				insufficientCurrencyDialog.setTitle("Insufficient Currency");
+				insufficientCurrencyDialog.setDescripton("Not enough currency. Please visit the offerwall for free currency");
+				insufficientCurrencyDialog.setButtonText("Get Free Currency", 12f);
+				insufficientCurrencyDialog.hideIcon();
+				insufficientCurrencyDialog.setButtonListener(new View.OnClickListener() {
 
-				@Override
-				public void onClick(
-						View v) {
-					// PublisherManager.showIncentOfferWall();
-					Intent intent = new Intent(v.getContext(), InAppPurchaseActivity.class);
-					v.getContext().startActivity(intent);
-					dismissDialog(DIALOG_INSUFFICIEN_CURRENCY);
-				}
-			});
-			insufficientCurrencyDialog.setCloseListener(new View.OnClickListener() {
+					@Override
+					public void onClick(
+							View v) {
+						// PublisherManager.showIncentOfferWall();
+						Intent intent = new Intent(v.getContext(), InAppPurchaseActivity.class);
+						v.getContext().startActivity(intent);
+						dismissDialog(DIALOG_INSUFFICIEN_CURRENCY);
+					}
+				});
+				insufficientCurrencyDialog.setCloseListener(new View.OnClickListener() {
 
-				@Override
-				public void onClick(
-						View v) {
-					dismissDialog(DIALOG_INSUFFICIEN_CURRENCY);
-				}
-			});
-			dialog = insufficientCurrencyDialog;
-			break;
+					@Override
+					public void onClick(
+							View v) {
+						dismissDialog(DIALOG_INSUFFICIEN_CURRENCY);
+					}
+				});
+				dialog = insufficientCurrencyDialog;
+				break;
 
 		}
 		return dialog;
@@ -535,9 +563,10 @@ public class StoreActivity extends Activity {
 		public void onClick(
 				View v) {
 			Object tag = v.getTag();
-			if (tag instanceof TorchItem) {
-				if (purchaseItem(v, (TorchItem) tag)) {
+			if (tag instanceof Upgrades) {
+				if (purchaseItem(v, (Upgrades) tag)) {
 					storeList.removeView(v);
+					adapter.reset();
 				}
 			}
 		}
@@ -545,28 +574,25 @@ public class StoreActivity extends Activity {
 
 	private boolean purchaseItem(
 			View item,
-			TorchItem storeItem) {
-		if (TorchItemManager.canBePurchased(storeItem)) {
-			TorchItemManager.purchaseItem(storeItem);
-			TorchCurrencyManager.buyItem(storeItem);
-			ReplicaIslandToast.makeStoreToast(this, storeItem);
-			GamesPlatformManager.trackItemPurchase(storeItem);
-			SharedPreferenceManager.storeTorchItemManager();
-			SharedPreferenceManager.storeTorchCurrencyManager();
-			updateAcheivementsOnPurchase(storeItem);
-			resetItemAvailability(item);
-			adapter.notifyDataSetChanged();
-			return true;
-		} else {
-			if (!TorchItemManager.isAffordable(storeItem)) {
-				showDialog(DIALOG_INSUFFICIEN_CURRENCY);
+			Upgrades storeItem) {
+		if (storeItem.getUpgrade().hasMetRequirements()) {
+			if (storeItem.getUpgrade().isAffordable()) {
+				storeItem.buy();
+				ReplicaIslandToast.makeStoreToast(this, storeItem);
+				updateAcheivementsOnPurchase();
+				resetItemAvailability(item);
+				adapter.notifyDataSetChanged();
+				return true;
+			} else {
+				if (!storeItem.getUpgrade().isAffordable()) {
+					showDialog(DIALOG_INSUFFICIEN_CURRENCY);
+				}
 			}
-			return false;
 		}
+		return false;
 	}
 
-	private void updateAcheivementsOnPurchase(
-			TorchItem item) {
+	private void updateAcheivementsOnPurchase() {
 		AchievementManager.setAchievementState(Type.HEALTH, State.UPDATE);
 		AchievementManager.setAchievementState(Type.GADGETEER, State.UPDATE);
 		AchievementManager.setAchievementState(Type.WINDOW_SHOPPER, State.FAIL);
@@ -595,7 +621,7 @@ public class StoreActivity extends Activity {
 					} else {
 						TextView errorTextView = (TextView) child.findViewById(R.id.uiStoreItemErrorMessage);
 						if (errorTextView != null) {
-							setItemErrorMessages((TorchItem) child.getTag(), errorTextView);
+							setItemErrorMessages((Upgrades) child.getTag(), errorTextView);
 						}
 					}
 				}

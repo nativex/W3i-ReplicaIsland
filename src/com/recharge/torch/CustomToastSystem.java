@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 public class CustomToastSystem extends BaseObject {
 	private View mView;
 	private TextView mText;

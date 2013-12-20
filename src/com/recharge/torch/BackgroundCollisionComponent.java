@@ -18,6 +18,7 @@ package com.recharge.torch;
 
 import java.util.Comparator;
 
+
 /**
  * Handles collision against the background. Snaps colliding objects out of collision and reports the hit to the parent game object.
  */

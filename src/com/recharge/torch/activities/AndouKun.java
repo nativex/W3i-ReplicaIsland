@@ -59,8 +59,9 @@ import com.recharge.torch.achivements.Achievement.Type;
 import com.recharge.torch.achivements.AchievementData;
 import com.recharge.torch.achivements.AchievementListener;
 import com.recharge.torch.achivements.AchievementManager;
-import com.recharge.torch.gamesplatform.SharedPreferenceManager;
+import com.recharge.torch.funds.Funds;
 import com.recharge.torch.store.KillingSpreeDetector;
+import com.recharge.torch.utils.PreferencesManager;
 import com.recharge.torch.views.FundsView;
 import com.recharge.torch.views.ReplicaIslandToast;
 import com.recharge.torch.views.ReplicaYesNoDialog;
@@ -387,8 +388,8 @@ public class AndouKun extends Activity implements SensorEventListener {
 		}
 		AchievementManager.updateFlyTime(0, false);
 		AchievementManager.updateJetpackTime(0, false);
-		SharedPreferenceManager.storeAchievement(Type.JETPACK_TIME);
-		SharedPreferenceManager.storeAchievement(Type.FLY_TIME);
+		PreferencesManager.storeAchievement(Type.JETPACK_TIME);
+		PreferencesManager.storeAchievement(Type.FLY_TIME);
 	}
 
 	protected void onResume() {
@@ -566,28 +567,28 @@ public class AndouKun extends Activity implements SensorEventListener {
 			MenuItem item) {
 		Intent i;
 		switch (item.getItemId()) {
-		case CHANGE_LEVEL_ID:
-			i = new Intent(this, LevelSelectActivity.class);
-			startActivityForResult(i, ACTIVITY_CHANGE_LEVELS);
-			return true;
-		case TEST_ANIMATION_ID:
-			i = new Intent(this, AnimationPlayerActivity.class);
-			i.putExtra("animation", AnimationPlayerActivity.ROKUDOU_ENDING);
-			startActivity(i);
-			return true;
-		case TEST_DIARY_ID:
-			i = new Intent(this, DiaryActivity.class);
-			i.putExtra("text", R.string.Diary10);
-			startActivity(i);
-			return true;
-		case METHOD_TRACING_ID:
-			if (mMethodTracing) {
-				Debug.stopMethodTracing();
-			} else {
-				Debug.startMethodTracing("andou");
-			}
-			mMethodTracing = !mMethodTracing;
-			return true;
+			case CHANGE_LEVEL_ID:
+				i = new Intent(this, LevelSelectActivity.class);
+				startActivityForResult(i, ACTIVITY_CHANGE_LEVELS);
+				return true;
+			case TEST_ANIMATION_ID:
+				i = new Intent(this, AnimationPlayerActivity.class);
+				i.putExtra("animation", AnimationPlayerActivity.ROKUDOU_ENDING);
+				startActivity(i);
+				return true;
+			case TEST_DIARY_ID:
+				i = new Intent(this, DiaryActivity.class);
+				i.putExtra("text", R.string.Diary10);
+				startActivity(i);
+				return true;
+			case METHOD_TRACING_ID:
+				if (mMethodTracing) {
+					Debug.stopMethodTracing();
+				} else {
+					Debug.startMethodTracing("andou");
+				}
+				mMethodTracing = !mMethodTracing;
+				return true;
 		}
 
 		return super.onMenuItemSelected(featureId, item);
@@ -634,172 +635,172 @@ public class AndouKun extends Activity implements SensorEventListener {
 			int eventCode,
 			int index) {
 		switch (eventCode) {
-		case GameFlowEvent.EVENT_END_GAME:
-			mGame.stop();
-			finish();
-			break;
-		case GameFlowEvent.EVENT_RESTART_LEVEL:
-			if (LevelTree.get(mLevelRow, mLevelIndex).restartable) {
-				if (mEventReporter != null) {
-					mEventReporter.addEvent(EventReporter.EVENT_DEATH, mGame.getLastDeathPosition().x, mGame.getLastDeathPosition().y, mGame.getGameTime(), LevelTree.get(mLevelRow, mLevelIndex).name, VERSION, mSessionId);
-				}
-				mGame.restartLevel();
-				AchievementManager.setAchievementState(Type.GODLIKE, State.FAIL);
+			case GameFlowEvent.EVENT_END_GAME:
+				mGame.stop();
+				finish();
 				break;
-			}
-			// else, fall through and go to the next level.
-		case GameFlowEvent.EVENT_GO_TO_NEXT_LEVEL:
-			final LevelTree.Level thisLevel = LevelTree.get(mLevelRow, mLevelIndex);
-			thisLevel.completed = true;
-			AchievementManager.setAchievementState(Type.All_LEVELS, State.UPDATE, new AchievementData<Integer>(thisLevel.resource));
-			final LevelTree.LevelGroup currentGroup = LevelTree.levels.get(mLevelRow);
-			final int count = currentGroup.levels.size();
-			boolean groupCompleted = true;
-			if (mEventReporter != null) {
-				mEventReporter.addEvent(EventReporter.EVENT_BEAT_LEVEL, 0, 0, mGame.getGameTime(), LevelTree.get(mLevelRow, mLevelIndex).name, VERSION, mSessionId);
-			}
-			for (int x = 0; x < count; x++) {
-				if (currentGroup.levels.get(x).completed == false) {
-					// We haven't completed the group yet.
-					mLevelIndex = x;
-					groupCompleted = false;
+			case GameFlowEvent.EVENT_RESTART_LEVEL:
+				if (LevelTree.get(mLevelRow, mLevelIndex).restartable) {
+					if (mEventReporter != null) {
+						mEventReporter.addEvent(EventReporter.EVENT_DEATH, mGame.getLastDeathPosition().x, mGame.getLastDeathPosition().y, mGame.getGameTime(), LevelTree.get(mLevelRow, mLevelIndex).name, VERSION, mSessionId);
+					}
+					mGame.restartLevel();
+					AchievementManager.setAchievementState(Type.GODLIKE, State.FAIL);
 					break;
 				}
-			}
-
-			if (groupCompleted) {
-				mLevelIndex = 0;
-				mLevelRow++;
-			}
-
-			mTotalGameTime += mGame.getGameTime();
-			mRobotsDestroyed += mGame.getRobotsDestroyed();
-			mPearlsCollected += mGame.getPearlsCollected();
-			mPearlsTotal += mGame.getPearlsTotal();
-
-			if (mLevelRow < LevelTree.levels.size()) {
-				final LevelTree.Level currentLevel = LevelTree.get(mLevelRow, mLevelIndex);
-				if (currentLevel.inThePast || LevelTree.levels.get(mLevelRow).levels.size() > 1) {
-					// go to the level select.
-					Intent i = new Intent(this, LevelSelectActivity.class);
-					startActivityForResult(i, ACTIVITY_CHANGE_LEVELS);
-					overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
-				} else {
-					// go directly to the next level
-					// PublisherManager.showFeaturedOfferDialog(this);
-					// PublisherManager.showCachedFeaturedOffer(this);
-					// PublisherManager.getAndCacheFeaturedOffer(this, null);
-
-					if (MonetizationManager.showPendingInterstitial(this)) {
-						levelToLoad = currentLevel;
-					} else {
-						mGame.setPendingLevel(currentLevel);
-						if (currentLevel.showWaitMessage) {
-							showWaitMessage();
-						} else {
-							hideWaitMessage();
-						}
-						mGame.requestNewLevel();
-					}
-					MonetizationManager.showInterstitial(this, null, false);
-
-				}
-				saveGame();
-
-			} else {
+				// else, fall through and go to the next level.
+			case GameFlowEvent.EVENT_GO_TO_NEXT_LEVEL:
+				final LevelTree.Level thisLevel = LevelTree.get(mLevelRow, mLevelIndex);
+				thisLevel.completed = true;
+				AchievementManager.setAchievementState(Type.All_LEVELS, State.UPDATE, new AchievementData<Integer>(thisLevel.resource));
+				final LevelTree.LevelGroup currentGroup = LevelTree.levels.get(mLevelRow);
+				final int count = currentGroup.levels.size();
+				boolean groupCompleted = true;
 				if (mEventReporter != null) {
-					mEventReporter.addEvent(EventReporter.EVENT_BEAT_GAME, 0, 0, mGame.getGameTime(), "end", VERSION, mSessionId);
+					mEventReporter.addEvent(EventReporter.EVENT_BEAT_LEVEL, 0, 0, mGame.getGameTime(), LevelTree.get(mLevelRow, mLevelIndex).name, VERSION, mSessionId);
 				}
-				// We beat the game!
-				mLevelRow = 0;
-				mLevelIndex = 0;
-				mLastEnding = mGame.getLastEnding();
-				mExtrasUnlocked = true;
-				saveGame();
-				mGame.stop();
-				Intent i = new Intent(this, GameOverActivity.class);
+				for (int x = 0; x < count; x++) {
+					if (currentGroup.levels.get(x).completed == false) {
+						// We haven't completed the group yet.
+						mLevelIndex = x;
+						groupCompleted = false;
+						break;
+					}
+				}
+
+				if (groupCompleted) {
+					mLevelIndex = 0;
+					mLevelRow++;
+				}
+
+				mTotalGameTime += mGame.getGameTime();
+				mRobotsDestroyed += mGame.getRobotsDestroyed();
+				mPearlsCollected += mGame.getPearlsCollected();
+				mPearlsTotal += mGame.getPearlsTotal();
+
+				if (mLevelRow < LevelTree.levels.size()) {
+					final LevelTree.Level currentLevel = LevelTree.get(mLevelRow, mLevelIndex);
+					if (currentLevel.inThePast || LevelTree.levels.get(mLevelRow).levels.size() > 1) {
+						// go to the level select.
+						Intent i = new Intent(this, LevelSelectActivity.class);
+						startActivityForResult(i, ACTIVITY_CHANGE_LEVELS);
+						overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
+					} else {
+						// go directly to the next level
+						// PublisherManager.showFeaturedOfferDialog(this);
+						// PublisherManager.showCachedFeaturedOffer(this);
+						// PublisherManager.getAndCacheFeaturedOffer(this, null);
+
+						if (MonetizationManager.showPendingInterstitial(this)) {
+							levelToLoad = currentLevel;
+						} else {
+							mGame.setPendingLevel(currentLevel);
+							if (currentLevel.showWaitMessage) {
+								showWaitMessage();
+							} else {
+								hideWaitMessage();
+							}
+							mGame.requestNewLevel();
+						}
+						MonetizationManager.showInterstitial(this, null, false);
+
+					}
+					saveGame();
+
+				} else {
+					if (mEventReporter != null) {
+						mEventReporter.addEvent(EventReporter.EVENT_BEAT_GAME, 0, 0, mGame.getGameTime(), "end", VERSION, mSessionId);
+					}
+					// We beat the game!
+					mLevelRow = 0;
+					mLevelIndex = 0;
+					mLastEnding = mGame.getLastEnding();
+					mExtrasUnlocked = true;
+					saveGame();
+					mGame.stop();
+					Intent i = new Intent(this, GameOverActivity.class);
+					startActivity(i);
+					overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
+					finish();
+
+				}
+				break;
+			case GameFlowEvent.EVENT_SHOW_DIARY:
+				Intent i = new Intent(this, DiaryActivity.class);
+				LevelTree.Level level = LevelTree.get(mLevelRow, mLevelIndex);
+				Log.v("Diary found: Level name - " + level.name);
+				level.diaryCollected = true;
+				i.putExtra("text", level.dialogResources.diaryEntry);
 				startActivity(i);
 				overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
-				finish();
-
-			}
-			break;
-		case GameFlowEvent.EVENT_SHOW_DIARY:
-			Intent i = new Intent(this, DiaryActivity.class);
-			LevelTree.Level level = LevelTree.get(mLevelRow, mLevelIndex);
-			Log.v("Diary found: Level name - " + level.name);
-			level.diaryCollected = true;
-			i.putExtra("text", level.dialogResources.diaryEntry);
-			startActivity(i);
-			overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
-			break;
-
-		case GameFlowEvent.EVENT_SHOW_DIALOG_CHARACTER1:
-			i = new Intent(this, ConversationDialogActivity.class);
-			i.putExtra("levelRow", mLevelRow);
-			i.putExtra("levelIndex", mLevelIndex);
-			i.putExtra("index", index);
-			i.putExtra("character", 1);
-			startActivity(i);
-			break;
-
-		case GameFlowEvent.EVENT_SHOW_DIALOG_CHARACTER2:
-			i = new Intent(this, ConversationDialogActivity.class);
-			i.putExtra("levelRow", mLevelRow);
-			i.putExtra("levelIndex", mLevelIndex);
-			i.putExtra("index", index);
-			i.putExtra("character", 2);
-			startActivity(i);
-			break;
-		case GameFlowEvent.EVENT_SHOW_ANIMATION:
-			i = new Intent(this, AnimationPlayerActivity.class);
-			boolean gameBeat = false;
-			switch (index) {
-			case AnimationPlayerActivity.KYLE_DEATH:
-				AchievementManager.setAchievementDone(Type.KYLE_DEFEATED, true);
-				break;
-			case AnimationPlayerActivity.ROKUDOU_ENDING:
-				AchievementManager.setAchievementDone(Type.KABOCHA_DEFEATED, true);
-				gameBeat = true;
 				break;
 
-			case AnimationPlayerActivity.KABOCHA_ENDING:
-				AchievementManager.setAchievementDone(Type.RODOKOU_DEFEATED, true);
-				gameBeat = true;
+			case GameFlowEvent.EVENT_SHOW_DIALOG_CHARACTER1:
+				i = new Intent(this, ConversationDialogActivity.class);
+				i.putExtra("levelRow", mLevelRow);
+				i.putExtra("levelIndex", mLevelIndex);
+				i.putExtra("index", index);
+				i.putExtra("character", 1);
+				startActivity(i);
 				break;
 
-			case AnimationPlayerActivity.WANDA_ENDING:
-				AchievementManager.setAchievementDone(Type.GOOD_ENDING, true);
-				gameBeat = true;
-
+			case GameFlowEvent.EVENT_SHOW_DIALOG_CHARACTER2:
+				i = new Intent(this, ConversationDialogActivity.class);
+				i.putExtra("levelRow", mLevelRow);
+				i.putExtra("levelIndex", mLevelIndex);
+				i.putExtra("index", index);
+				i.putExtra("character", 2);
+				startActivity(i);
 				break;
+			case GameFlowEvent.EVENT_SHOW_ANIMATION:
+				i = new Intent(this, AnimationPlayerActivity.class);
+				boolean gameBeat = false;
+				switch (index) {
+					case AnimationPlayerActivity.KYLE_DEATH:
+						AchievementManager.setAchievementDone(Type.KYLE_DEFEATED, true);
+						break;
+					case AnimationPlayerActivity.ROKUDOU_ENDING:
+						AchievementManager.setAchievementDone(Type.KABOCHA_DEFEATED, true);
+						gameBeat = true;
+						break;
 
-			}
-			if (gameBeat) {
-				AchievementManager.setAchievementDone(Type.GAME_BEAT, true);
-				AchievementManager.setAchievementState(Type.GODLIKE, State.FINISH);
-				DifficultyConstants difficultyConstants = PlayerComponent.getDifficultyConstants();
-				if (difficultyConstants != null) {
-					if (difficultyConstants instanceof BabyDifficultyConstants) {
-						AchievementManager.setAchievementDone(Type.BABY, true);
-					} else if (difficultyConstants instanceof KidsDifficultyConstants) {
-						AchievementManager.setAchievementDone(Type.KIDS, true);
-					} else if (difficultyConstants instanceof AdultsDifficultyConstants) {
-						AchievementManager.setAchievementDone(Type.ADULT, true);
+					case AnimationPlayerActivity.KABOCHA_ENDING:
+						AchievementManager.setAchievementDone(Type.RODOKOU_DEFEATED, true);
+						gameBeat = true;
+						break;
+
+					case AnimationPlayerActivity.WANDA_ENDING:
+						AchievementManager.setAchievementDone(Type.GOOD_ENDING, true);
+						gameBeat = true;
+
+						break;
+
+				}
+				if (gameBeat) {
+					AchievementManager.setAchievementDone(Type.GAME_BEAT, true);
+					AchievementManager.setAchievementState(Type.GODLIKE, State.FINISH);
+					DifficultyConstants difficultyConstants = PlayerComponent.getDifficultyConstants();
+					if (difficultyConstants != null) {
+						if (difficultyConstants instanceof BabyDifficultyConstants) {
+							AchievementManager.setAchievementDone(Type.BABY, true);
+						} else if (difficultyConstants instanceof KidsDifficultyConstants) {
+							AchievementManager.setAchievementDone(Type.KIDS, true);
+						} else if (difficultyConstants instanceof AdultsDifficultyConstants) {
+							AchievementManager.setAchievementDone(Type.ADULT, true);
+						}
 					}
 				}
-			}
-			i.putExtra("animation", index);
-			startActivityForResult(i, ACTIVITY_ANIMATION_PLAYER);
-			overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
-			break;
+				i.putExtra("animation", index);
+				startActivityForResult(i, ACTIVITY_ANIMATION_PLAYER);
+				overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
+				break;
 
 		}
 	}
 
 	protected void saveGame() {
 		if (mPrefsEditor != null) {
-			SharedPreferenceManager.storeTorchCurrencyManager();
+			Funds.store();
 			final int completed = LevelTree.packCompletedLevels(mLevelRow);
 			mPrefsEditor.putInt(PreferenceConstants.PREFERENCE_LEVEL_ROW, mLevelRow);
 			mPrefsEditor.putInt(PreferenceConstants.PREFERENCE_LEVEL_INDEX, mLevelIndex);

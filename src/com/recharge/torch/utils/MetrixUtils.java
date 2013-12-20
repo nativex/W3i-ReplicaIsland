@@ -3,6 +3,7 @@ package com.recharge.torch.utils;
 import android.app.Activity;
 import android.util.DisplayMetrics;
 
+
 public class MetrixUtils {
 
 	public static float getDeviceScreenDiagInches(

@@ -29,6 +29,7 @@ import javax.microedition.khronos.opengles.GL11Ext;
 
 import android.opengl.GLU;
 
+
 public class GLErrorLogger implements GLSurfaceView.GLWrapper {
 
 	@Override

@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.recharge.torch.PreferenceConstants;
 import com.recharge.torch.R;
-import com.recharge.torch.gamesplatform.GamesPlatformManager;
 
 public class OptionsMenu extends Activity {
 
@@ -45,57 +44,57 @@ public class OptionsMenu extends Activity {
 			Editor edit;
 
 			switch (v.getId()) {
-			case R.id.ui_option_sound:
-				prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, Context.MODE_PRIVATE);
-				soundEnabled = !prefs.getBoolean(PreferenceConstants.PREFERENCE_SOUND_ENABLED, true);
-				edit = prefs.edit();
-				edit.putBoolean(PreferenceConstants.PREFERENCE_SOUND_ENABLED, soundEnabled);
-				edit.commit();
-				final int soundText;
-				if (soundEnabled) {
-					soundText = R.string.options_menu_sound_on_button_text;
-				} else {
-					soundText = R.string.options_menu_sound_off_button_text;
-				}
-				setSwitchAnimation(soundButton, soundText);
+				case R.id.ui_option_sound:
+					prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, Context.MODE_PRIVATE);
+					soundEnabled = !prefs.getBoolean(PreferenceConstants.PREFERENCE_SOUND_ENABLED, true);
+					edit = prefs.edit();
+					edit.putBoolean(PreferenceConstants.PREFERENCE_SOUND_ENABLED, soundEnabled);
+					edit.commit();
+					final int soundText;
+					if (soundEnabled) {
+						soundText = R.string.options_menu_sound_on_button_text;
+					} else {
+						soundText = R.string.options_menu_sound_off_button_text;
+					}
+					setSwitchAnimation(soundButton, soundText);
 
-				break;
+					break;
 
-			case R.id.ui_option_safe_mode:
-				prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, Context.MODE_PRIVATE);
-				safeModeEnabled = !prefs.getBoolean(PreferenceConstants.PREFERENCE_SAFE_MODE, false);
-				edit = prefs.edit();
-				edit.putBoolean(PreferenceConstants.PREFERENCE_SAFE_MODE, safeModeEnabled);
-				edit.commit();
-				final int safeModeText;
-				if (safeModeEnabled) {
-					safeModeText = R.string.options_menu_safe_mode_on_button_text;
-				} else {
-					safeModeText = R.string.options_menu_safe_mode_off_button_text;
-				}
-				setSwitchAnimation(safeModeButton, safeModeText);
-				break;
+				case R.id.ui_option_safe_mode:
+					prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, Context.MODE_PRIVATE);
+					safeModeEnabled = !prefs.getBoolean(PreferenceConstants.PREFERENCE_SAFE_MODE, false);
+					edit = prefs.edit();
+					edit.putBoolean(PreferenceConstants.PREFERENCE_SAFE_MODE, safeModeEnabled);
+					edit.commit();
+					final int safeModeText;
+					if (safeModeEnabled) {
+						safeModeText = R.string.options_menu_safe_mode_on_button_text;
+					} else {
+						safeModeText = R.string.options_menu_safe_mode_off_button_text;
+					}
+					setSwitchAnimation(safeModeButton, safeModeText);
+					break;
 
-			case R.id.ui_option_controls:
-				intent = new Intent(getBaseContext(), ControlsSetupActivity.class);
-				intent.putExtra("controlConfig", true);
-				soundButton.startAnimation(mAlternateFadeOutAnimation);
-				safeModeButton.startAnimation(mAlternateFadeOutAnimation);
-				creditsButton.startAnimation(mAlternateFadeOutAnimation);
-				v.startAnimation(mButtonFlickerAnimation);
-				if (intent != null) {
-					mFadeOutAnimation.setAnimationListener(new StartActivityAfterAnimation(intent));
-				}
-				lockButtons = true;
-				mBackground.startAnimation(mFadeOutAnimation);
-				break;
+				case R.id.ui_option_controls:
+					intent = new Intent(getBaseContext(), ControlsSetupActivity.class);
+					intent.putExtra("controlConfig", true);
+					soundButton.startAnimation(mAlternateFadeOutAnimation);
+					safeModeButton.startAnimation(mAlternateFadeOutAnimation);
+					creditsButton.startAnimation(mAlternateFadeOutAnimation);
+					v.startAnimation(mButtonFlickerAnimation);
+					if (intent != null) {
+						mFadeOutAnimation.setAnimationListener(new StartActivityAfterAnimation(intent));
+					}
+					lockButtons = true;
+					mBackground.startAnimation(mFadeOutAnimation);
+					break;
 
-			case R.id.ui_option_eula:
-				intent = new Intent(getBaseContext(), LegalInformationActivity.class);
-				mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(intent));
-				v.startAnimation(mButtonFlickerAnimation);
-				lockButtons = true;
-				break;
+				case R.id.ui_option_eula:
+					intent = new Intent(getBaseContext(), LegalInformationActivity.class);
+					mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(intent));
+					v.startAnimation(mButtonFlickerAnimation);
+					lockButtons = true;
+					break;
 			}
 
 		}
@@ -161,7 +160,6 @@ public class OptionsMenu extends Activity {
 	protected void onResume() {
 		super.onResume();
 		lockButtons = false;
-		GamesPlatformManager.onResume();
 		setSwitchButtonsText();
 		clearViewAnimations();
 	}

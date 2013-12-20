@@ -29,6 +29,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
+
 public class KeyboardConfigDialogPreference extends DialogPreference implements OnKeyListener {
 	private SharedPreferences mSharedPrefs;
 	private Context mContext;

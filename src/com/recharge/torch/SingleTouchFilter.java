@@ -2,6 +2,7 @@ package com.recharge.torch;
 
 import android.view.MotionEvent;
 
+
 public class SingleTouchFilter extends TouchFilter {
 
 	@Override

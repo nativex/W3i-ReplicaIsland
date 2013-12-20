@@ -16,7 +16,7 @@
 
 package com.recharge.torch;
 
-import com.recharge.torch.powerups.PowerupTypes;
+import com.recharge.torch.store.attributes.Attributes;
 
 public class BabyDifficultyConstants extends DifficultyConstants {
 
@@ -37,27 +37,27 @@ public class BabyDifficultyConstants extends DifficultyConstants {
 
 	@Override
 	public float getFuelAirRefillSpeed() {
-		return FUEL_AIR_REFILL_SPEED * (1 + PowerupTypes.JETPACK_RECHARGE_AIR.getValueFloat());
+		return FUEL_AIR_REFILL_SPEED * (1f + (float) Attributes.JETPACK_RECHARGE_AIR.getValue() / 100f);
 	}
 
 	@Override
 	public float getFuelGroundRefillSpeed() {
-		return FUEL_GROUND_REFILL_SPEED * (1 + PowerupTypes.JETPACK_RECHARGE_GROUND.getValueFloat());
+		return FUEL_GROUND_REFILL_SPEED * (1f + (float) Attributes.JETPACK_RECHARGE_GROUND.getValue() / 100f);
 	}
 
 	@Override
 	public int getMaxPlayerLife() {
-		return MAX_PLAYER_LIFE + PowerupTypes.LIFE_POINTS.getValueInt();
+		return MAX_PLAYER_LIFE + Attributes.LIFE.getValue();
 	}
 
 	@Override
 	public int getCoinsPerPowerup() {
-		return Math.max(0, COINS_PER_POWERUP - PowerupTypes.SHIELD_REQUIREMENT_REDUCTION.getValueInt());
+		return Math.max(COINS_PER_POWERUP - Attributes.SHIELD_RECHARGE_REDUCTION.getValue(), 0);
 	}
 
 	@Override
 	public float getGlowDuration() {
-		return GLOW_DURATION + PowerupTypes.SHIELD_DURATION.getValueFloat();
+		return GLOW_DURATION + Attributes.SHIELD_DURATION.getValue();
 	}
 
 	@Override
@@ -82,17 +82,16 @@ public class BabyDifficultyConstants extends DifficultyConstants {
 
 	@Override
 	public float getDDAStage1FuelAirRefillSpeed() {
-		return DDA_STAGE_1_FUEL_AIR_REFILL_SPEED * (1 + PowerupTypes.JETPACK_RECHARGE_AIR.getValueFloat());
+		return DDA_STAGE_1_FUEL_AIR_REFILL_SPEED * (1f + (float) Attributes.JETPACK_RECHARGE_AIR.getValue() / 100f);
 	}
 
 	@Override
 	public float getDDAStage2FuelAirRefillSpeed() {
-		return DDA_STAGE_2_FUEL_AIR_REFILL_SPEED * (1 + PowerupTypes.JETPACK_RECHARGE_AIR.getValueFloat());
+		return DDA_STAGE_2_FUEL_AIR_REFILL_SPEED * (1f + (float) Attributes.JETPACK_RECHARGE_AIR.getValue() / 100f);
 	}
 
 	@Override
 	public float getAdditionalFuelAmount() {
-		return (1 + PowerupTypes.JETPACK_AIR_TIME.getValueFloat());
+		return 1f + (float) Attributes.JETPACK_DURATION.getValue() / 100f;
 	}
-
 }

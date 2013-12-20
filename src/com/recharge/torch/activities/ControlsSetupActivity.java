@@ -187,9 +187,9 @@ public class ControlsSetupActivity extends Activity {
 			int id) {
 		Dialog dialog = null;
 		switch (id) {
-		case DIALOG_KEY_CONFIG:
-			dialog = new KeyConfigDialog(this);
-			dialog.show();
+			case DIALOG_KEY_CONFIG:
+				dialog = new KeyConfigDialog(this);
+				dialog.show();
 		}
 		return dialog;
 	}

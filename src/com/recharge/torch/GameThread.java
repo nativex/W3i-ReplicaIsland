@@ -18,6 +18,7 @@ package com.recharge.torch;
 
 import android.os.SystemClock;
 
+
 /**
  * The GameThread contains the main loop for the game engine logic. It invokes the game graph, manages synchronization of input events, and handles the draw queue swap with the rendering thread.
  */

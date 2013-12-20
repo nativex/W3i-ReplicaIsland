@@ -1,122 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.recharge.torch" android:versionCode="14"
-	android:versionName="1.4">
+    package="com.recharge.torch"
+    android:versionCode="14"
+    android:versionName="1.4" >
 
-	<uses-permission android:name="android.permission.VIBRATE" />
-	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-	<uses-permission android:name="com.android.vending.BILLING" />
-	<uses-permission android:name="com.android.vending.CHECK_LICENSE" />
-	<uses-permission xmlns:android="http://schemas.android.com/apk/res/android"
-		android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
+    <uses-permission
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:name="android.permission.INTERNET" />
 
-	<uses-sdk android:minSdkVersion="7" android:targetSdkVersion="8" />
-	<!-- Actually, this game works fine on small screens, but the only one out 
-		right now has no 3D acceleration, so it's slow and unplayable. -->
+    <uses-sdk
+        android:minSdkVersion="7"
+        android:targetSdkVersion="11" />
+    <!--
+         Actually, this game works fine on small screens, but the only one out 
+		right now has no 3D acceleration, so it's slow and unplayable.
+    -->
 
-	<supports-screens android:anyDensity="true"
-		android:largeScreens="true" android:normalScreens="true"
-		android:smallScreens="false" />
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="false" />
 
-	<application android:icon="@drawable/game_icon"
-		android:label="@string/app_name" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
-		<activity android:name=".activities.MainMenuActivity"
-			android:configChanges="keyboardHidden|orientation" android:label="@string/app_name"
-			android:screenOrientation="landscape">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
+    <application
+        android:icon="@drawable/game_icon"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        <activity
+            android:name=".activities.MainMenuActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="sensorLandscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
-		</activity>
-		<activity android:name=".activities.AndouKun"
-			android:configChanges="keyboardHidden|orientation" android:label="@string/app_name"
-			android:launchMode="singleTask" android:screenOrientation="landscape" />
-		<activity android:name=".activities.LevelSelectActivity"
-			android:configChanges="keyboardHidden|orientation"
-			android:screenOrientation="landscape" />
-		<activity android:name=".activities.ConversationDialogActivity"
-			android:configChanges="keyboardHidden|orientation"
-			android:screenOrientation="landscape" android:theme="@style/Theme.ConversationDialog" />
-		<activity android:name=".activities.DiaryActivity"
-			android:configChanges="keyboardHidden|orientation"
-			android:screenOrientation="landscape" />
-		<activity android:name=".activities.SetPreferencesActivity"
-			android:configChanges="keyboardHidden|orientation"
-			android:screenOrientation="landscape" />
-		<activity android:name=".activities.AnimationPlayerActivity"
-			android:configChanges="keyboardHidden|orientation"
-			android:screenOrientation="landscape" />
-		<activity android:name=".activities.OptionsMenu"
-			android:configChanges="keyboardHidden|orientation"
-			android:screenOrientation="landscape" />
-		<activity android:name=".activities.DifficultyMenuActivity"
-			android:configChanges="keyboardHidden|orientation"
-			android:screenOrientation="landscape" />
-		<activity android:name=".activities.GameOverActivity"
-			android:configChanges="keyboardHidden|orientation"
-			android:screenOrientation="landscape" />
-		<activity android:name="com.nativex.monetization.activities.OfferwallActivity"
-			android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-		<activity android:name="com.nativex.monetization.activities.HistoryActivity"
-			android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-		<activity
-			android:name="com.nativex.monetization.activities.OfferDescriptionActivity"
-			android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-		<activity
-			android:name="com.nativex.monetization.activities.ComplexVideoPlayerActivity"
-			android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-		<activity android:name="com.nativex.monetization.activities.InterstitialActivity"
-			android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
-			android:hardwareAccelerated="true" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.AndouKun"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".activities.LevelSelectActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".activities.ConversationDialogActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@style/Theme.ConversationDialog" />
+        <activity
+            android:name=".activities.DiaryActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".activities.SetPreferencesActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".activities.AnimationPlayerActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".activities.OptionsMenu"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".activities.DifficultyMenuActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".activities.GameOverActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name="com.nativex.monetization.activities.OfferwallActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="com.nativex.monetization.activities.HistoryActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="com.nativex.monetization.activities.OfferDescriptionActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="com.nativex.monetization.activities.ComplexVideoPlayerActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="com.nativex.monetization.activities.InterstitialActivity"
+            android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
 
-		<receiver android:name="com.nativex.advertiser.ReferralReceiver">
-			<intent-filter>
-				<action android:name="com.android.vending.INSTALL_REFERRER" />
-			</intent-filter>
-		</receiver>
+        <receiver android:name="com.nativex.advertiser.ReferralReceiver" >
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
 
-		<activity android:name=".store.StoreActivity"
-			android:screenOrientation="landscape">
-		</activity>
-		<activity android:name="com.w3i.gamesplatformsdk.ui.StoreUI">
-		</activity>
-		<activity android:name=".activities.SkinSelectionActivity"
-			android:screenOrientation="landscape"
-			android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-		</activity>
-		<activity android:name=".activities.AchievementsActivity"
-			android:screenOrientation="landscape"
-			android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
-		</activity>
-		<activity android:name="com.nativex.monetization.activities.WebOfferwallActivity"
-			android:screenOrientation="landscape" android:hardwareAccelerated="true"
-			android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
-		</activity>
-		<activity android:name=".activities.StartGameActivity"
-			android:screenOrientation="landscape">
-		</activity>
-		<activity android:name=".activities.CreditsActivity"
-			android:screenOrientation="landscape" />
-		<activity android:name=".activities.GameModeSelectActivity"
-			android:screenOrientation="landscape" />
-		<activity android:name=".activities.ControlsSetupActivity"
-			android:screenOrientation="landscape">
-		</activity>
-		<activity android:name=".activities.LegalInformationActivity" />
-		<activity android:name=".activities.InAppPurchaseActivity"
-			android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
-		<service android:name="com.w3i.gamesplatformsdk.market.BillingService" />
+        <activity
+            android:name=".store.StoreActivity"
+            android:screenOrientation="sensorLandscape" >
+        </activity>
+        <activity android:name="com.w3i.gamesplatformsdk.ui.StoreUI" >
+        </activity>
+        <activity
+            android:name=".activities.SkinSelectionActivity"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name=".activities.AchievementsActivity"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name="com.nativex.monetization.activities.WebOfferwallActivity"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name=".activities.StartGameActivity"
+            android:screenOrientation="sensorLandscape" >
+        </activity>
+        <activity
+            android:name=".activities.CreditsActivity"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".activities.GameModeSelectActivity"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".activities.ControlsSetupActivity"
+            android:screenOrientation="sensorLandscape" >
+        </activity>
+        <activity android:name=".activities.LegalInformationActivity" />
+        <activity
+            android:name=".activities.InAppPurchaseActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
 
-		<receiver android:name="com.w3i.gamesplatformsdk.market.BillingReceiver">
-			<intent-filter>
-				<action android:name="com.android.vending.billing.IN_APP_NOTIFY" />
-				<action android:name="com.android.vending.billing.RESPONSE_CODE" />
-				<action android:name="com.android.vending.billing.PURCHASE_STATE_CHANGED" />
-			</intent-filter>
-		</receiver>
-	</application>
+        <service android:name="com.w3i.gamesplatformsdk.market.BillingService" />
+
+        <receiver android:name="com.w3i.gamesplatformsdk.market.BillingReceiver" >
+            <intent-filter>
+                <action android:name="com.android.vending.billing.IN_APP_NOTIFY" />
+                <action android:name="com.android.vending.billing.RESPONSE_CODE" />
+                <action android:name="com.android.vending.billing.PURCHASE_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+    </application>
 
 </manifest>

@@ -18,6 +18,7 @@ package com.recharge.torch;
 
 import java.util.ArrayList;
 
+
 /**
  * The object registry manages a collection of global singleton objects. However, it differs from the standard singleton pattern in a few important ways: - The objects managed by the registry have an
  * undefined lifetime. They may become invalid at any time, and they may not be valid at the beginning of the program. - The only object that is always guaranteed to be valid is the ObjectRegistry

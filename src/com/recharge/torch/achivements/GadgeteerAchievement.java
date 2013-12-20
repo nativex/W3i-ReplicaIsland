@@ -1,12 +1,7 @@
 package com.recharge.torch.achivements;
 
-import java.util.List;
-import java.util.Map;
-
 import com.recharge.torch.R;
-import com.recharge.torch.gamesplatform.TorchItem;
-import com.recharge.torch.gamesplatform.TorchItem.PurchaseState;
-import com.recharge.torch.gamesplatform.TorchItemManager;
+import com.recharge.torch.store.upgrades.Upgrades;
 
 public class GadgeteerAchievement extends ProgressAchievement {
 
@@ -32,10 +27,13 @@ public class GadgeteerAchievement extends ProgressAchievement {
 	@Override
 	public void onState(
 			State state) {
-		Map<TorchItem.PurchaseState, List<TorchItem>> allItems = TorchItemManager.getAllItems();
-		int purchased = allItems.get(PurchaseState.PURCHASED).size();
-		int available = allItems.get(PurchaseState.AVAILABLE).size();
-		setProgress(purchased);
-		setGoal(purchased + available);
+		int owned = 0;
+		for (Upgrades upgrade : Upgrades.values()) {
+			if (upgrade.isOwned()) {
+				owned++;
+			}
+		}
+		setProgress(owned);
+		setGoal(Upgrades.values().length);
 	}
 }

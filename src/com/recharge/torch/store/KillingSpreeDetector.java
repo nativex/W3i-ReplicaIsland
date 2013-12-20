@@ -1,25 +1,27 @@
 package com.recharge.torch.store;
 
+import java.util.Random;
+
 import com.nativex.common.Log;
 import com.recharge.torch.achivements.Achievement.State;
 import com.recharge.torch.achivements.Achievement.Type;
 import com.recharge.torch.achivements.AchievementManager;
 import com.recharge.torch.achivements.MegakillAchievement;
-import com.recharge.torch.gamesplatform.TorchCurrencyManager;
-import com.recharge.torch.gamesplatform.TorchCurrencyManager.Currencies;
-import com.recharge.torch.powerups.PowerupTypes;
+import com.recharge.torch.funds.Funds;
+import com.recharge.torch.store.attributes.Attributes;
+import com.recharge.torch.store.upgrades.Upgrades;
 
 public class KillingSpreeDetector {
 	public static final long KILLING_SPREE_DURATION = 1; // 1 sec
 
 	private static KillingSpreeDetector instance;
 	private static boolean isEnabled = false;
+	private static Random rnd = new Random(System.currentTimeMillis());
 
 	private boolean inSpree = false;
 	private float killingSpreeMultiplier = 1f;
 	private int monstersKilled = 0;
 	private int pearlsEarned = 0;
-	private int killsToCrystal = PowerupTypes.BONUS_CRYSTALS_REQUIREMENT.getValueInt();
 	private OnKillingSpreeEnd killingSpreeListener;
 	private double spreeTime = 0;
 
@@ -46,19 +48,19 @@ public class KillingSpreeDetector {
 
 	public static void recordKill() {
 		checkInstance();
-		if (PowerupTypes.BONUS_PEARLS.isEnabled()) {
+		if (Upgrades.GARBAGE_COLLECTOR.isOwned()) {
 			int pearlsAwarded = 0;
-			if (PowerupTypes.KILLING_SPREE_MULTIPLIER.isEnabled()) {
+			if (Upgrades.KILLING_SPREE.isOwned()) {
 				instance._recordKill();
-				pearlsAwarded = (int) (PowerupTypes.BONUS_PEARLS.getValueFloat() * KillingSpreeDetector.getMultiplier() + 0.5f);
+				pearlsAwarded = (int) (Attributes.BONUS_PEARLS.getValue() * KillingSpreeDetector.getMultiplier() + 0.5f);
+				if (Upgrades.CRYSTAL_EXTRACTOR.isOwned()) {
+					instance.recordCrystals();
+				}
 			} else {
-				pearlsAwarded = PowerupTypes.BONUS_PEARLS.getValueInt();
+				pearlsAwarded = Attributes.BONUS_PEARLS.getValue();
 			}
-			TorchCurrencyManager.addBalance(Currencies.PEARLS, pearlsAwarded);
+			Funds.PEARLS.addAmount(pearlsAwarded);
 			AchievementManager.incrementAchievementProgress(Type.BONUS_PEARLS, pearlsAwarded);
-			if (PowerupTypes.BONUS_CRYSTALS.isEnabled()) {
-				instance.recordCrystals();
-			}
 		}
 		AchievementManager.incrementAchievementProgress(Type.KILLS, 1);
 		AchievementManager.setAchievementState(Type.MERCIFUL, State.FAIL);
@@ -88,12 +90,12 @@ public class KillingSpreeDetector {
 
 	private void _recordKill() {
 		if (inSpree) {
-			killingSpreeMultiplier += PowerupTypes.KILLING_SPREE_MULTIPLIER.getValueFloat();
+			killingSpreeMultiplier += (int) ((float) Attributes.BONUS_PEARLS_MULTIPLIER.getValue() / 100f);
 			monstersKilled++;
-			pearlsEarned = (int) (PowerupTypes.BONUS_PEARLS.getValueFloat() * killingSpreeMultiplier + 0.5f);
+			pearlsEarned = (int) ((float) Attributes.BONUS_PEARLS.getValue() * killingSpreeMultiplier + 0.5f);
 			spreeTime = 0;
 		} else {
-			pearlsEarned = PowerupTypes.BONUS_PEARLS.getValueInt();
+			pearlsEarned = Attributes.BONUS_PEARLS.getValue();
 			monstersKilled = 1;
 			spreeTime = 0;
 			inSpree = true;
@@ -102,14 +104,12 @@ public class KillingSpreeDetector {
 	}
 
 	private void recordCrystals() {
-		float crystalsPerKill = PowerupTypes.BONUS_CRYSTALS.getValueFloat();
-		if (crystalsPerKill > 0) {
-			killsToCrystal--;
-			if (killsToCrystal <= 0) {
-				TorchCurrencyManager.addBalance(Currencies.CRYSTALS, PowerupTypes.BONUS_CRYSTALS.getValueInt());
-				killsToCrystal = PowerupTypes.BONUS_CRYSTALS_REQUIREMENT.getValueInt();
-				AchievementManager.incrementAchievementProgress(Type.BONUS_CRYSTALS, PowerupTypes.BONUS_CRYSTALS.getValueInt());
-			}
+		int random = rnd.nextInt(100);
+		Log.d("Bonus Crystals " + (monstersKilled > 1 ? "enabled: " : "disabled: ") + random);
+		if ((monstersKilled > 1) && (random < Attributes.BONUS_CRYSTALS_CHANCE.getValue())) {
+
+			Funds.CRYSTALS.addAmount(1);
+			AchievementManager.incrementAchievementProgress(Type.BONUS_CRYSTALS, 1);
 		}
 	}
 

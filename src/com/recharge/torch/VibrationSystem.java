@@ -18,6 +18,7 @@ package com.recharge.torch;
 import android.content.Context;
 import android.os.Vibrator;
 
+
 /**
  * A system for accessing the Android vibrator. Note that this system requires the app's AndroidManifest.xml to contain permissions for the Vibrator service.
  */

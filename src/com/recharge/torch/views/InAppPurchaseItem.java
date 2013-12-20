@@ -1,5 +1,6 @@
 package com.recharge.torch.views;
 
+import android.content.ClipData.Item;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
@@ -12,7 +13,6 @@ import com.nativex.monetization.custom.views.CustomImageView;
 import com.nativex.monetization.custom.views.ScrollingTextView;
 import com.nativex.monetization.dialogs.custom.AdvancedButton;
 import com.nativex.monetization.manager.DensityManager;
-import com.w3i.gamesplatformsdk.rest.entities.Item;
 
 public class InAppPurchaseItem extends RelativeLayout {
 	public static final int ICON_SIZE = 80;

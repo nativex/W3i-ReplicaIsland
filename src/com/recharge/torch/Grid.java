@@ -26,6 +26,7 @@ import java.nio.IntBuffer;
 import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.opengles.GL11;
 
+
 /**
  * A 2D rectangular mesh. Can be drawn textured or untextured. This version is modified from the original Grid.java (found in the SpriteText package in the APIDemos Android sample) to support hardware
  * vertex buffers and to insert edges between grid squares for tiling.

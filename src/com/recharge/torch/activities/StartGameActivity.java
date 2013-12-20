@@ -13,8 +13,6 @@ import android.view.animation.AnimationUtils;
 
 import com.recharge.torch.PreferenceConstants;
 import com.recharge.torch.R;
-import com.recharge.torch.gamesplatform.GamesPlatformManager;
-import com.recharge.torch.gamesplatform.TorchItemManager;
 import com.recharge.torch.store.StoreActivity;
 import com.recharge.torch.views.ReplicaInfoDialog;
 
@@ -44,26 +42,22 @@ public class StartGameActivity extends Activity {
 			}
 			Intent intent = null;
 			switch (v.getId()) {
-			case R.id.ui_start_game_continue:
-				intent = new Intent(StartGameActivity.this, AndouKun.class);
-				storeButton.startAnimation(mAlternateFadeOutAnimation);
-				achievementsButton.startAnimation(mAlternateFadeOutAnimation);
-				newGameButton.startAnimation(mAlternateFadeOutAnimation);
-				background.startAnimation(mFadeOutAnimation);
-				lockButtons = true;
-				break;
+				case R.id.ui_start_game_continue:
+					intent = new Intent(StartGameActivity.this, AndouKun.class);
+					storeButton.startAnimation(mAlternateFadeOutAnimation);
+					achievementsButton.startAnimation(mAlternateFadeOutAnimation);
+					newGameButton.startAnimation(mAlternateFadeOutAnimation);
+					background.startAnimation(mFadeOutAnimation);
+					lockButtons = true;
+					break;
 
-			case R.id.ui_start_game_new:
-				intent = new Intent(StartGameActivity.this, GameModeSelectActivity.class);
-				intent.putExtra("newGame", true);
-				lockButtons = true;
-				break;
+				case R.id.ui_start_game_new:
+					intent = new Intent(StartGameActivity.this, GameModeSelectActivity.class);
+					intent.putExtra("newGame", true);
+					lockButtons = true;
+					break;
 
-			case R.id.ui_start_game_store:
-				if (!TorchItemManager.hasItems()) {
-					GamesPlatformManager.downloadStoreTree();
-					showDialog(EXTRAS_STORE_NOT_READY_DIALOG);
-				} else {
+				case R.id.ui_start_game_store:
 					lockButtons = true;
 					intent = new Intent(StartGameActivity.this, StoreActivity.class);
 					if (continueButton.getVisibility() == View.VISIBLE) {
@@ -72,19 +66,18 @@ public class StartGameActivity extends Activity {
 					achievementsButton.startAnimation(mAlternateFadeOutAnimation);
 					newGameButton.startAnimation(mAlternateFadeOutAnimation);
 					background.startAnimation(mFadeOutAnimation);
-				}
-				break;
+					break;
 
-			case R.id.ui_start_game_achievements:
-				intent = new Intent(StartGameActivity.this, AchievementsActivity.class);
-				storeButton.startAnimation(mAlternateFadeOutAnimation);
-				if (continueButton.getVisibility() == View.VISIBLE) {
-					continueButton.startAnimation(mAlternateFadeOutAnimation);
-				}
-				newGameButton.startAnimation(mAlternateFadeOutAnimation);
-				background.startAnimation(mFadeOutAnimation);
-				lockButtons = true;
-				break;
+				case R.id.ui_start_game_achievements:
+					intent = new Intent(StartGameActivity.this, AchievementsActivity.class);
+					storeButton.startAnimation(mAlternateFadeOutAnimation);
+					if (continueButton.getVisibility() == View.VISIBLE) {
+						continueButton.startAnimation(mAlternateFadeOutAnimation);
+					}
+					newGameButton.startAnimation(mAlternateFadeOutAnimation);
+					background.startAnimation(mFadeOutAnimation);
+					lockButtons = true;
+					break;
 
 			}
 			v.startAnimation(mButtonFlickerAnimation);

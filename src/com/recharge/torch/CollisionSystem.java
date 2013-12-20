@@ -21,6 +21,7 @@ import java.io.InputStream;
 
 import android.content.res.AssetManager;
 
+
 /**
  * Collision detection system. Provides a ray-based interface for finding surfaces in the collision world. This version is based on a collision world of line segments, organized into an array of
  * tiles. The underlying detection algorithm isn't relevant to calling code, however, so this class may be extended to provide a completely different collision detection scheme.

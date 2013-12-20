@@ -1,11 +1,7 @@
 package com.recharge.torch.achivements;
 
-import java.util.List;
-
 import com.recharge.torch.R;
-import com.recharge.torch.gamesplatform.TorchItem;
-import com.recharge.torch.gamesplatform.TorchItemManager;
-import com.recharge.torch.powerups.PowerupTypes;
+import com.recharge.torch.store.upgrades.Upgrades;
 
 public class LifeAchievement extends Achievement {
 
@@ -23,15 +19,10 @@ public class LifeAchievement extends Achievement {
 		if (isDone()) {
 			return;
 		}
-		List<TorchItem> lifeUpgrades = TorchItemManager.getItemsWithAttribute(PowerupTypes.LIFE_POINTS);
-		if ((lifeUpgrades != null) && (lifeUpgrades.size() > 0)) {
-			for (TorchItem item : lifeUpgrades) {
-				if (!item.isPurchased()) {
-					setDone(false);
-					return;
-				}
-			}
+		if ((Upgrades.ALUMINIUM_PLATING.isOwned()) && (Upgrades.TITANIUM_PLATING.isOwned()) && (Upgrades.CARBON_PLATING.isOwned()) && (Upgrades.NANOBOTS_PLATING.isOwned())) {
 			setDone(true);
+		} else {
+			setDone(false);
 		}
 	}
 }

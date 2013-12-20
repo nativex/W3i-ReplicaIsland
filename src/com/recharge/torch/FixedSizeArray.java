@@ -19,6 +19,7 @@ package com.recharge.torch;
 import java.util.Arrays;
 import java.util.Comparator;
 
+
 /**
  * FixedSizeArray is an alternative to a standard Java collection like ArrayList. It is designed to provide a contiguous array of fixed length which can be accessed, sorted, and searched without
  * requiring any runtime allocation. This implementation makes a distinction between the "capacity" of an array (the maximum number of objects it can contain) and the "count" of an array (the current

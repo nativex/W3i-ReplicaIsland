@@ -20,6 +20,7 @@ import android.content.Context;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
 
+
 public class YesNoDialogPreference extends DialogPreference {
 	private YesNoDialogListener mListener;
 

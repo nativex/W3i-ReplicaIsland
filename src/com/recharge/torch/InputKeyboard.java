@@ -18,6 +18,7 @@ package com.recharge.torch;
 
 import android.view.KeyEvent;
 
+
 public class InputKeyboard {
 	private InputButton[] mKeys;
 

@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 
+
 public class AdvancedTextView extends View {
 	private ArrayList<Text> content;
 	private int textGap = DEFAULT_TEXT_HORIZONTAL_GAP;

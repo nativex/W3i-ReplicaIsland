@@ -1,5 +1,6 @@
 package com.recharge.torch.views;
 
+import android.content.ClipData.Item;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -8,8 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.recharge.torch.R;
-import com.w3i.gamesplatformsdk.rest.entities.Category;
-import com.w3i.gamesplatformsdk.rest.entities.Item;
 
 public class InAppPurchaseItemsList extends ScrollView {
 	private LinearLayout container;

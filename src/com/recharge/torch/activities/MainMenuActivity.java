@@ -18,6 +18,7 @@ package com.recharge.torch.activities;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
+import java.util.Map;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -38,6 +39,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.nativex.advertiser.AdvertiserListener;
 import com.nativex.advertiser.AdvertiserManager;
@@ -54,14 +56,18 @@ import com.recharge.torch.TouchFilter;
 import com.recharge.torch.achivements.Achievement.State;
 import com.recharge.torch.achivements.Achievement.Type;
 import com.recharge.torch.achivements.AchievementManager;
-import com.recharge.torch.gamesplatform.GamesPlatformManager;
-import com.recharge.torch.gamesplatform.SharedPreferenceManager;
-import com.recharge.torch.gamesplatform.TorchCurrency;
-import com.recharge.torch.gamesplatform.TorchCurrencyManager;
-import com.recharge.torch.gamesplatform.TorchInAppPurchaseManager;
-import com.recharge.torch.gamesplatform.TorchItemManager;
+import com.recharge.torch.funds.Funds;
+import com.recharge.torch.inapppurchase.InAppPurchaseData;
+import com.recharge.torch.inapppurchase.MarketItem;
+import com.recharge.torch.inapppurchase.MarketManager;
+import com.recharge.torch.inapppurchase.OnMarketPurchasesQueried;
+import com.recharge.torch.inapppurchase.OnMarketServiceInitialized;
+import com.recharge.torch.inapppurchase.MarketConstants.BILLING_RESPONSE_CODE;
+import com.recharge.torch.inapppurchase.items.Pearls3000Item;
 import com.recharge.torch.publisher.PublisherConstants;
 import com.recharge.torch.skins.SkinManager;
+import com.recharge.torch.store.upgrades.Upgrades;
+import com.recharge.torch.utils.PreferencesManager;
 import com.recharge.torch.views.FundsView;
 
 public class MainMenuActivity extends Activity implements AdvertiserListener {
@@ -78,6 +84,7 @@ public class MainMenuActivity extends Activity implements AdvertiserListener {
 	private final static int WHATS_NEW_DIALOG = 0;
 	private final static int TILT_TO_SCREEN_CONTROLS_DIALOG = 1;
 	private final static int CONTROL_SETUP_DIALOG = 2;
+	private static final String MARKET_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiQRXx7Rixcc5uzs2Ik/fxt3ik2KW9mA8pQEplwRkV5Iu3PqqeTKTGVjySXtXfhYJiy+POJfT7aI8M5m9nNlDFV2PRC7PRlC7DyVOX2UWWJgvbhr0L+ViDzkdelOhvBqcU94YN/02/4PmORxUVdRdRRYp7TpT5Czk/WjyhfRTnbIGohyO9s0gIlUQeDy/8OKXRIDePmXqF4qpcxulvCMJHWTtTlq9BDkwzvfHYvbB+5qKc2NId5LIccdSwzZTPA9aEdZ0bGBjRAwixd37vlcYmc5whse+7aM+HLgbtIOtUJb/lM35ZjjfjEXHxBbTG2bTtX1TfLt+su53zQYwV1NI9QIDAQAB";
 
 	private View.OnClickListener onButtonClick = new View.OnClickListener() {
 
@@ -88,22 +95,22 @@ public class MainMenuActivity extends Activity implements AdvertiserListener {
 				mPaused = true;
 				Intent intent = null;
 				switch (v.getId()) {
-				case R.id.ui_main_options:
-					intent = new Intent(getBaseContext(), OptionsMenu.class);
-					v.startAnimation(mButtonFlickerAnimation);
-					mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(intent));
-					break;
-				case R.id.ui_main_start_game:
-					intent = new Intent(getBaseContext(), StartGameActivity.class);
-					v.startAnimation(mButtonFlickerAnimation);
-					mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(intent));
-					break;
-				case R.id.mainMenuCharacter:
-					intent = new Intent(v.getContext(), SkinSelectionActivity.class);
-					v.getContext().startActivity(intent);
-					break;
-				default:
-					mPaused = false;
+					case R.id.ui_main_options:
+						intent = new Intent(getBaseContext(), OptionsMenu.class);
+						v.startAnimation(mButtonFlickerAnimation);
+						mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(intent));
+						break;
+					case R.id.ui_main_start_game:
+						intent = new Intent(getBaseContext(), StartGameActivity.class);
+						v.startAnimation(mButtonFlickerAnimation);
+						mButtonFlickerAnimation.setAnimationListener(new StartActivityAfterAnimation(intent));
+						break;
+					case R.id.mainMenuCharacter:
+						intent = new Intent(v.getContext(), SkinSelectionActivity.class);
+						v.getContext().startActivity(intent);
+						break;
+					default:
+						mPaused = false;
 				}
 			}
 		}
@@ -116,9 +123,9 @@ public class MainMenuActivity extends Activity implements AdvertiserListener {
 			if (balances != null && balances.size() > 0) {
 				for (Balance b : balances) {
 					try {
-						TorchCurrency currency = TorchCurrencyManager.findCurrency(b.getExternalCurrencyId());
+						Funds currency = Funds.getByExternalCurrencyId(b.getExternalCurrencyId());
 						if (currency != null) {
-							TorchCurrencyManager.addBalance(currency, (int) (Double.parseDouble(b.getAmount()) + 0.5));
+							currency.addAmount((int) (Double.parseDouble(b.getAmount()) + 0.5));
 						}
 					} catch (Exception e) {
 						com.nativex.common.Log.e("MainMenuActivity: Unable to read balances. " + b.getDisplayName(), e);
@@ -153,7 +160,6 @@ public class MainMenuActivity extends Activity implements AdvertiserListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ui_activity_main_menu);
 
-		TorchInAppPurchaseManager.context = getApplicationContext();
 		torchOnCreate();
 
 		doW3iInitialization();
@@ -174,6 +180,7 @@ public class MainMenuActivity extends Activity implements AdvertiserListener {
 		if (mOptionsButton != null) {
 			mOptionsButton.setOnClickListener(onButtonClick);
 		}
+		Upgrades.store();
 
 		mButtonFlickerAnimation = AnimationUtils.loadAnimation(this, R.anim.button_flicker);
 		mFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
@@ -212,19 +219,74 @@ public class MainMenuActivity extends Activity implements AdvertiserListener {
 
 	private void doTorchInitialization() {
 		AchievementManager.initialize(getApplicationContext());
-		SharedPreferenceManager.initialize(this);
-		SharedPreferenceManager.loadAll();
-		GamesPlatformManager.initializeManager(this);
+		PreferencesManager.initialize(getApplicationContext());
+		Funds.load();
+		Upgrades.load();
+		AchievementManager.setAchievementState(Type.GADGETEER, State.SET_PROGRESS);
+		MarketManager.setOnInitializeListener(new OnMarketServiceInitialized() {
 
-		if (TorchItemManager.hasItems()) {
-			AchievementManager.setAchievementState(Type.GADGETEER, State.SET_PROGRESS);
-		}
+			@Override
+			public void onInitialized(
+					boolean success) {
+				showTip("Market Initialized - " + success);
+				if (success) {
+					MarketItem item = new Pearls3000Item() {
+						public void onPurchased() {
+							super.onPurchased();
+							showTip("Item purchased");
+						};
+
+						@Override
+						public void onFailed(
+								BILLING_RESPONSE_CODE response) {
+							super.onFailed(response);
+							showTip("Item failed " + response.getMessage());
+						}
+
+						@Override
+						public void onConsumed() {
+							super.onConsumed();
+							showTip("Item consumed");
+						}
+					};
+					MarketManager.purchaseItem(item);
+				}
+			}
+		});
+		MarketManager.setOnQueryPurchasesListener(new OnMarketPurchasesQueried() {
+
+			@Override
+			public void onPurchasesQueried(
+					boolean success) {
+				showTip("Purchases queried - " + success);
+				Map<String, InAppPurchaseData> purchases = MarketManager.getPurchases();
+				for (InAppPurchaseData purchase : purchases.values()) {
+					Log.i("Torch", "Purchase: " + purchase.getProductId() + " " + purchase.getPurchaseState());
+				}
+			}
+		});
+		MarketManager.initialize(this, MARKET_KEY);
+
+	}
+
+	@Override
+	protected void onActivityResult(
+			int requestCode,
+			int resultCode,
+			Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		MarketManager.handleActivityResult(requestCode, resultCode, data);
+	}
+
+	private void showTip(
+			String msg) {
+		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+		Log.i("Torch", msg);
 	}
 
 	@Override
 	protected void onStart() {
 		super.onStart();
-		GamesPlatformManager.onResume();
 	}
 
 	@Override
@@ -232,11 +294,8 @@ public class MainMenuActivity extends Activity implements AdvertiserListener {
 		super.onDestroy();
 		AdvertiserManager.release();
 		MonetizationManager.release();
-		GamesPlatformManager.release();
-		TorchCurrencyManager.release();
-		TorchItemManager.release();
-		SharedPreferenceManager.release();
 		AchievementManager.release();
+		PreferencesManager.release();
 	}
 
 	/**
@@ -287,7 +346,8 @@ public class MainMenuActivity extends Activity implements AdvertiserListener {
 	protected void onPause() {
 		super.onPause();
 		mPaused = true;
-		SharedPreferenceManager.storeAll();
+		Funds.store();
+		Upgrades.store();
 		FundsView.releaseFunds();
 	}
 

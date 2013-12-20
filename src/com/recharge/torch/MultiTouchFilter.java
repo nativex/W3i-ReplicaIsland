@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.view.MotionEvent;
 
+
 public class MultiTouchFilter extends SingleTouchFilter {
 	private boolean mCheckedForMultitouch = false;
 	private boolean mSupportsMultitouch = false;

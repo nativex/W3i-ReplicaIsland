@@ -15,7 +15,6 @@ import com.nativex.monetization.custom.views.CustomImageView;
 import com.nativex.monetization.manager.DensityManager;
 import com.recharge.torch.R;
 import com.recharge.torch.views.InAppPurchaseCategoryScroller.OnCategoryChanged;
-import com.w3i.gamesplatformsdk.rest.entities.Category;
 
 public class InAppPurchaseList extends ViewGroup {
 	private InAppPurchaseCategoryScroller scroller;

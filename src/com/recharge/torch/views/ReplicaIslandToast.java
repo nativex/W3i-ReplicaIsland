@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.nativex.monetization.custom.views.CustomImageView;
 import com.recharge.torch.R;
 import com.recharge.torch.achivements.Achievement;
-import com.recharge.torch.gamesplatform.TorchItem;
+import com.recharge.torch.store.upgrades.Upgrades;
 
 public class ReplicaIslandToast {
 
@@ -24,7 +24,7 @@ public class ReplicaIslandToast {
 
 	public static Toast makeStoreToast(
 			Context context,
-			TorchItem item) {
+			Upgrades item) {
 		Toast toast = Toast.makeText(context, "", Toast.LENGTH_LONG);
 
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -34,8 +34,8 @@ public class ReplicaIslandToast {
 		CustomImageView itemIcon = (CustomImageView) toastLayout.findViewById(R.id.storeToastIcon);
 
 		toast.setDuration(Toast.LENGTH_SHORT);
-		itemName.setText(item.getDisplayName());
-		itemIcon.setImageFromInternet(item.getIcon());
+		itemName.setText(item.getUpgrade().getName());
+		itemIcon.setImageResource(item.getUpgrade().getIcon());
 		toast.show();
 		return toast;
 	}

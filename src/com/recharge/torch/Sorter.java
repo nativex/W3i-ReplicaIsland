@@ -18,6 +18,7 @@ package com.recharge.torch;
 
 import java.util.Comparator;
 
+
 public abstract class Sorter<Type> {
 	public abstract void sort(
 			Type[] array,

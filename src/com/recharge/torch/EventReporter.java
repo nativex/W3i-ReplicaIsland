@@ -5,6 +5,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
+
 public class EventReporter implements Runnable {
 	public final static int EVENT_DEATH = 0;
 	public final static int EVENT_BEAT_LEVEL = 1;

@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,7 +35,7 @@ import com.recharge.torch.achivements.AchievementManager;
 
 public class DiaryActivity extends Activity {
 
-	private OnClickListener mKillDiaryListener = new OnClickListener() {
+	private View.OnClickListener mKillDiaryListener = new View.OnClickListener() {
 		public void onClick(
 				View arg0) {
 			finish();

@@ -18,6 +18,7 @@ package com.recharge.torch;
 
 import java.util.Comparator;
 
+
 public class ChannelSystem extends BaseObject {
 	private static final int CHANNEL_COUNT = 8;
 	private static final ChannelComparator sChannelComparator = new ChannelComparator();

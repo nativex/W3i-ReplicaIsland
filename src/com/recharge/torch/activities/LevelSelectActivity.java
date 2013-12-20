@@ -304,26 +304,26 @@ public class LevelSelectActivity extends ListActivity {
 			int featureId,
 			MenuItem item) {
 		switch (item.getItemId()) {
-		case UNLOCK_NEXT_LEVEL_ID:
-			unlockNext();
-			mLevelData.clear();
-			generateLevelList(false);
-			((ArrayAdapter) getListAdapter()).sort(sLevelComparator);
-			((ArrayAdapter) getListAdapter()).notifyDataSetChanged();
+			case UNLOCK_NEXT_LEVEL_ID:
+				unlockNext();
+				mLevelData.clear();
+				generateLevelList(false);
+				((ArrayAdapter) getListAdapter()).sort(sLevelComparator);
+				((ArrayAdapter) getListAdapter()).notifyDataSetChanged();
 
-			return true;
+				return true;
 
-		case UNLOCK_ALL_LEVELS_ID:
-			// Regenerate the level list to remove the past-only filter.
-			mLevelData.clear();
-			generateLevelList(false);
-			for (LevelMetaData level : mLevelData) {
-				level.enabled = true;
-			}
+			case UNLOCK_ALL_LEVELS_ID:
+				// Regenerate the level list to remove the past-only filter.
+				mLevelData.clear();
+				generateLevelList(false);
+				for (LevelMetaData level : mLevelData) {
+					level.enabled = true;
+				}
 
-			((ArrayAdapter) getListAdapter()).sort(sLevelComparator);
-			((ArrayAdapter) getListAdapter()).notifyDataSetChanged();
-			return true;
+				((ArrayAdapter) getListAdapter()).sort(sLevelComparator);
+				((ArrayAdapter) getListAdapter()).notifyDataSetChanged();
+				return true;
 		}
 
 		return super.onMenuItemSelected(featureId, item);

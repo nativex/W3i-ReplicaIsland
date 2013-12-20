@@ -19,6 +19,7 @@ package com.recharge.torch;
 import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.opengles.GL11Ext;
 
+
 /**
  * Draws a screen-aligned bitmap to the screen.
  */

@@ -18,6 +18,7 @@ package com.recharge.torch;
 
 import android.content.Context;
 
+
 /** Contains global (but typically constant) parameters about the current operating context */
 public class ContextParameters extends BaseObject {
 	public int viewWidth;

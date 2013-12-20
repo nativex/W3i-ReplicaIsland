@@ -1,5 +1,6 @@
 package com.recharge.torch.store;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -11,20 +12,29 @@ import android.widget.BaseAdapter;
 import com.nativex.common.Log;
 import com.nativex.monetization.custom.views.CustomImageView;
 import com.recharge.torch.R;
-import com.recharge.torch.gamesplatform.TorchItem;
-import com.recharge.torch.gamesplatform.TorchItem.PurchaseState;
-import com.recharge.torch.gamesplatform.TorchItemManager;
+import com.recharge.torch.general.Upgrade;
+import com.recharge.torch.store.upgrades.Upgrades;
 
 public class HistoryListAdapter extends BaseAdapter {
-	private List<TorchItem> items;
+	private List<Upgrade> items;
 
 	public HistoryListAdapter() {
-		items = TorchItemManager.getItems(PurchaseState.PURCHASED);
+		items = new ArrayList<Upgrade>();
+		reset();
+	}
+
+	public void reset() {
+		items.clear();
+		for (Upgrades upgrade : Upgrades.values()) {
+			if (upgrade.isOwned()) {
+				items.add(upgrade.getUpgrade());
+			}
+		}
+		notifyDataSetChanged();
 	}
 
 	@Override
 	public void notifyDataSetChanged() {
-		items = TorchItemManager.getItems(PurchaseState.PURCHASED);
 		super.notifyDataSetChanged();
 	}
 
@@ -49,8 +59,7 @@ public class HistoryListAdapter extends BaseAdapter {
 	}
 
 	public void clear() {
-		items.clear();
-		notifyDataSetChanged();
+		reset();
 	}
 
 	public View getView(
@@ -65,8 +74,8 @@ public class HistoryListAdapter extends BaseAdapter {
 			} else {
 				item = (CustomImageView) arg1;
 			}
-			TorchItem torchItem = items.get(arg0);
-			item.setImageFromInternet(torchItem.getIcon());
+			Upgrade torchItem = items.get(arg0);
+			item.setImageResource(torchItem.getIcon());
 			item.setTag(torchItem);
 		} catch (Exception e) {
 			Log.e("HistoryAdapter: Exception caught while operating on item " + arg0, e);

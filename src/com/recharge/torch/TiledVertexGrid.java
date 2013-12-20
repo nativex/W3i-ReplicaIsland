@@ -18,6 +18,7 @@ package com.recharge.torch;
 
 import javax.microedition.khronos.opengles.GL10;
 
+
 public class TiledVertexGrid extends BaseObject {
 	private static final float GL_MAGIC_OFFSET = 0.375f;
 	private Grid mTileMap;

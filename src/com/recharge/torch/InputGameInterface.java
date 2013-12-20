@@ -18,6 +18,7 @@ package com.recharge.torch;
 
 import android.view.KeyEvent;
 
+
 public class InputGameInterface extends BaseObject {
 	private static final float ORIENTATION_DEAD_ZONE_MIN = 0.03f;
 	private static final float ORIENTATION_DEAD_ZONE_MAX = 0.1f;

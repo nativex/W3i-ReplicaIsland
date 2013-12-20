@@ -18,6 +18,7 @@ package com.recharge.torch;
 
 import java.util.Comparator;
 
+
 /**
  * A node in the game graph that manages the activation status of its children. The GameObjectManager moves the objects it manages in and out of the active list (that is, in and out of the game tree,
  * causing them to be updated or ignored, respectively) each frame based on the distance of that object to the camera. Objects may specify an "activation radius" to define an area around themselves so

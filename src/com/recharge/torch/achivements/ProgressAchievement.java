@@ -3,6 +3,7 @@ package com.recharge.torch.achivements;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+
 public class ProgressAchievement extends Achievement {
 	private int achievementProgress;
 	private int goal;

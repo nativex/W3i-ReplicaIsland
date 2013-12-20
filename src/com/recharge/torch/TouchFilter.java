@@ -19,6 +19,7 @@ package com.recharge.torch;
 import android.content.Context;
 import android.view.MotionEvent;
 
+
 public abstract class TouchFilter extends BaseObject {
 
 	public abstract void updateTouch(

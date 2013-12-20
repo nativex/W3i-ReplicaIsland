@@ -18,6 +18,7 @@ package com.recharge.torch;
 
 import java.util.Comparator;
 
+
 public class ShellSorter<Type> extends Sorter<Type> {
 	/**
 	 * Shell sort implementation based on the one found here: http://www.augustana.ab.ca/~mohrj/courses/2004.winter/csc310/source/ShellSort.java.html Note that the running time can be tuned by
